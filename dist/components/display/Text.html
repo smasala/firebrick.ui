@@ -1,0 +1,11 @@
+{{#if blockQuote}}
+<blockquote data-bind="{{data-bind 'blockQuoteBindings'}}">
+{{/if}}
+	<p data-bind="{{data-bind}}">
+	</p>
+	{{#if blockQuoteFooter}}
+	<footer data-bind="{{data-bind 'blockQuoteFooterBindings'}}"></footer>
+	{{/if}}
+{{#if blockQuote}}
+</blockquote>
+{{/if}}

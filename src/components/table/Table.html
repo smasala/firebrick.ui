@@ -1,0 +1,24 @@
+<div data-bind="{{data-bind 'containerBindings'}}">
+	<table id={{getId}} data-bind="{{data-bind}}">
+	{{#if treetable}}
+		<caption data-bind="{{data-bind 'captionBindings'}}">
+			<a data-bind="{{data-bind 'expandBindings'}}"></a>
+			<a data-bind="{{data-bind 'collapseBindings'}}"></a>
+		</caption>
+	{{/if}}
+	{{#if showHeadings}}
+		<thead data-bind="{{data-bind 'theadBindings'}}">
+	      <tr data-bind="{{data-bind 'theadTRBindings'}}">
+	        <th data-bind="{{data-bind 'theadTRTDBindings'}}"></th>
+	      </tr>
+	    </thead>
+    {{/if}}
+    {{#if showRows}}
+	    <tbody data-bind="{{data-bind 'tbodyBindings'}}">
+	      <tr data-bind="{{data-bind 'tbodyTRBindings'}}">
+	        <td data-bind="{{data-bind 'tbodyTRTDBindings'}}"></td>
+	      </tr>
+	    </tbody>
+    {{/if}}
+	</table>
+</div>

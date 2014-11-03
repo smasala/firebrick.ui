@@ -1,0 +1,21 @@
+<div class="{{formGroupClass}}" data-bind="{{data-bind 'containerBindings'}}">
+	<label for="{{getId}}" data-bind="{{data-bind 'labelBindings'}}"></label> 
+	<div data-bind="{{data-bind 'inputContainerBindings'}}">
+		<div data-bind="{{data-bind 'fieldBindings'}}">
+				
+				{{#if inputAddon }}
+					<div data-bind="{{data-bind 'inputAddonBindings'}}"></div>
+				{{/if}}
+				
+				{{{getSubTpl}}}
+				
+				{{#if showStateIcon}}
+					<span class="{{glyphiconClass}} {{formControlFeedbackClass}}" data-bind="{{data-bind 'feedbackBindings'}}"></span>
+				{{/if}}
+				{{#if helpText}}
+					<span class="{{helpBlockClass}}" data-bind="{{data-bind 'helpBlockBindings'}}"></span>
+			 	{{/if}}
+			 	
+		</div>
+	</div>
+</div>

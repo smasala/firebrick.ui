@@ -1,0 +1,10 @@
+<div data-bind="{{data-bind}}">
+	<div data-bind="{{data-bind 'panelHeaderBindings'}}">
+		{{#if collapsible}}
+			<a data-bind="{{data-bind 'collapsibleLinkBindings'}}"></a>
+		{{/if}}
+	</div>
+		<div data-bind="{{data-bind 'tabBindings'}}">
+			<div data-bind="{{data-bind 'panelBodyBindings'}}" >{{{getItems}}}</div>
+		</div>
+</div>
