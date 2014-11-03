@@ -34,7 +34,7 @@ require(["firebrick", "firebrick-ui", "bootstrap", "jquery", "x-editable"], func
 		autoRender:false,
 		cache:false,
 		dev:true,
-		require:["Firebrick.ui/display/Header", "Firebrick.ui/display/Text", "Firebrick.ui/containers/GridColumn", "Firebrick.ui/containers/Grid", "./fields/app/Panel", "Firebrick.ui/button/ToggleButton", "./fields/app/SelectBox", "./fields/app/Radio", "./fields/app/Checkbox", "./fields/app/Table", "Firebrick.ui/table/TreeTable", "./fields/app/Username", "./fields/app/Form", "./fields/app/Description", "Firebrick.ui/fields/Email", "Firebrick.ui/button/Button"],
+		require:["Firebrick.ui/fields/plugins/Radio", "Firebrick.ui/display/Header", "Firebrick.ui/display/Text", "Firebrick.ui/containers/GridColumn", "Firebrick.ui/containers/Grid", "./fields/app/Panel", "Firebrick.ui/button/ToggleButton", "./fields/app/SelectBox", "./fields/app/Radio", "./fields/app/Checkbox", "./fields/app/Table", "Firebrick.ui/table/TreeTable", "./fields/app/Username", "./fields/app/Form", "./fields/app/Description", "Firebrick.ui/fields/Email", "Firebrick.ui/button/Button"],
 		go: function(){
 
 			

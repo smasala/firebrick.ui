@@ -1,4 +1,4 @@
-/**
+/*!
 Author: https://github.com/taivo
 https://github.com/vitalets/x-editable/issues/153#issuecomment-49246106
 

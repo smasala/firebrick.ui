@@ -14,7 +14,7 @@ define(["text!./Radio.html", "../common/MultiplesBase", "./plugins/Radio"], func
 			var me = this;
 			if(!me.inplaceEdit){
 				return {
-					text:"$data.label ? fb.text($data.label) : fb.text($data)"
+					text:"$data.text ? fb.text($data.text) : fb.text($data)"
 				};
 			}
 			return {};
@@ -45,7 +45,7 @@ define(["text!./Radio.html", "../common/MultiplesBase", "./plugins/Radio"], func
 						optionsValue:"'value'",
 						optionsText:"'text'",
 						options:me.options,
-						type:me.dataType
+						type:"'checklist'"
 				};
 			}
 			

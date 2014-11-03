@@ -4,7 +4,9 @@ define(["Firebrick.ui/fields/SelectBox"], function(){
 		uiName:"ui-app-selectbox",
 		label:"Pick a country",
 		inplaceEdit:true,
-		data:"options1",
+		data: function(){
+			return this.inplaceEdit ? "options1" : "options"
+		},
 		selectedOptions:"selected"
-	})
+	});
 });

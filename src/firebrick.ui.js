@@ -1,5 +1,5 @@
 /*!
-* Firebrick UI v0.1.0
+* Firebrick UI
 * Author: Steven Masala
 * me@smasala.com
 * FirebrickUI, component library for Firebrick JS
@@ -29,7 +29,7 @@
 	
 	Firebrick.ui = {
 			
-			version: "0.1.0",
+			version: "0.1.4",
 			
 			/**
 			 * @private

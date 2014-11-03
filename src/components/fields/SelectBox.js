@@ -1,4 +1,4 @@
-define(["text!./SelectBox.html", "./Input"], function(subTpl){
+define(["text!./SelectBox.html", "jquery", "./Input"], function(subTpl, $){
 	return Firebrick.create("Firebrick.ui.fields.SelectBox", {
 		extend:'Firebrick.ui.fields.Input',
 		uiName:"fb-ui-selectbox",
@@ -11,18 +11,19 @@ define(["text!./SelectBox.html", "./Input"], function(subTpl){
 		optionsText:"'text'",
 		bindings:function(){
 			var me = this,
-				obj = me.callParent();
+				obj = me.callParent(),
+				data = $.isFunction(me.data) ? me.data() : me.data;
 			obj.attr.multiple = me.multiSelect;
 			
 			if(!me.inplaceEdit){
-				obj.options = me.data;
+				obj.options = data;
 				obj.selectedOptions = me.selectedOptions;
 			}else{
 				obj.editable = me.selectedOptions;
 				obj.editableOptions = {
 						optionsValue:me.optionsValue,
 						optionsText:me.optionsText,
-						options:me.data,
+						options:data,
 						type:me.dataType
 				}
 			}
