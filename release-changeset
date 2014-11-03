@@ -1,0 +1,6 @@
+v0.1.4
+----------------------------
+* inplaceEdit bug fix
+* allow data for selectboxes to be a function
+* change file names form "-" to "."
+* add demo

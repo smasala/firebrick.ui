@@ -1,4 +1,4 @@
-#Firebrick UI v0.1.0 Stable
+#Firebrick UI v0.1.4 Stable
 
 UI extendable component library for Firebrick MVC, built with :
 
