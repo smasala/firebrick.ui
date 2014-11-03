@@ -1,6 +1,6 @@
 {
 	"name": "firebrick.ui",
-	"description": "Component library for Firebrick MVC, built with Bootstrap and jQuery",
+	"description": "UI extendable component library for Firebrick MVC, built with Bootstrap and jQuery",
 	"main": "dist/firebrick.ui.js",
 	"ignore": "",
 	"authors": [
