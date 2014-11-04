@@ -1,3 +1,8 @@
+v0.1.6
+----------------------------
+* added missing x-editable css bug fix
+* added dependencies.js for easy dependency injection
+
 v0.1.4
 ----------------------------
 * inplaceEdit bug fix

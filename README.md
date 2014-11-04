@@ -1,4 +1,4 @@
-#Firebrick UI v0.1.4 Stable
+#Firebrick UI v0.1.6 Stable
 
 UI extendable component library for Firebrick MVC, built with :
 
@@ -32,50 +32,31 @@ Checkout the [Dashboard ](http://demo.firebrickjs.com) demo
 	
 	<!-- Datatables -->
 	<link rel="stylesheet" href="bower_components/datatables/media/css/jquery.dataTables.css" />
-	
+
 	<!-- TreeTables -->
 	<link rel="stylesheet" href="bower_components/jquery-treetable/css/jquery.treetable.css" />
-	<link rel="stylesheet" href="bower_components/firebrick.ui/dist/firebrick.ui.css" />
 	
 	<!-- X-Editable -->
 	<link href="bower_components/x-editable/dist/bootstrap3-editable/css/bootstrap-editable.css" rel="stylesheet">
 	
-	<!-- Firebrick JS -->
-	<link rel="stylesheet" href="bower_components/firebrick/firebrick.css" />
-	
+	<!-- Firebrick -->
+	<link rel="stylesheet" href="bower_components/firebrick/dist/firebrick.css" />
 	<!-- Firebrick UI -->
-	<link rel="stylesheet" href="bower_components/firebrick.ui/firebrick.ui.css" />
+	<link rel="stylesheet" href="bower_components/firebrick.ui/dist/firebrick.ui.css" />
 ```
 
 * Create you application
 
 ```
-	require.config({
-		paths:{
-		"jquery": "../bower_components/jquery/dist/jquery",
-		"knockout": "../bower_components/knockoutjs/dist/knockout",
-		"knockout-mapping": "../bower_components/knockout-mapping/knockout.mapping",
-		"firebrick": "../bower_components/firebrick/dist/firebrick",
-		"bootstrap": "../bower_components/bootstrap/dist/js/bootstrap.min",
-		"text": "../bower_components/text/text",
-		"firebrick-ui": "../bower_components/firebrick.ui/dist/firebrick.ui",
-		"handlebars": "../bower_components/handlebars/handlebars",
-		"datatables": "../bower_components/datatables/media/js/jquery.dataTables",
-		"jquery-treetable": "../bower_components/jquery-treetable/jquery.treetable",
-		"x-editable": "../bower_components/x-editable/dist/bootstrap3-editable/js/bootstrap-editable",
-		"fb-ui-plugins": "../bower_components/firebrick-ui/plugins",
-		"knockout-x-editable": "../bower_components/knockout-x-editable/knockout.x-editable",
-		"Firebrick.ui": "../bower_components/firebrick.ui/dist/components"
-		},
-		shim:{
-			"knockout-mapping": ["knockout"],
-			"bootstrap": ["jquery"],
-			"datatables": ["jquery"],
-			"x-editable": ["bootstrap"]
-		}
-	});
+require.config({
+	paths:{
+		"dependencies": "../bower_components/firebrick.ui/src/dependencies"
+	}
+});
 
-    require(["firebrick"], function(){
+require(["dependencies"], function(){
+	
+	require(["jquery", "firebrick", "firebrick-ui", "bootstrap"], function(){
 		Firebrick.ready({
 			app:{
 				name:"MyApp",
@@ -86,5 +67,5 @@ Checkout the [Dashboard ](http://demo.firebrickjs.com) demo
 			}
 		});
     });
-
+});
 ```
