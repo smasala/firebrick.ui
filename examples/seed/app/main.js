@@ -17,20 +17,7 @@ require(["dependencies"], function(){
 			dev:true,
 			require:["views/Content"],
 			go: function(){
-
-				
-				$.ajax({
-					url:'/app/data/form1.json',
-					success:function(response){
-						
-						Firebrick.create("MyApp.views.Content", {
-							items:response.ui,
-							store:response.data
-						});
-						
-					}
-				});
-				
+				Firebrick.create("MyApp.views.Content");
 			}
 		});
 	});

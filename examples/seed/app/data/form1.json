@@ -1,69 +1,37 @@
 {
-	"ui":[{
-			"uiName": "ui-app-panel",
-			"title": "Hello",
-			"items":[
-				{
-					"uiName": "ui-app-form",
-					"items": [
-						"fb-ui-header",
-						"fb-ui-text",
-						{"uiName":"ui-app-username"},
-						"fb-ui-email",
-						"ui-app-description",
-						"ui-app-radio",
-						"ui-app-checkbox",
-						"ui-app-selectbox",
-						"fb-ui-togglebutton",
-						"ui-app-table",
-						"fb-ui-treetable",
-						{"uiName":"fb-ui-button", "text":"Submit"}
-					]
-				}	
-			]
-		},{
-			"uiName": "fb-ui-grid",
-			"items":[
-				{"uiName": "fb-ui-gridcol", "columnWidth":"3", "items":["ui-app-username"]},
-				{"uiName": "fb-ui-gridcol", "columnWidth":"6", "items":["ui-app-description"]},
-				{"uiName": "fb-ui-gridcol", "columnWidth":"3", "items":["ui-app-username"]}
-			]
-		}],
-	"data":{
-		"username": "Fred",
-		"val": "a",
-		"aprop": true,
-		"description": "My profile description",
-		"chk": "b",
-		"options":["a", "b", "c"],
-		"options1":[{"text":"A", "value":"a"},{"text":"B", "value":"b"},{"text":"C", "value":"c"}],
-		"selected":"b",
-		"selected1":"c",
-		"selects": ["a1", "b1", "c1"],
-		"superedit": [
-			           {"uiName":"fb-ui-input"},
-			           "fb-ui-email",
-						"ui-app-description"
-		           ],
-		"tableData": {
-			"cols":["Col1", "Col2", "Col3"],
-			"rows": [
-				["row1Col1", "row1Col2", "row1Col3"],
-				["row2Col1", "row2Col2", "row2Col3"],
-				["row3Col1", "row3Col2", "row3Col3"],
-				["row4Col1", "row4Col2", "row4Col3"]
-			]
-		},
-		"treeTableData": {
-			"cols":["Col1", "Col2", "Col3"],
-			"rows": [
-				{"id":1, "cols":["rowXCol1", "rowXCol2", "rowXCol3"]},
-				{"id":2, "parentId":1, "cols":["rowX1Col1", "rowX1Col2", "rowX1Col3"]},
-				{"id":3, "parentId":2, "cols":["rowX12Col1", "rowX12Col2", "rowX12Col3"]},
-				{"id":4, "cols":["rowX4Col1", "rowX4Col2", "rowX4Col3"]},
-				{"id":5, "cols":["rowX5Col1", "rowX5Col2", "rowX5Col3"]},
-				{"id":6, "parentId":5, "cols":["rowX6Col1", "rowX6Col2", "rowX6Col3"]}
-			]
-		}
+	"username": "Fred",
+	"val": "a",
+	"aprop": true,
+	"description": "My profile description",
+	"chk": "b",
+	"options":["a", "b", "c"],
+	"options1":[{"text":"A", "value":"a"},{"text":"B", "value":"b"},{"text":"C", "value":"c"}],
+	"selected":"b",
+	"selected1":"c",
+	"selects": ["a1", "b1", "c1"],
+	"superedit": [
+		           {"uiName":"fb-ui-input"},
+		           "fb-ui-email",
+					"ui-app-description"
+	           ],
+	"tableData": {
+		"cols":["Col1", "Col2", "Col3"],
+		"rows": [
+			["row1Col1", "row1Col2", "row1Col3"],
+			["row2Col1", "row2Col2", "row2Col3"],
+			["row3Col1", "row3Col2", "row3Col3"],
+			["row4Col1", "row4Col2", "row4Col3"]
+		]
+	},
+	"treeTableData": {
+		"cols":["Col1", "Col2", "Col3"],
+		"rows": [
+			{"id":1, "cols":["rowXCol1", "rowXCol2", "rowXCol3"]},
+			{"id":2, "parentId":1, "cols":["rowX1Col1", "rowX1Col2", "rowX1Col3"]},
+			{"id":3, "parentId":2, "cols":["rowX12Col1", "rowX12Col2", "rowX12Col3"]},
+			{"id":4, "cols":["rowX4Col1", "rowX4Col2", "rowX4Col3"]},
+			{"id":5, "cols":["rowX5Col1", "rowX5Col2", "rowX5Col3"]},
+			{"id":6, "parentId":5, "cols":["rowX6Col1", "rowX6Col2", "rowX6Col3"]}
+		]
 	}
 }
