@@ -21,7 +21,7 @@ Checkout the [Dashboard ](http://demo.firebrickjs.com) demo
 
 ###Require JS
 
-* CSS
+* HEAD
 ```
 	<!-- Application -->
 	<script data-main="app/main" src="bower_components/requirejs/require.js"></script>
