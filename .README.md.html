@@ -458,7 +458,7 @@ function setDocumentScrollTop(ypos)
 
 </head>
 <body class="markdown-body">
-<h1> <a name="firebrick-ui-v010-stable" class="anchor" href="#firebrick-ui-v010-stable" aria-hidden="true"><span class="octicon octicon-link"></span></a>Firebrick UI v0.1.0 Stable</h1> 
+<h1> <a name="firebrick-ui-v014-stable" class="anchor" href="#firebrick-ui-v014-stable" aria-hidden="true"><span class="octicon octicon-link"></span></a>Firebrick UI v0.1.4 Stable</h1> 
 <p>UI extendable component library for Firebrick MVC, built with :</p> 
 <ul> 
  <li>Firebrick MVC</li> 
@@ -475,7 +475,10 @@ function setDocumentScrollTop(ypos)
 <ul> 
  <li>CSS</li> 
 </ul> 
-<pre><code>    &lt;!-- Bootstrap --&gt;
+<pre><code>    &lt;!-- Application --&gt;
+    &lt;script data-main=&quot;app/main&quot; src=&quot;bower_components/requirejs/require.js&quot;&gt;&lt;/script&gt;
+
+    &lt;!-- Bootstrap --&gt;
     &lt;link rel=&quot;stylesheet&quot; href=&quot;bower_components/bootstrap/dist/css/bootstrap.css&quot; /&gt;
     &lt;link rel=&quot;stylesheet&quot; href=&quot;bower_components/bootstrap/dist/css/bootstrap-theme.css&quot; /&gt;
 
@@ -484,7 +487,7 @@ function setDocumentScrollTop(ypos)
 
     &lt;!-- TreeTables --&gt;
     &lt;link rel=&quot;stylesheet&quot; href=&quot;bower_components/jquery-treetable/css/jquery.treetable.css&quot; /&gt;
-    &lt;link rel=&quot;stylesheet&quot; href=&quot;bower_components/firebrick-ui/firebrick-ui.css&quot; /&gt;
+    &lt;link rel=&quot;stylesheet&quot; href=&quot;bower_components/firebrick.ui/dist/firebrick.ui.css&quot; /&gt;
 
     &lt;!-- X-Editable --&gt;
     &lt;link href=&quot;bower_components/x-editable/dist/bootstrap3-editable/css/bootstrap-editable.css&quot; rel=&quot;stylesheet&quot;&gt;
@@ -494,28 +497,26 @@ function setDocumentScrollTop(ypos)
 
     &lt;!-- Firebrick UI --&gt;
     &lt;link rel=&quot;stylesheet&quot; href=&quot;bower_components/firebrick.ui/firebrick.ui.css&quot; /&gt;
-
-    &lt;!-- Require JS and App Start --&gt;
-    &lt;script data-main=&quot;js/app&quot; src=&quot;bower_components/requirejs/require.js&quot;&gt;&lt;/script&gt;
 </code></pre> 
 <ul> 
  <li>Create you application</li> 
 </ul> 
 <pre><code>    require.config({
         paths:{
-            &quot;jquery&quot;: &quot;../bower_components/jquery/dist/jquery&quot;,
-            &quot;knockout&quot;: &quot;../bower_components/knockoutjs/dist/knockout&quot;,
-            &quot;knockout-mapping&quot;: &quot;../bower_components/knockout-mapping/knockout.mapping&quot;,
-            &quot;firebrick&quot;: &quot;../bower_components/firebrick/firebrick&quot;,
-            &quot;bootstrap&quot;: &quot;../bower_components/bootstrap/dist/js/bootstrap.min&quot;,
-            &quot;text&quot;: &quot;../bower_components/text/text&quot;,
-            &quot;firebrick-ui&quot;: &quot;../bower_components/firebrick-ui/firebrick.ui&quot;,
-            &quot;Firebrick.ui&quot;: &quot;../bower_components/firebrick-ui/components&quot;,
-            &quot;handlebars&quot;: &quot;../bower_components/handlebars/handlebars&quot;,
-            &quot;datatables&quot;: &quot;../bower_components/datatables/media/js/jquery.dataTables&quot;,
-            &quot;jquery-treetable&quot;: &quot;../bower_components/jquery-treetable/jquery.treetable&quot;,
-            &quot;x-editable&quot;: &quot;../bower_components/x-editable/dist/bootstrap3-editable/js/bootstrap-editable&quot;,
-            &quot;knockout-x-editable&quot;: &quot;../bower_components/knockout-x-editable/knockout.x-editable&quot;,
+        &quot;jquery&quot;: &quot;../bower_components/jquery/dist/jquery&quot;,
+        &quot;knockout&quot;: &quot;../bower_components/knockoutjs/dist/knockout&quot;,
+        &quot;knockout-mapping&quot;: &quot;../bower_components/knockout-mapping/knockout.mapping&quot;,
+        &quot;firebrick&quot;: &quot;../bower_components/firebrick/dist/firebrick&quot;,
+        &quot;bootstrap&quot;: &quot;../bower_components/bootstrap/dist/js/bootstrap.min&quot;,
+        &quot;text&quot;: &quot;../bower_components/text/text&quot;,
+        &quot;firebrick-ui&quot;: &quot;../bower_components/firebrick.ui/dist/firebrick.ui&quot;,
+        &quot;handlebars&quot;: &quot;../bower_components/handlebars/handlebars&quot;,
+        &quot;datatables&quot;: &quot;../bower_components/datatables/media/js/jquery.dataTables&quot;,
+        &quot;jquery-treetable&quot;: &quot;../bower_components/jquery-treetable/jquery.treetable&quot;,
+        &quot;x-editable&quot;: &quot;../bower_components/x-editable/dist/bootstrap3-editable/js/bootstrap-editable&quot;,
+        &quot;fb-ui-plugins&quot;: &quot;../bower_components/firebrick-ui/plugins&quot;,
+        &quot;knockout-x-editable&quot;: &quot;../bower_components/knockout-x-editable/knockout.x-editable&quot;,
+        &quot;Firebrick.ui&quot;: &quot;../bower_components/firebrick.ui/dist/components&quot;
         },
         shim:{
             &quot;knockout-mapping&quot;: [&quot;knockout&quot;],
