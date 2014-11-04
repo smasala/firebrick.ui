@@ -1,85 +1,133 @@
+/**
+ * Extends: {{#crossLink "Firebrick.ui.components.common.Base"}}{{/crossLink}}
+ * @module Firebrick.ui.components
+ * @extends Firebrick.ui.components.common.Base
+ * @namespace Firebrick.ui.components.table
+ * @class Table
+ */
 define(["jquery", "text!./Table.html", "../common/Base", "datatables"], function($, tpl){
 	return Firebrick.define("Firebrick.ui.table.Table", {
 		extend:"Firebrick.ui.common.Base",
+		/**
+		 * @property uiName
+		 * @type {String}
+		 */
 		uiName: "fb-ui-table",
+		/**
+		 * @property tpl
+		 * @type {String} html
+		 */
 		tpl: tpl,
 		/**
-		 * @type boolean
+		 * @property responsive
+		 * @type {Boolean}
+		 * @default true
 		 */
 		responsive:true,
 		/**
-		 * @type json object || string 
 		 * {
 		 * 	cols:[{}]
 		 * 	rows:[{}]
 		 * }
+		 * @property data
+		 * @type {Object, String}
+		 * @default false
 		 */
 		data:false,
 		/**
-		 * @type boolean or string
+		 * @property tableStriped
+		 * @type {Boolean, String}
+		 * @default true
 		 */
 		tableStriped:true,
 		/**
-		 * @type boolean or string
+		 * @property tableHover
+		 * @type {Boolean, String}
+		 * @default false
 		 */
 		tableHover:false,
 		/**
-		 * @type boolean or string
+		 * @property tableCondensed
+		 * @type {Boolean, String}
+		 * @default false
 		 */
 		tableCondensed:false,
 		/**
-		 * @type boolean or string
+		 * @property tableBordered
+		 * @type {Boolean, String}
+		 * @default false
 		 */
 		tableBordered:false,
 		/**
-		 * @type boolean
+		 * @property showHeadings
+		 * @type {Boolean}
+		 * @default true
 		 */
 		showHeadings:true,
 		/**
-		 * @type boolean
+		 * @property showRows
+		 * @type {Boolean}
+		 * @default true
 		 */
 		showRows:true,
 		/**
-		 * @type boolean
 		 * activate the datatables plugin
+		 * @property datatable
+		 * @type {Boolean}
+		 * @default false
 		 */
 		datatable:false,
 		/**
-		 * @type boolean
 		 * activate the treetable plugin
+		 * @property treetable
+		 * @type {Boolean}
+		 * @default false
 		 */
 		treetable:false,
 		/**
-		 * @type object
 		 * return js object to pass to the DataTable function for configuring the table on componentReady
+		 * @property dataTableConfig
+		 * @type {function}
+		 * @return {object}
+		 * @default {}
 		 */
 		dataTableConfig: function(){
 			return {};
 		},
 		/**
-		 * @type boolean
 		 * works with parameter treetable
+		 * @property expandable
+		 * @type {Boolean}
+		 * @default true
 		 */
 		expandable:true,
 		/**
-		 * @type boolean or string
 		 * works with parameter treetable
+		 * @property showCaption
+		 * @type {Boolean, String}
+		 * @default true
 		 */
 		showCaption:true,
 		/**
-		 * @type string
 		 * works with parameter treetable
+		 * @property expandText
+		 * @type {String}
+		 * @default "Expand"
 		 */
 		expandText:'Expand',
 		/**
-		 * @type string
 		 * works with parameter treetable
+		 * @property collapseText
+		 * @type {String}
+		 * @default "Collapse"
 		 */
 		collapseText: 'Collapse',
-		
 		/**
-		 * @type object
 		 * return js object to pass to the Treetable function for configuring the table on componentReady
+		 * @property treeTableConfig
+		 * @type {function}
+		 * @returns {Object}
+		 * @default {}
 		 */
 		treeTableConfig:function(){
 			var me = this;
@@ -87,7 +135,9 @@ define(["jquery", "text!./Table.html", "../common/Base", "datatables"], function
 				expandable:me.expandable
 			};
 		},
-		
+		/**
+		 * @method init
+		 */
 		init:function(){
 			var me = this;
 			me.on("componentReady", function(){
@@ -101,7 +151,10 @@ define(["jquery", "text!./Table.html", "../common/Base", "datatables"], function
 			}),
 			me.callParent();
 		},
-		
+		/**
+		 * @method containerBindings
+		 * @returns {Object}
+		 */
 		containerBindings: function(){
 			var me = this;
 			return {
@@ -110,9 +163,10 @@ define(["jquery", "text!./Table.html", "../common/Base", "datatables"], function
 				}
 			};
 		},
-		
 		/**
+		 * @method _getData
 		 * @private
+		 * @returns {Object}
 		 */
 		_getData: function(){
 			var me = this;
@@ -121,7 +175,10 @@ define(["jquery", "text!./Table.html", "../common/Base", "datatables"], function
 			}
 			return me.data;
 		},
-		
+		/**
+		 * @method bindings
+		 * @returns {Object}
+		 */
 		bindings: function(){
 			var me = this;
 			return {
@@ -135,13 +192,19 @@ define(["jquery", "text!./Table.html", "../common/Base", "datatables"], function
 				}
 			}
 		},
-		
+		/**
+		 * @method theadBindings
+		 * @returns {Object}
+		 */
 		theadBindings: function(){
 			return {
 				"if": "cols" 
 			};
 		},
-		
+		/**
+		 * @method tbodyBindings
+		 * @returns {Object}
+		 */
 		tbodyBindings:function(){
 			return {
 				"if": "rows"
@@ -151,24 +214,37 @@ define(["jquery", "text!./Table.html", "../common/Base", "datatables"], function
 		/**
 		 * loop bindings
 		 */
+		/**
+		 * @method theadTRBindings
+		 * @returns {Object}
+		 */
 		theadTRBindings:function(){
 			return {
 				"foreach": "cols"
 			};
 		},
-		
+		/**
+		 * @method theadTRTDBindings
+		 * @returns {Object}
+		 */
 		theadTRTDBindings:function(){
 			return {
 				"text": "$data"
 			};
 		},
-		
+		/**
+		 * @method tbodyBindings
+		 * @returns {Object}
+		 */
 		tbodyBindings:function(){
 			return {
 				"foreach": "rows"
 			};
 		},
-		
+		/**
+		 * @method tbodyTRBindings
+		 * @returns {Object}
+		 */
 		tbodyTRBindings:function(){
 			return {
 				"foreach": "$data.cols ? $data.cols : $data",
@@ -178,20 +254,29 @@ define(["jquery", "text!./Table.html", "../common/Base", "datatables"], function
 				}
 			};
 		},
-		
+		/**
+		 * @method tbodyTRTDBindings
+		 * @returns {Object}
+		 */
 		tbodyTRTDBindings:function(){
 			return {
 				"text": "$data.text ? $data.text : $data"
 			};
 		},
-		
+		/**
+		 * @method captionBindings
+		 * @returns {Object}
+		 */
 		captionBindings:function(){
 			var me = this;
 			return {
 				show: me.showCaption
 			};
 		},
-		
+		/**
+		 * @method expandBindings
+		 * @returns {Object}
+		 */
 		expandBindings:function(){
 			var me = this;
 			return {
@@ -202,7 +287,10 @@ define(["jquery", "text!./Table.html", "../common/Base", "datatables"], function
 				}
 			};
 		},
-		
+		/**
+		 * @method collapseBindings
+		 * @returns {Object}
+		 */
 		collapseBindings:function(){
 			var me = this;
 			return {

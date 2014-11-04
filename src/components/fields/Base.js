@@ -1,119 +1,201 @@
+/**
+ * Extends: {{#crossLink "Firebrick.ui.components.common.Base"}}{{/crossLink}}
+ * @module Firebrick.ui.components
+ * @extends Firebrick.ui.components.common.Base
+ * @namespace Firebrick.ui.components.fields
+ * @class Base
+ */
 define(["text!./Base.html", "../common/Base", "x-editable", "knockout-x-editable"], function(tpl){
 	return Firebrick.define("Firebrick.ui.fields.Base", {
 		extend:"Firebrick.ui.common.Base",
+		/**
+		 * @property uiName
+		 * @type {String}
+		 */
 		uiName: "fb-ui-base",
 		/**
-		 * @type string
+		 * @property label
+		 * @type {String}
+		 * @default ""
 		 */
 		label: "",
 		/**
-		 * @type string
+		 * @property value
+		 * @type {String}
+		 * @default "''"
 		 */
-		value: "'val'",
+		value: "''",
 		/**
-		 * @type string (html)
+		 * @property tpl
+		 * @type {String} html
 		 */
 		tpl:tpl,
 		/**
-		 * @type string
+		 * @property type
+		 * @type {String}
+		 * @default false
 		 */
 		type:false,
 		/**
-		 * @type string
+		 * @property formGroupClass
+		 * @type {String}
+		 * @default "form-group"
 		 */
 		formGroupClass: "form-group",
 		/**
-		 * @type string
+		 * @property inputClass
+		 * @type {String}
+		 * @default true
 		 */
 		inputClass: true,
 		/**
-		 * @type int
+		 * @property colLabelSize
+		 * @type {Int}
+		 * @default 3
 		 */
 		colLabelSize: 3,
 		/**
-		 * @type int
+		 * @property colInputSize
+		 * @type {Int}
+		 * @default 9
 		 */
 		colInputSize: 9,
 		/**
-		 * @type string
+		 * @property deviceSize
+		 * @type {String}
+		 * @default "sm"
 		 */
 		deviceSize: "sm",
 		/**
-		 * @type boolean
+		 * @property hideLabel
+		 * @type {Boolean}
+		 * @default false
 		 */
 		hideLabel: false,
 		/**
-		 * @type boolean
+		 * @property readOnly
+		 * @type {Boolean}
+		 * @default false
 		 */
 		readOnly:false,
 		/**
-		 * @type boolean
+		 * @property disabled
+		 * @type {Boolean}
+		 * @default false
 		 */
 		disabled:false,
 		/**
-		 * @type false or string (sm || lg)
+		 * string (sm || lg)
+		 * @property inputSize
+		 * @type {Boolean, String}
+		 * @default false
 		 */
 		inputSize:false,
 		/**
-		 * @type boolean
+		 * @property controlLabel
+		 * @type {Boolean}
+		 * @default true
 		 */
 		controlLabel:true,
-		/** help text **/
 		/**
-		 * @type boolean || string
+		 * help text
+		 * @property helpText
+		 * @type {Boolean, String}
+		 * @default false
 		 */
 		helpText:false,
 		/**
-		 * @type string
+		 * help text
+		 * @property helpBlockClass
+		 * @type {String}
+		 * @default "help-block"
 		 */
 		helpBlockClass:"help-block",
 		/**
-		 * @type string || boolean
+		 * @property placeholder
+		 * @type {Boolean, String}
+		 * @default false
 		 */
 		placeholder:false,
 		/****************/
 		/**
-		 * @type boolean
+		 * @property showStateIcon
+		 * @type {Boolean}
+		 * @default true
 		 */
 		showStateIcon:true,
 		/**
-		 * @type string
+		 * @property formControlFeedbackClass
+		 * @type {String}
+		 * @default "form-control-feedback"
 		 */
 		formControlFeedbackClass: "form-control-feedback",
-		/** input addon **/
 		/**
-		 * @type false || string
+		 * input addon
+		 * @property inputAddon
+		 * @type {Boolean, String}
+		 * @default false
 		 */
 		inputAddon:false,
 		/**
-		 * @type string
+		 * @property inputAddonClass
+		 * @type {String}
+		 * @default "'input-group-addon'"
 		 */
 		inputAddonClass:"'input-group-addon'",
 		/******************/
 		/**
-		 * @type boolean
+		 * @property horizontal
+		 * @type {Boolean}
+		 * @default true
 		 */
 		horizontal:true,
 		/**
 		 * Feedback css bindings
-		 * @type boolean or string 
+		 * @property feedback_success
+		 * @type {Boolean, String}
+		 * @default false
 		 */
 		feedback_success:false,
+		/**
+		 * Feedback css bindings
+		 * @property feedback_warning
+		 * @type {Boolean, String}
+		 * @default false
+		 */
 		feedback_warning:false,
+		/**
+		 * Feedback css bindings
+		 * @property feedback_error
+		 * @type {Boolean, String}
+		 * @default false
+		 */
 		feedback_error: false,
 		/**
-		 * @type boolean or ko string
+		 * @property multiplesInline
+		 * @type {Boolean, String}
+		 * @default false
 		 */
 		multiplesInline:false,
 		/**
-		 * @type boolean
+		 * @property inplaceEdit
+		 * @type {Boolean}
+		 * @default false
 		 */
 		inplaceEdit:false,
+		/**
+		 * @property showInplaceTitle
+		 * @type {Boolean}
+		 * @default true
+		 */
 		showInplaceTitle:true,
 		/************************/
-		
 		/**
 		 * Binding Functions
+		 */
+		/**
+		 * @method containerBindings
+		 * @returns {Object}
 		 */
 		containerBindings:function(){
 			var me = this,
@@ -131,13 +213,19 @@ define(["text!./Base.html", "../common/Base", "x-editable", "knockout-x-editable
 			}
 			return obj;
 		},
-		
+		/**
+		 * @method helpBlockBindings
+		 * @returns {Object}
+		 */
 		helpBlockBindings: function(){
 			return {
 				text: "fb.text('" + this.helpText + "')"
 			}
 		},
-		
+		/**
+		 * @method feedbackBindings
+		 * @returns {Object}
+		 */
 		feedbackBindings:function(){
 			var me = this,
 				binds = {css:{}},
@@ -161,7 +249,10 @@ define(["text!./Base.html", "../common/Base", "x-editable", "knockout-x-editable
 			}
 			return binds;
 		},
-		
+		/**
+		 * @method bindings
+		 * @returns {Object}
+		 */
 		bindings:function(){
 			var me = this,
 				obj = {
@@ -189,7 +280,10 @@ define(["text!./Base.html", "../common/Base", "x-editable", "knockout-x-editable
 			
 			return obj;
 		},
-		
+		/**
+		 * @method inputAddonBindings
+		 * @returns {Object}
+		 */
 		inputAddonBindings: function(){
 			var me = this,
 				obj = {
@@ -197,11 +291,14 @@ define(["text!./Base.html", "../common/Base", "x-editable", "knockout-x-editable
 					css:{}
 				};
 			if(me.inputAddon){
-				obj.css[me.inputAddonClass] = me.inputAddon;
+				obj.css[me.inputAddonClass] = true;
 			}
 			return obj;
 		},
-		
+		/**
+		 * @method labelBindings
+		 * @returns {Object}
+		 */
 		labelBindings: function(){
 			var me = this,
 				obj = {
@@ -215,7 +312,10 @@ define(["text!./Base.html", "../common/Base", "x-editable", "knockout-x-editable
 			}
 			return obj;
 		},
-		
+		/**
+		 * @method inputContainerBindings
+		 * @returns {Object}
+		 */
 		inputContainerBindings: function(){
 			var me = this,
 				obj = {

@@ -3,6 +3,6 @@
 	"version": "0.0.0",
 	"dependencies": {
 		"firebrick": ">=0.8.20",
-		"firebrick.ui": ">=0.1.6"
+		"firebrick.ui": ">=0.2.0"
 	}
 }

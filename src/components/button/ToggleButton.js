@@ -1,31 +1,67 @@
+/**
+ * Extends: {{#crossLink "Firebrick.ui.components.common.MultiplesBase"}}{{/crossLink}}
+ * @module Firebrick.ui.components
+ * @extends Firebrick.ui.components.common.MultiplesBase
+ * @namespace Firebrick.ui.components.button
+ * @class ToggleButton
+ */
 define(["text!./ToggleButton.html", "../common/MultiplesBase"], function(subTpl){
 	return Firebrick.create("Firebrick.ui.button.ToggleButton", {
 		extend:"Firebrick.ui.common.MultiplesBase",
+		/**
+		 * component alias
+		 * @property uiName
+		 * @type {String}
+		 */
 		uiName: "fb-ui-togglebutton",
+		/**
+		 * @property subTpl
+		 * @type {String} html
+		 */
 		subTpl:subTpl,
 		/**
+		 * @property btnGroupClass
 		 * @type boolean or string
+		 * @default true
 		 */
 		btnGroupClass:true,
 		/**
-		 * @type boolean or string
+		 * @property btnClass
+		 * @type {Boolean, String}
+		 * @default true
 		 */
 		btnClass: true,
 		/**
-		 * @type boolean or string
+		 * @property btnPrimaryClass
+		 * @type {Boolean, String}
+		 * @default true
 		 */
 		btnPrimaryClass: true,
 		/**
-		 * @type boolean or string
+		 * @property defaultActive
+		 * @type {Boolean, String}
+		 * @default false
 		 */
 		defaultActive: false,
 		/**
-		 *  @type boolean or string
+		 * @property dataToggle
+		 * @type boolean or string
+		 * @default "'buttons'"
 		 */
 		dataToggle: "'buttons'",
-		options:'[{text:"abc", active:true}, "b", "c", "d"]',
+		/**
+		 * options that are to be shown by the toggle button : [{text:"abc", active:true}, "b", "c", "d"]
+		 * @property options
+		 * @type {String}
+		 * @default "''"
+		 */
+		options:"''",
 		/**
 		 * Bindings
+		 */
+		/**
+		 * @method btnGroupBindings
+		 * @returns {Object}
 		 */
 		btnGroupBindings: function(){
 			var me = this;
@@ -39,7 +75,10 @@ define(["text!./ToggleButton.html", "../common/MultiplesBase"], function(subTpl)
 				foreach: me.options
 			}
 		},
-		
+		/**
+		 * @method toggleInputBindings
+		 * @returns {Object}
+		 */
 		toggleInputBindings: function(){
 			var me = this;
 			return {
@@ -48,7 +87,10 @@ define(["text!./ToggleButton.html", "../common/MultiplesBase"], function(subTpl)
 				}
 			}
 		},
-		
+		/**
+		 * @method toggleLabelBindings
+		 * @returns {Object}
+		 */
 		toggleLabelBindings: function(){
 			var me = this;
 			return {
@@ -62,7 +104,10 @@ define(["text!./ToggleButton.html", "../common/MultiplesBase"], function(subTpl)
 				}
 			}
 		},
-		
+		/**
+		 * @method toggleLabelTextBindings
+		 * @returns {Object}
+		 */
 		toggleLabelTextBindings: function(){
 			return {
 				"text": "$data.text ? $data.text : $data"

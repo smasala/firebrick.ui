@@ -27,24 +27,39 @@
 		return;
 	}
 	
+	/**
+	 * Firebrick component library for Firebrick JS MVC
+	 * @module Firebrick
+	 * @namespace Firebrick
+	 * @class ui
+	 */
 	Firebrick.ui = {
-			
+			/**
+			 * library version number
+			 * @property version
+			 * @private
+			 * @type {String}
+			 */
 			version: "0.1.4",
 			
 			/**
-			 * @private
 			 * used to cache pointers to classes when searching by "uiName"
+			 * 
+			 * @private
+			 * @property _searchCache
+			 * @type {Object}
 			 */
 			_searchCache:{},
 			
 			/**
 			 * populate a target with fields and data
-			 * @param config :: object ::	{
-			 * 									target: selector string, jquery object (optional) if none passed, html is returned,
-			 * 									items: array of strings ["fb-ui-input", "fb-ui-textarea"],
-			 * 									view: Firebrick view class
-			 * 							 	}
-			 * @returns html :: string
+			 * 
+			 * @method build
+			 * @param {Object} config
+			 * @param {Object} config.target selector string, jquery object (optional) if none passed, html is returned
+			 * @param {Object} config.items array of strings or objects ["fb-ui-input", {uiName:"fb-ui-textarea"}]
+			 * @param {Object} config.view Firebrick view class (optional)
+			 * @returns {String} html
 			 */
 			build: function(config){
 				var me = this,
@@ -71,8 +86,10 @@
 			
 			/**
 			 * recursive function
+			 * 
 			 * @private
-			 * @returns object :: {html: string, items: array of objects}
+			 * @method _populate
+			 * @returns {Object} :: {html: string, items: array of objects}
 			 */
 			_populate: function(items, parent){
 				var me = this,
@@ -98,6 +115,13 @@
 				return {html: h, items: x};
 			},
 			
+			/**
+			 * get a component class by its shortname... uiName
+			 * 
+			 * @method getByShortName
+			 * @param {String} name (uiName)
+			 * @return {Object}
+			 */
 			getByShortName: function(name){
 				var me = this,
 					item = me._searchCache[name];
@@ -117,11 +141,31 @@
 				return item;
 			},
 			
+			/**
+			 * alias for Firebrick.get
+			 * 
+			 * @method get
+			 * @param {String} name
+			 * @returns {Object}
+			 */
 			get: function(name){
 				return Firebrick.get(name);
 			},
 			
+			/**
+			 * util methods
+			 * @module Firebrick.ui
+			 * @namespace Firebrick.ui
+			 * @class utils
+			 */
 			utils:{
+				/**
+				 * convert a JS Object into a simple "json" type string, this is mainly used for the data-bind attribute in Knockout
+				 * 
+				 * @method stringify
+				 * @param {Object} objToConvert
+				 * @returns {String}
+				 */
 				stringify:function(objToConvert){
 					if(objToConvert){
 						

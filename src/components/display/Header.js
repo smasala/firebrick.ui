@@ -1,37 +1,68 @@
+/**
+ * Extends: {{#crossLink "Firebrick.ui.components.common.Base"}}{{/crossLink}}
+ * @module Firebrick.ui.components
+ * @extends Firebrick.ui.components.common.Base
+ * @namespace Firebrick.ui.components.display
+ * @class Header
+ */
 define(["text!./Header.html", "../common/Base"], function(tpl){
 	return Firebrick.create("Firebrick.ui.display.Header", {
 		extend:"Firebrick.ui.common.Base",
+		/**
+		 * @property uiName
+		 * @type {String}
+		 */
 		uiName:"fb-ui-header",
+		/**
+		 * @property tpl
+		 * @type {String}
+		 */
 		tpl:tpl,
 		/**
-		 * @type int :: use to determine whether h1, h2, h3 etc - default(1)
+		 * use to determine whether h1, h2, h3 etc - default = 1
+		 * @property headerType
+		 * @type {Int}
+		 * @default 1
 		 */
 		headerType:1,
 		/**
-		 * @type string
+		 * @property headerText
+		 * @type {String}
+		 * @default ""
 		 */
 		headerText:"",
 		/**
-		 * @type string
+		 * @property secondaryText
+		 * @type {String}
+		 * @default ""
 		 */
 		secondaryText:"",
 		/**
-		 * @type string
+		 * @property labelText
+		 * @type {String}
+		 * @default ""
 		 */
 		labelText:"",
 		/**
-		 * @type false || string ::  "default", "primary", "success" "info", "warning", "danger"  
+		 * string = "default", "primary", "success" "info", "warning", "danger"  
+		 * @property labelCSS
+		 * @type {Boolean, String}
+		 * @default "default"
 		 */
 		labelCSS: "default",
 		/**
-		 * bindings
+		 * @method bindings
+		 * @returns Object
 		 */
 		bindings: function(){
 			return {
 				text: this.headerText
 			};
 		},
-		
+		/**
+		 * @method secondaryTextBindings
+		 * @returns Object
+		 */
 		secondaryTextBindings: function(){
 			var me = this;
 			if(me.secondaryText){
@@ -44,7 +75,10 @@ define(["text!./Header.html", "../common/Base"], function(tpl){
 				};
 			}
 		},
-		
+		/**
+		 * @method labelBindings
+		 * @returns Object
+		 */
 		labelBindings: function(){
 			var me = this, 
 				obj;

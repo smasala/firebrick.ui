@@ -1,12 +1,33 @@
+/**
+ * Extends: {{#crossLink "Firebrick.ui.components.containers.Base"}}{{/crossLink}}
+ * @module Firebrick.ui.components
+ * @extends Firebrick.ui.components.containers.Base
+ * @namespace Firebrick.ui.components.containers
+ * @class Grid
+ */
 define(["text!./Grid.html", "jquery", "./Base"], function(tpl, $){
 	return Firebrick.create("Firebrick.ui.containers.Grid", {
 		extend:"Firebrick.ui.containers.Base",
+		/**
+		 * @property uiName
+		 * @type {String}
+		 */
 		uiName:"fb-ui-grid",
+		/**
+		 * @property tpl
+		 * @type {String} html
+		 */
 		tpl: tpl,
 		/**
-		 * @boolean or string
+		 * @property rowClass
+		 * @type {Boolean, String}
+		 * @default true
 		 */
 		rowClass:true,
+		/**
+		 * @method bindings
+		 * @returns {Object}
+		 */
 		bindings: function(){
 			var me = this;
 			return {
@@ -18,6 +39,10 @@ define(["text!./Grid.html", "jquery", "./Base"], function(tpl, $){
 				}
 			}
 		},
+		/**
+		 * @method getBasicBindings
+		 * @returns {Object}
+		 */
 		getBasicBindings:function(){
 			var me = this;
 				obj = {
@@ -26,6 +51,14 @@ define(["text!./Grid.html", "jquery", "./Base"], function(tpl, $){
 			obj.css["'col-md-" + (Math.floor(12/me.items.length)) + "'"] = true;
 			return obj;
 		},
+		/**
+		 * used when calling {{{getGridItem}}} in template
+		 * @method getGridItem
+		 * @param {Int} iteration index
+		 * @param {Object} iteration object
+		 * @param {Context} iteration context
+		 * @returns {String}
+		 */
 		getGridItem: function(index, item, context){
 			var me = context.data.root,
 				newItem = me._getItems(item);

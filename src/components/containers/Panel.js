@@ -1,46 +1,83 @@
+/**
+ * Extends: {{#crossLink "Firebrick.ui.components.containers.Base"}}{{/crossLink}}
+ * @module Firebrick.ui.components
+ * @extends Firebrick.ui.components.containers.Base
+ * @namespace Firebrick.ui.components.containers
+ * @class Panel
+ */
 define(["text!./Panel.html", "./Base"], function(tpl){
 	return Firebrick.define("Firebrick.ui.containers.Panel", {
 		extend:"Firebrick.ui.containers.Base",
+		/**
+		 * @property uiName
+		 * @type {String}
+		 */
 		uiName: "fb-ui-panel",
+		/**
+		 * @property tpl
+		 * @type {String} html
+		 */
 		tpl:tpl,
 		/**
-		 * @type string
+		 * @property title
+		 * @type {String}
+		 * @default ""
 		 */
 		title:"",
 		/**
-		 * @type boolean || string
+		 * @property panelClass
+		 * @type {Boolean, String}
+		 * @default true
 		 */
 		panelClass: true,
 		/**
-		 * @type false || string (default, primary, success, info, warning, danger)
+		 * string = (default, primary, success, info, warning, danger)
+		 * @property panelTypeClass
+		 * @type {Boolean, String} 
+		 * @default "default"
 		 */
 		panelTypeClass: "default",
 		/**
-		 * @type boolean || string
+		 * @property panelHeaderClass
+		 * @type {Boolean, String}
+		 * @default true
 		 */
 		panelHeaderClass: true,
 		/**
-		 * @type boolean || string
+		 * @property panelBodyClass
+		 * @type {Boolean, String}
+		 * @default true
 		 */
 		panelBodyClass: true,
 		/**
-		 * @type boolean || string
+		 * @property showPanelHeader
+		 * @type {Boolean, String}
+		 * @default true
 		 */
 		showPanelHeader:true,
 		/**
-		 * @type string - fill the panel body (can be html too)
+		 * fill the panel body (can be html too)
+		 * @property content
+		 * @type {String}
+		 * @default ""
 		 */
 		content: "",
 		/**
-		 * @type boolean || string
+		 * @property collapsible
+		 * @type {Boolean, String}
+		 * @default false
 		 */
 		collapsible:false,
 		/**
-		 * @type boolean || string
+		 * @property collapsed
+		 * @type {Boolean, String}
+		 * @default false
 		 */
 		collapsed:false,
 		/**
 		 * Data bindings
+		 * @method bindings
+		 * @return {Object}
 		 */
 		bindings: function(){
 			var me = this,
@@ -57,7 +94,10 @@ define(["text!./Panel.html", "./Base"], function(tpl){
 			}
 			return obj;
 		},
-		
+		/**
+		 * @method tabBindings
+		 * @return {Object}
+		 */
 		tabBindings: function(){
 			var me = this,
 				obj = {
@@ -75,7 +115,10 @@ define(["text!./Panel.html", "./Base"], function(tpl){
 			}
 			return obj;
 		},
-		
+		/**
+		 * @method panelHeaderBindings
+		 * @return {Object}
+		 */
 		panelHeaderBindings: function(){
 			var me = this,
 				obj = {
@@ -89,7 +132,10 @@ define(["text!./Panel.html", "./Base"], function(tpl){
 			}
 			return obj;
 		},
-		
+		/**
+		 * @method collapsibleLinkBindings
+		 * @return {Object}
+		 */
 		collapsibleLinkBindings: function(){
 			var me = this,
 				id = "fb-ui-collapse-" + me.getId();
@@ -103,7 +149,10 @@ define(["text!./Panel.html", "./Base"], function(tpl){
 				text: "fb.text('" + me.title + "')"
 			}
 		},
-		
+		/**
+		 * @method panelBodyBindings
+		 * @return {Object}
+		 */
 		panelBodyBindings: function(){
 			var me = this,
 				obj = {

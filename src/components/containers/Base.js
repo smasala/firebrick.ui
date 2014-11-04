@@ -1,7 +1,16 @@
+/**
+ * Extends: {{#crossLink "Firebrick.ui.components.common.Base"}}{{/crossLink}}
+ * @module Firebrick.ui.components
+ * @extends Firebrick.ui.components.common.Base
+ * @namespace Firebrick.ui.components.containers
+ * @class Base
+ */
 define(["jquery", "../common/Base"], function($){
 	return Firebrick.define("Firebrick.ui.containers.Base", {
 		extend:"Firebrick.ui.common.Base",
-		
+		/**
+		 * @method init
+		 */
 		init:function(){
 			var me = this;
 			me.on("componentReady", function(){
@@ -20,7 +29,8 @@ define(["jquery", "../common/Base"], function($){
 		
 		/**
 		 * inject sub items
-		 * @param items :: array || object || string (optional) :: only pass param if you don't want to use default this.items
+		 * @method getItems
+		 * @returns {String} html
 		 */
 		getItems: function(){
 			var me = this,
@@ -30,8 +40,11 @@ define(["jquery", "../common/Base"], function($){
 		},
 		
 		/**
-		 * @private
 		 * use getItems
+		 * @private
+		 * @method _getItems
+		 * @param {Object}
+		 * @return {String}
 		 */
 		_getItems: function(items){
 			var me = this;

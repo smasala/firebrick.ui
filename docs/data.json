@@ -1,0 +1,3496 @@
+{
+    "project": {
+        "name": "Firebrick UI API",
+        "description": "Firebrick UI API: a component library for Firebrick MVC, jQuery and Bootstrap",
+        "version": "0.2.0",
+        "url": "https://github.com/smasala",
+        "logo": "../fbui_small.png"
+    },
+    "files": {
+        "src\\components\\button\\Button.js": {
+            "name": "src\\components\\button\\Button.js",
+            "modules": {},
+            "classes": {
+                "Firebrick.ui.components.button.Button": 1
+            },
+            "fors": {},
+            "namespaces": {
+                "Firebrick.ui.components.button": 1
+            }
+        },
+        "src\\components\\button\\ToggleButton.js": {
+            "name": "src\\components\\button\\ToggleButton.js",
+            "modules": {},
+            "classes": {
+                "Firebrick.ui.components.button.ToggleButton": 1
+            },
+            "fors": {},
+            "namespaces": {
+                "Firebrick.ui.components.button": 1
+            }
+        },
+        "src\\components\\common\\Base.js": {
+            "name": "src\\components\\common\\Base.js",
+            "modules": {},
+            "classes": {
+                "Firebrick.ui.components.common.Base": 1
+            },
+            "fors": {},
+            "namespaces": {
+                "Firebrick.ui.components.common": 1
+            }
+        },
+        "src\\components\\common\\MultiplesBase.js": {
+            "name": "src\\components\\common\\MultiplesBase.js",
+            "modules": {},
+            "classes": {
+                "Firebrick.ui.components.common.MultiplesBase": 1
+            },
+            "fors": {},
+            "namespaces": {
+                "Firebrick.ui.components.common": 1
+            }
+        },
+        "src\\components\\containers\\Base.js": {
+            "name": "src\\components\\containers\\Base.js",
+            "modules": {},
+            "classes": {
+                "Firebrick.ui.components.containers.Base": 1
+            },
+            "fors": {},
+            "namespaces": {
+                "Firebrick.ui.components.containers": 1
+            }
+        },
+        "src\\components\\containers\\Form.js": {
+            "name": "src\\components\\containers\\Form.js",
+            "modules": {},
+            "classes": {
+                "Firebrick.ui.components.containers.Form": 1
+            },
+            "fors": {},
+            "namespaces": {
+                "Firebrick.ui.components.containers": 1
+            }
+        },
+        "src\\components\\containers\\Grid.js": {
+            "name": "src\\components\\containers\\Grid.js",
+            "modules": {},
+            "classes": {
+                "Firebrick.ui.components.containers.Grid": 1
+            },
+            "fors": {},
+            "namespaces": {
+                "Firebrick.ui.components.containers": 1
+            }
+        },
+        "src\\components\\containers\\GridColumn.js": {
+            "name": "src\\components\\containers\\GridColumn.js",
+            "modules": {},
+            "classes": {
+                "Firebrick.ui.components.containers.GridColumn": 1
+            },
+            "fors": {},
+            "namespaces": {
+                "Firebrick.ui.components.containers": 1
+            }
+        },
+        "src\\components\\containers\\Panel.js": {
+            "name": "src\\components\\containers\\Panel.js",
+            "modules": {},
+            "classes": {
+                "Firebrick.ui.components.containers.Panel": 1
+            },
+            "fors": {},
+            "namespaces": {
+                "Firebrick.ui.components.containers": 1
+            }
+        },
+        "src\\components\\display\\Header.js": {
+            "name": "src\\components\\display\\Header.js",
+            "modules": {},
+            "classes": {
+                "Firebrick.ui.components.display.Header": 1
+            },
+            "fors": {},
+            "namespaces": {
+                "Firebrick.ui.components.display": 1
+            }
+        },
+        "src\\components\\display\\Text.js": {
+            "name": "src\\components\\display\\Text.js",
+            "modules": {},
+            "classes": {
+                "Firebrick.ui.components.display.Text": 1
+            },
+            "fors": {},
+            "namespaces": {
+                "Firebrick.ui.components.display": 1
+            }
+        },
+        "src\\components\\fields\\plugins\\Radio.js": {
+            "name": "src\\components\\fields\\plugins\\Radio.js",
+            "modules": {
+                "plugins": 1
+            },
+            "classes": {
+                "plugins.RadioList": 1
+            },
+            "fors": {},
+            "namespaces": {
+                "plugins": 1
+            }
+        },
+        "src\\components\\fields\\Base.js": {
+            "name": "src\\components\\fields\\Base.js",
+            "modules": {
+                "Firebrick.ui.components": 1
+            },
+            "classes": {
+                "Firebrick.ui.components.fields.Base": 1
+            },
+            "fors": {},
+            "namespaces": {
+                "Firebrick.ui.components.fields": 1
+            }
+        },
+        "src\\components\\fields\\Checkbox.js": {
+            "name": "src\\components\\fields\\Checkbox.js",
+            "modules": {},
+            "classes": {
+                "Firebrick.ui.components.fields.Checkbox": 1
+            },
+            "fors": {},
+            "namespaces": {
+                "Firebrick.ui.components.fields": 1
+            }
+        },
+        "src\\components\\fields\\Email.js": {
+            "name": "src\\components\\fields\\Email.js",
+            "modules": {},
+            "classes": {
+                "Firebrick.ui.components.fields.Email": 1
+            },
+            "fors": {},
+            "namespaces": {
+                "Firebrick.ui.components.fields": 1
+            }
+        },
+        "src\\components\\fields\\Input.js": {
+            "name": "src\\components\\fields\\Input.js",
+            "modules": {},
+            "classes": {
+                "Firebrick.ui.components.fields.Input": 1
+            },
+            "fors": {},
+            "namespaces": {
+                "Firebrick.ui.components.fields": 1
+            }
+        },
+        "src\\components\\fields\\Radio.js": {
+            "name": "src\\components\\fields\\Radio.js",
+            "modules": {},
+            "classes": {
+                "Firebrick.ui.components.fields.Radio": 1
+            },
+            "fors": {},
+            "namespaces": {
+                "Firebrick.ui.components.fields": 1
+            }
+        },
+        "src\\components\\fields\\SelectBox.js": {
+            "name": "src\\components\\fields\\SelectBox.js",
+            "modules": {},
+            "classes": {
+                "Firebrick.ui.components.fields.SelectBox": 1
+            },
+            "fors": {},
+            "namespaces": {
+                "Firebrick.ui.components.fields": 1
+            }
+        },
+        "src\\components\\fields\\TextArea.js": {
+            "name": "src\\components\\fields\\TextArea.js",
+            "modules": {},
+            "classes": {
+                "Firebrick.ui.components.fields.TextArea": 1
+            },
+            "fors": {},
+            "namespaces": {
+                "Firebrick.ui.components.fields": 1
+            }
+        },
+        "src\\components\\table\\Table.js": {
+            "name": "src\\components\\table\\Table.js",
+            "modules": {},
+            "classes": {
+                "Firebrick.ui.components.table.Table": 1
+            },
+            "fors": {},
+            "namespaces": {
+                "Firebrick.ui.components.table": 1
+            }
+        },
+        "src\\components\\table\\TreeTable.js": {
+            "name": "src\\components\\table\\TreeTable.js",
+            "modules": {},
+            "classes": {
+                "Firebrick.ui.components.table.TreeTable": 1
+            },
+            "fors": {},
+            "namespaces": {
+                "Firebrick.ui.components.table": 1
+            }
+        },
+        "src\\firebrick.ui.js": {
+            "name": "src\\firebrick.ui.js",
+            "modules": {
+                "Firebrick": 1,
+                "Firebrick.ui": 1
+            },
+            "classes": {
+                "Firebrick.ui": 1,
+                "Firebrick.ui.utils": 1
+            },
+            "fors": {},
+            "namespaces": {
+                "Firebrick": 1,
+                "Firebrick.ui": 1
+            }
+        }
+    },
+    "modules": {
+        "Firebrick.ui.components": {
+            "name": "Firebrick.ui.components",
+            "submodules": {},
+            "classes": {
+                "Firebrick.ui.components.button.Button": 1,
+                "Firebrick.ui.components.button.ToggleButton": 1,
+                "Firebrick.ui.components.common.Base": 1,
+                "Firebrick.ui.components.common.MultiplesBase": 1,
+                "Firebrick.ui.components.containers.Base": 1,
+                "Firebrick.ui.components.containers.Form": 1,
+                "Firebrick.ui.components.containers.Grid": 1,
+                "Firebrick.ui.components.containers.GridColumn": 1,
+                "Firebrick.ui.components.containers.Panel": 1,
+                "Firebrick.ui.components.display.Header": 1,
+                "Firebrick.ui.components.display.Text": 1,
+                "Firebrick.ui.components.fields.Base": 1,
+                "Firebrick.ui.components.fields.Checkbox": 1,
+                "Firebrick.ui.components.fields.Email": 1,
+                "Firebrick.ui.components.fields.Input": 1,
+                "Firebrick.ui.components.fields.Radio": 1,
+                "Firebrick.ui.components.fields.SelectBox": 1,
+                "Firebrick.ui.components.fields.TextArea": 1,
+                "Firebrick.ui.components.table.Table": 1,
+                "Firebrick.ui.components.table.TreeTable": 1
+            },
+            "fors": {},
+            "namespaces": {
+                "Firebrick.ui.components.button": 1,
+                "Firebrick.ui.components.common": 1,
+                "Firebrick.ui.components.containers": 1,
+                "Firebrick.ui.components.display": 1,
+                "Firebrick.ui.components.fields": 1,
+                "Firebrick.ui.components.table": 1
+            },
+            "tag": "module",
+            "file": "src\\components\\table\\TreeTable.js",
+            "line": 1,
+            "description": "Extends: {{#crossLink \"Firebrick.ui.components.common.Base\"}}{{/crossLink}}",
+            "extends": "Firebrick.ui.components.common.Base"
+        },
+        "plugins": {
+            "name": "plugins",
+            "submodules": {},
+            "classes": {
+                "plugins.RadioList": 1
+            },
+            "fors": {},
+            "namespaces": {
+                "plugins": 1
+            },
+            "tag": "module",
+            "file": "src\\components\\fields\\plugins\\Radio.js",
+            "line": 26
+        },
+        "Firebrick": {
+            "name": "Firebrick",
+            "submodules": {},
+            "classes": {},
+            "fors": {},
+            "namespaces": {
+                "Firebrick": 1
+            },
+            "tag": "module",
+            "file": "src\\firebrick.ui.js",
+            "line": 30,
+            "description": "Firebrick component library for Firebrick JS MVC"
+        },
+        "Firebrick.ui": {
+            "name": "Firebrick.ui",
+            "submodules": {},
+            "classes": {
+                "Firebrick.ui": 1,
+                "Firebrick.ui.utils": 1
+            },
+            "fors": {},
+            "namespaces": {
+                "Firebrick.ui": 1
+            },
+            "tag": "module",
+            "file": "src\\firebrick.ui.js",
+            "line": 155,
+            "description": "util methods"
+        }
+    },
+    "classes": {
+        "Firebrick.ui.components.button.Button": {
+            "name": "Firebrick.ui.components.button.Button",
+            "shortname": "Firebrick.ui.components.button.Button",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "Firebrick.ui.components",
+            "namespace": "Firebrick.ui.components.button",
+            "file": "src\\components\\button\\Button.js",
+            "line": 1,
+            "description": "Extends: {{#crossLink \"Firebrick.ui.components.common.Base\"}}{{/crossLink}}",
+            "extends": "Firebrick.ui.components.common.Base"
+        },
+        "Firebrick.ui.components.button.ToggleButton": {
+            "name": "Firebrick.ui.components.button.ToggleButton",
+            "shortname": "Firebrick.ui.components.button.ToggleButton",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "Firebrick.ui.components",
+            "namespace": "Firebrick.ui.components.button",
+            "file": "src\\components\\button\\ToggleButton.js",
+            "line": 1,
+            "description": "Extends: {{#crossLink \"Firebrick.ui.components.common.MultiplesBase\"}}{{/crossLink}}",
+            "extends": "Firebrick.ui.components.common.MultiplesBase"
+        },
+        "Firebrick.ui.components.common.Base": {
+            "name": "Firebrick.ui.components.common.Base",
+            "shortname": "Firebrick.ui.components.common.Base",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "Firebrick.ui.components",
+            "namespace": "Firebrick.ui.components.common",
+            "file": "src\\components\\common\\Base.js",
+            "line": 1,
+            "description": "Super class for all components\nExtends: {{#crossLink \"Firebrick.class.Base\"}}{{/crossLink}}",
+            "extends": "Firebrick.class.Base"
+        },
+        "Firebrick.ui.components.common.MultiplesBase": {
+            "name": "Firebrick.ui.components.common.MultiplesBase",
+            "shortname": "Firebrick.ui.components.common.MultiplesBase",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "Firebrick.ui.components",
+            "namespace": "Firebrick.ui.components.common",
+            "file": "src\\components\\common\\MultiplesBase.js",
+            "line": 1,
+            "description": "Base for inputs where multiple options are possible: checkboxes, radio and togglesbuttons for example\nExtends: {{#crossLink \"Firebrick.ui.components.fields.Input\"}}{{/crossLink}}",
+            "extends": "Firebrick.ui.components.fields.Input"
+        },
+        "Firebrick.ui.components.containers.Base": {
+            "name": "Firebrick.ui.components.containers.Base",
+            "shortname": "Firebrick.ui.components.containers.Base",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "Firebrick.ui.components",
+            "namespace": "Firebrick.ui.components.containers",
+            "file": "src\\components\\containers\\Base.js",
+            "line": 1,
+            "description": "Extends: {{#crossLink \"Firebrick.ui.components.common.Base\"}}{{/crossLink}}",
+            "extends": "Firebrick.ui.components.common.Base"
+        },
+        "Firebrick.ui.components.containers.Form": {
+            "name": "Firebrick.ui.components.containers.Form",
+            "shortname": "Firebrick.ui.components.containers.Form",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "Firebrick.ui.components",
+            "namespace": "Firebrick.ui.components.containers",
+            "file": "src\\components\\containers\\Form.js",
+            "line": 1,
+            "description": "Extends: {{#crossLink \"Firebrick.ui.components.containers.Base\"}}{{/crossLink}}",
+            "extends": "Firebrick.ui.components.containers.Base"
+        },
+        "Firebrick.ui.components.containers.Grid": {
+            "name": "Firebrick.ui.components.containers.Grid",
+            "shortname": "Firebrick.ui.components.containers.Grid",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "Firebrick.ui.components",
+            "namespace": "Firebrick.ui.components.containers",
+            "file": "src\\components\\containers\\Grid.js",
+            "line": 1,
+            "description": "Extends: {{#crossLink \"Firebrick.ui.components.containers.Base\"}}{{/crossLink}}",
+            "extends": "Firebrick.ui.components.containers.Base"
+        },
+        "Firebrick.ui.components.containers.GridColumn": {
+            "name": "Firebrick.ui.components.containers.GridColumn",
+            "shortname": "Firebrick.ui.components.containers.GridColumn",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "Firebrick.ui.components",
+            "namespace": "Firebrick.ui.components.containers",
+            "file": "src\\components\\containers\\GridColumn.js",
+            "line": 1,
+            "description": "Extends: {{#crossLink \"Firebrick.ui.components.containers.Base\"}}{{/crossLink}}",
+            "extends": "Firebrick.ui.components.containers.Base"
+        },
+        "Firebrick.ui.components.containers.Panel": {
+            "name": "Firebrick.ui.components.containers.Panel",
+            "shortname": "Firebrick.ui.components.containers.Panel",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "Firebrick.ui.components",
+            "namespace": "Firebrick.ui.components.containers",
+            "file": "src\\components\\containers\\Panel.js",
+            "line": 1,
+            "description": "Extends: {{#crossLink \"Firebrick.ui.components.containers.Base\"}}{{/crossLink}}",
+            "extends": "Firebrick.ui.components.containers.Base"
+        },
+        "Firebrick.ui.components.display.Header": {
+            "name": "Firebrick.ui.components.display.Header",
+            "shortname": "Firebrick.ui.components.display.Header",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "Firebrick.ui.components",
+            "namespace": "Firebrick.ui.components.display",
+            "file": "src\\components\\display\\Header.js",
+            "line": 1,
+            "description": "Extends: {{#crossLink \"Firebrick.ui.components.common.Base\"}}{{/crossLink}}",
+            "extends": "Firebrick.ui.components.common.Base"
+        },
+        "Firebrick.ui.components.display.Text": {
+            "name": "Firebrick.ui.components.display.Text",
+            "shortname": "Firebrick.ui.components.display.Text",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "Firebrick.ui.components",
+            "namespace": "Firebrick.ui.components.display",
+            "file": "src\\components\\display\\Text.js",
+            "line": 1,
+            "description": "Extends: {{#crossLink \"Firebrick.ui.components.common.Base\"}}{{/crossLink}}",
+            "extends": "Firebrick.ui.components.common.Base"
+        },
+        "plugins.RadioList": {
+            "name": "plugins.RadioList",
+            "shortname": "plugins.RadioList",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "plugins",
+            "namespace": "plugins",
+            "file": "src\\components\\fields\\plugins\\Radio.js",
+            "line": 26
+        },
+        "Firebrick.ui.components.fields.Base": {
+            "name": "Firebrick.ui.components.fields.Base",
+            "shortname": "Firebrick.ui.components.fields.Base",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "Firebrick.ui.components",
+            "namespace": "Firebrick.ui.components.fields",
+            "file": "src\\components\\fields\\Base.js",
+            "line": 1,
+            "description": "Extends: {{#crossLink \"Firebrick.ui.components.common.Base\"}}{{/crossLink}}",
+            "extends": "Firebrick.ui.components.common.Base"
+        },
+        "Firebrick.ui.components.fields.Checkbox": {
+            "name": "Firebrick.ui.components.fields.Checkbox",
+            "shortname": "Firebrick.ui.components.fields.Checkbox",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "Firebrick.ui.components",
+            "namespace": "Firebrick.ui.components.fields",
+            "file": "src\\components\\fields\\Checkbox.js",
+            "line": 1,
+            "description": "Extends: {{#crossLink \"Firebrick.ui.components.fields.Radio\"}}{{/crossLink}}",
+            "extends": "Firebrick.ui.components.fields.Radio"
+        },
+        "Firebrick.ui.components.fields.Email": {
+            "name": "Firebrick.ui.components.fields.Email",
+            "shortname": "Firebrick.ui.components.fields.Email",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "Firebrick.ui.components",
+            "namespace": "Firebrick.ui.components.fields",
+            "file": "src\\components\\fields\\Email.js",
+            "line": 1,
+            "description": "Extends: {{#crossLink \"Firebrick.ui.components.fields.Input\"}}{{/crossLink}}",
+            "extends": "Firebrick.ui.components.fields.Input"
+        },
+        "Firebrick.ui.components.fields.Input": {
+            "name": "Firebrick.ui.components.fields.Input",
+            "shortname": "Firebrick.ui.components.fields.Input",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "Firebrick.ui.components",
+            "namespace": "Firebrick.ui.components.fields",
+            "file": "src\\components\\fields\\Input.js",
+            "line": 1,
+            "description": "Extends: {{#crossLink \"Firebrick.ui.components.fields.Base\"}}{{/crossLink}}",
+            "extends": "Firebrick.ui.components.fields.Base"
+        },
+        "Firebrick.ui.components.fields.Radio": {
+            "name": "Firebrick.ui.components.fields.Radio",
+            "shortname": "Firebrick.ui.components.fields.Radio",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "Firebrick.ui.components",
+            "namespace": "Firebrick.ui.components.fields",
+            "file": "src\\components\\fields\\Radio.js",
+            "line": 1,
+            "description": "Extends: {{#crossLink \"Firebrick.ui.components.common.MultiplesBase\"}}{{/crossLink}}",
+            "extends": "Firebrick.ui.components.common.MultiplesBase"
+        },
+        "Firebrick.ui.components.fields.SelectBox": {
+            "name": "Firebrick.ui.components.fields.SelectBox",
+            "shortname": "Firebrick.ui.components.fields.SelectBox",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "Firebrick.ui.components",
+            "namespace": "Firebrick.ui.components.fields",
+            "file": "src\\components\\fields\\SelectBox.js",
+            "line": 1,
+            "description": "Extends: {{#crossLink \"Firebrick.ui.components.fields.Input\"}}{{/crossLink}}",
+            "extends": "Firebrick.ui.components.fields.Input"
+        },
+        "Firebrick.ui.components.fields.TextArea": {
+            "name": "Firebrick.ui.components.fields.TextArea",
+            "shortname": "Firebrick.ui.components.fields.TextArea",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "Firebrick.ui.components",
+            "namespace": "Firebrick.ui.components.fields",
+            "file": "src\\components\\fields\\TextArea.js",
+            "line": 1,
+            "description": "Extends: {{#crossLink \"Firebrick.ui.components.fields.Input\"}}{{/crossLink}}",
+            "extends": "Firebrick.ui.components.fields.Input"
+        },
+        "Firebrick.ui.components.table.Table": {
+            "name": "Firebrick.ui.components.table.Table",
+            "shortname": "Firebrick.ui.components.table.Table",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "Firebrick.ui.components",
+            "namespace": "Firebrick.ui.components.table",
+            "file": "src\\components\\table\\Table.js",
+            "line": 1,
+            "description": "Extends: {{#crossLink \"Firebrick.ui.components.common.Base\"}}{{/crossLink}}",
+            "extends": "Firebrick.ui.components.common.Base"
+        },
+        "Firebrick.ui.components.table.TreeTable": {
+            "name": "Firebrick.ui.components.table.TreeTable",
+            "shortname": "Firebrick.ui.components.table.TreeTable",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "Firebrick.ui.components",
+            "namespace": "Firebrick.ui.components.table",
+            "file": "src\\components\\table\\TreeTable.js",
+            "line": 1,
+            "description": "Extends: {{#crossLink \"Firebrick.ui.components.table.Table\"}}{{/crossLink}}",
+            "extends": "Firebrick.ui.components.table.Table"
+        },
+        "Firebrick.ui": {
+            "name": "Firebrick.ui",
+            "shortname": "Firebrick.ui",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "Firebrick.ui",
+            "namespace": "Firebrick.ui",
+            "file": "src\\firebrick.ui.js",
+            "line": 30,
+            "description": "Firebrick component library for Firebrick JS MVC"
+        },
+        "Firebrick.ui.utils": {
+            "name": "Firebrick.ui.utils",
+            "shortname": "Firebrick.ui.utils",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "Firebrick.ui",
+            "namespace": "Firebrick.ui",
+            "file": "src\\firebrick.ui.js",
+            "line": 155,
+            "description": "util methods"
+        }
+    },
+    "classitems": [
+        {
+            "file": "src\\components\\button\\Button.js",
+            "line": 14,
+            "itemtype": "property",
+            "name": "btnSize",
+            "type": "{String} (\"sm\", \"lg\", \"xs\")",
+            "default": "false",
+            "class": "Firebrick.ui.components.button.Button",
+            "module": "Firebrick.ui.components",
+            "namespace": "Firebrick.ui.components.button"
+        },
+        {
+            "file": "src\\components\\button\\Button.js",
+            "line": 21,
+            "itemtype": "property",
+            "name": "btnStyle",
+            "type": "{String} (default, primary, success, info, warning, danger, link)",
+            "default": "\"default\"",
+            "class": "Firebrick.ui.components.button.Button",
+            "module": "Firebrick.ui.components",
+            "namespace": "Firebrick.ui.components.button"
+        },
+        {
+            "file": "src\\components\\button\\Button.js",
+            "line": 29,
+            "class": "Firebrick.ui.components.button.Button",
+            "module": "Firebrick.ui.components",
+            "namespace": "Firebrick.ui.components.button"
+        },
+        {
+            "file": "src\\components\\button\\Button.js",
+            "line": 30,
+            "description": "default bindings called by data-bind={{data-bind}}",
+            "itemtype": "method",
+            "name": "bindings",
+            "return": {
+                "description": "",
+                "type": "Object"
+            },
+            "class": "Firebrick.ui.components.button.Button",
+            "module": "Firebrick.ui.components",
+            "namespace": "Firebrick.ui.components.button"
+        },
+        {
+            "file": "src\\components\\button\\ToggleButton.js",
+            "line": 11,
+            "description": "component alias",
+            "itemtype": "property",
+            "name": "uiName",
+            "type": "{String}",
+            "class": "Firebrick.ui.components.button.ToggleButton",
+            "module": "Firebrick.ui.components",
+            "namespace": "Firebrick.ui.components.button"
+        },
+        {
+            "file": "src\\components\\button\\ToggleButton.js",
+            "line": 17,
+            "itemtype": "property",
+            "name": "subTpl",
+            "type": "{String} html",
+            "class": "Firebrick.ui.components.button.ToggleButton",
+            "module": "Firebrick.ui.components",
+            "namespace": "Firebrick.ui.components.button"
+        },
+        {
+            "file": "src\\components\\button\\ToggleButton.js",
+            "line": 22,
+            "itemtype": "property",
+            "name": "btnGroupClass",
+            "type": "boolean or string",
+            "default": "true",
+            "class": "Firebrick.ui.components.button.ToggleButton",
+            "module": "Firebrick.ui.components",
+            "namespace": "Firebrick.ui.components.button"
+        },
+        {
+            "file": "src\\components\\button\\ToggleButton.js",
+            "line": 28,
+            "itemtype": "property",
+            "name": "btnClass",
+            "type": "{Boolean, String}",
+            "default": "true",
+            "class": "Firebrick.ui.components.button.ToggleButton",
+            "module": "Firebrick.ui.components",
+            "namespace": "Firebrick.ui.components.button"
+        },
+        {
+            "file": "src\\components\\button\\ToggleButton.js",
+            "line": 34,
+            "itemtype": "property",
+            "name": "btnPrimaryClass",
+            "type": "{Boolean, String}",
+            "default": "true",
+            "class": "Firebrick.ui.components.button.ToggleButton",
+            "module": "Firebrick.ui.components",
+            "namespace": "Firebrick.ui.components.button"
+        },
+        {
+            "file": "src\\components\\button\\ToggleButton.js",
+            "line": 40,
+            "itemtype": "property",
+            "name": "defaultActive",
+            "type": "{Boolean, String}",
+            "default": "false",
+            "class": "Firebrick.ui.components.button.ToggleButton",
+            "module": "Firebrick.ui.components",
+            "namespace": "Firebrick.ui.components.button"
+        },
+        {
+            "file": "src\\components\\button\\ToggleButton.js",
+            "line": 46,
+            "itemtype": "property",
+            "name": "dataToggle",
+            "type": "boolean or string",
+            "default": "\"'buttons'\"",
+            "class": "Firebrick.ui.components.button.ToggleButton",
+            "module": "Firebrick.ui.components",
+            "namespace": "Firebrick.ui.components.button"
+        },
+        {
+            "file": "src\\components\\button\\ToggleButton.js",
+            "line": 52,
+            "description": "options that are to be shown by the toggle button : [{text:\"abc\", active:true}, \"b\", \"c\", \"d\"]",
+            "itemtype": "property",
+            "name": "options",
+            "type": "{String}",
+            "default": "\"''\"",
+            "class": "Firebrick.ui.components.button.ToggleButton",
+            "module": "Firebrick.ui.components",
+            "namespace": "Firebrick.ui.components.button"
+        },
+        {
+            "file": "src\\components\\button\\ToggleButton.js",
+            "line": 59,
+            "description": "Bindings",
+            "class": "Firebrick.ui.components.button.ToggleButton",
+            "module": "Firebrick.ui.components",
+            "namespace": "Firebrick.ui.components.button"
+        },
+        {
+            "file": "src\\components\\button\\ToggleButton.js",
+            "line": 62,
+            "itemtype": "method",
+            "name": "btnGroupBindings",
+            "return": {
+                "description": "",
+                "type": "Object"
+            },
+            "class": "Firebrick.ui.components.button.ToggleButton",
+            "module": "Firebrick.ui.components",
+            "namespace": "Firebrick.ui.components.button"
+        },
+        {
+            "file": "src\\components\\button\\ToggleButton.js",
+            "line": 78,
+            "itemtype": "method",
+            "name": "toggleInputBindings",
+            "return": {
+                "description": "",
+                "type": "Object"
+            },
+            "class": "Firebrick.ui.components.button.ToggleButton",
+            "module": "Firebrick.ui.components",
+            "namespace": "Firebrick.ui.components.button"
+        },
+        {
+            "file": "src\\components\\button\\ToggleButton.js",
+            "line": 90,
+            "itemtype": "method",
+            "name": "toggleLabelBindings",
+            "return": {
+                "description": "",
+                "type": "Object"
+            },
+            "class": "Firebrick.ui.components.button.ToggleButton",
+            "module": "Firebrick.ui.components",
+            "namespace": "Firebrick.ui.components.button"
+        },
+        {
+            "file": "src\\components\\button\\ToggleButton.js",
+            "line": 107,
+            "itemtype": "method",
+            "name": "toggleLabelTextBindings",
+            "return": {
+                "description": "",
+                "type": "Object"
+            },
+            "class": "Firebrick.ui.components.button.ToggleButton",
+            "module": "Firebrick.ui.components",
+            "namespace": "Firebrick.ui.components.button"
+        },
+        {
+            "file": "src\\components\\common\\Base.js",
+            "line": 22,
+            "description": "Override class id",
+            "itemtype": "property",
+            "name": "_idPrefix",
+            "access": "private",
+            "tagname": "",
+            "type": "{String}",
+            "class": "Firebrick.ui.components.common.Base",
+            "module": "Firebrick.ui.components",
+            "namespace": "Firebrick.ui.components.common"
+        },
+        {
+            "file": "src\\components\\common\\Base.js",
+            "line": 29,
+            "description": "used when filtering component classes when searching",
+            "itemtype": "property",
+            "name": "uiComponent",
+            "type": "{Boolean}",
+            "default": "true",
+            "class": "Firebrick.ui.components.common.Base",
+            "module": "Firebrick.ui.components",
+            "namespace": "Firebrick.ui.components.common"
+        },
+        {
+            "file": "src\\components\\common\\Base.js",
+            "line": 36,
+            "itemtype": "property",
+            "name": "glyphiconClass",
+            "type": "{String}",
+            "default": "\"glyphicon\"",
+            "class": "Firebrick.ui.components.common.Base",
+            "module": "Firebrick.ui.components",
+            "namespace": "Firebrick.ui.components.common"
+        },
+        {
+            "file": "src\\components\\common\\Base.js",
+            "line": 42,
+            "description": "target to render the component to (not needed if combined with a view) (optional)",
+            "itemtype": "property",
+            "name": "renderTo",
+            "optional": 1,
+            "type": "{Boolean, String, Object} false, selector, jQuery Object",
+            "default": "false",
+            "class": "Firebrick.ui.components.common.Base",
+            "module": "Firebrick.ui.components",
+            "namespace": "Firebrick.ui.components.common"
+        },
+        {
+            "file": "src\\components\\common\\Base.js",
+            "line": 50,
+            "description": "cache",
+            "itemtype": "property",
+            "name": "_build",
+            "access": "private",
+            "tagname": "",
+            "default": "\"\"",
+            "class": "Firebrick.ui.components.common.Base",
+            "module": "Firebrick.ui.components",
+            "namespace": "Firebrick.ui.components.common"
+        },
+        {
+            "file": "src\\components\\common\\Base.js",
+            "line": 57,
+            "description": "used in conjunction with property \"renderTo\"",
+            "itemtype": "property",
+            "name": "appendComponent",
+            "type": "{Boolean}",
+            "default": "false",
+            "class": "Firebrick.ui.components.common.Base",
+            "module": "Firebrick.ui.components",
+            "namespace": "Firebrick.ui.components.common"
+        },
+        {
+            "file": "src\\components\\common\\Base.js",
+            "line": 64,
+            "description": "when overriding this or any other method, this.callParent() calls the method in the super class",
+            "itemtype": "method",
+            "name": "init",
+            "class": "Firebrick.ui.components.common.Base",
+            "module": "Firebrick.ui.components",
+            "namespace": "Firebrick.ui.components.common"
+        },
+        {
+            "file": "src\\components\\common\\Base.js",
+            "line": 80,
+            "itemtype": "method",
+            "name": "build",
+            "params": [
+                {
+                    "name": "prop",
+                    "description": "",
+                    "type": "String",
+                    "optional": true,
+                    "optdefault": "this.tpl"
+                }
+            ],
+            "return": {
+                "description": "html",
+                "type": "String"
+            },
+            "class": "Firebrick.ui.components.common.Base",
+            "module": "Firebrick.ui.components",
+            "namespace": "Firebrick.ui.components.common"
+        },
+        {
+            "file": "src\\components\\common\\Base.js",
+            "line": 92,
+            "itemtype": "method",
+            "name": "data-bind",
+            "params": [
+                {
+                    "name": "property",
+                    "description": "",
+                    "type": "String",
+                    "optional": true,
+                    "optdefault": "this.bindings"
+                }
+            ],
+            "access": "private",
+            "tagname": "",
+            "return": {
+                "description": "",
+                "type": "String"
+            },
+            "class": "Firebrick.ui.components.common.Base",
+            "module": "Firebrick.ui.components",
+            "namespace": "Firebrick.ui.components.common"
+        },
+        {
+            "file": "src\\components\\common\\Base.js",
+            "line": 105,
+            "description": "shorthand for getClassId()",
+            "itemtype": "method",
+            "name": "getId",
+            "return": {
+                "description": "uniqueId",
+                "type": "String"
+            },
+            "class": "Firebrick.ui.components.common.Base",
+            "module": "Firebrick.ui.components",
+            "namespace": "Firebrick.ui.components.common"
+        },
+        {
+            "file": "src\\components\\common\\Base.js",
+            "line": 113,
+            "description": "called when calling {{{getSubTpl}}} in component template",
+            "itemtype": "method",
+            "name": "getSubTpl",
+            "return": {
+                "description": "",
+                "type": "String"
+            },
+            "class": "Firebrick.ui.components.common.Base",
+            "module": "Firebrick.ui.components",
+            "namespace": "Firebrick.ui.components.common"
+        },
+        {
+            "file": "src\\components\\common\\Base.js",
+            "line": 121,
+            "description": "find the parent of this class\niterate up the inheritance tree looking for a classname that differs from the current and that \"subTpl\" or \"tpl\" don't match either",
+            "access": "private",
+            "tagname": "",
+            "itemtype": "method",
+            "name": "_getParent",
+            "return": {
+                "description": "",
+                "type": "Object"
+            },
+            "class": "Firebrick.ui.components.common.Base",
+            "module": "Firebrick.ui.components",
+            "namespace": "Firebrick.ui.components.common"
+        },
+        {
+            "file": "src\\components\\common\\Base.js",
+            "line": 140,
+            "description": "called when calling {{{getParentTpl}}} in component template",
+            "itemtype": "method",
+            "name": "getParentTpl",
+            "return": {
+                "description": "",
+                "type": "String"
+            },
+            "class": "Firebrick.ui.components.common.Base",
+            "module": "Firebrick.ui.components",
+            "namespace": "Firebrick.ui.components.common"
+        },
+        {
+            "file": "src\\components\\common\\Base.js",
+            "line": 149,
+            "description": "clean string - i.e. remove all ' from string",
+            "itemtype": "method",
+            "name": "cleanString",
+            "return": {
+                "description": "",
+                "type": "String"
+            },
+            "class": "Firebrick.ui.components.common.Base",
+            "module": "Firebrick.ui.components",
+            "namespace": "Firebrick.ui.components.common"
+        },
+        {
+            "file": "src\\components\\common\\MultiplesBase.js",
+            "line": 12,
+            "itemtype": "method",
+            "name": "fieldBindings",
+            "return": {
+                "description": "",
+                "type": "Object"
+            },
+            "class": "Firebrick.ui.components.common.MultiplesBase",
+            "module": "Firebrick.ui.components",
+            "namespace": "Firebrick.ui.components.common"
+        },
+        {
+            "file": "src\\components\\containers\\Base.js",
+            "line": 11,
+            "itemtype": "method",
+            "name": "init",
+            "class": "Firebrick.ui.components.containers.Base",
+            "module": "Firebrick.ui.components",
+            "namespace": "Firebrick.ui.components.containers"
+        },
+        {
+            "file": "src\\components\\containers\\Base.js",
+            "line": 30,
+            "description": "inject sub items",
+            "itemtype": "method",
+            "name": "getItems",
+            "return": {
+                "description": "html",
+                "type": "String"
+            },
+            "class": "Firebrick.ui.components.containers.Base",
+            "module": "Firebrick.ui.components",
+            "namespace": "Firebrick.ui.components.containers"
+        },
+        {
+            "file": "src\\components\\containers\\Base.js",
+            "line": 42,
+            "description": "use getItems",
+            "access": "private",
+            "tagname": "",
+            "itemtype": "method",
+            "name": "_getItems",
+            "params": [
+                {
+                    "name": "UNKNOWN",
+                    "description": "",
+                    "type": "Object"
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "String"
+            },
+            "class": "Firebrick.ui.components.containers.Base",
+            "module": "Firebrick.ui.components",
+            "namespace": "Firebrick.ui.components.containers"
+        },
+        {
+            "file": "src\\components\\containers\\Form.js",
+            "line": 11,
+            "itemtype": "property",
+            "name": "uiName",
+            "type": "{String}",
+            "class": "Firebrick.ui.components.containers.Form",
+            "module": "Firebrick.ui.components",
+            "namespace": "Firebrick.ui.components.containers"
+        },
+        {
+            "file": "src\\components\\containers\\Form.js",
+            "line": 16,
+            "itemtype": "property",
+            "name": "tpl",
+            "type": "{String} html",
+            "class": "Firebrick.ui.components.containers.Form",
+            "module": "Firebrick.ui.components",
+            "namespace": "Firebrick.ui.components.containers"
+        },
+        {
+            "file": "src\\components\\containers\\Form.js",
+            "line": 21,
+            "itemtype": "property",
+            "name": "formRole",
+            "type": "{String}",
+            "default": "\"'form'\"",
+            "class": "Firebrick.ui.components.containers.Form",
+            "module": "Firebrick.ui.components",
+            "namespace": "Firebrick.ui.components.containers"
+        },
+        {
+            "file": "src\\components\\containers\\Form.js",
+            "line": 27,
+            "itemtype": "property",
+            "name": "horizontal",
+            "type": "{Boolean, String}",
+            "default": "true",
+            "class": "Firebrick.ui.components.containers.Form",
+            "module": "Firebrick.ui.components",
+            "namespace": "Firebrick.ui.components.containers"
+        },
+        {
+            "file": "src\\components\\containers\\Form.js",
+            "line": 33,
+            "itemtype": "property",
+            "name": "inline",
+            "type": "{Boolean, String}",
+            "default": "false",
+            "class": "Firebrick.ui.components.containers.Form",
+            "module": "Firebrick.ui.components",
+            "namespace": "Firebrick.ui.components.containers"
+        },
+        {
+            "file": "src\\components\\containers\\Form.js",
+            "line": 39,
+            "itemtype": "method",
+            "name": "formBindings",
+            "return": {
+                "description": "",
+                "type": "Object"
+            },
+            "class": "Firebrick.ui.components.containers.Form",
+            "module": "Firebrick.ui.components",
+            "namespace": "Firebrick.ui.components.containers"
+        },
+        {
+            "file": "src\\components\\containers\\Grid.js",
+            "line": 11,
+            "itemtype": "property",
+            "name": "uiName",
+            "type": "{String}",
+            "class": "Firebrick.ui.components.containers.Grid",
+            "module": "Firebrick.ui.components",
+            "namespace": "Firebrick.ui.components.containers"
+        },
+        {
+            "file": "src\\components\\containers\\Grid.js",
+            "line": 16,
+            "itemtype": "property",
+            "name": "tpl",
+            "type": "{String} html",
+            "class": "Firebrick.ui.components.containers.Grid",
+            "module": "Firebrick.ui.components",
+            "namespace": "Firebrick.ui.components.containers"
+        },
+        {
+            "file": "src\\components\\containers\\Grid.js",
+            "line": 21,
+            "itemtype": "property",
+            "name": "rowClass",
+            "type": "{Boolean, String}",
+            "default": "true",
+            "class": "Firebrick.ui.components.containers.Grid",
+            "module": "Firebrick.ui.components",
+            "namespace": "Firebrick.ui.components.containers"
+        },
+        {
+            "file": "src\\components\\containers\\Grid.js",
+            "line": 27,
+            "itemtype": "method",
+            "name": "bindings",
+            "return": {
+                "description": "",
+                "type": "Object"
+            },
+            "class": "Firebrick.ui.components.containers.Grid",
+            "module": "Firebrick.ui.components",
+            "namespace": "Firebrick.ui.components.containers"
+        },
+        {
+            "file": "src\\components\\containers\\Grid.js",
+            "line": 42,
+            "itemtype": "method",
+            "name": "getBasicBindings",
+            "return": {
+                "description": "",
+                "type": "Object"
+            },
+            "class": "Firebrick.ui.components.containers.Grid",
+            "module": "Firebrick.ui.components",
+            "namespace": "Firebrick.ui.components.containers"
+        },
+        {
+            "file": "src\\components\\containers\\Grid.js",
+            "line": 54,
+            "description": "used when calling {{{getGridItem}}} in template",
+            "itemtype": "method",
+            "name": "getGridItem",
+            "params": [
+                {
+                    "name": "iteration",
+                    "description": "index",
+                    "type": "Int"
+                },
+                {
+                    "name": "iteration",
+                    "description": "object",
+                    "type": "Object"
+                },
+                {
+                    "name": "iteration",
+                    "description": "context",
+                    "type": "Context"
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "String"
+            },
+            "class": "Firebrick.ui.components.containers.Grid",
+            "module": "Firebrick.ui.components",
+            "namespace": "Firebrick.ui.components.containers"
+        },
+        {
+            "file": "src\\components\\containers\\GridColumn.js",
+            "line": 11,
+            "itemtype": "property",
+            "name": "uiName",
+            "type": "{String}",
+            "class": "Firebrick.ui.components.containers.GridColumn",
+            "module": "Firebrick.ui.components",
+            "namespace": "Firebrick.ui.components.containers"
+        },
+        {
+            "file": "src\\components\\containers\\GridColumn.js",
+            "line": 16,
+            "itemtype": "property",
+            "name": "tpl",
+            "type": "{String} html",
+            "class": "Firebrick.ui.components.containers.GridColumn",
+            "module": "Firebrick.ui.components",
+            "namespace": "Firebrick.ui.components.containers"
+        },
+        {
+            "file": "src\\components\\containers\\GridColumn.js",
+            "line": 21,
+            "itemtype": "property",
+            "name": "deviceSize",
+            "type": "{String}",
+            "default": "\"md\"",
+            "class": "Firebrick.ui.components.containers.GridColumn",
+            "module": "Firebrick.ui.components",
+            "namespace": "Firebrick.ui.components.containers"
+        },
+        {
+            "file": "src\\components\\containers\\GridColumn.js",
+            "line": 27,
+            "description": "auto will attempt to provide the column width by dividing the number of items in the parent Grid by 12 - decimals will be rounded down",
+            "itemtype": "property",
+            "name": "columnWidth",
+            "type": "{Int, String} number 1 to 12 or \"auto\"",
+            "default": "\"auto\"",
+            "class": "Firebrick.ui.components.containers.GridColumn",
+            "module": "Firebrick.ui.components",
+            "namespace": "Firebrick.ui.components.containers"
+        },
+        {
+            "file": "src\\components\\containers\\GridColumn.js",
+            "line": 34,
+            "description": "when property columnWidth is set to \"auto\", this function will attempt to calculate the correct size for each column.\nNote: this function will round down to the nearest whole number - 5 columns will result in size 2 for each column\nthe number of columns are divided by 12 (BS3 grid)",
+            "itemtype": "method",
+            "name": "_getColumnWidth",
+            "access": "private",
+            "tagname": "",
+            "return": {
+                "description": "",
+                "type": "Int"
+            },
+            "class": "Firebrick.ui.components.containers.GridColumn",
+            "module": "Firebrick.ui.components",
+            "namespace": "Firebrick.ui.components.containers"
+        },
+        {
+            "file": "src\\components\\containers\\GridColumn.js",
+            "line": 51,
+            "description": "Bindings",
+            "itemtype": "method",
+            "name": "bindings",
+            "return": {
+                "description": "",
+                "type": "Object"
+            },
+            "class": "Firebrick.ui.components.containers.GridColumn",
+            "module": "Firebrick.ui.components",
+            "namespace": "Firebrick.ui.components.containers"
+        },
+        {
+            "file": "src\\components\\containers\\Panel.js",
+            "line": 11,
+            "itemtype": "property",
+            "name": "uiName",
+            "type": "{String}",
+            "class": "Firebrick.ui.components.containers.Panel",
+            "module": "Firebrick.ui.components",
+            "namespace": "Firebrick.ui.components.containers"
+        },
+        {
+            "file": "src\\components\\containers\\Panel.js",
+            "line": 16,
+            "itemtype": "property",
+            "name": "tpl",
+            "type": "{String} html",
+            "class": "Firebrick.ui.components.containers.Panel",
+            "module": "Firebrick.ui.components",
+            "namespace": "Firebrick.ui.components.containers"
+        },
+        {
+            "file": "src\\components\\containers\\Panel.js",
+            "line": 21,
+            "itemtype": "property",
+            "name": "title",
+            "type": "{String}",
+            "default": "\"\"",
+            "class": "Firebrick.ui.components.containers.Panel",
+            "module": "Firebrick.ui.components",
+            "namespace": "Firebrick.ui.components.containers"
+        },
+        {
+            "file": "src\\components\\containers\\Panel.js",
+            "line": 27,
+            "itemtype": "property",
+            "name": "panelClass",
+            "type": "{Boolean, String}",
+            "default": "true",
+            "class": "Firebrick.ui.components.containers.Panel",
+            "module": "Firebrick.ui.components",
+            "namespace": "Firebrick.ui.components.containers"
+        },
+        {
+            "file": "src\\components\\containers\\Panel.js",
+            "line": 33,
+            "description": "string = (default, primary, success, info, warning, danger)",
+            "itemtype": "property",
+            "name": "panelTypeClass",
+            "type": "{Boolean, String}",
+            "default": "\"default\"",
+            "class": "Firebrick.ui.components.containers.Panel",
+            "module": "Firebrick.ui.components",
+            "namespace": "Firebrick.ui.components.containers"
+        },
+        {
+            "file": "src\\components\\containers\\Panel.js",
+            "line": 40,
+            "itemtype": "property",
+            "name": "panelHeaderClass",
+            "type": "{Boolean, String}",
+            "default": "true",
+            "class": "Firebrick.ui.components.containers.Panel",
+            "module": "Firebrick.ui.components",
+            "namespace": "Firebrick.ui.components.containers"
+        },
+        {
+            "file": "src\\components\\containers\\Panel.js",
+            "line": 46,
+            "itemtype": "property",
+            "name": "panelBodyClass",
+            "type": "{Boolean, String}",
+            "default": "true",
+            "class": "Firebrick.ui.components.containers.Panel",
+            "module": "Firebrick.ui.components",
+            "namespace": "Firebrick.ui.components.containers"
+        },
+        {
+            "file": "src\\components\\containers\\Panel.js",
+            "line": 52,
+            "itemtype": "property",
+            "name": "showPanelHeader",
+            "type": "{Boolean, String}",
+            "default": "true",
+            "class": "Firebrick.ui.components.containers.Panel",
+            "module": "Firebrick.ui.components",
+            "namespace": "Firebrick.ui.components.containers"
+        },
+        {
+            "file": "src\\components\\containers\\Panel.js",
+            "line": 58,
+            "description": "fill the panel body (can be html too)",
+            "itemtype": "property",
+            "name": "content",
+            "type": "{String}",
+            "default": "\"\"",
+            "class": "Firebrick.ui.components.containers.Panel",
+            "module": "Firebrick.ui.components",
+            "namespace": "Firebrick.ui.components.containers"
+        },
+        {
+            "file": "src\\components\\containers\\Panel.js",
+            "line": 65,
+            "itemtype": "property",
+            "name": "collapsible",
+            "type": "{Boolean, String}",
+            "default": "false",
+            "class": "Firebrick.ui.components.containers.Panel",
+            "module": "Firebrick.ui.components",
+            "namespace": "Firebrick.ui.components.containers"
+        },
+        {
+            "file": "src\\components\\containers\\Panel.js",
+            "line": 71,
+            "itemtype": "property",
+            "name": "collapsed",
+            "type": "{Boolean, String}",
+            "default": "false",
+            "class": "Firebrick.ui.components.containers.Panel",
+            "module": "Firebrick.ui.components",
+            "namespace": "Firebrick.ui.components.containers"
+        },
+        {
+            "file": "src\\components\\containers\\Panel.js",
+            "line": 77,
+            "description": "Data bindings",
+            "itemtype": "method",
+            "name": "bindings",
+            "return": {
+                "description": "",
+                "type": "Object"
+            },
+            "class": "Firebrick.ui.components.containers.Panel",
+            "module": "Firebrick.ui.components",
+            "namespace": "Firebrick.ui.components.containers"
+        },
+        {
+            "file": "src\\components\\containers\\Panel.js",
+            "line": 97,
+            "itemtype": "method",
+            "name": "tabBindings",
+            "return": {
+                "description": "",
+                "type": "Object"
+            },
+            "class": "Firebrick.ui.components.containers.Panel",
+            "module": "Firebrick.ui.components",
+            "namespace": "Firebrick.ui.components.containers"
+        },
+        {
+            "file": "src\\components\\containers\\Panel.js",
+            "line": 118,
+            "itemtype": "method",
+            "name": "panelHeaderBindings",
+            "return": {
+                "description": "",
+                "type": "Object"
+            },
+            "class": "Firebrick.ui.components.containers.Panel",
+            "module": "Firebrick.ui.components",
+            "namespace": "Firebrick.ui.components.containers"
+        },
+        {
+            "file": "src\\components\\containers\\Panel.js",
+            "line": 135,
+            "itemtype": "method",
+            "name": "collapsibleLinkBindings",
+            "return": {
+                "description": "",
+                "type": "Object"
+            },
+            "class": "Firebrick.ui.components.containers.Panel",
+            "module": "Firebrick.ui.components",
+            "namespace": "Firebrick.ui.components.containers"
+        },
+        {
+            "file": "src\\components\\containers\\Panel.js",
+            "line": 152,
+            "itemtype": "method",
+            "name": "panelBodyBindings",
+            "return": {
+                "description": "",
+                "type": "Object"
+            },
+            "class": "Firebrick.ui.components.containers.Panel",
+            "module": "Firebrick.ui.components",
+            "namespace": "Firebrick.ui.components.containers"
+        },
+        {
+            "file": "src\\components\\display\\Header.js",
+            "line": 11,
+            "itemtype": "property",
+            "name": "uiName",
+            "type": "{String}",
+            "class": "Firebrick.ui.components.display.Header",
+            "module": "Firebrick.ui.components",
+            "namespace": "Firebrick.ui.components.display"
+        },
+        {
+            "file": "src\\components\\display\\Header.js",
+            "line": 16,
+            "itemtype": "property",
+            "name": "tpl",
+            "type": "{String}",
+            "class": "Firebrick.ui.components.display.Header",
+            "module": "Firebrick.ui.components",
+            "namespace": "Firebrick.ui.components.display"
+        },
+        {
+            "file": "src\\components\\display\\Header.js",
+            "line": 21,
+            "description": "use to determine whether h1, h2, h3 etc - default = 1",
+            "itemtype": "property",
+            "name": "headerType",
+            "type": "{Int}",
+            "default": "1",
+            "class": "Firebrick.ui.components.display.Header",
+            "module": "Firebrick.ui.components",
+            "namespace": "Firebrick.ui.components.display"
+        },
+        {
+            "file": "src\\components\\display\\Header.js",
+            "line": 28,
+            "itemtype": "property",
+            "name": "headerText",
+            "type": "{String}",
+            "default": "\"\"",
+            "class": "Firebrick.ui.components.display.Header",
+            "module": "Firebrick.ui.components",
+            "namespace": "Firebrick.ui.components.display"
+        },
+        {
+            "file": "src\\components\\display\\Header.js",
+            "line": 34,
+            "itemtype": "property",
+            "name": "secondaryText",
+            "type": "{String}",
+            "default": "\"\"",
+            "class": "Firebrick.ui.components.display.Header",
+            "module": "Firebrick.ui.components",
+            "namespace": "Firebrick.ui.components.display"
+        },
+        {
+            "file": "src\\components\\display\\Header.js",
+            "line": 40,
+            "itemtype": "property",
+            "name": "labelText",
+            "type": "{String}",
+            "default": "\"\"",
+            "class": "Firebrick.ui.components.display.Header",
+            "module": "Firebrick.ui.components",
+            "namespace": "Firebrick.ui.components.display"
+        },
+        {
+            "file": "src\\components\\display\\Header.js",
+            "line": 46,
+            "description": "string = \"default\", \"primary\", \"success\" \"info\", \"warning\", \"danger\"",
+            "itemtype": "property",
+            "name": "labelCSS",
+            "type": "{Boolean, String}",
+            "default": "\"default\"",
+            "class": "Firebrick.ui.components.display.Header",
+            "module": "Firebrick.ui.components",
+            "namespace": "Firebrick.ui.components.display"
+        },
+        {
+            "file": "src\\components\\display\\Header.js",
+            "line": 53,
+            "itemtype": "method",
+            "name": "bindings",
+            "return": {
+                "description": "Object"
+            },
+            "class": "Firebrick.ui.components.display.Header",
+            "module": "Firebrick.ui.components",
+            "namespace": "Firebrick.ui.components.display"
+        },
+        {
+            "file": "src\\components\\display\\Header.js",
+            "line": 62,
+            "itemtype": "method",
+            "name": "secondaryTextBindings",
+            "return": {
+                "description": "Object"
+            },
+            "class": "Firebrick.ui.components.display.Header",
+            "module": "Firebrick.ui.components",
+            "namespace": "Firebrick.ui.components.display"
+        },
+        {
+            "file": "src\\components\\display\\Header.js",
+            "line": 78,
+            "itemtype": "method",
+            "name": "labelBindings",
+            "return": {
+                "description": "Object"
+            },
+            "class": "Firebrick.ui.components.display.Header",
+            "module": "Firebrick.ui.components",
+            "namespace": "Firebrick.ui.components.display"
+        },
+        {
+            "file": "src\\components\\display\\Text.js",
+            "line": 11,
+            "itemtype": "property",
+            "name": "uiName",
+            "type": "{String}",
+            "class": "Firebrick.ui.components.display.Text",
+            "module": "Firebrick.ui.components",
+            "namespace": "Firebrick.ui.components.display"
+        },
+        {
+            "file": "src\\components\\display\\Text.js",
+            "line": 16,
+            "itemtype": "property",
+            "name": "tpl",
+            "type": "{String}",
+            "class": "Firebrick.ui.components.display.Text",
+            "module": "Firebrick.ui.components",
+            "namespace": "Firebrick.ui.components.display"
+        },
+        {
+            "file": "src\\components\\display\\Text.js",
+            "line": 21,
+            "description": "whether text is raw html or not",
+            "itemtype": "property",
+            "name": "isHtml",
+            "type": "{Boolean}",
+            "default": "false",
+            "class": "Firebrick.ui.components.display.Text",
+            "module": "Firebrick.ui.components",
+            "namespace": "Firebrick.ui.components.display"
+        },
+        {
+            "file": "src\\components\\display\\Text.js",
+            "line": 28,
+            "itemtype": "property",
+            "name": "text",
+            "type": "{String}",
+            "default": "\"\"",
+            "class": "Firebrick.ui.components.display.Text",
+            "module": "Firebrick.ui.components",
+            "namespace": "Firebrick.ui.components.display"
+        },
+        {
+            "file": "src\\components\\display\\Text.js",
+            "line": 34,
+            "itemtype": "property",
+            "name": "leadCSS",
+            "type": "{Boolean}",
+            "default": "false",
+            "class": "Firebrick.ui.components.display.Text",
+            "module": "Firebrick.ui.components",
+            "namespace": "Firebrick.ui.components.display"
+        },
+        {
+            "file": "src\\components\\display\\Text.js",
+            "line": 40,
+            "itemtype": "property",
+            "name": "blockQuote",
+            "type": "{Boolean}",
+            "default": "false",
+            "class": "Firebrick.ui.components.display.Text",
+            "module": "Firebrick.ui.components",
+            "namespace": "Firebrick.ui.components.display"
+        },
+        {
+            "file": "src\\components\\display\\Text.js",
+            "line": 46,
+            "itemtype": "property",
+            "name": "blockQuoteReverseCSS",
+            "type": "{Boolean}",
+            "default": "false",
+            "class": "Firebrick.ui.components.display.Text",
+            "module": "Firebrick.ui.components",
+            "namespace": "Firebrick.ui.components.display"
+        },
+        {
+            "file": "src\\components\\display\\Text.js",
+            "line": 52,
+            "description": "false not to show, string for footer text",
+            "itemtype": "property",
+            "name": "blockQuoteFooter",
+            "type": "{Boolean, String}",
+            "default": "false",
+            "class": "Firebrick.ui.components.display.Text",
+            "module": "Firebrick.ui.components",
+            "namespace": "Firebrick.ui.components.display"
+        },
+        {
+            "file": "src\\components\\display\\Text.js",
+            "line": 59,
+            "itemtype": "property",
+            "name": "isBlockQuoteFooterHTML",
+            "type": "{Boolean}",
+            "default": "false",
+            "class": "Firebrick.ui.components.display.Text",
+            "module": "Firebrick.ui.components",
+            "namespace": "Firebrick.ui.components.display"
+        },
+        {
+            "file": "src\\components\\display\\Text.js",
+            "line": 65,
+            "description": "false || string :: 'left', 'center', 'right', 'justify', 'no-wrap' (defaults to: left)",
+            "itemtype": "property",
+            "name": "textAlignment",
+            "type": "{Boolean, String}",
+            "default": "\"justify\"",
+            "class": "Firebrick.ui.components.display.Text",
+            "module": "Firebrick.ui.components",
+            "namespace": "Firebrick.ui.components.display"
+        },
+        {
+            "file": "src\\components\\display\\Text.js",
+            "line": 72,
+            "description": "Bindings",
+            "itemtype": "method",
+            "name": "bindings",
+            "return": {
+                "description": "",
+                "type": "Object"
+            },
+            "class": "Firebrick.ui.components.display.Text",
+            "module": "Firebrick.ui.components",
+            "namespace": "Firebrick.ui.components.display"
+        },
+        {
+            "file": "src\\components\\display\\Text.js",
+            "line": 97,
+            "itemtype": "method",
+            "name": "blockQuoteBindings",
+            "return": {
+                "description": "",
+                "type": "Object"
+            },
+            "class": "Firebrick.ui.components.display.Text",
+            "module": "Firebrick.ui.components",
+            "namespace": "Firebrick.ui.components.display"
+        },
+        {
+            "file": "src\\components\\display\\Text.js",
+            "line": 108,
+            "itemtype": "method",
+            "name": "blockQuoteFooterBindings",
+            "return": {
+                "description": "",
+                "type": "Object"
+            },
+            "class": "Firebrick.ui.components.display.Text",
+            "module": "Firebrick.ui.components",
+            "namespace": "Firebrick.ui.components.display"
+        },
+        {
+            "file": "src\\components\\fields\\plugins\\Radio.js",
+            "line": 82,
+            "itemtype": "property",
+            "name": "tpl",
+            "default": "<div></div>",
+            "class": "plugins.RadioList",
+            "module": "plugins",
+            "namespace": "plugins"
+        },
+        {
+            "file": "src\\components\\fields\\plugins\\Radio.js",
+            "line": 88,
+            "itemtype": "property",
+            "name": "inputclass, attached to the <label> wrapper instead of the input element",
+            "type": "string",
+            "default": "null",
+            "class": "plugins.RadioList",
+            "module": "plugins",
+            "namespace": "plugins"
+        },
+        {
+            "file": "src\\components\\fields\\Base.js",
+            "line": 11,
+            "itemtype": "property",
+            "name": "uiName",
+            "type": "{String}",
+            "class": "Firebrick.ui.components.fields.Base",
+            "module": "Firebrick.ui.components",
+            "namespace": "Firebrick.ui.components.fields"
+        },
+        {
+            "file": "src\\components\\fields\\Base.js",
+            "line": 16,
+            "itemtype": "property",
+            "name": "label",
+            "type": "{String}",
+            "default": "\"\"",
+            "class": "Firebrick.ui.components.fields.Base",
+            "module": "Firebrick.ui.components",
+            "namespace": "Firebrick.ui.components.fields"
+        },
+        {
+            "file": "src\\components\\fields\\Base.js",
+            "line": 22,
+            "itemtype": "property",
+            "name": "value",
+            "type": "{String}",
+            "default": "\"''\"",
+            "class": "Firebrick.ui.components.fields.Base",
+            "module": "Firebrick.ui.components",
+            "namespace": "Firebrick.ui.components.fields"
+        },
+        {
+            "file": "src\\components\\fields\\Base.js",
+            "line": 28,
+            "itemtype": "property",
+            "name": "tpl",
+            "type": "{String} html",
+            "class": "Firebrick.ui.components.fields.Base",
+            "module": "Firebrick.ui.components",
+            "namespace": "Firebrick.ui.components.fields"
+        },
+        {
+            "file": "src\\components\\fields\\Base.js",
+            "line": 33,
+            "itemtype": "property",
+            "name": "type",
+            "type": "{String}",
+            "default": "false",
+            "class": "Firebrick.ui.components.fields.Base",
+            "module": "Firebrick.ui.components",
+            "namespace": "Firebrick.ui.components.fields"
+        },
+        {
+            "file": "src\\components\\fields\\Base.js",
+            "line": 39,
+            "itemtype": "property",
+            "name": "formGroupClass",
+            "type": "{String}",
+            "default": "\"form-group\"",
+            "class": "Firebrick.ui.components.fields.Base",
+            "module": "Firebrick.ui.components",
+            "namespace": "Firebrick.ui.components.fields"
+        },
+        {
+            "file": "src\\components\\fields\\Base.js",
+            "line": 45,
+            "itemtype": "property",
+            "name": "inputClass",
+            "type": "{String}",
+            "default": "true",
+            "class": "Firebrick.ui.components.fields.Base",
+            "module": "Firebrick.ui.components",
+            "namespace": "Firebrick.ui.components.fields"
+        },
+        {
+            "file": "src\\components\\fields\\Base.js",
+            "line": 51,
+            "itemtype": "property",
+            "name": "colLabelSize",
+            "type": "{Int}",
+            "default": "3",
+            "class": "Firebrick.ui.components.fields.Base",
+            "module": "Firebrick.ui.components",
+            "namespace": "Firebrick.ui.components.fields"
+        },
+        {
+            "file": "src\\components\\fields\\Base.js",
+            "line": 57,
+            "itemtype": "property",
+            "name": "colInputSize",
+            "type": "{Int}",
+            "default": "9",
+            "class": "Firebrick.ui.components.fields.Base",
+            "module": "Firebrick.ui.components",
+            "namespace": "Firebrick.ui.components.fields"
+        },
+        {
+            "file": "src\\components\\fields\\Base.js",
+            "line": 63,
+            "itemtype": "property",
+            "name": "deviceSize",
+            "type": "{String}",
+            "default": "\"sm\"",
+            "class": "Firebrick.ui.components.fields.Base",
+            "module": "Firebrick.ui.components",
+            "namespace": "Firebrick.ui.components.fields"
+        },
+        {
+            "file": "src\\components\\fields\\Base.js",
+            "line": 69,
+            "itemtype": "property",
+            "name": "hideLabel",
+            "type": "{Boolean}",
+            "default": "false",
+            "class": "Firebrick.ui.components.fields.Base",
+            "module": "Firebrick.ui.components",
+            "namespace": "Firebrick.ui.components.fields"
+        },
+        {
+            "file": "src\\components\\fields\\Base.js",
+            "line": 75,
+            "itemtype": "property",
+            "name": "readOnly",
+            "type": "{Boolean}",
+            "default": "false",
+            "class": "Firebrick.ui.components.fields.Base",
+            "module": "Firebrick.ui.components",
+            "namespace": "Firebrick.ui.components.fields"
+        },
+        {
+            "file": "src\\components\\fields\\Base.js",
+            "line": 81,
+            "itemtype": "property",
+            "name": "disabled",
+            "type": "{Boolean}",
+            "default": "false",
+            "class": "Firebrick.ui.components.fields.Base",
+            "module": "Firebrick.ui.components",
+            "namespace": "Firebrick.ui.components.fields"
+        },
+        {
+            "file": "src\\components\\fields\\Base.js",
+            "line": 87,
+            "description": "string (sm || lg)",
+            "itemtype": "property",
+            "name": "inputSize",
+            "type": "{Boolean, String}",
+            "default": "false",
+            "class": "Firebrick.ui.components.fields.Base",
+            "module": "Firebrick.ui.components",
+            "namespace": "Firebrick.ui.components.fields"
+        },
+        {
+            "file": "src\\components\\fields\\Base.js",
+            "line": 94,
+            "itemtype": "property",
+            "name": "controlLabel",
+            "type": "{Boolean}",
+            "default": "true",
+            "class": "Firebrick.ui.components.fields.Base",
+            "module": "Firebrick.ui.components",
+            "namespace": "Firebrick.ui.components.fields"
+        },
+        {
+            "file": "src\\components\\fields\\Base.js",
+            "line": 100,
+            "description": "help text",
+            "itemtype": "property",
+            "name": "helpText",
+            "type": "{Boolean, String}",
+            "default": "false",
+            "class": "Firebrick.ui.components.fields.Base",
+            "module": "Firebrick.ui.components",
+            "namespace": "Firebrick.ui.components.fields"
+        },
+        {
+            "file": "src\\components\\fields\\Base.js",
+            "line": 107,
+            "description": "help text",
+            "itemtype": "property",
+            "name": "helpBlockClass",
+            "type": "{String}",
+            "default": "\"help-block\"",
+            "class": "Firebrick.ui.components.fields.Base",
+            "module": "Firebrick.ui.components",
+            "namespace": "Firebrick.ui.components.fields"
+        },
+        {
+            "file": "src\\components\\fields\\Base.js",
+            "line": 114,
+            "itemtype": "property",
+            "name": "placeholder",
+            "type": "{Boolean, String}",
+            "default": "false",
+            "class": "Firebrick.ui.components.fields.Base",
+            "module": "Firebrick.ui.components",
+            "namespace": "Firebrick.ui.components.fields"
+        },
+        {
+            "file": "src\\components\\fields\\Base.js",
+            "line": 120,
+            "class": "Firebrick.ui.components.fields.Base",
+            "module": "Firebrick.ui.components",
+            "namespace": "Firebrick.ui.components.fields"
+        },
+        {
+            "file": "src\\components\\fields\\Base.js",
+            "line": 121,
+            "itemtype": "property",
+            "name": "showStateIcon",
+            "type": "{Boolean}",
+            "default": "true",
+            "class": "Firebrick.ui.components.fields.Base",
+            "module": "Firebrick.ui.components",
+            "namespace": "Firebrick.ui.components.fields"
+        },
+        {
+            "file": "src\\components\\fields\\Base.js",
+            "line": 127,
+            "itemtype": "property",
+            "name": "formControlFeedbackClass",
+            "type": "{String}",
+            "default": "\"form-control-feedback\"",
+            "class": "Firebrick.ui.components.fields.Base",
+            "module": "Firebrick.ui.components",
+            "namespace": "Firebrick.ui.components.fields"
+        },
+        {
+            "file": "src\\components\\fields\\Base.js",
+            "line": 133,
+            "description": "input addon",
+            "itemtype": "property",
+            "name": "inputAddon",
+            "type": "{Boolean, String}",
+            "default": "false",
+            "class": "Firebrick.ui.components.fields.Base",
+            "module": "Firebrick.ui.components",
+            "namespace": "Firebrick.ui.components.fields"
+        },
+        {
+            "file": "src\\components\\fields\\Base.js",
+            "line": 140,
+            "itemtype": "property",
+            "name": "inputAddonClass",
+            "type": "{String}",
+            "default": "\"'input-group-addon'\"",
+            "class": "Firebrick.ui.components.fields.Base",
+            "module": "Firebrick.ui.components",
+            "namespace": "Firebrick.ui.components.fields"
+        },
+        {
+            "file": "src\\components\\fields\\Base.js",
+            "line": 146,
+            "class": "Firebrick.ui.components.fields.Base",
+            "module": "Firebrick.ui.components",
+            "namespace": "Firebrick.ui.components.fields"
+        },
+        {
+            "file": "src\\components\\fields\\Base.js",
+            "line": 147,
+            "itemtype": "property",
+            "name": "horizontal",
+            "type": "{Boolean}",
+            "default": "true",
+            "class": "Firebrick.ui.components.fields.Base",
+            "module": "Firebrick.ui.components",
+            "namespace": "Firebrick.ui.components.fields"
+        },
+        {
+            "file": "src\\components\\fields\\Base.js",
+            "line": 153,
+            "description": "Feedback css bindings",
+            "itemtype": "property",
+            "name": "feedback_success",
+            "type": "{Boolean, String}",
+            "default": "false",
+            "class": "Firebrick.ui.components.fields.Base",
+            "module": "Firebrick.ui.components",
+            "namespace": "Firebrick.ui.components.fields"
+        },
+        {
+            "file": "src\\components\\fields\\Base.js",
+            "line": 160,
+            "description": "Feedback css bindings",
+            "itemtype": "property",
+            "name": "feedback_warning",
+            "type": "{Boolean, String}",
+            "default": "false",
+            "class": "Firebrick.ui.components.fields.Base",
+            "module": "Firebrick.ui.components",
+            "namespace": "Firebrick.ui.components.fields"
+        },
+        {
+            "file": "src\\components\\fields\\Base.js",
+            "line": 167,
+            "description": "Feedback css bindings",
+            "itemtype": "property",
+            "name": "feedback_error",
+            "type": "{Boolean, String}",
+            "default": "false",
+            "class": "Firebrick.ui.components.fields.Base",
+            "module": "Firebrick.ui.components",
+            "namespace": "Firebrick.ui.components.fields"
+        },
+        {
+            "file": "src\\components\\fields\\Base.js",
+            "line": 174,
+            "itemtype": "property",
+            "name": "multiplesInline",
+            "type": "{Boolean, String}",
+            "default": "false",
+            "class": "Firebrick.ui.components.fields.Base",
+            "module": "Firebrick.ui.components",
+            "namespace": "Firebrick.ui.components.fields"
+        },
+        {
+            "file": "src\\components\\fields\\Base.js",
+            "line": 180,
+            "itemtype": "property",
+            "name": "inplaceEdit",
+            "type": "{Boolean}",
+            "default": "false",
+            "class": "Firebrick.ui.components.fields.Base",
+            "module": "Firebrick.ui.components",
+            "namespace": "Firebrick.ui.components.fields"
+        },
+        {
+            "file": "src\\components\\fields\\Base.js",
+            "line": 186,
+            "itemtype": "property",
+            "name": "showInplaceTitle",
+            "type": "{Boolean}",
+            "default": "true",
+            "class": "Firebrick.ui.components.fields.Base",
+            "module": "Firebrick.ui.components",
+            "namespace": "Firebrick.ui.components.fields"
+        },
+        {
+            "file": "src\\components\\fields\\Base.js",
+            "line": 192,
+            "class": "Firebrick.ui.components.fields.Base",
+            "module": "Firebrick.ui.components",
+            "namespace": "Firebrick.ui.components.fields"
+        },
+        {
+            "file": "src\\components\\fields\\Base.js",
+            "line": 193,
+            "description": "Binding Functions",
+            "class": "Firebrick.ui.components.fields.Base",
+            "module": "Firebrick.ui.components",
+            "namespace": "Firebrick.ui.components.fields"
+        },
+        {
+            "file": "src\\components\\fields\\Base.js",
+            "line": 196,
+            "itemtype": "method",
+            "name": "containerBindings",
+            "return": {
+                "description": "",
+                "type": "Object"
+            },
+            "class": "Firebrick.ui.components.fields.Base",
+            "module": "Firebrick.ui.components",
+            "namespace": "Firebrick.ui.components.fields"
+        },
+        {
+            "file": "src\\components\\fields\\Base.js",
+            "line": 216,
+            "itemtype": "method",
+            "name": "helpBlockBindings",
+            "return": {
+                "description": "",
+                "type": "Object"
+            },
+            "class": "Firebrick.ui.components.fields.Base",
+            "module": "Firebrick.ui.components",
+            "namespace": "Firebrick.ui.components.fields"
+        },
+        {
+            "file": "src\\components\\fields\\Base.js",
+            "line": 225,
+            "itemtype": "method",
+            "name": "feedbackBindings",
+            "return": {
+                "description": "",
+                "type": "Object"
+            },
+            "class": "Firebrick.ui.components.fields.Base",
+            "module": "Firebrick.ui.components",
+            "namespace": "Firebrick.ui.components.fields"
+        },
+        {
+            "file": "src\\components\\fields\\Base.js",
+            "line": 252,
+            "itemtype": "method",
+            "name": "bindings",
+            "return": {
+                "description": "",
+                "type": "Object"
+            },
+            "class": "Firebrick.ui.components.fields.Base",
+            "module": "Firebrick.ui.components",
+            "namespace": "Firebrick.ui.components.fields"
+        },
+        {
+            "file": "src\\components\\fields\\Base.js",
+            "line": 283,
+            "itemtype": "method",
+            "name": "inputAddonBindings",
+            "return": {
+                "description": "",
+                "type": "Object"
+            },
+            "class": "Firebrick.ui.components.fields.Base",
+            "module": "Firebrick.ui.components",
+            "namespace": "Firebrick.ui.components.fields"
+        },
+        {
+            "file": "src\\components\\fields\\Base.js",
+            "line": 298,
+            "itemtype": "method",
+            "name": "labelBindings",
+            "return": {
+                "description": "",
+                "type": "Object"
+            },
+            "class": "Firebrick.ui.components.fields.Base",
+            "module": "Firebrick.ui.components",
+            "namespace": "Firebrick.ui.components.fields"
+        },
+        {
+            "file": "src\\components\\fields\\Base.js",
+            "line": 315,
+            "itemtype": "method",
+            "name": "inputContainerBindings",
+            "return": {
+                "description": "",
+                "type": "Object"
+            },
+            "class": "Firebrick.ui.components.fields.Base",
+            "module": "Firebrick.ui.components",
+            "namespace": "Firebrick.ui.components.fields"
+        },
+        {
+            "file": "src\\components\\fields\\Checkbox.js",
+            "line": 11,
+            "itemtype": "property",
+            "name": "uiName",
+            "type": "{String}",
+            "class": "Firebrick.ui.components.fields.Checkbox",
+            "module": "Firebrick.ui.components",
+            "namespace": "Firebrick.ui.components.fields"
+        },
+        {
+            "file": "src\\components\\fields\\Checkbox.js",
+            "line": 16,
+            "itemtype": "property",
+            "name": "type",
+            "type": "{String}",
+            "default": "\"'checkbox'\"",
+            "class": "Firebrick.ui.components.fields.Checkbox",
+            "module": "Firebrick.ui.components",
+            "namespace": "Firebrick.ui.components.fields"
+        },
+        {
+            "file": "src\\components\\fields\\Checkbox.js",
+            "line": 22,
+            "itemtype": "property",
+            "name": "dataType",
+            "type": "{String}",
+            "default": "\"'checklist'\"",
+            "class": "Firebrick.ui.components.fields.Checkbox",
+            "module": "Firebrick.ui.components",
+            "namespace": "Firebrick.ui.components.fields"
+        },
+        {
+            "file": "src\\components\\fields\\Checkbox.js",
+            "line": 28,
+            "itemtype": "method",
+            "name": "bindings",
+            "return": {
+                "description": "",
+                "type": "Object"
+            },
+            "class": "Firebrick.ui.components.fields.Checkbox",
+            "module": "Firebrick.ui.components",
+            "namespace": "Firebrick.ui.components.fields"
+        },
+        {
+            "file": "src\\components\\fields\\Email.js",
+            "line": 11,
+            "itemtype": "property",
+            "name": "uiName",
+            "type": "{String}",
+            "class": "Firebrick.ui.components.fields.Email",
+            "module": "Firebrick.ui.components",
+            "namespace": "Firebrick.ui.components.fields"
+        },
+        {
+            "file": "src\\components\\fields\\Email.js",
+            "line": 16,
+            "itemtype": "property",
+            "name": "type",
+            "type": "{String}",
+            "default": "\"'email'\"",
+            "class": "Firebrick.ui.components.fields.Email",
+            "module": "Firebrick.ui.components",
+            "namespace": "Firebrick.ui.components.fields"
+        },
+        {
+            "file": "src\\components\\fields\\Email.js",
+            "line": 22,
+            "itemtype": "property",
+            "name": "dataType",
+            "type": "{String}",
+            "default": "\"'text'\"",
+            "class": "Firebrick.ui.components.fields.Email",
+            "module": "Firebrick.ui.components",
+            "namespace": "Firebrick.ui.components.fields"
+        },
+        {
+            "file": "src\\components\\fields\\Input.js",
+            "line": 11,
+            "itemtype": "property",
+            "name": "uiName",
+            "type": "{String}",
+            "class": "Firebrick.ui.components.fields.Input",
+            "module": "Firebrick.ui.components",
+            "namespace": "Firebrick.ui.components.fields"
+        },
+        {
+            "file": "src\\components\\fields\\Input.js",
+            "line": 16,
+            "itemtype": "property",
+            "name": "subTpl",
+            "type": "{String} html",
+            "class": "Firebrick.ui.components.fields.Input",
+            "module": "Firebrick.ui.components",
+            "namespace": "Firebrick.ui.components.fields"
+        },
+        {
+            "file": "src\\components\\fields\\Input.js",
+            "line": 21,
+            "itemtype": "property",
+            "name": "type",
+            "type": "{String}",
+            "default": "\"'text'\"",
+            "class": "Firebrick.ui.components.fields.Input",
+            "module": "Firebrick.ui.components",
+            "namespace": "Firebrick.ui.components.fields"
+        },
+        {
+            "file": "src\\components\\fields\\Radio.js",
+            "line": 11,
+            "itemtype": "property",
+            "name": "uiName",
+            "type": "{String}",
+            "class": "Firebrick.ui.components.fields.Radio",
+            "module": "Firebrick.ui.components",
+            "namespace": "Firebrick.ui.components.fields"
+        },
+        {
+            "file": "src\\components\\fields\\Radio.js",
+            "line": 16,
+            "itemtype": "property",
+            "name": "type",
+            "type": "{String}",
+            "default": "\"'radio'\"",
+            "class": "Firebrick.ui.components.fields.Radio",
+            "module": "Firebrick.ui.components",
+            "namespace": "Firebrick.ui.components.fields"
+        },
+        {
+            "file": "src\\components\\fields\\Radio.js",
+            "line": 22,
+            "itemtype": "property",
+            "name": "dataType",
+            "type": "{String}",
+            "default": "\"'radiolist'\"",
+            "class": "Firebrick.ui.components.fields.Radio",
+            "module": "Firebrick.ui.components",
+            "namespace": "Firebrick.ui.components.fields"
+        },
+        {
+            "file": "src\\components\\fields\\Radio.js",
+            "line": 28,
+            "itemtype": "property",
+            "name": "subTpl",
+            "type": "{String} html",
+            "class": "Firebrick.ui.components.fields.Radio",
+            "module": "Firebrick.ui.components",
+            "namespace": "Firebrick.ui.components.fields"
+        },
+        {
+            "file": "src\\components\\fields\\Radio.js",
+            "line": 33,
+            "itemtype": "property",
+            "name": "defaultChecked",
+            "type": "{String}",
+            "default": "\"$data.checked ? $data.checked : false\"",
+            "class": "Firebrick.ui.components.fields.Radio",
+            "module": "Firebrick.ui.components",
+            "namespace": "Firebrick.ui.components.fields"
+        },
+        {
+            "file": "src\\components\\fields\\Radio.js",
+            "line": 39,
+            "description": "radio options",
+            "itemtype": "property",
+            "name": "options",
+            "type": "{Boolean, String}",
+            "default": "false",
+            "class": "Firebrick.ui.components.fields.Radio",
+            "module": "Firebrick.ui.components",
+            "namespace": "Firebrick.ui.components.fields"
+        },
+        {
+            "file": "src\\components\\fields\\Radio.js",
+            "line": 46,
+            "itemtype": "method",
+            "name": "optionLabelBindings",
+            "return": {
+                "description": "",
+                "type": "Object"
+            },
+            "class": "Firebrick.ui.components.fields.Radio",
+            "module": "Firebrick.ui.components",
+            "namespace": "Firebrick.ui.components.fields"
+        },
+        {
+            "file": "src\\components\\fields\\Radio.js",
+            "line": 59,
+            "itemtype": "method",
+            "name": "optionLabelContainerBindings",
+            "return": {
+                "description": "",
+                "type": "Object"
+            },
+            "class": "Firebrick.ui.components.fields.Radio",
+            "module": "Firebrick.ui.components",
+            "namespace": "Firebrick.ui.components.fields"
+        },
+        {
+            "file": "src\\components\\fields\\Radio.js",
+            "line": 71,
+            "itemtype": "method",
+            "name": "inputContainerBindings",
+            "return": {
+                "description": "",
+                "type": "Object"
+            },
+            "class": "Firebrick.ui.components.fields.Radio",
+            "module": "Firebrick.ui.components",
+            "namespace": "Firebrick.ui.components.fields"
+        },
+        {
+            "file": "src\\components\\fields\\Radio.js",
+            "line": 83,
+            "itemtype": "method",
+            "name": "bindings",
+            "return": {
+                "description": "",
+                "type": "Object"
+            },
+            "class": "Firebrick.ui.components.fields.Radio",
+            "module": "Firebrick.ui.components",
+            "namespace": "Firebrick.ui.components.fields"
+        },
+        {
+            "file": "src\\components\\fields\\SelectBox.js",
+            "line": 11,
+            "itemtype": "property",
+            "name": "uiName",
+            "type": "{String}",
+            "class": "Firebrick.ui.components.fields.SelectBox",
+            "module": "Firebrick.ui.components",
+            "namespace": "Firebrick.ui.components.fields"
+        },
+        {
+            "file": "src\\components\\fields\\SelectBox.js",
+            "line": 16,
+            "itemtype": "property",
+            "name": "multiSelect",
+            "type": "{Boolean}",
+            "default": "false",
+            "class": "Firebrick.ui.components.fields.SelectBox",
+            "module": "Firebrick.ui.components",
+            "namespace": "Firebrick.ui.components.fields"
+        },
+        {
+            "file": "src\\components\\fields\\SelectBox.js",
+            "line": 22,
+            "itemtype": "property",
+            "name": "subTpl",
+            "type": "{String} html",
+            "class": "Firebrick.ui.components.fields.SelectBox",
+            "module": "Firebrick.ui.components",
+            "namespace": "Firebrick.ui.components.fields"
+        },
+        {
+            "file": "src\\components\\fields\\SelectBox.js",
+            "line": 27,
+            "itemtype": "property",
+            "name": "data",
+            "type": "{String, Function}",
+            "default": "false",
+            "class": "Firebrick.ui.components.fields.SelectBox",
+            "module": "Firebrick.ui.components",
+            "namespace": "Firebrick.ui.components.fields"
+        },
+        {
+            "file": "src\\components\\fields\\SelectBox.js",
+            "line": 33,
+            "itemtype": "property",
+            "name": "dataType",
+            "type": "{String}",
+            "default": "\"'select'2",
+            "class": "Firebrick.ui.components.fields.SelectBox",
+            "module": "Firebrick.ui.components",
+            "namespace": "Firebrick.ui.components.fields"
+        },
+        {
+            "file": "src\\components\\fields\\SelectBox.js",
+            "line": 39,
+            "itemtype": "property",
+            "name": "selectedOptions",
+            "type": "{String}",
+            "default": "false",
+            "class": "Firebrick.ui.components.fields.SelectBox",
+            "module": "Firebrick.ui.components",
+            "namespace": "Firebrick.ui.components.fields"
+        },
+        {
+            "file": "src\\components\\fields\\SelectBox.js",
+            "line": 45,
+            "itemtype": "property",
+            "name": "optionsValue",
+            "type": "{String}",
+            "default": "\"'value'\"",
+            "class": "Firebrick.ui.components.fields.SelectBox",
+            "module": "Firebrick.ui.components",
+            "namespace": "Firebrick.ui.components.fields"
+        },
+        {
+            "file": "src\\components\\fields\\SelectBox.js",
+            "line": 51,
+            "itemtype": "property",
+            "name": "optionsText",
+            "type": "{String}",
+            "default": "\"'text'\"",
+            "class": "Firebrick.ui.components.fields.SelectBox",
+            "module": "Firebrick.ui.components",
+            "namespace": "Firebrick.ui.components.fields"
+        },
+        {
+            "file": "src\\components\\fields\\SelectBox.js",
+            "line": 57,
+            "itemtype": "method",
+            "name": "bindings",
+            "return": {
+                "description": "",
+                "type": "Object"
+            },
+            "class": "Firebrick.ui.components.fields.SelectBox",
+            "module": "Firebrick.ui.components",
+            "namespace": "Firebrick.ui.components.fields"
+        },
+        {
+            "file": "src\\components\\fields\\TextArea.js",
+            "line": 11,
+            "itemtype": "property",
+            "name": "uiName",
+            "type": "{String}",
+            "class": "Firebrick.ui.components.fields.TextArea",
+            "module": "Firebrick.ui.components",
+            "namespace": "Firebrick.ui.components.fields"
+        },
+        {
+            "file": "src\\components\\fields\\TextArea.js",
+            "line": 16,
+            "description": "number of rows high",
+            "itemtype": "property",
+            "name": "rows",
+            "type": "{Int}",
+            "default": "5",
+            "class": "Firebrick.ui.components.fields.TextArea",
+            "module": "Firebrick.ui.components",
+            "namespace": "Firebrick.ui.components.fields"
+        },
+        {
+            "file": "src\\components\\fields\\TextArea.js",
+            "line": 23,
+            "itemtype": "property",
+            "name": "subTpl",
+            "type": "{String}",
+            "class": "Firebrick.ui.components.fields.TextArea",
+            "module": "Firebrick.ui.components",
+            "namespace": "Firebrick.ui.components.fields"
+        },
+        {
+            "file": "src\\components\\fields\\TextArea.js",
+            "line": 28,
+            "itemtype": "property",
+            "name": "dataType",
+            "type": "{String}",
+            "default": "\"'textarea'\"",
+            "class": "Firebrick.ui.components.fields.TextArea",
+            "module": "Firebrick.ui.components",
+            "namespace": "Firebrick.ui.components.fields"
+        },
+        {
+            "file": "src\\components\\table\\Table.js",
+            "line": 11,
+            "itemtype": "property",
+            "name": "uiName",
+            "type": "{String}",
+            "class": "Firebrick.ui.components.table.Table",
+            "module": "Firebrick.ui.components",
+            "namespace": "Firebrick.ui.components.table"
+        },
+        {
+            "file": "src\\components\\table\\Table.js",
+            "line": 16,
+            "itemtype": "property",
+            "name": "tpl",
+            "type": "{String} html",
+            "class": "Firebrick.ui.components.table.Table",
+            "module": "Firebrick.ui.components",
+            "namespace": "Firebrick.ui.components.table"
+        },
+        {
+            "file": "src\\components\\table\\Table.js",
+            "line": 21,
+            "itemtype": "property",
+            "name": "responsive",
+            "type": "{Boolean}",
+            "default": "true",
+            "class": "Firebrick.ui.components.table.Table",
+            "module": "Firebrick.ui.components",
+            "namespace": "Firebrick.ui.components.table"
+        },
+        {
+            "file": "src\\components\\table\\Table.js",
+            "line": 27,
+            "description": "{\n\tcols:[{}]\n\trows:[{}]\n}",
+            "itemtype": "property",
+            "name": "data",
+            "type": "{Object, String}",
+            "default": "false",
+            "class": "Firebrick.ui.components.table.Table",
+            "module": "Firebrick.ui.components",
+            "namespace": "Firebrick.ui.components.table"
+        },
+        {
+            "file": "src\\components\\table\\Table.js",
+            "line": 37,
+            "itemtype": "property",
+            "name": "tableStriped",
+            "type": "{Boolean, String}",
+            "default": "true",
+            "class": "Firebrick.ui.components.table.Table",
+            "module": "Firebrick.ui.components",
+            "namespace": "Firebrick.ui.components.table"
+        },
+        {
+            "file": "src\\components\\table\\Table.js",
+            "line": 43,
+            "itemtype": "property",
+            "name": "tableHover",
+            "type": "{Boolean, String}",
+            "default": "false",
+            "class": "Firebrick.ui.components.table.Table",
+            "module": "Firebrick.ui.components",
+            "namespace": "Firebrick.ui.components.table"
+        },
+        {
+            "file": "src\\components\\table\\Table.js",
+            "line": 49,
+            "itemtype": "property",
+            "name": "tableCondensed",
+            "type": "{Boolean, String}",
+            "default": "false",
+            "class": "Firebrick.ui.components.table.Table",
+            "module": "Firebrick.ui.components",
+            "namespace": "Firebrick.ui.components.table"
+        },
+        {
+            "file": "src\\components\\table\\Table.js",
+            "line": 55,
+            "itemtype": "property",
+            "name": "tableBordered",
+            "type": "{Boolean, String}",
+            "default": "false",
+            "class": "Firebrick.ui.components.table.Table",
+            "module": "Firebrick.ui.components",
+            "namespace": "Firebrick.ui.components.table"
+        },
+        {
+            "file": "src\\components\\table\\Table.js",
+            "line": 61,
+            "itemtype": "property",
+            "name": "showHeadings",
+            "type": "{Boolean}",
+            "default": "true",
+            "class": "Firebrick.ui.components.table.Table",
+            "module": "Firebrick.ui.components",
+            "namespace": "Firebrick.ui.components.table"
+        },
+        {
+            "file": "src\\components\\table\\Table.js",
+            "line": 67,
+            "itemtype": "property",
+            "name": "showRows",
+            "type": "{Boolean}",
+            "default": "true",
+            "class": "Firebrick.ui.components.table.Table",
+            "module": "Firebrick.ui.components",
+            "namespace": "Firebrick.ui.components.table"
+        },
+        {
+            "file": "src\\components\\table\\Table.js",
+            "line": 73,
+            "description": "activate the datatables plugin",
+            "itemtype": "property",
+            "name": "datatable",
+            "type": "{Boolean}",
+            "default": "false",
+            "class": "Firebrick.ui.components.table.Table",
+            "module": "Firebrick.ui.components",
+            "namespace": "Firebrick.ui.components.table"
+        },
+        {
+            "file": "src\\components\\table\\Table.js",
+            "line": 80,
+            "description": "activate the treetable plugin",
+            "itemtype": "property",
+            "name": "treetable",
+            "type": "{Boolean}",
+            "default": "false",
+            "class": "Firebrick.ui.components.table.Table",
+            "module": "Firebrick.ui.components",
+            "namespace": "Firebrick.ui.components.table"
+        },
+        {
+            "file": "src\\components\\table\\Table.js",
+            "line": 87,
+            "description": "return js object to pass to the DataTable function for configuring the table on componentReady",
+            "itemtype": "property",
+            "name": "dataTableConfig",
+            "type": "{function}",
+            "return": {
+                "description": "",
+                "type": "Object"
+            },
+            "default": "{}",
+            "class": "Firebrick.ui.components.table.Table",
+            "module": "Firebrick.ui.components",
+            "namespace": "Firebrick.ui.components.table"
+        },
+        {
+            "file": "src\\components\\table\\Table.js",
+            "line": 97,
+            "description": "works with parameter treetable",
+            "itemtype": "property",
+            "name": "expandable",
+            "type": "{Boolean}",
+            "default": "true",
+            "class": "Firebrick.ui.components.table.Table",
+            "module": "Firebrick.ui.components",
+            "namespace": "Firebrick.ui.components.table"
+        },
+        {
+            "file": "src\\components\\table\\Table.js",
+            "line": 104,
+            "description": "works with parameter treetable",
+            "itemtype": "property",
+            "name": "showCaption",
+            "type": "{Boolean, String}",
+            "default": "true",
+            "class": "Firebrick.ui.components.table.Table",
+            "module": "Firebrick.ui.components",
+            "namespace": "Firebrick.ui.components.table"
+        },
+        {
+            "file": "src\\components\\table\\Table.js",
+            "line": 111,
+            "description": "works with parameter treetable",
+            "itemtype": "property",
+            "name": "expandText",
+            "type": "{String}",
+            "default": "\"Expand\"",
+            "class": "Firebrick.ui.components.table.Table",
+            "module": "Firebrick.ui.components",
+            "namespace": "Firebrick.ui.components.table"
+        },
+        {
+            "file": "src\\components\\table\\Table.js",
+            "line": 118,
+            "description": "works with parameter treetable",
+            "itemtype": "property",
+            "name": "collapseText",
+            "type": "{String}",
+            "default": "\"Collapse\"",
+            "class": "Firebrick.ui.components.table.Table",
+            "module": "Firebrick.ui.components",
+            "namespace": "Firebrick.ui.components.table"
+        },
+        {
+            "file": "src\\components\\table\\Table.js",
+            "line": 125,
+            "description": "return js object to pass to the Treetable function for configuring the table on componentReady",
+            "itemtype": "property",
+            "name": "treeTableConfig",
+            "type": "{function}",
+            "return": {
+                "description": "",
+                "type": "Object"
+            },
+            "default": "{}",
+            "class": "Firebrick.ui.components.table.Table",
+            "module": "Firebrick.ui.components",
+            "namespace": "Firebrick.ui.components.table"
+        },
+        {
+            "file": "src\\components\\table\\Table.js",
+            "line": 138,
+            "itemtype": "method",
+            "name": "init",
+            "class": "Firebrick.ui.components.table.Table",
+            "module": "Firebrick.ui.components",
+            "namespace": "Firebrick.ui.components.table"
+        },
+        {
+            "file": "src\\components\\table\\Table.js",
+            "line": 154,
+            "itemtype": "method",
+            "name": "containerBindings",
+            "return": {
+                "description": "",
+                "type": "Object"
+            },
+            "class": "Firebrick.ui.components.table.Table",
+            "module": "Firebrick.ui.components",
+            "namespace": "Firebrick.ui.components.table"
+        },
+        {
+            "file": "src\\components\\table\\Table.js",
+            "line": 166,
+            "itemtype": "method",
+            "name": "_getData",
+            "access": "private",
+            "tagname": "",
+            "return": {
+                "description": "",
+                "type": "Object"
+            },
+            "class": "Firebrick.ui.components.table.Table",
+            "module": "Firebrick.ui.components",
+            "namespace": "Firebrick.ui.components.table"
+        },
+        {
+            "file": "src\\components\\table\\Table.js",
+            "line": 178,
+            "itemtype": "method",
+            "name": "bindings",
+            "return": {
+                "description": "",
+                "type": "Object"
+            },
+            "class": "Firebrick.ui.components.table.Table",
+            "module": "Firebrick.ui.components",
+            "namespace": "Firebrick.ui.components.table"
+        },
+        {
+            "file": "src\\components\\table\\Table.js",
+            "line": 195,
+            "itemtype": "method",
+            "name": "theadBindings",
+            "return": {
+                "description": "",
+                "type": "Object"
+            },
+            "class": "Firebrick.ui.components.table.Table",
+            "module": "Firebrick.ui.components",
+            "namespace": "Firebrick.ui.components.table"
+        },
+        {
+            "file": "src\\components\\table\\Table.js",
+            "line": 204,
+            "itemtype": "method",
+            "name": "tbodyBindings",
+            "return": {
+                "description": "",
+                "type": "Object"
+            },
+            "class": "Firebrick.ui.components.table.Table",
+            "module": "Firebrick.ui.components",
+            "namespace": "Firebrick.ui.components.table"
+        },
+        {
+            "file": "src\\components\\table\\Table.js",
+            "line": 214,
+            "description": "loop bindings",
+            "class": "Firebrick.ui.components.table.Table",
+            "module": "Firebrick.ui.components",
+            "namespace": "Firebrick.ui.components.table"
+        },
+        {
+            "file": "src\\components\\table\\Table.js",
+            "line": 217,
+            "itemtype": "method",
+            "name": "theadTRBindings",
+            "return": {
+                "description": "",
+                "type": "Object"
+            },
+            "class": "Firebrick.ui.components.table.Table",
+            "module": "Firebrick.ui.components",
+            "namespace": "Firebrick.ui.components.table"
+        },
+        {
+            "file": "src\\components\\table\\Table.js",
+            "line": 226,
+            "itemtype": "method",
+            "name": "theadTRTDBindings",
+            "return": {
+                "description": "",
+                "type": "Object"
+            },
+            "class": "Firebrick.ui.components.table.Table",
+            "module": "Firebrick.ui.components",
+            "namespace": "Firebrick.ui.components.table"
+        },
+        {
+            "file": "src\\components\\table\\Table.js",
+            "line": 235,
+            "itemtype": "method",
+            "name": "tbodyBindings",
+            "return": {
+                "description": "",
+                "type": "Object"
+            },
+            "class": "Firebrick.ui.components.table.Table",
+            "module": "Firebrick.ui.components",
+            "namespace": "Firebrick.ui.components.table"
+        },
+        {
+            "file": "src\\components\\table\\Table.js",
+            "line": 244,
+            "itemtype": "method",
+            "name": "tbodyTRBindings",
+            "return": {
+                "description": "",
+                "type": "Object"
+            },
+            "class": "Firebrick.ui.components.table.Table",
+            "module": "Firebrick.ui.components",
+            "namespace": "Firebrick.ui.components.table"
+        },
+        {
+            "file": "src\\components\\table\\Table.js",
+            "line": 257,
+            "itemtype": "method",
+            "name": "tbodyTRTDBindings",
+            "return": {
+                "description": "",
+                "type": "Object"
+            },
+            "class": "Firebrick.ui.components.table.Table",
+            "module": "Firebrick.ui.components",
+            "namespace": "Firebrick.ui.components.table"
+        },
+        {
+            "file": "src\\components\\table\\Table.js",
+            "line": 266,
+            "itemtype": "method",
+            "name": "captionBindings",
+            "return": {
+                "description": "",
+                "type": "Object"
+            },
+            "class": "Firebrick.ui.components.table.Table",
+            "module": "Firebrick.ui.components",
+            "namespace": "Firebrick.ui.components.table"
+        },
+        {
+            "file": "src\\components\\table\\Table.js",
+            "line": 276,
+            "itemtype": "method",
+            "name": "expandBindings",
+            "return": {
+                "description": "",
+                "type": "Object"
+            },
+            "class": "Firebrick.ui.components.table.Table",
+            "module": "Firebrick.ui.components",
+            "namespace": "Firebrick.ui.components.table"
+        },
+        {
+            "file": "src\\components\\table\\Table.js",
+            "line": 290,
+            "itemtype": "method",
+            "name": "collapseBindings",
+            "return": {
+                "description": "",
+                "type": "Object"
+            },
+            "class": "Firebrick.ui.components.table.Table",
+            "module": "Firebrick.ui.components",
+            "namespace": "Firebrick.ui.components.table"
+        },
+        {
+            "file": "src\\components\\table\\TreeTable.js",
+            "line": 11,
+            "itemtype": "property",
+            "name": "uiName",
+            "type": "{String}",
+            "class": "Firebrick.ui.components.table.TreeTable",
+            "module": "Firebrick.ui.components",
+            "namespace": "Firebrick.ui.components.table"
+        },
+        {
+            "file": "src\\components\\table\\TreeTable.js",
+            "line": 16,
+            "itemtype": "property",
+            "name": "data",
+            "type": "{Object, String}",
+            "default": "\"''\"",
+            "class": "Firebrick.ui.components.table.TreeTable",
+            "module": "Firebrick.ui.components",
+            "namespace": "Firebrick.ui.components.table"
+        },
+        {
+            "file": "src\\components\\table\\TreeTable.js",
+            "line": 22,
+            "itemtype": "property",
+            "name": "treetable",
+            "type": "{Boolean}",
+            "default": "true",
+            "class": "Firebrick.ui.components.table.TreeTable",
+            "module": "Firebrick.ui.components",
+            "namespace": "Firebrick.ui.components.table"
+        },
+        {
+            "file": "src\\firebrick.ui.js",
+            "line": 37,
+            "description": "library version number",
+            "itemtype": "property",
+            "name": "version",
+            "access": "private",
+            "tagname": "",
+            "type": "{String}",
+            "class": "Firebrick.ui",
+            "module": "Firebrick",
+            "namespace": "Firebrick"
+        },
+        {
+            "file": "src\\firebrick.ui.js",
+            "line": 45,
+            "description": "used to cache pointers to classes when searching by \"uiName\"",
+            "access": "private",
+            "tagname": "",
+            "itemtype": "property",
+            "name": "_searchCache",
+            "type": "{Object}",
+            "class": "Firebrick.ui",
+            "module": "Firebrick",
+            "namespace": "Firebrick"
+        },
+        {
+            "file": "src\\firebrick.ui.js",
+            "line": 54,
+            "description": "populate a target with fields and data",
+            "itemtype": "method",
+            "name": "build",
+            "params": [
+                {
+                    "name": "config",
+                    "description": "",
+                    "type": "Object",
+                    "props": [
+                        {
+                            "name": "target",
+                            "description": "selector string, jquery object (optional) if none passed, html is returned",
+                            "type": "Object"
+                        },
+                        {
+                            "name": "items",
+                            "description": "array of strings or objects [\"fb-ui-input\", {uiName:\"fb-ui-textarea\"}]",
+                            "type": "Object"
+                        },
+                        {
+                            "name": "view",
+                            "description": "Firebrick view class (optional)",
+                            "type": "Object"
+                        }
+                    ]
+                }
+            ],
+            "return": {
+                "description": "html",
+                "type": "String"
+            },
+            "class": "Firebrick.ui",
+            "module": "Firebrick",
+            "namespace": "Firebrick"
+        },
+        {
+            "file": "src\\firebrick.ui.js",
+            "line": 87,
+            "description": "recursive function",
+            "access": "private",
+            "tagname": "",
+            "itemtype": "method",
+            "name": "_populate",
+            "return": {
+                "description": ":: {html: string, items: array of objects}",
+                "type": "Object"
+            },
+            "class": "Firebrick.ui",
+            "module": "Firebrick",
+            "namespace": "Firebrick"
+        },
+        {
+            "file": "src\\firebrick.ui.js",
+            "line": 118,
+            "description": "get a component class by its shortname... uiName",
+            "itemtype": "method",
+            "name": "getByShortName",
+            "params": [
+                {
+                    "name": "name",
+                    "description": "(uiName)",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "Object"
+            },
+            "class": "Firebrick.ui",
+            "module": "Firebrick",
+            "namespace": "Firebrick"
+        },
+        {
+            "file": "src\\firebrick.ui.js",
+            "line": 144,
+            "description": "alias for Firebrick.get",
+            "itemtype": "method",
+            "name": "get",
+            "params": [
+                {
+                    "name": "name",
+                    "description": "",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "Object"
+            },
+            "class": "Firebrick.ui",
+            "module": "Firebrick",
+            "namespace": "Firebrick"
+        },
+        {
+            "file": "src\\firebrick.ui.js",
+            "line": 162,
+            "description": "convert a JS Object into a simple \"json\" type string, this is mainly used for the data-bind attribute in Knockout",
+            "itemtype": "method",
+            "name": "stringify",
+            "params": [
+                {
+                    "name": "objToConvert",
+                    "description": "",
+                    "type": "Object"
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "String"
+            },
+            "class": "Firebrick.ui.utils",
+            "module": "Firebrick.ui",
+            "namespace": "Firebrick.ui"
+        },
+        {
+            "file": "src\\firebrick.ui.js",
+            "line": 197,
+            "description": "use withProperties to pass extra properties down to the descendants\nhttp://knockoutjs.com/documentation/custom-bindings-controlling-descendant-bindings.html",
+            "class": "Firebrick.ui.utils",
+            "module": "Firebrick.ui",
+            "namespace": "Firebrick.ui"
+        }
+    ],
+    "warnings": [
+        {
+            "message": "replacing incorrect tag: returns with return",
+            "line": " src\\components\\button\\Button.js:30"
+        },
+        {
+            "message": "replacing incorrect tag: returns with return",
+            "line": " src\\components\\button\\ToggleButton.js:62"
+        },
+        {
+            "message": "replacing incorrect tag: returns with return",
+            "line": " src\\components\\button\\ToggleButton.js:78"
+        },
+        {
+            "message": "replacing incorrect tag: returns with return",
+            "line": " src\\components\\button\\ToggleButton.js:90"
+        },
+        {
+            "message": "replacing incorrect tag: returns with return",
+            "line": " src\\components\\button\\ToggleButton.js:107"
+        },
+        {
+            "message": "replacing incorrect tag: returns with return",
+            "line": " src\\components\\common\\Base.js:80"
+        },
+        {
+            "message": "replacing incorrect tag: returns with return",
+            "line": " src\\components\\common\\Base.js:105"
+        },
+        {
+            "message": "replacing incorrect tag: returns with return",
+            "line": " src\\components\\common\\Base.js:113"
+        },
+        {
+            "message": "replacing incorrect tag: returns with return",
+            "line": " src\\components\\common\\Base.js:121"
+        },
+        {
+            "message": "replacing incorrect tag: returns with return",
+            "line": " src\\components\\common\\Base.js:140"
+        },
+        {
+            "message": "replacing incorrect tag: returns with return",
+            "line": " src\\components\\common\\Base.js:149"
+        },
+        {
+            "message": "replacing incorrect tag: returns with return",
+            "line": " src\\components\\common\\MultiplesBase.js:12"
+        },
+        {
+            "message": "replacing incorrect tag: returns with return",
+            "line": " src\\components\\containers\\Base.js:30"
+        },
+        {
+            "message": "param name missing: {Object}",
+            "line": " src\\components\\containers\\Base.js:42"
+        },
+        {
+            "message": "replacing incorrect tag: returns with return",
+            "line": " src\\components\\containers\\Grid.js:27"
+        },
+        {
+            "message": "replacing incorrect tag: returns with return",
+            "line": " src\\components\\containers\\Grid.js:42"
+        },
+        {
+            "message": "replacing incorrect tag: returns with return",
+            "line": " src\\components\\containers\\Grid.js:54"
+        },
+        {
+            "message": "replacing incorrect tag: returns with return",
+            "line": " src\\components\\containers\\GridColumn.js:34"
+        },
+        {
+            "message": "replacing incorrect tag: returns with return",
+            "line": " src\\components\\containers\\GridColumn.js:51"
+        },
+        {
+            "message": "replacing incorrect tag: returns with return",
+            "line": " src\\components\\display\\Header.js:53"
+        },
+        {
+            "message": "replacing incorrect tag: returns with return",
+            "line": " src\\components\\display\\Header.js:62"
+        },
+        {
+            "message": "replacing incorrect tag: returns with return",
+            "line": " src\\components\\display\\Header.js:78"
+        },
+        {
+            "message": "replacing incorrect tag: returns with return",
+            "line": " src\\components\\display\\Text.js:72"
+        },
+        {
+            "message": "replacing incorrect tag: returns with return",
+            "line": " src\\components\\display\\Text.js:97"
+        },
+        {
+            "message": "replacing incorrect tag: returns with return",
+            "line": " src\\components\\display\\Text.js:108"
+        },
+        {
+            "message": "replacing incorrect tag: returns with return",
+            "line": " src\\components\\fields\\Base.js:196"
+        },
+        {
+            "message": "replacing incorrect tag: returns with return",
+            "line": " src\\components\\fields\\Base.js:216"
+        },
+        {
+            "message": "replacing incorrect tag: returns with return",
+            "line": " src\\components\\fields\\Base.js:225"
+        },
+        {
+            "message": "replacing incorrect tag: returns with return",
+            "line": " src\\components\\fields\\Base.js:252"
+        },
+        {
+            "message": "replacing incorrect tag: returns with return",
+            "line": " src\\components\\fields\\Base.js:283"
+        },
+        {
+            "message": "replacing incorrect tag: returns with return",
+            "line": " src\\components\\fields\\Base.js:298"
+        },
+        {
+            "message": "replacing incorrect tag: returns with return",
+            "line": " src\\components\\fields\\Base.js:315"
+        },
+        {
+            "message": "replacing incorrect tag: returns with return",
+            "line": " src\\components\\fields\\Checkbox.js:28"
+        },
+        {
+            "message": "replacing incorrect tag: returns with return",
+            "line": " src\\components\\fields\\Radio.js:46"
+        },
+        {
+            "message": "replacing incorrect tag: returns with return",
+            "line": " src\\components\\fields\\Radio.js:59"
+        },
+        {
+            "message": "replacing incorrect tag: returns with return",
+            "line": " src\\components\\fields\\Radio.js:71"
+        },
+        {
+            "message": "replacing incorrect tag: returns with return",
+            "line": " src\\components\\fields\\Radio.js:83"
+        },
+        {
+            "message": "replacing incorrect tag: returns with return",
+            "line": " src\\components\\fields\\SelectBox.js:57"
+        },
+        {
+            "message": "replacing incorrect tag: returns with return",
+            "line": " src\\components\\table\\Table.js:125"
+        },
+        {
+            "message": "replacing incorrect tag: returns with return",
+            "line": " src\\components\\table\\Table.js:154"
+        },
+        {
+            "message": "replacing incorrect tag: returns with return",
+            "line": " src\\components\\table\\Table.js:166"
+        },
+        {
+            "message": "replacing incorrect tag: returns with return",
+            "line": " src\\components\\table\\Table.js:178"
+        },
+        {
+            "message": "replacing incorrect tag: returns with return",
+            "line": " src\\components\\table\\Table.js:195"
+        },
+        {
+            "message": "replacing incorrect tag: returns with return",
+            "line": " src\\components\\table\\Table.js:204"
+        },
+        {
+            "message": "replacing incorrect tag: returns with return",
+            "line": " src\\components\\table\\Table.js:217"
+        },
+        {
+            "message": "replacing incorrect tag: returns with return",
+            "line": " src\\components\\table\\Table.js:226"
+        },
+        {
+            "message": "replacing incorrect tag: returns with return",
+            "line": " src\\components\\table\\Table.js:235"
+        },
+        {
+            "message": "replacing incorrect tag: returns with return",
+            "line": " src\\components\\table\\Table.js:244"
+        },
+        {
+            "message": "replacing incorrect tag: returns with return",
+            "line": " src\\components\\table\\Table.js:257"
+        },
+        {
+            "message": "replacing incorrect tag: returns with return",
+            "line": " src\\components\\table\\Table.js:266"
+        },
+        {
+            "message": "replacing incorrect tag: returns with return",
+            "line": " src\\components\\table\\Table.js:276"
+        },
+        {
+            "message": "replacing incorrect tag: returns with return",
+            "line": " src\\components\\table\\Table.js:290"
+        },
+        {
+            "message": "replacing incorrect tag: returns with return",
+            "line": " src\\firebrick.ui.js:54"
+        },
+        {
+            "message": "replacing incorrect tag: returns with return",
+            "line": " src\\firebrick.ui.js:87"
+        },
+        {
+            "message": "replacing incorrect tag: returns with return",
+            "line": " src\\firebrick.ui.js:144"
+        },
+        {
+            "message": "replacing incorrect tag: returns with return",
+            "line": " src\\firebrick.ui.js:162"
+        },
+        {
+            "message": "Missing item type",
+            "line": " src\\components\\button\\Button.js:29"
+        },
+        {
+            "message": "Missing item type\nBindings",
+            "line": " src\\components\\button\\ToggleButton.js:59"
+        },
+        {
+            "message": "Missing item type",
+            "line": " src\\components\\fields\\Base.js:120"
+        },
+        {
+            "message": "Missing item type",
+            "line": " src\\components\\fields\\Base.js:146"
+        },
+        {
+            "message": "Missing item type",
+            "line": " src\\components\\fields\\Base.js:192"
+        },
+        {
+            "message": "Missing item type\nBinding Functions",
+            "line": " src\\components\\fields\\Base.js:193"
+        },
+        {
+            "message": "Missing item type\nloop bindings",
+            "line": " src\\components\\table\\Table.js:214"
+        },
+        {
+            "message": "Missing item type\nuse withProperties to pass extra properties down to the descendants\nhttp://knockoutjs.com/documentation/custom-bindings-controlling-descendant-bindings.html",
+            "line": " src\\firebrick.ui.js:197"
+        }
+    ]
+}

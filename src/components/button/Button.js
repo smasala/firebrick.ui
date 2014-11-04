@@ -1,3 +1,10 @@
+/**
+ * Extends: {{#crossLink "Firebrick.ui.components.common.Base"}}{{/crossLink}}
+ * @module Firebrick.ui.components
+ * @extends Firebrick.ui.components.common.Base
+ * @namespace Firebrick.ui.components.button
+ * @class Button
+ */
 define(["text!./Button.html", "../common/Base"], function(tpl){
 	return Firebrick.create("Firebrick.ui.button.Button", {
 		extend:"Firebrick.ui.common.Base",
@@ -5,15 +12,26 @@ define(["text!./Button.html", "../common/Base"], function(tpl){
 		tpl:tpl,
 		text:"",
 		/**
-		 * @type false || string ("sm", "lg", "xs")
+		 * @property btnSize
+		 * @type {boolean} false 
+		 * @type {String} ("sm", "lg", "xs")
+		 * @default false
 		 */
 		btnSize:false,
 		/**
-		 * @type false || string (default, primary, success, info, warning, danger, link)
+		 * @property btnStyle
+		 * @type {boolean} false 
+		 * @type {String} (default, primary, success, info, warning, danger, link)
+		 * @default "default"
 		 */
 		btnStyle:"default",
 		
 		/*****************/
+		/**
+		 * default bindings called by data-bind={{data-bind}}
+		 * @method bindings
+		 * @returns {Object}
+		 */
 		bindings: function(){
 			var me = this,
 				obj = {

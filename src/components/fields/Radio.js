@@ -1,15 +1,52 @@
+/**
+ * Extends: {{#crossLink "Firebrick.ui.components.common.MultiplesBase"}}{{/crossLink}}
+ * @module Firebrick.ui.components
+ * @extends Firebrick.ui.components.common.MultiplesBase
+ * @namespace Firebrick.ui.components.fields
+ * @class Radio
+ */
 define(["text!./Radio.html", "../common/MultiplesBase", "./plugins/Radio"], function(subTpl){
 	return Firebrick.define("Firebrick.ui.fields.Radio", {
 		extend:"Firebrick.ui.common.MultiplesBase",
+		/**
+		 * @property uiName
+		 * @type {String}
+		 */
 		uiName:"fb-ui-radio",
+		/**
+		 * @property type
+		 * @type {String}
+		 * @default "'radio'"
+		 */
 		type:"'radio'",
+		/**
+		 * @property dataType
+		 * @type {String}
+		 * @default "'radiolist'"
+		 */
 		dataType:"'radiolist'",
+		/**
+		 * @property subTpl
+		 * @type {String} html
+		 */
 		subTpl:subTpl,
+		/**
+		 * @property defaultChecked
+		 * @type {String}
+		 * @default "$data.checked ? $data.checked : false"
+		 */
 		defaultChecked:"$data.checked ? $data.checked : false",
 		/**
-		 * @boolean or string
+		 * radio options
+		 * @property options
+		 * @type {Boolean, String}
+		 * @default false
 		 */
 		options:false,
+		/**
+		 * @method optionLabelBindings
+		 * @returns {Object}
+		 */
 		optionLabelBindings:function(){
 			var me = this;
 			if(!me.inplaceEdit){
@@ -19,6 +56,10 @@ define(["text!./Radio.html", "../common/MultiplesBase", "./plugins/Radio"], func
 			}
 			return {};
 		},
+		/**
+		 * @method optionLabelContainerBindings
+		 * @returns {Object}
+		 */
 		optionLabelContainerBindings:function(){
 			var me = this;
 			return {
@@ -27,6 +68,10 @@ define(["text!./Radio.html", "../common/MultiplesBase", "./plugins/Radio"], func
 				}
 			};
 		},
+		/**
+		 * @method inputContainerBindings
+		 * @returns {Object}
+		 */
 		inputContainerBindings:function(){
 			var me = this,
 				obj = me.callParent();
@@ -35,6 +80,10 @@ define(["text!./Radio.html", "../common/MultiplesBase", "./plugins/Radio"], func
 			}
 			return obj;
 		},
+		/**
+		 * @method bindings
+		 * @returns {Object}
+		 */
 		bindings:function(){
 			var me = this,
 				obj = me.callParent();

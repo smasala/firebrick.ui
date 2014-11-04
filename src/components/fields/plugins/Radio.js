@@ -23,6 +23,11 @@ $(function(){
 });
 </script>
 **/
+/**
+ * @module plugins
+ * @namespace plugins
+ * @class RadioList
+ */
 (function(factory) {
     if (typeof define === "function" && define.amd) {
         // AMD anonymous module

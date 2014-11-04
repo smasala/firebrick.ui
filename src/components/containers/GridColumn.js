@@ -1,19 +1,43 @@
+/**
+ * Extends: {{#crossLink "Firebrick.ui.components.containers.Base"}}{{/crossLink}}
+ * @module Firebrick.ui.components
+ * @extends Firebrick.ui.components.containers.Base
+ * @namespace Firebrick.ui.components.containers
+ * @class GridColumn
+ */
 define(["text!./GridColumn.html", "./Base"], function(tpl){
 	return Firebrick.create("Firebrick.ui.containers.GridColumn", {
 		extend:"Firebrick.ui.containers.Base",
+		/**
+		 * @property uiName
+		 * @type {String}
+		 */
 		uiName:"fb-ui-gridcol",
+		/**
+		 * @property tpl
+		 * @type {String} html
+		 */
 		tpl:tpl,
 		/**
-		 * @type string
+		 * @property deviceSize
+		 * @type {String}
+		 * @default "md"
 		 */
 		deviceSize:"md",
 		/**
-		 * @type int || string :: number 1 to 12 || "auto"
 		 * auto will attempt to provide the column width by dividing the number of items in the parent Grid by 12 - decimals will be rounded down
+		 * @property columnWidth
+		 * @type {Int, String} number 1 to 12 or "auto"
+		 * @default "auto"
 		 */
 		columnWidth:"auto",
 		/**
+		 * when property columnWidth is set to "auto", this function will attempt to calculate the correct size for each column.
+		 * Note: this function will round down to the nearest whole number - 5 columns will result in size 2 for each column
+		 * the number of columns are divided by 12 (BS3 grid)
+		 * @method _getColumnWidth
 		 * @private
+		 * @returns {Int}
 		 */
 		_getColumnWidth:function(){
 			var me = this,
@@ -26,6 +50,8 @@ define(["text!./GridColumn.html", "./Base"], function(tpl){
 		
 		/**
 		 * Bindings
+		 * @method bindings
+		 * @returns {Object}
 		 */
 		bindings: function(){
 			var me = this,

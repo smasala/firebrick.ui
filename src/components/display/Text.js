@@ -1,42 +1,78 @@
+/**
+ * Extends: {{#crossLink "Firebrick.ui.components.common.Base"}}{{/crossLink}}
+ * @module Firebrick.ui.components
+ * @extends Firebrick.ui.components.common.Base
+ * @namespace Firebrick.ui.components.display
+ * @class Text
+ */
 define(["text!./Text.html", "../common/Base"], function(tpl){
 	return Firebrick.create("Firebrick.ui.display.Text", {
 		extend: "Firebrick.ui.common.Base",
+		/**
+		 * @property uiName
+		 * @type {String}
+		 */
 		uiName:"fb-ui-text",
+		/**
+		 * @property tpl
+		 * @type {String}
+		 */
 		tpl:tpl,
 		/**
-		 * @type boolean - whether text is raw html or not
+		 * whether text is raw html or not
+		 * @property isHtml
+		 * @type {Boolean}
+		 * @default false
 		 */
 		isHtml:false,
 		/**
-		 * @type string 
+		 * @property text
+		 * @type {String}
+		 * @default ""
 		 */
 		text:"",
 		/**
-		 * @type boolean
+		 * @property leadCSS
+		 * @type {Boolean}
+		 * @default false
 		 */
 		leadCSS:false,
 		/**
-		 * @type boolean
+		 * @property blockQuote
+		 * @type {Boolean}
+		 * @default false
 		 */
 		blockQuote:false,
 		/**
-		 * @type boolean
+		 * @property blockQuoteReverseCSS
+		 * @type {Boolean}
+		 * @default false
 		 */
 		blockQuoteReverseCSS: false,
 		/**
-		 * @type boolean :: string - false not to show, string for footer text
+		 * false not to show, string for footer text
+		 * @property blockQuoteFooter
+		 * @type {Boolean, String}
+		 * @default false
 		 */
 		blockQuoteFooter:false,
 		/**
-		 * @type boolean
+		 * @property isBlockQuoteFooterHTML
+		 * @type {Boolean}
+		 * @default false
 		 */
 		isBlockQuoteFooterHTML: false,
 		/**
-		 * @type false || string :: 'left', 'center', 'right', 'justify', 'no-wrap' (defaults to: left)
+		 * false || string :: 'left', 'center', 'right', 'justify', 'no-wrap' (defaults to: left)
+		 * @property textAlignment
+		 * @type {Boolean, String}
+		 * @default "justify"
 		 */
 		textAlignment:"justify",
 		/**
 		 * Bindings
+		 * @method bindings
+		 * @returns {Object}
 		 */
 		bindings:function(){
 			var me = this,
@@ -58,7 +94,10 @@ define(["text!./Text.html", "../common/Base"], function(tpl){
 			
 			return obj;
 		},
-		
+		/**
+		 * @method blockQuoteBindings
+		 * @returns {Object}
+		 */
 		blockQuoteBindings: function(){
 			return {
 				css:{
@@ -66,7 +105,10 @@ define(["text!./Text.html", "../common/Base"], function(tpl){
 				}
 			};
 		},
-		
+		/**
+		 * @method blockQuoteFooterBindings
+		 * @returns {Object}
+		 */
 		blockQuoteFooterBindings: function(){
 			var me = this,
 				obj = {};
