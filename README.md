@@ -10,7 +10,7 @@ UI extendable component library for Firebrick MVC, built with :
 
 ## Install with Bower
 ```
-bower install firebrick.ui
+bower install "firebrick.ui"
 ```
 <!--
 ##Demo
