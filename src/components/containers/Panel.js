@@ -26,32 +26,32 @@ define(["text!./Panel.html", "./Base"], function(tpl){
 		title:"",
 		/**
 		 * @property panelClass
-		 * @type {Boolean, String}
+		 * @type {Boolean|String}
 		 * @default true
 		 */
 		panelClass: true,
 		/**
 		 * string = (default, primary, success, info, warning, danger)
 		 * @property panelTypeClass
-		 * @type {Boolean, String} 
+		 * @type {Boolean|String} 
 		 * @default "default"
 		 */
 		panelTypeClass: "default",
 		/**
 		 * @property panelHeaderClass
-		 * @type {Boolean, String}
+		 * @type {Boolean|String}
 		 * @default true
 		 */
 		panelHeaderClass: true,
 		/**
 		 * @property panelBodyClass
-		 * @type {Boolean, String}
+		 * @type {Boolean|String}
 		 * @default true
 		 */
 		panelBodyClass: true,
 		/**
 		 * @property showPanelHeader
-		 * @type {Boolean, String}
+		 * @type {Boolean|String}
 		 * @default true
 		 */
 		showPanelHeader:true,
@@ -64,13 +64,13 @@ define(["text!./Panel.html", "./Base"], function(tpl){
 		content: "",
 		/**
 		 * @property collapsible
-		 * @type {Boolean, String}
+		 * @type {Boolean|String}
 		 * @default false
 		 */
 		collapsible:false,
 		/**
 		 * @property collapsed
-		 * @type {Boolean, String}
+		 * @type {Boolean|String}
 		 * @default false
 		 */
 		collapsed:false,

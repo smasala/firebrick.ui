@@ -21,31 +21,31 @@ define(["text!./ToggleButton.html", "../common/MultiplesBase"], function(subTpl)
 		subTpl:subTpl,
 		/**
 		 * @property btnGroupClass
-		 * @type boolean or string
+		 * @type {Boolean|String}
 		 * @default true
 		 */
 		btnGroupClass:true,
 		/**
 		 * @property btnClass
-		 * @type {Boolean, String}
+		 * @type {Boolean|String}
 		 * @default true
 		 */
 		btnClass: true,
 		/**
 		 * @property btnPrimaryClass
-		 * @type {Boolean, String}
+		 * @type {Boolean|String}
 		 * @default true
 		 */
 		btnPrimaryClass: true,
 		/**
 		 * @property defaultActive
-		 * @type {Boolean, String}
+		 * @type {Boolean|String}
 		 * @default false
 		 */
 		defaultActive: false,
 		/**
 		 * @property dataToggle
-		 * @type boolean or string
+		 * @type {Boolean|String}
 		 * @default "'buttons'"
 		 */
 		dataToggle: "'buttons'",

@@ -27,7 +27,7 @@ define(["text!./GridColumn.html", "./Base"], function(tpl){
 		/**
 		 * auto will attempt to provide the column width by dividing the number of items in the parent Grid by 12 - decimals will be rounded down
 		 * @property columnWidth
-		 * @type {Int, String} number 1 to 12 or "auto"
+		 * @type {Int|String} number 1 to 12 or "auto"
 		 * @default "auto"
 		 */
 		columnWidth:"auto",

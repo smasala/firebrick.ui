@@ -13,19 +13,16 @@ define(["text!./Button.html", "../common/Base"], function(tpl){
 		text:"",
 		/**
 		 * @property btnSize
-		 * @type {boolean} false 
-		 * @type {String} ("sm", "lg", "xs")
+		 * @type {Boolean|String} false |  ("sm", "lg", "xs")
 		 * @default false
 		 */
 		btnSize:false,
 		/**
 		 * @property btnStyle
-		 * @type {boolean} false 
-		 * @type {String} (default, primary, success, info, warning, danger, link)
+		 * @type {Boolean|String} false | (default, primary, success, info, warning, danger, link)
 		 * @default "default"
 		 */
 		btnStyle:"default",
-		
 		/*****************/
 		/**
 		 * default bindings called by data-bind={{data-bind}}

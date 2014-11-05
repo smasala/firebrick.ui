@@ -30,31 +30,31 @@ define(["jquery", "text!./Table.html", "../common/Base", "datatables"], function
 		 * 	rows:[{}]
 		 * }
 		 * @property data
-		 * @type {Object, String}
+		 * @type {Object|String}
 		 * @default false
 		 */
 		data:false,
 		/**
 		 * @property tableStriped
-		 * @type {Boolean, String}
+		 * @type {Boolean|String}
 		 * @default true
 		 */
 		tableStriped:true,
 		/**
 		 * @property tableHover
-		 * @type {Boolean, String}
+		 * @type {Boolean|String}
 		 * @default false
 		 */
 		tableHover:false,
 		/**
 		 * @property tableCondensed
-		 * @type {Boolean, String}
+		 * @type {Boolean|String}
 		 * @default false
 		 */
 		tableCondensed:false,
 		/**
 		 * @property tableBordered
-		 * @type {Boolean, String}
+		 * @type {Boolean|String}
 		 * @default false
 		 */
 		tableBordered:false,
@@ -87,7 +87,7 @@ define(["jquery", "text!./Table.html", "../common/Base", "datatables"], function
 		/**
 		 * return js object to pass to the DataTable function for configuring the table on componentReady
 		 * @property dataTableConfig
-		 * @type {function}
+		 * @type {Function}
 		 * @return {object}
 		 * @default {}
 		 */
@@ -104,7 +104,7 @@ define(["jquery", "text!./Table.html", "../common/Base", "datatables"], function
 		/**
 		 * works with parameter treetable
 		 * @property showCaption
-		 * @type {Boolean, String}
+		 * @type {Boolean|String}
 		 * @default true
 		 */
 		showCaption:true,
@@ -125,7 +125,7 @@ define(["jquery", "text!./Table.html", "../common/Base", "datatables"], function
 		/**
 		 * return js object to pass to the Treetable function for configuring the table on componentReady
 		 * @property treeTableConfig
-		 * @type {function}
+		 * @type {Function}
 		 * @returns {Object}
 		 * @default {}
 		 */

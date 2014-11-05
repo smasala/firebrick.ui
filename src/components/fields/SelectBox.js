@@ -26,7 +26,7 @@ define(["text!./SelectBox.html", "jquery", "./Input"], function(subTpl, $){
 		subTpl:subTpl,
 		/**
 		 * @property data
-		 * @type {String, Function}
+		 * @type {String|Function}
 		 * @default false
 		 */
 		data:false,

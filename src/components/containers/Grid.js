@@ -20,7 +20,7 @@ define(["text!./Grid.html", "jquery", "./Base"], function(tpl, $){
 		tpl: tpl,
 		/**
 		 * @property rowClass
-		 * @type {Boolean, String}
+		 * @type {Boolean|String}
 		 * @default true
 		 */
 		rowClass:true,

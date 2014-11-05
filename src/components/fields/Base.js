@@ -85,9 +85,8 @@ define(["text!./Base.html", "../common/Base", "x-editable", "knockout-x-editable
 		 */
 		disabled:false,
 		/**
-		 * string (sm || lg)
 		 * @property inputSize
-		 * @type {Boolean, String}
+		 * @type {Boolean|String} string (sm || lg)
 		 * @default false
 		 */
 		inputSize:false,
@@ -100,7 +99,7 @@ define(["text!./Base.html", "../common/Base", "x-editable", "knockout-x-editable
 		/**
 		 * help text
 		 * @property helpText
-		 * @type {Boolean, String}
+		 * @type {Boolean|String}
 		 * @default false
 		 */
 		helpText:false,
@@ -113,7 +112,7 @@ define(["text!./Base.html", "../common/Base", "x-editable", "knockout-x-editable
 		helpBlockClass:"help-block",
 		/**
 		 * @property placeholder
-		 * @type {Boolean, String}
+		 * @type {Boolean|String}
 		 * @default false
 		 */
 		placeholder:false,
@@ -133,7 +132,7 @@ define(["text!./Base.html", "../common/Base", "x-editable", "knockout-x-editable
 		/**
 		 * input addon
 		 * @property inputAddon
-		 * @type {Boolean, String}
+		 * @type {Boolean|String}
 		 * @default false
 		 */
 		inputAddon:false,
@@ -153,27 +152,27 @@ define(["text!./Base.html", "../common/Base", "x-editable", "knockout-x-editable
 		/**
 		 * Feedback css bindings
 		 * @property feedback_success
-		 * @type {Boolean, String}
+		 * @type {Boolean|String}
 		 * @default false
 		 */
 		feedback_success:false,
 		/**
 		 * Feedback css bindings
 		 * @property feedback_warning
-		 * @type {Boolean, String}
+		 * @type {Boolean|String}
 		 * @default false
 		 */
 		feedback_warning:false,
 		/**
 		 * Feedback css bindings
 		 * @property feedback_error
-		 * @type {Boolean, String}
+		 * @type {Boolean|String}
 		 * @default false
 		 */
 		feedback_error: false,
 		/**
 		 * @property multiplesInline
-		 * @type {Boolean, String}
+		 * @type {Boolean|String}
 		 * @default false
 		 */
 		multiplesInline:false,

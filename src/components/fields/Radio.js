@@ -39,7 +39,7 @@ define(["text!./Radio.html", "../common/MultiplesBase", "./plugins/Radio"], func
 		/**
 		 * radio options
 		 * @property options
-		 * @type {Boolean, String}
+		 * @type {Boolean|String}
 		 * @default false
 		 */
 		options:false,

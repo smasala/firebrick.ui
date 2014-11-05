@@ -52,7 +52,7 @@ define(["text!./Text.html", "../common/Base"], function(tpl){
 		/**
 		 * false not to show, string for footer text
 		 * @property blockQuoteFooter
-		 * @type {Boolean, String}
+		 * @type {Boolean|String}
 		 * @default false
 		 */
 		blockQuoteFooter:false,
@@ -65,7 +65,7 @@ define(["text!./Text.html", "../common/Base"], function(tpl){
 		/**
 		 * false || string :: 'left', 'center', 'right', 'justify', 'no-wrap' (defaults to: left)
 		 * @property textAlignment
-		 * @type {Boolean, String}
+		 * @type {Boolean|String}
 		 * @default "justify"
 		 */
 		textAlignment:"justify",

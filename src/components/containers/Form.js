@@ -26,13 +26,13 @@ define(["text!./Form.html", "./Base"], function(tpl){
 		formRole:"'form'",
 		/**
 		 * @property horizontal
-		 * @type {Boolean, String}
+		 * @type {Boolean|String}
 		 * @default true
 		 */
 		horizontal:true,
 		/**
 		 * @property inline
-		 * @type {Boolean, String}
+		 * @type {Boolean|String}
 		 * @default false
 		 */
 		inline:false,

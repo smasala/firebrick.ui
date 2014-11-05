@@ -15,7 +15,7 @@ define(["jquery", "./Table", "jquery-treetable"], function($){
 		uiName: "fb-ui-treetable",
 		/**
 		 * @property data
-		 * @type {Object, String}
+		 * @type {Object|String}
 		 * @default "''"
 		 */
 		data:"''",

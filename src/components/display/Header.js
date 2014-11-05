@@ -46,7 +46,7 @@ define(["text!./Header.html", "../common/Base"], function(tpl){
 		/**
 		 * string = "default", "primary", "success" "info", "warning", "danger"  
 		 * @property labelCSS
-		 * @type {Boolean, String}
+		 * @type {Boolean|String}
 		 * @default "default"
 		 */
 		labelCSS: "default",

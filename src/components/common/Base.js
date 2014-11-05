@@ -43,7 +43,7 @@ define(["handlebars"], function(Handlebars){
 		 * target to render the component to (not needed if combined with a view) (optional)
 		 * @property renderTo
 		 * @optional
-		 * @type {Boolean, String, Object} false, selector, jQuery Object
+		 * @type {Boolean|String|Object} false, selector, jQuery Object
 		 * @default false
 		 */
 		renderTo:false,
