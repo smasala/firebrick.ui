@@ -32,25 +32,35 @@ define(["store/MyStore",
 								"fb-ui-header",
 								"fb-ui-text",
 								{"uiName":"ui-app-username"},
-								"fb-ui-email",
+								{"uiName":"ui-app-username", "inplaceEdit": false},
 								"ui-app-description",
 								"ui-app-radio",
 								"ui-app-checkbox",
 								"ui-app-selectbox",
-								"fb-ui-togglebutton",
+								{"uiName": "fb-ui-togglebutton", "label": "Toggle!", "options": "options"},
 								"ui-app-table",
-								"fb-ui-treetable",
 								{"uiName":"fb-ui-button", "text":"Submit"}
 							]
 						}	
 					]
 				},{
-					"uiName": "fb-ui-grid",
-					"items":[
-						{"uiName": "fb-ui-gridcol", "columnWidth":"3", "items":["ui-app-username"]},
-						{"uiName": "fb-ui-gridcol", "columnWidth":"6", "items":["ui-app-description"]},
-						{"uiName": "fb-ui-gridcol", "columnWidth":"3", "items":["ui-app-username"]}
-					]
+					"uiName": "ui-app-panel",
+					"title": "Fancy Table",
+					"items":[{
+						"uiName": "ui-app-table",
+						"datatable": true
+					}]
+				},{
+					"uiName": "ui-app-panel",
+					"title": "A Gird with Columns",
+					"items": [{
+						"uiName": "fb-ui-grid",
+						"items":[
+							{"uiName": "fb-ui-gridcol", "columnWidth":"3", "items":["ui-app-username"]},
+							{"uiName": "fb-ui-gridcol", "columnWidth":"6", "items":["ui-app-description"]},
+							{"uiName": "fb-ui-gridcol", "columnWidth":"3", "items":["ui-app-username"]}
+						]
+					}]
 				}],
 				//items:response.ui,
 				listeners:{
