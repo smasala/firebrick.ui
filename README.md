@@ -12,11 +12,11 @@ UI extendable component library for Firebrick MVC, built with :
 ```
 bower install "firebrick.ui"
 ```
-<!--
+
 ##Demo
 
-Checkout the [Dashboard ](http://demo.firebrickjs.com) demo
--->
+Checkout the [Dashboard ](http://demo-ui.firebrickjs.com) demo
+
 ##Usage
 
 ###Require JS
