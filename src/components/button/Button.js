@@ -23,11 +23,10 @@ define(["text!./Button.html", "../common/Base"], function(tpl){
 		 * @default "default"
 		 */
 		btnStyle:"default",
-		/*****************/
 		/**
 		 * default bindings called by data-bind={{data-bind}}
 		 * @method bindings
-		 * @returns {Object}
+		 * @return {Object}
 		 */
 		bindings: function(){
 			var me = this,

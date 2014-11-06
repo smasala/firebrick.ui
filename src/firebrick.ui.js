@@ -59,7 +59,7 @@
 			 * @param {Object} config.target selector string, jquery object (optional) if none passed, html is returned
 			 * @param {Object} config.items array of strings or objects ["fb-ui-input", {uiName:"fb-ui-textarea"}]
 			 * @param {Object} config.view Firebrick view class (optional)
-			 * @returns {String} html
+			 * @return {String} html
 			 */
 			build: function(config){
 				var me = this,
@@ -89,7 +89,7 @@
 			 * 
 			 * @private
 			 * @method _populate
-			 * @returns {Object} :: {html: string, items: array of objects}
+			 * @return {Object} :: {html: string, items: array of objects}
 			 */
 			_populate: function(items, parent){
 				var me = this,
@@ -146,7 +146,7 @@
 			 * 
 			 * @method get
 			 * @param {String} name
-			 * @returns {Object}
+			 * @return {Object}
 			 */
 			get: function(name){
 				return Firebrick.get(name);
@@ -164,7 +164,7 @@
 				 * 
 				 * @method stringify
 				 * @param {Object} objToConvert
-				 * @returns {String}
+				 * @return {String}
 				 */
 				stringify:function(objToConvert){
 					if(objToConvert){
@@ -193,8 +193,7 @@
 			
 			
 	};
-	
-	/**
+	/*
 	 * use withProperties to pass extra properties down to the descendants
 	 * http://knockoutjs.com/documentation/custom-bindings-controlling-descendant-bindings.html
 	 */

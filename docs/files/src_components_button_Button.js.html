@@ -153,24 +153,20 @@ define([&quot;text!./Button.html&quot;, &quot;../common/Base&quot;], function(tp
 		text:&quot;&quot;,
 		/**
 		 * @property btnSize
-		 * @type {boolean} false 
-		 * @type {String} (&quot;sm&quot;, &quot;lg&quot;, &quot;xs&quot;)
+		 * @type {Boolean|String} false |  (&quot;sm&quot;, &quot;lg&quot;, &quot;xs&quot;)
 		 * @default false
 		 */
 		btnSize:false,
 		/**
 		 * @property btnStyle
-		 * @type {boolean} false 
-		 * @type {String} (default, primary, success, info, warning, danger, link)
+		 * @type {Boolean|String} false | (default, primary, success, info, warning, danger, link)
 		 * @default &quot;default&quot;
 		 */
 		btnStyle:&quot;default&quot;,
-		
-		/*****************/
 		/**
 		 * default bindings called by data-bind={{data-bind}}
 		 * @method bindings
-		 * @returns {Object}
+		 * @return {Object}
 		 */
 		bindings: function(){
 			var me = this,

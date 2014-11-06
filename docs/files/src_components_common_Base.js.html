@@ -183,7 +183,7 @@ define([&quot;handlebars&quot;], function(Handlebars){
 		 * target to render the component to (not needed if combined with a view) (optional)
 		 * @property renderTo
 		 * @optional
-		 * @type {Boolean, String, Object} false, selector, jQuery Object
+		 * @type {Boolean|String|Object} false, selector, jQuery Object
 		 * @default false
 		 */
 		renderTo:false,
@@ -220,7 +220,7 @@ define([&quot;handlebars&quot;], function(Handlebars){
 		/**
 		 * @method build
 		 * @param {String} [prop=this.tpl]
-		 * @returns {String} html 
+		 * @return {String} html 
 		 */
 		build: function(prop){
 			var me = this;
@@ -245,7 +245,7 @@ define([&quot;handlebars&quot;], function(Handlebars){
 		/**
 		 * shorthand for getClassId()
 		 * @method getId 
-		 * @returns {String} uniqueId
+		 * @return {String} uniqueId
 		 */
 		getId: function(){
 			return this.getClassId();
@@ -253,7 +253,7 @@ define([&quot;handlebars&quot;], function(Handlebars){
 		/**
 		 * called when calling {{{getSubTpl}}} in component template
 		 * @method getSubTpl
-		 * @returns {String}
+		 * @return {String}
 		 */
 		getSubTpl: function(){
 			return this.build(&quot;subTpl&quot;);
@@ -263,7 +263,7 @@ define([&quot;handlebars&quot;], function(Handlebars){
 		 * iterate up the inheritance tree looking for a classname that differs from the current and that &quot;subTpl&quot; or &quot;tpl&quot; don&#x27;t match either
 		 * @private
 		 * @method _getParent
-		 * @returns {Object}
+		 * @return {Object}
 		 */
 		_getParent: function(clazz){
 			var me = clazz || this,
@@ -280,7 +280,7 @@ define([&quot;handlebars&quot;], function(Handlebars){
 		/**
 		 * called when calling {{{getParentTpl}}} in component template
 		 * @method getParentTpl
-		 * @returns {String}
+		 * @return {String}
 		 */
 		getParentTpl: function(){
 			var me = this;
@@ -289,7 +289,7 @@ define([&quot;handlebars&quot;], function(Handlebars){
 		/**
 		 * clean string - i.e. remove all &#x27; from string
 		 * @method cleanString
-		 * @returns {String}
+		 * @return {String}
 		 */
 		cleanString: function(string){
 			return string.replace(/\&#x27;/g, &quot;&quot;);

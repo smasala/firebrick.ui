@@ -72,7 +72,7 @@ define(["text!./Text.html", "../common/Base"], function(tpl){
 		/**
 		 * Bindings
 		 * @method bindings
-		 * @returns {Object}
+		 * @return {Object}
 		 */
 		bindings:function(){
 			var me = this,
@@ -96,7 +96,7 @@ define(["text!./Text.html", "../common/Base"], function(tpl){
 		},
 		/**
 		 * @method blockQuoteBindings
-		 * @returns {Object}
+		 * @return {Object}
 		 */
 		blockQuoteBindings: function(){
 			return {
@@ -107,7 +107,7 @@ define(["text!./Text.html", "../common/Base"], function(tpl){
 		},
 		/**
 		 * @method blockQuoteFooterBindings
-		 * @returns {Object}
+		 * @return {Object}
 		 */
 		blockQuoteFooterBindings: function(){
 			var me = this,

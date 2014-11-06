@@ -26,7 +26,7 @@ define(["text!./Grid.html", "jquery", "./Base"], function(tpl, $){
 		rowClass:true,
 		/**
 		 * @method bindings
-		 * @returns {Object}
+		 * @return {Object}
 		 */
 		bindings: function(){
 			var me = this;
@@ -41,7 +41,7 @@ define(["text!./Grid.html", "jquery", "./Base"], function(tpl, $){
 		},
 		/**
 		 * @method getBasicBindings
-		 * @returns {Object}
+		 * @return {Object}
 		 */
 		getBasicBindings:function(){
 			var me = this;
@@ -57,7 +57,7 @@ define(["text!./Grid.html", "jquery", "./Base"], function(tpl, $){
 		 * @param {Int} iteration index
 		 * @param {Object} iteration object
 		 * @param {Context} iteration context
-		 * @returns {String}
+		 * @return {String}
 		 */
 		getGridItem: function(index, item, context){
 			var me = context.data.root,

@@ -27,7 +27,7 @@ define(["./Radio"], function(){
 		dataType:"'checklist'",
 		/**
 		 * @method bindings
-		 * @returns {Object}
+		 * @return {Object}
 		 */
 		bindings:function(){
 			var me = this,

@@ -80,7 +80,7 @@ define(["handlebars"], function(Handlebars){
 		/**
 		 * @method build
 		 * @param {String} [prop=this.tpl]
-		 * @returns {String} html 
+		 * @return {String} html 
 		 */
 		build: function(prop){
 			var me = this;
@@ -105,7 +105,7 @@ define(["handlebars"], function(Handlebars){
 		/**
 		 * shorthand for getClassId()
 		 * @method getId 
-		 * @returns {String} uniqueId
+		 * @return {String} uniqueId
 		 */
 		getId: function(){
 			return this.getClassId();
@@ -113,7 +113,7 @@ define(["handlebars"], function(Handlebars){
 		/**
 		 * called when calling {{{getSubTpl}}} in component template
 		 * @method getSubTpl
-		 * @returns {String}
+		 * @return {String}
 		 */
 		getSubTpl: function(){
 			return this.build("subTpl");
@@ -123,7 +123,7 @@ define(["handlebars"], function(Handlebars){
 		 * iterate up the inheritance tree looking for a classname that differs from the current and that "subTpl" or "tpl" don't match either
 		 * @private
 		 * @method _getParent
-		 * @returns {Object}
+		 * @return {Object}
 		 */
 		_getParent: function(clazz){
 			var me = clazz || this,
@@ -140,7 +140,7 @@ define(["handlebars"], function(Handlebars){
 		/**
 		 * called when calling {{{getParentTpl}}} in component template
 		 * @method getParentTpl
-		 * @returns {String}
+		 * @return {String}
 		 */
 		getParentTpl: function(){
 			var me = this;
@@ -149,7 +149,7 @@ define(["handlebars"], function(Handlebars){
 		/**
 		 * clean string - i.e. remove all ' from string
 		 * @method cleanString
-		 * @returns {String}
+		 * @return {String}
 		 */
 		cleanString: function(string){
 			return string.replace(/\'/g, "");

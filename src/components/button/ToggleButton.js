@@ -57,11 +57,8 @@ define(["text!./ToggleButton.html", "../common/MultiplesBase"], function(subTpl)
 		 */
 		options:"''",
 		/**
-		 * Bindings
-		 */
-		/**
 		 * @method btnGroupBindings
-		 * @returns {Object}
+		 * @return {Object}
 		 */
 		btnGroupBindings: function(){
 			var me = this;
@@ -77,7 +74,7 @@ define(["text!./ToggleButton.html", "../common/MultiplesBase"], function(subTpl)
 		},
 		/**
 		 * @method toggleInputBindings
-		 * @returns {Object}
+		 * @return {Object}
 		 */
 		toggleInputBindings: function(){
 			var me = this;
@@ -89,7 +86,7 @@ define(["text!./ToggleButton.html", "../common/MultiplesBase"], function(subTpl)
 		},
 		/**
 		 * @method toggleLabelBindings
-		 * @returns {Object}
+		 * @return {Object}
 		 */
 		toggleLabelBindings: function(){
 			var me = this;
@@ -106,7 +103,7 @@ define(["text!./ToggleButton.html", "../common/MultiplesBase"], function(subTpl)
 		},
 		/**
 		 * @method toggleLabelTextBindings
-		 * @returns {Object}
+		 * @return {Object}
 		 */
 		toggleLabelTextBindings: function(){
 			return {

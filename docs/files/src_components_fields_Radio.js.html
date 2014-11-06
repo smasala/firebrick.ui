@@ -179,13 +179,13 @@ define([&quot;text!./Radio.html&quot;, &quot;../common/MultiplesBase&quot;, &quo
 		/**
 		 * radio options
 		 * @property options
-		 * @type {Boolean, String}
+		 * @type {Boolean|String}
 		 * @default false
 		 */
 		options:false,
 		/**
 		 * @method optionLabelBindings
-		 * @returns {Object}
+		 * @return {Object}
 		 */
 		optionLabelBindings:function(){
 			var me = this;
@@ -198,7 +198,7 @@ define([&quot;text!./Radio.html&quot;, &quot;../common/MultiplesBase&quot;, &quo
 		},
 		/**
 		 * @method optionLabelContainerBindings
-		 * @returns {Object}
+		 * @return {Object}
 		 */
 		optionLabelContainerBindings:function(){
 			var me = this;
@@ -210,7 +210,7 @@ define([&quot;text!./Radio.html&quot;, &quot;../common/MultiplesBase&quot;, &quo
 		},
 		/**
 		 * @method inputContainerBindings
-		 * @returns {Object}
+		 * @return {Object}
 		 */
 		inputContainerBindings:function(){
 			var me = this,
@@ -222,7 +222,7 @@ define([&quot;text!./Radio.html&quot;, &quot;../common/MultiplesBase&quot;, &quo
 		},
 		/**
 		 * @method bindings
-		 * @returns {Object}
+		 * @return {Object}
 		 */
 		bindings:function(){
 			var me = this,

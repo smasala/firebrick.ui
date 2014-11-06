@@ -15,9 +15,9 @@
 		"library",
 		"bootstrap"
 	],
-	"version": "0.2.0",
+	"version": "0.2.1",
 	"dependencies": {
-		"firebrick": ">=0.8.19",
+		"firebrick": ">=0.8.21",
 		"text": "~2.0.12",
 		"handlebars": "~2.0.0",
 		"datatables": "~1.10.3",

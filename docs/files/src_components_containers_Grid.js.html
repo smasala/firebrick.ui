@@ -160,13 +160,13 @@ define([&quot;text!./Grid.html&quot;, &quot;jquery&quot;, &quot;./Base&quot;], f
 		tpl: tpl,
 		/**
 		 * @property rowClass
-		 * @type {Boolean, String}
+		 * @type {Boolean|String}
 		 * @default true
 		 */
 		rowClass:true,
 		/**
 		 * @method bindings
-		 * @returns {Object}
+		 * @return {Object}
 		 */
 		bindings: function(){
 			var me = this;
@@ -181,7 +181,7 @@ define([&quot;text!./Grid.html&quot;, &quot;jquery&quot;, &quot;./Base&quot;], f
 		},
 		/**
 		 * @method getBasicBindings
-		 * @returns {Object}
+		 * @return {Object}
 		 */
 		getBasicBindings:function(){
 			var me = this;
@@ -197,7 +197,7 @@ define([&quot;text!./Grid.html&quot;, &quot;jquery&quot;, &quot;./Base&quot;], f
 		 * @param {Int} iteration index
 		 * @param {Object} iteration object
 		 * @param {Context} iteration context
-		 * @returns {String}
+		 * @return {String}
 		 */
 		getGridItem: function(index, item, context){
 			var me = context.data.root,

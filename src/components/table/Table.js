@@ -126,7 +126,7 @@ define(["jquery", "text!./Table.html", "../common/Base", "datatables"], function
 		 * return js object to pass to the Treetable function for configuring the table on componentReady
 		 * @property treeTableConfig
 		 * @type {Function}
-		 * @returns {Object}
+		 * @return {Object}
 		 * @default {}
 		 */
 		treeTableConfig:function(){
@@ -153,7 +153,7 @@ define(["jquery", "text!./Table.html", "../common/Base", "datatables"], function
 		},
 		/**
 		 * @method containerBindings
-		 * @returns {Object}
+		 * @return {Object}
 		 */
 		containerBindings: function(){
 			var me = this;
@@ -166,7 +166,7 @@ define(["jquery", "text!./Table.html", "../common/Base", "datatables"], function
 		/**
 		 * @method _getData
 		 * @private
-		 * @returns {Object}
+		 * @return {Object}
 		 */
 		_getData: function(){
 			var me = this;
@@ -177,7 +177,7 @@ define(["jquery", "text!./Table.html", "../common/Base", "datatables"], function
 		},
 		/**
 		 * @method bindings
-		 * @returns {Object}
+		 * @return {Object}
 		 */
 		bindings: function(){
 			var me = this;
@@ -194,7 +194,7 @@ define(["jquery", "text!./Table.html", "../common/Base", "datatables"], function
 		},
 		/**
 		 * @method theadBindings
-		 * @returns {Object}
+		 * @return {Object}
 		 */
 		theadBindings: function(){
 			return {
@@ -203,20 +203,16 @@ define(["jquery", "text!./Table.html", "../common/Base", "datatables"], function
 		},
 		/**
 		 * @method tbodyBindings
-		 * @returns {Object}
+		 * @return {Object}
 		 */
 		tbodyBindings:function(){
 			return {
 				"if": "rows"
 			};
 		},
-		
-		/**
-		 * loop bindings
-		 */
 		/**
 		 * @method theadTRBindings
-		 * @returns {Object}
+		 * @return {Object}
 		 */
 		theadTRBindings:function(){
 			return {
@@ -225,7 +221,7 @@ define(["jquery", "text!./Table.html", "../common/Base", "datatables"], function
 		},
 		/**
 		 * @method theadTRTDBindings
-		 * @returns {Object}
+		 * @return {Object}
 		 */
 		theadTRTDBindings:function(){
 			return {
@@ -234,7 +230,7 @@ define(["jquery", "text!./Table.html", "../common/Base", "datatables"], function
 		},
 		/**
 		 * @method tbodyBindings
-		 * @returns {Object}
+		 * @return {Object}
 		 */
 		tbodyBindings:function(){
 			return {
@@ -243,7 +239,7 @@ define(["jquery", "text!./Table.html", "../common/Base", "datatables"], function
 		},
 		/**
 		 * @method tbodyTRBindings
-		 * @returns {Object}
+		 * @return {Object}
 		 */
 		tbodyTRBindings:function(){
 			return {
@@ -256,7 +252,7 @@ define(["jquery", "text!./Table.html", "../common/Base", "datatables"], function
 		},
 		/**
 		 * @method tbodyTRTDBindings
-		 * @returns {Object}
+		 * @return {Object}
 		 */
 		tbodyTRTDBindings:function(){
 			return {
@@ -265,7 +261,7 @@ define(["jquery", "text!./Table.html", "../common/Base", "datatables"], function
 		},
 		/**
 		 * @method captionBindings
-		 * @returns {Object}
+		 * @return {Object}
 		 */
 		captionBindings:function(){
 			var me = this;
@@ -275,7 +271,7 @@ define(["jquery", "text!./Table.html", "../common/Base", "datatables"], function
 		},
 		/**
 		 * @method expandBindings
-		 * @returns {Object}
+		 * @return {Object}
 		 */
 		expandBindings:function(){
 			var me = this;
@@ -289,7 +285,7 @@ define(["jquery", "text!./Table.html", "../common/Base", "datatables"], function
 		},
 		/**
 		 * @method collapseBindings
-		 * @returns {Object}
+		 * @return {Object}
 		 */
 		collapseBindings:function(){
 			var me = this;

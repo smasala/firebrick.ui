@@ -693,7 +693,7 @@
             "line": 14,
             "itemtype": "property",
             "name": "btnSize",
-            "type": "{String} (\"sm\", \"lg\", \"xs\")",
+            "type": "{Boolean|String} false |  (\"sm\", \"lg\", \"xs\")",
             "default": "false",
             "class": "Firebrick.ui.components.button.Button",
             "module": "Firebrick.ui.components",
@@ -701,10 +701,10 @@
         },
         {
             "file": "src\\components\\button\\Button.js",
-            "line": 21,
+            "line": 20,
             "itemtype": "property",
             "name": "btnStyle",
-            "type": "{String} (default, primary, success, info, warning, danger, link)",
+            "type": "{Boolean|String} false | (default, primary, success, info, warning, danger, link)",
             "default": "\"default\"",
             "class": "Firebrick.ui.components.button.Button",
             "module": "Firebrick.ui.components",
@@ -712,14 +712,7 @@
         },
         {
             "file": "src\\components\\button\\Button.js",
-            "line": 29,
-            "class": "Firebrick.ui.components.button.Button",
-            "module": "Firebrick.ui.components",
-            "namespace": "Firebrick.ui.components.button"
-        },
-        {
-            "file": "src\\components\\button\\Button.js",
-            "line": 30,
+            "line": 26,
             "description": "default bindings called by data-bind={{data-bind}}",
             "itemtype": "method",
             "name": "bindings",
@@ -757,7 +750,7 @@
             "line": 22,
             "itemtype": "property",
             "name": "btnGroupClass",
-            "type": "boolean or string",
+            "type": "{Boolean|String}",
             "default": "true",
             "class": "Firebrick.ui.components.button.ToggleButton",
             "module": "Firebrick.ui.components",
@@ -768,7 +761,7 @@
             "line": 28,
             "itemtype": "property",
             "name": "btnClass",
-            "type": "{Boolean, String}",
+            "type": "{Boolean|String}",
             "default": "true",
             "class": "Firebrick.ui.components.button.ToggleButton",
             "module": "Firebrick.ui.components",
@@ -779,7 +772,7 @@
             "line": 34,
             "itemtype": "property",
             "name": "btnPrimaryClass",
-            "type": "{Boolean, String}",
+            "type": "{Boolean|String}",
             "default": "true",
             "class": "Firebrick.ui.components.button.ToggleButton",
             "module": "Firebrick.ui.components",
@@ -790,7 +783,7 @@
             "line": 40,
             "itemtype": "property",
             "name": "defaultActive",
-            "type": "{Boolean, String}",
+            "type": "{Boolean|String}",
             "default": "false",
             "class": "Firebrick.ui.components.button.ToggleButton",
             "module": "Firebrick.ui.components",
@@ -801,7 +794,7 @@
             "line": 46,
             "itemtype": "property",
             "name": "dataToggle",
-            "type": "boolean or string",
+            "type": "{Boolean|String}",
             "default": "\"'buttons'\"",
             "class": "Firebrick.ui.components.button.ToggleButton",
             "module": "Firebrick.ui.components",
@@ -822,14 +815,6 @@
         {
             "file": "src\\components\\button\\ToggleButton.js",
             "line": 59,
-            "description": "Bindings",
-            "class": "Firebrick.ui.components.button.ToggleButton",
-            "module": "Firebrick.ui.components",
-            "namespace": "Firebrick.ui.components.button"
-        },
-        {
-            "file": "src\\components\\button\\ToggleButton.js",
-            "line": 62,
             "itemtype": "method",
             "name": "btnGroupBindings",
             "return": {
@@ -842,7 +827,7 @@
         },
         {
             "file": "src\\components\\button\\ToggleButton.js",
-            "line": 78,
+            "line": 75,
             "itemtype": "method",
             "name": "toggleInputBindings",
             "return": {
@@ -855,7 +840,7 @@
         },
         {
             "file": "src\\components\\button\\ToggleButton.js",
-            "line": 90,
+            "line": 87,
             "itemtype": "method",
             "name": "toggleLabelBindings",
             "return": {
@@ -868,7 +853,7 @@
         },
         {
             "file": "src\\components\\button\\ToggleButton.js",
-            "line": 107,
+            "line": 104,
             "itemtype": "method",
             "name": "toggleLabelTextBindings",
             "return": {
@@ -922,7 +907,7 @@
             "itemtype": "property",
             "name": "renderTo",
             "optional": 1,
-            "type": "{Boolean, String, Object} false, selector, jQuery Object",
+            "type": "{Boolean|String|Object} false, selector, jQuery Object",
             "default": "false",
             "class": "Firebrick.ui.components.common.Base",
             "module": "Firebrick.ui.components",
@@ -1105,7 +1090,7 @@
         },
         {
             "file": "src\\components\\containers\\Base.js",
-            "line": 30,
+            "line": 29,
             "description": "inject sub items",
             "itemtype": "method",
             "name": "getItems",
@@ -1119,7 +1104,7 @@
         },
         {
             "file": "src\\components\\containers\\Base.js",
-            "line": 42,
+            "line": 40,
             "description": "use getItems",
             "access": "private",
             "tagname": "",
@@ -1127,7 +1112,7 @@
             "name": "_getItems",
             "params": [
                 {
-                    "name": "UNKNOWN",
+                    "name": "items",
                     "description": "",
                     "type": "Object"
                 }
@@ -1176,7 +1161,7 @@
             "line": 27,
             "itemtype": "property",
             "name": "horizontal",
-            "type": "{Boolean, String}",
+            "type": "{Boolean|String}",
             "default": "true",
             "class": "Firebrick.ui.components.containers.Form",
             "module": "Firebrick.ui.components",
@@ -1187,7 +1172,7 @@
             "line": 33,
             "itemtype": "property",
             "name": "inline",
-            "type": "{Boolean, String}",
+            "type": "{Boolean|String}",
             "default": "false",
             "class": "Firebrick.ui.components.containers.Form",
             "module": "Firebrick.ui.components",
@@ -1231,7 +1216,7 @@
             "line": 21,
             "itemtype": "property",
             "name": "rowClass",
-            "type": "{Boolean, String}",
+            "type": "{Boolean|String}",
             "default": "true",
             "class": "Firebrick.ui.components.containers.Grid",
             "module": "Firebrick.ui.components",
@@ -1331,7 +1316,7 @@
             "description": "auto will attempt to provide the column width by dividing the number of items in the parent Grid by 12 - decimals will be rounded down",
             "itemtype": "property",
             "name": "columnWidth",
-            "type": "{Int, String} number 1 to 12 or \"auto\"",
+            "type": "{Int|String} number 1 to 12 or \"auto\"",
             "default": "\"auto\"",
             "class": "Firebrick.ui.components.containers.GridColumn",
             "module": "Firebrick.ui.components",
@@ -1403,7 +1388,7 @@
             "line": 27,
             "itemtype": "property",
             "name": "panelClass",
-            "type": "{Boolean, String}",
+            "type": "{Boolean|String}",
             "default": "true",
             "class": "Firebrick.ui.components.containers.Panel",
             "module": "Firebrick.ui.components",
@@ -1415,7 +1400,7 @@
             "description": "string = (default, primary, success, info, warning, danger)",
             "itemtype": "property",
             "name": "panelTypeClass",
-            "type": "{Boolean, String}",
+            "type": "{Boolean|String}",
             "default": "\"default\"",
             "class": "Firebrick.ui.components.containers.Panel",
             "module": "Firebrick.ui.components",
@@ -1426,7 +1411,7 @@
             "line": 40,
             "itemtype": "property",
             "name": "panelHeaderClass",
-            "type": "{Boolean, String}",
+            "type": "{Boolean|String}",
             "default": "true",
             "class": "Firebrick.ui.components.containers.Panel",
             "module": "Firebrick.ui.components",
@@ -1437,7 +1422,7 @@
             "line": 46,
             "itemtype": "property",
             "name": "panelBodyClass",
-            "type": "{Boolean, String}",
+            "type": "{Boolean|String}",
             "default": "true",
             "class": "Firebrick.ui.components.containers.Panel",
             "module": "Firebrick.ui.components",
@@ -1448,7 +1433,7 @@
             "line": 52,
             "itemtype": "property",
             "name": "showPanelHeader",
-            "type": "{Boolean, String}",
+            "type": "{Boolean|String}",
             "default": "true",
             "class": "Firebrick.ui.components.containers.Panel",
             "module": "Firebrick.ui.components",
@@ -1471,7 +1456,7 @@
             "line": 65,
             "itemtype": "property",
             "name": "collapsible",
-            "type": "{Boolean, String}",
+            "type": "{Boolean|String}",
             "default": "false",
             "class": "Firebrick.ui.components.containers.Panel",
             "module": "Firebrick.ui.components",
@@ -1482,7 +1467,7 @@
             "line": 71,
             "itemtype": "property",
             "name": "collapsed",
-            "type": "{Boolean, String}",
+            "type": "{Boolean|String}",
             "default": "false",
             "class": "Firebrick.ui.components.containers.Panel",
             "module": "Firebrick.ui.components",
@@ -1625,7 +1610,7 @@
             "description": "string = \"default\", \"primary\", \"success\" \"info\", \"warning\", \"danger\"",
             "itemtype": "property",
             "name": "labelCSS",
-            "type": "{Boolean, String}",
+            "type": "{Boolean|String}",
             "default": "\"default\"",
             "class": "Firebrick.ui.components.display.Header",
             "module": "Firebrick.ui.components",
@@ -1749,7 +1734,7 @@
             "description": "false not to show, string for footer text",
             "itemtype": "property",
             "name": "blockQuoteFooter",
-            "type": "{Boolean, String}",
+            "type": "{Boolean|String}",
             "default": "false",
             "class": "Firebrick.ui.components.display.Text",
             "module": "Firebrick.ui.components",
@@ -1772,7 +1757,7 @@
             "description": "false || string :: 'left', 'center', 'right', 'justify', 'no-wrap' (defaults to: left)",
             "itemtype": "property",
             "name": "textAlignment",
-            "type": "{Boolean, String}",
+            "type": "{Boolean|String}",
             "default": "\"justify\"",
             "class": "Firebrick.ui.components.display.Text",
             "module": "Firebrick.ui.components",
@@ -1983,10 +1968,9 @@
         {
             "file": "src\\components\\fields\\Base.js",
             "line": 87,
-            "description": "string (sm || lg)",
             "itemtype": "property",
             "name": "inputSize",
-            "type": "{Boolean, String}",
+            "type": "{Boolean|String} string (sm || lg)",
             "default": "false",
             "class": "Firebrick.ui.components.fields.Base",
             "module": "Firebrick.ui.components",
@@ -1994,7 +1978,7 @@
         },
         {
             "file": "src\\components\\fields\\Base.js",
-            "line": 94,
+            "line": 93,
             "itemtype": "property",
             "name": "controlLabel",
             "type": "{Boolean}",
@@ -2005,11 +1989,11 @@
         },
         {
             "file": "src\\components\\fields\\Base.js",
-            "line": 100,
+            "line": 99,
             "description": "help text",
             "itemtype": "property",
             "name": "helpText",
-            "type": "{Boolean, String}",
+            "type": "{Boolean|String}",
             "default": "false",
             "class": "Firebrick.ui.components.fields.Base",
             "module": "Firebrick.ui.components",
@@ -2017,7 +2001,7 @@
         },
         {
             "file": "src\\components\\fields\\Base.js",
-            "line": 107,
+            "line": 106,
             "description": "help text",
             "itemtype": "property",
             "name": "helpBlockClass",
@@ -2029,10 +2013,10 @@
         },
         {
             "file": "src\\components\\fields\\Base.js",
-            "line": 114,
+            "line": 113,
             "itemtype": "property",
             "name": "placeholder",
-            "type": "{Boolean, String}",
+            "type": "{Boolean|String}",
             "default": "false",
             "class": "Firebrick.ui.components.fields.Base",
             "module": "Firebrick.ui.components",
@@ -2040,14 +2024,7 @@
         },
         {
             "file": "src\\components\\fields\\Base.js",
-            "line": 120,
-            "class": "Firebrick.ui.components.fields.Base",
-            "module": "Firebrick.ui.components",
-            "namespace": "Firebrick.ui.components.fields"
-        },
-        {
-            "file": "src\\components\\fields\\Base.js",
-            "line": 121,
+            "line": 119,
             "itemtype": "property",
             "name": "showStateIcon",
             "type": "{Boolean}",
@@ -2058,7 +2035,7 @@
         },
         {
             "file": "src\\components\\fields\\Base.js",
-            "line": 127,
+            "line": 125,
             "itemtype": "property",
             "name": "formControlFeedbackClass",
             "type": "{String}",
@@ -2069,11 +2046,11 @@
         },
         {
             "file": "src\\components\\fields\\Base.js",
-            "line": 133,
+            "line": 131,
             "description": "input addon",
             "itemtype": "property",
             "name": "inputAddon",
-            "type": "{Boolean, String}",
+            "type": "{Boolean|String}",
             "default": "false",
             "class": "Firebrick.ui.components.fields.Base",
             "module": "Firebrick.ui.components",
@@ -2081,7 +2058,7 @@
         },
         {
             "file": "src\\components\\fields\\Base.js",
-            "line": 140,
+            "line": 138,
             "itemtype": "property",
             "name": "inputAddonClass",
             "type": "{String}",
@@ -2092,14 +2069,7 @@
         },
         {
             "file": "src\\components\\fields\\Base.js",
-            "line": 146,
-            "class": "Firebrick.ui.components.fields.Base",
-            "module": "Firebrick.ui.components",
-            "namespace": "Firebrick.ui.components.fields"
-        },
-        {
-            "file": "src\\components\\fields\\Base.js",
-            "line": 147,
+            "line": 144,
             "itemtype": "property",
             "name": "horizontal",
             "type": "{Boolean}",
@@ -2110,11 +2080,11 @@
         },
         {
             "file": "src\\components\\fields\\Base.js",
-            "line": 153,
+            "line": 150,
             "description": "Feedback css bindings",
             "itemtype": "property",
             "name": "feedback_success",
-            "type": "{Boolean, String}",
+            "type": "{Boolean|String}",
             "default": "false",
             "class": "Firebrick.ui.components.fields.Base",
             "module": "Firebrick.ui.components",
@@ -2122,11 +2092,11 @@
         },
         {
             "file": "src\\components\\fields\\Base.js",
-            "line": 160,
+            "line": 157,
             "description": "Feedback css bindings",
             "itemtype": "property",
             "name": "feedback_warning",
-            "type": "{Boolean, String}",
+            "type": "{Boolean|String}",
             "default": "false",
             "class": "Firebrick.ui.components.fields.Base",
             "module": "Firebrick.ui.components",
@@ -2134,11 +2104,11 @@
         },
         {
             "file": "src\\components\\fields\\Base.js",
-            "line": 167,
+            "line": 164,
             "description": "Feedback css bindings",
             "itemtype": "property",
             "name": "feedback_error",
-            "type": "{Boolean, String}",
+            "type": "{Boolean|String}",
             "default": "false",
             "class": "Firebrick.ui.components.fields.Base",
             "module": "Firebrick.ui.components",
@@ -2146,10 +2116,10 @@
         },
         {
             "file": "src\\components\\fields\\Base.js",
-            "line": 174,
+            "line": 171,
             "itemtype": "property",
             "name": "multiplesInline",
-            "type": "{Boolean, String}",
+            "type": "{Boolean|String}",
             "default": "false",
             "class": "Firebrick.ui.components.fields.Base",
             "module": "Firebrick.ui.components",
@@ -2157,7 +2127,7 @@
         },
         {
             "file": "src\\components\\fields\\Base.js",
-            "line": 180,
+            "line": 177,
             "itemtype": "property",
             "name": "inplaceEdit",
             "type": "{Boolean}",
@@ -2168,7 +2138,7 @@
         },
         {
             "file": "src\\components\\fields\\Base.js",
-            "line": 186,
+            "line": 183,
             "itemtype": "property",
             "name": "showInplaceTitle",
             "type": "{Boolean}",
@@ -2179,22 +2149,7 @@
         },
         {
             "file": "src\\components\\fields\\Base.js",
-            "line": 192,
-            "class": "Firebrick.ui.components.fields.Base",
-            "module": "Firebrick.ui.components",
-            "namespace": "Firebrick.ui.components.fields"
-        },
-        {
-            "file": "src\\components\\fields\\Base.js",
-            "line": 193,
-            "description": "Binding Functions",
-            "class": "Firebrick.ui.components.fields.Base",
-            "module": "Firebrick.ui.components",
-            "namespace": "Firebrick.ui.components.fields"
-        },
-        {
-            "file": "src\\components\\fields\\Base.js",
-            "line": 196,
+            "line": 189,
             "itemtype": "method",
             "name": "containerBindings",
             "return": {
@@ -2207,7 +2162,7 @@
         },
         {
             "file": "src\\components\\fields\\Base.js",
-            "line": 216,
+            "line": 209,
             "itemtype": "method",
             "name": "helpBlockBindings",
             "return": {
@@ -2220,7 +2175,7 @@
         },
         {
             "file": "src\\components\\fields\\Base.js",
-            "line": 225,
+            "line": 218,
             "itemtype": "method",
             "name": "feedbackBindings",
             "return": {
@@ -2233,7 +2188,7 @@
         },
         {
             "file": "src\\components\\fields\\Base.js",
-            "line": 252,
+            "line": 245,
             "itemtype": "method",
             "name": "bindings",
             "return": {
@@ -2246,7 +2201,7 @@
         },
         {
             "file": "src\\components\\fields\\Base.js",
-            "line": 283,
+            "line": 276,
             "itemtype": "method",
             "name": "inputAddonBindings",
             "return": {
@@ -2259,7 +2214,7 @@
         },
         {
             "file": "src\\components\\fields\\Base.js",
-            "line": 298,
+            "line": 291,
             "itemtype": "method",
             "name": "labelBindings",
             "return": {
@@ -2272,7 +2227,7 @@
         },
         {
             "file": "src\\components\\fields\\Base.js",
-            "line": 315,
+            "line": 308,
             "itemtype": "method",
             "name": "inputContainerBindings",
             "return": {
@@ -2450,7 +2405,7 @@
             "description": "radio options",
             "itemtype": "property",
             "name": "options",
-            "type": "{Boolean, String}",
+            "type": "{Boolean|String}",
             "default": "false",
             "class": "Firebrick.ui.components.fields.Radio",
             "module": "Firebrick.ui.components",
@@ -2544,7 +2499,7 @@
             "line": 27,
             "itemtype": "property",
             "name": "data",
-            "type": "{String, Function}",
+            "type": "{String|Function}",
             "default": "false",
             "class": "Firebrick.ui.components.fields.SelectBox",
             "module": "Firebrick.ui.components",
@@ -2687,7 +2642,7 @@
             "description": "{\n\tcols:[{}]\n\trows:[{}]\n}",
             "itemtype": "property",
             "name": "data",
-            "type": "{Object, String}",
+            "type": "{Object|String}",
             "default": "false",
             "class": "Firebrick.ui.components.table.Table",
             "module": "Firebrick.ui.components",
@@ -2698,7 +2653,7 @@
             "line": 37,
             "itemtype": "property",
             "name": "tableStriped",
-            "type": "{Boolean, String}",
+            "type": "{Boolean|String}",
             "default": "true",
             "class": "Firebrick.ui.components.table.Table",
             "module": "Firebrick.ui.components",
@@ -2709,7 +2664,7 @@
             "line": 43,
             "itemtype": "property",
             "name": "tableHover",
-            "type": "{Boolean, String}",
+            "type": "{Boolean|String}",
             "default": "false",
             "class": "Firebrick.ui.components.table.Table",
             "module": "Firebrick.ui.components",
@@ -2720,7 +2675,7 @@
             "line": 49,
             "itemtype": "property",
             "name": "tableCondensed",
-            "type": "{Boolean, String}",
+            "type": "{Boolean|String}",
             "default": "false",
             "class": "Firebrick.ui.components.table.Table",
             "module": "Firebrick.ui.components",
@@ -2731,7 +2686,7 @@
             "line": 55,
             "itemtype": "property",
             "name": "tableBordered",
-            "type": "{Boolean, String}",
+            "type": "{Boolean|String}",
             "default": "false",
             "class": "Firebrick.ui.components.table.Table",
             "module": "Firebrick.ui.components",
@@ -2789,7 +2744,7 @@
             "description": "return js object to pass to the DataTable function for configuring the table on componentReady",
             "itemtype": "property",
             "name": "dataTableConfig",
-            "type": "{function}",
+            "type": "{Function}",
             "return": {
                 "description": "",
                 "type": "Object"
@@ -2817,7 +2772,7 @@
             "description": "works with parameter treetable",
             "itemtype": "property",
             "name": "showCaption",
-            "type": "{Boolean, String}",
+            "type": "{Boolean|String}",
             "default": "true",
             "class": "Firebrick.ui.components.table.Table",
             "module": "Firebrick.ui.components",
@@ -2853,7 +2808,7 @@
             "description": "return js object to pass to the Treetable function for configuring the table on componentReady",
             "itemtype": "property",
             "name": "treeTableConfig",
-            "type": "{function}",
+            "type": "{Function}",
             "return": {
                 "description": "",
                 "type": "Object"
@@ -2941,15 +2896,7 @@
         },
         {
             "file": "src\\components\\table\\Table.js",
-            "line": 214,
-            "description": "loop bindings",
-            "class": "Firebrick.ui.components.table.Table",
-            "module": "Firebrick.ui.components",
-            "namespace": "Firebrick.ui.components.table"
-        },
-        {
-            "file": "src\\components\\table\\Table.js",
-            "line": 217,
+            "line": 213,
             "itemtype": "method",
             "name": "theadTRBindings",
             "return": {
@@ -2962,7 +2909,7 @@
         },
         {
             "file": "src\\components\\table\\Table.js",
-            "line": 226,
+            "line": 222,
             "itemtype": "method",
             "name": "theadTRTDBindings",
             "return": {
@@ -2975,7 +2922,7 @@
         },
         {
             "file": "src\\components\\table\\Table.js",
-            "line": 235,
+            "line": 231,
             "itemtype": "method",
             "name": "tbodyBindings",
             "return": {
@@ -2988,7 +2935,7 @@
         },
         {
             "file": "src\\components\\table\\Table.js",
-            "line": 244,
+            "line": 240,
             "itemtype": "method",
             "name": "tbodyTRBindings",
             "return": {
@@ -3001,7 +2948,7 @@
         },
         {
             "file": "src\\components\\table\\Table.js",
-            "line": 257,
+            "line": 253,
             "itemtype": "method",
             "name": "tbodyTRTDBindings",
             "return": {
@@ -3014,7 +2961,7 @@
         },
         {
             "file": "src\\components\\table\\Table.js",
-            "line": 266,
+            "line": 262,
             "itemtype": "method",
             "name": "captionBindings",
             "return": {
@@ -3027,7 +2974,7 @@
         },
         {
             "file": "src\\components\\table\\Table.js",
-            "line": 276,
+            "line": 272,
             "itemtype": "method",
             "name": "expandBindings",
             "return": {
@@ -3040,7 +2987,7 @@
         },
         {
             "file": "src\\components\\table\\Table.js",
-            "line": 290,
+            "line": 286,
             "itemtype": "method",
             "name": "collapseBindings",
             "return": {
@@ -3066,7 +3013,7 @@
             "line": 16,
             "itemtype": "property",
             "name": "data",
-            "type": "{Object, String}",
+            "type": "{Object|String}",
             "default": "\"''\"",
             "class": "Firebrick.ui.components.table.TreeTable",
             "module": "Firebrick.ui.components",
@@ -3225,272 +3172,7 @@
             "class": "Firebrick.ui.utils",
             "module": "Firebrick.ui",
             "namespace": "Firebrick.ui"
-        },
-        {
-            "file": "src\\firebrick.ui.js",
-            "line": 197,
-            "description": "use withProperties to pass extra properties down to the descendants\nhttp://knockoutjs.com/documentation/custom-bindings-controlling-descendant-bindings.html",
-            "class": "Firebrick.ui.utils",
-            "module": "Firebrick.ui",
-            "namespace": "Firebrick.ui"
         }
     ],
-    "warnings": [
-        {
-            "message": "replacing incorrect tag: returns with return",
-            "line": " src\\components\\button\\Button.js:30"
-        },
-        {
-            "message": "replacing incorrect tag: returns with return",
-            "line": " src\\components\\button\\ToggleButton.js:62"
-        },
-        {
-            "message": "replacing incorrect tag: returns with return",
-            "line": " src\\components\\button\\ToggleButton.js:78"
-        },
-        {
-            "message": "replacing incorrect tag: returns with return",
-            "line": " src\\components\\button\\ToggleButton.js:90"
-        },
-        {
-            "message": "replacing incorrect tag: returns with return",
-            "line": " src\\components\\button\\ToggleButton.js:107"
-        },
-        {
-            "message": "replacing incorrect tag: returns with return",
-            "line": " src\\components\\common\\Base.js:80"
-        },
-        {
-            "message": "replacing incorrect tag: returns with return",
-            "line": " src\\components\\common\\Base.js:105"
-        },
-        {
-            "message": "replacing incorrect tag: returns with return",
-            "line": " src\\components\\common\\Base.js:113"
-        },
-        {
-            "message": "replacing incorrect tag: returns with return",
-            "line": " src\\components\\common\\Base.js:121"
-        },
-        {
-            "message": "replacing incorrect tag: returns with return",
-            "line": " src\\components\\common\\Base.js:140"
-        },
-        {
-            "message": "replacing incorrect tag: returns with return",
-            "line": " src\\components\\common\\Base.js:149"
-        },
-        {
-            "message": "replacing incorrect tag: returns with return",
-            "line": " src\\components\\common\\MultiplesBase.js:12"
-        },
-        {
-            "message": "replacing incorrect tag: returns with return",
-            "line": " src\\components\\containers\\Base.js:30"
-        },
-        {
-            "message": "param name missing: {Object}",
-            "line": " src\\components\\containers\\Base.js:42"
-        },
-        {
-            "message": "replacing incorrect tag: returns with return",
-            "line": " src\\components\\containers\\Grid.js:27"
-        },
-        {
-            "message": "replacing incorrect tag: returns with return",
-            "line": " src\\components\\containers\\Grid.js:42"
-        },
-        {
-            "message": "replacing incorrect tag: returns with return",
-            "line": " src\\components\\containers\\Grid.js:54"
-        },
-        {
-            "message": "replacing incorrect tag: returns with return",
-            "line": " src\\components\\containers\\GridColumn.js:34"
-        },
-        {
-            "message": "replacing incorrect tag: returns with return",
-            "line": " src\\components\\containers\\GridColumn.js:51"
-        },
-        {
-            "message": "replacing incorrect tag: returns with return",
-            "line": " src\\components\\display\\Header.js:53"
-        },
-        {
-            "message": "replacing incorrect tag: returns with return",
-            "line": " src\\components\\display\\Header.js:62"
-        },
-        {
-            "message": "replacing incorrect tag: returns with return",
-            "line": " src\\components\\display\\Header.js:78"
-        },
-        {
-            "message": "replacing incorrect tag: returns with return",
-            "line": " src\\components\\display\\Text.js:72"
-        },
-        {
-            "message": "replacing incorrect tag: returns with return",
-            "line": " src\\components\\display\\Text.js:97"
-        },
-        {
-            "message": "replacing incorrect tag: returns with return",
-            "line": " src\\components\\display\\Text.js:108"
-        },
-        {
-            "message": "replacing incorrect tag: returns with return",
-            "line": " src\\components\\fields\\Base.js:196"
-        },
-        {
-            "message": "replacing incorrect tag: returns with return",
-            "line": " src\\components\\fields\\Base.js:216"
-        },
-        {
-            "message": "replacing incorrect tag: returns with return",
-            "line": " src\\components\\fields\\Base.js:225"
-        },
-        {
-            "message": "replacing incorrect tag: returns with return",
-            "line": " src\\components\\fields\\Base.js:252"
-        },
-        {
-            "message": "replacing incorrect tag: returns with return",
-            "line": " src\\components\\fields\\Base.js:283"
-        },
-        {
-            "message": "replacing incorrect tag: returns with return",
-            "line": " src\\components\\fields\\Base.js:298"
-        },
-        {
-            "message": "replacing incorrect tag: returns with return",
-            "line": " src\\components\\fields\\Base.js:315"
-        },
-        {
-            "message": "replacing incorrect tag: returns with return",
-            "line": " src\\components\\fields\\Checkbox.js:28"
-        },
-        {
-            "message": "replacing incorrect tag: returns with return",
-            "line": " src\\components\\fields\\Radio.js:46"
-        },
-        {
-            "message": "replacing incorrect tag: returns with return",
-            "line": " src\\components\\fields\\Radio.js:59"
-        },
-        {
-            "message": "replacing incorrect tag: returns with return",
-            "line": " src\\components\\fields\\Radio.js:71"
-        },
-        {
-            "message": "replacing incorrect tag: returns with return",
-            "line": " src\\components\\fields\\Radio.js:83"
-        },
-        {
-            "message": "replacing incorrect tag: returns with return",
-            "line": " src\\components\\fields\\SelectBox.js:57"
-        },
-        {
-            "message": "replacing incorrect tag: returns with return",
-            "line": " src\\components\\table\\Table.js:125"
-        },
-        {
-            "message": "replacing incorrect tag: returns with return",
-            "line": " src\\components\\table\\Table.js:154"
-        },
-        {
-            "message": "replacing incorrect tag: returns with return",
-            "line": " src\\components\\table\\Table.js:166"
-        },
-        {
-            "message": "replacing incorrect tag: returns with return",
-            "line": " src\\components\\table\\Table.js:178"
-        },
-        {
-            "message": "replacing incorrect tag: returns with return",
-            "line": " src\\components\\table\\Table.js:195"
-        },
-        {
-            "message": "replacing incorrect tag: returns with return",
-            "line": " src\\components\\table\\Table.js:204"
-        },
-        {
-            "message": "replacing incorrect tag: returns with return",
-            "line": " src\\components\\table\\Table.js:217"
-        },
-        {
-            "message": "replacing incorrect tag: returns with return",
-            "line": " src\\components\\table\\Table.js:226"
-        },
-        {
-            "message": "replacing incorrect tag: returns with return",
-            "line": " src\\components\\table\\Table.js:235"
-        },
-        {
-            "message": "replacing incorrect tag: returns with return",
-            "line": " src\\components\\table\\Table.js:244"
-        },
-        {
-            "message": "replacing incorrect tag: returns with return",
-            "line": " src\\components\\table\\Table.js:257"
-        },
-        {
-            "message": "replacing incorrect tag: returns with return",
-            "line": " src\\components\\table\\Table.js:266"
-        },
-        {
-            "message": "replacing incorrect tag: returns with return",
-            "line": " src\\components\\table\\Table.js:276"
-        },
-        {
-            "message": "replacing incorrect tag: returns with return",
-            "line": " src\\components\\table\\Table.js:290"
-        },
-        {
-            "message": "replacing incorrect tag: returns with return",
-            "line": " src\\firebrick.ui.js:54"
-        },
-        {
-            "message": "replacing incorrect tag: returns with return",
-            "line": " src\\firebrick.ui.js:87"
-        },
-        {
-            "message": "replacing incorrect tag: returns with return",
-            "line": " src\\firebrick.ui.js:144"
-        },
-        {
-            "message": "replacing incorrect tag: returns with return",
-            "line": " src\\firebrick.ui.js:162"
-        },
-        {
-            "message": "Missing item type",
-            "line": " src\\components\\button\\Button.js:29"
-        },
-        {
-            "message": "Missing item type\nBindings",
-            "line": " src\\components\\button\\ToggleButton.js:59"
-        },
-        {
-            "message": "Missing item type",
-            "line": " src\\components\\fields\\Base.js:120"
-        },
-        {
-            "message": "Missing item type",
-            "line": " src\\components\\fields\\Base.js:146"
-        },
-        {
-            "message": "Missing item type",
-            "line": " src\\components\\fields\\Base.js:192"
-        },
-        {
-            "message": "Missing item type\nBinding Functions",
-            "line": " src\\components\\fields\\Base.js:193"
-        },
-        {
-            "message": "Missing item type\nloop bindings",
-            "line": " src\\components\\table\\Table.js:214"
-        },
-        {
-            "message": "Missing item type\nuse withProperties to pass extra properties down to the descendants\nhttp://knockoutjs.com/documentation/custom-bindings-controlling-descendant-bindings.html",
-            "line": " src\\firebrick.ui.js:197"
-        }
-    ]
+    "warnings": []
 }

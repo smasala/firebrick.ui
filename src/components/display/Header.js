@@ -52,7 +52,7 @@ define(["text!./Header.html", "../common/Base"], function(tpl){
 		labelCSS: "default",
 		/**
 		 * @method bindings
-		 * @returns Object
+		 * @return Object
 		 */
 		bindings: function(){
 			return {
@@ -61,7 +61,7 @@ define(["text!./Header.html", "../common/Base"], function(tpl){
 		},
 		/**
 		 * @method secondaryTextBindings
-		 * @returns Object
+		 * @return Object
 		 */
 		secondaryTextBindings: function(){
 			var me = this;
@@ -77,7 +77,7 @@ define(["text!./Header.html", "../common/Base"], function(tpl){
 		},
 		/**
 		 * @method labelBindings
-		 * @returns Object
+		 * @return Object
 		 */
 		labelBindings: function(){
 			var me = this, 

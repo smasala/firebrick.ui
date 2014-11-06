@@ -37,7 +37,7 @@ define(["text!./GridColumn.html", "./Base"], function(tpl){
 		 * the number of columns are divided by 12 (BS3 grid)
 		 * @method _getColumnWidth
 		 * @private
-		 * @returns {Int}
+		 * @return {Int}
 		 */
 		_getColumnWidth:function(){
 			var me = this,
@@ -51,7 +51,7 @@ define(["text!./GridColumn.html", "./Base"], function(tpl){
 		/**
 		 * Bindings
 		 * @method bindings
-		 * @returns {Object}
+		 * @return {Object}
 		 */
 		bindings: function(){
 			var me = this,

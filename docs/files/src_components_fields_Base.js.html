@@ -225,9 +225,8 @@ define([&quot;text!./Base.html&quot;, &quot;../common/Base&quot;, &quot;x-editab
 		 */
 		disabled:false,
 		/**
-		 * string (sm || lg)
 		 * @property inputSize
-		 * @type {Boolean, String}
+		 * @type {Boolean|String} string (sm || lg)
 		 * @default false
 		 */
 		inputSize:false,
@@ -240,7 +239,7 @@ define([&quot;text!./Base.html&quot;, &quot;../common/Base&quot;, &quot;x-editab
 		/**
 		 * help text
 		 * @property helpText
-		 * @type {Boolean, String}
+		 * @type {Boolean|String}
 		 * @default false
 		 */
 		helpText:false,
@@ -253,11 +252,10 @@ define([&quot;text!./Base.html&quot;, &quot;../common/Base&quot;, &quot;x-editab
 		helpBlockClass:&quot;help-block&quot;,
 		/**
 		 * @property placeholder
-		 * @type {Boolean, String}
+		 * @type {Boolean|String}
 		 * @default false
 		 */
 		placeholder:false,
-		/****************/
 		/**
 		 * @property showStateIcon
 		 * @type {Boolean}
@@ -273,7 +271,7 @@ define([&quot;text!./Base.html&quot;, &quot;../common/Base&quot;, &quot;x-editab
 		/**
 		 * input addon
 		 * @property inputAddon
-		 * @type {Boolean, String}
+		 * @type {Boolean|String}
 		 * @default false
 		 */
 		inputAddon:false,
@@ -283,7 +281,6 @@ define([&quot;text!./Base.html&quot;, &quot;../common/Base&quot;, &quot;x-editab
 		 * @default &quot;&#x27;input-group-addon&#x27;&quot;
 		 */
 		inputAddonClass:&quot;&#x27;input-group-addon&#x27;&quot;,
-		/******************/
 		/**
 		 * @property horizontal
 		 * @type {Boolean}
@@ -293,27 +290,27 @@ define([&quot;text!./Base.html&quot;, &quot;../common/Base&quot;, &quot;x-editab
 		/**
 		 * Feedback css bindings
 		 * @property feedback_success
-		 * @type {Boolean, String}
+		 * @type {Boolean|String}
 		 * @default false
 		 */
 		feedback_success:false,
 		/**
 		 * Feedback css bindings
 		 * @property feedback_warning
-		 * @type {Boolean, String}
+		 * @type {Boolean|String}
 		 * @default false
 		 */
 		feedback_warning:false,
 		/**
 		 * Feedback css bindings
 		 * @property feedback_error
-		 * @type {Boolean, String}
+		 * @type {Boolean|String}
 		 * @default false
 		 */
 		feedback_error: false,
 		/**
 		 * @property multiplesInline
-		 * @type {Boolean, String}
+		 * @type {Boolean|String}
 		 * @default false
 		 */
 		multiplesInline:false,
@@ -329,13 +326,9 @@ define([&quot;text!./Base.html&quot;, &quot;../common/Base&quot;, &quot;x-editab
 		 * @default true
 		 */
 		showInplaceTitle:true,
-		/************************/
-		/**
-		 * Binding Functions
-		 */
 		/**
 		 * @method containerBindings
-		 * @returns {Object}
+		 * @return {Object}
 		 */
 		containerBindings:function(){
 			var me = this,
@@ -355,7 +348,7 @@ define([&quot;text!./Base.html&quot;, &quot;../common/Base&quot;, &quot;x-editab
 		},
 		/**
 		 * @method helpBlockBindings
-		 * @returns {Object}
+		 * @return {Object}
 		 */
 		helpBlockBindings: function(){
 			return {
@@ -364,7 +357,7 @@ define([&quot;text!./Base.html&quot;, &quot;../common/Base&quot;, &quot;x-editab
 		},
 		/**
 		 * @method feedbackBindings
-		 * @returns {Object}
+		 * @return {Object}
 		 */
 		feedbackBindings:function(){
 			var me = this,
@@ -391,7 +384,7 @@ define([&quot;text!./Base.html&quot;, &quot;../common/Base&quot;, &quot;x-editab
 		},
 		/**
 		 * @method bindings
-		 * @returns {Object}
+		 * @return {Object}
 		 */
 		bindings:function(){
 			var me = this,
@@ -422,7 +415,7 @@ define([&quot;text!./Base.html&quot;, &quot;../common/Base&quot;, &quot;x-editab
 		},
 		/**
 		 * @method inputAddonBindings
-		 * @returns {Object}
+		 * @return {Object}
 		 */
 		inputAddonBindings: function(){
 			var me = this,
@@ -437,7 +430,7 @@ define([&quot;text!./Base.html&quot;, &quot;../common/Base&quot;, &quot;x-editab
 		},
 		/**
 		 * @method labelBindings
-		 * @returns {Object}
+		 * @return {Object}
 		 */
 		labelBindings: function(){
 			var me = this,
@@ -454,7 +447,7 @@ define([&quot;text!./Base.html&quot;, &quot;../common/Base&quot;, &quot;x-editab
 		},
 		/**
 		 * @method inputContainerBindings
-		 * @returns {Object}
+		 * @return {Object}
 		 */
 		inputContainerBindings: function(){
 			var me = this,

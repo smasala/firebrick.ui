@@ -116,7 +116,6 @@ define(["text!./Base.html", "../common/Base", "x-editable", "knockout-x-editable
 		 * @default false
 		 */
 		placeholder:false,
-		/****************/
 		/**
 		 * @property showStateIcon
 		 * @type {Boolean}
@@ -142,7 +141,6 @@ define(["text!./Base.html", "../common/Base", "x-editable", "knockout-x-editable
 		 * @default "'input-group-addon'"
 		 */
 		inputAddonClass:"'input-group-addon'",
-		/******************/
 		/**
 		 * @property horizontal
 		 * @type {Boolean}
@@ -188,13 +186,9 @@ define(["text!./Base.html", "../common/Base", "x-editable", "knockout-x-editable
 		 * @default true
 		 */
 		showInplaceTitle:true,
-		/************************/
-		/**
-		 * Binding Functions
-		 */
 		/**
 		 * @method containerBindings
-		 * @returns {Object}
+		 * @return {Object}
 		 */
 		containerBindings:function(){
 			var me = this,
@@ -214,7 +208,7 @@ define(["text!./Base.html", "../common/Base", "x-editable", "knockout-x-editable
 		},
 		/**
 		 * @method helpBlockBindings
-		 * @returns {Object}
+		 * @return {Object}
 		 */
 		helpBlockBindings: function(){
 			return {
@@ -223,7 +217,7 @@ define(["text!./Base.html", "../common/Base", "x-editable", "knockout-x-editable
 		},
 		/**
 		 * @method feedbackBindings
-		 * @returns {Object}
+		 * @return {Object}
 		 */
 		feedbackBindings:function(){
 			var me = this,
@@ -250,7 +244,7 @@ define(["text!./Base.html", "../common/Base", "x-editable", "knockout-x-editable
 		},
 		/**
 		 * @method bindings
-		 * @returns {Object}
+		 * @return {Object}
 		 */
 		bindings:function(){
 			var me = this,
@@ -281,7 +275,7 @@ define(["text!./Base.html", "../common/Base", "x-editable", "knockout-x-editable
 		},
 		/**
 		 * @method inputAddonBindings
-		 * @returns {Object}
+		 * @return {Object}
 		 */
 		inputAddonBindings: function(){
 			var me = this,
@@ -296,7 +290,7 @@ define(["text!./Base.html", "../common/Base", "x-editable", "knockout-x-editable
 		},
 		/**
 		 * @method labelBindings
-		 * @returns {Object}
+		 * @return {Object}
 		 */
 		labelBindings: function(){
 			var me = this,
@@ -313,7 +307,7 @@ define(["text!./Base.html", "../common/Base", "x-editable", "knockout-x-editable
 		},
 		/**
 		 * @method inputContainerBindings
-		 * @returns {Object}
+		 * @return {Object}
 		 */
 		inputContainerBindings: function(){
 			var me = this,

@@ -167,7 +167,7 @@ define([&quot;text!./GridColumn.html&quot;, &quot;./Base&quot;], function(tpl){
 		/**
 		 * auto will attempt to provide the column width by dividing the number of items in the parent Grid by 12 - decimals will be rounded down
 		 * @property columnWidth
-		 * @type {Int, String} number 1 to 12 or &quot;auto&quot;
+		 * @type {Int|String} number 1 to 12 or &quot;auto&quot;
 		 * @default &quot;auto&quot;
 		 */
 		columnWidth:&quot;auto&quot;,
@@ -177,7 +177,7 @@ define([&quot;text!./GridColumn.html&quot;, &quot;./Base&quot;], function(tpl){
 		 * the number of columns are divided by 12 (BS3 grid)
 		 * @method _getColumnWidth
 		 * @private
-		 * @returns {Int}
+		 * @return {Int}
 		 */
 		_getColumnWidth:function(){
 			var me = this,
@@ -191,7 +191,7 @@ define([&quot;text!./GridColumn.html&quot;, &quot;./Base&quot;], function(tpl){
 		/**
 		 * Bindings
 		 * @method bindings
-		 * @returns {Object}
+		 * @return {Object}
 		 */
 		bindings: function(){
 			var me = this,

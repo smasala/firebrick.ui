@@ -170,31 +170,31 @@ define([&quot;jquery&quot;, &quot;text!./Table.html&quot;, &quot;../common/Base&
 		 * 	rows:[{}]
 		 * }
 		 * @property data
-		 * @type {Object, String}
+		 * @type {Object|String}
 		 * @default false
 		 */
 		data:false,
 		/**
 		 * @property tableStriped
-		 * @type {Boolean, String}
+		 * @type {Boolean|String}
 		 * @default true
 		 */
 		tableStriped:true,
 		/**
 		 * @property tableHover
-		 * @type {Boolean, String}
+		 * @type {Boolean|String}
 		 * @default false
 		 */
 		tableHover:false,
 		/**
 		 * @property tableCondensed
-		 * @type {Boolean, String}
+		 * @type {Boolean|String}
 		 * @default false
 		 */
 		tableCondensed:false,
 		/**
 		 * @property tableBordered
-		 * @type {Boolean, String}
+		 * @type {Boolean|String}
 		 * @default false
 		 */
 		tableBordered:false,
@@ -227,7 +227,7 @@ define([&quot;jquery&quot;, &quot;text!./Table.html&quot;, &quot;../common/Base&
 		/**
 		 * return js object to pass to the DataTable function for configuring the table on componentReady
 		 * @property dataTableConfig
-		 * @type {function}
+		 * @type {Function}
 		 * @return {object}
 		 * @default {}
 		 */
@@ -244,7 +244,7 @@ define([&quot;jquery&quot;, &quot;text!./Table.html&quot;, &quot;../common/Base&
 		/**
 		 * works with parameter treetable
 		 * @property showCaption
-		 * @type {Boolean, String}
+		 * @type {Boolean|String}
 		 * @default true
 		 */
 		showCaption:true,
@@ -265,8 +265,8 @@ define([&quot;jquery&quot;, &quot;text!./Table.html&quot;, &quot;../common/Base&
 		/**
 		 * return js object to pass to the Treetable function for configuring the table on componentReady
 		 * @property treeTableConfig
-		 * @type {function}
-		 * @returns {Object}
+		 * @type {Function}
+		 * @return {Object}
 		 * @default {}
 		 */
 		treeTableConfig:function(){
@@ -293,7 +293,7 @@ define([&quot;jquery&quot;, &quot;text!./Table.html&quot;, &quot;../common/Base&
 		},
 		/**
 		 * @method containerBindings
-		 * @returns {Object}
+		 * @return {Object}
 		 */
 		containerBindings: function(){
 			var me = this;
@@ -306,7 +306,7 @@ define([&quot;jquery&quot;, &quot;text!./Table.html&quot;, &quot;../common/Base&
 		/**
 		 * @method _getData
 		 * @private
-		 * @returns {Object}
+		 * @return {Object}
 		 */
 		_getData: function(){
 			var me = this;
@@ -317,7 +317,7 @@ define([&quot;jquery&quot;, &quot;text!./Table.html&quot;, &quot;../common/Base&
 		},
 		/**
 		 * @method bindings
-		 * @returns {Object}
+		 * @return {Object}
 		 */
 		bindings: function(){
 			var me = this;
@@ -334,7 +334,7 @@ define([&quot;jquery&quot;, &quot;text!./Table.html&quot;, &quot;../common/Base&
 		},
 		/**
 		 * @method theadBindings
-		 * @returns {Object}
+		 * @return {Object}
 		 */
 		theadBindings: function(){
 			return {
@@ -343,20 +343,16 @@ define([&quot;jquery&quot;, &quot;text!./Table.html&quot;, &quot;../common/Base&
 		},
 		/**
 		 * @method tbodyBindings
-		 * @returns {Object}
+		 * @return {Object}
 		 */
 		tbodyBindings:function(){
 			return {
 				&quot;if&quot;: &quot;rows&quot;
 			};
 		},
-		
-		/**
-		 * loop bindings
-		 */
 		/**
 		 * @method theadTRBindings
-		 * @returns {Object}
+		 * @return {Object}
 		 */
 		theadTRBindings:function(){
 			return {
@@ -365,7 +361,7 @@ define([&quot;jquery&quot;, &quot;text!./Table.html&quot;, &quot;../common/Base&
 		},
 		/**
 		 * @method theadTRTDBindings
-		 * @returns {Object}
+		 * @return {Object}
 		 */
 		theadTRTDBindings:function(){
 			return {
@@ -374,7 +370,7 @@ define([&quot;jquery&quot;, &quot;text!./Table.html&quot;, &quot;../common/Base&
 		},
 		/**
 		 * @method tbodyBindings
-		 * @returns {Object}
+		 * @return {Object}
 		 */
 		tbodyBindings:function(){
 			return {
@@ -383,7 +379,7 @@ define([&quot;jquery&quot;, &quot;text!./Table.html&quot;, &quot;../common/Base&
 		},
 		/**
 		 * @method tbodyTRBindings
-		 * @returns {Object}
+		 * @return {Object}
 		 */
 		tbodyTRBindings:function(){
 			return {
@@ -396,7 +392,7 @@ define([&quot;jquery&quot;, &quot;text!./Table.html&quot;, &quot;../common/Base&
 		},
 		/**
 		 * @method tbodyTRTDBindings
-		 * @returns {Object}
+		 * @return {Object}
 		 */
 		tbodyTRTDBindings:function(){
 			return {
@@ -405,7 +401,7 @@ define([&quot;jquery&quot;, &quot;text!./Table.html&quot;, &quot;../common/Base&
 		},
 		/**
 		 * @method captionBindings
-		 * @returns {Object}
+		 * @return {Object}
 		 */
 		captionBindings:function(){
 			var me = this;
@@ -415,7 +411,7 @@ define([&quot;jquery&quot;, &quot;text!./Table.html&quot;, &quot;../common/Base&
 		},
 		/**
 		 * @method expandBindings
-		 * @returns {Object}
+		 * @return {Object}
 		 */
 		expandBindings:function(){
 			var me = this;
@@ -429,7 +425,7 @@ define([&quot;jquery&quot;, &quot;text!./Table.html&quot;, &quot;../common/Base&
 		},
 		/**
 		 * @method collapseBindings
-		 * @returns {Object}
+		 * @return {Object}
 		 */
 		collapseBindings:function(){
 			var me = this;

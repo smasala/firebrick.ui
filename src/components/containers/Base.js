@@ -26,11 +26,10 @@ define(["jquery", "../common/Base"], function($){
 			});
 			me.callParent();
 		},
-		
 		/**
 		 * inject sub items
 		 * @method getItems
-		 * @returns {String} html
+		 * @return {String} html
 		 */
 		getItems: function(){
 			var me = this,
@@ -38,12 +37,11 @@ define(["jquery", "../common/Base"], function($){
 			me.items = r.items;
 			return r.html;
 		},
-		
 		/**
 		 * use getItems
 		 * @private
 		 * @method _getItems
-		 * @param {Object}
+		 * @param {Object} items
 		 * @return {String}
 		 */
 		_getItems: function(items){

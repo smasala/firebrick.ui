@@ -11,7 +11,7 @@ define(["../fields/Input"], function(subTpl){
 		extend:"Firebrick.ui.fields.Input",
 		/**
 		 * @method fieldBindings
-		 * @returns {Object}
+		 * @return {Object}
 		 */
 		fieldBindings:function(){
 			var me = this;

@@ -45,7 +45,7 @@ define(["text!./Radio.html", "../common/MultiplesBase", "./plugins/Radio"], func
 		options:false,
 		/**
 		 * @method optionLabelBindings
-		 * @returns {Object}
+		 * @return {Object}
 		 */
 		optionLabelBindings:function(){
 			var me = this;
@@ -58,7 +58,7 @@ define(["text!./Radio.html", "../common/MultiplesBase", "./plugins/Radio"], func
 		},
 		/**
 		 * @method optionLabelContainerBindings
-		 * @returns {Object}
+		 * @return {Object}
 		 */
 		optionLabelContainerBindings:function(){
 			var me = this;
@@ -70,7 +70,7 @@ define(["text!./Radio.html", "../common/MultiplesBase", "./plugins/Radio"], func
 		},
 		/**
 		 * @method inputContainerBindings
-		 * @returns {Object}
+		 * @return {Object}
 		 */
 		inputContainerBindings:function(){
 			var me = this,
@@ -82,7 +82,7 @@ define(["text!./Radio.html", "../common/MultiplesBase", "./plugins/Radio"], func
 		},
 		/**
 		 * @method bindings
-		 * @returns {Object}
+		 * @return {Object}
 		 */
 		bindings:function(){
 			var me = this,

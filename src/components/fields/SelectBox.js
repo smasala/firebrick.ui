@@ -56,7 +56,7 @@ define(["text!./SelectBox.html", "jquery", "./Input"], function(subTpl, $){
 		optionsText:"'text'",
 		/**
 		 * @method bindings
-		 * @returns {Object}
+		 * @return {Object}
 		 */
 		bindings:function(){
 			var me = this,

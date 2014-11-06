@@ -161,31 +161,31 @@ define([&quot;text!./ToggleButton.html&quot;, &quot;../common/MultiplesBase&quot
 		subTpl:subTpl,
 		/**
 		 * @property btnGroupClass
-		 * @type boolean or string
+		 * @type {Boolean|String}
 		 * @default true
 		 */
 		btnGroupClass:true,
 		/**
 		 * @property btnClass
-		 * @type {Boolean, String}
+		 * @type {Boolean|String}
 		 * @default true
 		 */
 		btnClass: true,
 		/**
 		 * @property btnPrimaryClass
-		 * @type {Boolean, String}
+		 * @type {Boolean|String}
 		 * @default true
 		 */
 		btnPrimaryClass: true,
 		/**
 		 * @property defaultActive
-		 * @type {Boolean, String}
+		 * @type {Boolean|String}
 		 * @default false
 		 */
 		defaultActive: false,
 		/**
 		 * @property dataToggle
-		 * @type boolean or string
+		 * @type {Boolean|String}
 		 * @default &quot;&#x27;buttons&#x27;&quot;
 		 */
 		dataToggle: &quot;&#x27;buttons&#x27;&quot;,
@@ -197,11 +197,8 @@ define([&quot;text!./ToggleButton.html&quot;, &quot;../common/MultiplesBase&quot
 		 */
 		options:&quot;&#x27;&#x27;&quot;,
 		/**
-		 * Bindings
-		 */
-		/**
 		 * @method btnGroupBindings
-		 * @returns {Object}
+		 * @return {Object}
 		 */
 		btnGroupBindings: function(){
 			var me = this;
@@ -217,7 +214,7 @@ define([&quot;text!./ToggleButton.html&quot;, &quot;../common/MultiplesBase&quot
 		},
 		/**
 		 * @method toggleInputBindings
-		 * @returns {Object}
+		 * @return {Object}
 		 */
 		toggleInputBindings: function(){
 			var me = this;
@@ -229,7 +226,7 @@ define([&quot;text!./ToggleButton.html&quot;, &quot;../common/MultiplesBase&quot
 		},
 		/**
 		 * @method toggleLabelBindings
-		 * @returns {Object}
+		 * @return {Object}
 		 */
 		toggleLabelBindings: function(){
 			var me = this;
@@ -246,7 +243,7 @@ define([&quot;text!./ToggleButton.html&quot;, &quot;../common/MultiplesBase&quot
 		},
 		/**
 		 * @method toggleLabelTextBindings
-		 * @returns {Object}
+		 * @return {Object}
 		 */
 		toggleLabelTextBindings: function(){
 			return {

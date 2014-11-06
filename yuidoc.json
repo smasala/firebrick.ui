@@ -1,7 +1,7 @@
 {
     "name": "Firebrick UI API",
-    "description": "Firebrick UI API: a component library for Firebrick MVC, jQuery and Bootstrap",
-    "version": "0.2.0",
+    "description": "Firebrick UI API: a component library for Firebrick MVC, Knockout JS, jQuery and Bootstrap",
+    "version": "0.2.1",
     "url": "https://github.com/smasala",
     "logo": "../fbui_small.png",
     "options": {
