@@ -1,8 +1,8 @@
 /**
  * Extends: {{#crossLink "Firebrick.ui.components.common.Base"}}{{/crossLink}}
- * @module Firebrick.ui.components
- * @extends Firebrick.ui.components.common.Base
- * @namespace Firebrick.ui.components.fields
+ * @module ui.components
+ * @extends ui.components.common.Base
+ * @namespace ui.components.fields
  * @class Base
  */
 define(["text!./Base.html", "../common/Base", "x-editable", "knockout-x-editable"], function(tpl){

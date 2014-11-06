@@ -1,8 +1,8 @@
 /**
  * Extends: {{#crossLink "Firebrick.ui.components.containers.Base"}}{{/crossLink}}
- * @module Firebrick.ui.components
- * @extends Firebrick.ui.components.containers.Base
- * @namespace Firebrick.ui.components.containers
+ * @module ui.components
+ * @extends ui.components.containers.Base
+ * @namespace ui.components.containers
  * @class Panel
  */
 define(["text!./Panel.html", "./Base"], function(tpl){

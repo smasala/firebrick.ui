@@ -1,8 +1,8 @@
 /**
  * Extends: {{#crossLink "Firebrick.ui.components.fields.Base"}}{{/crossLink}}
- * @module Firebrick.ui.components
- * @extends Firebrick.ui.components.fields.Base
- * @namespace Firebrick.ui.components.fields
+ * @module ui.components
+ * @extends ui.components.fields.Base
+ * @namespace ui.components.fields
  * @class Input
  */
 define(["text!./Input.html", "./Base"], function(subTpl){

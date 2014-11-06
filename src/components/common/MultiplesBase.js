@@ -1,9 +1,9 @@
 /**
  * Base for inputs where multiple options are possible: checkboxes, radio and togglesbuttons for example
  * Extends: {{#crossLink "Firebrick.ui.components.fields.Input"}}{{/crossLink}}
- * @module Firebrick.ui.components
- * @extends Firebrick.ui.components.fields.Input
- * @namespace Firebrick.ui.components.common
+ * @module ui.components
+ * @extends ui.components.fields.Input
+ * @namespace ui.components.common
  * @class MultiplesBase
  */
 define(["../fields/Input"], function(subTpl){

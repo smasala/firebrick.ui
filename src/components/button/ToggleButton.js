@@ -1,8 +1,8 @@
 /**
  * Extends: {{#crossLink "Firebrick.ui.components.common.MultiplesBase"}}{{/crossLink}}
- * @module Firebrick.ui.components
- * @extends Firebrick.ui.components.common.MultiplesBase
- * @namespace Firebrick.ui.components.button
+ * @module ui.components
+ * @extends ui.components.common.MultiplesBase
+ * @namespace ui.components.button
  * @class ToggleButton
  */
 define(["text!./ToggleButton.html", "../common/MultiplesBase"], function(subTpl){

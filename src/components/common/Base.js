@@ -1,9 +1,9 @@
 /**
  * Super class for all components
  * Extends: {{#crossLink "Firebrick.class.Base"}}{{/crossLink}}
- * @module Firebrick.ui.components
- * @extends Firebrick.class.Base
- * @namespace Firebrick.ui.components.common
+ * @module ui.components
+ * @extends class.Base
+ * @namespace ui.components.common
  * @class Base
  */
 define(["handlebars"], function(Handlebars){

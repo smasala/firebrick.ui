@@ -1,8 +1,8 @@
 /**
  * Extends: {{#crossLink "Firebrick.ui.components.fields.Radio"}}{{/crossLink}}
- * @module Firebrick.ui.components
- * @extends Firebrick.ui.components.fields.Radio
- * @namespace Firebrick.ui.components.fields
+ * @module ui.components
+ * @extends ui.components.fields.Radio
+ * @namespace ui.components.fields
  * @class Checkbox
  */
 define(["./Radio"], function(){

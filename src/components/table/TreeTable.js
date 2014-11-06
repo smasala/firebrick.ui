@@ -1,8 +1,8 @@
 /**
  * Extends: {{#crossLink "Firebrick.ui.components.table.Table"}}{{/crossLink}}
- * @module Firebrick.ui.components
- * @extends Firebrick.ui.components.table.Table
- * @namespace Firebrick.ui.components.table
+ * @module ui.components
+ * @extends ui.components.table.Table
+ * @namespace ui.components.table
  * @class TreeTable
  */
 define(["jquery", "./Table", "jquery-treetable"], function($){

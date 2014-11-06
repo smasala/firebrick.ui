@@ -71,6 +71,10 @@ define(["store/MyStore",
 							{"uiName": "fb-ui-gridcol", "columnWidth":"3", "items":["ui-app-username"]}
 						]
 					}]
+				},{
+					"uiName": "ui-app-panel",
+					"title": "Testing 123",
+					"classId": "testpanel"
 				}],
 				//items:response.ui,
 				listeners:{

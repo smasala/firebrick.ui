@@ -1,8 +1,8 @@
 /**
  * Extends: {{#crossLink "Firebrick.ui.components.common.MultiplesBase"}}{{/crossLink}}
- * @module Firebrick.ui.components
- * @extends Firebrick.ui.components.common.MultiplesBase
- * @namespace Firebrick.ui.components.fields
+ * @module ui.components
+ * @extends ui.components.common.MultiplesBase
+ * @namespace ui.components.fields
  * @class Radio
  */
 define(["text!./Radio.html", "../common/MultiplesBase", "./plugins/Radio"], function(subTpl){

@@ -30,7 +30,6 @@
 	/**
 	 * Firebrick component library for Firebrick JS MVC
 	 * @module Firebrick
-	 * @namespace Firebrick
 	 * @class ui
 	 */
 	Firebrick.ui = {
@@ -154,8 +153,8 @@
 			
 			/**
 			 * util methods
-			 * @module Firebrick.ui
-			 * @namespace Firebrick.ui
+			 * @for Firebrick
+			 * @namespace ui
 			 * @class utils
 			 */
 			utils:{

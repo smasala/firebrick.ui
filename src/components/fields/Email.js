@@ -1,8 +1,8 @@
 /**
  * Extends: {{#crossLink "Firebrick.ui.components.fields.Input"}}{{/crossLink}}
- * @module Firebrick.ui.components
- * @extends Firebrick.ui.components.fields.Input
- * @namespace Firebrick.ui.components.fields
+ * @module ui.components
+ * @extends ui.components.fields.Input
+ * @namespace ui.components.fields
  * @class Email
  */
 define(["./Input"], function(){

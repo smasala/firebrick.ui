@@ -1,8 +1,8 @@
 /**
  * Extends: {{#crossLink "Firebrick.ui.components.common.Base"}}{{/crossLink}}
- * @module Firebrick.ui.components
- * @extends Firebrick.ui.components.common.Base
- * @namespace Firebrick.ui.components.button
+ * @module ui.components
+ * @extends ui.components.common.Base
+ * @namespace ui.components.button
  * @class Button
  */
 define(["text!./Button.html", "../common/Base"], function(tpl){

@@ -1,8 +1,8 @@
 /**
  * Extends: {{#crossLink "Firebrick.ui.components.common.Base"}}{{/crossLink}}
- * @module Firebrick.ui.components
- * @extends Firebrick.ui.components.common.Base
- * @namespace Firebrick.ui.components.table
+ * @module ui.components
+ * @extends ui.components.common.Base
+ * @namespace ui.components.table
  * @class Table
  */
 define(["jquery", "text!./Table.html", "../common/Base", "datatables"], function($, tpl){
