@@ -24,6 +24,7 @@ define(["store/MyStore",
 				store: myStore,
 				items:[{
 					"uiName": "ui-app-panel",
+					"panelTypeClass": "primary",
 					"title": "Hello",
 					"items":[
 						{
@@ -52,7 +53,16 @@ define(["store/MyStore",
 					}]
 				},{
 					"uiName": "ui-app-panel",
+					"title": "Another Fancy Table",
+					"panelTypeClass": "danger", 
+					"items":[{
+						"uiName": "fb-ui-treetable",
+						"data": "treeTableData"
+					}]
+				},{
+					"uiName": "ui-app-panel",
 					"title": "A Gird with Columns",
+					"panelTypeClass": "success", 
 					"items": [{
 						"uiName": "fb-ui-grid",
 						"items":[
