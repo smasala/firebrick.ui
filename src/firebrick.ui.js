@@ -57,7 +57,7 @@
 			 * @param {Object} config
 			 * @param {Object} config.target selector string, jquery object (optional) if none passed, html is returned
 			 * @param {Object} config.items array of strings or objects ["fb-ui-input", {uiName:"fb-ui-textarea"}]
-			 * @param {Object} config.view Firebrick view class (optional)
+			 * @param {Object} config.view Firebrick view class (optional), must be defined for componentReady event to be fired
 			 * @return {String} html
 			 */
 			build: function(config){
@@ -75,6 +75,10 @@
 				
 				r = me._populate(config.items, config.view);
 				html = r.html;
+				
+				if(config.view && r.items.length){
+					config.view.items = r.items;
+				}
 				
 				if(target){
 					target.append(html);
@@ -97,17 +101,27 @@
 					component, tmp;
 
 				$.each(items, function(i,v){
-					if(!v.uiComponent){
-						//v can be string or object
-						tmp = me.getByShortName(($.isFunction(v.uiName) ? v.uiName() : v.uiName) || v);
-						//getPrototypeOf(object.create) to make a new copy of the object and not a prototype pointer to v
-						component = Firebrick.create(tmp._classname, (v.uiName ? Object.getPrototypeOf(Object.create(v)) : null) );
+					if(v.isView){
+						if(v._state == "initial"){
+							component = v.init();
+						}
+						h += component.tpl;
+					}else if(v.viewName){
+						component = Firebrick.create(v.viewName, v);
+						h += component.tpl;
 					}else{
-						//v is already a field class
-						component = v;
+						if(!v.uiComponent){
+							//v can be string or object
+							tmp = me.getByShortName(($.isFunction(v.uiName) ? v.uiName() : v.uiName) || v);
+							//getPrototypeOf(object.create) to make a new copy of the object and not a prototype pointer to v
+							component = Firebrick.create(tmp._classname, (v.uiName ? Object.getPrototypeOf(Object.create(v)) : null) );
+						}else{
+							//v is already a field class
+							component = v;
+						}
+						h += component.build();
 					}
 					component._parent = parent;
-					h += component.build();
 					x.push(component);
 				});
 				

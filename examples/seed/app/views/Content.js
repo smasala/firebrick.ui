@@ -15,7 +15,8 @@ define(["store/MyStore",
         "../fields/app/Form", 
         "../fields/app/Description", 
         "Firebrick.ui/fields/Email", 
-        "Firebrick.ui/button/Button"
+        "Firebrick.ui/button/Button",
+        "./ABC"
     ], function(myStore){
 	
 			return Firebrick.define("MyApp.views.Content", {
@@ -74,14 +75,17 @@ define(["store/MyStore",
 				},{
 					"uiName": "ui-app-panel",
 					"title": "Testing 123",
-					"classId": "testpanel"
+					"_classId": "testpanel",
+					items:[{
+						"viewName": "ABC"
+					}]
 				}],
 				//items:response.ui,
 				listeners:{
 					"ready": function(){
 						console.timeEnd("atime");
 					}
-				},
+				}
 				//store:response.data
 			});
 });

@@ -1,3 +1,9 @@
+v0.2.4
+----------------------------
+* minor bug fix when container component has no items
+* small bug fix regarding views, items and reference pointers after build
+* allow views to be added inside the "items" property
+
 v0.2.1
 ----------------------------
 * minor comment/documentation changes

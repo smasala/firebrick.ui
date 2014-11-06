@@ -1,21 +1,7 @@
 YUI.add("yuidoc-meta", function(Y) {
    Y.YUIDoc = { meta: {
     "classes": [
-        "Boot",
-        "Classes",
-        "Controllers",
-        "Data",
-        "Data.Store",
-        "Events",
-        "Languages",
-        "Router",
-        "Templates",
-        "Utils",
-        "Views",
-        "class.Base",
-        "controller.Base",
         "plugins.RadioList",
-        "store.Base",
         "ui",
         "ui.Firebrick",
         "ui.components.button.Button",
@@ -38,14 +24,10 @@ YUI.add("yuidoc-meta", function(Y) {
         "ui.components.fields.TextArea",
         "ui.components.table.Table",
         "ui.components.table.TreeTable",
-        "ui.utils",
-        "view.Base",
-        "window"
+        "ui.utils"
     ],
     "modules": [
         "Firebrick",
-        "Firebrick.class",
-        "Global",
         "plugins",
         "ui.components"
     ],
@@ -54,14 +36,6 @@ YUI.add("yuidoc-meta", function(Y) {
             "displayName": "Firebrick",
             "name": "Firebrick",
             "description": "Firebrick component library for Firebrick JS MVC"
-        },
-        {
-            "displayName": "Firebrick.class",
-            "name": "Firebrick.class"
-        },
-        {
-            "displayName": "Global",
-            "name": "Global"
         },
         {
             "displayName": "plugins",

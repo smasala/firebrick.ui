@@ -34,8 +34,10 @@ define(["jquery", "../common/Base"], function($){
 		getItems: function(){
 			var me = this,
 				r = me._getItems(me.items);
-			me.items = r.items;
-			return r.html;
+			if($.isPlainObject(r)){
+				me.items = r.items;
+			}
+			return r.html || r;
 		},
 		/**
 		 * use getItems

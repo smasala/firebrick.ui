@@ -161,7 +161,7 @@ define(["text!./Panel.html", "./Base"], function(tpl){
 						}
 					};
 			
-			if(!me.items){
+			if(!me.items && me.content){
 				obj.html = me.content;
 			}
 			return obj;
