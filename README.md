@@ -15,7 +15,7 @@ bower install "firebrick.ui"
 
 ##Demo
 
-Checkout the [Dashboard ](http://demo-ui.firebrickjs.com) demo
+Checkout the [Component ](http://demo-ui.firebrickjs.com) demo
 
 ##Usage
 
