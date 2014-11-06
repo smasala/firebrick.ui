@@ -1,6 +1,6 @@
-define(function(){
+define(["text!./ABC.html"], function(tpl){
 	return Firebrick.defineView("ABC", {
 		autoRender:false,
-		items:["ui-app-description"]
+		tpl:tpl
 	})
 });
