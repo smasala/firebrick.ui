@@ -1,0 +1,9 @@
+<div data-bind="{{data-bind 'listTemplateBindings'}}"></div>
+
+<script type="text/html" id="{{getId}}">
+	<{{listType}} data-bind="{{data-bind 'listContainerBindings'}}">
+		<li data-bind="{{data-bind 'listItemBindings'}}">{{{preItemTpl}}}<span data-bind="{{data-bind}}"></span>{{{postItemTpl}}}
+			<div data-bind="{{data-bind 'childrenBindings'}}"></div>
+		</li>
+	</{{listType}}>
+</script>

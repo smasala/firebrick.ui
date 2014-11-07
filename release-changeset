@@ -1,8 +1,14 @@
-v0.2.4
+v0.4.2
 ----------------------------
 * minor bug fix when container component has no items
 * small bug fix regarding views, items and reference pointers after build
 * allow views to be added inside the "items" property
+* minor bug fix with undefined text value for "text" component
+* property changed to id instead of _classId for components, for more intuitive usage
+* new component List - nested list possible and list group
+* new component Navbar
+* new component Breadcrumb
+* new component Pagination
 
 v0.2.1
 ----------------------------

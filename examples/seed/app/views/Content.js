@@ -16,6 +16,10 @@ define(["store/MyStore",
         "../fields/app/Description", 
         "Firebrick.ui/fields/Email", 
         "Firebrick.ui/button/Button",
+        "Firebrick.ui/display/List",
+        "Firebrick.ui/nav/Navbar",
+        "Firebrick.ui/nav/Breadcrumbs",
+        "Firebrick.ui/nav/Pagination",
         "./ABC"
     ], function(myStore){
 	
@@ -24,11 +28,20 @@ define(["store/MyStore",
 				target:"#content",
 				store: myStore,
 				items:[{
+					"uiName": "fb-ui-navbar",
+					"data": "navs"
+				},{
 					"uiName": "ui-app-panel",
 					"panelTypeClass": "primary",
 					"title": "Hello",
 					"items":[
-						{
+				        {
+				        	"uiName": "fb-ui-breadcrumbs",
+				        	"data": "simplelist"
+				        },{
+				        	"uiName": "fb-ui-pagination",
+				        	"data": "simplelist"
+				        },{
 							"uiName": "ui-app-form",
 							"items": [
 								"fb-ui-header",
@@ -75,10 +88,14 @@ define(["store/MyStore",
 				},{
 					"uiName": "ui-app-panel",
 					"title": "Testing 123",
-					"_classId": "testpanel",
+					"id": "testpanel",
 					items:[{
 						"viewName": "ABC"
 					}]
+				},{
+					"uiName": "ui-app-panel",
+					"title": "A list in a panel! Wow!",
+					items:[{"uiName": "fb-ui-list", data:"list"}]
 				}],
 				//items:response.ui,
 				listeners:{

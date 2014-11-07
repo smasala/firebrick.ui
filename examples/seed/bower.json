@@ -2,6 +2,6 @@
 	"name": "firebrick.ui.seed",
 	"version": "0.0.0",
 	"dependencies": {
-		"firebrick.ui": ">=0.2.1"
+		"firebrick.ui": ">=0.4.2"
 	}
 }

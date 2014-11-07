@@ -27,6 +27,13 @@ define(["handlebars"], function(Handlebars){
 		 */
 		_idPrefix: "fb-ui-",
 		/**
+		 * component id, not the _classId - however if none specified it will default to the _classId
+		 * @property id,
+		 * @type {String}
+		 * @default null
+		 */
+		id:null,
+		/**
 		 * used when filtering component classes when searching
 		 * @property uiComponent
 		 * @type {Boolean}
@@ -54,6 +61,20 @@ define(["handlebars"], function(Handlebars){
 		 * @default ""
 		 */
 		_build:"",
+		/**
+		 * template
+		 * @property tpl
+		 * @type {String} html
+		 * @default null
+		 */
+		tpl: null,
+		/**
+		 * uiName
+		 * @property uiName
+		 * @type {String}
+		 * @default null
+		 */
+		uiName:null,
 		/**
 		 * used in conjunction with property "renderTo"
 		 * @property appendComponent
@@ -103,12 +124,18 @@ define(["handlebars"], function(Handlebars){
 			return Firebrick.ui.utils.stringify( prop );
 		},
 		/**
-		 * shorthand for getClassId()
+		 * if no id is specified it will call getClassId() and use that value
 		 * @method getId 
 		 * @return {String} uniqueId
 		 */
 		getId: function(){
-			return this.getClassId();
+			var me = this,
+				id = me.id;
+			if(!id){
+				id = this.getClassId();
+				me.id = id;
+			}
+			return id;
 		},
 		/**
 		 * called when calling {{{getSubTpl}}} in component template
@@ -143,6 +170,15 @@ define(["handlebars"], function(Handlebars){
 		 * @return {String}
 		 */
 		getParentTpl: function(){
+			var me = this;
+			return Handlebars.compile(me._getParent().tpl)(me);
+		},
+		/**
+		 * called when calling {{{getParentSubTpl}}} in component template
+		 * @method getParentSubTpl
+		 * @return {String}
+		 */
+		getParentSubTpl: function(){
 			var me = this;
 			return Handlebars.compile(me._getParent().subTpl)(me);
 		},

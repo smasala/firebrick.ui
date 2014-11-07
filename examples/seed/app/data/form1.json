@@ -9,6 +9,13 @@
 	"selected":"b",
 	"selected1":"c",
 	"selects": ["a1", "b1", "c1"],
+	"simplelist":["a", {"text": "b"}, "c"],
+	"list": [
+		"a",
+		{"text": "b", "children":[{"text":"a1", "children":["a2", "b2"]}, "b1"]},
+		"c"
+	],
+	"navs": [{"text":"Home", "active": true, "link":"#"}, {"text":"About", "link":"#"}, {"text":"Contact", "link":"#"}],
 	"superedit": [
 		           {"uiName":"fb-ui-input"},
 		           "fb-ui-email",

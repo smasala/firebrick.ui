@@ -1,4 +1,4 @@
-#Firebrick UI v0.2.1 Stable
+#Firebrick UI v0.4.2 Stable
 
 UI extendable component library for Firebrick MVC, built with :
 
@@ -15,7 +15,7 @@ bower install "firebrick.ui"
 
 ##Demo
 
-Checkout the [Component ](http://demo-ui.firebrickjs.com) demo
+Checkout the [Component ] (http://demo-ui.firebrickjs.com) demo
 
 ##Usage
 

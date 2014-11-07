@@ -88,7 +88,7 @@ define(["text!./Text.html", "../common/Base"], function(tpl){
 			
 			if(me.html){
 				obj.html = me.text; 
-			}else{
+			}else if(me.text){
 				obj.text = me.text;
 			}
 			

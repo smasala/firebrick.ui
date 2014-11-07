@@ -14,6 +14,8 @@ YUI.add("yuidoc-meta", function(Y) {
         "ui.components.containers.GridColumn",
         "ui.components.containers.Panel",
         "ui.components.display.Header",
+        "ui.components.display.List",
+        "ui.components.display.Navbar",
         "ui.components.display.Text",
         "ui.components.fields.Base",
         "ui.components.fields.Checkbox",
@@ -22,6 +24,8 @@ YUI.add("yuidoc-meta", function(Y) {
         "ui.components.fields.Radio",
         "ui.components.fields.SelectBox",
         "ui.components.fields.TextArea",
+        "ui.components.nav.Breadcrumbs",
+        "ui.components.nav.Pagination",
         "ui.components.table.Table",
         "ui.components.table.TreeTable",
         "ui.utils"
