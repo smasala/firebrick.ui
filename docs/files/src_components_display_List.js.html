@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>Controllers - Firebrick UI API</title>
+    <title>src\components\display\List.js - Firebrick UI API</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -15,11 +15,11 @@
     <div id="hd" class="yui3-g header">
         <div class="yui3-u-3-4">
             
-                <h1><img src="..\..\fbui_small.png" title="Firebrick UI API"></h1>
+                <h1><img src="..\fbui_small.png" title="Firebrick UI API"></h1>
             
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 0.2.1</em>
+            <em>API Docs for: 0.4.2</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -41,31 +41,7 @@
         <div id="api-tabview-panel">
             <ul id="api-classes" class="apis classes">
             
-                <li><a href="../classes/Boot.html">Boot</a></li>
-            
-                <li><a href="../classes/class.Base.html">class.Base</a></li>
-            
-                <li><a href="../classes/Classes.html">Classes</a></li>
-            
-                <li><a href="../classes/controller.Base.html">controller.Base</a></li>
-            
-                <li><a href="../classes/Controllers.html">Controllers</a></li>
-            
-                <li><a href="../classes/Data.html">Data</a></li>
-            
-                <li><a href="../classes/Data.Store.html">Data.Store</a></li>
-            
-                <li><a href="../classes/Events.html">Events</a></li>
-            
-                <li><a href="../classes/Languages.html">Languages</a></li>
-            
                 <li><a href="../classes/plugins.RadioList.html">plugins.RadioList</a></li>
-            
-                <li><a href="../classes/Router.html">Router</a></li>
-            
-                <li><a href="../classes/store.Base.html">store.Base</a></li>
-            
-                <li><a href="../classes/Templates.html">Templates</a></li>
             
                 <li><a href="../classes/ui.html">ui</a></li>
             
@@ -89,6 +65,10 @@
             
                 <li><a href="../classes/ui.components.display.Header.html">ui.components.display.Header</a></li>
             
+                <li><a href="../classes/ui.components.display.List.html">ui.components.display.List</a></li>
+            
+                <li><a href="../classes/ui.components.display.Navbar.html">ui.components.display.Navbar</a></li>
+            
                 <li><a href="../classes/ui.components.display.Text.html">ui.components.display.Text</a></li>
             
                 <li><a href="../classes/ui.components.fields.Base.html">ui.components.fields.Base</a></li>
@@ -105,6 +85,10 @@
             
                 <li><a href="../classes/ui.components.fields.TextArea.html">ui.components.fields.TextArea</a></li>
             
+                <li><a href="../classes/ui.components.nav.Breadcrumbs.html">ui.components.nav.Breadcrumbs</a></li>
+            
+                <li><a href="../classes/ui.components.nav.Pagination.html">ui.components.nav.Pagination</a></li>
+            
                 <li><a href="../classes/ui.components.table.Table.html">ui.components.table.Table</a></li>
             
                 <li><a href="../classes/ui.components.table.TreeTable.html">ui.components.table.TreeTable</a></li>
@@ -113,23 +97,11 @@
             
                 <li><a href="../classes/ui.utils.html">ui.utils</a></li>
             
-                <li><a href="../classes/Utils.html">Utils</a></li>
-            
-                <li><a href="../classes/view.Base.html">view.Base</a></li>
-            
-                <li><a href="../classes/Views.html">Views</a></li>
-            
-                <li><a href="../classes/window.html">window</a></li>
-            
             </ul>
 
             <ul id="api-modules" class="apis modules">
             
                 <li><a href="../modules/Firebrick.html">Firebrick</a></li>
-            
-                <li><a href="../modules/Firebrick.class.html">Firebrick.class</a></li>
-            
-                <li><a href="../modules/Global.html">Global</a></li>
             
                 <li><a href="../modules/plugins.html">plugins</a></li>
             
@@ -170,217 +142,140 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-                        <h1>Controllers Class</h1>
-<div class="box meta">
-    
+                        <h1 class="file-heading">File: src\components\display\List.js</h1>
 
-    
+<div class="file">
+    <pre class="code prettyprint linenums">
+/*!
+ * @author Steven Masala [me@smasala.com]
+ */
 
-    
-        <div class="foundat">
-            Defined in: <a href="../files/src_firebrick.js.html#l365"><code>src\firebrick.js:365</code></a>
-        </div>
-    
+/**
+ * @module ui.components
+ * @extends ui.components.common.Base
+ * @namespace ui.components.display
+ * @class List
+ */
+define([&quot;text!./List.html&quot;, &quot;../common/Base&quot;], function(tpl){
+	return Firebrick.define(&quot;Firebrick.ui.display.List&quot;, {
+		extend:&quot;Firebrick.ui.common.Base&quot;,
+		/**
+		 * @property uiName
+		 * @type {String}
+		 * @default &quot;fb-ui-list&quot;
+		 */
+		uiName:&quot;fb-ui-list&quot;,
+		/**
+		 * @property tpl
+		 * @type {String} html
+		 * @default components/display/List.html
+		 */
+		tpl:tpl,
+		/**
+		 * type of list, ul or ol
+		 * @property listType
+		 * @type {String}
+		 * @default &quot;ul&quot;
+		 */
+		listType:&quot;ul&quot;,
+		/**
+		 * is a list group?
+		 * @property listGroupClass
+		 * @type {Boolean|String}
+		 * @default true
+		 */
+		listGroupClass:false,
+		/**
+		 * defaults to true but only comes into effect with property &quot;listGroupClass&quot;
+		 * @property listItemGroupClass
+		 * @type {Boolean|String}
+		 * @default true
+		 */
+		listItemGroupClass:true,
+		/**
+		 * items to parse into the list
+		 * @property data
+		 * @type {String}
+		 * @default false
+		 */
+		data:false,
+		/**
+		 * inject a template into the &lt;li&gt;{preItemTpl}&lt;span&gt;&lt;/span&gt;{postItemTpl}&lt;/li&gt; item
+		 * @property preItemTpl
+		 * @type {String|Function} html
+		 * @default &quot;&quot;
+		 */
+		preItemTpl:&quot;&quot;,
+		/**
+		 * inject a template into the &lt;li&gt;{preItemTpl}&lt;span&gt;&lt;/span&gt;{postItemTpl}&lt;/li&gt; item
+		 * @property postItemTpl
+		 * @type {String|Function} html
+		 * @default &quot;&quot;
+		 */
+		postItemTpl:&quot;&quot;,
+		/**
+		 * @method listContainerBindings
+		 * @return {Object}
+		 */
+		listContainerBindings: function(){
+			var me = this,
+				obj = {css:{}};
+			if(me.listGroupClass){
+				obj.css[&quot;&#x27;list-group&#x27;&quot;] = me.listGroupClass
+			}
+			if(me.data){
+				obj.foreach = &quot;$data&quot;
+			}
+			return obj;
+		},
+		/**
+		 * @method listItemBindings
+		 * @return {Object}
+		 */
+		listItemBindings: function(){
+			var me  = this,
+				obj = {css:{}};
+			
+			if(me.listGroupClass &amp;&amp; me.listItemGroupClass){
+				obj.css[&quot;&#x27;list-group-item&#x27;&quot;] = me.listItemGroupClass
+			}
 
-    
-        
-            Module: <a href="../modules/Firebrick.html">Firebrick</a>
-        
-    
-
-    
-</div>
-
-
-
-<div class="box intro">
-    
-</div>
-
-
-
-<div id="classdocs" class="tabview">
-    <ul class="api-class-tabs">
-        <li class="api-class-tab index"><a href="#index">Index</a></li>
-
-        
-            <li class="api-class-tab methods"><a href="#methods">Methods</a></li>
-        
-        
-        
-        
-    </ul>
-
-    <div>
-        <div id="index" class="api-class-tabpanel index">
-            <h2 class="off-left">Item Index</h2>
-
-            
-                <div class="index-section methods">
-                    <h3>Methods</h3>
-
-                    <ul class="index-list methods">
-                        
-                            <li class="index-item method">
-                                <a href="#method_createController">createController</a>
-
-                                
-                                
-                            </li>
-                        
-                    </ul>
-                </div>
-            
-
-            
-
-            
-
-            
-        </div>
-
-        
-            <div id="methods" class="api-class-tabpanel">
-                <h2 class="off-left">Methods</h2>
-
-                
-                    <div id="method_createController" class="method item">
-    <h3 class="name"><code>createController</code></h3>
-
-    
-        <div class="args">
-            <span class="paren">(</span><ul class="args-list inline commas">
-            
-                <li class="arg">
-                    
-                        <code>name</code>
-                    
-                </li>
-            
-                <li class="arg">
-                    
-                        <code>config</code>
-                    
-                </li>
-            
-            </ul><span class="paren">)</span>
-        </div>
-    
-
-    
-        <span class="returns-inline">
-            <span class="type">Object</span>
-        </span>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/src_firebrick.js.html#l370"><code>src\firebrick.js:370</code></a>
-        
-        </p>
-
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>shorthand method. Same as calling Firebrick:create, however it sets the extend value on the config to &quot;Firebrick.controller.Base&quot; automatically</p>
-
-    </div>
-
-    
-        <div class="params">
-            <h4>Parameters:</h4>
-
-            <ul class="params-list">
-            
-                <li class="param">
-                    
-                        <code class="param-name">name</code>
-                        <span class="type">String</span>
-                    
-
-                    
-
-                    <div class="param-description">
-                         
-                    </div>
-
-                    
-                </li>
-            
-                <li class="param">
-                    
-                        <code class="param-name">config</code>
-                        <span class="type">Object</span>
-                    
-
-                    
-
-                    <div class="param-description">
-                        <p>optional</p>
-
-                    </div>
-
-                    
-                </li>
-            
-            </ul>
-        </div>
-    
-
-    
-        <div class="returns">
-            <h4>Returns:</h4>
-
-            <div class="returns-description">
-                
-                    
-                        <span class="type">Object</span>:
-                    
-                    <p>class</p>
-
-                
-            </div>
-        </div>
-    
-
-    
-</div>
-
-                
-            </div>
-        
-
-        
-
-        
-
-        
-    </div>
+			return obj;
+		},
+		/**
+		 * @method bindings
+		 * @return {Object}
+		 */
+		bindings:function(){
+			var me = this, 
+				obj = {};
+				obj.text = &quot;$data.text ? $data.text : $data&quot;;
+			return obj;
+		},
+		
+		listTemplateBindings: function(){
+			var me = this;
+			return {
+				template: {
+					name: &quot;&#x27;&quot;+me.getId()+&quot;&#x27;&quot;,
+					data: me.data
+				}
+			}
+		},
+		
+		childrenBindings: function(){
+			var me = this;
+			return {
+				visible: &quot;$data.children ? $data.children : false&quot;,
+				template: {
+					name: &quot;&#x27;&quot;+this.getId()+&quot;&#x27;&quot;,
+					data: &quot;$data.children&quot;
+				}
+			}
+		}
+	})
+});
+    </pre>
 </div>
 
                     </div>

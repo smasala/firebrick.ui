@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>src\components\containers\Form.js - Firebrick UI API</title>
+    <title>src\components\nav\Navbar.js - Firebrick UI API</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -142,7 +142,7 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-                        <h1 class="file-heading">File: src\components\containers\Form.js</h1>
+                        <h1 class="file-heading">File: src\components\nav\Navbar.js</h1>
 
 <div class="file">
     <pre class="code prettyprint linenums">
@@ -152,59 +152,283 @@
 
 /**
  * @module ui.components
- * @extends ui.components.containers.Base
- * @namespace ui.components.containers
- * @class Form
+ * @extends ui.components.display.List
+ * @namespace ui.components.display
+ * @class Navbar
  */
-define([&quot;text!./Form.html&quot;, &quot;./Base&quot;], function(tpl){
-	return Firebrick.define(&quot;Firebrick.ui.containers.Form&quot;, {
-		extend:&quot;Firebrick.ui.containers.Base&quot;,
-		/**
-		 * @property uiName
-		 * @type {String}
-		 */
-		uiName: &quot;fb-ui-form&quot;,
-		/**
-		 * @property tpl
-		 * @type {String} html
-		 */
+define([&quot;text!./Navbar.html&quot;, &quot;handlebars&quot;, &quot;../common/Base&quot;, &quot;../display/List&quot;], function(tpl, Handlebars){
+	return Firebrick.create(&quot;Firebrick.ui.display.Navbar&quot;, {
+		extend:&quot;Firebrick.ui.display.List&quot;,
 		tpl:tpl,
+		uiName:&quot;fb-ui-navbar&quot;,
 		/**
-		 * @property formRole
-		 * @type {String}
-		 * @default &quot;&#x27;form&#x27;&quot;
+		 * false to deactivate
+		 * @property navTypeClass
+		 * @type {Boolean|String} string: navbar-fixed-top, navbar-static-top, navbar-fixed-top, navbar-fixed-bottom, navbar-inverse (navbarDefaultClass=false)
+		 * @default &quot;&#x27;navbar-static-top&#x27;&quot;
 		 */
-		formRole:&quot;&#x27;form&#x27;&quot;,
+		navTypeClass: &quot;&#x27;navbar-static-top&#x27;&quot;,
 		/**
-		 * @property horizontal
+		 * whether &quot;navbar-default&quot; is used
+		 * @property navbarDefaultClass
+		 * @type {Boolean}
+		 * @default true
+		 */
+		navbarDefaultClass: true,
+		/**
+		 * whether &quot;navbar&quot; css class is used
+		 * @property navbarClass
+		 * @type {Boolean}
+		 * @default true
+		 */
+		navbarClass:true,
+		/**
+		 * css class: navbar-header
+		 * @property navbarHeaderClass
+		 * @type {Boolean}
+		 * @default true
+		 */
+		navbarHeaderClass:true, 
+		/**
+		 * if false then the navigation won&#x27;t collapse to the small menu button
+		 * @property toggleButton
+		 * @type {Boolean}
+		 * @default true
+		 */
+		toggleButton: true,
+		/**
+		 * @property toggleText
+		 * @type {String}
+		 * @default &quot;Toggle navigation&quot;
+		 */
+		toggleText: &quot;Toggle navigation&quot;,
+		/**
+		 * @property brandClass
 		 * @type {Boolean|String}
 		 * @default true
 		 */
-		horizontal:true,
+		brandClass: true,
 		/**
-		 * @property inline
+		 * false to deactivate
+		 * @property brandLink
+		 * @type {Boolean|String}
+		 * @default &quot;&#x27;/&#x27;&quot;
+		 */
+		brandLink: &quot;&#x27;/&#x27;&quot;,
+		/**
+		 * brand text - false to show none or if you wish to use brandTpl instead
+		 * @property brandText
+		 * @type {Boolean|String}
+		 * @default &quot;&#x27;Firebrick.ui&#x27;&quot;
+		 */
+		brandText:&quot;&#x27;Firebrick.ui&#x27;&quot;,
+		/**
+		 * false to deactivate
+		 * @property brandTpl
 		 * @type {Boolean|String}
 		 * @default false
 		 */
-		inline:false,
+		brandTpl:false,
 		/**
-		 * @method formBindings
+		 * data to populate navigation with
+		 * @property data
+		 * @type {String}
+		 * @default null
+		 */
+		data:null,
+		/**
+		 * overriding parent
+		 * @property listGroupClass
+		 * @default false
+		 */
+		listGroupClass:false,
+		/**
+		 * sets nav &amp;&amp; nav-bar css classes to the list container
+		 * @property navClass
+		 * @type {String|Boolean}
+		 * @default true
+		 */
+		navClass: true,
+		/**
+		 * overriding property from list
+		 * @property preItemTpl
+		 * @type {String}
+		 * @default &quot;&lt;a data-bind=&quot;{{data-bind &#x27;navLinkBindings&#x27;}}&quot;&gt;&quot;
+		 */
+		preItemTpl:function(){
+			return Handlebars.compile(&#x27;&lt;a data-bind=&quot;{{data-bind \&#x27;navLinkBindings\&#x27;}}&quot;&gt;&#x27;)(this);
+		},
+		/**
+		 * overriding property from list
+		 * @property postItemTpl
+		 * @type {String}
+		 * @default &quot;&lt;/a&gt;&quot;
+		 */
+		postItemTpl:&quot;&lt;/a&gt;&quot;,
+		/**
+		 * @method navBindings
 		 * @return {Object}
 		 */
-		formBindings:function(){
-			var me = this;
-			return {
-				attr:{
-					id: &quot;&#x27;&quot; + me.getId() + &quot;&#x27;&quot;,
-					role: me.formRole
-				},
-				css:{
-					&quot;&#x27;form-horizontal&#x27;&quot;: this.horizontal,
-					&quot;&#x27;form-inline&#x27;&quot;: this.inline
+		navBindings: function(){
+			var me = this,
+				obj = {
+					attr:{
+						role: &quot;&#x27;navigation&#x27;&quot;
+					},
+					css:{
+						&quot;&#x27;navbar-default&#x27;&quot;: me.navbarDefaultClass,
+						&quot;navbar&quot;: me.navbarClass
+					}
+			};
+			if(me.navTypeClass){
+				obj.css[me.navTypeClass] = true;
+			}
+			return obj;
+		},
+		/**
+		 * @method brandBindings
+		 * @return {Object}
+		 */
+		brandBindings: function(){
+			var me = this,
+				obj = {
+					css:{},
+					attr:{
+						href: me.brandLink
+					}
+				};
+			if(me.brandClass){
+				obj.css[&quot;&#x27;navbar-brand&#x27;&quot;] = me.brandClass;
+			}
+			if(me.brandText &amp;&amp; !me.brandTpl){
+				obj.text = me.brandText;
+			}
+			return obj;
+		},
+		/**
+		 * overriding parent
+		 * @method listContainerBindings
+		 * @return {Object}
+		 */
+		listContainerBindings: function(){
+			var me = this,
+				obj = me.callParent();
+			obj.css.nav = me.navClass;
+			obj.css[&quot;&#x27;navbar-nav&#x27;&quot;] = me.navClass;
+			return obj;
+		},
+		/**
+		 * overriding parent
+		 * @method bindings
+		 * @return {Object}
+		 */
+		bindings: function(){
+			var me = this,
+				obj = me.callParent();
+			obj.text = &quot;$data.text ? $data.text : &#x27;&#x27;&quot;;
+			return obj;
+		},
+		/**
+		 * overriding parent
+		 * @method listItemBindings
+		 * @return {Object}
+		 */
+		listItemBindings: function(){
+			var me = this,
+			obj = {
+				css: {
+					active: &quot;$data.active ? $data.active : false&quot;
 				}
 			};
+			return obj;
+		},
+		/**
+		 * @method navLinkBindings
+		 * @return {Object}
+		 */
+		navLinkBindings: function(){
+			var me = this,
+				obj = {
+					attr:{
+						href: &quot;$data.link ? $data.link : &#x27;&#x27;&quot;
+					}
+			};
+			return obj;
+		},
+		/**
+		 * @method navbarHeaderBindings
+		 * @return {Object}
+		 */
+		navbarHeaderBindings: function(){
+			var me = this,
+				obj = {css:{}};
+			if(me.navbarHeaderClass){
+				obj.css[&quot;&#x27;navbar-header&#x27;&quot;] = me.navbarHeaderClass;
+			}
+			return obj;
+		},
+		/**
+		 * @method navbarContainerBindings
+		 * @return {Object}
+		 */
+		navbarContainerBindings: function(){
+			var me = this,
+				obj = {
+						attr:{
+							id: &quot;&#x27;fb-nav-&quot; + me.getId() + &quot;&#x27;&quot;
+						},
+						css:{}
+					};
+			if(me.toggleButton){
+				obj.css.collapse = true;
+				obj.css[&quot;&#x27;navbar-collapse&#x27;&quot;] = true;
+			}
+			return obj;
+		},
+		/**
+		 * @method toggleTextBindings
+		 * @return {Object}
+		 */
+		toggleTextBindings: function(){
+			return {
+				text: &quot;fb.text(&#x27;&quot; + this.toggleText + &quot;&#x27;)&quot;
+			}
+		},
+		/**
+		 * @method toggleButtonBindings
+		 * @return {Object}
+		 */
+		toggleButtonBindings: function(){
+			var me = this,
+				id = &quot;fb-nav-&quot; + me.getId() + &quot;&#x27;&quot;,
+				obj = {
+					attr:{
+						type: &quot;&#x27;button&#x27;&quot;,
+						&quot;&#x27;data-toggle&#x27;&quot;: &quot;&#x27;collapse&#x27;&quot;,
+						&quot;&#x27;data-target&#x27;&quot;: &quot;&#x27;#&quot; + id,
+						&quot;&#x27;aria-expanded&#x27;&quot;: false,
+						&quot;&#x27;aria-controls&#x27;&quot;: &quot;&#x27;&quot; + id
+					},
+					css:{
+						collapsed: true,
+						&quot;&#x27;navbar-toggle&#x27;&quot;: true
+					}
+				};
+			
+			return obj;
+		},
+		/**
+		 * @method navbarHeaderContainerBindings
+		 * @return {Object}
+		 */
+		navbarHeaderContainerBindings: function(){
+			return {
+				css:{
+					&quot;container&quot;: true
+				}
+			}
 		}
-	})
+	});
 });
     </pre>
 </div>
