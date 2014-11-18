@@ -1,12 +1,12 @@
 #Firebrick UI v0.4.2 Stable
 
-UI extendable component library for Firebrick MVC, built with :
+UI extendable component library built for:
 
 * Firebrick MVC
-* jQuery v2
-* Bootstrap v3
-* Knockout JS v3
-* Require JS v2
+    * jQuery 2
+    * Bootstrap 3
+    * Knockout JS 3
+    * Require JS 2
 
 ## Install with Bower
 ```
