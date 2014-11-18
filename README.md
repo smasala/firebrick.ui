@@ -3,10 +3,10 @@
 UI extendable component library for Firebrick MVC, built with :
 
 * Firebrick MVC
-* jQuery
-* Bootstrap
-* Knockout JS
-* Require JS
+* jQuery - 2
+* Bootstrap - 3
+* Knockout JS - 3
+* Require JS - 2
 
 ## Install with Bower
 ```
