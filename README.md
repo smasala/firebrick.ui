@@ -2,7 +2,7 @@
 
 UI extendable component library built for:
 
-* Firebrick MVC
+* [Firebrick MVC](https://github.com/smasala/firebrick)
     * jQuery 2
     * Bootstrap 3
     * Knockout JS 3
