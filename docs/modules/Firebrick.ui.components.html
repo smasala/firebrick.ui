@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>src\components\table\TreeTable.js - Firebrick UI API</title>
+    <title>Firebrick.ui.components - Firebrick UI API</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -140,43 +140,187 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-                        <h1 class="file-heading">File: src\components\table\TreeTable.js</h1>
+                        <h1>Firebrick.ui.components Module</h1>
+<div class="box clearfix meta">
+    
 
-<div class="file">
-    <pre class="code prettyprint linenums">
-/*!
- * @author Steven Masala [me@smasala.com]
- */
+    
 
-/**
- * @module Firebrick.ui.components
- * @extends components.table.Table
- * @namespace components.table
- * @class TreeTable
- */
-define([&quot;jquery&quot;, &quot;./Table&quot;, &quot;jquery-treetable&quot;], function($){
-	return Firebrick.define(&quot;Firebrick.ui.table.TreeTable&quot;, {
-		extend:&quot;Firebrick.ui.table.Table&quot;,
-		/**
-		 * @property uiName
-		 * @type {String}
-		 */
-		uiName: &quot;fb-ui-treetable&quot;,
-		/**
-		 * @property data
-		 * @type {Object|String}
-		 * @default &quot;&#x27;&#x27;&quot;
-		 */
-		data:&quot;&#x27;&#x27;&quot;,
-		/**
-		 * @property treetable
-		 * @type {Boolean}
-		 * @default true
-		 */
-		treetable:true
-	});
-});
-    </pre>
+    
+        <div class="foundat">
+            Defined in: <a href="../files/src_components_table_TreeTable.js.html#l5"><code>src\components\table\TreeTable.js:5</code></a>
+        </div>
+    
+
+    
+</div>
+
+
+
+<div class="box intro">
+    
+</div>
+
+
+
+<div class="yui3-g">
+    <div class="yui3-u-1-2">
+        
+            <p>This module provides the following classes:</p>
+
+            <ul class="module-classes">
+            
+                <li class="module-class">
+                    <a href="../classes/components.button.Button.html">
+                        components.button.Button
+                    </a>
+                </li>
+            
+                <li class="module-class">
+                    <a href="../classes/components.button.ToggleButton.html">
+                        components.button.ToggleButton
+                    </a>
+                </li>
+            
+                <li class="module-class">
+                    <a href="../classes/components.common.Base.html">
+                        components.common.Base
+                    </a>
+                </li>
+            
+                <li class="module-class">
+                    <a href="../classes/components.common.MultiplesBase.html">
+                        components.common.MultiplesBase
+                    </a>
+                </li>
+            
+                <li class="module-class">
+                    <a href="../classes/components.containers.Base.html">
+                        components.containers.Base
+                    </a>
+                </li>
+            
+                <li class="module-class">
+                    <a href="../classes/components.containers.Form.html">
+                        components.containers.Form
+                    </a>
+                </li>
+            
+                <li class="module-class">
+                    <a href="../classes/components.containers.Grid.html">
+                        components.containers.Grid
+                    </a>
+                </li>
+            
+                <li class="module-class">
+                    <a href="../classes/components.containers.GridColumn.html">
+                        components.containers.GridColumn
+                    </a>
+                </li>
+            
+                <li class="module-class">
+                    <a href="../classes/components.containers.Panel.html">
+                        components.containers.Panel
+                    </a>
+                </li>
+            
+                <li class="module-class">
+                    <a href="../classes/components.display.Header.html">
+                        components.display.Header
+                    </a>
+                </li>
+            
+                <li class="module-class">
+                    <a href="../classes/components.display.List.html">
+                        components.display.List
+                    </a>
+                </li>
+            
+                <li class="module-class">
+                    <a href="../classes/components.display.Navbar.html">
+                        components.display.Navbar
+                    </a>
+                </li>
+            
+                <li class="module-class">
+                    <a href="../classes/components.display.Text.html">
+                        components.display.Text
+                    </a>
+                </li>
+            
+                <li class="module-class">
+                    <a href="../classes/components.fields.Base.html">
+                        components.fields.Base
+                    </a>
+                </li>
+            
+                <li class="module-class">
+                    <a href="../classes/components.fields.Checkbox.html">
+                        components.fields.Checkbox
+                    </a>
+                </li>
+            
+                <li class="module-class">
+                    <a href="../classes/components.fields.Email.html">
+                        components.fields.Email
+                    </a>
+                </li>
+            
+                <li class="module-class">
+                    <a href="../classes/components.fields.Input.html">
+                        components.fields.Input
+                    </a>
+                </li>
+            
+                <li class="module-class">
+                    <a href="../classes/components.fields.Radio.html">
+                        components.fields.Radio
+                    </a>
+                </li>
+            
+                <li class="module-class">
+                    <a href="../classes/components.fields.SelectBox.html">
+                        components.fields.SelectBox
+                    </a>
+                </li>
+            
+                <li class="module-class">
+                    <a href="../classes/components.fields.TextArea.html">
+                        components.fields.TextArea
+                    </a>
+                </li>
+            
+                <li class="module-class">
+                    <a href="../classes/components.nav.Breadcrumbs.html">
+                        components.nav.Breadcrumbs
+                    </a>
+                </li>
+            
+                <li class="module-class">
+                    <a href="../classes/components.nav.Pagination.html">
+                        components.nav.Pagination
+                    </a>
+                </li>
+            
+                <li class="module-class">
+                    <a href="../classes/components.table.Table.html">
+                        components.table.Table
+                    </a>
+                </li>
+            
+                <li class="module-class">
+                    <a href="../classes/components.table.TreeTable.html">
+                        components.table.TreeTable
+                    </a>
+                </li>
+            
+            </ul>
+        
+    </div>
+
+    <div class="yui3-u-1-2">
+        
+    </div>
 </div>
 
                     </div>
