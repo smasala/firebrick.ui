@@ -3,9 +3,9 @@
  */
 
 /**
- * @module ui.components
- * @extends ui.components.fields.Radio
- * @namespace ui.components.fields
+ * @module Firebrick.ui.components
+ * @extends components.fields.Radio
+ * @namespace components.fields
  * @class Checkbox
  */
 define(["./Radio"], function(){

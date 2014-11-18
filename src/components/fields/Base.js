@@ -3,9 +3,9 @@
  */
 
 /**
- * @module ui.components
- * @extends ui.components.common.Base
- * @namespace ui.components.fields
+ * @module Firebrick.ui.components
+ * @extends components.common.Base
+ * @namespace components.fields
  * @class Base
  */
 define(["text!./Base.html", "../common/Base", "x-editable", "knockout-x-editable"], function(tpl){

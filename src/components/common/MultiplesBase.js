@@ -4,9 +4,9 @@
 
 /**
  * Base for inputs where multiple options are possible: checkboxes, radio and togglesbuttons for example
- * @module ui.components
- * @extends ui.components.fields.Input
- * @namespace ui.components.common
+ * @module Firebrick.ui.components
+ * @extends components.fields.Input
+ * @namespace components.common
  * @class MultiplesBase
  */
 define(["../fields/Input"], function(subTpl){

@@ -3,9 +3,9 @@
  */
 
 /**
- * @module ui.components
- * @extends ui.components.common.Base
- * @namespace ui.components.containers
+ * @module Firebrick.ui.components
+ * @extends components.common.Base
+ * @namespace components.containers
  * @class Base
  */
 define(["jquery", "../common/Base"], function($){

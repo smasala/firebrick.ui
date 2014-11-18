@@ -3,9 +3,9 @@
  */
 
 /**
- * @module ui.components
- * @extends ui.components.containers.Base
- * @namespace ui.components.containers
+ * @module Firebrick.ui.components
+ * @extends components.containers.Base
+ * @namespace components.containers
  * @class Panel
  */
 define(["text!./Panel.html", "./Base"], function(tpl){

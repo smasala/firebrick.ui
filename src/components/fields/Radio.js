@@ -3,9 +3,9 @@
  */
 
 /**
- * @module ui.components
- * @extends ui.components.common.MultiplesBase
- * @namespace ui.components.fields
+ * @module Firebrick.ui.components
+ * @extends components.common.MultiplesBase
+ * @namespace components.fields
  * @class Radio
  */
 define(["text!./Radio.html", "../common/MultiplesBase", "./plugins/Radio"], function(subTpl){

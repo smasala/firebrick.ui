@@ -3,9 +3,9 @@
  */
 
 /**
- * @module ui.components
- * @extends ui.components.fields.Input
- * @namespace ui.components.fields
+ * @module Firebrick.ui.components
+ * @extends components.fields.Input
+ * @namespace components.fields
  * @class TextArea
  */
 define(["text!./TextArea.html", "./Input"], function(subTpl){

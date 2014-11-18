@@ -3,9 +3,9 @@
  */
 
 /**
- * @module ui.components
- * @extends ui.components.common.Base
- * @namespace ui.components.button
+ * @module Firebrick.ui.components
+ * @extends components.common.Base
+ * @namespace components.button
  * @class Button
  */
 define(["text!./Button.html", "../common/Base"], function(tpl){

@@ -3,10 +3,12 @@
  */
 
 /**
- * Super class for all components
- * @module ui.components
+ * Super class for all components.
+ * 
+ * Extends from <a href="http://smasala.github.io/firebrick/docs/classes/class.Base.html">Firebrick.class.Base</a>
+ * @module Firebrick.ui.components
  * @extends class.Base
- * @namespace ui.components.common
+ * @namespace components.common
  * @class Base
  */
 define(["handlebars"], function(Handlebars){

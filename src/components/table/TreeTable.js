@@ -3,9 +3,9 @@
  */
 
 /**
- * @module ui.components
- * @extends ui.components.table.Table
- * @namespace ui.components.table
+ * @module Firebrick.ui.components
+ * @extends components.table.Table
+ * @namespace components.table
  * @class TreeTable
  */
 define(["jquery", "./Table", "jquery-treetable"], function($){

@@ -3,10 +3,9 @@
  */
 
 /**
- * @author Steven Masala [me@smasala.com]
- * @module ui.components
- * @extends ui.components.common.Base
- * @namespace ui.components.table
+ * @module Firebrick.ui.components
+ * @extends components.common.Base
+ * @namespace components.table
  * @class Table
  */
 define(["jquery", "text!./Table.html", "../common/Base", "datatables"], function($, tpl){

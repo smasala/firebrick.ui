@@ -3,9 +3,9 @@
  */
 
 /**
- * @module ui.components
- * @extends ui.components.common.Base
- * @namespace ui.components.display
+ * @module Firebrick.ui.components
+ * @extends components.common.Base
+ * @namespace components.display
  * @class Text
  */
 define(["text!./Text.html", "../common/Base"], function(tpl){

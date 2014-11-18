@@ -3,9 +3,9 @@
  */
 
 /**
- * @module ui.components
- * @extends ui.components.fields.Base
- * @namespace ui.components.fields
+ * @module Firebrick.ui.components
+ * @extends components.fields.Base
+ * @namespace components.fields
  * @class Input
  */
 define(["text!./Input.html", "./Base"], function(subTpl){

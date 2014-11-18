@@ -3,9 +3,9 @@
  */
 
 /**
- * @module ui.components
- * @extends ui.components.common.MultiplesBase
- * @namespace ui.components.button
+ * @module Firebrick.ui.components
+ * @extends components.common.MultiplesBase
+ * @namespace components.button
  * @class ToggleButton
  */
 define(["text!./ToggleButton.html", "../common/MultiplesBase"], function(subTpl){

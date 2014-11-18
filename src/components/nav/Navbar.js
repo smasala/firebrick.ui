@@ -3,9 +3,9 @@
  */
 
 /**
- * @module ui.components
- * @extends ui.components.display.List
- * @namespace ui.components.display
+ * @module Firebrick.ui.components
+ * @extends components.display.List
+ * @namespace components.display
  * @class Navbar
  */
 define(["text!./Navbar.html", "handlebars", "../common/Base", "../display/List"], function(tpl, Handlebars){

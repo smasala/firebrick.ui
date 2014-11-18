@@ -3,9 +3,9 @@
  */
 
 /**
- * @module ui.components
- * @extends ui.components.display.List
- * @namespace ui.components.nav
+ * @module Firebrick.ui.components
+ * @extends components.display.List
+ * @namespace components.nav
  * @class Breadcrumbs
  */
 define(["../display/List"], function(){
