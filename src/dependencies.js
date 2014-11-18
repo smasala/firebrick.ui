@@ -1,7 +1,8 @@
 /*!
- * Author: Steven Masala
- * Firebrick UI Dependency Confirugation
- */
+ * Firebrick UI Dependency Configuration
+ * @author Steven Masala [me@smasala.com]
+**/
+
 define(function(){
 	return require.config({
 		paths:{

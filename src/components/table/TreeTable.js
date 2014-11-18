@@ -1,5 +1,8 @@
+/*!
+ * @author Steven Masala [me@smasala.com]
+ */
+
 /**
- * Extends: {{#crossLink "Firebrick.ui.components.table.Table"}}{{/crossLink}}
  * @module ui.components
  * @extends ui.components.table.Table
  * @namespace ui.components.table

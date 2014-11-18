@@ -1,5 +1,8 @@
+/*!
+ * @author Steven Masala [me@smasala.com]
+ */
+
 /**
- * Extends: {{#crossLink "Firebrick.ui.components.fields.Base"}}{{/crossLink}}
  * @module ui.components
  * @extends ui.components.fields.Base
  * @namespace ui.components.fields

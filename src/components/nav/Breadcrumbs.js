@@ -1,5 +1,8 @@
+/*!
+ * @author Steven Masala [me@smasala.com]
+ */
+
 /**
- * Extends: {{#crossLink "Firebrick.ui.components.display.List"}}{{/crossLink}}
  * @module ui.components
  * @extends ui.components.display.List
  * @namespace ui.components.nav

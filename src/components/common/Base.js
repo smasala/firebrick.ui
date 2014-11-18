@@ -1,6 +1,9 @@
+/*!
+ * @author Steven Masala [me@smasala.com]
+ */
+
 /**
  * Super class for all components
- * Extends: {{#crossLink "Firebrick.class.Base"}}{{/crossLink}}
  * @module ui.components
  * @extends class.Base
  * @namespace ui.components.common

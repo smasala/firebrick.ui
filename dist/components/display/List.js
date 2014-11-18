@@ -1,1 +1,5 @@
+/*!
+ * @author Steven Masala [me@smasala.com]
+ */
+
 define(["text!./List.html","../common/Base"],function(e){return Firebrick.define("Firebrick.ui.display.List",{extend:"Firebrick.ui.common.Base",uiName:"fb-ui-list",tpl:e,listType:"ul",listGroupClass:!1,listItemGroupClass:!0,data:!1,preItemTpl:"",postItemTpl:"",listContainerBindings:function(){var e=this,t={css:{}};return e.listGroupClass&&(t.css["'list-group'"]=e.listGroupClass),e.data&&(t.foreach="$data"),t},listItemBindings:function(){var e=this,t={css:{}};return e.listGroupClass&&e.listItemGroupClass&&(t.css["'list-group-item'"]=e.listItemGroupClass),t},bindings:function(){var e=this,t={};return t.text="$data.text ? $data.text : $data",t},listTemplateBindings:function(){var e=this;return{template:{name:"'"+e.getId()+"'",data:e.data}}},childrenBindings:function(){var e=this;return{visible:"$data.children ? $data.children : false",template:{name:"'"+this.getId()+"'",data:"$data.children"}}}})});

@@ -1,6 +1,9 @@
+/*!
+ * @author Steven Masala [me@smasala.com]
+ */
+
 /**
  * Base for inputs where multiple options are possible: checkboxes, radio and togglesbuttons for example
- * Extends: {{#crossLink "Firebrick.ui.components.fields.Input"}}{{/crossLink}}
  * @module ui.components
  * @extends ui.components.fields.Input
  * @namespace ui.components.common

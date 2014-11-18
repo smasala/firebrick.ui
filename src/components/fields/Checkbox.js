@@ -1,5 +1,8 @@
+/*!
+ * @author Steven Masala [me@smasala.com]
+ */
+
 /**
- * Extends: {{#crossLink "Firebrick.ui.components.fields.Radio"}}{{/crossLink}}
  * @module ui.components
  * @extends ui.components.fields.Radio
  * @namespace ui.components.fields

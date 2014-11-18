@@ -1,5 +1,8 @@
+/*!
+ * @author Steven Masala [me@smasala.com]
+ */
+
 /**
- * Extends: {{#crossLink "Firebrick.ui.components.fields.Input"}}{{/crossLink}}
  * @module ui.components
  * @extends ui.components.fields.Input
  * @namespace ui.components.fields

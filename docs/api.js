@@ -47,8 +47,7 @@ YUI.add("yuidoc-meta", function(Y) {
         },
         {
             "displayName": "ui.components",
-            "name": "ui.components",
-            "description": "Extends: {{#crossLink \"Firebrick.ui.components.common.Base\"}}{{/crossLink}}"
+            "name": "ui.components"
         }
     ]
 } };

@@ -1,7 +1,8 @@
 /*!
 * Firebrick UI
-* Author: Steven Masala
-* me@smasala.com
+* @author Steven Masala [me@smasala.com]
+* @version 0.4.2
+* 
 * FirebrickUI, component library for Firebrick JS
 **/
 (function(root, factory) {
