@@ -1,3 +1,13 @@
+v0.5.5
+----------------------------
+* panel content is by default text and passed through fb.text('') - change parameter "contentTextual" to false otherwise
+** same for display.Text
+** input
+* grid auto bug fix as build was called before parent was set  - fixes error: "me._parent is undefined"
+* new component navlist - list with links
+* fix bug where components were delcared with Firebrick.create and not Firebrick.define - this could lead to occasional "too much recursion" or "max stack size reached" errors
+* placeholder bug fix - displayed "false" instead of ""
+
 v0.4.2
 ----------------------------
 * minor bug fix when container component has no items

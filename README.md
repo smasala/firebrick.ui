@@ -1,4 +1,4 @@
-#Firebrick UI v0.4.2 Stable
+#Firebrick UI v0.5.5 Stable
 
 UI extendable component library built for:
 

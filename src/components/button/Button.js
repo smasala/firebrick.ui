@@ -9,7 +9,7 @@
  * @class Button
  */
 define(["text!./Button.html", "../common/Base"], function(tpl){
-	return Firebrick.create("Firebrick.ui.button.Button", {
+	return Firebrick.define("Firebrick.ui.button.Button", {
 		extend:"Firebrick.ui.common.Base",
 		uiName: "fb-ui-button",
 		tpl:tpl,

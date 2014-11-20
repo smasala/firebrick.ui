@@ -9,7 +9,7 @@
  * @class GridColumn
  */
 define(["text!./GridColumn.html", "./Base"], function(tpl){
-	return Firebrick.create("Firebrick.ui.containers.GridColumn", {
+	return Firebrick.define("Firebrick.ui.containers.GridColumn", {
 		extend:"Firebrick.ui.containers.Base",
 		/**
 		 * @property uiName

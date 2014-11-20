@@ -9,7 +9,7 @@
  * @class Header
  */
 define(["text!./Header.html", "../common/Base"], function(tpl){
-	return Firebrick.create("Firebrick.ui.display.Header", {
+	return Firebrick.define("Firebrick.ui.display.Header", {
 		extend:"Firebrick.ui.common.Base",
 		/**
 		 * @property uiName

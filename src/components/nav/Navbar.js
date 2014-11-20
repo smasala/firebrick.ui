@@ -4,13 +4,13 @@
 
 /**
  * @module Firebrick.ui.components
- * @extends components.display.List
- * @namespace components.display
+ * @extends components.nav.List
+ * @namespace components.nav
  * @class Navbar
  */
-define(["text!./Navbar.html", "handlebars", "../common/Base", "../display/List"], function(tpl, Handlebars){
-	return Firebrick.create("Firebrick.ui.display.Navbar", {
-		extend:"Firebrick.ui.display.List",
+define(["text!./Navbar.html", "handlebars", "../common/Base", "./List"], function(tpl, Handlebars){
+	return Firebrick.define("Firebrick.ui.nav.Navbar", {
+		extend:"Firebrick.ui.nav.List",
 		tpl:tpl,
 		uiName:"fb-ui-navbar",
 		/**
@@ -102,22 +102,6 @@ define(["text!./Navbar.html", "handlebars", "../common/Base", "../display/List"]
 		 */
 		navClass: true,
 		/**
-		 * overriding property from list
-		 * @property preItemTpl
-		 * @type {String}
-		 * @default "<a data-bind="{{data-bind 'navLinkBindings'}}">"
-		 */
-		preItemTpl:function(){
-			return Handlebars.compile('<a data-bind="{{data-bind \'navLinkBindings\'}}">')(this);
-		},
-		/**
-		 * overriding property from list
-		 * @property postItemTpl
-		 * @type {String}
-		 * @default "</a>"
-		 */
-		postItemTpl:"</a>",
-		/**
 		 * @method navBindings
 		 * @return {Object}
 		 */
@@ -191,19 +175,6 @@ define(["text!./Navbar.html", "handlebars", "../common/Base", "../display/List"]
 				css: {
 					active: "$data.active ? $data.active : false"
 				}
-			};
-			return obj;
-		},
-		/**
-		 * @method navLinkBindings
-		 * @return {Object}
-		 */
-		navLinkBindings: function(){
-			var me = this,
-				obj = {
-					attr:{
-						href: "$data.link ? $data.link : ''"
-					}
 			};
 			return obj;
 		},

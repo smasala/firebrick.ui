@@ -9,7 +9,7 @@ define(function(){
 			"jquery": "../bower_components/jquery/dist/jquery",
 			"knockout": "../bower_components/knockoutjs/dist/knockout",
 			"knockout-mapping": "../bower_components/knockout-mapping/knockout.mapping",
-			"firebrick": "../bower_components/firebrick/dist/firebrick",
+			"firebrick": "../bower_components/firebrick/src/firebrick",
 			"bootstrap": "../bower_components/bootstrap/dist/js/bootstrap.min",
 			"text": "../bower_components/text/text",
 			"firebrick-ui": "../bower_components/firebrick.ui/src/firebrick.ui",

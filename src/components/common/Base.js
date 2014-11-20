@@ -166,7 +166,6 @@ define(["handlebars"], function(Handlebars){
 					return p;
 				}
 			}
-		  
 			return this._getParent(p);
 		},
 		/**

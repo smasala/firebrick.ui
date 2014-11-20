@@ -9,7 +9,7 @@
  * @class Text
  */
 define(["text!./Text.html", "../common/Base"], function(tpl){
-	return Firebrick.create("Firebrick.ui.display.Text", {
+	return Firebrick.define("Firebrick.ui.display.Text", {
 		extend: "Firebrick.ui.common.Base",
 		/**
 		 * @property uiName
@@ -92,7 +92,7 @@ define(["text!./Text.html", "../common/Base"], function(tpl){
 			if(me.html){
 				obj.html = me.text; 
 			}else if(me.text){
-				obj.text = me.text;
+				obj.text = "fb.text('" + me.text + "')";
 			}
 			
 			return obj;

@@ -19,7 +19,7 @@
             
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 0.4.2</em>
+            <em>API Docs for: 0.5.5</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -63,8 +63,6 @@
             
                 <li><a href="../classes/components.display.List.html">components.display.List</a></li>
             
-                <li><a href="../classes/components.display.Navbar.html">components.display.Navbar</a></li>
-            
                 <li><a href="../classes/components.display.Text.html">components.display.Text</a></li>
             
                 <li><a href="../classes/components.fields.Base.html">components.fields.Base</a></li>
@@ -82,6 +80,10 @@
                 <li><a href="../classes/components.fields.TextArea.html">components.fields.TextArea</a></li>
             
                 <li><a href="../classes/components.nav.Breadcrumbs.html">components.nav.Breadcrumbs</a></li>
+            
+                <li><a href="../classes/components.nav.List.html">components.nav.List</a></li>
+            
+                <li><a href="../classes/components.nav.Navbar.html">components.nav.Navbar</a></li>
             
                 <li><a href="../classes/components.nav.Pagination.html">components.nav.Pagination</a></li>
             
@@ -147,7 +149,6 @@
 /*!
 * Firebrick UI
 * @author Steven Masala [me@smasala.com]
-* @version 0.4.2
 * 
 * FirebrickUI, component library for Firebrick JS
 **/
@@ -186,7 +187,7 @@
 			 * @private
 			 * @type {String}
 			 */
-			version: &quot;0.4.2&quot;,
+			version: &quot;0.5.5&quot;,
 			
 			/**
 			 * used to cache pointers to classes when searching by &quot;uiName&quot;
@@ -266,9 +267,14 @@
 							//v is already a field class
 							component = v;
 						}
+						//sometimes needed before build - grid column for example
+						component._parent = parent;
 						h += component.build();
 					}
-					component._parent = parent;
+					if(!component._parent){
+						//if not set yet
+						component._parent = parent;
+					}
 					x.push(component);
 				});
 				

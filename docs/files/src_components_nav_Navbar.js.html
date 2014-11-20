@@ -19,7 +19,7 @@
             
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 0.4.2</em>
+            <em>API Docs for: 0.5.5</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -63,8 +63,6 @@
             
                 <li><a href="../classes/components.display.List.html">components.display.List</a></li>
             
-                <li><a href="../classes/components.display.Navbar.html">components.display.Navbar</a></li>
-            
                 <li><a href="../classes/components.display.Text.html">components.display.Text</a></li>
             
                 <li><a href="../classes/components.fields.Base.html">components.fields.Base</a></li>
@@ -82,6 +80,10 @@
                 <li><a href="../classes/components.fields.TextArea.html">components.fields.TextArea</a></li>
             
                 <li><a href="../classes/components.nav.Breadcrumbs.html">components.nav.Breadcrumbs</a></li>
+            
+                <li><a href="../classes/components.nav.List.html">components.nav.List</a></li>
+            
+                <li><a href="../classes/components.nav.Navbar.html">components.nav.Navbar</a></li>
             
                 <li><a href="../classes/components.nav.Pagination.html">components.nav.Pagination</a></li>
             
@@ -150,13 +152,13 @@
 
 /**
  * @module Firebrick.ui.components
- * @extends components.display.List
- * @namespace components.display
+ * @extends components.nav.List
+ * @namespace components.nav
  * @class Navbar
  */
-define([&quot;text!./Navbar.html&quot;, &quot;handlebars&quot;, &quot;../common/Base&quot;, &quot;../display/List&quot;], function(tpl, Handlebars){
-	return Firebrick.create(&quot;Firebrick.ui.display.Navbar&quot;, {
-		extend:&quot;Firebrick.ui.display.List&quot;,
+define([&quot;text!./Navbar.html&quot;, &quot;handlebars&quot;, &quot;../common/Base&quot;, &quot;./List&quot;], function(tpl, Handlebars){
+	return Firebrick.define(&quot;Firebrick.ui.nav.Navbar&quot;, {
+		extend:&quot;Firebrick.ui.nav.List&quot;,
 		tpl:tpl,
 		uiName:&quot;fb-ui-navbar&quot;,
 		/**
@@ -248,22 +250,6 @@ define([&quot;text!./Navbar.html&quot;, &quot;handlebars&quot;, &quot;../common/
 		 */
 		navClass: true,
 		/**
-		 * overriding property from list
-		 * @property preItemTpl
-		 * @type {String}
-		 * @default &quot;&lt;a data-bind=&quot;{{data-bind &#x27;navLinkBindings&#x27;}}&quot;&gt;&quot;
-		 */
-		preItemTpl:function(){
-			return Handlebars.compile(&#x27;&lt;a data-bind=&quot;{{data-bind \&#x27;navLinkBindings\&#x27;}}&quot;&gt;&#x27;)(this);
-		},
-		/**
-		 * overriding property from list
-		 * @property postItemTpl
-		 * @type {String}
-		 * @default &quot;&lt;/a&gt;&quot;
-		 */
-		postItemTpl:&quot;&lt;/a&gt;&quot;,
-		/**
 		 * @method navBindings
 		 * @return {Object}
 		 */
@@ -337,19 +323,6 @@ define([&quot;text!./Navbar.html&quot;, &quot;handlebars&quot;, &quot;../common/
 				css: {
 					active: &quot;$data.active ? $data.active : false&quot;
 				}
-			};
-			return obj;
-		},
-		/**
-		 * @method navLinkBindings
-		 * @return {Object}
-		 */
-		navLinkBindings: function(){
-			var me = this,
-				obj = {
-					attr:{
-						href: &quot;$data.link ? $data.link : &#x27;&#x27;&quot;
-					}
 			};
 			return obj;
 		},

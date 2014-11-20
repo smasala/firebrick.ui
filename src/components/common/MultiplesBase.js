@@ -10,7 +10,7 @@
  * @class MultiplesBase
  */
 define(["../fields/Input"], function(subTpl){
-	return Firebrick.create("Firebrick.ui.common.MultiplesBase", {
+	return Firebrick.define("Firebrick.ui.common.MultiplesBase", {
 		extend:"Firebrick.ui.fields.Input",
 		/**
 		 * @method fieldBindings

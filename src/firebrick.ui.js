@@ -1,7 +1,6 @@
 /*!
 * Firebrick UI
 * @author Steven Masala [me@smasala.com]
-* @version 0.4.2
 * 
 * FirebrickUI, component library for Firebrick JS
 **/
@@ -40,7 +39,7 @@
 			 * @private
 			 * @type {String}
 			 */
-			version: "0.4.2",
+			version: "0.5.5",
 			
 			/**
 			 * used to cache pointers to classes when searching by "uiName"
@@ -120,9 +119,14 @@
 							//v is already a field class
 							component = v;
 						}
+						//sometimes needed before build - grid column for example
+						component._parent = parent;
 						h += component.build();
 					}
-					component._parent = parent;
+					if(!component._parent){
+						//if not set yet
+						component._parent = parent;
+					}
 					x.push(component);
 				});
 				

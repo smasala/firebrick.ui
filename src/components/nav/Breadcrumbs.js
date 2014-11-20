@@ -9,7 +9,7 @@
  * @class Breadcrumbs
  */
 define(["../display/List"], function(){
-	return Firebrick.create("Firebrick.ui.display.Breadcrumbs", {
+	return Firebrick.define("Firebrick.ui.display.Breadcrumbs", {
 		extend:"Firebrick.ui.display.List",
 		uiName:"fb-ui-breadcrumbs",
 		listType: "ol",

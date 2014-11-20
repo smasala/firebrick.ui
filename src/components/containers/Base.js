@@ -20,9 +20,9 @@ define(["jquery", "../common/Base"], function($){
 				var items = me.items,
 					args = arguments;
 				if($.isArray(items)){
-					$.each(items, function(i,f){
-						if(f.passEvent){
-							f.passEvent(args);
+					$.each(items, function(i,cmp){
+						if(cmp.passEvent && !cmp.didit){
+							cmp.passEvent(args);
 						}
 					});
 				}
@@ -40,14 +40,14 @@ define(["jquery", "../common/Base"], function($){
 			if($.isPlainObject(r)){
 				me.items = r.items;
 			}
-			return r.html || r;
+			return r ? r.html || r : "";
 		},
 		/**
 		 * use getItems
 		 * @private
 		 * @method _getItems
 		 * @param {Object} items
-		 * @return {String}
+		 * @return {Object, Null} object - {html:"", items:[]}
 		 */
 		_getItems: function(items){
 			var me = this;
@@ -57,7 +57,7 @@ define(["jquery", "../common/Base"], function($){
 				}
 				return Firebrick.ui._populate(items, me);
 			}
-			return "";
+			return null;
 		}
 	});
 });

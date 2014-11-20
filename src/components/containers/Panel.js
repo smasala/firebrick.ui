@@ -66,6 +66,13 @@ define(["text!./Panel.html", "./Base"], function(tpl){
 		 */
 		content: "",
 		/**
+		 * whether the content is just text
+		 * @property contentTextual
+		 * @type {Boolean}
+		 * @default true
+		 */
+		contentTextual: true,
+		/**
 		 * @property collapsible
 		 * @type {Boolean|String}
 		 * @default false
@@ -165,7 +172,7 @@ define(["text!./Panel.html", "./Base"], function(tpl){
 					};
 			
 			if(!me.items && me.content){
-				obj.html = me.content;
+				obj.html = me.contentTextual ? "fb.text('" + me.content + "')" : me.content;
 			}
 			return obj;
 		}

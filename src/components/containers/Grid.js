@@ -9,7 +9,7 @@
  * @class Grid
  */
 define(["text!./Grid.html", "jquery", "./Base"], function(tpl, $){
-	return Firebrick.create("Firebrick.ui.containers.Grid", {
+	return Firebrick.define("Firebrick.ui.containers.Grid", {
 		extend:"Firebrick.ui.containers.Base",
 		/**
 		 * @property uiName
@@ -66,13 +66,17 @@ define(["text!./Grid.html", "jquery", "./Base"], function(tpl, $){
 			var me = context.data.root,
 				newItem = me._getItems(item);
 			
-			me.items[index] = newItem.items[0];
-			
-			if(!$.isPlainObject(item)){
-				return '<div data-bind="' + Firebrick.ui.utils.stringify(me.getBasicBindings()) + '">' + newItem.html + '</div>';
+			if(newItem){
+				//replace items with the new object - _getItems returns an object {html:"", items:[]}
+				me.items[index] = newItem.items[0];
+				
+				if(!$.isPlainObject(item)){
+					return '<div data-bind="' + Firebrick.ui.utils.stringify(me.getBasicBindings()) + '">' + newItem.html + '</div>';
+				}
+				
+				return newItem.html;
 			}
-			
-			return newItem.html;
+			return "";
 		}
 	});
 });

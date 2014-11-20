@@ -9,7 +9,7 @@
  * @class Pagination
  */
 define(["../display/List"], function(){
-	return Firebrick.create("Firebrick.ui.display.Pagination", {
+	return Firebrick.define("Firebrick.ui.display.Pagination", {
 		extend:"Firebrick.ui.display.List",
 		uiName:"fb-ui-pagination",
 		/**

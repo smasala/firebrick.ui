@@ -9,7 +9,7 @@
  * @class ToggleButton
  */
 define(["text!./ToggleButton.html", "../common/MultiplesBase"], function(subTpl){
-	return Firebrick.create("Firebrick.ui.button.ToggleButton", {
+	return Firebrick.define("Firebrick.ui.button.ToggleButton", {
 		extend:"Firebrick.ui.common.MultiplesBase",
 		/**
 		 * component alias

@@ -115,10 +115,10 @@ define(["text!./Base.html", "../common/Base", "x-editable", "knockout-x-editable
 		helpBlockClass:"help-block",
 		/**
 		 * @property placeholder
-		 * @type {Boolean|String}
-		 * @default false
+		 * @type {String}
+		 * @default ""
 		 */
-		placeholder:false,
+		placeholder:"",
 		/**
 		 * @property showStateIcon
 		 * @type {Boolean}
@@ -271,7 +271,7 @@ define(["text!./Base.html", "../common/Base", "x-editable", "knockout-x-editable
 				}
 			}else{
 				obj.css["'form-control'"] = me.inputClass;
-				obj.attr.placeholder = me.placeholder
+				obj.attr.placeholder = "fb.text('" + me.placeholder + "')"
 			}
 			
 			return obj;

@@ -9,7 +9,7 @@
  * @class SelectBox
  */
 define(["text!./SelectBox.html", "jquery", "./Input"], function(subTpl, $){
-	return Firebrick.create("Firebrick.ui.fields.SelectBox", {
+	return Firebrick.define("Firebrick.ui.fields.SelectBox", {
 		extend:'Firebrick.ui.fields.Input',
 		/**
 		 * @property uiName
