@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>plugins - Firebrick UI API</title>
+    <title>src\components\nav\List.js - Firebrick UI API</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -142,49 +142,56 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-                        <h1>plugins Module</h1>
-<div class="box clearfix meta">
-    
+                        <h1 class="file-heading">File: src\components\nav\List.js</h1>
 
-    
+<div class="file">
+    <pre class="code prettyprint linenums">
+/*!
+ * @author Steven Masala [me@smasala.com]
+ */
 
-    
-        <div class="foundat">
-            Defined in: <a href="../files/src_components_fields_plugins_Radio.js.html#l26"><code>src\components\fields\plugins\Radio.js:26</code></a>
-        </div>
-    
-
-    
-</div>
-
-
-
-<div class="box intro">
-    
-</div>
-
-
-
-<div class="yui3-g">
-    <div class="yui3-u-1-2">
-        
-            <p>This module provides the following classes:</p>
-
-            <ul class="module-classes">
-            
-                <li class="module-class">
-                    <a href="../classes/plugins.RadioList.html">
-                        plugins.RadioList
-                    </a>
-                </li>
-            
-            </ul>
-        
-    </div>
-
-    <div class="yui3-u-1-2">
-        
-    </div>
+/**
+ * @module Firebrick.ui.components
+ * @extends components.display.List
+ * @namespace components.nav
+ * @class List
+ */
+define([&quot;handlebars&quot;, &quot;../display/List&quot;], function(Handlebars){
+	return Firebrick.define(&quot;Firebrick.ui.nav.List&quot;, {
+		extend: &quot;Firebrick.ui.display.List&quot;, 
+		uiName:&quot;fb-ui-navlist&quot;,
+		/**
+		 * overriding property from list
+		 * @property preItemTpl
+		 * @type {String}
+		 * @default &quot;&lt;a data-bind=&quot;{{data-bind &#x27;navLinkBindings&#x27;}}&quot;&gt;&quot;
+		 */
+		preItemTpl:function(){
+			return Handlebars.compile(&#x27;&lt;a data-bind=&quot;{{data-bind \&#x27;navLinkBindings\&#x27;}}&quot;&gt;&#x27;)(this);
+		},
+		/**
+		 * overriding property from list
+		 * @property postItemTpl
+		 * @type {String}
+		 * @default &quot;&lt;/a&gt;&quot;
+		 */
+		postItemTpl:&quot;&lt;/a&gt;&quot;,
+		/**
+		 * @method navLinkBindings
+		 * @return {Object}
+		 */
+		navLinkBindings: function(){
+			var me = this,
+				obj = {
+					attr:{
+						href: &quot;$data.link ? $data.link : &#x27;&#x27;&quot;
+					}
+			};
+			return obj;
+		}
+	});
+})
+    </pre>
 </div>
 
                     </div>

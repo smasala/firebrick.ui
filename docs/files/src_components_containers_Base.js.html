@@ -19,7 +19,7 @@
             
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 0.4.2</em>
+            <em>API Docs for: 0.5.5</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -63,8 +63,6 @@
             
                 <li><a href="../classes/components.display.List.html">components.display.List</a></li>
             
-                <li><a href="../classes/components.display.Navbar.html">components.display.Navbar</a></li>
-            
                 <li><a href="../classes/components.display.Text.html">components.display.Text</a></li>
             
                 <li><a href="../classes/components.fields.Base.html">components.fields.Base</a></li>
@@ -82,6 +80,10 @@
                 <li><a href="../classes/components.fields.TextArea.html">components.fields.TextArea</a></li>
             
                 <li><a href="../classes/components.nav.Breadcrumbs.html">components.nav.Breadcrumbs</a></li>
+            
+                <li><a href="../classes/components.nav.List.html">components.nav.List</a></li>
+            
+                <li><a href="../classes/components.nav.Navbar.html">components.nav.Navbar</a></li>
             
                 <li><a href="../classes/components.nav.Pagination.html">components.nav.Pagination</a></li>
             
@@ -166,9 +168,9 @@ define([&quot;jquery&quot;, &quot;../common/Base&quot;], function($){
 				var items = me.items,
 					args = arguments;
 				if($.isArray(items)){
-					$.each(items, function(i,f){
-						if(f.passEvent){
-							f.passEvent(args);
+					$.each(items, function(i,cmp){
+						if(cmp.passEvent &amp;&amp; !cmp.didit){
+							cmp.passEvent(args);
 						}
 					});
 				}
@@ -186,14 +188,14 @@ define([&quot;jquery&quot;, &quot;../common/Base&quot;], function($){
 			if($.isPlainObject(r)){
 				me.items = r.items;
 			}
-			return r.html || r;
+			return r ? r.html || r : &quot;&quot;;
 		},
 		/**
 		 * use getItems
 		 * @private
 		 * @method _getItems
 		 * @param {Object} items
-		 * @return {String}
+		 * @return {Object, Null} object - {html:&quot;&quot;, items:[]}
 		 */
 		_getItems: function(items){
 			var me = this;
@@ -203,7 +205,7 @@ define([&quot;jquery&quot;, &quot;../common/Base&quot;], function($){
 				}
 				return Firebrick.ui._populate(items, me);
 			}
-			return &quot;&quot;;
+			return null;
 		}
 	});
 });

@@ -19,7 +19,7 @@
             
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 0.4.2</em>
+            <em>API Docs for: 0.5.5</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -63,8 +63,6 @@
             
                 <li><a href="../classes/components.display.List.html">components.display.List</a></li>
             
-                <li><a href="../classes/components.display.Navbar.html">components.display.Navbar</a></li>
-            
                 <li><a href="../classes/components.display.Text.html">components.display.Text</a></li>
             
                 <li><a href="../classes/components.fields.Base.html">components.fields.Base</a></li>
@@ -82,6 +80,10 @@
                 <li><a href="../classes/components.fields.TextArea.html">components.fields.TextArea</a></li>
             
                 <li><a href="../classes/components.nav.Breadcrumbs.html">components.nav.Breadcrumbs</a></li>
+            
+                <li><a href="../classes/components.nav.List.html">components.nav.List</a></li>
+            
+                <li><a href="../classes/components.nav.Navbar.html">components.nav.Navbar</a></li>
             
                 <li><a href="../classes/components.nav.Pagination.html">components.nav.Pagination</a></li>
             
@@ -155,7 +157,7 @@
  * @class Grid
  */
 define([&quot;text!./Grid.html&quot;, &quot;jquery&quot;, &quot;./Base&quot;], function(tpl, $){
-	return Firebrick.create(&quot;Firebrick.ui.containers.Grid&quot;, {
+	return Firebrick.define(&quot;Firebrick.ui.containers.Grid&quot;, {
 		extend:&quot;Firebrick.ui.containers.Base&quot;,
 		/**
 		 * @property uiName
@@ -212,13 +214,17 @@ define([&quot;text!./Grid.html&quot;, &quot;jquery&quot;, &quot;./Base&quot;], f
 			var me = context.data.root,
 				newItem = me._getItems(item);
 			
-			me.items[index] = newItem.items[0];
-			
-			if(!$.isPlainObject(item)){
-				return &#x27;&lt;div data-bind=&quot;&#x27; + Firebrick.ui.utils.stringify(me.getBasicBindings()) + &#x27;&quot;&gt;&#x27; + newItem.html + &#x27;&lt;/div&gt;&#x27;;
+			if(newItem){
+				//replace items with the new object - _getItems returns an object {html:&quot;&quot;, items:[]}
+				me.items[index] = newItem.items[0];
+				
+				if(!$.isPlainObject(item)){
+					return &#x27;&lt;div data-bind=&quot;&#x27; + Firebrick.ui.utils.stringify(me.getBasicBindings()) + &#x27;&quot;&gt;&#x27; + newItem.html + &#x27;&lt;/div&gt;&#x27;;
+				}
+				
+				return newItem.html;
 			}
-			
-			return newItem.html;
+			return &quot;&quot;;
 		}
 	});
 });

@@ -19,7 +19,7 @@
             
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 0.4.2</em>
+            <em>API Docs for: 0.5.5</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -63,8 +63,6 @@
             
                 <li><a href="../classes/components.display.List.html">components.display.List</a></li>
             
-                <li><a href="../classes/components.display.Navbar.html">components.display.Navbar</a></li>
-            
                 <li><a href="../classes/components.display.Text.html">components.display.Text</a></li>
             
                 <li><a href="../classes/components.fields.Base.html">components.fields.Base</a></li>
@@ -82,6 +80,10 @@
                 <li><a href="../classes/components.fields.TextArea.html">components.fields.TextArea</a></li>
             
                 <li><a href="../classes/components.nav.Breadcrumbs.html">components.nav.Breadcrumbs</a></li>
+            
+                <li><a href="../classes/components.nav.List.html">components.nav.List</a></li>
+            
+                <li><a href="../classes/components.nav.Navbar.html">components.nav.Navbar</a></li>
             
                 <li><a href="../classes/components.nav.Pagination.html">components.nav.Pagination</a></li>
             
@@ -261,10 +263,10 @@ define([&quot;text!./Base.html&quot;, &quot;../common/Base&quot;, &quot;x-editab
 		helpBlockClass:&quot;help-block&quot;,
 		/**
 		 * @property placeholder
-		 * @type {Boolean|String}
-		 * @default false
+		 * @type {String}
+		 * @default &quot;&quot;
 		 */
-		placeholder:false,
+		placeholder:&quot;&quot;,
 		/**
 		 * @property showStateIcon
 		 * @type {Boolean}
@@ -417,7 +419,7 @@ define([&quot;text!./Base.html&quot;, &quot;../common/Base&quot;, &quot;x-editab
 				}
 			}else{
 				obj.css[&quot;&#x27;form-control&#x27;&quot;] = me.inputClass;
-				obj.attr.placeholder = me.placeholder
+				obj.attr.placeholder = &quot;fb.text(&#x27;&quot; + me.placeholder + &quot;&#x27;)&quot;
 			}
 			
 			return obj;
