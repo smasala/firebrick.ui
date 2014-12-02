@@ -16,6 +16,14 @@
 		"c"
 	],
 	"navs": [{"text":"Home", "active": true, "link":"#"}, {"text":"About", "link":"#"}, {"text":"Contact", "link":"#"}],
+	"navs1": [	{"text":"Home", "active": true, "link":"#"}, 
+				{"text":"About", "link":"#", 
+									"children":[
+												{"text":"Home1", "link":"#"},
+												{"text":"About1", "link":"#"}
+											]
+				}, 
+				{"text":"Contact", "link":"#"}],
 	"superedit": [
 		           {"uiName":"fb-ui-input"},
 		           "fb-ui-email",

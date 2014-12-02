@@ -1,18 +1,18 @@
 <nav data-bind="{{data-bind 'navBindings'}}">
 	<div data-bind="{{data-bind 'navbarHeaderContainerBindings'}}">
 		<div data-bind="{{data-bind 'navbarHeaderBindings'}}">
-			{{#toggleButton}}
+			{{#if toggleButton}}
 				<button data-bind="{{data-bind 'toggleButtonBindings'}}">
 		         	<span class="sr-only" data-bind="{{data-bind 'toggleTextBindings'}}"></span>
 		         	<span class="icon-bar"></span>
 		         	<span class="icon-bar"></span>
 		         	<span class="icon-bar"></span>
 	       		</button>
-       		{{/toggleButton}}
+       		{{/if}}
       	<a data-bind="{{data-bind 'brandBindings'}}">{{{brandTpl}}}</a>
 	</div>
 		<div data-bind="{{data-bind 'navbarContainerBindings'}}">
      		{{{getParentTpl}}}
-     	</div><!--/.nav-collapse -->
+     	</div>
 	</div>
 </nav>

@@ -1,4 +1,4 @@
-#Firebrick UI v0.5.5 Stable
+#Firebrick UI 0.7.7 Stable
 
 UI extendable component library built for:
 
@@ -23,9 +23,6 @@ Checkout the [Component ] (http://demo-ui.firebrickjs.com) demo
 
 * HEAD
 ```
-	<!-- Application -->
-	<script data-main="app/main" src="bower_components/requirejs/require.js"></script>
-	
 	<!-- Bootstrap -->
 	<link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
 	<link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap-theme.css" />
@@ -36,13 +33,20 @@ Checkout the [Component ] (http://demo-ui.firebrickjs.com) demo
 	<!-- TreeTables -->
 	<link rel="stylesheet" href="bower_components/jquery-treetable/css/jquery.treetable.css" />
 	
+	<!-- Responsive Tables -->
+	<link rel="stylesheet" href="bower_components/responsive-tables-js/dist/responsivetables.css" />
+	
 	<!-- X-Editable -->
 	<link href="bower_components/x-editable/dist/bootstrap3-editable/css/bootstrap-editable.css" rel="stylesheet">
 	
 	<!-- Firebrick -->
 	<link rel="stylesheet" href="bower_components/firebrick/dist/firebrick.css" />
+	
 	<!-- Firebrick UI -->
 	<link rel="stylesheet" href="bower_components/firebrick.ui/dist/firebrick.ui.css" />
+	
+	<!-- Application -->
+	<script data-main="app/main" src="bower_components/requirejs/require.js"></script>
 ```
 
 * Create you application
@@ -50,11 +54,11 @@ Checkout the [Component ] (http://demo-ui.firebrickjs.com) demo
 ```
 require.config({
 	paths:{
-		"dependencies": "../bower_components/firebrick.ui/src/dependencies"
+		"configuration": "../bower_components/firebrick.ui/dist/configuration"
 	}
 });
 
-require(["dependencies"], function(){
+require(["configuration"], function(){
 	
 	require(["jquery", "firebrick", "firebrick-ui", "bootstrap"], function(){
 		Firebrick.ready({

@@ -38,7 +38,7 @@ define(["text!./SelectBox.html", "jquery", "./Input"], function(subTpl, $){
 		 * @type {String}
 		 * @default "'select'2
 		 */
-		dataType:"'select'",
+		dataType:"select",
 		/**
 		 * @property selectedOptions
 		 * @type {String}
@@ -76,7 +76,7 @@ define(["text!./SelectBox.html", "jquery", "./Input"], function(subTpl, $){
 						optionsValue:me.optionsValue,
 						optionsText:me.optionsText,
 						options:data,
-						type:me.dataType
+						type: me.parseBind( me.dataType )
 				}
 			}
 			return obj;

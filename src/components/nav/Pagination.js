@@ -29,7 +29,7 @@ define(["../display/List"], function(){
 				obj = this.callParent();
 			obj.css.pagination = true;
 			if(me.paginationSize){
-				obj.css["'pagination-"+me.paginationSize+"'"] = true;
+				obj.css[ me.parseBind("pagination-"+me.paginationSize) ] = true;
 			}
 			return obj;
 		}

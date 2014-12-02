@@ -19,7 +19,7 @@
             
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 0.5.5</em>
+            <em>API Docs for: 0.7.7</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -43,13 +43,21 @@
             
                 <li><a href="../classes/components.button.Button.html">components.button.Button</a></li>
             
+                <li><a href="../classes/components.button.dropdown.List.html">components.button.dropdown.List</a></li>
+            
+                <li><a href="../classes/components.button.Icon.html">components.button.Icon</a></li>
+            
                 <li><a href="../classes/components.button.ToggleButton.html">components.button.ToggleButton</a></li>
             
                 <li><a href="../classes/components.common.Base.html">components.common.Base</a></li>
             
+                <li><a href="../classes/components.common.mixins.@static Items.html">components.common.mixins.@static Items</a></li>
+            
                 <li><a href="../classes/components.common.MultiplesBase.html">components.common.MultiplesBase</a></li>
             
                 <li><a href="../classes/components.containers.Base.html">components.containers.Base</a></li>
+            
+                <li><a href="../classes/components.containers.Box.html">components.containers.Box</a></li>
             
                 <li><a href="../classes/components.containers.Form.html">components.containers.Form</a></li>
             
@@ -61,15 +69,19 @@
             
                 <li><a href="../classes/components.display.Header.html">components.display.Header</a></li>
             
+                <li><a href="../classes/components.display.Image.html">components.display.Image</a></li>
+            
                 <li><a href="../classes/components.display.List.html">components.display.List</a></li>
             
-                <li><a href="../classes/components.display.Text.html">components.display.Text</a></li>
+                <li><a href="../classes/components.display.Progress.html">components.display.Progress</a></li>
             
-                <li><a href="../classes/components.fields.Base.html">components.fields.Base</a></li>
+                <li><a href="../classes/components.display.Text.html">components.display.Text</a></li>
             
                 <li><a href="../classes/components.fields.Checkbox.html">components.fields.Checkbox</a></li>
             
                 <li><a href="../classes/components.fields.Email.html">components.fields.Email</a></li>
+            
+                <li><a href="../classes/components.fields.File.html">components.fields.File</a></li>
             
                 <li><a href="../classes/components.fields.Input.html">components.fields.Input</a></li>
             
@@ -211,9 +223,21 @@ define([&quot;handlebars&quot;], function(Handlebars){
 		 * cache
 		 * @property _build
 		 * @private
+		 * @type {String}
 		 * @default &quot;&quot;
 		 */
 		_build:&quot;&quot;,
+		/**
+		 * compiled handles bars function
+		 * @property _template
+		 * @private
+		 * @type {Object}
+		 * @default null
+		 */
+		_template: null,
+		/**
+		 * 
+		 */
 		/**
 		 * template
 		 * @property tpl
@@ -259,7 +283,8 @@ define([&quot;handlebars&quot;], function(Handlebars){
 		build: function(prop){
 			var me = this;
 			if(!me._build){
-				me._build = Handlebars.compile(prop ? me[prop] : me.tpl)(me);
+				me._template = Handlebars.compile(prop ? me[prop] : me.tpl);
+				me._build = me._template(me);
 			}
 			return me._build;
 		},
@@ -341,6 +366,15 @@ define([&quot;handlebars&quot;], function(Handlebars){
 		 */
 		cleanString: function(string){
 			return string.replace(/\&#x27;/g, &quot;&quot;);
+		},
+		/**
+		 * attach &#x27; to the start and end of the string for KO binds
+		 * @method parseBind
+		 * @param  {String} str
+		 * @return {String} &quot;&#x27;&quot; + str + &quot;&#x27;&quot;
+		 */
+		parseBind: function(str){
+			return &quot;&#x27;&quot; + str + &quot;&#x27;&quot;;
 		}
 	});
 });

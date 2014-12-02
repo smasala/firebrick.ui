@@ -89,11 +89,12 @@
 			
 			/**
 			 * recursive function
-			 * 
+			 * create components and html from an array of items
 			 * @private
 			 * @method _populate
 			 * @return {Object} :: {html: string, items: array of objects}
 			 */
+			i:0,
 			_populate: function(items, parent){
 				var me = this,
 					x = [],
@@ -107,14 +108,16 @@
 						}
 						h += component.tpl;
 					}else if(v.viewName){
+						//Creates a view from a JS file
+						//Firebrick.create("MyApp.view.MyView", {})
 						component = Firebrick.create(v.viewName, v);
 						h += component.tpl;
 					}else{
 						if(!v.uiComponent){
 							//v can be string or object
-							tmp = me.getByShortName(($.isFunction(v.uiName) ? v.uiName() : v.uiName) || v);
-							//getPrototypeOf(object.create) to make a new copy of the object and not a prototype pointer to v
-							component = Firebrick.create(tmp._classname, (v.uiName ? Object.getPrototypeOf(Object.create(v)) : null) );
+							tmp = me.getByShortName(v.uiName || v);
+							//Object.getPrototypeOf(object.create) to make a new copy of the properties and not a pointer to v
+							component = Firebrick.create(tmp._classname, (v.uiName ? Object.getPrototypeOf(Object.create(v)) : null));
 						}else{
 							//v is already a field class
 							component = v;

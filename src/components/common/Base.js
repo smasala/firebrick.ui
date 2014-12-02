@@ -63,9 +63,21 @@ define(["handlebars"], function(Handlebars){
 		 * cache
 		 * @property _build
 		 * @private
+		 * @type {String}
 		 * @default ""
 		 */
 		_build:"",
+		/**
+		 * compiled handles bars function
+		 * @property _template
+		 * @private
+		 * @type {Object}
+		 * @default null
+		 */
+		_template: null,
+		/**
+		 * 
+		 */
 		/**
 		 * template
 		 * @property tpl
@@ -111,7 +123,8 @@ define(["handlebars"], function(Handlebars){
 		build: function(prop){
 			var me = this;
 			if(!me._build){
-				me._build = Handlebars.compile(prop ? me[prop] : me.tpl)(me);
+				me._template = Handlebars.compile(prop ? me[prop] : me.tpl);
+				me._build = me._template(me);
 			}
 			return me._build;
 		},
@@ -193,6 +206,15 @@ define(["handlebars"], function(Handlebars){
 		 */
 		cleanString: function(string){
 			return string.replace(/\'/g, "");
+		},
+		/**
+		 * attach ' to the start and end of the string for KO binds
+		 * @method parseBind
+		 * @param  {String} str
+		 * @return {String} "'" + str + "'"
+		 */
+		parseBind: function(str){
+			return "'" + str + "'";
 		}
 	});
 });

@@ -26,7 +26,7 @@ define(["../fields/Input"], function(subTpl){
 					css:{}
 				};
 				if(me.multiplesInline){
-					obj.css["'"+me.cleanString(me.type)+"-inline'"] = me.multiplesInline;
+					obj.css[ me.parseBind(me.cleanString(me.type)+"-inline")] = me.multiplesInline;
 				}
 				return obj;
 			}

@@ -33,6 +33,6 @@ define(["text!./TextArea.html", "./Input"], function(subTpl){
 		 * @type {String}
 		 * @default "'textarea'"
 		 */
-		dataType:"'textarea'"
+		dataType:"textarea"
 	})
 });

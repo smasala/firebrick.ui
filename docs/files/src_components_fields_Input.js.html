@@ -19,7 +19,7 @@
             
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 0.5.5</em>
+            <em>API Docs for: 0.7.7</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -43,13 +43,21 @@
             
                 <li><a href="../classes/components.button.Button.html">components.button.Button</a></li>
             
+                <li><a href="../classes/components.button.dropdown.List.html">components.button.dropdown.List</a></li>
+            
+                <li><a href="../classes/components.button.Icon.html">components.button.Icon</a></li>
+            
                 <li><a href="../classes/components.button.ToggleButton.html">components.button.ToggleButton</a></li>
             
                 <li><a href="../classes/components.common.Base.html">components.common.Base</a></li>
             
+                <li><a href="../classes/components.common.mixins.@static Items.html">components.common.mixins.@static Items</a></li>
+            
                 <li><a href="../classes/components.common.MultiplesBase.html">components.common.MultiplesBase</a></li>
             
                 <li><a href="../classes/components.containers.Base.html">components.containers.Base</a></li>
+            
+                <li><a href="../classes/components.containers.Box.html">components.containers.Box</a></li>
             
                 <li><a href="../classes/components.containers.Form.html">components.containers.Form</a></li>
             
@@ -61,15 +69,19 @@
             
                 <li><a href="../classes/components.display.Header.html">components.display.Header</a></li>
             
+                <li><a href="../classes/components.display.Image.html">components.display.Image</a></li>
+            
                 <li><a href="../classes/components.display.List.html">components.display.List</a></li>
             
-                <li><a href="../classes/components.display.Text.html">components.display.Text</a></li>
+                <li><a href="../classes/components.display.Progress.html">components.display.Progress</a></li>
             
-                <li><a href="../classes/components.fields.Base.html">components.fields.Base</a></li>
+                <li><a href="../classes/components.display.Text.html">components.display.Text</a></li>
             
                 <li><a href="../classes/components.fields.Checkbox.html">components.fields.Checkbox</a></li>
             
                 <li><a href="../classes/components.fields.Email.html">components.fields.Email</a></li>
+            
+                <li><a href="../classes/components.fields.File.html">components.fields.File</a></li>
             
                 <li><a href="../classes/components.fields.Input.html">components.fields.Input</a></li>
             
@@ -156,9 +168,9 @@
  * @namespace components.fields
  * @class Input
  */
-define([&quot;text!./Input.html&quot;, &quot;./Base&quot;], function(subTpl){
+define([&quot;text!./Base.html&quot;, &quot;text!./Input.html&quot;, &quot;../common/Base&quot;, &quot;x-editable&quot;, &quot;knockout-x-editable&quot;], function(tpl, subTpl){
 	return Firebrick.define(&quot;Firebrick.ui.fields.Input&quot;, {
-		extend:&quot;Firebrick.ui.fields.Base&quot;,
+		extend:&quot;Firebrick.ui.common.Base&quot;,
 		/**
 		 * @property uiName
 		 * @type {String}
@@ -172,10 +184,321 @@ define([&quot;text!./Input.html&quot;, &quot;./Base&quot;], function(subTpl){
 		/**
 		 * @property type
 		 * @type {String}
-		 * @default &quot;&#x27;text&#x27;&quot;
+		 * @default &quot;text&quot;
 		 */
-		type:&quot;&#x27;text&#x27;&quot;
-	})
+		type:&quot;text&quot;,
+		/**
+		 * @property label
+		 * @type {String}
+		 * @default &quot;&quot;
+		 */
+		label: &quot;&quot;,
+		/**
+		 * @property value
+		 * @type {String}
+		 * @default &quot;&#x27;&#x27;&quot;
+		 */
+		value: &quot;&#x27;&#x27;&quot;,
+		/**
+		 * @property tpl
+		 * @type {String} html
+		 */
+		tpl:tpl,
+		/**
+		 * @property formGroupClass
+		 * @type {String}
+		 * @default &quot;form-group&quot;
+		 */
+		formGroupClass: &quot;form-group&quot;,
+		/**
+		 * show form-control class
+		 * @property formControlClass
+		 * @type {String}
+		 * @default true
+		 */
+		formControlClass: true,
+		/**
+		 * @property colLabelSize
+		 * @type {Int}
+		 * @default 3
+		 */
+		colLabelSize: 3,
+		/**
+		 * @property colInputSize
+		 * @type {Int}
+		 * @default 9
+		 */
+		colInputSize: 9,
+		/**
+		 * @property deviceSize
+		 * @type {String}
+		 * @default &quot;sm&quot;
+		 */
+		deviceSize: &quot;sm&quot;,
+		/**
+		 * @property hideLabel
+		 * @type {Boolean}
+		 * @default false
+		 */
+		hideLabel: false,
+		/**
+		 * @property readOnly
+		 * @type {Boolean}
+		 * @default false
+		 */
+		readOnly:false,
+		/**
+		 * @property disabled
+		 * @type {Boolean}
+		 * @default false
+		 */
+		disabled:false,
+		/**
+		 * @property inputSize
+		 * @type {Boolean|String} string (sm || lg)
+		 * @default false
+		 */
+		inputSize:false,
+		/**
+		 * @property controlLabel
+		 * @type {Boolean}
+		 * @default true
+		 */
+		controlLabel:true,
+		/**
+		 * help text
+		 * @property helpText
+		 * @type {Boolean|String}
+		 * @default false
+		 */
+		helpText:false,
+		/**
+		 * help text
+		 * @property helpBlockClass
+		 * @type {String}
+		 * @default &quot;help-block&quot;
+		 */
+		helpBlockClass:&quot;help-block&quot;,
+		/**
+		 * @property placeholder
+		 * @type {String}
+		 * @default &quot;&quot;
+		 */
+		placeholder:&quot;&quot;,
+		/**
+		 * @property showStateIcon
+		 * @type {Boolean}
+		 * @default true
+		 */
+		showStateIcon:true,
+		/**
+		 * @property formControlFeedbackClass
+		 * @type {String}
+		 * @default &quot;form-control-feedback&quot;
+		 */
+		formControlFeedbackClass: &quot;form-control-feedback&quot;,
+		/**
+		 * input addon
+		 * @property inputAddon
+		 * @type {Boolean|String}
+		 * @default false
+		 */
+		inputAddon:false,
+		/**
+		 * @property inputAddonClass
+		 * @type {String}
+		 * @default &quot;&#x27;input-group-addon&#x27;&quot;
+		 */
+		inputAddonClass:&quot;&#x27;input-group-addon&#x27;&quot;,
+		/**
+		 * @property horizontal
+		 * @type {Boolean}
+		 * @default true
+		 */
+		horizontal:true,
+		/**
+		 * Feedback css bindings
+		 * @property feedback_success
+		 * @type {Boolean|String}
+		 * @default false
+		 */
+		feedback_success:false,
+		/**
+		 * Feedback css bindings
+		 * @property feedback_warning
+		 * @type {Boolean|String}
+		 * @default false
+		 */
+		feedback_warning:false,
+		/**
+		 * Feedback css bindings
+		 * @property feedback_error
+		 * @type {Boolean|String}
+		 * @default false
+		 */
+		feedback_error: false,
+		/**
+		 * @property multiplesInline
+		 * @type {Boolean|String}
+		 * @default false
+		 */
+		multiplesInline:false,
+		/**
+		 * @property inplaceEdit
+		 * @type {Boolean}
+		 * @default false
+		 */
+		inplaceEdit:false,
+		/**
+		 * @property showInplaceTitle
+		 * @type {Boolean}
+		 * @default true
+		 */
+		showInplaceTitle:true,
+		/**
+		 * if none specified then the name is set to that of this.type
+		 * @property name
+		 * @type {String}
+		 * @default &quot;&quot;
+		 */
+		name:&quot;&quot;,
+		/**
+		 * @method containerBindings
+		 * @return {Object}
+		 */
+		containerBindings:function(){
+			var me = this,
+				obj = { 
+					css: {
+						&quot;&#x27;has-success&#x27;&quot;: me.feedback_success,
+						&quot;&#x27;has-warning&#x27;&quot;: me.feedback_warning,
+						&quot;&#x27;has-error&#x27;&quot;: me.feedback_error,
+						&quot;&#x27;has-feedback&#x27;&quot;: me.feedback_success || me.feedback_warning || me.feedback_error,
+						&quot;&#x27;sr-only&#x27;&quot;: me.hideLabel
+					}
+				};
+			if(this.inputSize){
+				obj.css[me.parseBind(&quot;form-group-&quot; + me.inputSize)] = me.inputSize ? true : false;	
+			}
+			return obj;
+		},
+		/**
+		 * @method helpBlockBindings
+		 * @return {Object}
+		 */
+		helpBlockBindings: function(){
+			return {
+				text: &quot;fb.text(&#x27;&quot; + this.helpText + &quot;&#x27;)&quot;
+			}
+		},
+		/**
+		 * @method feedbackBindings
+		 * @return {Object}
+		 */
+		feedbackBindings:function(){
+			var me = this,
+				binds = {css:{}},
+				rootClass = &quot;&#x27;glyphicon-&quot;;
+			if(me.containerBindings &amp;&amp; me.containerBindings.css){
+				$.each(me.containerBindings.css, function(k,v){
+					if(v){
+						switch(k){
+							case &quot;&#x27;has-success&#x27;&quot;:
+								binds.css[rootClass + &quot;ok&#x27;&quot;] = v;
+								break;
+							case &quot;&#x27;has-warning&#x27;&quot;:
+								binds.css[rootClass + &quot;warning&#x27;&quot;] = v;
+								break;
+							case &quot;&#x27;has-error&#x27;&quot;:
+								binds.css[rootClass + &quot;remove&#x27;&quot;] = v;
+								break;
+						}
+					}
+				});
+			}
+			return binds;
+		},
+		/**
+		 * @method bindings
+		 * @return {Object}
+		 */
+		bindings:function(){
+			var me = this
+				type =  me.parseBind( me.type ),
+				obj = {
+					attr:{
+						disabled:me.disabled,
+						readonly:me.readOnly,
+						type: type,
+						name: me.name ?  me.parseBind( me.name ) : type
+					},
+					css:{},
+					value: me.value
+				};
+			
+			if(me.inplaceEdit){
+				obj.editableOptions = {};
+				obj.attr[&quot;&#x27;data-type&#x27;&quot;] = me.dataType ?  me.parseBind( me.dataType ) : type;
+				obj.editable = me.value;
+				if(me.showInplaceTitle || $.fn.editable.defaults.mode != &quot;inline&quot;){
+					obj.attr[&quot;&#x27;data-title&#x27;&quot;] = &quot;fb.text(&#x27;&quot; + (me.dataTitle || me.label) + &quot;&#x27;)&quot;;	
+				}
+			}else{
+				obj.css[&quot;&#x27;form-control&#x27;&quot;] = me.formControlClass;
+				obj.attr.placeholder = &quot;fb.text(&#x27;&quot; + me.placeholder + &quot;&#x27;)&quot;
+			}
+			
+			return obj;
+		},
+		/**
+		 * @method inputAddonBindings
+		 * @return {Object}
+		 */
+		inputAddonBindings: function(){
+			var me = this,
+				obj = {
+					text: me.inputAddon,
+					css:{}
+				};
+			if(me.inputAddon){
+				obj.css[me.inputAddonClass] = true;
+			}
+			return obj;
+		},
+		/**
+		 * @method labelBindings
+		 * @return {Object}
+		 */
+		labelBindings: function(){
+			var me = this,
+				obj = {
+					text: &quot;fb.text(&#x27;&quot;+me.label+&quot;&#x27;)&quot;,
+					css:{
+						&quot;&#x27;control-label&#x27;&quot;: me.controlLabel
+					}
+				};
+			if(me.horizontal){
+				obj.css[ me.parseBind(&quot;col-&quot; + me.deviceSize + &quot;-&quot; + me.colLabelSize )] = me.horizontal;
+			}
+			return obj;
+		},
+		/**
+		 * @method inputContainerBindings
+		 * @return {Object}
+		 */
+		inputContainerBindings: function(){
+			var me = this,
+				obj = {
+					css:{
+						&quot;&#x27;input-group&#x27;&quot;: me.inputAddon
+					}
+				};
+			if(me.horizontal){
+				obj.css[ me.parseBind( &quot;col-&quot; + me.deviceSize + &quot;-&quot; + me.colInputSize ) ] = me.horizontal;
+			}
+			return obj;
+		}
+	});
 });
     </pre>
 </div>

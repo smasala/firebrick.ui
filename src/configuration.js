@@ -17,15 +17,18 @@ define(function(){
 			"datatables": "../bower_components/datatables/media/js/jquery.dataTables",
 			"jquery-treetable": "../bower_components/jquery-treetable/jquery.treetable",
 			"x-editable": "../bower_components/x-editable/dist/bootstrap3-editable/js/bootstrap-editable",
-			"fb-ui-plugins": "../bower_components/firebrick-ui/plugins",
 			"knockout-x-editable": "../bower_components/knockout-x-editable/knockout.x-editable",
-			"Firebrick.ui": "../bower_components/firebrick.ui/src/components"
+			"Firebrick.ui": "../bower_components/firebrick.ui/src/components",
+			"responsive-images": "../bower_components/responsive-images/src/responsiveimages",
+			"responsive-tables-js": "../bower_components/responsive-tables-js/src/responsivetables" 
 		},
 		shim:{
 			"knockout-mapping": ["knockout"],
 			"bootstrap": ["jquery"],
 			"datatables": ["jquery"],
-			"x-editable": ["bootstrap"]
+			"x-editable": ["bootstrap"],
+			"responsive-images": ["jquery"],
+			"responsive-tables-js": ["jquery"]
 		}
 	});	
 });

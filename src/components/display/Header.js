@@ -93,7 +93,7 @@ define(["text!./Header.html", "../common/Base"], function(tpl){
 						}
 					};
 				if(me.labelCSS){
-					obj.css["'label-"+me.labelCSS+"'"] = true;
+					obj.css[ me.parseBind( "label-"+me.labelCSS ) ] = true;
 				}
 				return obj;
 			}else{

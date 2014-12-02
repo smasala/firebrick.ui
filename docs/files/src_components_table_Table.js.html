@@ -19,7 +19,7 @@
             
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 0.5.5</em>
+            <em>API Docs for: 0.7.7</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -43,13 +43,21 @@
             
                 <li><a href="../classes/components.button.Button.html">components.button.Button</a></li>
             
+                <li><a href="../classes/components.button.dropdown.List.html">components.button.dropdown.List</a></li>
+            
+                <li><a href="../classes/components.button.Icon.html">components.button.Icon</a></li>
+            
                 <li><a href="../classes/components.button.ToggleButton.html">components.button.ToggleButton</a></li>
             
                 <li><a href="../classes/components.common.Base.html">components.common.Base</a></li>
             
+                <li><a href="../classes/components.common.mixins.@static Items.html">components.common.mixins.@static Items</a></li>
+            
                 <li><a href="../classes/components.common.MultiplesBase.html">components.common.MultiplesBase</a></li>
             
                 <li><a href="../classes/components.containers.Base.html">components.containers.Base</a></li>
+            
+                <li><a href="../classes/components.containers.Box.html">components.containers.Box</a></li>
             
                 <li><a href="../classes/components.containers.Form.html">components.containers.Form</a></li>
             
@@ -61,15 +69,19 @@
             
                 <li><a href="../classes/components.display.Header.html">components.display.Header</a></li>
             
+                <li><a href="../classes/components.display.Image.html">components.display.Image</a></li>
+            
                 <li><a href="../classes/components.display.List.html">components.display.List</a></li>
             
-                <li><a href="../classes/components.display.Text.html">components.display.Text</a></li>
+                <li><a href="../classes/components.display.Progress.html">components.display.Progress</a></li>
             
-                <li><a href="../classes/components.fields.Base.html">components.fields.Base</a></li>
+                <li><a href="../classes/components.display.Text.html">components.display.Text</a></li>
             
                 <li><a href="../classes/components.fields.Checkbox.html">components.fields.Checkbox</a></li>
             
                 <li><a href="../classes/components.fields.Email.html">components.fields.Email</a></li>
+            
+                <li><a href="../classes/components.fields.File.html">components.fields.File</a></li>
             
                 <li><a href="../classes/components.fields.Input.html">components.fields.Input</a></li>
             
@@ -156,7 +168,7 @@
  * @namespace components.table
  * @class Table
  */
-define([&quot;jquery&quot;, &quot;text!./Table.html&quot;, &quot;../common/Base&quot;, &quot;datatables&quot;], function($, tpl){
+define([&quot;jquery&quot;, &quot;text!./Table.html&quot;, &quot;../common/Base&quot;, &quot;datatables&quot;, &quot;responsive-tables-js&quot;], function($, tpl){
 	return Firebrick.define(&quot;Firebrick.ui.table.Table&quot;, {
 		extend:&quot;Firebrick.ui.common.Base&quot;,
 		/**
@@ -170,6 +182,14 @@ define([&quot;jquery&quot;, &quot;text!./Table.html&quot;, &quot;../common/Base&
 		 */
 		tpl: tpl,
 		/**
+		 * sets the bootstrap css class &quot;responsive&quot; to the table
+		 * @property responsiveClass
+		 * @type {Boolean}
+		 * @default true
+		 */
+		responsiveClass:true,
+		/**
+		 * activates the responsive-table-js package on the table
 		 * @property responsive
 		 * @type {Boolean}
 		 * @default true
@@ -292,12 +312,16 @@ define([&quot;jquery&quot;, &quot;text!./Table.html&quot;, &quot;../common/Base&
 		init:function(){
 			var me = this;
 			me.on(&quot;componentReady&quot;, function(){
-				var table = $(&quot;#&quot; + me.getId());
+				var id = me.getId(),
+					table = $(&quot;#&quot; + id);
 				if(me.datatable){
 					table.DataTable(me.dataTableConfig());
 				}
 				if(me.treetable){
 					table.treetable(me.treeTableConfig());
+				}
+				if(me.responsive &amp;&amp; window.responsiveTables){
+					window.responsiveTables.update(id);
 				}
 			}),
 			me.callParent();
@@ -310,7 +334,7 @@ define([&quot;jquery&quot;, &quot;text!./Table.html&quot;, &quot;../common/Base&
 			var me = this;
 			return {
 				css:{
-					&quot;&#x27;responsive&#x27;&quot;: me.responsive
+					&quot;&#x27;responsive&#x27;&quot;: me.responsiveClass
 				}
 			};
 		},
@@ -339,7 +363,8 @@ define([&quot;jquery&quot;, &quot;text!./Table.html&quot;, &quot;../common/Base&
 					&quot;&#x27;table-striped&#x27;&quot;: me.tableStriped,
 					&quot;&#x27;table-hover&#x27;&quot;: me.tableHover,
 					&quot;&#x27;table-condensed&#x27;&quot;: me.tableCondensed,
-					&quot;&#x27;table-bordered&#x27;&quot;: me.tableBordered
+					&quot;&#x27;table-bordered&#x27;&quot;: me.tableBordered,
+					&quot;&#x27;responsive&#x27;&quot; : me.responsive
 				}
 			}
 		},

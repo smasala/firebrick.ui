@@ -2,7 +2,7 @@
 	"name": "firebrick.ui",
 	"description": "UI extendable component library for Firebrick MVC, built with Knockout, Bootstrap and jQuery",
 	"main": "dist/firebrick.ui.js",
-	"ignore": "",
+	"ignore": [""],
 	"authors": [
 		"Steven Masala"
 	],
@@ -15,14 +15,17 @@
 		"library",
 		"bootstrap"
 	],
-	"version": "0.5.5",
+	"version": "0.7.7",
 	"dependencies": {
-		"firebrick": ">=0.8.21",
-		"text": "~2.0.12",
-		"handlebars": "~2.0.0",
-		"datatables": "~1.10.3",
-		"x-editable": "~1.5.1",
-		"knockout-x-editable": "~0.1.1",
-		"jquery-treetable": "latest"
+		"firebrick": "latest",
+		"bootstrap": "3.x",
+		"text": "2.x",
+		"handlebars": "2.x",
+		"datatables": "1.x",
+		"x-editable": "1.x",
+		"knockout-x-editable": "0.x",
+		"jquery-treetable": "3.x",
+		"responsive-images": "latest",
+		"responsive-tables-js": "latest"
 	}
 }

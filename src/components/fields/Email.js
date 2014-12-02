@@ -21,12 +21,12 @@ define(["./Input"], function(){
 		 * @type {String}
 		 * @default "'email'"
 		 */
-		type:"'email'",
+		type:"email",
 		/**
 		 * @property dataType
 		 * @type {String}
 		 * @default "'text'"
 		 */
-		dataType:"'text'"
+		dataType:"text"
 	})
 });

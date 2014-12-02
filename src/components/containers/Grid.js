@@ -36,9 +36,6 @@ define(["text!./Grid.html", "jquery", "./Base"], function(tpl, $){
 			return {
 				css: {
 					row: me.rowClass
-				},
-				attr:{
-					id: "'" + me.getId() + "'"
 				}
 			}
 		},
@@ -51,7 +48,7 @@ define(["text!./Grid.html", "jquery", "./Base"], function(tpl, $){
 				obj = {
 						css:{}
 				};
-			obj.css["'col-md-" + (Math.floor(12/me.items.length)) + "'"] = true;
+			obj.css[ me.parseBind( "col-md-" + (Math.floor(12/me.items.length)) )] = true;
 			return obj;
 		},
 		/**
@@ -62,9 +59,8 @@ define(["text!./Grid.html", "jquery", "./Base"], function(tpl, $){
 		 * @param {Context} iteration context
 		 * @return {String}
 		 */
-		getGridItem: function(index, item, context){
-			var me = context.data.root,
-				newItem = me._getItems(item);
+		getGridItem: function(index, item, me){
+			var newItem = me._getItems(item);
 			
 			if(newItem){
 				//replace items with the new object - _getItems returns an object {html:"", items:[]}

@@ -20,10 +20,14 @@ define(["store/MyStore",
         "Firebrick.ui/nav/Navbar",
         "Firebrick.ui/nav/Breadcrumbs",
         "Firebrick.ui/nav/Pagination",
+        "Firebrick.ui/button/Icon",
+        "Firebrick.ui/display/Progress",
+        "Firebrick.ui/display/Image",
+        "Firebrick.ui/containers/Box",
         "./ABC"
     ], function(myStore){
 	
-			return Firebrick.define("MyApp.views.Content", {
+			return Firebrick.create("MyApp.view.Content", {
 				extend:"Firebrick.view.Base",
 				target:"#content",
 				store: myStore,
@@ -31,7 +35,77 @@ define(["store/MyStore",
 					"uiName": "fb-ui-navbar",
 					"data": "navs"
 				},{
-					"uiName": "ui-app-panel",
+					uiName: "fb-ui-grid",
+					items:[{
+						uiName: "fb-ui-gridcol",
+						columnWidth: 2,
+						items:[{
+							uiName: "fb-ui-navlist",
+							data: "navs"
+						},{
+							uiName:"fb-ui-box",
+							items:[{
+								uiName:"fb-ui-button",
+								items:[{
+									uiName: "fb-ui-dropdown-list",
+									data: "navs1"
+								}],
+								text:"Dropdown"
+							}]
+						}]
+					},{
+						uiName:"fb-ui-gridcol",
+						columnWidth:10,
+						items:[{
+							uiName: "fb-ui-grid",
+							items: [{
+								uiName:"fb-ui-gridcol",
+								columnWidth:8,
+								items:[{
+									uiName: "fb-ui-panel",
+									title: "Main Content",
+									collapsible:true,
+									headerIcons:[{
+										uiName:"fb-ui-icon",
+										glyIcon:"home",
+										btnStyle: "info",
+										text: " HIS"
+									},{
+										uiName:"fb-ui-icon"
+									}],
+									items:[{
+										"uiName": "fb-ui-navbar",
+										"data": "navs"
+									},{
+										uiName:"fb-ui-progress",
+										value:80,
+										label: "Complete"
+									}, {
+										uiName:"fb-ui-form",
+										items:[{
+											uiName: "fb-ui-table",
+											datatable:true,
+											data: "tableData"
+										}]
+									}]
+								}]
+							},{
+								uiName:"fb-ui-gridcol",
+								columnWidth:4,
+								items:[{
+									uiName:"fb-ui-image",
+									sizes: "xl, l, m, s, xs",
+									srcset:	"http://placehold.it/500x400&text=xl, "+
+							                "http://placehold.it/400x300&text=l, "+
+							                "http://placehold.it/300x200&text=m, "+
+							                "http://placehold.it/200x150&text=s, "+
+							                "http://placehold.it/150x100&text=xs"
+				                }]
+							}]
+						}]
+					}]
+				},{
+					"uiName": "fb-ui-panel",
 					"panelTypeClass": "primary",
 					"title": "Hello",
 					"items":[
@@ -59,14 +133,14 @@ define(["store/MyStore",
 						}	
 					]
 				},{
-					"uiName": "ui-app-panel",
+					"uiName": "fb-ui-panel",
 					"title": "Fancy Table",
 					"items":[{
 						"uiName": "ui-app-table",
 						"datatable": true
 					}]
 				},{
-					"uiName": "ui-app-panel",
+					"uiName": "fb-ui-panel",
 					"title": "Another Fancy Table",
 					"panelTypeClass": "danger", 
 					"items":[{
@@ -74,7 +148,7 @@ define(["store/MyStore",
 						"data": "treeTableData"
 					}]
 				},{
-					"uiName": "ui-app-panel",
+					"uiName": "fb-ui-panel",
 					"title": "A Gird with Columns",
 					"panelTypeClass": "success", 
 					"items": [{
@@ -86,14 +160,14 @@ define(["store/MyStore",
 						]
 					}]
 				},{
-					"uiName": "ui-app-panel",
+					"uiName": "fb-ui-panel",
 					"title": "Testing 123",
 					"id": "testpanel",
 					items:[{
-						"viewName": "ABC"
+						"viewName": "MyApp.view.ABC"
 					}]
 				},{
-					"uiName": "ui-app-panel",
+					"uiName": "fb-ui-panel",
 					"title": "A list in a panel! Wow!",
 					items:[{"uiName": "fb-ui-list", data:"list"}]
 				}],

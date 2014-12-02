@@ -85,6 +85,18 @@ define(["text!./Panel.html", "./Base"], function(tpl){
 		 */
 		collapsed:false,
 		/**
+		 * @property headerIcons
+		 * @type {Boolean|Object} boolean = false, if object use the same way as the "items" property
+		 * @default false
+		 */
+		headerIcons: false,
+		/**
+		 * @property headerIconPosition
+		 * @type {String} css class "pull-right", "pull-left" etc
+		 * @default "pull-right"
+		 */
+		headerIconPosition: "pull-right",
+		/**
 		 * Data bindings
 		 * @method bindings
 		 * @return {Object}
@@ -92,15 +104,12 @@ define(["text!./Panel.html", "./Base"], function(tpl){
 		bindings: function(){
 			var me = this,
 				obj = {
-						attr:{
-							id: "'" + me.getId() + "'",
-						},
 						css:{
 							"panel": me.panelClass
 						}
 					};
 			if(me.panelTypeClass){
-				obj.css["'panel-"+me.panelTypeClass+"'"] = true;
+				obj.css[ me.parseBind("panel-"+me.panelTypeClass)] = true;
 			}
 			return obj;
 		},
@@ -113,7 +122,7 @@ define(["text!./Panel.html", "./Base"], function(tpl){
 				obj = {
 					css:{},
 					attr:{
-						id:"'fb-ui-collapse-" + me.getId() + "'"
+						id: me.parseBind( "fb-ui-collapse-" + me.getId() )
 					}
 			};
 			if(me.collapsible){
@@ -137,10 +146,24 @@ define(["text!./Panel.html", "./Base"], function(tpl){
 					},
 					visible: me.showPanelHeader
 				};
-			if(!me.collapsible){
-				obj.text = "fb.text('" + me.title + "')";
-			}
 			return obj;
+		},
+		/**
+		 * @method headerIconBindings
+		 * @return {Object}
+		 */
+		headerIconBindings: function(){
+			var me = this,
+				obj= {
+					css: {
+						"'btn-group'": true
+					}
+				};
+			
+			obj.css[me.parseBind(me.headerIconPosition)] = true;
+				
+			return obj;
+			
 		},
 		/**
 		 * @method collapsibleLinkBindings
@@ -151,12 +174,20 @@ define(["text!./Panel.html", "./Base"], function(tpl){
 				id = "fb-ui-collapse-" + me.getId();
 			return {
 				attr:{
-					"'data-toggle'": "'collapse'",
-					"href": "'#" + id + "'",
+					"'data-toggle'":  "'collapse'",
+					"href":  me.parseBind("#" + id ),
 					"'aria-expanded'": typeof me.collapsed == "boolean" ? me.collapsed : true,
-					"'aria-controls'": "'" + id + "'",
-				},
-				text: "fb.text('" + me.title + "')"
+					"'aria-controls'":  me.parseBind( id ),
+				}
+			}
+		},
+		/**
+		 * @method panelHeaderTextBindings
+		 * @return {Object}
+		 */
+		panelHeaderTextBindings: function(){
+			return {
+				text: "fb.text('" + this.title + "')"
 			}
 		},
 		/**

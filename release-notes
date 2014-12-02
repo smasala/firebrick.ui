@@ -1,3 +1,19 @@
+v0.7.7
+----------------------------
+* new component - responsive images (https://github.com/smasala/responsive-images-js)
+* support for responsive tables - responsive-tables-js package
+* changed dependencies.js to configuration.js
+* add name attribute to field components
+* consolidate component base into input
+* parseBind function shorcut for KO binds by adding "'" + "'" to strings
+* shortcut reference to templates, compiled templates and elements - _template, _build & _element
+* added toggleButtons property showLabel
+* headerIcons property to add icons to a panel header
+* new component icon - primary idea for headerIcons
+* if statement bug fix in handlebars
+* add box component - bascially just a div container
+* put getItems functionality into a mixin "items"
+
 v0.5.5
 ----------------------------
 * panel content is by default text and passed through fb.text('') - change parameter "contentTextual" to false otherwise

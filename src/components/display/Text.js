@@ -86,7 +86,7 @@ define(["text!./Text.html", "../common/Base"], function(tpl){
 				};
 			
 			if(me.textAlignment){
-				obj.css["'text-"+me.textAlignment+"'"] = true;	
+				obj.css[ me.parseBind("text-"+me.textAlignment) ] = true;	
 			}
 			
 			if(me.html){

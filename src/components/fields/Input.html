@@ -1,5 +1,5 @@
 {{#if inplaceEdit}}
-	<a data-bind="{{ data-bind }}"></a>
+	<a id="{{getId}}" data-bind="{{ data-bind }}"></a>
 {{else}}
-	<input data-bind="{{ data-bind }}">
+	<input id="{{getId}}" data-bind="{{ data-bind }}">
 {{/if}}

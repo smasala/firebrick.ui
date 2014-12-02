@@ -52,6 +52,13 @@ define(["text!./List.html", "../common/Base"], function(tpl){
 		 */
 		data:false,
 		/**
+		 * unstyled - applies list-unstyled css class to list container (ul/ol)
+		 * @property unstyled
+		 * @type {boolean}
+		 * @default false
+		 */
+		unstyled:false,
+		/**
 		 * inject a template into the <li>{preItemTpl}<span></span>{postItemTpl}</li> item
 		 * @property preItemTpl
 		 * @type {String|Function} html
@@ -74,6 +81,9 @@ define(["text!./List.html", "../common/Base"], function(tpl){
 				obj = {css:{}};
 			if(me.listGroupClass){
 				obj.css["'list-group'"] = me.listGroupClass
+			}
+			if(me.unstyled){
+				obj.css["'list-unstyled'"] = me.unstyled;
 			}
 			if(me.data){
 				obj.foreach = "$data"
@@ -109,7 +119,7 @@ define(["text!./List.html", "../common/Base"], function(tpl){
 			var me = this;
 			return {
 				template: {
-					name: "'"+me.getId()+"'",
+					name:  me.parseBind(me.getId()),
 					data: me.data
 				}
 			}
@@ -118,9 +128,8 @@ define(["text!./List.html", "../common/Base"], function(tpl){
 		childrenBindings: function(){
 			var me = this;
 			return {
-				visible: "$data.children ? $data.children : false",
 				template: {
-					name: "'"+this.getId()+"'",
+					name:  me.parseBind(me.getId()),
 					data: "$data.children"
 				}
 			}

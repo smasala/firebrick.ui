@@ -8,9 +8,10 @@
  * @namespace components.button
  * @class Button
  */
-define(["text!./Button.html", "../common/Base"], function(tpl){
+define(["text!./Button.html", "../common/Base", "../common/mixins/Items", "./dropdown/List"], function(tpl){
 	return Firebrick.define("Firebrick.ui.button.Button", {
 		extend:"Firebrick.ui.common.Base",
+		mixins:"Firebrick.ui.common.mixins.Items",
 		uiName: "fb-ui-button",
 		tpl:tpl,
 		text:"",
@@ -27,6 +28,27 @@ define(["text!./Button.html", "../common/Base"], function(tpl){
 		 */
 		btnStyle:"default",
 		/**
+		 * used to inject something before the text <span>
+		 * @property beforeText
+		 * @type {Any}
+		 * @default ""
+		 */
+		beforeText: "",
+		/**
+		 * used to inject something after the text <span>
+		 * @property afterText
+		 * @type {Any}
+		 * @default ""
+		 */
+		afterText: "",
+		/**
+		 * passed to list data property
+		 * @property items
+		 * @type {String}
+		 * @default null
+		 */
+		items:null,
+		/**
 		 * default bindings called by data-bind={{data-bind}}
 		 * @method bindings
 		 * @return {Object}
@@ -34,19 +56,57 @@ define(["text!./Button.html", "../common/Base"], function(tpl){
 		bindings: function(){
 			var me = this,
 				obj = {
-					type: "button",
-					text: "fb.text('" + me.text + "')",
+					attr:{
+						type: "'button'"
+					},
 					css:{
 						"'btn'": true
 					}
 				}
 			if(me.btnStyle){
-				obj.css["'btn-"+me.btnStyle+"'"] = true;
+				obj.css[ me.parseBind("btn-"+me.btnStyle)] = true;
 			}
 			if(me.btnSize){
-				obj.css["'btn-" + me.btnSize + "'"] = true;
+				obj.css[ me.parseBind("btn-" + me.btnSize)] = true;
 			}
+			
+			if(me.items){
+				obj.css["'dropdown-toggle'"] = true;
+				obj.attr["'data-toggle'"] = "'dropdown'"
+			}
+			
 			return obj;
+		},
+		/**
+		 * @property buttonTextBindings
+		 * @return {Object}
+		 */
+		buttonTextBindings: function(){
+			return {
+				text: "fb.text('" + this.text + "')"
+			}
+		},
+		/**
+		 * @method caretBindings
+		 * @return {Object}
+		 */
+		caretBindings: function(){
+			return {
+				css: {
+					caret: true
+				}
+			}
+		},
+		/**
+		 * @method dropdownContainerBindings
+		 * @return {Object}
+		 */
+		dropdownContainerBindings: function(){
+			return {
+				css: {
+					dropdown: true
+				}
+			}
 		}
 	})
 });

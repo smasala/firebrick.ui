@@ -21,13 +21,13 @@ define(["./Radio"], function(){
 		 * @type {String}
 		 * @default "'checkbox'"
 		 */
-		type:"'checkbox'",
+		type:"checkbox",
 		/**
 		 * @property dataType
 		 * @type {String}
 		 * @default "'checklist'"
 		 */
-		dataType:"'checklist'",
+		dataType:"checklist",
 		/**
 		 * @method bindings
 		 * @return {Object}
@@ -42,7 +42,7 @@ define(["./Radio"], function(){
 						optionsValue:"'value'",
 						optionsText:"'text'",
 						options:me.options,
-						type:me.dataType
+						type:  me.parseBind( me.dataType )
 				};
 			}
 			

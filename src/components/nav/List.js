@@ -12,6 +12,7 @@ define(["handlebars", "../display/List"], function(Handlebars){
 	return Firebrick.define("Firebrick.ui.nav.List", {
 		extend: "Firebrick.ui.display.List", 
 		uiName:"fb-ui-navlist",
+		unstyled:true,
 		/**
 		 * overriding property from list
 		 * @property preItemTpl

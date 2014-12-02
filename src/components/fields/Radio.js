@@ -21,13 +21,13 @@ define(["text!./Radio.html", "../common/MultiplesBase", "./plugins/Radio"], func
 		 * @type {String}
 		 * @default "'radio'"
 		 */
-		type:"'radio'",
+		type:"radio",
 		/**
 		 * @property dataType
 		 * @type {String}
 		 * @default "'radiolist'"
 		 */
-		dataType:"'radiolist'",
+		dataType:"radiolist",
 		/**
 		 * @property subTpl
 		 * @type {String} html
@@ -67,7 +67,7 @@ define(["text!./Radio.html", "../common/MultiplesBase", "./plugins/Radio"], func
 			var me = this;
 			return {
 				attr: {
-					"for": me.inplaceEdit ? "'"+me.getId()+"'" : "itemId"
+					"for": me.inplaceEdit ?  me.parseBind(me.getId()) : "itemId"
 				}
 			};
 		},
@@ -106,9 +106,9 @@ define(["text!./Radio.html", "../common/MultiplesBase", "./plugins/Radio"], func
 				obj.value = "$data.value ? $data.value : $data";
 				obj.attr.id = "itemId";
 			}else{
-				obj.attr.id = "'"+me.getId()+"'";
+				obj.attr.id =  me.parseBind(me.getId());
 			}
-			obj.attr.name = "'"+me.cleanString(me.type)+"-group-"+Firebrick.utils.uniqId()+"'";
+			obj.attr.name = me.parseBind( me.cleanString(me.type)+"-group-"+Firebrick.utils.uniqId() );
 			obj.checked = me.defaultChecked;
 			return obj;
 		}

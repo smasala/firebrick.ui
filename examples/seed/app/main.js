@@ -1,10 +1,10 @@
 require.config({
 	paths:{
-		"dependencies": "../bower_components/firebrick.ui/src/dependencies"
+		"configuration": "../bower_components/firebrick.ui/src/configuration"
 	}
 });
 
-require(["dependencies"], function(){
+require(["configuration"], function(){
 	
 	require(["jquery", "firebrick", "firebrick-ui", "bootstrap"], function(){
 		Firebrick.ready({
@@ -15,9 +15,9 @@ require(["dependencies"], function(){
 			autoRender:false,
 			cache:false,
 			dev:true,
-			require:["views/Content"],
+			require:["view/Content"],
+			//require: ["view/example1"],
 			go: function(){
-				Firebrick.create("MyApp.views.Content");
 			}
 		});
 	});

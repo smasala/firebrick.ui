@@ -8,7 +8,7 @@
  * @namespace components.table
  * @class Table
  */
-define(["jquery", "text!./Table.html", "../common/Base", "datatables"], function($, tpl){
+define(["jquery", "text!./Table.html", "../common/Base", "datatables", "responsive-tables-js"], function($, tpl){
 	return Firebrick.define("Firebrick.ui.table.Table", {
 		extend:"Firebrick.ui.common.Base",
 		/**
@@ -22,6 +22,14 @@ define(["jquery", "text!./Table.html", "../common/Base", "datatables"], function
 		 */
 		tpl: tpl,
 		/**
+		 * sets the bootstrap css class "responsive" to the table
+		 * @property responsiveClass
+		 * @type {Boolean}
+		 * @default true
+		 */
+		responsiveClass:true,
+		/**
+		 * activates the responsive-table-js package on the table
 		 * @property responsive
 		 * @type {Boolean}
 		 * @default true
@@ -144,12 +152,16 @@ define(["jquery", "text!./Table.html", "../common/Base", "datatables"], function
 		init:function(){
 			var me = this;
 			me.on("componentReady", function(){
-				var table = $("#" + me.getId());
+				var id = me.getId(),
+					table = $("#" + id);
 				if(me.datatable){
 					table.DataTable(me.dataTableConfig());
 				}
 				if(me.treetable){
 					table.treetable(me.treeTableConfig());
+				}
+				if(me.responsive && window.responsiveTables){
+					window.responsiveTables.update(id);
 				}
 			}),
 			me.callParent();
@@ -162,7 +174,7 @@ define(["jquery", "text!./Table.html", "../common/Base", "datatables"], function
 			var me = this;
 			return {
 				css:{
-					"'responsive'": me.responsive
+					"'responsive'": me.responsiveClass
 				}
 			};
 		},
@@ -191,7 +203,8 @@ define(["jquery", "text!./Table.html", "../common/Base", "datatables"], function
 					"'table-striped'": me.tableStriped,
 					"'table-hover'": me.tableHover,
 					"'table-condensed'": me.tableCondensed,
-					"'table-bordered'": me.tableBordered
+					"'table-bordered'": me.tableBordered,
+					"'responsive'" : me.responsive
 				}
 			}
 		},

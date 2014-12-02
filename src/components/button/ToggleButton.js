@@ -60,6 +60,12 @@ define(["text!./ToggleButton.html", "../common/MultiplesBase"], function(subTpl)
 		 */
 		options:"''",
 		/**
+		 * @property showLabel
+		 * @type {Boolean}
+		 * @default true
+		 */
+		showLabel: true,
+		/**
 		 * @method btnGroupBindings
 		 * @return {Object}
 		 */

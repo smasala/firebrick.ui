@@ -198,7 +198,7 @@ define(["text!./Navbar.html", "handlebars", "../common/Base", "./List"], functio
 			var me = this,
 				obj = {
 						attr:{
-							id: "'fb-nav-" + me.getId() + "'"
+							id:  me.parseBind( "fb-nav-" + me.getId() )
 						},
 						css:{}
 					};

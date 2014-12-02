@@ -19,7 +19,7 @@
             
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 0.5.5</em>
+            <em>API Docs for: 0.7.7</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -43,13 +43,21 @@
             
                 <li><a href="../classes/components.button.Button.html">components.button.Button</a></li>
             
+                <li><a href="../classes/components.button.dropdown.List.html">components.button.dropdown.List</a></li>
+            
+                <li><a href="../classes/components.button.Icon.html">components.button.Icon</a></li>
+            
                 <li><a href="../classes/components.button.ToggleButton.html">components.button.ToggleButton</a></li>
             
                 <li><a href="../classes/components.common.Base.html">components.common.Base</a></li>
             
+                <li><a href="../classes/components.common.mixins.@static Items.html">components.common.mixins.@static Items</a></li>
+            
                 <li><a href="../classes/components.common.MultiplesBase.html">components.common.MultiplesBase</a></li>
             
                 <li><a href="../classes/components.containers.Base.html">components.containers.Base</a></li>
+            
+                <li><a href="../classes/components.containers.Box.html">components.containers.Box</a></li>
             
                 <li><a href="../classes/components.containers.Form.html">components.containers.Form</a></li>
             
@@ -61,15 +69,19 @@
             
                 <li><a href="../classes/components.display.Header.html">components.display.Header</a></li>
             
+                <li><a href="../classes/components.display.Image.html">components.display.Image</a></li>
+            
                 <li><a href="../classes/components.display.List.html">components.display.List</a></li>
             
-                <li><a href="../classes/components.display.Text.html">components.display.Text</a></li>
+                <li><a href="../classes/components.display.Progress.html">components.display.Progress</a></li>
             
-                <li><a href="../classes/components.fields.Base.html">components.fields.Base</a></li>
+                <li><a href="../classes/components.display.Text.html">components.display.Text</a></li>
             
                 <li><a href="../classes/components.fields.Checkbox.html">components.fields.Checkbox</a></li>
             
                 <li><a href="../classes/components.fields.Email.html">components.fields.Email</a></li>
+            
+                <li><a href="../classes/components.fields.File.html">components.fields.File</a></li>
             
                 <li><a href="../classes/components.fields.Input.html">components.fields.Input</a></li>
             
@@ -169,13 +181,13 @@ define([&quot;text!./Radio.html&quot;, &quot;../common/MultiplesBase&quot;, &quo
 		 * @type {String}
 		 * @default &quot;&#x27;radio&#x27;&quot;
 		 */
-		type:&quot;&#x27;radio&#x27;&quot;,
+		type:&quot;radio&quot;,
 		/**
 		 * @property dataType
 		 * @type {String}
 		 * @default &quot;&#x27;radiolist&#x27;&quot;
 		 */
-		dataType:&quot;&#x27;radiolist&#x27;&quot;,
+		dataType:&quot;radiolist&quot;,
 		/**
 		 * @property subTpl
 		 * @type {String} html
@@ -215,7 +227,7 @@ define([&quot;text!./Radio.html&quot;, &quot;../common/MultiplesBase&quot;, &quo
 			var me = this;
 			return {
 				attr: {
-					&quot;for&quot;: me.inplaceEdit ? &quot;&#x27;&quot;+me.getId()+&quot;&#x27;&quot; : &quot;itemId&quot;
+					&quot;for&quot;: me.inplaceEdit ?  me.parseBind(me.getId()) : &quot;itemId&quot;
 				}
 			};
 		},
@@ -254,9 +266,9 @@ define([&quot;text!./Radio.html&quot;, &quot;../common/MultiplesBase&quot;, &quo
 				obj.value = &quot;$data.value ? $data.value : $data&quot;;
 				obj.attr.id = &quot;itemId&quot;;
 			}else{
-				obj.attr.id = &quot;&#x27;&quot;+me.getId()+&quot;&#x27;&quot;;
+				obj.attr.id =  me.parseBind(me.getId());
 			}
-			obj.attr.name = &quot;&#x27;&quot;+me.cleanString(me.type)+&quot;-group-&quot;+Firebrick.utils.uniqId()+&quot;&#x27;&quot;;
+			obj.attr.name = me.parseBind( me.cleanString(me.type)+&quot;-group-&quot;+Firebrick.utils.uniqId() );
 			obj.checked = me.defaultChecked;
 			return obj;
 		}

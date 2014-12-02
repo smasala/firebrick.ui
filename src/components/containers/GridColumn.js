@@ -62,7 +62,7 @@ define(["text!./GridColumn.html", "./Base"], function(tpl){
 					css:{}
 				};
 				
-			obj.css["'col-"+me.deviceSize+"-"+me._getColumnWidth()+"'"] = true;
+			obj.css[ me.parseBind( "col-"+me.deviceSize+"-"+me._getColumnWidth() )] = true;
 			
 			return obj;
 		}

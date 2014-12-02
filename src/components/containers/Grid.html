@@ -1,7 +1,7 @@
-<div data-bind="{{data-bind}}">
+<div id="{{getId}}" data-bind="{{data-bind}}">
 
 	{{#each items}}
-		{{{../getGridItem @index this}}}
+		{{{../getGridItem @index this ../this}}}
 	{{/each}}
 
 </div>

@@ -1,7 +1,16 @@
-<div data-bind="{{data-bind}}">
+<div id="{{getId}}" data-bind="{{data-bind}}">
 	<div data-bind="{{data-bind 'panelHeaderBindings'}}">
 		{{#if collapsible}}
-			<a data-bind="{{data-bind 'collapsibleLinkBindings'}}"></a>
+			<a data-bind="{{data-bind 'collapsibleLinkBindings'}}">
+		{{/if}}
+			<span data-bind="{{data-bind 'panelHeaderTextBindings'}}"></span>	
+		{{#if collapsible}}
+			</a>
+		{{/if}}
+		{{#if headerIcons}}
+			<div data-bind="{{data-bind 'headerIconBindings'}}">
+				{{{../_getItemsScoped ../this 'headerIcons'}}}
+			</div>
 		{{/if}}
 	</div>
 		<div data-bind="{{data-bind 'tabBindings'}}">

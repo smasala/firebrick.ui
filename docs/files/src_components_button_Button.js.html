@@ -19,7 +19,7 @@
             
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 0.5.5</em>
+            <em>API Docs for: 0.7.7</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -43,13 +43,21 @@
             
                 <li><a href="../classes/components.button.Button.html">components.button.Button</a></li>
             
+                <li><a href="../classes/components.button.dropdown.List.html">components.button.dropdown.List</a></li>
+            
+                <li><a href="../classes/components.button.Icon.html">components.button.Icon</a></li>
+            
                 <li><a href="../classes/components.button.ToggleButton.html">components.button.ToggleButton</a></li>
             
                 <li><a href="../classes/components.common.Base.html">components.common.Base</a></li>
             
+                <li><a href="../classes/components.common.mixins.@static Items.html">components.common.mixins.@static Items</a></li>
+            
                 <li><a href="../classes/components.common.MultiplesBase.html">components.common.MultiplesBase</a></li>
             
                 <li><a href="../classes/components.containers.Base.html">components.containers.Base</a></li>
+            
+                <li><a href="../classes/components.containers.Box.html">components.containers.Box</a></li>
             
                 <li><a href="../classes/components.containers.Form.html">components.containers.Form</a></li>
             
@@ -61,15 +69,19 @@
             
                 <li><a href="../classes/components.display.Header.html">components.display.Header</a></li>
             
+                <li><a href="../classes/components.display.Image.html">components.display.Image</a></li>
+            
                 <li><a href="../classes/components.display.List.html">components.display.List</a></li>
             
-                <li><a href="../classes/components.display.Text.html">components.display.Text</a></li>
+                <li><a href="../classes/components.display.Progress.html">components.display.Progress</a></li>
             
-                <li><a href="../classes/components.fields.Base.html">components.fields.Base</a></li>
+                <li><a href="../classes/components.display.Text.html">components.display.Text</a></li>
             
                 <li><a href="../classes/components.fields.Checkbox.html">components.fields.Checkbox</a></li>
             
                 <li><a href="../classes/components.fields.Email.html">components.fields.Email</a></li>
+            
+                <li><a href="../classes/components.fields.File.html">components.fields.File</a></li>
             
                 <li><a href="../classes/components.fields.Input.html">components.fields.Input</a></li>
             
@@ -156,9 +168,10 @@
  * @namespace components.button
  * @class Button
  */
-define([&quot;text!./Button.html&quot;, &quot;../common/Base&quot;], function(tpl){
+define([&quot;text!./Button.html&quot;, &quot;../common/Base&quot;, &quot;../common/mixins/Items&quot;, &quot;./dropdown/List&quot;], function(tpl){
 	return Firebrick.define(&quot;Firebrick.ui.button.Button&quot;, {
 		extend:&quot;Firebrick.ui.common.Base&quot;,
+		mixins:&quot;Firebrick.ui.common.mixins.Items&quot;,
 		uiName: &quot;fb-ui-button&quot;,
 		tpl:tpl,
 		text:&quot;&quot;,
@@ -175,6 +188,27 @@ define([&quot;text!./Button.html&quot;, &quot;../common/Base&quot;], function(tp
 		 */
 		btnStyle:&quot;default&quot;,
 		/**
+		 * used to inject something before the text &lt;span&gt;
+		 * @property beforeText
+		 * @type {Any}
+		 * @default &quot;&quot;
+		 */
+		beforeText: &quot;&quot;,
+		/**
+		 * used to inject something after the text &lt;span&gt;
+		 * @property afterText
+		 * @type {Any}
+		 * @default &quot;&quot;
+		 */
+		afterText: &quot;&quot;,
+		/**
+		 * passed to list data property
+		 * @property items
+		 * @type {String}
+		 * @default null
+		 */
+		items:null,
+		/**
 		 * default bindings called by data-bind={{data-bind}}
 		 * @method bindings
 		 * @return {Object}
@@ -182,19 +216,57 @@ define([&quot;text!./Button.html&quot;, &quot;../common/Base&quot;], function(tp
 		bindings: function(){
 			var me = this,
 				obj = {
-					type: &quot;button&quot;,
-					text: &quot;fb.text(&#x27;&quot; + me.text + &quot;&#x27;)&quot;,
+					attr:{
+						type: &quot;&#x27;button&#x27;&quot;
+					},
 					css:{
 						&quot;&#x27;btn&#x27;&quot;: true
 					}
 				}
 			if(me.btnStyle){
-				obj.css[&quot;&#x27;btn-&quot;+me.btnStyle+&quot;&#x27;&quot;] = true;
+				obj.css[ me.parseBind(&quot;btn-&quot;+me.btnStyle)] = true;
 			}
 			if(me.btnSize){
-				obj.css[&quot;&#x27;btn-&quot; + me.btnSize + &quot;&#x27;&quot;] = true;
+				obj.css[ me.parseBind(&quot;btn-&quot; + me.btnSize)] = true;
 			}
+			
+			if(me.items){
+				obj.css[&quot;&#x27;dropdown-toggle&#x27;&quot;] = true;
+				obj.attr[&quot;&#x27;data-toggle&#x27;&quot;] = &quot;&#x27;dropdown&#x27;&quot;
+			}
+			
 			return obj;
+		},
+		/**
+		 * @property buttonTextBindings
+		 * @return {Object}
+		 */
+		buttonTextBindings: function(){
+			return {
+				text: &quot;fb.text(&#x27;&quot; + this.text + &quot;&#x27;)&quot;
+			}
+		},
+		/**
+		 * @method caretBindings
+		 * @return {Object}
+		 */
+		caretBindings: function(){
+			return {
+				css: {
+					caret: true
+				}
+			}
+		},
+		/**
+		 * @method dropdownContainerBindings
+		 * @return {Object}
+		 */
+		dropdownContainerBindings: function(){
+			return {
+				css: {
+					dropdown: true
+				}
+			}
 		}
 	})
 });
