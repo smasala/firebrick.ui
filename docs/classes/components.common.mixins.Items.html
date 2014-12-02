@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>components.common.mixins.@static Items - Firebrick UI API</title>
+    <title>components.common.mixins.Items - Firebrick UI API</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -51,7 +51,7 @@
             
                 <li><a href="../classes/components.common.Base.html">components.common.Base</a></li>
             
-                <li><a href="../classes/components.common.mixins.@static Items.html">components.common.mixins.@static Items</a></li>
+                <li><a href="../classes/components.common.mixins.Items.html">components.common.mixins.Items</a></li>
             
                 <li><a href="../classes/components.common.MultiplesBase.html">components.common.MultiplesBase</a></li>
             
@@ -154,7 +154,7 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-                        <h1>components.common.mixins.@static Items Class</h1>
+                        <h1>components.common.mixins.Items Class</h1>
 <div class="box meta">
     
 
@@ -215,6 +215,13 @@
                             </li>
                         
                             <li class="index-item method">
+                                <a href="#method__getItemsScoped">_getItemsScoped</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
                                 <a href="#method_getItems">getItems</a>
 
                                 
@@ -233,13 +240,6 @@
                         
                             <li class="index-item property">
                                 <a href="#property_items">items</a>
-
-                                
-                                
-                            </li>
-                        
-                            <li class="index-item property">
-                                <a href="#property_me - component class (this)">me - component class (this)</a>
 
                                 
                                 
@@ -307,7 +307,7 @@
             
         
         
-        <a href="../files/src_components_common_mixins_Items.js.html#l57"><code>src\components\common\mixins\Items.js:57</code></a>
+        <a href="../files/src_components_common_mixins_Items.js.html#l58"><code>src\components\common\mixins\Items.js:58</code></a>
         
         </p>
 
@@ -367,6 +367,136 @@
 </div>
 
                 
+                    <div id="method__getItemsScoped" class="method item">
+    <h3 class="name"><code>_getItemsScoped</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>me</code>
+                    
+                </li>
+            
+                <li class="arg">
+                    
+                        <code class="optional">[itemsName]</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+        <span class="returns-inline">
+            <span class="type">String</span>
+        </span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/src_components_common_mixins_Items.js.html#l46"><code>src\components\common\mixins\Items.js:46</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>if you are calling _getItems from a nested scope then use this function</p>
+
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">me</code>
+                        <span class="type">Object</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>me component class (this)</p>
+
+                    </div>
+
+                    
+                </li>
+            
+                <li class="param">
+                    
+                        <code class="param-name optional">[itemsName]</code>
+                        <span class="type">String</span>
+                        <span class="flag optional" title="This parameter is optional.">optional</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>name of property to get items from</p>
+
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                        <span class="type">String</span>:
+                    
+                    <p>html</p>
+
+                
+            </div>
+        </div>
+    
+
+    
+</div>
+
+                
                     <div id="method_getItems" class="method item">
     <h3 class="name"><code>getItems</code></h3>
 
@@ -403,7 +533,7 @@
             
         
         
-        <a href="../files/src_components_common_mixins_Items.js.html#l32"><code>src\components\common\mixins\Items.js:32</code></a>
+        <a href="../files/src_components_common_mixins_Items.js.html#l33"><code>src\components\common\mixins\Items.js:33</code></a>
         
         </p>
 
@@ -450,7 +580,7 @@
                 
                     <div id="property_items" class="property item">
     <h3 class="name"><code>items</code></h3>
-    <span class="type">String | Object | Object</span>
+    <span class="type">String | Object | Array of Object</span>
 
     
 
@@ -471,7 +601,7 @@
             
         
         
-        <a href="../files/src_components_common_mixins_Items.js.html#l12"><code>src\components\common\mixins\Items.js:12</code></a>
+        <a href="../files/src_components_common_mixins_Items.js.html#l13"><code>src\components\common\mixins\Items.js:13</code></a>
         
         </p>
 
@@ -490,73 +620,6 @@
 
     
 
-    
-</div>
-
-                
-                    <div id="property_me - component class (this)" class="property item">
-    <h3 class="name"><code>me - component class (this)</code></h3>
-    <span class="type">Object</span>
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/src_components_common_mixins_Items.js.html#l45"><code>src\components\common\mixins\Items.js:45</code></a>
-        
-        </p>
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>if you are calling _getItems from a nested scope then use this function</p>
-
-    </div>
-
-    
-
-    
-
-    
-        <h4>Sub-properties:</h4>
-
-        <ul class="params-list">
-            
-            <li class="param">
-                
-                    <code class="param-name">itemsName</code>
-                    <span class="type">String</span>
-                
-
-                <div class="param-description">
-                    <ul>
-<li>optional - name of property to get items from</li>
-</ul>
-
-                </div>
-
-                
-            </li>
-            
-        </ul>
     
 </div>
 

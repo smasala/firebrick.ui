@@ -55,7 +55,7 @@
             "name": "src\\components\\common\\mixins\\Items.js",
             "modules": {},
             "classes": {
-                "components.common.mixins.@static Items": 1
+                "components.common.mixins.Items": 1
             },
             "fors": {},
             "namespaces": {
@@ -387,7 +387,7 @@
                 "components.button.Button": 1,
                 "components.button.Icon": 1,
                 "components.button.ToggleButton": 1,
-                "components.common.mixins.@static Items": 1,
+                "components.common.mixins.Items": 1,
                 "components.common.Base": 1,
                 "components.common.MultiplesBase": 1,
                 "components.containers.Base": 1,
@@ -431,6 +431,7 @@
             "file": "src\\components\\table\\TreeTable.js",
             "line": 5,
             "extends": "components.nav.List",
+            "static": 1,
             "uses": [
                 "components.common.mixins.Items"
             ]
@@ -523,14 +524,16 @@
             "line": 5,
             "extends": "components.common.MultiplesBase"
         },
-        "components.common.mixins.@static Items": {
-            "name": "components.common.mixins.@static Items",
-            "shortname": "components.common.mixins.@static Items",
+        "components.common.mixins.Items": {
+            "name": "components.common.mixins.Items",
+            "shortname": "components.common.mixins.Items",
             "classitems": [],
             "plugins": [],
             "extensions": [],
             "plugin_for": [],
-            "extension_for": [],
+            "extension_for": [
+                "components.containers.Base"
+            ],
             "module": "Firebrick.ui.components",
             "namespace": "components.common.mixins",
             "file": "src\\components\\common\\mixins\\Items.js",
@@ -1345,18 +1348,18 @@
         },
         {
             "file": "src\\components\\common\\mixins\\Items.js",
-            "line": 12,
+            "line": 13,
             "itemtype": "property",
             "name": "items",
-            "type": "{String|Object|[Object]}",
+            "type": "{String|Object|Array of Object}",
             "default": "null",
-            "class": "components.common.mixins.@static Items",
+            "class": "components.common.mixins.Items",
             "module": "Firebrick.ui.components",
             "namespace": "components.common.mixins"
         },
         {
             "file": "src\\components\\common\\mixins\\Items.js",
-            "line": 32,
+            "line": 33,
             "description": "inject sub items",
             "itemtype": "method",
             "name": "getItems",
@@ -1364,35 +1367,40 @@
                 "description": "html",
                 "type": "String"
             },
-            "class": "components.common.mixins.@static Items",
+            "class": "components.common.mixins.Items",
             "module": "Firebrick.ui.components",
             "namespace": "components.common.mixins"
         },
         {
             "file": "src\\components\\common\\mixins\\Items.js",
-            "line": 45,
+            "line": 46,
             "description": "if you are calling _getItems from a nested scope then use this function",
-            "itemtype": "property",
-            "name": "me - component class (this)",
-            "type": "Object",
+            "itemtype": "method",
+            "name": "_getItemsScoped",
+            "params": [
+                {
+                    "name": "me",
+                    "description": "me component class (this)",
+                    "type": "Object"
+                },
+                {
+                    "name": "itemsName",
+                    "description": "name of property to get items from",
+                    "type": "String",
+                    "optional": true
+                }
+            ],
             "return": {
                 "description": "html",
                 "type": "String"
             },
-            "class": "components.common.mixins.@static Items",
+            "class": "components.common.mixins.Items",
             "module": "Firebrick.ui.components",
-            "namespace": "components.common.mixins",
-            "subprops": [
-                {
-                    "name": "itemsName",
-                    "description": "-  optional - name of property to get items from",
-                    "type": "String"
-                }
-            ]
+            "namespace": "components.common.mixins"
         },
         {
             "file": "src\\components\\common\\mixins\\Items.js",
-            "line": 57,
+            "line": 58,
             "description": "use getItems",
             "access": "private",
             "tagname": "",
@@ -1409,7 +1417,7 @@
                 "description": "object - {html:\"\", items:[]}",
                 "type": "Object, Null"
             },
-            "class": "components.common.mixins.@static Items",
+            "class": "components.common.mixins.Items",
             "module": "Firebrick.ui.components",
             "namespace": "components.common.mixins"
         },
@@ -1464,10 +1472,9 @@
         {
             "file": "src\\components\\common\\Base.js",
             "line": 54,
-            "description": "target to render the component to (not needed if combined with a view) (optional)",
+            "description": "target to render the component to (not needed if combined with a view)",
             "itemtype": "property",
             "name": "renderTo",
-            "optional": 1,
             "type": "{Boolean|String|Object} false, selector, jQuery Object",
             "default": "false",
             "class": "components.common.Base",
@@ -1476,7 +1483,7 @@
         },
         {
             "file": "src\\components\\common\\Base.js",
-            "line": 62,
+            "line": 61,
             "description": "cache",
             "itemtype": "property",
             "name": "_build",
@@ -1490,7 +1497,7 @@
         },
         {
             "file": "src\\components\\common\\Base.js",
-            "line": 70,
+            "line": 69,
             "description": "compiled handles bars function",
             "itemtype": "property",
             "name": "_template",
@@ -1504,14 +1511,14 @@
         },
         {
             "file": "src\\components\\common\\Base.js",
-            "line": 78,
+            "line": 77,
             "class": "components.common.Base",
             "module": "Firebrick.ui.components",
             "namespace": "components.common"
         },
         {
             "file": "src\\components\\common\\Base.js",
-            "line": 81,
+            "line": 80,
             "description": "template",
             "itemtype": "property",
             "name": "tpl",
@@ -1523,7 +1530,7 @@
         },
         {
             "file": "src\\components\\common\\Base.js",
-            "line": 88,
+            "line": 87,
             "description": "uiName",
             "itemtype": "property",
             "name": "uiName",
@@ -1535,7 +1542,7 @@
         },
         {
             "file": "src\\components\\common\\Base.js",
-            "line": 95,
+            "line": 94,
             "description": "used in conjunction with property \"renderTo\"",
             "itemtype": "property",
             "name": "appendComponent",
@@ -1547,7 +1554,7 @@
         },
         {
             "file": "src\\components\\common\\Base.js",
-            "line": 102,
+            "line": 101,
             "description": "when overriding this or any other method, this.callParent() calls the method in the super class",
             "itemtype": "method",
             "name": "init",
@@ -1557,7 +1564,7 @@
         },
         {
             "file": "src\\components\\common\\Base.js",
-            "line": 118,
+            "line": 117,
             "itemtype": "method",
             "name": "build",
             "params": [
@@ -1579,7 +1586,7 @@
         },
         {
             "file": "src\\components\\common\\Base.js",
-            "line": 131,
+            "line": 130,
             "itemtype": "method",
             "name": "data-bind",
             "params": [
@@ -1603,7 +1610,7 @@
         },
         {
             "file": "src\\components\\common\\Base.js",
-            "line": 144,
+            "line": 143,
             "description": "if no id is specified it will call getClassId() and use that value",
             "itemtype": "method",
             "name": "getId",
@@ -1617,7 +1624,7 @@
         },
         {
             "file": "src\\components\\common\\Base.js",
-            "line": 158,
+            "line": 157,
             "description": "called when calling {{{getSubTpl}}} in component template",
             "itemtype": "method",
             "name": "getSubTpl",
@@ -1631,7 +1638,7 @@
         },
         {
             "file": "src\\components\\common\\Base.js",
-            "line": 166,
+            "line": 165,
             "description": "find the parent of this class\niterate up the inheritance tree looking for a classname that differs from the current and that \"subTpl\" or \"tpl\" don't match either",
             "access": "private",
             "tagname": "",
@@ -1647,7 +1654,7 @@
         },
         {
             "file": "src\\components\\common\\Base.js",
-            "line": 184,
+            "line": 183,
             "description": "called when calling {{{getParentTpl}}} in component template",
             "itemtype": "method",
             "name": "getParentTpl",
@@ -1661,7 +1668,7 @@
         },
         {
             "file": "src\\components\\common\\Base.js",
-            "line": 193,
+            "line": 192,
             "description": "called when calling {{{getParentSubTpl}}} in component template",
             "itemtype": "method",
             "name": "getParentSubTpl",
@@ -1675,7 +1682,7 @@
         },
         {
             "file": "src\\components\\common\\Base.js",
-            "line": 202,
+            "line": 201,
             "description": "clean string - i.e. remove all ' from string",
             "itemtype": "method",
             "name": "cleanString",
@@ -1689,7 +1696,7 @@
         },
         {
             "file": "src\\components\\common\\Base.js",
-            "line": 210,
+            "line": 209,
             "description": "attach ' to the start and end of the string for KO binds",
             "itemtype": "method",
             "name": "parseBind",
@@ -4741,7 +4748,7 @@
         },
         {
             "message": "Missing item type",
-            "line": " src\\components\\common\\Base.js:78"
+            "line": " src\\components\\common\\Base.js:77"
         }
     ]
 }
