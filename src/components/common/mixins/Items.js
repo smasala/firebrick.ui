@@ -5,13 +5,14 @@
 /**
  * @module Firebrick.ui.components
  * @namespace components.common.mixins
- * @class @static Items
+ * @class Items
+ * @static
  */
 define(["jquery"], function($){
 	return Firebrick.define("Firebrick.ui.common.mixins.Items", {
 		/**
 		 * @property items
-		 * @type {String|Object|[Object]}
+		 * @type {String|Object|Array of Object}
 		 * @default null
 		 */
 		items:null,
@@ -45,11 +46,11 @@ define(["jquery"], function($){
 		/**
 		 * if you are calling _getItems from a nested scope then use this function
 		 * @method _getItemsScoped
-		 * @property {Object} me - component class (this)
-		 * @property {String} itemsName -  optional - name of property to get items from
+		 * @param me {Object} me component class (this)
+		 * @param [itemsName] {String}  name of property to get items from
 		 * @return {String} html
 		 */
-		_getItemsScoped: function(me, itemsName){
+		getItemsScoped: function(me, itemsName){
 			itemsName = typeof itemsName == "string" ? me[itemsName] : me.items;
 			var items = me._getItems(itemsName);
 			return items ? items.html || items : "";

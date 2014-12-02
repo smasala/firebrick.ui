@@ -51,7 +51,7 @@
             
                 <li><a href="../classes/components.common.Base.html">components.common.Base</a></li>
             
-                <li><a href="../classes/components.common.mixins.@static Items.html">components.common.mixins.@static Items</a></li>
+                <li><a href="../classes/components.common.mixins.Items.html">components.common.mixins.Items</a></li>
             
                 <li><a href="../classes/components.common.MultiplesBase.html">components.common.MultiplesBase</a></li>
             
@@ -212,6 +212,20 @@
                     <ul class="index-list methods extends">
                         
                             <li class="index-item method private inherited">
+                                <a href="#method__getItems">_getItems</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method inherited">
+                                <a href="#method__getItemsScoped">_getItemsScoped</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method private inherited">
                                 <a href="#method__getParent">_getParent</a>
 
                                 
@@ -248,6 +262,13 @@
                         
                             <li class="index-item method inherited">
                                 <a href="#method_getId">getId</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method inherited">
+                                <a href="#method_getItems">getItems</a>
 
                                 
                                 
@@ -341,6 +362,13 @@
                             </li>
                         
                             <li class="index-item property inherited">
+                                <a href="#property_items">items</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item property inherited">
                                 <a href="#property_renderTo">renderTo</a>
 
                                 
@@ -382,6 +410,238 @@
                 <h2 class="off-left">Methods</h2>
 
                 
+                    <div id="method__getItems" class="method item private inherited">
+    <h3 class="name"><code>_getItems</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>items</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+        <span class="returns-inline">
+            <span class="type">Object, Null</span>
+        </span>
+    
+
+    
+
+    
+        <span class="flag private">private</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                <p>Inherited from
+                <a href="../classes/components.common.mixins.Items.html#method__getItems">components.common.mixins.Items</a>:
+            
+        
+        
+        <a href="../files/src_components_common_mixins_Items.js.html#l58"><code>src\components\common\mixins\Items.js:58</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>use getItems</p>
+
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">items</code>
+                        <span class="type">Object</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                         
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                        <span class="type">Object, Null</span>:
+                    
+                    <p>object - {html:&quot;&quot;, items:[]}</p>
+
+                
+            </div>
+        </div>
+    
+
+    
+</div>
+
+                
+                    <div id="method__getItemsScoped" class="method item inherited">
+    <h3 class="name"><code>_getItemsScoped</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>me</code>
+                    
+                </li>
+            
+                <li class="arg">
+                    
+                        <code class="optional">[itemsName]</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+        <span class="returns-inline">
+            <span class="type">String</span>
+        </span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                <p>Inherited from
+                <a href="../classes/components.common.mixins.Items.html#method__getItemsScoped">components.common.mixins.Items</a>:
+            
+        
+        
+        <a href="../files/src_components_common_mixins_Items.js.html#l46"><code>src\components\common\mixins\Items.js:46</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>if you are calling _getItems from a nested scope then use this function</p>
+
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">me</code>
+                        <span class="type">Object</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>me component class (this)</p>
+
+                    </div>
+
+                    
+                </li>
+            
+                <li class="param">
+                    
+                        <code class="param-name optional">[itemsName]</code>
+                        <span class="type">String</span>
+                        <span class="flag optional" title="This parameter is optional.">optional</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>name of property to get items from</p>
+
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                        <span class="type">String</span>:
+                    
+                    <p>html</p>
+
+                
+            </div>
+        </div>
+    
+
+    
+</div>
+
+                
                     <div id="method__getParent" class="method item private inherited">
     <h3 class="name"><code>_getParent</code></h3>
 
@@ -417,7 +677,7 @@
             
         
         
-        <a href="../files/src_components_common_Base.js.html#l166"><code>src\components\common\Base.js:166</code></a>
+        <a href="../files/src_components_common_Base.js.html#l165"><code>src\components\common\Base.js:165</code></a>
         
         </p>
 
@@ -566,7 +826,7 @@ iterate up the inheritance tree looking for a classname that differs from the cu
             
         
         
-        <a href="../files/src_components_common_Base.js.html#l118"><code>src\components\common\Base.js:118</code></a>
+        <a href="../files/src_components_common_Base.js.html#l117"><code>src\components\common\Base.js:117</code></a>
         
         </p>
 
@@ -659,7 +919,7 @@ iterate up the inheritance tree looking for a classname that differs from the cu
             
         
         
-        <a href="../files/src_components_common_Base.js.html#l202"><code>src\components\common\Base.js:202</code></a>
+        <a href="../files/src_components_common_Base.js.html#l201"><code>src\components\common\Base.js:201</code></a>
         
         </p>
 
@@ -739,7 +999,7 @@ iterate up the inheritance tree looking for a classname that differs from the cu
             
         
         
-        <a href="../files/src_components_common_Base.js.html#l131"><code>src\components\common\Base.js:131</code></a>
+        <a href="../files/src_components_common_Base.js.html#l130"><code>src\components\common\Base.js:130</code></a>
         
         </p>
 
@@ -830,7 +1090,7 @@ iterate up the inheritance tree looking for a classname that differs from the cu
             
         
         
-        <a href="../files/src_components_common_Base.js.html#l144"><code>src\components\common\Base.js:144</code></a>
+        <a href="../files/src_components_common_Base.js.html#l143"><code>src\components\common\Base.js:143</code></a>
         
         </p>
 
@@ -857,6 +1117,76 @@ iterate up the inheritance tree looking for a classname that differs from the cu
                         <span class="type">String</span>:
                     
                     <p>uniqueId</p>
+
+                
+            </div>
+        </div>
+    
+
+    
+</div>
+
+                
+                    <div id="method_getItems" class="method item inherited">
+    <h3 class="name"><code>getItems</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+        <span class="returns-inline">
+            <span class="type">String</span>
+        </span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                <p>Inherited from
+                <a href="../classes/components.common.mixins.Items.html#method_getItems">components.common.mixins.Items</a>:
+            
+        
+        
+        <a href="../files/src_components_common_mixins_Items.js.html#l33"><code>src\components\common\mixins\Items.js:33</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>inject sub items</p>
+
+    </div>
+
+    
+
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                        <span class="type">String</span>:
+                    
+                    <p>html</p>
 
                 
             </div>
@@ -900,7 +1230,7 @@ iterate up the inheritance tree looking for a classname that differs from the cu
             
         
         
-        <a href="../files/src_components_common_Base.js.html#l193"><code>src\components\common\Base.js:193</code></a>
+        <a href="../files/src_components_common_Base.js.html#l192"><code>src\components\common\Base.js:192</code></a>
         
         </p>
 
@@ -968,7 +1298,7 @@ iterate up the inheritance tree looking for a classname that differs from the cu
             
         
         
-        <a href="../files/src_components_common_Base.js.html#l184"><code>src\components\common\Base.js:184</code></a>
+        <a href="../files/src_components_common_Base.js.html#l183"><code>src\components\common\Base.js:183</code></a>
         
         </p>
 
@@ -1036,7 +1366,7 @@ iterate up the inheritance tree looking for a classname that differs from the cu
             
         
         
-        <a href="../files/src_components_common_Base.js.html#l158"><code>src\components\common\Base.js:158</code></a>
+        <a href="../files/src_components_common_Base.js.html#l157"><code>src\components\common\Base.js:157</code></a>
         
         </p>
 
@@ -1100,7 +1430,7 @@ iterate up the inheritance tree looking for a classname that differs from the cu
             
         
         
-        <a href="../files/src_components_common_Base.js.html#l102"><code>src\components\common\Base.js:102</code></a>
+        <a href="../files/src_components_common_Base.js.html#l101"><code>src\components\common\Base.js:101</code></a>
         
         </p>
 
@@ -1166,7 +1496,7 @@ iterate up the inheritance tree looking for a classname that differs from the cu
             
         
         
-        <a href="../files/src_components_common_Base.js.html#l210"><code>src\components\common\Base.js:210</code></a>
+        <a href="../files/src_components_common_Base.js.html#l209"><code>src\components\common\Base.js:209</code></a>
         
         </p>
 
@@ -1256,7 +1586,7 @@ iterate up the inheritance tree looking for a classname that differs from the cu
             
         
         
-        <a href="../files/src_components_common_Base.js.html#l62"><code>src\components\common\Base.js:62</code></a>
+        <a href="../files/src_components_common_Base.js.html#l61"><code>src\components\common\Base.js:61</code></a>
         
         </p>
 
@@ -1346,7 +1676,7 @@ iterate up the inheritance tree looking for a classname that differs from the cu
             
         
         
-        <a href="../files/src_components_common_Base.js.html#l70"><code>src\components\common\Base.js:70</code></a>
+        <a href="../files/src_components_common_Base.js.html#l69"><code>src\components\common\Base.js:69</code></a>
         
         </p>
 
@@ -1390,7 +1720,7 @@ iterate up the inheritance tree looking for a classname that differs from the cu
             
         
         
-        <a href="../files/src_components_common_Base.js.html#l95"><code>src\components\common\Base.js:95</code></a>
+        <a href="../files/src_components_common_Base.js.html#l94"><code>src\components\common\Base.js:94</code></a>
         
         </p>
 
@@ -1501,6 +1831,49 @@ iterate up the inheritance tree looking for a classname that differs from the cu
 </div>
 
                 
+                    <div id="property_items" class="property item inherited">
+    <h3 class="name"><code>items</code></h3>
+    <span class="type">String | Object | Array of Object</span>
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                <p>Inherited from
+                <a href="../classes/components.common.mixins.Items.html#property_items">components.common.mixins.Items</a>:
+            
+        
+        
+        <a href="../files/src_components_common_mixins_Items.js.html#l13"><code>src\components\common\mixins\Items.js:13</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        
+    </div>
+
+    
+        <p><strong>Default:</strong> null</p>
+    
+
+    
+
+    
+</div>
+
+                
                     <div id="property_renderTo" class="property item inherited">
     <h3 class="name"><code>renderTo</code></h3>
     <span class="type">Boolean | String | Object false, selector, jQuery Object</span>
@@ -1531,7 +1904,7 @@ iterate up the inheritance tree looking for a classname that differs from the cu
     </div>
 
     <div class="description">
-        <p>target to render the component to (not needed if combined with a view) (optional)</p>
+        <p>target to render the component to (not needed if combined with a view)</p>
 
     </div>
 
@@ -1565,7 +1938,7 @@ iterate up the inheritance tree looking for a classname that differs from the cu
             
         
         
-        <a href="../files/src_components_common_Base.js.html#l81"><code>src\components\common\Base.js:81</code></a>
+        <a href="../files/src_components_common_Base.js.html#l80"><code>src\components\common\Base.js:80</code></a>
         
         </p>
 
@@ -1653,7 +2026,7 @@ iterate up the inheritance tree looking for a classname that differs from the cu
             
         
         
-        <a href="../files/src_components_common_Base.js.html#l88"><code>src\components\common\Base.js:88</code></a>
+        <a href="../files/src_components_common_Base.js.html#l87"><code>src\components\common\Base.js:87</code></a>
         
         </p>
 

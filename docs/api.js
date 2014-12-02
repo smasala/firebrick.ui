@@ -7,7 +7,7 @@ YUI.add("yuidoc-meta", function(Y) {
         "components.button.dropdown.List",
         "components.common.Base",
         "components.common.MultiplesBase",
-        "components.common.mixins.@static Items",
+        "components.common.mixins.Items",
         "components.containers.Base",
         "components.containers.Box",
         "components.containers.Form",
