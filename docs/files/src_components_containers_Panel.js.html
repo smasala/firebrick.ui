@@ -19,7 +19,7 @@
             
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 0.5.5</em>
+            <em>API Docs for: 0.7.7</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -43,13 +43,21 @@
             
                 <li><a href="../classes/components.button.Button.html">components.button.Button</a></li>
             
+                <li><a href="../classes/components.button.dropdown.List.html">components.button.dropdown.List</a></li>
+            
+                <li><a href="../classes/components.button.Icon.html">components.button.Icon</a></li>
+            
                 <li><a href="../classes/components.button.ToggleButton.html">components.button.ToggleButton</a></li>
             
                 <li><a href="../classes/components.common.Base.html">components.common.Base</a></li>
             
+                <li><a href="../classes/components.common.mixins.@static Items.html">components.common.mixins.@static Items</a></li>
+            
                 <li><a href="../classes/components.common.MultiplesBase.html">components.common.MultiplesBase</a></li>
             
                 <li><a href="../classes/components.containers.Base.html">components.containers.Base</a></li>
+            
+                <li><a href="../classes/components.containers.Box.html">components.containers.Box</a></li>
             
                 <li><a href="../classes/components.containers.Form.html">components.containers.Form</a></li>
             
@@ -61,15 +69,19 @@
             
                 <li><a href="../classes/components.display.Header.html">components.display.Header</a></li>
             
+                <li><a href="../classes/components.display.Image.html">components.display.Image</a></li>
+            
                 <li><a href="../classes/components.display.List.html">components.display.List</a></li>
             
-                <li><a href="../classes/components.display.Text.html">components.display.Text</a></li>
+                <li><a href="../classes/components.display.Progress.html">components.display.Progress</a></li>
             
-                <li><a href="../classes/components.fields.Base.html">components.fields.Base</a></li>
+                <li><a href="../classes/components.display.Text.html">components.display.Text</a></li>
             
                 <li><a href="../classes/components.fields.Checkbox.html">components.fields.Checkbox</a></li>
             
                 <li><a href="../classes/components.fields.Email.html">components.fields.Email</a></li>
+            
+                <li><a href="../classes/components.fields.File.html">components.fields.File</a></li>
             
                 <li><a href="../classes/components.fields.Input.html">components.fields.Input</a></li>
             
@@ -233,6 +245,18 @@ define([&quot;text!./Panel.html&quot;, &quot;./Base&quot;], function(tpl){
 		 */
 		collapsed:false,
 		/**
+		 * @property headerIcons
+		 * @type {Boolean|Object} boolean = false, if object use the same way as the &quot;items&quot; property
+		 * @default false
+		 */
+		headerIcons: false,
+		/**
+		 * @property headerIconPosition
+		 * @type {String} css class &quot;pull-right&quot;, &quot;pull-left&quot; etc
+		 * @default &quot;pull-right&quot;
+		 */
+		headerIconPosition: &quot;pull-right&quot;,
+		/**
 		 * Data bindings
 		 * @method bindings
 		 * @return {Object}
@@ -240,15 +264,12 @@ define([&quot;text!./Panel.html&quot;, &quot;./Base&quot;], function(tpl){
 		bindings: function(){
 			var me = this,
 				obj = {
-						attr:{
-							id: &quot;&#x27;&quot; + me.getId() + &quot;&#x27;&quot;,
-						},
 						css:{
 							&quot;panel&quot;: me.panelClass
 						}
 					};
 			if(me.panelTypeClass){
-				obj.css[&quot;&#x27;panel-&quot;+me.panelTypeClass+&quot;&#x27;&quot;] = true;
+				obj.css[ me.parseBind(&quot;panel-&quot;+me.panelTypeClass)] = true;
 			}
 			return obj;
 		},
@@ -261,7 +282,7 @@ define([&quot;text!./Panel.html&quot;, &quot;./Base&quot;], function(tpl){
 				obj = {
 					css:{},
 					attr:{
-						id:&quot;&#x27;fb-ui-collapse-&quot; + me.getId() + &quot;&#x27;&quot;
+						id: me.parseBind( &quot;fb-ui-collapse-&quot; + me.getId() )
 					}
 			};
 			if(me.collapsible){
@@ -285,10 +306,24 @@ define([&quot;text!./Panel.html&quot;, &quot;./Base&quot;], function(tpl){
 					},
 					visible: me.showPanelHeader
 				};
-			if(!me.collapsible){
-				obj.text = &quot;fb.text(&#x27;&quot; + me.title + &quot;&#x27;)&quot;;
-			}
 			return obj;
+		},
+		/**
+		 * @method headerIconBindings
+		 * @return {Object}
+		 */
+		headerIconBindings: function(){
+			var me = this,
+				obj= {
+					css: {
+						&quot;&#x27;btn-group&#x27;&quot;: true
+					}
+				};
+			
+			obj.css[me.parseBind(me.headerIconPosition)] = true;
+				
+			return obj;
+			
 		},
 		/**
 		 * @method collapsibleLinkBindings
@@ -299,12 +334,20 @@ define([&quot;text!./Panel.html&quot;, &quot;./Base&quot;], function(tpl){
 				id = &quot;fb-ui-collapse-&quot; + me.getId();
 			return {
 				attr:{
-					&quot;&#x27;data-toggle&#x27;&quot;: &quot;&#x27;collapse&#x27;&quot;,
-					&quot;href&quot;: &quot;&#x27;#&quot; + id + &quot;&#x27;&quot;,
+					&quot;&#x27;data-toggle&#x27;&quot;:  &quot;&#x27;collapse&#x27;&quot;,
+					&quot;href&quot;:  me.parseBind(&quot;#&quot; + id ),
 					&quot;&#x27;aria-expanded&#x27;&quot;: typeof me.collapsed == &quot;boolean&quot; ? me.collapsed : true,
-					&quot;&#x27;aria-controls&#x27;&quot;: &quot;&#x27;&quot; + id + &quot;&#x27;&quot;,
-				},
-				text: &quot;fb.text(&#x27;&quot; + me.title + &quot;&#x27;)&quot;
+					&quot;&#x27;aria-controls&#x27;&quot;:  me.parseBind( id ),
+				}
+			}
+		},
+		/**
+		 * @method panelHeaderTextBindings
+		 * @return {Object}
+		 */
+		panelHeaderTextBindings: function(){
+			return {
+				text: &quot;fb.text(&#x27;&quot; + this.title + &quot;&#x27;)&quot;
 			}
 		},
 		/**

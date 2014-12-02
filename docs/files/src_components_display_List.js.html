@@ -19,7 +19,7 @@
             
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 0.5.5</em>
+            <em>API Docs for: 0.7.7</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -43,13 +43,21 @@
             
                 <li><a href="../classes/components.button.Button.html">components.button.Button</a></li>
             
+                <li><a href="../classes/components.button.dropdown.List.html">components.button.dropdown.List</a></li>
+            
+                <li><a href="../classes/components.button.Icon.html">components.button.Icon</a></li>
+            
                 <li><a href="../classes/components.button.ToggleButton.html">components.button.ToggleButton</a></li>
             
                 <li><a href="../classes/components.common.Base.html">components.common.Base</a></li>
             
+                <li><a href="../classes/components.common.mixins.@static Items.html">components.common.mixins.@static Items</a></li>
+            
                 <li><a href="../classes/components.common.MultiplesBase.html">components.common.MultiplesBase</a></li>
             
                 <li><a href="../classes/components.containers.Base.html">components.containers.Base</a></li>
+            
+                <li><a href="../classes/components.containers.Box.html">components.containers.Box</a></li>
             
                 <li><a href="../classes/components.containers.Form.html">components.containers.Form</a></li>
             
@@ -61,15 +69,19 @@
             
                 <li><a href="../classes/components.display.Header.html">components.display.Header</a></li>
             
+                <li><a href="../classes/components.display.Image.html">components.display.Image</a></li>
+            
                 <li><a href="../classes/components.display.List.html">components.display.List</a></li>
             
-                <li><a href="../classes/components.display.Text.html">components.display.Text</a></li>
+                <li><a href="../classes/components.display.Progress.html">components.display.Progress</a></li>
             
-                <li><a href="../classes/components.fields.Base.html">components.fields.Base</a></li>
+                <li><a href="../classes/components.display.Text.html">components.display.Text</a></li>
             
                 <li><a href="../classes/components.fields.Checkbox.html">components.fields.Checkbox</a></li>
             
                 <li><a href="../classes/components.fields.Email.html">components.fields.Email</a></li>
+            
+                <li><a href="../classes/components.fields.File.html">components.fields.File</a></li>
             
                 <li><a href="../classes/components.fields.Input.html">components.fields.Input</a></li>
             
@@ -200,6 +212,13 @@ define([&quot;text!./List.html&quot;, &quot;../common/Base&quot;], function(tpl)
 		 */
 		data:false,
 		/**
+		 * unstyled - applies list-unstyled css class to list container (ul/ol)
+		 * @property unstyled
+		 * @type {boolean}
+		 * @default false
+		 */
+		unstyled:false,
+		/**
 		 * inject a template into the &lt;li&gt;{preItemTpl}&lt;span&gt;&lt;/span&gt;{postItemTpl}&lt;/li&gt; item
 		 * @property preItemTpl
 		 * @type {String|Function} html
@@ -222,6 +241,9 @@ define([&quot;text!./List.html&quot;, &quot;../common/Base&quot;], function(tpl)
 				obj = {css:{}};
 			if(me.listGroupClass){
 				obj.css[&quot;&#x27;list-group&#x27;&quot;] = me.listGroupClass
+			}
+			if(me.unstyled){
+				obj.css[&quot;&#x27;list-unstyled&#x27;&quot;] = me.unstyled;
 			}
 			if(me.data){
 				obj.foreach = &quot;$data&quot;
@@ -257,7 +279,7 @@ define([&quot;text!./List.html&quot;, &quot;../common/Base&quot;], function(tpl)
 			var me = this;
 			return {
 				template: {
-					name: &quot;&#x27;&quot;+me.getId()+&quot;&#x27;&quot;,
+					name:  me.parseBind(me.getId()),
 					data: me.data
 				}
 			}
@@ -266,9 +288,8 @@ define([&quot;text!./List.html&quot;, &quot;../common/Base&quot;], function(tpl)
 		childrenBindings: function(){
 			var me = this;
 			return {
-				visible: &quot;$data.children ? $data.children : false&quot;,
 				template: {
-					name: &quot;&#x27;&quot;+this.getId()+&quot;&#x27;&quot;,
+					name:  me.parseBind(me.getId()),
 					data: &quot;$data.children&quot;
 				}
 			}

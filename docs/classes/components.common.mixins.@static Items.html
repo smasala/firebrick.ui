@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>utils - Firebrick UI API</title>
+    <title>components.common.mixins.@static Items - Firebrick UI API</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -154,7 +154,7 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-                        <h1>utils Class</h1>
+                        <h1>components.common.mixins.@static Items Class</h1>
 <div class="box meta">
     
 
@@ -162,13 +162,13 @@
 
     
         <div class="foundat">
-            Defined in: <a href="../files/src_firebrick.ui.js.html#l176"><code>src\firebrick.ui.js:176</code></a>
+            Defined in: <a href="../files/src_components_common_mixins_Items.js.html#l5"><code>src\components\common\mixins\Items.js:5</code></a>
         </div>
     
 
     
         
-            Module: <a href="../modules/Firebrick.ui.html">Firebrick.ui</a>
+            Module: <a href="../modules/Firebrick.ui.components.html">Firebrick.ui.components</a>
         
     
 
@@ -178,8 +178,7 @@
 
 
 <div class="box intro">
-    <p>util methods</p>
-
+    
 </div>
 
 
@@ -191,6 +190,8 @@
         
             <li class="api-class-tab methods"><a href="#methods">Methods</a></li>
         
+        
+            <li class="api-class-tab properties"><a href="#properties">Properties</a></li>
         
         
         
@@ -206,8 +207,39 @@
 
                     <ul class="index-list methods">
                         
+                            <li class="index-item method private">
+                                <a href="#method__getItems">_getItems</a>
+
+                                
+                                
+                            </li>
+                        
                             <li class="index-item method">
-                                <a href="#method_stringify">stringify</a>
+                                <a href="#method_getItems">getItems</a>
+
+                                
+                                
+                            </li>
+                        
+                    </ul>
+                </div>
+            
+
+            
+                <div class="index-section properties">
+                    <h3>Properties</h3>
+
+                    <ul class="index-list properties">
+                        
+                            <li class="index-item property">
+                                <a href="#property_items">items</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item property">
+                                <a href="#property_me - component class (this)">me - component class (this)</a>
 
                                 
                                 
@@ -220,8 +252,6 @@
             
 
             
-
-            
         </div>
 
         
@@ -229,8 +259,8 @@
                 <h2 class="off-left">Methods</h2>
 
                 
-                    <div id="method_stringify" class="method item">
-    <h3 class="name"><code>stringify</code></h3>
+                    <div id="method__getItems" class="method item private">
+    <h3 class="name"><code>_getItems</code></h3>
 
     
         <div class="args">
@@ -238,12 +268,110 @@
             
                 <li class="arg">
                     
-                        <code>objToConvert</code>
+                        <code>items</code>
                     
                 </li>
             
             </ul><span class="paren">)</span>
         </div>
+    
+
+    
+        <span class="returns-inline">
+            <span class="type">Object, Null</span>
+        </span>
+    
+
+    
+
+    
+        <span class="flag private">private</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/src_components_common_mixins_Items.js.html#l57"><code>src\components\common\mixins\Items.js:57</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>use getItems</p>
+
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">items</code>
+                        <span class="type">Object</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                         
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                        <span class="type">Object, Null</span>:
+                    
+                    <p>object - {html:&quot;&quot;, items:[]}</p>
+
+                
+            </div>
+        </div>
+    
+
+    
+</div>
+
+                
+                    <div id="method_getItems" class="method item">
+    <h3 class="name"><code>getItems</code></h3>
+
+    
+        <span class="paren">()</span>
     
 
     
@@ -275,7 +403,7 @@
             
         
         
-        <a href="../files/src_firebrick.ui.js.html#l182"><code>src\firebrick.ui.js:182</code></a>
+        <a href="../files/src_components_common_mixins_Items.js.html#l32"><code>src\components\common\mixins\Items.js:32</code></a>
         
         </p>
 
@@ -286,33 +414,10 @@
     </div>
 
     <div class="description">
-        <p>convert a JS Object into a simple &quot;json&quot; type string, this is mainly used for the data-bind attribute in Knockout</p>
+        <p>inject sub items</p>
 
     </div>
 
-    
-        <div class="params">
-            <h4>Parameters:</h4>
-
-            <ul class="params-list">
-            
-                <li class="param">
-                    
-                        <code class="param-name">objToConvert</code>
-                        <span class="type">Object</span>
-                    
-
-                    
-
-                    <div class="param-description">
-                         
-                    </div>
-
-                    
-                </li>
-            
-            </ul>
-        </div>
     
 
     
@@ -324,6 +429,8 @@
                     
                         <span class="type">String</span>:
                     
+                    <p>html</p>
+
                 
             </div>
         </div>
@@ -336,6 +443,125 @@
             </div>
         
 
+        
+            <div id="properties" class="api-class-tabpanel">
+                <h2 class="off-left">Properties</h2>
+
+                
+                    <div id="property_items" class="property item">
+    <h3 class="name"><code>items</code></h3>
+    <span class="type">String | Object | Object</span>
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/src_components_common_mixins_Items.js.html#l12"><code>src\components\common\mixins\Items.js:12</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        
+    </div>
+
+    
+        <p><strong>Default:</strong> null</p>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="property_me - component class (this)" class="property item">
+    <h3 class="name"><code>me - component class (this)</code></h3>
+    <span class="type">Object</span>
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/src_components_common_mixins_Items.js.html#l45"><code>src\components\common\mixins\Items.js:45</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>if you are calling _getItems from a nested scope then use this function</p>
+
+    </div>
+
+    
+
+    
+
+    
+        <h4>Sub-properties:</h4>
+
+        <ul class="params-list">
+            
+            <li class="param">
+                
+                    <code class="param-name">itemsName</code>
+                    <span class="type">String</span>
+                
+
+                <div class="param-description">
+                    <ul>
+<li>optional - name of property to get items from</li>
+</ul>
+
+                </div>
+
+                
+            </li>
+            
+        </ul>
+    
+</div>
+
+                
+            </div>
         
 
         

@@ -19,7 +19,7 @@
             
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 0.5.5</em>
+            <em>API Docs for: 0.7.7</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -43,13 +43,21 @@
             
                 <li><a href="../classes/components.button.Button.html">components.button.Button</a></li>
             
+                <li><a href="../classes/components.button.dropdown.List.html">components.button.dropdown.List</a></li>
+            
+                <li><a href="../classes/components.button.Icon.html">components.button.Icon</a></li>
+            
                 <li><a href="../classes/components.button.ToggleButton.html">components.button.ToggleButton</a></li>
             
                 <li><a href="../classes/components.common.Base.html">components.common.Base</a></li>
             
+                <li><a href="../classes/components.common.mixins.@static Items.html">components.common.mixins.@static Items</a></li>
+            
                 <li><a href="../classes/components.common.MultiplesBase.html">components.common.MultiplesBase</a></li>
             
                 <li><a href="../classes/components.containers.Base.html">components.containers.Base</a></li>
+            
+                <li><a href="../classes/components.containers.Box.html">components.containers.Box</a></li>
             
                 <li><a href="../classes/components.containers.Form.html">components.containers.Form</a></li>
             
@@ -61,15 +69,19 @@
             
                 <li><a href="../classes/components.display.Header.html">components.display.Header</a></li>
             
+                <li><a href="../classes/components.display.Image.html">components.display.Image</a></li>
+            
                 <li><a href="../classes/components.display.List.html">components.display.List</a></li>
             
-                <li><a href="../classes/components.display.Text.html">components.display.Text</a></li>
+                <li><a href="../classes/components.display.Progress.html">components.display.Progress</a></li>
             
-                <li><a href="../classes/components.fields.Base.html">components.fields.Base</a></li>
+                <li><a href="../classes/components.display.Text.html">components.display.Text</a></li>
             
                 <li><a href="../classes/components.fields.Checkbox.html">components.fields.Checkbox</a></li>
             
                 <li><a href="../classes/components.fields.Email.html">components.fields.Email</a></li>
+            
+                <li><a href="../classes/components.fields.File.html">components.fields.File</a></li>
             
                 <li><a href="../classes/components.fields.Input.html">components.fields.Input</a></li>
             
@@ -156,7 +168,7 @@
  * @namespace components.containers
  * @class Form
  */
-define([&quot;text!./Form.html&quot;, &quot;./Base&quot;], function(tpl){
+define([&quot;text!./Form.html&quot;, &quot;jquery&quot;, &quot;./Base&quot;], function(tpl, $){
 	return Firebrick.define(&quot;Firebrick.ui.containers.Form&quot;, {
 		extend:&quot;Firebrick.ui.containers.Base&quot;,
 		/**
@@ -174,7 +186,7 @@ define([&quot;text!./Form.html&quot;, &quot;./Base&quot;], function(tpl){
 		 * @type {String}
 		 * @default &quot;&#x27;form&#x27;&quot;
 		 */
-		formRole:&quot;&#x27;form&#x27;&quot;,
+		formRole:&quot;form&quot;,
 		/**
 		 * @property horizontal
 		 * @type {Boolean|String}
@@ -188,6 +200,164 @@ define([&quot;text!./Form.html&quot;, &quot;./Base&quot;], function(tpl){
 		 */
 		inline:false,
 		/**
+		 * @property enctype
+		 * @type {String}
+		 * @default &quot;multipart/form-data&quot;
+		 */
+		enctype: &quot;multipart/form-data&quot;,
+		/**
+		 * whether the progress bar should be shown on form submission
+		 * @property showProgress
+		 * @type {Boolean}
+		 * @default true
+		 */
+		showProgress: true,
+		/**
+		 * see &quot;ProcessData&quot; in http://api.jquery.com/jquery.ajax/
+		 * @property ajaxProcessData
+		 * @type {Boolean}
+		 * @default true
+		 */
+		ajaxProcessData: false,
+		/**
+		 * used for submitting the form
+		 * @property url
+		 * @type {String}
+		 * @default &quot;&quot;
+		 */
+		url: &quot;/&quot;,
+		/**
+		 * @property submitType
+		 * @type {String}
+		 * @default &quot;post&quot;
+		 */
+		submitType: &quot;post&quot;,
+		/**
+		 * upload and download progress
+		 * @property xhr
+		 * @type {Function}
+		 */
+		xhr: function(){
+			var xhr = new window.XMLHttpRequest();
+
+			//Upload progress
+		    xhr.upload.addEventListener(&quot;progress&quot;, function(evt){
+		    	if (evt.lengthComputable) {
+		    		var percentComplete = evt.loaded / evt.total;
+		    		//Do something with upload progress
+		    		console.log(percentComplete);
+		    	}
+		    }, false);
+		    
+		    //Download progress
+		    xhr.addEventListener(&quot;progress&quot;, function(evt){
+		    	if (evt.lengthComputable) {
+		    		var percentComplete = evt.loaded / evt.total;
+		    		//Do something with download progress
+		    		console.log(percentComplete);
+		    	}
+		    }, false);
+		    
+		    return xhr;
+		},
+		/**
+		 * stores the current form item
+		 * @property _form
+		 * @type {jQuery Object} &lt;form&gt;&lt;/form&gt;
+		 */
+		_form: null,
+		/**
+		 * method called on submit ajax
+		 * @property success
+		 * @type {Function}
+		 * @default 
+		 */
+		success: function(){
+			console.info(&quot;success&quot;)
+		},
+		/**
+		 * method called on submit ajax
+		 * @property failure
+		 * @type {Function}
+		 * @default 
+		 */
+		failure: function(){
+			console.info(&quot;failure&quot;)
+		},
+		/**
+		 * method called on submit ajax
+		 * @property complete
+		 * @type {Function}
+		 * @default function(){}
+		 */
+		complete: function(){console.info(&quot;complete&quot;)},
+		/**
+		 * method called after ajax
+		 * @method always
+		 * @param {Arguments} always function arguments from ajax
+		 */
+		always: function(){},
+		/**
+		 * method called after ajax
+		 * @method beforeSend
+		 * @param {Arguments} beforeSend function arguments from ajax
+		 */
+		beforeSend: function(){},
+		/**
+		 * this function requires the HTML5 function FormData to be supported
+		 * @method getFormData
+		 * @return {Object}
+		 */
+		getFormData: function(){
+			return new FormData($(&quot;#&quot;+this.getId()));
+		},
+		/**
+		 * @method init
+		 */
+		init: function(){
+			var me = this;
+				
+			me.on(&quot;componentReady&quot;, function(){
+				me._form = $(&quot;#&quot; + me.getId());
+			});
+			
+			return this.callParent();
+		},
+		/**
+		 * make sure this.url is set before calling this function
+		 * @method submit
+		 */
+		submit: function(){
+			var me = this;
+
+			if(!me.url || typeof me.url != &quot;string&quot;){
+				console.error(&quot;unable to submit form. No url is set or is set incorrectly&quot;, me.url, me);
+				return;
+			}
+			
+			if(!me._form){
+				console.error(&quot;unable to submit form. Form not found for id&quot;, me.getId());
+			}
+			
+			if(window.FormData){
+				//HTML 5 - IE10+ 
+				$.ajax({
+					xhr: me.xhr,
+					url: me.url, 
+					type: me.submitType, 
+					data: new FormData(me._form[0]), 
+					processData: me.ajaxProcessData, 
+					contentType: me.enctype,
+					beforeSend: me.beforeSend.bind(me),
+					complete: me.complete.bind(me), //regardless of success of failure
+					success: me.success.bind(me),
+					failure: me.failure.bind(me)
+				}).always(me.always.bind(me));
+			}else{
+				console.error(&quot;FormData is not supported by your browser&quot;);
+			}
+		},
+		/**
 		 * @method formBindings
 		 * @return {Object}
 		 */
@@ -195,8 +365,8 @@ define([&quot;text!./Form.html&quot;, &quot;./Base&quot;], function(tpl){
 			var me = this;
 			return {
 				attr:{
-					id: &quot;&#x27;&quot; + me.getId() + &quot;&#x27;&quot;,
-					role: me.formRole
+					role:  me.parseBind(me.formRole),
+					enctype:  me.parseBind(me.enctype)
 				},
 				css:{
 					&quot;&#x27;form-horizontal&#x27;&quot;: this.horizontal,

@@ -19,7 +19,7 @@
             
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 0.5.5</em>
+            <em>API Docs for: 0.7.7</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -43,13 +43,21 @@
             
                 <li><a href="../classes/components.button.Button.html">components.button.Button</a></li>
             
+                <li><a href="../classes/components.button.dropdown.List.html">components.button.dropdown.List</a></li>
+            
+                <li><a href="../classes/components.button.Icon.html">components.button.Icon</a></li>
+            
                 <li><a href="../classes/components.button.ToggleButton.html">components.button.ToggleButton</a></li>
             
                 <li><a href="../classes/components.common.Base.html">components.common.Base</a></li>
             
+                <li><a href="../classes/components.common.mixins.@static Items.html">components.common.mixins.@static Items</a></li>
+            
                 <li><a href="../classes/components.common.MultiplesBase.html">components.common.MultiplesBase</a></li>
             
                 <li><a href="../classes/components.containers.Base.html">components.containers.Base</a></li>
+            
+                <li><a href="../classes/components.containers.Box.html">components.containers.Box</a></li>
             
                 <li><a href="../classes/components.containers.Form.html">components.containers.Form</a></li>
             
@@ -61,15 +69,19 @@
             
                 <li><a href="../classes/components.display.Header.html">components.display.Header</a></li>
             
+                <li><a href="../classes/components.display.Image.html">components.display.Image</a></li>
+            
                 <li><a href="../classes/components.display.List.html">components.display.List</a></li>
             
-                <li><a href="../classes/components.display.Text.html">components.display.Text</a></li>
+                <li><a href="../classes/components.display.Progress.html">components.display.Progress</a></li>
             
-                <li><a href="../classes/components.fields.Base.html">components.fields.Base</a></li>
+                <li><a href="../classes/components.display.Text.html">components.display.Text</a></li>
             
                 <li><a href="../classes/components.fields.Checkbox.html">components.fields.Checkbox</a></li>
             
                 <li><a href="../classes/components.fields.Email.html">components.fields.Email</a></li>
+            
+                <li><a href="../classes/components.fields.File.html">components.fields.File</a></li>
             
                 <li><a href="../classes/components.fields.Input.html">components.fields.Input</a></li>
             
@@ -237,11 +249,12 @@
 			
 			/**
 			 * recursive function
-			 * 
+			 * create components and html from an array of items
 			 * @private
 			 * @method _populate
 			 * @return {Object} :: {html: string, items: array of objects}
 			 */
+			i:0,
 			_populate: function(items, parent){
 				var me = this,
 					x = [],
@@ -255,14 +268,16 @@
 						}
 						h += component.tpl;
 					}else if(v.viewName){
+						//Creates a view from a JS file
+						//Firebrick.create(&quot;MyApp.view.MyView&quot;, {})
 						component = Firebrick.create(v.viewName, v);
 						h += component.tpl;
 					}else{
 						if(!v.uiComponent){
 							//v can be string or object
-							tmp = me.getByShortName(($.isFunction(v.uiName) ? v.uiName() : v.uiName) || v);
-							//getPrototypeOf(object.create) to make a new copy of the object and not a prototype pointer to v
-							component = Firebrick.create(tmp._classname, (v.uiName ? Object.getPrototypeOf(Object.create(v)) : null) );
+							tmp = me.getByShortName(v.uiName || v);
+							//Object.getPrototypeOf(object.create) to make a new copy of the properties and not a pointer to v
+							component = Firebrick.create(tmp._classname, (v.uiName ? Object.getPrototypeOf(Object.create(v)) : null));
 						}else{
 							//v is already a field class
 							component = v;

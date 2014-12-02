@@ -19,7 +19,7 @@
             
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 0.5.5</em>
+            <em>API Docs for: 0.7.7</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -43,13 +43,21 @@
             
                 <li><a href="../classes/components.button.Button.html">components.button.Button</a></li>
             
+                <li><a href="../classes/components.button.dropdown.List.html">components.button.dropdown.List</a></li>
+            
+                <li><a href="../classes/components.button.Icon.html">components.button.Icon</a></li>
+            
                 <li><a href="../classes/components.button.ToggleButton.html">components.button.ToggleButton</a></li>
             
                 <li><a href="../classes/components.common.Base.html">components.common.Base</a></li>
             
+                <li><a href="../classes/components.common.mixins.@static Items.html">components.common.mixins.@static Items</a></li>
+            
                 <li><a href="../classes/components.common.MultiplesBase.html">components.common.MultiplesBase</a></li>
             
                 <li><a href="../classes/components.containers.Base.html">components.containers.Base</a></li>
+            
+                <li><a href="../classes/components.containers.Box.html">components.containers.Box</a></li>
             
                 <li><a href="../classes/components.containers.Form.html">components.containers.Form</a></li>
             
@@ -61,15 +69,19 @@
             
                 <li><a href="../classes/components.display.Header.html">components.display.Header</a></li>
             
+                <li><a href="../classes/components.display.Image.html">components.display.Image</a></li>
+            
                 <li><a href="../classes/components.display.List.html">components.display.List</a></li>
             
-                <li><a href="../classes/components.display.Text.html">components.display.Text</a></li>
+                <li><a href="../classes/components.display.Progress.html">components.display.Progress</a></li>
             
-                <li><a href="../classes/components.fields.Base.html">components.fields.Base</a></li>
+                <li><a href="../classes/components.display.Text.html">components.display.Text</a></li>
             
                 <li><a href="../classes/components.fields.Checkbox.html">components.fields.Checkbox</a></li>
             
                 <li><a href="../classes/components.fields.Email.html">components.fields.Email</a></li>
+            
+                <li><a href="../classes/components.fields.File.html">components.fields.File</a></li>
             
                 <li><a href="../classes/components.fields.Input.html">components.fields.Input</a></li>
             
@@ -184,9 +196,6 @@ define([&quot;text!./Grid.html&quot;, &quot;jquery&quot;, &quot;./Base&quot;], f
 			return {
 				css: {
 					row: me.rowClass
-				},
-				attr:{
-					id: &quot;&#x27;&quot; + me.getId() + &quot;&#x27;&quot;
 				}
 			}
 		},
@@ -199,7 +208,7 @@ define([&quot;text!./Grid.html&quot;, &quot;jquery&quot;, &quot;./Base&quot;], f
 				obj = {
 						css:{}
 				};
-			obj.css[&quot;&#x27;col-md-&quot; + (Math.floor(12/me.items.length)) + &quot;&#x27;&quot;] = true;
+			obj.css[ me.parseBind( &quot;col-md-&quot; + (Math.floor(12/me.items.length)) )] = true;
 			return obj;
 		},
 		/**
@@ -210,9 +219,8 @@ define([&quot;text!./Grid.html&quot;, &quot;jquery&quot;, &quot;./Base&quot;], f
 		 * @param {Context} iteration context
 		 * @return {String}
 		 */
-		getGridItem: function(index, item, context){
-			var me = context.data.root,
-				newItem = me._getItems(item);
+		getGridItem: function(index, item, me){
+			var newItem = me._getItems(item);
 			
 			if(newItem){
 				//replace items with the new object - _getItems returns an object {html:&quot;&quot;, items:[]}

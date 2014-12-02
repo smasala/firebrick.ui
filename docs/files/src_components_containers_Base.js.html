@@ -19,7 +19,7 @@
             
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 0.5.5</em>
+            <em>API Docs for: 0.7.7</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -43,13 +43,21 @@
             
                 <li><a href="../classes/components.button.Button.html">components.button.Button</a></li>
             
+                <li><a href="../classes/components.button.dropdown.List.html">components.button.dropdown.List</a></li>
+            
+                <li><a href="../classes/components.button.Icon.html">components.button.Icon</a></li>
+            
                 <li><a href="../classes/components.button.ToggleButton.html">components.button.ToggleButton</a></li>
             
                 <li><a href="../classes/components.common.Base.html">components.common.Base</a></li>
             
+                <li><a href="../classes/components.common.mixins.@static Items.html">components.common.mixins.@static Items</a></li>
+            
                 <li><a href="../classes/components.common.MultiplesBase.html">components.common.MultiplesBase</a></li>
             
                 <li><a href="../classes/components.containers.Base.html">components.containers.Base</a></li>
+            
+                <li><a href="../classes/components.containers.Box.html">components.containers.Box</a></li>
             
                 <li><a href="../classes/components.containers.Form.html">components.containers.Form</a></li>
             
@@ -61,15 +69,19 @@
             
                 <li><a href="../classes/components.display.Header.html">components.display.Header</a></li>
             
+                <li><a href="../classes/components.display.Image.html">components.display.Image</a></li>
+            
                 <li><a href="../classes/components.display.List.html">components.display.List</a></li>
             
-                <li><a href="../classes/components.display.Text.html">components.display.Text</a></li>
+                <li><a href="../classes/components.display.Progress.html">components.display.Progress</a></li>
             
-                <li><a href="../classes/components.fields.Base.html">components.fields.Base</a></li>
+                <li><a href="../classes/components.display.Text.html">components.display.Text</a></li>
             
                 <li><a href="../classes/components.fields.Checkbox.html">components.fields.Checkbox</a></li>
             
                 <li><a href="../classes/components.fields.Email.html">components.fields.Email</a></li>
+            
+                <li><a href="../classes/components.fields.File.html">components.fields.File</a></li>
             
                 <li><a href="../classes/components.fields.Input.html">components.fields.Input</a></li>
             
@@ -154,59 +166,13 @@
  * @module Firebrick.ui.components
  * @extends components.common.Base
  * @namespace components.containers
+ * @uses components.common.mixins.Items
  * @class Base
  */
-define([&quot;jquery&quot;, &quot;../common/Base&quot;], function($){
+define([&quot;jquery&quot;, &quot;../common/Base&quot;, &quot;../common/mixins/Items&quot;], function($){
 	return Firebrick.define(&quot;Firebrick.ui.containers.Base&quot;, {
 		extend:&quot;Firebrick.ui.common.Base&quot;,
-		/**
-		 * @method init
-		 */
-		init:function(){
-			var me = this;
-			me.on(&quot;componentReady&quot;, function(){
-				var items = me.items,
-					args = arguments;
-				if($.isArray(items)){
-					$.each(items, function(i,cmp){
-						if(cmp.passEvent &amp;&amp; !cmp.didit){
-							cmp.passEvent(args);
-						}
-					});
-				}
-			});
-			me.callParent();
-		},
-		/**
-		 * inject sub items
-		 * @method getItems
-		 * @return {String} html
-		 */
-		getItems: function(){
-			var me = this,
-				r = me._getItems(me.items);
-			if($.isPlainObject(r)){
-				me.items = r.items;
-			}
-			return r ? r.html || r : &quot;&quot;;
-		},
-		/**
-		 * use getItems
-		 * @private
-		 * @method _getItems
-		 * @param {Object} items
-		 * @return {Object, Null} object - {html:&quot;&quot;, items:[]}
-		 */
-		_getItems: function(items){
-			var me = this;
-			if(items){
-				if(!$.isArray(items)){
-					items = [items];
-				}
-				return Firebrick.ui._populate(items, me);
-			}
-			return null;
-		}
+		mixins:&quot;Firebrick.ui.common.mixins.Items&quot;
 	});
 });
     </pre>
