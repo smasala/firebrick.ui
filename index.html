@@ -29,7 +29,7 @@
       <div class="inner clearfix">
         <section id="main-content">
           <h1>
-<a id="firebrick-ui-v077-stable" class="anchor" href="#firebrick-ui-v077-stable" aria-hidden="true"><span class="octicon octicon-link"></span></a>Firebrick UI v0.7.7 Stable</h1>
+<a id="firebrick-ui-version" class="anchor" href="#firebrick-ui-version" aria-hidden="true"><span class="octicon octicon-link"></span></a>Firebrick UI <span id="fb-ui-ver"></span> Stable</h1>
 
 <p>UI extendable component library for Firebrick MVC, built with :</p>
 
@@ -139,6 +139,22 @@ require(["dependencies"], function(){
               var pageTracker = _gat._getTracker("UA-55394521-2");
             pageTracker._trackPageview();
             } catch(err) {}
+          </script>
+          
+          <script type="text/javascript">
+          
+          	var getVersion = function(repo, id){
+	      	  	$.ajax({
+	      		  	url:"https://api.github.com/repos/smasala/"+repo+"/tags",
+	      		  	type:"get",
+	      		  	success:function(releases){
+	      	    		$("#" + id).html(releases[0].name);
+	      		  	}
+	      		});
+	        }
+	        
+	        getVersion("firebrick.ui", "fb-ui-ver");
+	       
           </script>
 
   </body>
