@@ -19,7 +19,7 @@
             
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 0.7.7</em>
+            <em>API Docs for: 0.8.20</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -109,6 +109,8 @@
             
                 <li><a href="../classes/utils.html">utils</a></li>
             
+                <li><a href="../classes/view.Base.html">view.Base</a></li>
+            
             </ul>
 
             <ul id="api-modules" class="apis modules">
@@ -169,6 +171,7 @@
  * @class Grid
  */
 define([&quot;text!./Grid.html&quot;, &quot;jquery&quot;, &quot;./Base&quot;], function(tpl, $){
+	&quot;use strict&quot;;
 	return Firebrick.define(&quot;Firebrick.ui.containers.Grid&quot;, {
 		extend:&quot;Firebrick.ui.containers.Base&quot;,
 		/**
@@ -197,14 +200,14 @@ define([&quot;text!./Grid.html&quot;, &quot;jquery&quot;, &quot;./Base&quot;], f
 				css: {
 					row: me.rowClass
 				}
-			}
+			};
 		},
 		/**
 		 * @method getBasicBindings
 		 * @return {Object}
 		 */
 		getBasicBindings:function(){
-			var me = this;
+			var me = this,
 				obj = {
 						css:{}
 				};
@@ -219,8 +222,9 @@ define([&quot;text!./Grid.html&quot;, &quot;jquery&quot;, &quot;./Base&quot;], f
 		 * @param {Context} iteration context
 		 * @return {String}
 		 */
-		getGridItem: function(index, item, me){
-			var newItem = me._getItems(item);
+		getGridItem: function(index, item){
+			var me = this,
+				newItem = me._getItems(item);
 			
 			if(newItem){
 				//replace items with the new object - _getItems returns an object {html:&quot;&quot;, items:[]}

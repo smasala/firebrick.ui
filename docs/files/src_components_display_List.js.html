@@ -19,7 +19,7 @@
             
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 0.7.7</em>
+            <em>API Docs for: 0.8.20</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -109,6 +109,8 @@
             
                 <li><a href="../classes/utils.html">utils</a></li>
             
+                <li><a href="../classes/view.Base.html">view.Base</a></li>
+            
             </ul>
 
             <ul id="api-modules" class="apis modules">
@@ -169,6 +171,7 @@
  * @class List
  */
 define([&quot;text!./List.html&quot;, &quot;../common/Base&quot;], function(tpl){
+	&quot;use strict&quot;;
 	return Firebrick.define(&quot;Firebrick.ui.display.List&quot;, {
 		extend:&quot;Firebrick.ui.common.Base&quot;,
 		/**
@@ -233,6 +236,13 @@ define([&quot;text!./List.html&quot;, &quot;../common/Base&quot;], function(tpl)
 		 */
 		postItemTpl:&quot;&quot;,
 		/**
+		 * @method virtualContainerBindings
+		 * @return {Object}
+		 */
+		virtualContainerBindings: function(){
+			return {&quot;if&quot;: &quot;$data &amp;&amp; $data.length&quot;};
+		},
+		/**
 		 * @method listContainerBindings
 		 * @return {Object}
 		 */
@@ -240,13 +250,13 @@ define([&quot;text!./List.html&quot;, &quot;../common/Base&quot;], function(tpl)
 			var me = this,
 				obj = {css:{}};
 			if(me.listGroupClass){
-				obj.css[&quot;&#x27;list-group&#x27;&quot;] = me.listGroupClass
+				obj.css[&quot;&#x27;list-group&#x27;&quot;] = me.listGroupClass;
 			}
 			if(me.unstyled){
 				obj.css[&quot;&#x27;list-unstyled&#x27;&quot;] = me.unstyled;
 			}
 			if(me.data){
-				obj.foreach = &quot;$data&quot;
+				obj.foreach = &quot;$data&quot;;
 			}
 			return obj;
 		},
@@ -259,7 +269,7 @@ define([&quot;text!./List.html&quot;, &quot;../common/Base&quot;], function(tpl)
 				obj = {css:{}};
 			
 			if(me.listGroupClass &amp;&amp; me.listItemGroupClass){
-				obj.css[&quot;&#x27;list-group-item&#x27;&quot;] = me.listItemGroupClass
+				obj.css[&quot;&#x27;list-group-item&#x27;&quot;] = me.listItemGroupClass;
 			}
 
 			return obj;
@@ -269,8 +279,7 @@ define([&quot;text!./List.html&quot;, &quot;../common/Base&quot;], function(tpl)
 		 * @return {Object}
 		 */
 		bindings:function(){
-			var me = this, 
-				obj = {};
+			var obj = {};
 				obj.text = &quot;$data.text ? $data.text : $data&quot;;
 			return obj;
 		},
@@ -282,7 +291,7 @@ define([&quot;text!./List.html&quot;, &quot;../common/Base&quot;], function(tpl)
 					name:  me.parseBind(me.getId()),
 					data: me.data
 				}
-			}
+			};
 		},
 		
 		childrenBindings: function(){
@@ -292,9 +301,9 @@ define([&quot;text!./List.html&quot;, &quot;../common/Base&quot;], function(tpl)
 					name:  me.parseBind(me.getId()),
 					data: &quot;$data.children&quot;
 				}
-			}
+			};
 		}
-	})
+	});
 });
     </pre>
 </div>

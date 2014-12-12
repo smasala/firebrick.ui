@@ -1,15 +1,17 @@
-{{#if items}}
-	<div data-bind="{{data-bind 'dropdownContainerBindings'}}">
-{{/if}}
-		<button id={{getId}} data-bind="{{data-bind}}">
-			{{beforeText}}
-			<span data-bind="{{data-bind 'buttonTextBindings'}}"></span>
-			{{afterText}}
-			{{#if items}}
-				<span data-bind="{{data-bind 'caretBindings'}}"></span>
-			{{/if}}
+{{?it.items}}
+	<div data-bind="{{=it.dataBind('dropdownContainerBindings')}}">
+{{?}}
+		<button id="{{=it.getId()}}" data-bind="{{=it.dataBind()}}">
+			
+			{{=it.b(it.beforeText)}}
+			<span data-bind="{{=it.dataBind('buttonTextBindings')}}"></span>
+			{{=it.b(it.afterText)}}
+			
+			{{?it.items}}
+				<span data-bind="{{=it.dataBind('caretBindings')}}"></span>
+			{{?}}
 		</button>
-{{#if items}}
-		{{{../getItems ../this}}}
+{{?it.items}}
+		{{=it.getItems()}}
 	</div>
-{{/if}}
+{{?}}

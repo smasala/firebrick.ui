@@ -19,7 +19,7 @@
             
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 0.7.7</em>
+            <em>API Docs for: 0.8.20</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -109,6 +109,8 @@
             
                 <li><a href="../classes/utils.html">utils</a></li>
             
+                <li><a href="../classes/view.Base.html">view.Base</a></li>
+            
             </ul>
 
             <ul id="api-modules" class="apis modules">
@@ -169,6 +171,7 @@
  * @class Pagination
  */
 define([&quot;../display/List&quot;], function(){
+	&quot;use strict&quot;;
 	return Firebrick.define(&quot;Firebrick.ui.display.Pagination&quot;, {
 		extend:&quot;Firebrick.ui.display.List&quot;,
 		uiName:&quot;fb-ui-pagination&quot;,
@@ -186,7 +189,7 @@ define([&quot;../display/List&quot;], function(){
 		 */
 		listContainerBindings: function(){
 			var me = this,
-				obj = this.callParent();
+				obj = this.callParent(arguments);
 			obj.css.pagination = true;
 			if(me.paginationSize){
 				obj.css[ me.parseBind(&quot;pagination-&quot;+me.paginationSize) ] = true;

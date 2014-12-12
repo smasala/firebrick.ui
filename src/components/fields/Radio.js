@@ -9,6 +9,7 @@
  * @class Radio
  */
 define(["text!./Radio.html", "../common/MultiplesBase", "./plugins/Radio"], function(subTpl){
+	"use strict";
 	return Firebrick.define("Firebrick.ui.fields.Radio", {
 		extend:"Firebrick.ui.common.MultiplesBase",
 		/**
@@ -77,7 +78,7 @@ define(["text!./Radio.html", "../common/MultiplesBase", "./plugins/Radio"], func
 		 */
 		inputContainerBindings:function(){
 			var me = this,
-				obj = me.callParent();
+				obj = me.callParent(arguments);
 			if(me.options && !me.inplaceEdit){
 				obj.foreach = me.options;
 			}
@@ -89,7 +90,7 @@ define(["text!./Radio.html", "../common/MultiplesBase", "./plugins/Radio"], func
 		 */
 		bindings:function(){
 			var me = this,
-				obj = me.callParent();
+				obj = me.callParent(arguments);
 			
 			if(me.inplaceEdit){
 				obj.editable = me.selectedOptions || false;

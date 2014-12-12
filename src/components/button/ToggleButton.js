@@ -9,6 +9,7 @@
  * @class ToggleButton
  */
 define(["text!./ToggleButton.html", "../common/MultiplesBase"], function(subTpl){
+	"use strict";
 	return Firebrick.define("Firebrick.ui.button.ToggleButton", {
 		extend:"Firebrick.ui.common.MultiplesBase",
 		/**
@@ -79,19 +80,18 @@ define(["text!./ToggleButton.html", "../common/MultiplesBase"], function(subTpl)
 					"'data-toggle'": me.dataToggle
 				},
 				foreach: me.options
-			}
+			};
 		},
 		/**
 		 * @method toggleInputBindings
 		 * @return {Object}
 		 */
 		toggleInputBindings: function(){
-			var me = this;
 			return {
 				attr:{
 					id: "itemId"
 				}
-			}
+			};
 		},
 		/**
 		 * @method toggleLabelBindings
@@ -108,7 +108,7 @@ define(["text!./ToggleButton.html", "../common/MultiplesBase"], function(subTpl)
 					"'btn-primary'": "$data.btnPrimaryClass ? $data.btnPrimaryClass : " + me.btnPrimaryClass,
 					active: "$data.hasOwnProperty && $data.hasOwnProperty('active') ? $data : " + me.defaultActive 
 				}
-			}
+			};
 		},
 		/**
 		 * @method toggleLabelTextBindings
@@ -117,7 +117,7 @@ define(["text!./ToggleButton.html", "../common/MultiplesBase"], function(subTpl)
 		toggleLabelTextBindings: function(){
 			return {
 				"text": "$data.text ? $data.text : $data"
-			}
+			};
 		}
-	})
+	});
 });

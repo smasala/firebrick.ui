@@ -19,7 +19,7 @@
             
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 0.7.7</em>
+            <em>API Docs for: 0.8.20</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -108,6 +108,8 @@
                 <li><a href="../classes/ui.html">ui</a></li>
             
                 <li><a href="../classes/utils.html">utils</a></li>
+            
+                <li><a href="../classes/view.Base.html">view.Base</a></li>
             
             </ul>
 
@@ -225,15 +227,22 @@
                                 
                             </li>
                         
-                            <li class="index-item method">
-                                <a href="#method_bindings">bindings</a>
+                            <li class="index-item method inherited">
+                                <a href="#method__precompile">_precompile</a>
 
                                 
                                 
                             </li>
                         
                             <li class="index-item method inherited">
-                                <a href="#method_build">build</a>
+                                <a href="#method_b">b</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
+                                <a href="#method_bindings">bindings</a>
 
                                 
                                 
@@ -260,6 +269,13 @@
                                 
                             </li>
                         
+                            <li class="index-item method inherited">
+                                <a href="#method_constructor">constructor</a>
+
+                                
+                                
+                            </li>
+                        
                             <li class="index-item method">
                                 <a href="#method_containerBindings">containerBindings</a>
 
@@ -268,7 +284,7 @@
                             </li>
                         
                             <li class="index-item method private inherited">
-                                <a href="#method_data-bind">data-bind</a>
+                                <a href="#method_dataBind">dataBind</a>
 
                                 
                                 
@@ -276,6 +292,13 @@
                         
                             <li class="index-item method">
                                 <a href="#method_expandBindings">expandBindings</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
+                                <a href="#method_generateOnclick">generateOnclick</a>
 
                                 
                                 
@@ -318,13 +341,6 @@
                         
                             <li class="index-item method inherited">
                                 <a href="#method_parseBind">parseBind</a>
-
-                                
-                                
-                            </li>
-                        
-                            <li class="index-item method">
-                                <a href="#method_tbodyBindings">tbodyBindings</a>
 
                                 
                                 
@@ -403,13 +419,6 @@
                                 
                             </li>
                         
-                            <li class="index-item property inherited">
-                                <a href="#property_appendComponent">appendComponent</a>
-
-                                
-                                
-                            </li>
-                        
                             <li class="index-item property">
                                 <a href="#property_collapseText">collapseText</a>
 
@@ -453,6 +462,13 @@
                             </li>
                         
                             <li class="index-item property inherited">
+                                <a href="#property_force {Boolean} [force=false] optional - set to true to force a retemplate">force {Boolean} [force=false] optional - set to true to force a retemplate</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item property inherited">
                                 <a href="#property_glyphiconClass">glyphiconClass</a>
 
                                 
@@ -467,7 +483,7 @@
                             </li>
                         
                             <li class="index-item property inherited">
-                                <a href="#property_renderTo">renderTo</a>
+                                <a href="#property_prop  [prop=&quot;tpl&quot;] optional - name of property to build">prop  [prop=&quot;tpl&quot;] optional - name of property to build</a>
 
                                 
                                 
@@ -502,7 +518,21 @@
                             </li>
                         
                             <li class="index-item property">
+                                <a href="#property_showOptions">showOptions</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item property">
                                 <a href="#property_showRows">showRows</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item property inherited">
+                                <a href="#property_subTpl">subTpl</a>
 
                                 
                                 
@@ -623,7 +653,7 @@
             
         
         
-        <a href="../files/src_components_table_Table.js.html#l181"><code>src\components\table\Table.js:181</code></a>
+        <a href="../files/src_components_table_Table.js.html#l202"><code>src\components\table\Table.js:202</code></a>
         
         </p>
 
@@ -692,7 +722,7 @@
             
         
         
-        <a href="../files/src_components_common_Base.js.html#l165"><code>src\components\common\Base.js:165</code></a>
+        <a href="../files/src_components_common_Base.js.html#l216"><code>src\components\common\Base.js:216</code></a>
         
         </p>
 
@@ -718,6 +748,177 @@ iterate up the inheritance tree looking for a classname that differs from the cu
                 
                     
                         <span class="type">Object</span>:
+                    
+                
+            </div>
+        </div>
+    
+
+    
+</div>
+
+                
+                    <div id="method__precompile" class="method item inherited">
+    <h3 class="name"><code>_precompile</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+        <span class="returns-inline">
+            <span class="type">Object</span>
+        </span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                <p>Inherited from
+                <a href="../classes/components.common.Base.html#method__precompile">components.common.Base</a>:
+            
+        
+        
+        <a href="../files/src_components_common_Base.js.html#l107"><code>src\components\common\Base.js:107</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>compile and cache template</p>
+
+    </div>
+
+    
+
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                        <span class="type">Object</span>:
+                    
+                    <p>self</p>
+
+                
+            </div>
+        </div>
+    
+
+    
+</div>
+
+                
+                    <div id="method_b" class="method item inherited">
+    <h3 class="name"><code>b</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>value</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+        <span class="returns-inline">
+            <span class="type">String</span>
+        </span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                <p>Inherited from
+                <a href="../classes/components.common.Base.html#method_b">components.common.Base</a>:
+            
+        
+        
+        <a href="../files/src_components_common_Base.js.html#l130"><code>src\components\common\Base.js:130</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>use this as a wrapper in a template if the property you wish to call COULD be either a primitive or a function</p>
+
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">value</code>
+                        <span class="type">String | Function</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                        <span class="type">String</span>:
                     
                 
             </div>
@@ -764,7 +965,7 @@ iterate up the inheritance tree looking for a classname that differs from the cu
             
         
         
-        <a href="../files/src_components_table_Table.js.html#l193"><code>src\components\table\Table.js:193</code></a>
+        <a href="../files/src_components_table_Table.js.html#l214"><code>src\components\table\Table.js:214</code></a>
         
         </p>
 
@@ -789,109 +990,6 @@ iterate up the inheritance tree looking for a classname that differs from the cu
                     
                         <span class="type">Object</span>:
                     
-                
-            </div>
-        </div>
-    
-
-    
-</div>
-
-                
-                    <div id="method_build" class="method item inherited">
-    <h3 class="name"><code>build</code></h3>
-
-    
-        <div class="args">
-            <span class="paren">(</span><ul class="args-list inline commas">
-            
-                <li class="arg">
-                    
-                        <code class="optional">[prop=this.tpl]</code>
-                    
-                </li>
-            
-            </ul><span class="paren">)</span>
-        </div>
-    
-
-    
-        <span class="returns-inline">
-            <span class="type">String</span>
-        </span>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                <p>Inherited from
-                <a href="../classes/components.common.Base.html#method_build">components.common.Base</a>:
-            
-        
-        
-        <a href="../files/src_components_common_Base.js.html#l117"><code>src\components\common\Base.js:117</code></a>
-        
-        </p>
-
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        
-    </div>
-
-    
-        <div class="params">
-            <h4>Parameters:</h4>
-
-            <ul class="params-list">
-            
-                <li class="param">
-                    
-                        <code class="param-name optional">[prop=this.tpl]</code>
-                        <span class="type">String</span>
-                        <span class="flag optional" title="This parameter is optional.">optional</span>
-                    
-
-                    
-
-                    <div class="param-description">
-                        
-                    </div>
-
-                    
-                </li>
-            
-            </ul>
-        </div>
-    
-
-    
-        <div class="returns">
-            <h4>Returns:</h4>
-
-            <div class="returns-description">
-                
-                    
-                        <span class="type">String</span>:
-                    
-                    <p>html</p>
-
                 
             </div>
         </div>
@@ -937,7 +1035,7 @@ iterate up the inheritance tree looking for a classname that differs from the cu
             
         
         
-        <a href="../files/src_components_table_Table.js.html#l278"><code>src\components\table\Table.js:278</code></a>
+        <a href="../files/src_components_table_Table.js.html#l290"><code>src\components\table\Table.js:290</code></a>
         
         </p>
 
@@ -1004,7 +1102,7 @@ iterate up the inheritance tree looking for a classname that differs from the cu
             
         
         
-        <a href="../files/src_components_common_Base.js.html#l201"><code>src\components\common\Base.js:201</code></a>
+        <a href="../files/src_components_common_Base.js.html#l252"><code>src\components\common\Base.js:252</code></a>
         
         </p>
 
@@ -1075,7 +1173,7 @@ iterate up the inheritance tree looking for a classname that differs from the cu
             
         
         
-        <a href="../files/src_components_table_Table.js.html#l302"><code>src\components\table\Table.js:302</code></a>
+        <a href="../files/src_components_table_Table.js.html#l326"><code>src\components\table\Table.js:326</code></a>
         
         </p>
 
@@ -1100,6 +1198,76 @@ iterate up the inheritance tree looking for a classname that differs from the cu
                     
                         <span class="type">Object</span>:
                     
+                
+            </div>
+        </div>
+    
+
+    
+</div>
+
+                
+                    <div id="method_constructor" class="method item inherited">
+    <h3 class="name"><code>constructor</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+        <span class="returns-inline">
+            <span class="type">Any</span>
+        </span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                <p>Inherited from
+                <a href="../classes/components.common.Base.html#method_constructor">components.common.Base</a>:
+            
+        
+        
+        <a href="../files/src_components_common_Base.js.html#l88"><code>src\components\common\Base.js:88</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>called when defining the class</p>
+
+    </div>
+
+    
+
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                        <span class="type">Any</span>:
+                    
+                    <p>this.callParent(arguments)</p>
+
                 
             </div>
         </div>
@@ -1145,7 +1313,7 @@ iterate up the inheritance tree looking for a classname that differs from the cu
             
         
         
-        <a href="../files/src_components_table_Table.js.html#l169"><code>src\components\table\Table.js:169</code></a>
+        <a href="../files/src_components_table_Table.js.html#l190"><code>src\components\table\Table.js:190</code></a>
         
         </p>
 
@@ -1179,8 +1347,8 @@ iterate up the inheritance tree looking for a classname that differs from the cu
 </div>
 
                 
-                    <div id="method_data-bind" class="method item private inherited">
-    <h3 class="name"><code>data-bind</code></h3>
+                    <div id="method_dataBind" class="method item private inherited">
+    <h3 class="name"><code>dataBind</code></h3>
 
     
         <div class="args">
@@ -1220,11 +1388,11 @@ iterate up the inheritance tree looking for a classname that differs from the cu
         
             
                 <p>Inherited from
-                <a href="../classes/components.common.Base.html#method_data-bind">components.common.Base</a>:
+                <a href="../classes/components.common.Base.html#method_dataBind">components.common.Base</a>:
             
         
         
-        <a href="../files/src_components_common_Base.js.html#l130"><code>src\components\common\Base.js:130</code></a>
+        <a href="../files/src_components_common_Base.js.html#l181"><code>src\components\common\Base.js:181</code></a>
         
         </p>
 
@@ -1318,7 +1486,7 @@ iterate up the inheritance tree looking for a classname that differs from the cu
             
         
         
-        <a href="../files/src_components_table_Table.js.html#l288"><code>src\components\table\Table.js:288</code></a>
+        <a href="../files/src_components_table_Table.js.html#l312"><code>src\components\table\Table.js:312</code></a>
         
         </p>
 
@@ -1342,6 +1510,110 @@ iterate up the inheritance tree looking for a classname that differs from the cu
                 
                     
                         <span class="type">Object</span>:
+                    
+                
+            </div>
+        </div>
+    
+
+    
+</div>
+
+                
+                    <div id="method_generateOnclick" class="method item">
+    <h3 class="name"><code>generateOnclick</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>type</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+        <span class="returns-inline">
+            <span class="type">Function</span>
+        </span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/src_components_table_Table.js.html#l300"><code>src\components\table\Table.js:300</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">type</code>
+                        <span class="type">String</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>expandAll, collapseAll</p>
+
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                        <span class="type">Function</span>:
                     
                 
             </div>
@@ -1385,7 +1657,7 @@ iterate up the inheritance tree looking for a classname that differs from the cu
             
         
         
-        <a href="../files/src_components_common_Base.js.html#l143"><code>src\components\common\Base.js:143</code></a>
+        <a href="../files/src_components_common_Base.js.html#l194"><code>src\components\common\Base.js:194</code></a>
         
         </p>
 
@@ -1455,7 +1727,7 @@ iterate up the inheritance tree looking for a classname that differs from the cu
             
         
         
-        <a href="../files/src_components_common_Base.js.html#l192"><code>src\components\common\Base.js:192</code></a>
+        <a href="../files/src_components_common_Base.js.html#l243"><code>src\components\common\Base.js:243</code></a>
         
         </p>
 
@@ -1523,7 +1795,7 @@ iterate up the inheritance tree looking for a classname that differs from the cu
             
         
         
-        <a href="../files/src_components_common_Base.js.html#l183"><code>src\components\common\Base.js:183</code></a>
+        <a href="../files/src_components_common_Base.js.html#l234"><code>src\components\common\Base.js:234</code></a>
         
         </p>
 
@@ -1591,7 +1863,7 @@ iterate up the inheritance tree looking for a classname that differs from the cu
             
         
         
-        <a href="../files/src_components_common_Base.js.html#l157"><code>src\components\common\Base.js:157</code></a>
+        <a href="../files/src_components_common_Base.js.html#l208"><code>src\components\common\Base.js:208</code></a>
         
         </p>
 
@@ -1658,7 +1930,7 @@ iterate up the inheritance tree looking for a classname that differs from the cu
             
         
         
-        <a href="../files/src_components_table_Table.js.html#l149"><code>src\components\table\Table.js:149</code></a>
+        <a href="../files/src_components_table_Table.js.html#l166"><code>src\components\table\Table.js:166</code></a>
         
         </p>
 
@@ -1723,7 +1995,7 @@ iterate up the inheritance tree looking for a classname that differs from the cu
             
         
         
-        <a href="../files/src_components_common_Base.js.html#l209"><code>src\components\common\Base.js:209</code></a>
+        <a href="../files/src_components_common_Base.js.html#l260"><code>src\components\common\Base.js:260</code></a>
         
         </p>
 
@@ -1819,77 +2091,7 @@ iterate up the inheritance tree looking for a classname that differs from the cu
             
         
         
-        <a href="../files/src_components_table_Table.js.html#l247"><code>src\components\table\Table.js:247</code></a>
-        
-        </p>
-
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        
-    </div>
-
-    
-
-    
-        <div class="returns">
-            <h4>Returns:</h4>
-
-            <div class="returns-description">
-                
-                    
-                        <span class="type">Object</span>:
-                    
-                
-            </div>
-        </div>
-    
-
-    
-</div>
-
-                
-                    <div id="method_tbodyBindings" class="method item">
-    <h3 class="name"><code>tbodyBindings</code></h3>
-
-    
-        <span class="paren">()</span>
-    
-
-    
-        <span class="returns-inline">
-            <span class="type">Object</span>
-        </span>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/src_components_table_Table.js.html#l220"><code>src\components\table\Table.js:220</code></a>
+        <a href="../files/src_components_table_Table.js.html#l259"><code>src\components\table\Table.js:259</code></a>
         
         </p>
 
@@ -1959,7 +2161,7 @@ iterate up the inheritance tree looking for a classname that differs from the cu
             
         
         
-        <a href="../files/src_components_table_Table.js.html#l256"><code>src\components\table\Table.js:256</code></a>
+        <a href="../files/src_components_table_Table.js.html#l268"><code>src\components\table\Table.js:268</code></a>
         
         </p>
 
@@ -2029,7 +2231,7 @@ iterate up the inheritance tree looking for a classname that differs from the cu
             
         
         
-        <a href="../files/src_components_table_Table.js.html#l269"><code>src\components\table\Table.js:269</code></a>
+        <a href="../files/src_components_table_Table.js.html#l281"><code>src\components\table\Table.js:281</code></a>
         
         </p>
 
@@ -2099,7 +2301,7 @@ iterate up the inheritance tree looking for a classname that differs from the cu
             
         
         
-        <a href="../files/src_components_table_Table.js.html#l211"><code>src\components\table\Table.js:211</code></a>
+        <a href="../files/src_components_table_Table.js.html#l232"><code>src\components\table\Table.js:232</code></a>
         
         </p>
 
@@ -2169,7 +2371,7 @@ iterate up the inheritance tree looking for a classname that differs from the cu
             
         
         
-        <a href="../files/src_components_table_Table.js.html#l229"><code>src\components\table\Table.js:229</code></a>
+        <a href="../files/src_components_table_Table.js.html#l241"><code>src\components\table\Table.js:241</code></a>
         
         </p>
 
@@ -2239,7 +2441,7 @@ iterate up the inheritance tree looking for a classname that differs from the cu
             
         
         
-        <a href="../files/src_components_table_Table.js.html#l238"><code>src\components\table\Table.js:238</code></a>
+        <a href="../files/src_components_table_Table.js.html#l250"><code>src\components\table\Table.js:250</code></a>
         
         </p>
 
@@ -2283,7 +2485,7 @@ iterate up the inheritance tree looking for a classname that differs from the cu
                 
                     <div id="property__build" class="property item private inherited">
     <h3 class="name"><code>_build</code></h3>
-    <span class="type">String</span>
+    <span class="type">Object map of all builds</span>
 
     
 
@@ -2303,7 +2505,7 @@ iterate up the inheritance tree looking for a classname that differs from the cu
             
         
         
-        <a href="../files/src_components_common_Base.js.html#l61"><code>src\components\common\Base.js:61</code></a>
+        <a href="../files/src_components_common_Base.js.html#l47"><code>src\components\common\Base.js:47</code></a>
         
         </p>
 
@@ -2318,7 +2520,7 @@ iterate up the inheritance tree looking for a classname that differs from the cu
     </div>
 
     
-        <p><strong>Default:</strong> &quot;&quot;</p>
+        <p><strong>Default:</strong> null</p>
     
 
     
@@ -2349,7 +2551,7 @@ iterate up the inheritance tree looking for a classname that differs from the cu
             
         
         
-        <a href="../files/src_components_common_Base.js.html#l27"><code>src\components\common\Base.js:27</code></a>
+        <a href="../files/src_components_common_Base.js.html#l20"><code>src\components\common\Base.js:20</code></a>
         
         </p>
 
@@ -2373,7 +2575,7 @@ iterate up the inheritance tree looking for a classname that differs from the cu
                 
                     <div id="property__template" class="property item private inherited">
     <h3 class="name"><code>_template</code></h3>
-    <span class="type">Object</span>
+    <span class="type">Object map of all templates</span>
 
     
 
@@ -2393,7 +2595,7 @@ iterate up the inheritance tree looking for a classname that differs from the cu
             
         
         
-        <a href="../files/src_components_common_Base.js.html#l69"><code>src\components\common\Base.js:69</code></a>
+        <a href="../files/src_components_common_Base.js.html#l55"><code>src\components\common\Base.js:55</code></a>
         
         </p>
 
@@ -2403,56 +2605,12 @@ iterate up the inheritance tree looking for a classname that differs from the cu
     </div>
 
     <div class="description">
-        <p>compiled handles bars function</p>
+        <p>compiled template map</p>
 
     </div>
 
     
         <p><strong>Default:</strong> null</p>
-    
-
-    
-
-    
-</div>
-
-                
-                    <div id="property_appendComponent" class="property item inherited">
-    <h3 class="name"><code>appendComponent</code></h3>
-    <span class="type">Boolean</span>
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                <p>Inherited from
-                <a href="../classes/components.common.Base.html#property_appendComponent">components.common.Base</a>:
-            
-        
-        
-        <a href="../files/src_components_common_Base.js.html#l94"><code>src\components\common\Base.js:94</code></a>
-        
-        </p>
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>used in conjunction with property &quot;renderTo&quot;</p>
-
-    </div>
-
-    
-        <p><strong>Default:</strong> false</p>
     
 
     
@@ -2484,7 +2642,7 @@ iterate up the inheritance tree looking for a classname that differs from the cu
             
         
         
-        <a href="../files/src_components_table_Table.js.html#l129"><code>src\components\table\Table.js:129</code></a>
+        <a href="../files/src_components_table_Table.js.html#l139"><code>src\components\table\Table.js:139</code></a>
         
         </p>
 
@@ -2531,7 +2689,7 @@ iterate up the inheritance tree looking for a classname that differs from the cu
             
         
         
-        <a href="../files/src_components_table_Table.js.html#l38"><code>src\components\table\Table.js:38</code></a>
+        <a href="../files/src_components_table_Table.js.html#l39"><code>src\components\table\Table.js:39</code></a>
         
         </p>
 
@@ -2581,7 +2739,7 @@ iterate up the inheritance tree looking for a classname that differs from the cu
             
         
         
-        <a href="../files/src_components_table_Table.js.html#l84"><code>src\components\table\Table.js:84</code></a>
+        <a href="../files/src_components_table_Table.js.html#l85"><code>src\components\table\Table.js:85</code></a>
         
         </p>
 
@@ -2628,7 +2786,7 @@ iterate up the inheritance tree looking for a classname that differs from the cu
             
         
         
-        <a href="../files/src_components_table_Table.js.html#l98"><code>src\components\table\Table.js:98</code></a>
+        <a href="../files/src_components_table_Table.js.html#l99"><code>src\components\table\Table.js:99</code></a>
         
         </p>
 
@@ -2675,7 +2833,7 @@ iterate up the inheritance tree looking for a classname that differs from the cu
             
         
         
-        <a href="../files/src_components_table_Table.js.html#l108"><code>src\components\table\Table.js:108</code></a>
+        <a href="../files/src_components_table_Table.js.html#l118"><code>src\components\table\Table.js:118</code></a>
         
         </p>
 
@@ -2722,7 +2880,7 @@ iterate up the inheritance tree looking for a classname that differs from the cu
             
         
         
-        <a href="../files/src_components_table_Table.js.html#l122"><code>src\components\table\Table.js:122</code></a>
+        <a href="../files/src_components_table_Table.js.html#l132"><code>src\components\table\Table.js:132</code></a>
         
         </p>
 
@@ -2738,6 +2896,48 @@ iterate up the inheritance tree looking for a classname that differs from the cu
 
     
         <p><strong>Default:</strong> &quot;Expand&quot;</p>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="property_force {Boolean} [force=false] optional - set to true to force a retemplate" class="property item inherited">
+    <h3 class="name"><code>force {Boolean} [force=false] optional - set to true to force a retemplate</code></h3>
+    <span class="type">String</span>
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                <p>Inherited from
+                <a href="../classes/components.common.Base.html#property_force {Boolean} [force=false] optional - set to true to force a retemplate">components.common.Base</a>:
+            
+        
+        
+        <a href="../files/src_components_common_Base.js.html#l153"><code>src\components\common\Base.js:153</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>compile the template</p>
+
+    </div>
+
     
 
     
@@ -2766,7 +2966,7 @@ iterate up the inheritance tree looking for a classname that differs from the cu
             
         
         
-        <a href="../files/src_components_common_Base.js.html#l48"><code>src\components\common\Base.js:48</code></a>
+        <a href="../files/src_components_common_Base.js.html#l41"><code>src\components\common\Base.js:41</code></a>
         
         </p>
 
@@ -2809,7 +3009,7 @@ iterate up the inheritance tree looking for a classname that differs from the cu
             
         
         
-        <a href="../files/src_components_common_Base.js.html#l34"><code>src\components\common\Base.js:34</code></a>
+        <a href="../files/src_components_common_Base.js.html#l27"><code>src\components\common\Base.js:27</code></a>
         
         </p>
 
@@ -2833,9 +3033,9 @@ iterate up the inheritance tree looking for a classname that differs from the cu
 </div>
 
                 
-                    <div id="property_renderTo" class="property item inherited">
-    <h3 class="name"><code>renderTo</code></h3>
-    <span class="type">Boolean | String | Object false, selector, jQuery Object</span>
+                    <div id="property_prop  [prop=&quot;tpl&quot;] optional - name of property to build" class="property item inherited">
+    <h3 class="name"><code>prop  [prop=&quot;tpl&quot;] optional - name of property to build</code></h3>
+    <span class="type">String</span>
 
     
 
@@ -2849,11 +3049,11 @@ iterate up the inheritance tree looking for a classname that differs from the cu
         
             
                 <p>Inherited from
-                <a href="../classes/components.common.Base.html#property_renderTo">components.common.Base</a>:
+                <a href="../classes/components.common.Base.html#property_prop  [prop=&quot;tpl&quot;] optional - name of property to build">components.common.Base</a>:
             
         
         
-        <a href="../files/src_components_common_Base.js.html#l54"><code>src\components\common\Base.js:54</code></a>
+        <a href="../files/src_components_common_Base.js.html#l168"><code>src\components\common\Base.js:168</code></a>
         
         </p>
 
@@ -2863,12 +3063,10 @@ iterate up the inheritance tree looking for a classname that differs from the cu
     </div>
 
     <div class="description">
-        <p>target to render the component to (not needed if combined with a view)</p>
+        <p>build the compiled template</p>
 
     </div>
 
-    
-        <p><strong>Default:</strong> false</p>
     
 
     
@@ -2900,7 +3098,7 @@ iterate up the inheritance tree looking for a classname that differs from the cu
             
         
         
-        <a href="../files/src_components_table_Table.js.html#l31"><code>src\components\table\Table.js:31</code></a>
+        <a href="../files/src_components_table_Table.js.html#l32"><code>src\components\table\Table.js:32</code></a>
         
         </p>
 
@@ -2947,7 +3145,7 @@ iterate up the inheritance tree looking for a classname that differs from the cu
             
         
         
-        <a href="../files/src_components_table_Table.js.html#l24"><code>src\components\table\Table.js:24</code></a>
+        <a href="../files/src_components_table_Table.js.html#l25"><code>src\components\table\Table.js:25</code></a>
         
         </p>
 
@@ -2994,7 +3192,7 @@ iterate up the inheritance tree looking for a classname that differs from the cu
             
         
         
-        <a href="../files/src_components_table_Table.js.html#l115"><code>src\components\table\Table.js:115</code></a>
+        <a href="../files/src_components_table_Table.js.html#l125"><code>src\components\table\Table.js:125</code></a>
         
         </p>
 
@@ -3041,7 +3239,7 @@ iterate up the inheritance tree looking for a classname that differs from the cu
             
         
         
-        <a href="../files/src_components_table_Table.js.html#l72"><code>src\components\table\Table.js:72</code></a>
+        <a href="../files/src_components_table_Table.js.html#l73"><code>src\components\table\Table.js:73</code></a>
         
         </p>
 
@@ -3052,6 +3250,53 @@ iterate up the inheritance tree looking for a classname that differs from the cu
 
     <div class="description">
         
+    </div>
+
+    
+        <p><strong>Default:</strong> true</p>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="property_showOptions" class="property item">
+    <h3 class="name"><code>showOptions</code></h3>
+    <span class="type">Boolean</span>
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/src_components_table_Table.js.html#l146"><code>src\components\table\Table.js:146</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>whether to show the collapse / expand buttons for the treetable</p>
+
     </div>
 
     
@@ -3087,7 +3332,7 @@ iterate up the inheritance tree looking for a classname that differs from the cu
             
         
         
-        <a href="../files/src_components_table_Table.js.html#l78"><code>src\components\table\Table.js:78</code></a>
+        <a href="../files/src_components_table_Table.js.html#l79"><code>src\components\table\Table.js:79</code></a>
         
         </p>
 
@@ -3102,6 +3347,50 @@ iterate up the inheritance tree looking for a classname that differs from the cu
 
     
         <p><strong>Default:</strong> true</p>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="property_subTpl" class="property item inherited">
+    <h3 class="name"><code>subTpl</code></h3>
+    <span class="type">String html</span>
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                <p>Inherited from
+                <a href="../classes/components.common.Base.html#property_subTpl">components.common.Base</a>:
+            
+        
+        
+        <a href="../files/src_components_common_Base.js.html#l70"><code>src\components\common\Base.js:70</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>sub template</p>
+
+    </div>
+
+    
+        <p><strong>Default:</strong> null</p>
     
 
     
@@ -3133,7 +3422,7 @@ iterate up the inheritance tree looking for a classname that differs from the cu
             
         
         
-        <a href="../files/src_components_table_Table.js.html#l66"><code>src\components\table\Table.js:66</code></a>
+        <a href="../files/src_components_table_Table.js.html#l67"><code>src\components\table\Table.js:67</code></a>
         
         </p>
 
@@ -3179,7 +3468,7 @@ iterate up the inheritance tree looking for a classname that differs from the cu
             
         
         
-        <a href="../files/src_components_table_Table.js.html#l60"><code>src\components\table\Table.js:60</code></a>
+        <a href="../files/src_components_table_Table.js.html#l61"><code>src\components\table\Table.js:61</code></a>
         
         </p>
 
@@ -3225,7 +3514,7 @@ iterate up the inheritance tree looking for a classname that differs from the cu
             
         
         
-        <a href="../files/src_components_table_Table.js.html#l54"><code>src\components\table\Table.js:54</code></a>
+        <a href="../files/src_components_table_Table.js.html#l55"><code>src\components\table\Table.js:55</code></a>
         
         </p>
 
@@ -3271,7 +3560,7 @@ iterate up the inheritance tree looking for a classname that differs from the cu
             
         
         
-        <a href="../files/src_components_table_Table.js.html#l48"><code>src\components\table\Table.js:48</code></a>
+        <a href="../files/src_components_table_Table.js.html#l49"><code>src\components\table\Table.js:49</code></a>
         
         </p>
 
@@ -3317,7 +3606,7 @@ iterate up the inheritance tree looking for a classname that differs from the cu
             
         
         
-        <a href="../files/src_components_table_Table.js.html#l19"><code>src\components\table\Table.js:19</code></a>
+        <a href="../files/src_components_table_Table.js.html#l20"><code>src\components\table\Table.js:20</code></a>
         
         </p>
 
@@ -3361,7 +3650,7 @@ iterate up the inheritance tree looking for a classname that differs from the cu
             
         
         
-        <a href="../files/src_components_table_Table.js.html#l91"><code>src\components\table\Table.js:91</code></a>
+        <a href="../files/src_components_table_Table.js.html#l92"><code>src\components\table\Table.js:92</code></a>
         
         </p>
 
@@ -3408,7 +3697,7 @@ iterate up the inheritance tree looking for a classname that differs from the cu
             
         
         
-        <a href="../files/src_components_table_Table.js.html#l136"><code>src\components\table\Table.js:136</code></a>
+        <a href="../files/src_components_table_Table.js.html#l153"><code>src\components\table\Table.js:153</code></a>
         
         </p>
 
@@ -3452,7 +3741,7 @@ iterate up the inheritance tree looking for a classname that differs from the cu
             
         
         
-        <a href="../files/src_components_common_Base.js.html#l41"><code>src\components\common\Base.js:41</code></a>
+        <a href="../files/src_components_common_Base.js.html#l34"><code>src\components\common\Base.js:34</code></a>
         
         </p>
 
@@ -3499,7 +3788,7 @@ iterate up the inheritance tree looking for a classname that differs from the cu
             
         
         
-        <a href="../files/src_components_table_Table.js.html#l14"><code>src\components\table\Table.js:14</code></a>
+        <a href="../files/src_components_table_Table.js.html#l15"><code>src\components\table\Table.js:15</code></a>
         
         </p>
 

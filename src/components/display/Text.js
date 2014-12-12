@@ -9,6 +9,7 @@
  * @class Text
  */
 define(["text!./Text.html", "../common/Base"], function(tpl){
+	"use strict";
 	return Firebrick.define("Firebrick.ui.display.Text", {
 		extend: "Firebrick.ui.common.Base",
 		/**

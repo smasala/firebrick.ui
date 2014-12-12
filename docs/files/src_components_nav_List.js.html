@@ -19,7 +19,7 @@
             
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 0.7.7</em>
+            <em>API Docs for: 0.8.20</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -109,6 +109,8 @@
             
                 <li><a href="../classes/utils.html">utils</a></li>
             
+                <li><a href="../classes/view.Base.html">view.Base</a></li>
+            
             </ul>
 
             <ul id="api-modules" class="apis modules">
@@ -168,7 +170,8 @@
  * @namespace components.nav
  * @class List
  */
-define([&quot;handlebars&quot;, &quot;../display/List&quot;], function(Handlebars){
+define([&quot;doT&quot;, &quot;../display/List&quot;], function(tplEngine){
+	&quot;use strict&quot;;
 	return Firebrick.define(&quot;Firebrick.ui.nav.List&quot;, {
 		extend: &quot;Firebrick.ui.display.List&quot;, 
 		uiName:&quot;fb-ui-navlist&quot;,
@@ -180,7 +183,7 @@ define([&quot;handlebars&quot;, &quot;../display/List&quot;], function(Handlebar
 		 * @default &quot;&lt;a data-bind=&quot;{{data-bind &#x27;navLinkBindings&#x27;}}&quot;&gt;&quot;
 		 */
 		preItemTpl:function(){
-			return Handlebars.compile(&#x27;&lt;a data-bind=&quot;{{data-bind \&#x27;navLinkBindings\&#x27;}}&quot;&gt;&#x27;)(this);
+			return tplEngine.template(&#x27;&lt;a data-bind=&quot;{{=it.dataBind(\&#x27;navLinkBindings\&#x27;)}}&quot;&gt;&#x27;)(this);
 		},
 		/**
 		 * overriding property from list
@@ -194,8 +197,7 @@ define([&quot;handlebars&quot;, &quot;../display/List&quot;], function(Handlebar
 		 * @return {Object}
 		 */
 		navLinkBindings: function(){
-			var me = this,
-				obj = {
+			var obj = {
 					attr:{
 						href: &quot;$data.link ? $data.link : &#x27;&#x27;&quot;
 					}
@@ -203,7 +205,7 @@ define([&quot;handlebars&quot;, &quot;../display/List&quot;], function(Handlebar
 			return obj;
 		}
 	});
-})
+});
     </pre>
 </div>
 

@@ -19,7 +19,7 @@
             
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 0.7.7</em>
+            <em>API Docs for: 0.8.20</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -109,6 +109,8 @@
             
                 <li><a href="../classes/utils.html">utils</a></li>
             
+                <li><a href="../classes/view.Base.html">view.Base</a></li>
+            
             </ul>
 
             <ul id="api-modules" class="apis modules">
@@ -169,6 +171,7 @@
  * @class Progress
  */
 define([&quot;text!./Progress.html&quot;, &quot;../common/Base&quot;], function(tpl){
+	&quot;use strict&quot;;
 	return Firebrick.define(&quot;Firebrick.ui.display.Progress&quot;, {
 		extend: &quot;Firebrick.ui.common.Base&quot;,
 		uiName:&quot;fb-ui-progress&quot;,
@@ -219,7 +222,7 @@ define([&quot;text!./Progress.html&quot;, &quot;../common/Base&quot;], function(
 					value: me.value
 				},
 				text: me.parseBind(me.value+&quot;%&quot;)
-			}
+			};
 		},
 		/**
 		 * @method progressLabelBindings
@@ -238,7 +241,7 @@ define([&quot;text!./Progress.html&quot;, &quot;../common/Base&quot;], function(
 				style: {
 					width: me.parseBind(me.value+&quot;%&quot;)
 				}
-			}
+			};
 		},
 		/**
 		 * @method progressContainerBindings
@@ -248,10 +251,10 @@ define([&quot;text!./Progress.html&quot;, &quot;../common/Base&quot;], function(
 				css:{
 					&quot;&#x27;progress-container&#x27;&quot;: true
 				}
-			}
+			};
 		}
 	});
-})
+});
     </pre>
 </div>
 

@@ -9,6 +9,7 @@
  * @class Image
  */
 define(["text!./Image.html", "../common/Base", "responsive-images"], function(tpl){
+	"use strict";
 	return Firebrick.define("Firebrick.ui.display.Image", {
 		extend:"Firebrick.ui.common.Base",
 		uiName:"fb-ui-image",
@@ -23,7 +24,7 @@ define(["text!./Image.html", "../common/Base", "responsive-images"], function(tp
 					window.responsiveImages.update(me.getId());
 				}
 			});
-			this.callParent();
+			this.callParent(arguments);
 		},
 		/**
 		 * @property src
@@ -33,7 +34,7 @@ define(["text!./Image.html", "../common/Base", "responsive-images"], function(tp
 		src: "",
 		/**
 		 * use this property for responsive images. Define in order of sizes with the largest first!
-		 * @usage "xl, l, m, s, xs"
+		 * @example "xl, l, m, s, xs"
 		 * @property sizes
 		 * @type {String} predefined sizes or media queries
 		 * @default ""
@@ -41,7 +42,7 @@ define(["text!./Image.html", "../common/Base", "responsive-images"], function(tp
 		sizes: "",
 		/**
 		 * use this property in conjunction with "sizes" - mirror the image sizes with that of the "sizes" order
-		 * @usage "dogXL.jpg, dogL.jpg, dogM.jpg, dogS.jpg, dogXS.jpg"
+		 * @example "dogXL.jpg, dogL.jpg, dogM.jpg, dogS.jpg, dogXS.jpg"
 		 * @property srcset
 		 * @type {String} url(s)
 		 * @default ""

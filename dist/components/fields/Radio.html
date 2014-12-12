@@ -1,4 +1,4 @@
-<label data-bind="{{data-bind 'optionLabelContainerBindings'}}">
-	{{{getParentSubTpl}}}
-	<span data-bind="{{data-bind 'optionLabelBindings'}}"></span>
+<label data-bind="{{=it.dataBind('optionLabelContainerBindings')}}">
+	{{=it.getParentSubTpl()}}
+	<span data-bind="{{=it.dataBind('optionLabelBindings')}}"></span>
 </label>

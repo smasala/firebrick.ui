@@ -9,6 +9,7 @@
  * @class Panel
  */
 define(["text!./Panel.html", "./Base"], function(tpl){
+	"use strict";
 	return Firebrick.define("Firebrick.ui.containers.Panel", {
 		extend:"Firebrick.ui.containers.Base",
 		/**
@@ -127,7 +128,7 @@ define(["text!./Panel.html", "./Base"], function(tpl){
 			};
 			if(me.collapsible){
 				obj.css["'panel-collapse'"] = me.collapsible;
-				obj.css["collapse"] = me.collapsible;
+				obj.css.collapse = me.collapsible;
 				if(!me.collapsed){
 					obj.css["in"] = true;
 				}
@@ -179,7 +180,7 @@ define(["text!./Panel.html", "./Base"], function(tpl){
 					"'aria-expanded'": typeof me.collapsed == "boolean" ? me.collapsed : true,
 					"'aria-controls'":  me.parseBind( id ),
 				}
-			}
+			};
 		},
 		/**
 		 * @method panelHeaderTextBindings
@@ -188,7 +189,7 @@ define(["text!./Panel.html", "./Base"], function(tpl){
 		panelHeaderTextBindings: function(){
 			return {
 				text: "fb.text('" + this.title + "')"
-			}
+			};
 		},
 		/**
 		 * @method panelBodyBindings
@@ -207,5 +208,5 @@ define(["text!./Panel.html", "./Base"], function(tpl){
 			}
 			return obj;
 		}
-	})
+	});
 });

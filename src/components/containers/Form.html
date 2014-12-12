@@ -1,3 +1,3 @@
-<form id="{{getId}}" data-bind="{{data-bind 'formBindings'}}">
-	{{{getItems}}}
+<form id="{{=it.getId}}" data-bind="{{=it.dataBind('formBindings')}}">
+	{{=it.getItems()}}
 </form>

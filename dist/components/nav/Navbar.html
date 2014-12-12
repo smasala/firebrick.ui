@@ -1,18 +1,18 @@
-<nav data-bind="{{data-bind 'navBindings'}}">
-	<div data-bind="{{data-bind 'navbarHeaderContainerBindings'}}">
-		<div data-bind="{{data-bind 'navbarHeaderBindings'}}">
-			{{#if toggleButton}}
-				<button data-bind="{{data-bind 'toggleButtonBindings'}}">
-		         	<span class="sr-only" data-bind="{{data-bind 'toggleTextBindings'}}"></span>
+<nav data-bind="{{=it.dataBind('navBindings')}}">
+	<div data-bind="{{=it.dataBind('navbarHeaderContainerBindings')}}">
+		<div data-bind="{{=it.dataBind('navbarHeaderBindings')}}">
+			{{?it.toggleButton}}
+				<button data-bind="{{=it.dataBind('toggleButtonBindings')}}">
+		         	<span class="sr-only" data-bind="{{=it.dataBind('toggleTextBindings')}}"></span>
 		         	<span class="icon-bar"></span>
 		         	<span class="icon-bar"></span>
 		         	<span class="icon-bar"></span>
 	       		</button>
-       		{{/if}}
-      	<a data-bind="{{data-bind 'brandBindings'}}">{{{brandTpl}}}</a>
+       		{{?}}
+      	<a data-bind="{{=it.dataBind('brandBindings')}}">{{=it.brandTpl}}</a>
 	</div>
-		<div data-bind="{{data-bind 'navbarContainerBindings'}}">
-     		{{{getParentTpl}}}
+		<div data-bind="{{=it.dataBind('navbarContainerBindings')}}">
+     		{{=it.getParentTpl()}}
      	</div>
 	</div>
 </nav>

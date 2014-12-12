@@ -8,7 +8,8 @@
  * @namespace components.table
  * @class TreeTable
  */
-define(["jquery", "./Table", "jquery-treetable"], function($){
+define(["./Table", "jquery-treetable"], function(){
+	"use strict";
 	return Firebrick.define("Firebrick.ui.table.TreeTable", {
 		extend:"Firebrick.ui.table.Table",
 		/**

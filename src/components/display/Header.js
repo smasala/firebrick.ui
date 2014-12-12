@@ -9,6 +9,7 @@
  * @class Header
  */
 define(["text!./Header.html", "../common/Base"], function(tpl){
+	"use strict";
 	return Firebrick.define("Firebrick.ui.display.Header", {
 		extend:"Firebrick.ui.common.Base",
 		/**
@@ -29,11 +30,11 @@ define(["text!./Header.html", "../common/Base"], function(tpl){
 		 */
 		headerType:1,
 		/**
-		 * @property headerText
+		 * @property text
 		 * @type {String}
 		 * @default ""
 		 */
-		headerText:"",
+		text:"",
 		/**
 		 * @property secondaryText
 		 * @type {String}
@@ -59,7 +60,7 @@ define(["text!./Header.html", "../common/Base"], function(tpl){
 		 */
 		bindings: function(){
 			return {
-				text: this.headerText
+				text: "fb.text('" + this.text + "')"
 			};
 		},
 		/**

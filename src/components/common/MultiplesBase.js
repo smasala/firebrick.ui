@@ -9,7 +9,8 @@
  * @namespace components.common
  * @class MultiplesBase
  */
-define(["../fields/Input"], function(subTpl){
+define(["../fields/Input"], function(){
+	"use strict";
 	return Firebrick.define("Firebrick.ui.common.MultiplesBase", {
 		extend:"Firebrick.ui.fields.Input",
 		/**

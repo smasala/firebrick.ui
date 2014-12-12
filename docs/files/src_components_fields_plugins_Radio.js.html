@@ -19,7 +19,7 @@
             
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 0.7.7</em>
+            <em>API Docs for: 0.8.20</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -109,6 +109,8 @@
             
                 <li><a href="../classes/utils.html">utils</a></li>
             
+                <li><a href="../classes/view.Base.html">view.Base</a></li>
+            
             </ul>
 
             <ul id="api-modules" class="apis modules">
@@ -189,6 +191,7 @@ $(function(){
  * @class RadioList
  */
 (function(factory) {
+	&quot;use strict&quot;;
     if (typeof define === &quot;function&quot; &amp;&amp; define.amd) {
         // AMD anonymous module
         define([&quot;jquery&quot;, &quot;x-editable&quot;], factory);
@@ -197,6 +200,7 @@ $(function(){
         factory(window.jQuery);
     }
 })(function($) {
+	&quot;use strict&quot;;
     var Radiolist = function(options) {
         this.init(&#x27;radiolist&#x27;, options, Radiolist.defaults);
     };

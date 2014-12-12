@@ -9,6 +9,7 @@
  * @static
  */
 define(["jquery"], function($){
+	"use strict";
 	return Firebrick.define("Firebrick.ui.common.mixins.Items", {
 		/**
 		 * @property items
@@ -22,11 +23,13 @@ define(["jquery"], function($){
 					items = me.items,
 					args = arguments;
 				if($.isArray(items)){
-					$.each(items, function(i,cmp){
+					var cmp;
+					for(var i = 0, l = items.length; i<l; i++){
+						cmp = items[i];
 						if(cmp.passEvent){
 							cmp.passEvent(args);
 						}
-					});
+					}
 				}
 			}
 		},
@@ -50,7 +53,8 @@ define(["jquery"], function($){
 		 * @param [itemsName] {String}  name of property to get items from
 		 * @return {String} html
 		 */
-		getItemsScoped: function(me, itemsName){
+		getItemsProp: function(itemsName){
+			var me = this;
 			itemsName = typeof itemsName == "string" ? me[itemsName] : me.items;
 			var items = me._getItems(itemsName);
 			return items ? items.html || items : "";
@@ -65,7 +69,7 @@ define(["jquery"], function($){
 		_getItems: function(items){
 			var me = this;
 			if(items){
-				if(!$.isArray(items)){
+				if(!$.isArray(items) && !$.isFunction(items)){
 					items = [items];
 				}
 				return Firebrick.ui._populate(items, me);

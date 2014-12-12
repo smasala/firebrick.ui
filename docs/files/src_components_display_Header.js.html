@@ -19,7 +19,7 @@
             
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 0.7.7</em>
+            <em>API Docs for: 0.8.20</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -109,6 +109,8 @@
             
                 <li><a href="../classes/utils.html">utils</a></li>
             
+                <li><a href="../classes/view.Base.html">view.Base</a></li>
+            
             </ul>
 
             <ul id="api-modules" class="apis modules">
@@ -169,6 +171,7 @@
  * @class Header
  */
 define([&quot;text!./Header.html&quot;, &quot;../common/Base&quot;], function(tpl){
+	&quot;use strict&quot;;
 	return Firebrick.define(&quot;Firebrick.ui.display.Header&quot;, {
 		extend:&quot;Firebrick.ui.common.Base&quot;,
 		/**
@@ -189,11 +192,11 @@ define([&quot;text!./Header.html&quot;, &quot;../common/Base&quot;], function(tp
 		 */
 		headerType:1,
 		/**
-		 * @property headerText
+		 * @property text
 		 * @type {String}
 		 * @default &quot;&quot;
 		 */
-		headerText:&quot;&quot;,
+		text:&quot;&quot;,
 		/**
 		 * @property secondaryText
 		 * @type {String}
@@ -219,7 +222,7 @@ define([&quot;text!./Header.html&quot;, &quot;../common/Base&quot;], function(tp
 		 */
 		bindings: function(){
 			return {
-				text: this.headerText
+				text: &quot;fb.text(&#x27;&quot; + this.text + &quot;&#x27;)&quot;
 			};
 		},
 		/**

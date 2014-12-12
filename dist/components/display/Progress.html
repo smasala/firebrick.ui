@@ -1,6 +1,6 @@
-<div id="{{getId}}" data-bind="{{data-bind 'progressContainerBindings'}}">
-	{{#if showLabel}}
-		<p data-bind="{{data-bind 'progressLabelBindings'}}" ></p>
-	{{/if}}
-	<progress data-bind="{{data-bind}}"></progress>
+<div id="{{=it.getId()}}" data-bind="{{=it.dataBind('progressContainerBindings')}}">
+	{{?it.showLabel}}
+		<p data-bind="{{=it.dataBind('progressLabelBindings')}}" ></p>
+	{{?}}
+	<progress data-bind="{{=it.dataBind()}}"></progress>
 </div>

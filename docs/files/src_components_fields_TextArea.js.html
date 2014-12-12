@@ -19,7 +19,7 @@
             
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 0.7.7</em>
+            <em>API Docs for: 0.8.20</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -109,6 +109,8 @@
             
                 <li><a href="../classes/utils.html">utils</a></li>
             
+                <li><a href="../classes/view.Base.html">view.Base</a></li>
+            
             </ul>
 
             <ul id="api-modules" class="apis modules">
@@ -169,6 +171,7 @@
  * @class TextArea
  */
 define([&quot;text!./TextArea.html&quot;, &quot;./Input&quot;], function(subTpl){
+	&quot;use strict&quot;;
 	return Firebrick.define(&quot;Firebrick.ui.fields.TextArea&quot;, {
 		extend:&quot;Firebrick.ui.fields.Input&quot;,
 		/**
@@ -194,7 +197,7 @@ define([&quot;text!./TextArea.html&quot;, &quot;./Input&quot;], function(subTpl)
 		 * @default &quot;&#x27;textarea&#x27;&quot;
 		 */
 		dataType:&quot;textarea&quot;
-	})
+	});
 });
     </pre>
 </div>

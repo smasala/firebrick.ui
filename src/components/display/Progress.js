@@ -9,6 +9,7 @@
  * @class Progress
  */
 define(["text!./Progress.html", "../common/Base"], function(tpl){
+	"use strict";
 	return Firebrick.define("Firebrick.ui.display.Progress", {
 		extend: "Firebrick.ui.common.Base",
 		uiName:"fb-ui-progress",
@@ -59,7 +60,7 @@ define(["text!./Progress.html", "../common/Base"], function(tpl){
 					value: me.value
 				},
 				text: me.parseBind(me.value+"%")
-			}
+			};
 		},
 		/**
 		 * @method progressLabelBindings
@@ -78,7 +79,7 @@ define(["text!./Progress.html", "../common/Base"], function(tpl){
 				style: {
 					width: me.parseBind(me.value+"%")
 				}
-			}
+			};
 		},
 		/**
 		 * @method progressContainerBindings
@@ -88,7 +89,7 @@ define(["text!./Progress.html", "../common/Base"], function(tpl){
 				css:{
 					"'progress-container'": true
 				}
-			}
+			};
 		}
 	});
-})
+});

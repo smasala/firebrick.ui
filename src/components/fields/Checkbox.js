@@ -9,6 +9,7 @@
  * @class Checkbox
  */
 define(["./Radio"], function(){
+	"use strict";
 	return Firebrick.define("Firebrick.ui.fields.Checkbox", {
 		extend:"Firebrick.ui.fields.Radio",
 		/**
@@ -34,7 +35,7 @@ define(["./Radio"], function(){
 		 */
 		bindings:function(){
 			var me = this,
-				obj = me.callParent();
+				obj = me.callParent(arguments);
 
 			if(me.inplaceEdit){
 				obj.editable = me.selectedOptions || false;

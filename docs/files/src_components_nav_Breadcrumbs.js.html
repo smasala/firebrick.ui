@@ -19,7 +19,7 @@
             
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 0.7.7</em>
+            <em>API Docs for: 0.8.20</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -109,6 +109,8 @@
             
                 <li><a href="../classes/utils.html">utils</a></li>
             
+                <li><a href="../classes/view.Base.html">view.Base</a></li>
+            
             </ul>
 
             <ul id="api-modules" class="apis modules">
@@ -169,13 +171,14 @@
  * @class Breadcrumbs
  */
 define([&quot;../display/List&quot;], function(){
+	&quot;use strict&quot;;
 	return Firebrick.define(&quot;Firebrick.ui.display.Breadcrumbs&quot;, {
 		extend:&quot;Firebrick.ui.display.List&quot;,
 		uiName:&quot;fb-ui-breadcrumbs&quot;,
 		listType: &quot;ol&quot;,
 		listContainerBindings: function(){
 			var me = this,
-				obj = this.callParent();
+				obj = me.callParent(arguments);
 			obj.css.breadcrumb = true;
 			return obj;
 		}

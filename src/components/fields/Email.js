@@ -9,6 +9,7 @@
  * @class Email
  */
 define(["./Input"], function(){
+	"use strict";
 	return Firebrick.define("Firebrick.ui.fields.Email", {
 		extend:"Firebrick.ui.fields.Input",
 		/**
@@ -28,5 +29,5 @@ define(["./Input"], function(){
 		 * @default "'text'"
 		 */
 		dataType:"text"
-	})
+	});
 });

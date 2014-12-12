@@ -9,6 +9,7 @@
  * @class Form
  */
 define(["text!./Form.html", "jquery", "./Base"], function(tpl, $){
+	"use strict";
 	return Firebrick.define("Firebrick.ui.containers.Form", {
 		extend:"Firebrick.ui.containers.Base",
 		/**
@@ -113,7 +114,7 @@ define(["text!./Form.html", "jquery", "./Base"], function(tpl, $){
 		 * @default 
 		 */
 		success: function(){
-			console.info("success")
+			console.info("success");
 		},
 		/**
 		 * method called on submit ajax
@@ -122,7 +123,7 @@ define(["text!./Form.html", "jquery", "./Base"], function(tpl, $){
 		 * @default 
 		 */
 		failure: function(){
-			console.info("failure")
+			console.info("failure");
 		},
 		/**
 		 * method called on submit ajax
@@ -130,7 +131,7 @@ define(["text!./Form.html", "jquery", "./Base"], function(tpl, $){
 		 * @type {Function}
 		 * @default function(){}
 		 */
-		complete: function(){console.info("complete")},
+		complete: function(){},
 		/**
 		 * method called after ajax
 		 * @method always
@@ -149,7 +150,7 @@ define(["text!./Form.html", "jquery", "./Base"], function(tpl, $){
 		 * @return {Object}
 		 */
 		getFormData: function(){
-			return new FormData($("#"+this.getId()));
+			return new window.FormData($("#"+this.getId()));
 		},
 		/**
 		 * @method init
@@ -161,7 +162,7 @@ define(["text!./Form.html", "jquery", "./Base"], function(tpl, $){
 				me._form = $("#" + me.getId());
 			});
 			
-			return this.callParent();
+			return this.callParent(arguments);
 		},
 		/**
 		 * make sure this.url is set before calling this function
@@ -185,7 +186,7 @@ define(["text!./Form.html", "jquery", "./Base"], function(tpl, $){
 					xhr: me.xhr,
 					url: me.url, 
 					type: me.submitType, 
-					data: new FormData(me._form[0]), 
+					data: new window.FormData(me._form[0]), 
 					processData: me.ajaxProcessData, 
 					contentType: me.enctype,
 					beforeSend: me.beforeSend.bind(me),
@@ -214,5 +215,5 @@ define(["text!./Form.html", "jquery", "./Base"], function(tpl, $){
 				}
 			};
 		}
-	})
+	});
 });

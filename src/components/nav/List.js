@@ -8,7 +8,8 @@
  * @namespace components.nav
  * @class List
  */
-define(["handlebars", "../display/List"], function(Handlebars){
+define(["doT", "../display/List"], function(tplEngine){
+	"use strict";
 	return Firebrick.define("Firebrick.ui.nav.List", {
 		extend: "Firebrick.ui.display.List", 
 		uiName:"fb-ui-navlist",
@@ -20,7 +21,7 @@ define(["handlebars", "../display/List"], function(Handlebars){
 		 * @default "<a data-bind="{{data-bind 'navLinkBindings'}}">"
 		 */
 		preItemTpl:function(){
-			return Handlebars.compile('<a data-bind="{{data-bind \'navLinkBindings\'}}">')(this);
+			return tplEngine.template('<a data-bind="{{=it.dataBind(\'navLinkBindings\')}}">')(this);
 		},
 		/**
 		 * overriding property from list
@@ -34,8 +35,7 @@ define(["handlebars", "../display/List"], function(Handlebars){
 		 * @return {Object}
 		 */
 		navLinkBindings: function(){
-			var me = this,
-				obj = {
+			var obj = {
 					attr:{
 						href: "$data.link ? $data.link : ''"
 					}
@@ -43,4 +43,4 @@ define(["handlebars", "../display/List"], function(Handlebars){
 			return obj;
 		}
 	});
-})
+});

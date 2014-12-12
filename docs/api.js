@@ -34,7 +34,8 @@ YUI.add("yuidoc-meta", function(Y) {
         "components.table.TreeTable",
         "plugins.RadioList",
         "ui",
-        "utils"
+        "utils",
+        "view.Base"
     ],
     "modules": [
         "Firebrick.ui",

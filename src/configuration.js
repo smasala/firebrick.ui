@@ -4,6 +4,7 @@
 **/
 
 define(function(){
+	"use strict";
 	return require.config({
 		paths:{
 			"jquery": "../bower_components/jquery/dist/jquery",
@@ -13,7 +14,7 @@ define(function(){
 			"bootstrap": "../bower_components/bootstrap/dist/js/bootstrap.min",
 			"text": "../bower_components/text/text",
 			"firebrick-ui": "../bower_components/firebrick.ui/src/firebrick.ui",
-			"handlebars": "../bower_components/handlebars/handlebars",
+			"doT": "../bower_components/doT/doT",
 			"datatables": "../bower_components/datatables/media/js/jquery.dataTables",
 			"jquery-treetable": "../bower_components/jquery-treetable/jquery.treetable",
 			"x-editable": "../bower_components/x-editable/dist/bootstrap3-editable/js/bootstrap-editable",

@@ -19,7 +19,7 @@
             
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 0.7.7</em>
+            <em>API Docs for: 0.8.20</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -109,6 +109,8 @@
             
                 <li><a href="../classes/utils.html">utils</a></li>
             
+                <li><a href="../classes/view.Base.html">view.Base</a></li>
+            
             </ul>
 
             <ul id="api-modules" class="apis modules">
@@ -169,6 +171,7 @@
  * @class Table
  */
 define([&quot;jquery&quot;, &quot;text!./Table.html&quot;, &quot;../common/Base&quot;, &quot;datatables&quot;, &quot;responsive-tables-js&quot;], function($, tpl){
+	&quot;use strict&quot;;
 	return Firebrick.define(&quot;Firebrick.ui.table.Table&quot;, {
 		extend:&quot;Firebrick.ui.common.Base&quot;,
 		/**
@@ -263,7 +266,16 @@ define([&quot;jquery&quot;, &quot;text!./Table.html&quot;, &quot;../common/Base&
 		 * @default {}
 		 */
 		dataTableConfig: function(){
-			return {};
+			return {
+				&quot;language&quot;: {
+					&quot;paginate&quot;: {
+						&quot;first&quot;: &quot;First&quot;,
+						&quot;last&quot;: &quot;Last&quot;,
+						&quot;next&quot;: &quot;Nex1t&quot;,
+						&quot;previous&quot;: &quot;Previous1&quot;
+					}
+				}
+			};
 		},
 		/**
 		 * works with parameter treetable
@@ -294,6 +306,13 @@ define([&quot;jquery&quot;, &quot;text!./Table.html&quot;, &quot;../common/Base&
 		 */
 		collapseText: &#x27;Collapse&#x27;,
 		/**
+		 * whether to show the collapse / expand buttons for the treetable
+		 * @property showOptions
+		 * @type {Boolean}
+		 * @default true
+		 */
+		showOptions: true,
+		/**
 		 * return js object to pass to the Treetable function for configuring the table on componentReady
 		 * @property treeTableConfig
 		 * @type {Function}
@@ -318,13 +337,17 @@ define([&quot;jquery&quot;, &quot;text!./Table.html&quot;, &quot;../common/Base&
 					table.DataTable(me.dataTableConfig());
 				}
 				if(me.treetable){
+					if(me.showOptions){
+						$(&quot;a#fb-expand-&quot; + id).on(&quot;click&quot;, me.generateOnclick(&quot;expandAll&quot;));
+						$(&quot;a#fb-collapse-&quot; + id).on(&quot;click&quot;, me.generateOnclick(&quot;collapseAll&quot;));
+					}
 					table.treetable(me.treeTableConfig());
 				}
 				if(me.responsive &amp;&amp; window.responsiveTables){
 					window.responsiveTables.update(id);
 				}
-			}),
-			me.callParent();
+			});
+			me.callParent(arguments);
 		},
 		/**
 		 * @method containerBindings
@@ -366,7 +389,7 @@ define([&quot;jquery&quot;, &quot;text!./Table.html&quot;, &quot;../common/Base&
 					&quot;&#x27;table-bordered&#x27;&quot;: me.tableBordered,
 					&quot;&#x27;responsive&#x27;&quot; : me.responsive
 				}
-			}
+			};
 		},
 		/**
 		 * @method theadBindings
@@ -375,15 +398,6 @@ define([&quot;jquery&quot;, &quot;text!./Table.html&quot;, &quot;../common/Base&
 		theadBindings: function(){
 			return {
 				&quot;if&quot;: &quot;cols&quot; 
-			};
-		},
-		/**
-		 * @method tbodyBindings
-		 * @return {Object}
-		 */
-		tbodyBindings:function(){
-			return {
-				&quot;if&quot;: &quot;rows&quot;
 			};
 		},
 		/**
@@ -446,6 +460,18 @@ define([&quot;jquery&quot;, &quot;text!./Table.html&quot;, &quot;../common/Base&
 			};
 		},
 		/**
+		 * @method generateOnclick
+		 * @param type {String} expandAll, collapseAll
+		 * @return {Function}
+		 */
+		generateOnclick: function(type){
+			var id = this.getId();
+			return function(){
+				$(&quot;#&quot; + id).treetable(type); 
+				return false;
+			};
+		},
+		/**
 		 * @method expandBindings
 		 * @return {Object}
 		 */
@@ -454,7 +480,7 @@ define([&quot;jquery&quot;, &quot;text!./Table.html&quot;, &quot;../common/Base&
 			return {
 				text: &quot;fb.text(&#x27;&quot;+ me.expandText +&quot;&#x27;)&quot;,
 				attr:{
-					onclick: &quot;\&quot;$(&#x27;#&quot; + me.getId() + &quot;&#x27;).treetable(&#x27;expandAll&#x27;); return false;\&quot;&quot;,
+					id: me.parseBind(&quot;fb-expand-&quot; + me.getId()),
 					href:&quot;&#x27;&#x27;&quot;
 				}
 			};
@@ -468,7 +494,7 @@ define([&quot;jquery&quot;, &quot;text!./Table.html&quot;, &quot;../common/Base&
 			return {
 				text: &quot;fb.text(&#x27;&quot;+ me.collapseText +&quot;&#x27;)&quot;,
 				attr:{
-					onclick: &quot;\&quot;$(&#x27;#&quot; + me.getId() + &quot;&#x27;).treetable(&#x27;collapseAll&#x27;); return false;\&quot;&quot;,
+					id: me.parseBind(&quot;fb-collapse-&quot; + me.getId()),
 					href:&quot;&#x27;&#x27;&quot;
 				}
 			};

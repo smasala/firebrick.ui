@@ -1,5 +1,5 @@
-{{#if inplaceEdit}}
-	<a data-bind="{{ data-bind }}"></a>
-{{else}}
-	<textarea rows="{{rows}}" data-bind="{{ data-bind }}"></textarea>
-{{/if}}
+{{?it.inplaceEdit}}
+	<a data-bind="{{=it.dataBind()}}"></a>
+{{?? true }}
+	<textarea id="{{=it.getId()}}" rows="{{=it.rows}}" data-bind="{{=it.dataBind()}}"></textarea>
+{{?}}

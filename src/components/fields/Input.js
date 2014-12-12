@@ -9,6 +9,7 @@
  * @class Input
  */
 define(["text!./Base.html", "text!./Input.html", "../common/Base", "x-editable", "knockout-x-editable"], function(tpl, subTpl){
+	"use strict";
 	return Firebrick.define("Firebrick.ui.fields.Input", {
 		extend:"Firebrick.ui.common.Base",
 		/**
@@ -229,7 +230,7 @@ define(["text!./Base.html", "text!./Input.html", "../common/Base", "x-editable",
 		helpBlockBindings: function(){
 			return {
 				text: "fb.text('" + this.helpText + "')"
-			}
+			};
 		},
 		/**
 		 * @method feedbackBindings
@@ -263,7 +264,7 @@ define(["text!./Base.html", "text!./Input.html", "../common/Base", "x-editable",
 		 * @return {Object}
 		 */
 		bindings:function(){
-			var me = this
+			var me = this,
 				type =  me.parseBind( me.type ),
 				obj = {
 					attr:{
@@ -285,7 +286,7 @@ define(["text!./Base.html", "text!./Input.html", "../common/Base", "x-editable",
 				}
 			}else{
 				obj.css["'form-control'"] = me.formControlClass;
-				obj.attr.placeholder = "fb.text('" + me.placeholder + "')"
+				obj.attr.placeholder = "fb.text('" + me.placeholder + "')";
 			}
 			
 			return obj;

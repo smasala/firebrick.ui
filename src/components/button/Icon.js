@@ -9,6 +9,7 @@
  * @class Icon
  */
 define(["./Button"], function(){
+	"use strict";
 	return Firebrick.define("Firebrick.ui.button.Icon", {
 		extend: "Firebrick.ui.button.Button",
 		uiName:"fb-ui-icon",
@@ -46,25 +47,15 @@ define(["./Button"], function(){
 			return me.text ? me.text : "";
 		},
 		/**
-		 * @property buttonTextBindings
-		 * @return {Object}
-		 */
-		buttonTextBindings: function(){
-			var me = this,
-				obj = me.callParent();
-			
-			return obj;
-		},
-		/**
 		 * @method buttonTextBindings
 		 * @return {Object}
 		 */
 		buttonTextBindings: function(){
 			var me = this,
-				obj = me.callParent();
+				obj = me.callParent(arguments);
 			
 			if(obj.hasOwnProperty("text")){
-				delete obj["text"];
+				delete obj.text;
 			}
 			
 			if(!obj.css){

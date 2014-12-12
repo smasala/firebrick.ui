@@ -9,6 +9,7 @@
  * @class TextArea
  */
 define(["text!./TextArea.html", "./Input"], function(subTpl){
+	"use strict";
 	return Firebrick.define("Firebrick.ui.fields.TextArea", {
 		extend:"Firebrick.ui.fields.Input",
 		/**
@@ -34,5 +35,5 @@ define(["text!./TextArea.html", "./Input"], function(subTpl){
 		 * @default "'textarea'"
 		 */
 		dataType:"textarea"
-	})
+	});
 });

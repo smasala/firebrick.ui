@@ -19,7 +19,7 @@
             
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 0.7.7</em>
+            <em>API Docs for: 0.8.20</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -109,6 +109,8 @@
             
                 <li><a href="../classes/utils.html">utils</a></li>
             
+                <li><a href="../classes/view.Base.html">view.Base</a></li>
+            
             </ul>
 
             <ul id="api-modules" class="apis modules">
@@ -169,6 +171,7 @@
  * @class Panel
  */
 define([&quot;text!./Panel.html&quot;, &quot;./Base&quot;], function(tpl){
+	&quot;use strict&quot;;
 	return Firebrick.define(&quot;Firebrick.ui.containers.Panel&quot;, {
 		extend:&quot;Firebrick.ui.containers.Base&quot;,
 		/**
@@ -287,7 +290,7 @@ define([&quot;text!./Panel.html&quot;, &quot;./Base&quot;], function(tpl){
 			};
 			if(me.collapsible){
 				obj.css[&quot;&#x27;panel-collapse&#x27;&quot;] = me.collapsible;
-				obj.css[&quot;collapse&quot;] = me.collapsible;
+				obj.css.collapse = me.collapsible;
 				if(!me.collapsed){
 					obj.css[&quot;in&quot;] = true;
 				}
@@ -339,7 +342,7 @@ define([&quot;text!./Panel.html&quot;, &quot;./Base&quot;], function(tpl){
 					&quot;&#x27;aria-expanded&#x27;&quot;: typeof me.collapsed == &quot;boolean&quot; ? me.collapsed : true,
 					&quot;&#x27;aria-controls&#x27;&quot;:  me.parseBind( id ),
 				}
-			}
+			};
 		},
 		/**
 		 * @method panelHeaderTextBindings
@@ -348,7 +351,7 @@ define([&quot;text!./Panel.html&quot;, &quot;./Base&quot;], function(tpl){
 		panelHeaderTextBindings: function(){
 			return {
 				text: &quot;fb.text(&#x27;&quot; + this.title + &quot;&#x27;)&quot;
-			}
+			};
 		},
 		/**
 		 * @method panelBodyBindings
@@ -367,7 +370,7 @@ define([&quot;text!./Panel.html&quot;, &quot;./Base&quot;], function(tpl){
 			}
 			return obj;
 		}
-	})
+	});
 });
     </pre>
 </div>

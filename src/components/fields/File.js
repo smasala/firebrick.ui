@@ -9,6 +9,7 @@
  * @class File
  */
 define(["./Input"], function(){
+	"use strict";
 	return Firebrick.define("Firebrick.ui.fields.File", {
 		extend:"Firebrick.ui.fields.Input",
 		uiName:"fb-ui-file",

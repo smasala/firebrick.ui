@@ -1,6 +1,6 @@
-{{#if inplaceEdit}}
-	<a data-bind="{{ data-bind }}"></a>
-{{else}}
-	<select data-bind="{{data-bind}}">
+{{?it.inplaceEdit}}
+	<a data-bind="{{=it.dataBind()}}"></a>
+{{?? true }}
+	<select data-bind="{{=it.dataBind()}}">
 	</select>
-{{/if}}
+{{?}}

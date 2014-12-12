@@ -7,18 +7,20 @@
 (function(root, factory) {
 	
   "use strict";
-
+  
   if (typeof define === "function" && define.amd) {
-    define(["jquery", "firebrick", "knockout", "knockout-mapping", "text", "handlebars"], function($, fb, ko, kom, text, hb) {
+    define(["jquery", "firebrick", "knockout", "knockout-mapping", "text"], function($, fb, ko, kom, text, hb) {
     	ko.mapping = kom;
     	return factory($, fb, ko, hb);
     });
   } else {
-	  return factory(root.jQuery, root.Firebrick, root.ko, root.Handlebars);
+	  return factory(root.jQuery, root.Firebrick, root.ko);
   }
 
-})(this, function($, Firebrick, ko, Handlebars) {
+})(this, function($, Firebrick, ko) {
 	
+	"use strict";
+
 	if(!Firebrick){
 		console.error("Firebrick has not been loaded, Firebrick-UI requires Firebrick JS to function");
 		return;
@@ -39,7 +41,7 @@
 			 * @private
 			 * @type {String}
 			 */
-			version: "0.7.7",
+			version: "0.8.20",
 			
 			/**
 			 * used to cache pointers to classes when searching by "uiName"
@@ -67,9 +69,9 @@
 				
 				if(config.view){
 					config.view.on("ready", function(){
-						$.each(r.items, function(i,f){
-							f.fireEvent("componentReady");
-						});
+						for(var i = 0, l = r.items.length; i<l; i++){
+							r.items[i].fireEvent("componentReady");	
+						}
 					});
 				}
 				
@@ -88,6 +90,15 @@
 			},
 			
 			/**
+			 * components uiNames are populated into this map for variable access
+			 * fb.ui.cmp.input
+			 * @property cmp
+			 * @type {Object}
+			 * @default {}
+			 */
+			cmp:{},
+			
+			/**
 			 * recursive function
 			 * create components and html from an array of items
 			 * @private
@@ -101,7 +112,13 @@
 					h = "", 
 					component, tmp;
 
-				$.each(items, function(i,v){
+				if($.isFunction(items)){
+					items = items();
+				}
+				
+				var v;
+				for(var i = 0, l = items.length; i<l; i++){
+					v = items[i];
 					if(v.isView){
 						if(v._state == "initial"){
 							component = v.init();
@@ -131,7 +148,7 @@
 						component._parent = parent;
 					}
 					x.push(component);
-				});
+				}
 				
 				return {html: h, items: x};
 			},
@@ -147,13 +164,17 @@
 				var me = this,
 					item = me._searchCache[name];
 				if(!item){
-					$.each(Firebrick.classes.classRegistry, function(k, v){
-						if(v.uiComponent && v.uiName == name){
-							item = v;
-							me._searchCache[name] = v;
-							return false;
+					var k, v;
+					for(k in Firebrick.classes.classRegistry){
+						if(Firebrick.classes.classRegistry.hasOwnProperty(k)){
+							v = Firebrick.classes.classRegistry[k];
+							if(v.uiComponent && v.uiName == name){
+								item = v;
+								me._searchCache[name] = v;
+								break;
+							}
 						}
-					});
+					}
 				}
 				
 				if(!item){
@@ -190,19 +211,23 @@
 					if(objToConvert){
 						
 						var loop = function(obj, f){
-							var p = f ? "" : "{";
-							$.each(obj, function(k,v){
-								if($.isPlainObject(v)){
-									p += k + ":" + loop(v);
-								}else{
-									p += k + ": " + v + ","
+							var p = f ? "" : "{",
+								k,v;
+							for(k in obj){
+								if(obj.hasOwnProperty(k)){
+									v = obj[k];
+									if($.isPlainObject(v)){
+										p += k + ":" + loop(v);
+									}else{
+										p += k + ": " + v + ",";
+									}
 								}
-							});
+							}
 							//remove last ", "
 							p = p.substr(-1) == "," ? p.substring(0, p.length-1) : p;
 							p += f ? "" : "},";
 							return p;
-						}
+						};
 						
 						return loop(objToConvert, true);
 					}
@@ -213,6 +238,49 @@
 			
 			
 	};
+	
+	/**
+	 * Overwrites "Firebrick.view.Base" 
+	 * @extends class.Base
+	 * @class view.Base
+	 */
+	Firebrick.classes.overwrite("Firebrick.view.Base", {
+		/**
+		 * @property listeners
+		 * @type {Object}
+		 */
+		listeners:{
+			componentReady: function(){
+				var me = this;
+				if($.isArray(me.items)){
+					for(var i = 0, l = me.items.length; i<l; i++){
+						me.items[i].fireEvent("componentReady");
+					}
+				}
+			}
+		},
+		/**
+	 	 * @property items
+		 * @type {Array|Function}
+		 * @default null
+		 */
+		items: null,
+		/**
+		 * @property tpl
+		 * @type {Function}
+		 * @return {String}
+		 */
+		tpl: function(){
+			var me = this;
+			if(me.items){
+				return Firebrick.ui.build({
+					items: me.items,
+					view: me
+				});
+			}
+		}
+	});
+	
 	/*
 	 * use withProperties to pass extra properties down to the descendants
 	 * http://knockoutjs.com/documentation/custom-bindings-controlling-descendant-bindings.html

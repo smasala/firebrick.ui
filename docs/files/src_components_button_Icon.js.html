@@ -19,7 +19,7 @@
             
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 0.7.7</em>
+            <em>API Docs for: 0.8.20</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -109,6 +109,8 @@
             
                 <li><a href="../classes/utils.html">utils</a></li>
             
+                <li><a href="../classes/view.Base.html">view.Base</a></li>
+            
             </ul>
 
             <ul id="api-modules" class="apis modules">
@@ -169,6 +171,7 @@
  * @class Icon
  */
 define([&quot;./Button&quot;], function(){
+	&quot;use strict&quot;;
 	return Firebrick.define(&quot;Firebrick.ui.button.Icon&quot;, {
 		extend: &quot;Firebrick.ui.button.Button&quot;,
 		uiName:&quot;fb-ui-icon&quot;,
@@ -206,25 +209,15 @@ define([&quot;./Button&quot;], function(){
 			return me.text ? me.text : &quot;&quot;;
 		},
 		/**
-		 * @property buttonTextBindings
-		 * @return {Object}
-		 */
-		buttonTextBindings: function(){
-			var me = this,
-				obj = me.callParent();
-			
-			return obj;
-		},
-		/**
 		 * @method buttonTextBindings
 		 * @return {Object}
 		 */
 		buttonTextBindings: function(){
 			var me = this,
-				obj = me.callParent();
+				obj = me.callParent(arguments);
 			
 			if(obj.hasOwnProperty(&quot;text&quot;)){
-				delete obj[&quot;text&quot;];
+				delete obj.text;
 			}
 			
 			if(!obj.css){

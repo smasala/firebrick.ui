@@ -9,6 +9,7 @@
  * @class Grid
  */
 define(["text!./Grid.html", "jquery", "./Base"], function(tpl, $){
+	"use strict";
 	return Firebrick.define("Firebrick.ui.containers.Grid", {
 		extend:"Firebrick.ui.containers.Base",
 		/**
@@ -37,14 +38,14 @@ define(["text!./Grid.html", "jquery", "./Base"], function(tpl, $){
 				css: {
 					row: me.rowClass
 				}
-			}
+			};
 		},
 		/**
 		 * @method getBasicBindings
 		 * @return {Object}
 		 */
 		getBasicBindings:function(){
-			var me = this;
+			var me = this,
 				obj = {
 						css:{}
 				};
@@ -59,8 +60,9 @@ define(["text!./Grid.html", "jquery", "./Base"], function(tpl, $){
 		 * @param {Context} iteration context
 		 * @return {String}
 		 */
-		getGridItem: function(index, item, me){
-			var newItem = me._getItems(item);
+		getGridItem: function(index, item){
+			var me = this,
+				newItem = me._getItems(item);
 			
 			if(newItem){
 				//replace items with the new object - _getItems returns an object {html:"", items:[]}

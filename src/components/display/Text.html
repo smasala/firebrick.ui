@@ -1,11 +1,11 @@
-{{#if blockQuote}}
-<blockquote data-bind="{{data-bind 'blockQuoteBindings'}}">
-{{/if}}
-	<p data-bind="{{data-bind}}">
+{{?it.blockQuote}}
+<blockquote data-bind="{{=it.dataBind('blockQuoteBindings')}}">
+{{?}}
+	<p data-bind="{{=it.dataBind()}}">
 	</p>
-	{{#if blockQuoteFooter}}
-	<footer data-bind="{{data-bind 'blockQuoteFooterBindings'}}"></footer>
-	{{/if}}
-{{#if blockQuote}}
+	{{?it.blockQuoteFooter}}
+	<footer data-bind="{{=it.dataBind('blockQuoteFooterBindings')}}"></footer>
+	{{?}}
+{{?it.blockQuote}}
 </blockquote>
-{{/if}}
+{{?}}

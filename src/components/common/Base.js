@@ -5,25 +5,18 @@
 /**
  * Super class for all components.
  * 
- * Extends from <a href="http://smasala.github.io/firebrick/docs/classes/class.Base.html">Firebrick.class.Base</a>
+ * Extends from <a href="http://smasala.github.io/firebrick/docs/classes/view.Base.html">Firebrick.view.Base</a>
  * @module Firebrick.ui.components
  * @extends class.Base
  * @namespace components.common
  * @class Base
  */
-define(["handlebars"], function(Handlebars){
+define(["doT"], function(tplEngine){
 
-	Handlebars.registerHelper('data-bind', function(arg, scope) {
-		if(typeof arg == "string"){
-			return scope.data.root["data-bind"](arg);
-		}
-		
-		return arg.data.root["data-bind"]();
-	});
-	
+	"use strict";
 	
 	return Firebrick.define("Firebrick.ui.common.Base", {
-		extend:"Firebrick.class.Base",
+		extend:"Firebrick.view.Base",
 		/**
 		 * Override class id
 		 * @property _idPrefix
@@ -52,31 +45,21 @@ define(["handlebars"], function(Handlebars){
 		 */
 		glyphiconClass: "glyphicon",
 		/**
-		 * target to render the component to (not needed if combined with a view)
-		 * @property renderTo
-		 * @type {Boolean|String|Object} false, selector, jQuery Object
-		 * @default false
-		 */
-		renderTo:false,
-		/**
 		 * cache
 		 * @property _build
 		 * @private
-		 * @type {String}
-		 * @default ""
+		 * @type {Object} map of all builds
+		 * @default null
 		 */
-		_build:"",
+		_build: null,
 		/**
-		 * compiled handles bars function
+		 * compiled template map
 		 * @property _template
 		 * @private
-		 * @type {Object}
+		 * @type {Object} map of all templates
 		 * @default null
 		 */
 		_template: null,
-		/**
-		 * 
-		 */
 		/**
 		 * template
 		 * @property tpl
@@ -85,55 +68,123 @@ define(["handlebars"], function(Handlebars){
 		 */
 		tpl: null,
 		/**
-		 * uiName
+		 * sub template
+		 * @property subTpl
+		 * @type {String} html
+		 * @default null
+		 */
+		subTpl: null,
+		/**
+		 * variable shortcuts are created using the uiName. by default the string after the last "-" is used
+		 * @example
+		 * 		uiName:"fb-ui-input"
+		 * 		//becomes accessible via: {Firebrick|fb}.ui.cmp.input
+		 * 		//defining another component e.g "myapp-field-input" would overwrite the default input as "input" is found after the last "-"
 		 * @property uiName
 		 * @type {String}
 		 * @default null
 		 */
 		uiName:null,
 		/**
-		 * used in conjunction with property "renderTo"
-		 * @property appendComponent
-		 * @type {Boolean}
-		 * @default false
+		 * called when defining the class
+		 * @method constructor
+		 * @return {Any} this.callParent(arguments)
 		 */
-		appendComponent:false,
+		constructor: function(){
+			var me = this,
+				uiName = me.uiName;
+			
+			if(uiName){
+				var n = uiName.substr(uiName.lastIndexOf("-")+1);
+				//create variable
+				Firebrick.ui.cmp[n] = uiName;
+			}
+
+			me.precompile();
+			
+			return me.callParent(arguments);
+		},
 		/**
-		 * when overriding this or any other method, this.callParent() calls the method in the super class
+		 * compile and cache template
+		 * 
+		 * @method _precompile
+		 * @return {Object} self
+		 */
+		precompile: function(){
+			var me = this;
+			
+			//init objects so each class is unqiue
+			me._template = {};
+			me._build = {};
+			
+			//precompile the template as soon as possible - performance
+			//http://jsperf.com/dot-vs-handlebars/2
+			if(me.tpl){
+				me.template();	
+			}
+			if(me.subTpl){
+				me.template("subTpl");	
+			}
+			return me;
+		},
+		/**
+		 * use this as a wrapper in a template if the property you wish to call COULD be either a primitive or a function
+		 * @method b
+		 * @param value {String|Function}
+		 * @return {String}
+		 */
+		b: function(value){
+			return $.isFunction(value) ? value.bind(this)() : value;
+		},
+		/**
+		 * when overriding this or any other method, this.callParent(arguments) calls the method in the super class
 		 * @method init
 		 */
 		init: function(){
 			var me = this;
-			if($.isPlainObject(me.bindings)){
-				Firebrick.utils.mixinFor("bindings", me);	
+			
+			if(me.autoRender && me.getTarget()){
+				me.tpl = me.build();
 			}
-			if(me.renderTo){
-				me.on("ready", function(){
-					Firebrick.views.renderTo(Firebrick.views.getTarget(me.renderTo), me.build(), me.appendComponent);
-				});
-			}
-			return this.callParent();
+			
+			
+			return this.callParent(arguments);
 		},
 		/**
+		 * compile the template
+		 * @method template
+		 * @property prop {String} [prop=tpl] optional - name of property to template
+		 * @property force {Boolean} [force=false] optional - set to true to force a retemplate
+		 * @return {Function} template function
+		 */
+		template: function(prop, force){
+			var me = this;
+			prop = prop || "tpl";
+			if(!me._template[prop] || force){
+				me._template[prop] = tplEngine.template(me[prop]);
+			}
+			return me._template[prop];
+		},
+		/**
+		 * build the compiled template
 		 * @method build
-		 * @param {String} [prop=this.tpl]
+		 * @property prop {String} [prop="tpl"] optional - name of property to build
 		 * @return {String} html 
 		 */
 		build: function(prop){
 			var me = this;
-			if(!me._build){
-				me._template = Handlebars.compile(prop ? me[prop] : me.tpl);
-				me._build = me._template(me);
-			}
-			return me._build;
+			prop = prop || "tpl";
+			me._build[prop] = me._template[prop](me);
+			return me._build[prop];
 		},
+		
 		/**
-		 * @method data-bind
+		 * @method dataBind
 		 * @param {String} [property=this.bindings]
 		 * @private
 		 * @return {String}
 		 */
-		"data-bind": function(property){
+		dataBind: function(property){
 			var prop = property ? this[property] : this.bindings;
 			if($.isFunction(prop)){
 				prop = prop.call(this);
@@ -187,7 +238,7 @@ define(["handlebars"], function(Handlebars){
 		 */
 		getParentTpl: function(){
 			var me = this;
-			return Handlebars.compile(me._getParent().tpl)(me);
+			return tplEngine.template(me._getParent().tpl)(me);
 		},
 		/**
 		 * called when calling {{{getParentSubTpl}}} in component template
@@ -196,7 +247,7 @@ define(["handlebars"], function(Handlebars){
 		 */
 		getParentSubTpl: function(){
 			var me = this;
-			return Handlebars.compile(me._getParent().subTpl)(me);
+			return tplEngine.template(me._getParent().subTpl)(me);
 		},
 		/**
 		 * clean string - i.e. remove all ' from string

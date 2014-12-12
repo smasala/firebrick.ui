@@ -1,3 +1,18 @@
+v0.8.20
+----------------------------
+* css for loader - taken from Firebrick MVC
+* implemented Firebrick view compaitibility in this framework and not in Firebrick JS (MVC)
+* add arguments parameter to all "callParent" calls
+* activate jshint and "use strict"
+* components inherit now from "view.Base" and not directly "class.Base"
+* changed property "headerText" for component "header" to "text"
+* changed template engine from Handlebars to doT - performance: http://jsperf.com/dot-vs-handlebars/2 - http://jsperf.com/handlebarsvsdotjs
+* precompile template in constructor
+* items property can also be a function
+* change $.each loops to "for" loops - performance : http://jsperf.com/loops/188 - http://jsperf.com/lodash-each-vs-object-keys/6 - http://jsperf.com/fastest-array-loops-in-javascript/287
+* fix tree table collapse and expand buttons
+* add option to hide tree table options with showOptions parameter
+
 v0.7.7
 ----------------------------
 * new component - responsive images (https://github.com/smasala/responsive-images-js)

@@ -19,7 +19,7 @@
             
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 0.7.7</em>
+            <em>API Docs for: 0.8.20</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -109,6 +109,8 @@
             
                 <li><a href="../classes/utils.html">utils</a></li>
             
+                <li><a href="../classes/view.Base.html">view.Base</a></li>
+            
             </ul>
 
             <ul id="api-modules" class="apis modules">
@@ -169,6 +171,7 @@
  * @class Form
  */
 define([&quot;text!./Form.html&quot;, &quot;jquery&quot;, &quot;./Base&quot;], function(tpl, $){
+	&quot;use strict&quot;;
 	return Firebrick.define(&quot;Firebrick.ui.containers.Form&quot;, {
 		extend:&quot;Firebrick.ui.containers.Base&quot;,
 		/**
@@ -273,7 +276,7 @@ define([&quot;text!./Form.html&quot;, &quot;jquery&quot;, &quot;./Base&quot;], f
 		 * @default 
 		 */
 		success: function(){
-			console.info(&quot;success&quot;)
+			console.info(&quot;success&quot;);
 		},
 		/**
 		 * method called on submit ajax
@@ -282,7 +285,7 @@ define([&quot;text!./Form.html&quot;, &quot;jquery&quot;, &quot;./Base&quot;], f
 		 * @default 
 		 */
 		failure: function(){
-			console.info(&quot;failure&quot;)
+			console.info(&quot;failure&quot;);
 		},
 		/**
 		 * method called on submit ajax
@@ -290,7 +293,7 @@ define([&quot;text!./Form.html&quot;, &quot;jquery&quot;, &quot;./Base&quot;], f
 		 * @type {Function}
 		 * @default function(){}
 		 */
-		complete: function(){console.info(&quot;complete&quot;)},
+		complete: function(){},
 		/**
 		 * method called after ajax
 		 * @method always
@@ -309,7 +312,7 @@ define([&quot;text!./Form.html&quot;, &quot;jquery&quot;, &quot;./Base&quot;], f
 		 * @return {Object}
 		 */
 		getFormData: function(){
-			return new FormData($(&quot;#&quot;+this.getId()));
+			return new window.FormData($(&quot;#&quot;+this.getId()));
 		},
 		/**
 		 * @method init
@@ -321,7 +324,7 @@ define([&quot;text!./Form.html&quot;, &quot;jquery&quot;, &quot;./Base&quot;], f
 				me._form = $(&quot;#&quot; + me.getId());
 			});
 			
-			return this.callParent();
+			return this.callParent(arguments);
 		},
 		/**
 		 * make sure this.url is set before calling this function
@@ -345,7 +348,7 @@ define([&quot;text!./Form.html&quot;, &quot;jquery&quot;, &quot;./Base&quot;], f
 					xhr: me.xhr,
 					url: me.url, 
 					type: me.submitType, 
-					data: new FormData(me._form[0]), 
+					data: new window.FormData(me._form[0]), 
 					processData: me.ajaxProcessData, 
 					contentType: me.enctype,
 					beforeSend: me.beforeSend.bind(me),
@@ -374,7 +377,7 @@ define([&quot;text!./Form.html&quot;, &quot;jquery&quot;, &quot;./Base&quot;], f
 				}
 			};
 		}
-	})
+	});
 });
     </pre>
 </div>

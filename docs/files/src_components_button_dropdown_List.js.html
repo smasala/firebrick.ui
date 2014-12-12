@@ -19,7 +19,7 @@
             
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 0.7.7</em>
+            <em>API Docs for: 0.8.20</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -109,6 +109,8 @@
             
                 <li><a href="../classes/utils.html">utils</a></li>
             
+                <li><a href="../classes/view.Base.html">view.Base</a></li>
+            
             </ul>
 
             <ul id="api-modules" class="apis modules">
@@ -169,6 +171,7 @@
  * @class List
  */
 define([&quot;../../nav/List&quot;], function(){
+	&quot;use strict&quot;;
 	return Firebrick.define(&quot;Firebrick.ui.button.dropdown.List&quot;, {
 		extend: &quot;Firebrick.ui.nav.List&quot;,
 		uiName:&quot;fb-ui-dropdown-list&quot;,
@@ -184,14 +187,14 @@ define([&quot;../../nav/List&quot;], function(){
 		 */ 
 		listContainerBindings: function(){
 			var me = this,
-				obj = me.callParent();
+				obj = me.callParent(arguments);
 			obj.css = {
 					&quot;&#x27;dropdown-menu&#x27;&quot;: true
 			};
 			if(!obj.attr){
 				obj.attr = {};
 			}
-			obj.attr[&quot;role&quot;] = &quot;&#x27;menu&#x27;&quot;;
+			obj.attr.role = &quot;&#x27;menu&#x27;&quot;;
 			obj.attr[&quot;&#x27;aria-labelledby&#x27;&quot;] = me.parseBind(me.ariaLabelledBy);
 			return obj;
 		},
@@ -206,7 +209,7 @@ define([&quot;../../nav/List&quot;], function(){
 				css:{
 					&quot;&#x27;dropdown-submenu&#x27;&quot; : &quot;$data.children &amp;&amp; $data.children().length ? true : false&quot;
 				}
-			}
+			};
 		},
 		/**
 		 * @method navLinkBindings
@@ -214,9 +217,9 @@ define([&quot;../../nav/List&quot;], function(){
 		 */
 		navLinkBindings: function(){
 			var me = this,
-				obj = me.callParent();
-			obj.attr[&quot;role&quot;] = &quot;&#x27;menuitem&#x27;&quot;;
-			obj.attr[&quot;tabindex&quot;] = &quot;-1&quot;;
+				obj = me.callParent(arguments);
+			obj.attr.role = &quot;&#x27;menuitem&#x27;&quot;;
+			obj.attr.tabindex = &quot;-1&quot;;
 			return obj;
 		}
 	});

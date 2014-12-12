@@ -29,6 +29,7 @@ $(function(){
  * @class RadioList
  */
 (function(factory) {
+	"use strict";
     if (typeof define === "function" && define.amd) {
         // AMD anonymous module
         define(["jquery", "x-editable"], factory);
@@ -37,6 +38,7 @@ $(function(){
         factory(window.jQuery);
     }
 })(function($) {
+	"use strict";
     var Radiolist = function(options) {
         this.init('radiolist', options, Radiolist.defaults);
     };

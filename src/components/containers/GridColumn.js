@@ -9,6 +9,7 @@
  * @class GridColumn
  */
 define(["text!./GridColumn.html", "./Base"], function(tpl){
+	"use strict";
 	return Firebrick.define("Firebrick.ui.containers.GridColumn", {
 		extend:"Firebrick.ui.containers.Base",
 		/**
@@ -67,4 +68,4 @@ define(["text!./GridColumn.html", "./Base"], function(tpl){
 			return obj;
 		}
 	});
-})
+});

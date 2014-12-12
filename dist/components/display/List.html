@@ -1,9 +1,11 @@
-<!-- ko {{{data-bind 'listTemplateBindings'}}} --><!-- /ko -->
+<!-- ko {{=it.dataBind('listTemplateBindings')}} --><!-- /ko -->
 
-<script type="text/html" id="{{getId}}">
-	<{{listType}} data-bind="{{data-bind 'listContainerBindings'}}">
-		<li data-bind="{{data-bind 'listItemBindings'}}">{{{preItemTpl}}}<span data-bind="{{data-bind}}"></span>{{{postItemTpl}}}
-			<!-- ko {{{data-bind 'childrenBindings'}}} --><!-- /ko -->
-		</li>
-	</{{listType}}>
+<script type="text/html" id="{{=it.getId()}}">
+	<!-- ko {{=it.dataBind('virtualContainerBindings')}} -->
+		<{{=it.listType}} data-bind="{{=it.dataBind('listContainerBindings')}}">
+			<li data-bind="{{=it.dataBind('listItemBindings')}}">{{=it.b(it.preItemTpl)}}<span data-bind="{{=it.dataBind()}}"></span>{{=it.b(it.postItemTpl)}}
+				<!-- ko {{=it.dataBind('childrenBindings')}} --><!-- /ko -->
+			</li>
+		</{{=it.listType}}>
+	<!-- /ko -->
 </script>

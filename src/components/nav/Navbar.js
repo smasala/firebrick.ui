@@ -8,7 +8,8 @@
  * @namespace components.nav
  * @class Navbar
  */
-define(["text!./Navbar.html", "handlebars", "../common/Base", "./List"], function(tpl, Handlebars){
+define(["text!./Navbar.html", "../common/Base", "./List"], function(tpl){
+	"use strict";
 	return Firebrick.define("Firebrick.ui.nav.Navbar", {
 		extend:"Firebrick.ui.nav.List",
 		tpl:tpl,
@@ -148,7 +149,7 @@ define(["text!./Navbar.html", "handlebars", "../common/Base", "./List"], functio
 		 */
 		listContainerBindings: function(){
 			var me = this,
-				obj = me.callParent();
+				obj = me.callParent(arguments);
 			obj.css.nav = me.navClass;
 			obj.css["'navbar-nav'"] = me.navClass;
 			return obj;
@@ -160,7 +161,7 @@ define(["text!./Navbar.html", "handlebars", "../common/Base", "./List"], functio
 		 */
 		bindings: function(){
 			var me = this,
-				obj = me.callParent();
+				obj = me.callParent(arguments);
 			obj.text = "$data.text ? $data.text : ''";
 			return obj;
 		},
@@ -170,13 +171,11 @@ define(["text!./Navbar.html", "handlebars", "../common/Base", "./List"], functio
 		 * @return {Object}
 		 */
 		listItemBindings: function(){
-			var me = this,
-			obj = {
-				css: {
-					active: "$data.active ? $data.active : false"
-				}
-			};
-			return obj;
+			return {
+					css: {
+						active: "$data.active ? $data.active : false"
+					}
+				};
 		},
 		/**
 		 * @method navbarHeaderBindings
@@ -215,7 +214,7 @@ define(["text!./Navbar.html", "handlebars", "../common/Base", "./List"], functio
 		toggleTextBindings: function(){
 			return {
 				text: "fb.text('" + this.toggleText + "')"
-			}
+			};
 		},
 		/**
 		 * @method toggleButtonBindings
@@ -249,7 +248,7 @@ define(["text!./Navbar.html", "handlebars", "../common/Base", "./List"], functio
 				css:{
 					"container": true
 				}
-			}
+			};
 		}
 	});
 });

@@ -19,7 +19,7 @@
             
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 0.7.7</em>
+            <em>API Docs for: 0.8.20</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -109,6 +109,8 @@
             
                 <li><a href="../classes/utils.html">utils</a></li>
             
+                <li><a href="../classes/view.Base.html">view.Base</a></li>
+            
             </ul>
 
             <ul id="api-modules" class="apis modules">
@@ -169,6 +171,7 @@
  * @class Input
  */
 define([&quot;text!./Base.html&quot;, &quot;text!./Input.html&quot;, &quot;../common/Base&quot;, &quot;x-editable&quot;, &quot;knockout-x-editable&quot;], function(tpl, subTpl){
+	&quot;use strict&quot;;
 	return Firebrick.define(&quot;Firebrick.ui.fields.Input&quot;, {
 		extend:&quot;Firebrick.ui.common.Base&quot;,
 		/**
@@ -389,7 +392,7 @@ define([&quot;text!./Base.html&quot;, &quot;text!./Input.html&quot;, &quot;../co
 		helpBlockBindings: function(){
 			return {
 				text: &quot;fb.text(&#x27;&quot; + this.helpText + &quot;&#x27;)&quot;
-			}
+			};
 		},
 		/**
 		 * @method feedbackBindings
@@ -423,7 +426,7 @@ define([&quot;text!./Base.html&quot;, &quot;text!./Input.html&quot;, &quot;../co
 		 * @return {Object}
 		 */
 		bindings:function(){
-			var me = this
+			var me = this,
 				type =  me.parseBind( me.type ),
 				obj = {
 					attr:{
@@ -445,7 +448,7 @@ define([&quot;text!./Base.html&quot;, &quot;text!./Input.html&quot;, &quot;../co
 				}
 			}else{
 				obj.css[&quot;&#x27;form-control&#x27;&quot;] = me.formControlClass;
-				obj.attr.placeholder = &quot;fb.text(&#x27;&quot; + me.placeholder + &quot;&#x27;)&quot;
+				obj.attr.placeholder = &quot;fb.text(&#x27;&quot; + me.placeholder + &quot;&#x27;)&quot;;
 			}
 			
 			return obj;

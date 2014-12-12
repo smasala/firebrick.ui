@@ -1,9 +1,9 @@
-<div data-bind="{{data-bind 'btnGroupBindings'}}">
-	{{#if showLabel}}
-		<label data-bind="{{data-bind 'toggleLabelBindings'}}">
-	{{/if}}
-			<input type="radio" name="options" data-bind="{{data-bind 'toggleInputBindings'}}"><span data-bind="{{data-bind 'toggleLabelTextBindings'}}"></span>
-	{{#if showLabel}}
+<div data-bind="{{=it.dataBind('btnGroupBindings')}}">
+	{{?it.showLabel}}
+		<label data-bind="{{=it.dataBind('toggleLabelBindings')}}">
+	{{?}}
+			<input type="radio" name="options" data-bind="{{=it.dataBind('toggleInputBindings')}}"><span data-bind="{{=it.dataBind('toggleLabelTextBindings')}}"></span>
+	{{?it.showLabel}}
 		</label>
-	{{/if}}
+	{{?}}
 </div>

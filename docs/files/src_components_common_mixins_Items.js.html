@@ -19,7 +19,7 @@
             
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 0.7.7</em>
+            <em>API Docs for: 0.8.20</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -109,6 +109,8 @@
             
                 <li><a href="../classes/utils.html">utils</a></li>
             
+                <li><a href="../classes/view.Base.html">view.Base</a></li>
+            
             </ul>
 
             <ul id="api-modules" class="apis modules">
@@ -169,6 +171,7 @@
  * @static
  */
 define([&quot;jquery&quot;], function($){
+	&quot;use strict&quot;;
 	return Firebrick.define(&quot;Firebrick.ui.common.mixins.Items&quot;, {
 		/**
 		 * @property items
@@ -182,11 +185,13 @@ define([&quot;jquery&quot;], function($){
 					items = me.items,
 					args = arguments;
 				if($.isArray(items)){
-					$.each(items, function(i,cmp){
+					var cmp;
+					for(var i = 0, l = items.length; i&lt;l; i++){
+						cmp = items[i];
 						if(cmp.passEvent){
 							cmp.passEvent(args);
 						}
-					});
+					}
 				}
 			}
 		},
@@ -210,7 +215,8 @@ define([&quot;jquery&quot;], function($){
 		 * @param [itemsName] {String}  name of property to get items from
 		 * @return {String} html
 		 */
-		getItemsScoped: function(me, itemsName){
+		getItemsProp: function(itemsName){
+			var me = this;
 			itemsName = typeof itemsName == &quot;string&quot; ? me[itemsName] : me.items;
 			var items = me._getItems(itemsName);
 			return items ? items.html || items : &quot;&quot;;
@@ -225,7 +231,7 @@ define([&quot;jquery&quot;], function($){
 		_getItems: function(items){
 			var me = this;
 			if(items){
-				if(!$.isArray(items)){
+				if(!$.isArray(items) &amp;&amp; !$.isFunction(items)){
 					items = [items];
 				}
 				return Firebrick.ui._populate(items, me);

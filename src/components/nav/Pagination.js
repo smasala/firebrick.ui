@@ -9,6 +9,7 @@
  * @class Pagination
  */
 define(["../display/List"], function(){
+	"use strict";
 	return Firebrick.define("Firebrick.ui.display.Pagination", {
 		extend:"Firebrick.ui.display.List",
 		uiName:"fb-ui-pagination",
@@ -26,7 +27,7 @@ define(["../display/List"], function(){
 		 */
 		listContainerBindings: function(){
 			var me = this,
-				obj = this.callParent();
+				obj = this.callParent(arguments);
 			obj.css.pagination = true;
 			if(me.paginationSize){
 				obj.css[ me.parseBind("pagination-"+me.paginationSize) ] = true;

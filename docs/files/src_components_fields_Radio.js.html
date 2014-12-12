@@ -19,7 +19,7 @@
             
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 0.7.7</em>
+            <em>API Docs for: 0.8.20</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -109,6 +109,8 @@
             
                 <li><a href="../classes/utils.html">utils</a></li>
             
+                <li><a href="../classes/view.Base.html">view.Base</a></li>
+            
             </ul>
 
             <ul id="api-modules" class="apis modules">
@@ -169,6 +171,7 @@
  * @class Radio
  */
 define([&quot;text!./Radio.html&quot;, &quot;../common/MultiplesBase&quot;, &quot;./plugins/Radio&quot;], function(subTpl){
+	&quot;use strict&quot;;
 	return Firebrick.define(&quot;Firebrick.ui.fields.Radio&quot;, {
 		extend:&quot;Firebrick.ui.common.MultiplesBase&quot;,
 		/**
@@ -237,7 +240,7 @@ define([&quot;text!./Radio.html&quot;, &quot;../common/MultiplesBase&quot;, &quo
 		 */
 		inputContainerBindings:function(){
 			var me = this,
-				obj = me.callParent();
+				obj = me.callParent(arguments);
 			if(me.options &amp;&amp; !me.inplaceEdit){
 				obj.foreach = me.options;
 			}
@@ -249,7 +252,7 @@ define([&quot;text!./Radio.html&quot;, &quot;../common/MultiplesBase&quot;, &quo
 		 */
 		bindings:function(){
 			var me = this,
-				obj = me.callParent();
+				obj = me.callParent(arguments);
 			
 			if(me.inplaceEdit){
 				obj.editable = me.selectedOptions || false;

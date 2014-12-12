@@ -19,7 +19,7 @@
             
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 0.7.7</em>
+            <em>API Docs for: 0.8.20</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -109,6 +109,8 @@
             
                 <li><a href="../classes/utils.html">utils</a></li>
             
+                <li><a href="../classes/view.Base.html">view.Base</a></li>
+            
             </ul>
 
             <ul id="api-modules" class="apis modules">
@@ -169,6 +171,7 @@
  * @class ToggleButton
  */
 define([&quot;text!./ToggleButton.html&quot;, &quot;../common/MultiplesBase&quot;], function(subTpl){
+	&quot;use strict&quot;;
 	return Firebrick.define(&quot;Firebrick.ui.button.ToggleButton&quot;, {
 		extend:&quot;Firebrick.ui.common.MultiplesBase&quot;,
 		/**
@@ -239,19 +242,18 @@ define([&quot;text!./ToggleButton.html&quot;, &quot;../common/MultiplesBase&quot
 					&quot;&#x27;data-toggle&#x27;&quot;: me.dataToggle
 				},
 				foreach: me.options
-			}
+			};
 		},
 		/**
 		 * @method toggleInputBindings
 		 * @return {Object}
 		 */
 		toggleInputBindings: function(){
-			var me = this;
 			return {
 				attr:{
 					id: &quot;itemId&quot;
 				}
-			}
+			};
 		},
 		/**
 		 * @method toggleLabelBindings
@@ -268,7 +270,7 @@ define([&quot;text!./ToggleButton.html&quot;, &quot;../common/MultiplesBase&quot
 					&quot;&#x27;btn-primary&#x27;&quot;: &quot;$data.btnPrimaryClass ? $data.btnPrimaryClass : &quot; + me.btnPrimaryClass,
 					active: &quot;$data.hasOwnProperty &amp;&amp; $data.hasOwnProperty(&#x27;active&#x27;) ? $data : &quot; + me.defaultActive 
 				}
-			}
+			};
 		},
 		/**
 		 * @method toggleLabelTextBindings
@@ -277,9 +279,9 @@ define([&quot;text!./ToggleButton.html&quot;, &quot;../common/MultiplesBase&quot
 		toggleLabelTextBindings: function(){
 			return {
 				&quot;text&quot;: &quot;$data.text ? $data.text : $data&quot;
-			}
+			};
 		}
-	})
+	});
 });
     </pre>
 </div>

@@ -19,7 +19,7 @@
             
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 0.7.7</em>
+            <em>API Docs for: 0.8.20</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -109,6 +109,8 @@
             
                 <li><a href="../classes/utils.html">utils</a></li>
             
+                <li><a href="../classes/view.Base.html">view.Base</a></li>
+            
             </ul>
 
             <ul id="api-modules" class="apis modules">
@@ -168,7 +170,8 @@
  * @namespace components.table
  * @class TreeTable
  */
-define([&quot;jquery&quot;, &quot;./Table&quot;, &quot;jquery-treetable&quot;], function($){
+define([&quot;./Table&quot;, &quot;jquery-treetable&quot;], function(){
+	&quot;use strict&quot;;
 	return Firebrick.define(&quot;Firebrick.ui.table.TreeTable&quot;, {
 		extend:&quot;Firebrick.ui.table.Table&quot;,
 		/**

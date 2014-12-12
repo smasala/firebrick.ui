@@ -9,6 +9,7 @@
  * @class Table
  */
 define(["jquery", "text!./Table.html", "../common/Base", "datatables", "responsive-tables-js"], function($, tpl){
+	"use strict";
 	return Firebrick.define("Firebrick.ui.table.Table", {
 		extend:"Firebrick.ui.common.Base",
 		/**
@@ -103,7 +104,16 @@ define(["jquery", "text!./Table.html", "../common/Base", "datatables", "responsi
 		 * @default {}
 		 */
 		dataTableConfig: function(){
-			return {};
+			return {
+				"language": {
+					"paginate": {
+						"first": "First",
+						"last": "Last",
+						"next": "Nex1t",
+						"previous": "Previous1"
+					}
+				}
+			};
 		},
 		/**
 		 * works with parameter treetable
@@ -134,6 +144,13 @@ define(["jquery", "text!./Table.html", "../common/Base", "datatables", "responsi
 		 */
 		collapseText: 'Collapse',
 		/**
+		 * whether to show the collapse / expand buttons for the treetable
+		 * @property showOptions
+		 * @type {Boolean}
+		 * @default true
+		 */
+		showOptions: true,
+		/**
 		 * return js object to pass to the Treetable function for configuring the table on componentReady
 		 * @property treeTableConfig
 		 * @type {Function}
@@ -158,13 +175,17 @@ define(["jquery", "text!./Table.html", "../common/Base", "datatables", "responsi
 					table.DataTable(me.dataTableConfig());
 				}
 				if(me.treetable){
+					if(me.showOptions){
+						$("a#fb-expand-" + id).on("click", me.generateOnclick("expandAll"));
+						$("a#fb-collapse-" + id).on("click", me.generateOnclick("collapseAll"));
+					}
 					table.treetable(me.treeTableConfig());
 				}
 				if(me.responsive && window.responsiveTables){
 					window.responsiveTables.update(id);
 				}
-			}),
-			me.callParent();
+			});
+			me.callParent(arguments);
 		},
 		/**
 		 * @method containerBindings
@@ -206,7 +227,7 @@ define(["jquery", "text!./Table.html", "../common/Base", "datatables", "responsi
 					"'table-bordered'": me.tableBordered,
 					"'responsive'" : me.responsive
 				}
-			}
+			};
 		},
 		/**
 		 * @method theadBindings
@@ -215,15 +236,6 @@ define(["jquery", "text!./Table.html", "../common/Base", "datatables", "responsi
 		theadBindings: function(){
 			return {
 				"if": "cols" 
-			};
-		},
-		/**
-		 * @method tbodyBindings
-		 * @return {Object}
-		 */
-		tbodyBindings:function(){
-			return {
-				"if": "rows"
 			};
 		},
 		/**
@@ -286,6 +298,18 @@ define(["jquery", "text!./Table.html", "../common/Base", "datatables", "responsi
 			};
 		},
 		/**
+		 * @method generateOnclick
+		 * @param type {String} expandAll, collapseAll
+		 * @return {Function}
+		 */
+		generateOnclick: function(type){
+			var id = this.getId();
+			return function(){
+				$("#" + id).treetable(type); 
+				return false;
+			};
+		},
+		/**
 		 * @method expandBindings
 		 * @return {Object}
 		 */
@@ -294,7 +318,7 @@ define(["jquery", "text!./Table.html", "../common/Base", "datatables", "responsi
 			return {
 				text: "fb.text('"+ me.expandText +"')",
 				attr:{
-					onclick: "\"$('#" + me.getId() + "').treetable('expandAll'); return false;\"",
+					id: me.parseBind("fb-expand-" + me.getId()),
 					href:"''"
 				}
 			};
@@ -308,7 +332,7 @@ define(["jquery", "text!./Table.html", "../common/Base", "datatables", "responsi
 			return {
 				text: "fb.text('"+ me.collapseText +"')",
 				attr:{
-					onclick: "\"$('#" + me.getId() + "').treetable('collapseAll'); return false;\"",
+					id: me.parseBind("fb-collapse-" + me.getId()),
 					href:"''"
 				}
 			};

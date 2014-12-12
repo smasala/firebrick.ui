@@ -9,6 +9,7 @@
  * @class List
  */
 define(["text!./List.html", "../common/Base"], function(tpl){
+	"use strict";
 	return Firebrick.define("Firebrick.ui.display.List", {
 		extend:"Firebrick.ui.common.Base",
 		/**
@@ -73,6 +74,13 @@ define(["text!./List.html", "../common/Base"], function(tpl){
 		 */
 		postItemTpl:"",
 		/**
+		 * @method virtualContainerBindings
+		 * @return {Object}
+		 */
+		virtualContainerBindings: function(){
+			return {"if": "$data && $data.length"};
+		},
+		/**
 		 * @method listContainerBindings
 		 * @return {Object}
 		 */
@@ -80,13 +88,13 @@ define(["text!./List.html", "../common/Base"], function(tpl){
 			var me = this,
 				obj = {css:{}};
 			if(me.listGroupClass){
-				obj.css["'list-group'"] = me.listGroupClass
+				obj.css["'list-group'"] = me.listGroupClass;
 			}
 			if(me.unstyled){
 				obj.css["'list-unstyled'"] = me.unstyled;
 			}
 			if(me.data){
-				obj.foreach = "$data"
+				obj.foreach = "$data";
 			}
 			return obj;
 		},
@@ -99,7 +107,7 @@ define(["text!./List.html", "../common/Base"], function(tpl){
 				obj = {css:{}};
 			
 			if(me.listGroupClass && me.listItemGroupClass){
-				obj.css["'list-group-item'"] = me.listItemGroupClass
+				obj.css["'list-group-item'"] = me.listItemGroupClass;
 			}
 
 			return obj;
@@ -109,8 +117,7 @@ define(["text!./List.html", "../common/Base"], function(tpl){
 		 * @return {Object}
 		 */
 		bindings:function(){
-			var me = this, 
-				obj = {};
+			var obj = {};
 				obj.text = "$data.text ? $data.text : $data";
 			return obj;
 		},
@@ -122,7 +129,7 @@ define(["text!./List.html", "../common/Base"], function(tpl){
 					name:  me.parseBind(me.getId()),
 					data: me.data
 				}
-			}
+			};
 		},
 		
 		childrenBindings: function(){
@@ -132,7 +139,7 @@ define(["text!./List.html", "../common/Base"], function(tpl){
 					name:  me.parseBind(me.getId()),
 					data: "$data.children"
 				}
-			}
+			};
 		}
-	})
+	});
 });

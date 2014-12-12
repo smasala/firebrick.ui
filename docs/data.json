@@ -2,7 +2,7 @@
     "project": {
         "name": "Firebrick UI API",
         "description": "Firebrick UI API: a component library for Firebrick MVC, Knockout JS, jQuery and Bootstrap",
-        "version": "0.7.7",
+        "version": "0.8.20",
         "url": "https://github.com/smasala",
         "logo": "fbui_small.png"
     },
@@ -370,7 +370,8 @@
             },
             "classes": {
                 "ui": 1,
-                "utils": 1
+                "utils": 1,
+                "view.Base": 1
             },
             "fors": {
                 "ui": 1
@@ -455,7 +456,8 @@
             "submodules": {},
             "classes": {
                 "ui": 1,
-                "utils": 1
+                "utils": 1,
+                "view.Base": 1
             },
             "fors": {
                 "ui": 1
@@ -463,7 +465,7 @@
             "namespaces": {},
             "tag": "module",
             "file": "src\\firebrick.ui.js",
-            "line": 176,
+            "line": 242,
             "description": "Firebrick component library for Firebrick JS MVC"
         }
     },
@@ -551,7 +553,7 @@
             "namespace": "components.common",
             "file": "src\\components\\common\\Base.js",
             "line": 5,
-            "description": "Super class for all components.\n\nExtends from <a href=\"http://smasala.github.io/firebrick/docs/classes/class.Base.html\">Firebrick.class.Base</a>",
+            "description": "Super class for all components.\n\nExtends from <a href=\"http://smasala.github.io/firebrick/docs/classes/view.Base.html\">Firebrick.view.Base</a>",
             "extends": "class.Base"
         },
         "components.common.MultiplesBase": {
@@ -932,7 +934,7 @@
             "module": "Firebrick.ui",
             "namespace": "",
             "file": "src\\firebrick.ui.js",
-            "line": 30,
+            "line": 32,
             "description": "Firebrick component library for Firebrick JS MVC"
         },
         "utils": {
@@ -946,14 +948,29 @@
             "module": "Firebrick.ui",
             "namespace": "",
             "file": "src\\firebrick.ui.js",
-            "line": 176,
+            "line": 197,
             "description": "util methods"
+        },
+        "view.Base": {
+            "name": "view.Base",
+            "shortname": "view.Base",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "Firebrick.ui",
+            "namespace": "",
+            "file": "src\\firebrick.ui.js",
+            "line": 242,
+            "description": "Overwrites \"Firebrick.view.Base\"",
+            "extends": "class.Base"
         }
     },
     "classitems": [
         {
             "file": "src\\components\\button\\dropdown\\List.js",
-            "line": 15,
+            "line": 16,
             "itemtype": "property",
             "name": "ariaLabelledBy",
             "type": "{String}",
@@ -964,7 +981,7 @@
         },
         {
             "file": "src\\components\\button\\dropdown\\List.js",
-            "line": 21,
+            "line": 22,
             "itemtype": "method",
             "name": "listContainerBindings",
             "return": {
@@ -977,7 +994,7 @@
         },
         {
             "file": "src\\components\\button\\dropdown\\List.js",
-            "line": 38,
+            "line": 39,
             "description": "completely overwrite parent",
             "itemtype": "method",
             "name": "listItemBindings",
@@ -991,7 +1008,7 @@
         },
         {
             "file": "src\\components\\button\\dropdown\\List.js",
-            "line": 51,
+            "line": 52,
             "itemtype": "method",
             "name": "navLinkBindings",
             "return": {
@@ -1006,6 +1023,17 @@
             "file": "src\\components\\button\\Button.js",
             "line": 18,
             "itemtype": "property",
+            "name": "text",
+            "type": "{String}",
+            "default": "\"\"",
+            "class": "components.button.Button",
+            "module": "Firebrick.ui.components",
+            "namespace": "components.button"
+        },
+        {
+            "file": "src\\components\\button\\Button.js",
+            "line": 24,
+            "itemtype": "property",
             "name": "btnSize",
             "type": "{Boolean|String} false |  (\"sm\", \"lg\", \"xs\")",
             "default": "false",
@@ -1015,7 +1043,7 @@
         },
         {
             "file": "src\\components\\button\\Button.js",
-            "line": 24,
+            "line": 30,
             "itemtype": "property",
             "name": "btnStyle",
             "type": "{Boolean|String} false | (default, primary, success, info, warning, danger, link)",
@@ -1026,7 +1054,7 @@
         },
         {
             "file": "src\\components\\button\\Button.js",
-            "line": 30,
+            "line": 36,
             "description": "used to inject something before the text <span>",
             "itemtype": "property",
             "name": "beforeText",
@@ -1038,7 +1066,7 @@
         },
         {
             "file": "src\\components\\button\\Button.js",
-            "line": 37,
+            "line": 43,
             "description": "used to inject something after the text <span>",
             "itemtype": "property",
             "name": "afterText",
@@ -1050,7 +1078,7 @@
         },
         {
             "file": "src\\components\\button\\Button.js",
-            "line": 44,
+            "line": 50,
             "description": "passed to list data property",
             "itemtype": "property",
             "name": "items",
@@ -1062,7 +1090,7 @@
         },
         {
             "file": "src\\components\\button\\Button.js",
-            "line": 51,
+            "line": 57,
             "description": "default bindings called by data-bind={{data-bind}}",
             "itemtype": "method",
             "name": "bindings",
@@ -1076,7 +1104,7 @@
         },
         {
             "file": "src\\components\\button\\Button.js",
-            "line": 80,
+            "line": 86,
             "itemtype": "property",
             "name": "buttonTextBindings",
             "return": {
@@ -1089,7 +1117,7 @@
         },
         {
             "file": "src\\components\\button\\Button.js",
-            "line": 89,
+            "line": 95,
             "itemtype": "method",
             "name": "caretBindings",
             "return": {
@@ -1102,7 +1130,7 @@
         },
         {
             "file": "src\\components\\button\\Button.js",
-            "line": 100,
+            "line": 106,
             "itemtype": "method",
             "name": "dropdownContainerBindings",
             "return": {
@@ -1115,7 +1143,7 @@
         },
         {
             "file": "src\\components\\button\\Icon.js",
-            "line": 15,
+            "line": 16,
             "itemtype": "property",
             "name": "buttonSize",
             "type": "{Boolean|String} boolean = false",
@@ -1126,7 +1154,7 @@
         },
         {
             "file": "src\\components\\button\\Icon.js",
-            "line": 21,
+            "line": 22,
             "itemtype": "property",
             "name": "text",
             "type": "{String}",
@@ -1137,7 +1165,7 @@
         },
         {
             "file": "src\\components\\button\\Icon.js",
-            "line": 27,
+            "line": 28,
             "itemtype": "property",
             "name": "glyIcon",
             "type": "{String}",
@@ -1148,7 +1176,7 @@
         },
         {
             "file": "src\\components\\button\\Icon.js",
-            "line": 33,
+            "line": 34,
             "itemtype": "property",
             "name": "btnStyle",
             "type": "{String}",
@@ -1159,7 +1187,7 @@
         },
         {
             "file": "src\\components\\button\\Icon.js",
-            "line": 39,
+            "line": 40,
             "itemtype": "property",
             "name": "afterText",
             "access": "private",
@@ -1171,20 +1199,7 @@
         },
         {
             "file": "src\\components\\button\\Icon.js",
-            "line": 48,
-            "itemtype": "property",
-            "name": "buttonTextBindings",
-            "return": {
-                "description": "",
-                "type": "Object"
-            },
-            "class": "components.button.Icon",
-            "module": "Firebrick.ui.components",
-            "namespace": "components.button"
-        },
-        {
-            "file": "src\\components\\button\\Icon.js",
-            "line": 58,
+            "line": 49,
             "itemtype": "method",
             "name": "buttonTextBindings",
             "return": {
@@ -1197,7 +1212,7 @@
         },
         {
             "file": "src\\components\\button\\ToggleButton.js",
-            "line": 14,
+            "line": 15,
             "description": "component alias",
             "itemtype": "property",
             "name": "uiName",
@@ -1208,7 +1223,7 @@
         },
         {
             "file": "src\\components\\button\\ToggleButton.js",
-            "line": 20,
+            "line": 21,
             "itemtype": "property",
             "name": "subTpl",
             "type": "{String} html",
@@ -1218,7 +1233,7 @@
         },
         {
             "file": "src\\components\\button\\ToggleButton.js",
-            "line": 25,
+            "line": 26,
             "itemtype": "property",
             "name": "btnGroupClass",
             "type": "{Boolean|String}",
@@ -1229,7 +1244,7 @@
         },
         {
             "file": "src\\components\\button\\ToggleButton.js",
-            "line": 31,
+            "line": 32,
             "itemtype": "property",
             "name": "btnClass",
             "type": "{Boolean|String}",
@@ -1240,7 +1255,7 @@
         },
         {
             "file": "src\\components\\button\\ToggleButton.js",
-            "line": 37,
+            "line": 38,
             "itemtype": "property",
             "name": "btnPrimaryClass",
             "type": "{Boolean|String}",
@@ -1251,7 +1266,7 @@
         },
         {
             "file": "src\\components\\button\\ToggleButton.js",
-            "line": 43,
+            "line": 44,
             "itemtype": "property",
             "name": "defaultActive",
             "type": "{Boolean|String}",
@@ -1262,7 +1277,7 @@
         },
         {
             "file": "src\\components\\button\\ToggleButton.js",
-            "line": 49,
+            "line": 50,
             "itemtype": "property",
             "name": "dataToggle",
             "type": "{Boolean|String}",
@@ -1273,7 +1288,7 @@
         },
         {
             "file": "src\\components\\button\\ToggleButton.js",
-            "line": 55,
+            "line": 56,
             "description": "options that are to be shown by the toggle button : [{text:\"abc\", active:true}, \"b\", \"c\", \"d\"]",
             "itemtype": "property",
             "name": "options",
@@ -1285,7 +1300,7 @@
         },
         {
             "file": "src\\components\\button\\ToggleButton.js",
-            "line": 62,
+            "line": 63,
             "itemtype": "property",
             "name": "showLabel",
             "type": "{Boolean}",
@@ -1296,7 +1311,7 @@
         },
         {
             "file": "src\\components\\button\\ToggleButton.js",
-            "line": 68,
+            "line": 69,
             "itemtype": "method",
             "name": "btnGroupBindings",
             "return": {
@@ -1309,7 +1324,7 @@
         },
         {
             "file": "src\\components\\button\\ToggleButton.js",
-            "line": 84,
+            "line": 85,
             "itemtype": "method",
             "name": "toggleInputBindings",
             "return": {
@@ -1348,7 +1363,7 @@
         },
         {
             "file": "src\\components\\common\\mixins\\Items.js",
-            "line": 13,
+            "line": 14,
             "itemtype": "property",
             "name": "items",
             "type": "{String|Object|Array of Object}",
@@ -1359,7 +1374,7 @@
         },
         {
             "file": "src\\components\\common\\mixins\\Items.js",
-            "line": 33,
+            "line": 36,
             "description": "inject sub items",
             "itemtype": "method",
             "name": "getItems",
@@ -1373,7 +1388,7 @@
         },
         {
             "file": "src\\components\\common\\mixins\\Items.js",
-            "line": 46,
+            "line": 49,
             "description": "if you are calling _getItems from a nested scope then use this function",
             "itemtype": "method",
             "name": "_getItemsScoped",
@@ -1400,7 +1415,7 @@
         },
         {
             "file": "src\\components\\common\\mixins\\Items.js",
-            "line": 58,
+            "line": 62,
             "description": "use getItems",
             "access": "private",
             "tagname": "",
@@ -1423,7 +1438,7 @@
         },
         {
             "file": "src\\components\\common\\Base.js",
-            "line": 27,
+            "line": 20,
             "description": "Override class id",
             "itemtype": "property",
             "name": "_idPrefix",
@@ -1436,7 +1451,7 @@
         },
         {
             "file": "src\\components\\common\\Base.js",
-            "line": 34,
+            "line": 27,
             "description": "component id, not the _classId - however if none specified it will default to the _classId",
             "itemtype": "property",
             "name": "id,",
@@ -1448,7 +1463,7 @@
         },
         {
             "file": "src\\components\\common\\Base.js",
-            "line": 41,
+            "line": 34,
             "description": "used when filtering component classes when searching",
             "itemtype": "property",
             "name": "uiComponent",
@@ -1460,7 +1475,7 @@
         },
         {
             "file": "src\\components\\common\\Base.js",
-            "line": 48,
+            "line": 41,
             "itemtype": "property",
             "name": "glyphiconClass",
             "type": "{String}",
@@ -1471,39 +1486,13 @@
         },
         {
             "file": "src\\components\\common\\Base.js",
-            "line": 54,
-            "description": "target to render the component to (not needed if combined with a view)",
-            "itemtype": "property",
-            "name": "renderTo",
-            "type": "{Boolean|String|Object} false, selector, jQuery Object",
-            "default": "false",
-            "class": "components.common.Base",
-            "module": "Firebrick.ui.components",
-            "namespace": "components.common"
-        },
-        {
-            "file": "src\\components\\common\\Base.js",
-            "line": 61,
+            "line": 47,
             "description": "cache",
             "itemtype": "property",
             "name": "_build",
             "access": "private",
             "tagname": "",
-            "type": "{String}",
-            "default": "\"\"",
-            "class": "components.common.Base",
-            "module": "Firebrick.ui.components",
-            "namespace": "components.common"
-        },
-        {
-            "file": "src\\components\\common\\Base.js",
-            "line": 69,
-            "description": "compiled handles bars function",
-            "itemtype": "property",
-            "name": "_template",
-            "access": "private",
-            "tagname": "",
-            "type": "{Object}",
+            "type": "{Object} map of all builds",
             "default": "null",
             "class": "components.common.Base",
             "module": "Firebrick.ui.components",
@@ -1511,14 +1500,21 @@
         },
         {
             "file": "src\\components\\common\\Base.js",
-            "line": 77,
+            "line": 55,
+            "description": "compiled template map",
+            "itemtype": "property",
+            "name": "_template",
+            "access": "private",
+            "tagname": "",
+            "type": "{Object} map of all templates",
+            "default": "null",
             "class": "components.common.Base",
             "module": "Firebrick.ui.components",
             "namespace": "components.common"
         },
         {
             "file": "src\\components\\common\\Base.js",
-            "line": 80,
+            "line": 63,
             "description": "template",
             "itemtype": "property",
             "name": "tpl",
@@ -1530,8 +1526,23 @@
         },
         {
             "file": "src\\components\\common\\Base.js",
-            "line": 87,
-            "description": "uiName",
+            "line": 70,
+            "description": "sub template",
+            "itemtype": "property",
+            "name": "subTpl",
+            "type": "{String} html",
+            "default": "null",
+            "class": "components.common.Base",
+            "module": "Firebrick.ui.components",
+            "namespace": "components.common"
+        },
+        {
+            "file": "src\\components\\common\\Base.js",
+            "line": 77,
+            "description": "variable shortcuts are created using the uiName. by default the string after the last \"-\" is used",
+            "example": [
+                "\n\t\tuiName:\"fb-ui-input\"\n\t\t//becomes accessible via: {Firebrick|fb}.ui.cmp.input\n\t\t//defining another component e.g \"myapp-field-input\" would overwrite the default input as \"input\" is found after the last \"-\""
+            ],
             "itemtype": "property",
             "name": "uiName",
             "type": "{String}",
@@ -1542,20 +1553,57 @@
         },
         {
             "file": "src\\components\\common\\Base.js",
-            "line": 94,
-            "description": "used in conjunction with property \"renderTo\"",
-            "itemtype": "property",
-            "name": "appendComponent",
-            "type": "{Boolean}",
-            "default": "false",
+            "line": 88,
+            "description": "called when defining the class",
+            "itemtype": "method",
+            "name": "constructor",
+            "return": {
+                "description": "this.callParent(arguments)",
+                "type": "Any"
+            },
             "class": "components.common.Base",
             "module": "Firebrick.ui.components",
             "namespace": "components.common"
         },
         {
             "file": "src\\components\\common\\Base.js",
-            "line": 101,
-            "description": "when overriding this or any other method, this.callParent() calls the method in the super class",
+            "line": 107,
+            "description": "compile and cache template",
+            "itemtype": "method",
+            "name": "_precompile",
+            "return": {
+                "description": "self",
+                "type": "Object"
+            },
+            "class": "components.common.Base",
+            "module": "Firebrick.ui.components",
+            "namespace": "components.common"
+        },
+        {
+            "file": "src\\components\\common\\Base.js",
+            "line": 130,
+            "description": "use this as a wrapper in a template if the property you wish to call COULD be either a primitive or a function",
+            "itemtype": "method",
+            "name": "b",
+            "params": [
+                {
+                    "name": "value",
+                    "description": "",
+                    "type": "String|Function"
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "String"
+            },
+            "class": "components.common.Base",
+            "module": "Firebrick.ui.components",
+            "namespace": "components.common"
+        },
+        {
+            "file": "src\\components\\common\\Base.js",
+            "line": 139,
+            "description": "when overriding this or any other method, this.callParent(arguments) calls the method in the super class",
             "itemtype": "method",
             "name": "init",
             "class": "components.common.Base",
@@ -1564,18 +1612,26 @@
         },
         {
             "file": "src\\components\\common\\Base.js",
-            "line": 117,
-            "itemtype": "method",
-            "name": "build",
-            "params": [
-                {
-                    "name": "prop",
-                    "description": "",
-                    "type": "String",
-                    "optional": true,
-                    "optdefault": "this.tpl"
-                }
-            ],
+            "line": 153,
+            "description": "compile the template",
+            "itemtype": "property",
+            "name": "force {Boolean} [force=false] optional - set to true to force a retemplate",
+            "type": "String",
+            "return": {
+                "description": "template function",
+                "type": "Function"
+            },
+            "class": "components.common.Base",
+            "module": "Firebrick.ui.components",
+            "namespace": "components.common"
+        },
+        {
+            "file": "src\\components\\common\\Base.js",
+            "line": 168,
+            "description": "build the compiled template",
+            "itemtype": "property",
+            "name": "prop  [prop=\"tpl\"] optional - name of property to build",
+            "type": "String",
             "return": {
                 "description": "html",
                 "type": "String"
@@ -1586,9 +1642,9 @@
         },
         {
             "file": "src\\components\\common\\Base.js",
-            "line": 130,
+            "line": 181,
             "itemtype": "method",
-            "name": "data-bind",
+            "name": "dataBind",
             "params": [
                 {
                     "name": "property",
@@ -1610,7 +1666,7 @@
         },
         {
             "file": "src\\components\\common\\Base.js",
-            "line": 143,
+            "line": 194,
             "description": "if no id is specified it will call getClassId() and use that value",
             "itemtype": "method",
             "name": "getId",
@@ -1624,7 +1680,7 @@
         },
         {
             "file": "src\\components\\common\\Base.js",
-            "line": 157,
+            "line": 208,
             "description": "called when calling {{{getSubTpl}}} in component template",
             "itemtype": "method",
             "name": "getSubTpl",
@@ -1638,7 +1694,7 @@
         },
         {
             "file": "src\\components\\common\\Base.js",
-            "line": 165,
+            "line": 216,
             "description": "find the parent of this class\niterate up the inheritance tree looking for a classname that differs from the current and that \"subTpl\" or \"tpl\" don't match either",
             "access": "private",
             "tagname": "",
@@ -1654,7 +1710,7 @@
         },
         {
             "file": "src\\components\\common\\Base.js",
-            "line": 183,
+            "line": 234,
             "description": "called when calling {{{getParentTpl}}} in component template",
             "itemtype": "method",
             "name": "getParentTpl",
@@ -1668,7 +1724,7 @@
         },
         {
             "file": "src\\components\\common\\Base.js",
-            "line": 192,
+            "line": 243,
             "description": "called when calling {{{getParentSubTpl}}} in component template",
             "itemtype": "method",
             "name": "getParentSubTpl",
@@ -1682,7 +1738,7 @@
         },
         {
             "file": "src\\components\\common\\Base.js",
-            "line": 201,
+            "line": 252,
             "description": "clean string - i.e. remove all ' from string",
             "itemtype": "method",
             "name": "cleanString",
@@ -1696,7 +1752,7 @@
         },
         {
             "file": "src\\components\\common\\Base.js",
-            "line": 209,
+            "line": 260,
             "description": "attach ' to the start and end of the string for KO binds",
             "itemtype": "method",
             "name": "parseBind",
@@ -1717,7 +1773,7 @@
         },
         {
             "file": "src\\components\\common\\MultiplesBase.js",
-            "line": 15,
+            "line": 16,
             "itemtype": "method",
             "name": "fieldBindings",
             "return": {
@@ -1730,7 +1786,7 @@
         },
         {
             "file": "src\\components\\containers\\Box.js",
-            "line": 16,
+            "line": 17,
             "itemtype": "method",
             "name": "bindings",
             "return": {
@@ -1743,7 +1799,7 @@
         },
         {
             "file": "src\\components\\containers\\Form.js",
-            "line": 14,
+            "line": 15,
             "itemtype": "property",
             "name": "uiName",
             "type": "{String}",
@@ -1753,7 +1809,7 @@
         },
         {
             "file": "src\\components\\containers\\Form.js",
-            "line": 19,
+            "line": 20,
             "itemtype": "property",
             "name": "tpl",
             "type": "{String} html",
@@ -1763,7 +1819,7 @@
         },
         {
             "file": "src\\components\\containers\\Form.js",
-            "line": 24,
+            "line": 25,
             "itemtype": "property",
             "name": "formRole",
             "type": "{String}",
@@ -1774,7 +1830,7 @@
         },
         {
             "file": "src\\components\\containers\\Form.js",
-            "line": 30,
+            "line": 31,
             "itemtype": "property",
             "name": "horizontal",
             "type": "{Boolean|String}",
@@ -1785,7 +1841,7 @@
         },
         {
             "file": "src\\components\\containers\\Form.js",
-            "line": 36,
+            "line": 37,
             "itemtype": "property",
             "name": "inline",
             "type": "{Boolean|String}",
@@ -1796,7 +1852,7 @@
         },
         {
             "file": "src\\components\\containers\\Form.js",
-            "line": 42,
+            "line": 43,
             "itemtype": "property",
             "name": "enctype",
             "type": "{String}",
@@ -1807,7 +1863,7 @@
         },
         {
             "file": "src\\components\\containers\\Form.js",
-            "line": 48,
+            "line": 49,
             "description": "whether the progress bar should be shown on form submission",
             "itemtype": "property",
             "name": "showProgress",
@@ -1819,7 +1875,7 @@
         },
         {
             "file": "src\\components\\containers\\Form.js",
-            "line": 55,
+            "line": 56,
             "description": "see \"ProcessData\" in http://api.jquery.com/jquery.ajax/",
             "itemtype": "property",
             "name": "ajaxProcessData",
@@ -1831,7 +1887,7 @@
         },
         {
             "file": "src\\components\\containers\\Form.js",
-            "line": 62,
+            "line": 63,
             "description": "used for submitting the form",
             "itemtype": "property",
             "name": "url",
@@ -1843,7 +1899,7 @@
         },
         {
             "file": "src\\components\\containers\\Form.js",
-            "line": 69,
+            "line": 70,
             "itemtype": "property",
             "name": "submitType",
             "type": "{String}",
@@ -1854,7 +1910,7 @@
         },
         {
             "file": "src\\components\\containers\\Form.js",
-            "line": 75,
+            "line": 76,
             "description": "upload and download progress",
             "itemtype": "property",
             "name": "xhr",
@@ -1865,7 +1921,7 @@
         },
         {
             "file": "src\\components\\containers\\Form.js",
-            "line": 103,
+            "line": 104,
             "description": "stores the current form item",
             "itemtype": "property",
             "name": "_form",
@@ -1876,7 +1932,7 @@
         },
         {
             "file": "src\\components\\containers\\Form.js",
-            "line": 109,
+            "line": 110,
             "description": "method called on submit ajax",
             "itemtype": "property",
             "name": "success",
@@ -1888,7 +1944,7 @@
         },
         {
             "file": "src\\components\\containers\\Form.js",
-            "line": 118,
+            "line": 119,
             "description": "method called on submit ajax",
             "itemtype": "property",
             "name": "failure",
@@ -1900,7 +1956,7 @@
         },
         {
             "file": "src\\components\\containers\\Form.js",
-            "line": 127,
+            "line": 128,
             "description": "method called on submit ajax",
             "itemtype": "property",
             "name": "complete",
@@ -1912,7 +1968,7 @@
         },
         {
             "file": "src\\components\\containers\\Form.js",
-            "line": 134,
+            "line": 135,
             "description": "method called after ajax",
             "itemtype": "method",
             "name": "always",
@@ -1929,7 +1985,7 @@
         },
         {
             "file": "src\\components\\containers\\Form.js",
-            "line": 140,
+            "line": 141,
             "description": "method called after ajax",
             "itemtype": "method",
             "name": "beforeSend",
@@ -1946,7 +2002,7 @@
         },
         {
             "file": "src\\components\\containers\\Form.js",
-            "line": 146,
+            "line": 147,
             "description": "this function requires the HTML5 function FormData to be supported",
             "itemtype": "method",
             "name": "getFormData",
@@ -1960,7 +2016,7 @@
         },
         {
             "file": "src\\components\\containers\\Form.js",
-            "line": 154,
+            "line": 155,
             "itemtype": "method",
             "name": "init",
             "class": "components.containers.Form",
@@ -1969,7 +2025,7 @@
         },
         {
             "file": "src\\components\\containers\\Form.js",
-            "line": 166,
+            "line": 167,
             "description": "make sure this.url is set before calling this function",
             "itemtype": "method",
             "name": "submit",
@@ -1979,7 +2035,7 @@
         },
         {
             "file": "src\\components\\containers\\Form.js",
-            "line": 200,
+            "line": 201,
             "itemtype": "method",
             "name": "formBindings",
             "return": {
@@ -1992,7 +2048,7 @@
         },
         {
             "file": "src\\components\\containers\\Grid.js",
-            "line": 14,
+            "line": 15,
             "itemtype": "property",
             "name": "uiName",
             "type": "{String}",
@@ -2002,7 +2058,7 @@
         },
         {
             "file": "src\\components\\containers\\Grid.js",
-            "line": 19,
+            "line": 20,
             "itemtype": "property",
             "name": "tpl",
             "type": "{String} html",
@@ -2012,7 +2068,7 @@
         },
         {
             "file": "src\\components\\containers\\Grid.js",
-            "line": 24,
+            "line": 25,
             "itemtype": "property",
             "name": "rowClass",
             "type": "{Boolean|String}",
@@ -2023,7 +2079,7 @@
         },
         {
             "file": "src\\components\\containers\\Grid.js",
-            "line": 30,
+            "line": 31,
             "itemtype": "method",
             "name": "bindings",
             "return": {
@@ -2036,7 +2092,7 @@
         },
         {
             "file": "src\\components\\containers\\Grid.js",
-            "line": 42,
+            "line": 43,
             "itemtype": "method",
             "name": "getBasicBindings",
             "return": {
@@ -2049,7 +2105,7 @@
         },
         {
             "file": "src\\components\\containers\\Grid.js",
-            "line": 54,
+            "line": 55,
             "description": "used when calling {{{getGridItem}}} in template",
             "itemtype": "method",
             "name": "getGridItem",
@@ -2080,7 +2136,7 @@
         },
         {
             "file": "src\\components\\containers\\GridColumn.js",
-            "line": 14,
+            "line": 15,
             "itemtype": "property",
             "name": "uiName",
             "type": "{String}",
@@ -2090,7 +2146,7 @@
         },
         {
             "file": "src\\components\\containers\\GridColumn.js",
-            "line": 19,
+            "line": 20,
             "itemtype": "property",
             "name": "tpl",
             "type": "{String} html",
@@ -2100,7 +2156,7 @@
         },
         {
             "file": "src\\components\\containers\\GridColumn.js",
-            "line": 24,
+            "line": 25,
             "itemtype": "property",
             "name": "deviceSize",
             "type": "{String}",
@@ -2111,7 +2167,7 @@
         },
         {
             "file": "src\\components\\containers\\GridColumn.js",
-            "line": 30,
+            "line": 31,
             "description": "auto will attempt to provide the column width by dividing the number of items in the parent Grid by 12 - decimals will be rounded down",
             "itemtype": "property",
             "name": "columnWidth",
@@ -2123,7 +2179,7 @@
         },
         {
             "file": "src\\components\\containers\\GridColumn.js",
-            "line": 37,
+            "line": 38,
             "description": "when property columnWidth is set to \"auto\", this function will attempt to calculate the correct size for each column.\nNote: this function will round down to the nearest whole number - 5 columns will result in size 2 for each column\nthe number of columns are divided by 12 (BS3 grid)",
             "itemtype": "method",
             "name": "_getColumnWidth",
@@ -2139,7 +2195,7 @@
         },
         {
             "file": "src\\components\\containers\\GridColumn.js",
-            "line": 54,
+            "line": 55,
             "description": "Bindings",
             "itemtype": "method",
             "name": "bindings",
@@ -2153,7 +2209,7 @@
         },
         {
             "file": "src\\components\\containers\\Panel.js",
-            "line": 14,
+            "line": 15,
             "itemtype": "property",
             "name": "uiName",
             "type": "{String}",
@@ -2163,7 +2219,7 @@
         },
         {
             "file": "src\\components\\containers\\Panel.js",
-            "line": 19,
+            "line": 20,
             "itemtype": "property",
             "name": "tpl",
             "type": "{String} html",
@@ -2173,7 +2229,7 @@
         },
         {
             "file": "src\\components\\containers\\Panel.js",
-            "line": 24,
+            "line": 25,
             "itemtype": "property",
             "name": "title",
             "type": "{String}",
@@ -2184,7 +2240,7 @@
         },
         {
             "file": "src\\components\\containers\\Panel.js",
-            "line": 30,
+            "line": 31,
             "itemtype": "property",
             "name": "panelClass",
             "type": "{Boolean|String}",
@@ -2195,7 +2251,7 @@
         },
         {
             "file": "src\\components\\containers\\Panel.js",
-            "line": 36,
+            "line": 37,
             "description": "string = (default, primary, success, info, warning, danger)",
             "itemtype": "property",
             "name": "panelTypeClass",
@@ -2207,7 +2263,7 @@
         },
         {
             "file": "src\\components\\containers\\Panel.js",
-            "line": 43,
+            "line": 44,
             "itemtype": "property",
             "name": "panelHeaderClass",
             "type": "{Boolean|String}",
@@ -2218,7 +2274,7 @@
         },
         {
             "file": "src\\components\\containers\\Panel.js",
-            "line": 49,
+            "line": 50,
             "itemtype": "property",
             "name": "panelBodyClass",
             "type": "{Boolean|String}",
@@ -2229,7 +2285,7 @@
         },
         {
             "file": "src\\components\\containers\\Panel.js",
-            "line": 55,
+            "line": 56,
             "itemtype": "property",
             "name": "showPanelHeader",
             "type": "{Boolean|String}",
@@ -2240,7 +2296,7 @@
         },
         {
             "file": "src\\components\\containers\\Panel.js",
-            "line": 61,
+            "line": 62,
             "description": "fill the panel body (can be html too)",
             "itemtype": "property",
             "name": "content",
@@ -2252,7 +2308,7 @@
         },
         {
             "file": "src\\components\\containers\\Panel.js",
-            "line": 68,
+            "line": 69,
             "description": "whether the content is just text",
             "itemtype": "property",
             "name": "contentTextual",
@@ -2264,7 +2320,7 @@
         },
         {
             "file": "src\\components\\containers\\Panel.js",
-            "line": 75,
+            "line": 76,
             "itemtype": "property",
             "name": "collapsible",
             "type": "{Boolean|String}",
@@ -2275,7 +2331,7 @@
         },
         {
             "file": "src\\components\\containers\\Panel.js",
-            "line": 81,
+            "line": 82,
             "itemtype": "property",
             "name": "collapsed",
             "type": "{Boolean|String}",
@@ -2286,7 +2342,7 @@
         },
         {
             "file": "src\\components\\containers\\Panel.js",
-            "line": 87,
+            "line": 88,
             "itemtype": "property",
             "name": "headerIcons",
             "type": "{Boolean|Object} boolean = false, if object use the same way as the \"items\" property",
@@ -2297,7 +2353,7 @@
         },
         {
             "file": "src\\components\\containers\\Panel.js",
-            "line": 93,
+            "line": 94,
             "itemtype": "property",
             "name": "headerIconPosition",
             "type": "{String} css class \"pull-right\", \"pull-left\" etc",
@@ -2308,7 +2364,7 @@
         },
         {
             "file": "src\\components\\containers\\Panel.js",
-            "line": 99,
+            "line": 100,
             "description": "Data bindings",
             "itemtype": "method",
             "name": "bindings",
@@ -2322,7 +2378,7 @@
         },
         {
             "file": "src\\components\\containers\\Panel.js",
-            "line": 116,
+            "line": 117,
             "itemtype": "method",
             "name": "tabBindings",
             "return": {
@@ -2335,7 +2391,7 @@
         },
         {
             "file": "src\\components\\containers\\Panel.js",
-            "line": 137,
+            "line": 138,
             "itemtype": "method",
             "name": "panelHeaderBindings",
             "return": {
@@ -2348,7 +2404,7 @@
         },
         {
             "file": "src\\components\\containers\\Panel.js",
-            "line": 151,
+            "line": 152,
             "itemtype": "method",
             "name": "headerIconBindings",
             "return": {
@@ -2361,7 +2417,7 @@
         },
         {
             "file": "src\\components\\containers\\Panel.js",
-            "line": 168,
+            "line": 169,
             "itemtype": "method",
             "name": "collapsibleLinkBindings",
             "return": {
@@ -2374,7 +2430,7 @@
         },
         {
             "file": "src\\components\\containers\\Panel.js",
-            "line": 184,
+            "line": 185,
             "itemtype": "method",
             "name": "panelHeaderTextBindings",
             "return": {
@@ -2387,7 +2443,7 @@
         },
         {
             "file": "src\\components\\containers\\Panel.js",
-            "line": 193,
+            "line": 194,
             "itemtype": "method",
             "name": "panelBodyBindings",
             "return": {
@@ -2400,7 +2456,7 @@
         },
         {
             "file": "src\\components\\display\\Header.js",
-            "line": 14,
+            "line": 15,
             "itemtype": "property",
             "name": "uiName",
             "type": "{String}",
@@ -2410,7 +2466,7 @@
         },
         {
             "file": "src\\components\\display\\Header.js",
-            "line": 19,
+            "line": 20,
             "itemtype": "property",
             "name": "tpl",
             "type": "{String}",
@@ -2420,7 +2476,7 @@
         },
         {
             "file": "src\\components\\display\\Header.js",
-            "line": 24,
+            "line": 25,
             "description": "use to determine whether h1, h2, h3 etc - default = 1",
             "itemtype": "property",
             "name": "headerType",
@@ -2432,9 +2488,9 @@
         },
         {
             "file": "src\\components\\display\\Header.js",
-            "line": 31,
+            "line": 32,
             "itemtype": "property",
-            "name": "headerText",
+            "name": "text",
             "type": "{String}",
             "default": "\"\"",
             "class": "components.display.Header",
@@ -2443,7 +2499,7 @@
         },
         {
             "file": "src\\components\\display\\Header.js",
-            "line": 37,
+            "line": 38,
             "itemtype": "property",
             "name": "secondaryText",
             "type": "{String}",
@@ -2454,7 +2510,7 @@
         },
         {
             "file": "src\\components\\display\\Header.js",
-            "line": 43,
+            "line": 44,
             "itemtype": "property",
             "name": "labelText",
             "type": "{String}",
@@ -2465,7 +2521,7 @@
         },
         {
             "file": "src\\components\\display\\Header.js",
-            "line": 49,
+            "line": 50,
             "description": "string = \"default\", \"primary\", \"success\" \"info\", \"warning\", \"danger\"",
             "itemtype": "property",
             "name": "labelCSS",
@@ -2477,7 +2533,7 @@
         },
         {
             "file": "src\\components\\display\\Header.js",
-            "line": 56,
+            "line": 57,
             "itemtype": "method",
             "name": "bindings",
             "return": {
@@ -2489,7 +2545,7 @@
         },
         {
             "file": "src\\components\\display\\Header.js",
-            "line": 65,
+            "line": 66,
             "itemtype": "method",
             "name": "secondaryTextBindings",
             "return": {
@@ -2501,7 +2557,7 @@
         },
         {
             "file": "src\\components\\display\\Header.js",
-            "line": 81,
+            "line": 82,
             "itemtype": "method",
             "name": "labelBindings",
             "return": {
@@ -2513,7 +2569,7 @@
         },
         {
             "file": "src\\components\\display\\Image.js",
-            "line": 16,
+            "line": 17,
             "itemtype": "method",
             "name": "init",
             "class": "components.display.Image",
@@ -2522,7 +2578,7 @@
         },
         {
             "file": "src\\components\\display\\Image.js",
-            "line": 28,
+            "line": 29,
             "itemtype": "property",
             "name": "src",
             "type": "{String}",
@@ -2533,9 +2589,11 @@
         },
         {
             "file": "src\\components\\display\\Image.js",
-            "line": 34,
+            "line": 35,
             "description": "use this property for responsive images. Define in order of sizes with the largest first!",
-            "usage": "\"xl, l, m, s, xs\"",
+            "example": [
+                " \"xl, l, m, s, xs\""
+            ],
             "itemtype": "property",
             "name": "sizes",
             "type": "{String} predefined sizes or media queries",
@@ -2546,9 +2604,11 @@
         },
         {
             "file": "src\\components\\display\\Image.js",
-            "line": 42,
+            "line": 43,
             "description": "use this property in conjunction with \"sizes\" - mirror the image sizes with that of the \"sizes\" order",
-            "usage": "\"dogXL.jpg, dogL.jpg, dogM.jpg, dogS.jpg, dogXS.jpg\"",
+            "example": [
+                " \"dogXL.jpg, dogL.jpg, dogM.jpg, dogS.jpg, dogXS.jpg\""
+            ],
             "itemtype": "property",
             "name": "srcset",
             "type": "{String} url(s)",
@@ -2559,7 +2619,7 @@
         },
         {
             "file": "src\\components\\display\\Image.js",
-            "line": 50,
+            "line": 51,
             "description": "sets \"img-responsive\" to the image",
             "itemtype": "property",
             "name": "responsiveClass",
@@ -2571,7 +2631,7 @@
         },
         {
             "file": "src\\components\\display\\Image.js",
-            "line": 57,
+            "line": 58,
             "description": "\"rounded, \"circle\", \"thumbnail\"",
             "itemtype": "property",
             "name": "imgTypeClass",
@@ -2583,7 +2643,7 @@
         },
         {
             "file": "src\\components\\display\\Image.js",
-            "line": 64,
+            "line": 65,
             "itemtype": "method",
             "name": "bindings",
             "return": {
@@ -2596,7 +2656,7 @@
         },
         {
             "file": "src\\components\\display\\Image.js",
-            "line": 80,
+            "line": 81,
             "itemtype": "method",
             "name": "getSizes",
             "return": {
@@ -2609,7 +2669,7 @@
         },
         {
             "file": "src\\components\\display\\Image.js",
-            "line": 88,
+            "line": 89,
             "itemtype": "method",
             "name": "getSrcset",
             "return": {
@@ -2622,7 +2682,7 @@
         },
         {
             "file": "src\\components\\display\\Image.js",
-            "line": 96,
+            "line": 97,
             "itemtype": "method",
             "name": "getSrc",
             "return": {
@@ -2635,7 +2695,7 @@
         },
         {
             "file": "src\\components\\display\\List.js",
-            "line": 14,
+            "line": 15,
             "itemtype": "property",
             "name": "uiName",
             "type": "{String}",
@@ -2646,7 +2706,7 @@
         },
         {
             "file": "src\\components\\display\\List.js",
-            "line": 20,
+            "line": 21,
             "itemtype": "property",
             "name": "tpl",
             "type": "{String} html",
@@ -2657,7 +2717,7 @@
         },
         {
             "file": "src\\components\\display\\List.js",
-            "line": 26,
+            "line": 27,
             "description": "type of list, ul or ol",
             "itemtype": "property",
             "name": "listType",
@@ -2669,7 +2729,7 @@
         },
         {
             "file": "src\\components\\display\\List.js",
-            "line": 33,
+            "line": 34,
             "description": "is a list group?",
             "itemtype": "property",
             "name": "listGroupClass",
@@ -2681,7 +2741,7 @@
         },
         {
             "file": "src\\components\\display\\List.js",
-            "line": 40,
+            "line": 41,
             "description": "defaults to true but only comes into effect with property \"listGroupClass\"",
             "itemtype": "property",
             "name": "listItemGroupClass",
@@ -2693,7 +2753,7 @@
         },
         {
             "file": "src\\components\\display\\List.js",
-            "line": 47,
+            "line": 48,
             "description": "items to parse into the list",
             "itemtype": "property",
             "name": "data",
@@ -2705,7 +2765,7 @@
         },
         {
             "file": "src\\components\\display\\List.js",
-            "line": 54,
+            "line": 55,
             "description": "unstyled - applies list-unstyled css class to list container (ul/ol)",
             "itemtype": "property",
             "name": "unstyled",
@@ -2717,7 +2777,7 @@
         },
         {
             "file": "src\\components\\display\\List.js",
-            "line": 61,
+            "line": 62,
             "description": "inject a template into the <li>{preItemTpl}<span></span>{postItemTpl}</li> item",
             "itemtype": "property",
             "name": "preItemTpl",
@@ -2729,7 +2789,7 @@
         },
         {
             "file": "src\\components\\display\\List.js",
-            "line": 68,
+            "line": 69,
             "description": "inject a template into the <li>{preItemTpl}<span></span>{postItemTpl}</li> item",
             "itemtype": "property",
             "name": "postItemTpl",
@@ -2741,7 +2801,20 @@
         },
         {
             "file": "src\\components\\display\\List.js",
-            "line": 75,
+            "line": 76,
+            "itemtype": "method",
+            "name": "virtualContainerBindings",
+            "return": {
+                "description": "",
+                "type": "Object"
+            },
+            "class": "components.display.List",
+            "module": "Firebrick.ui.components",
+            "namespace": "components.display"
+        },
+        {
+            "file": "src\\components\\display\\List.js",
+            "line": 83,
             "itemtype": "method",
             "name": "listContainerBindings",
             "return": {
@@ -2754,7 +2827,7 @@
         },
         {
             "file": "src\\components\\display\\List.js",
-            "line": 93,
+            "line": 101,
             "itemtype": "method",
             "name": "listItemBindings",
             "return": {
@@ -2767,7 +2840,7 @@
         },
         {
             "file": "src\\components\\display\\List.js",
-            "line": 107,
+            "line": 115,
             "itemtype": "method",
             "name": "bindings",
             "return": {
@@ -2780,7 +2853,7 @@
         },
         {
             "file": "src\\components\\display\\Progress.js",
-            "line": 16,
+            "line": 17,
             "description": "progress html5 element max attribute",
             "itemtype": "property",
             "name": "max",
@@ -2792,7 +2865,7 @@
         },
         {
             "file": "src\\components\\display\\Progress.js",
-            "line": 23,
+            "line": 24,
             "description": "progress html5 element value attribute",
             "itemtype": "property",
             "name": "value",
@@ -2804,7 +2877,7 @@
         },
         {
             "file": "src\\components\\display\\Progress.js",
-            "line": 30,
+            "line": 31,
             "description": "whether or not to show a label with the progress bar",
             "itemtype": "property",
             "name": "showLabel",
@@ -2816,7 +2889,7 @@
         },
         {
             "file": "src\\components\\display\\Progress.js",
-            "line": 37,
+            "line": 38,
             "description": "used to append to the data-value attribute value",
             "itemtype": "property",
             "name": "dataSymbol",
@@ -2828,7 +2901,7 @@
         },
         {
             "file": "src\\components\\display\\Progress.js",
-            "line": 44,
+            "line": 45,
             "itemtype": "property",
             "name": "label",
             "type": "{String}",
@@ -2839,7 +2912,7 @@
         },
         {
             "file": "src\\components\\display\\Progress.js",
-            "line": 50,
+            "line": 51,
             "itemtype": "method",
             "name": "bindings",
             "return": {
@@ -2852,7 +2925,7 @@
         },
         {
             "file": "src\\components\\display\\Progress.js",
-            "line": 64,
+            "line": 65,
             "itemtype": "method",
             "name": "progressLabelBindings",
             "class": "components.display.Progress",
@@ -2861,7 +2934,7 @@
         },
         {
             "file": "src\\components\\display\\Progress.js",
-            "line": 83,
+            "line": 84,
             "itemtype": "method",
             "name": "progressContainerBindings",
             "class": "components.display.Progress",
@@ -2870,7 +2943,7 @@
         },
         {
             "file": "src\\components\\display\\Text.js",
-            "line": 14,
+            "line": 15,
             "itemtype": "property",
             "name": "uiName",
             "type": "{String}",
@@ -2880,7 +2953,7 @@
         },
         {
             "file": "src\\components\\display\\Text.js",
-            "line": 19,
+            "line": 20,
             "itemtype": "property",
             "name": "tpl",
             "type": "{String}",
@@ -2890,7 +2963,7 @@
         },
         {
             "file": "src\\components\\display\\Text.js",
-            "line": 24,
+            "line": 25,
             "description": "whether text is raw html or not",
             "itemtype": "property",
             "name": "isHtml",
@@ -2902,7 +2975,7 @@
         },
         {
             "file": "src\\components\\display\\Text.js",
-            "line": 31,
+            "line": 32,
             "itemtype": "property",
             "name": "text",
             "type": "{String}",
@@ -2913,7 +2986,7 @@
         },
         {
             "file": "src\\components\\display\\Text.js",
-            "line": 37,
+            "line": 38,
             "itemtype": "property",
             "name": "leadCSS",
             "type": "{Boolean}",
@@ -2924,7 +2997,7 @@
         },
         {
             "file": "src\\components\\display\\Text.js",
-            "line": 43,
+            "line": 44,
             "itemtype": "property",
             "name": "blockQuote",
             "type": "{Boolean}",
@@ -2935,7 +3008,7 @@
         },
         {
             "file": "src\\components\\display\\Text.js",
-            "line": 49,
+            "line": 50,
             "itemtype": "property",
             "name": "blockQuoteReverseCSS",
             "type": "{Boolean}",
@@ -2946,7 +3019,7 @@
         },
         {
             "file": "src\\components\\display\\Text.js",
-            "line": 55,
+            "line": 56,
             "description": "false not to show, string for footer text",
             "itemtype": "property",
             "name": "blockQuoteFooter",
@@ -2958,7 +3031,7 @@
         },
         {
             "file": "src\\components\\display\\Text.js",
-            "line": 62,
+            "line": 63,
             "itemtype": "property",
             "name": "isBlockQuoteFooterHTML",
             "type": "{Boolean}",
@@ -2969,7 +3042,7 @@
         },
         {
             "file": "src\\components\\display\\Text.js",
-            "line": 68,
+            "line": 69,
             "description": "false || string :: 'left', 'center', 'right', 'justify', 'no-wrap' (defaults to: left)",
             "itemtype": "property",
             "name": "textAlignment",
@@ -2981,7 +3054,7 @@
         },
         {
             "file": "src\\components\\display\\Text.js",
-            "line": 75,
+            "line": 76,
             "description": "Bindings",
             "itemtype": "method",
             "name": "bindings",
@@ -2995,7 +3068,7 @@
         },
         {
             "file": "src\\components\\display\\Text.js",
-            "line": 100,
+            "line": 101,
             "itemtype": "method",
             "name": "blockQuoteBindings",
             "return": {
@@ -3008,7 +3081,7 @@
         },
         {
             "file": "src\\components\\display\\Text.js",
-            "line": 111,
+            "line": 112,
             "itemtype": "method",
             "name": "blockQuoteFooterBindings",
             "return": {
@@ -3021,7 +3094,7 @@
         },
         {
             "file": "src\\components\\fields\\plugins\\Radio.js",
-            "line": 82,
+            "line": 84,
             "itemtype": "property",
             "name": "tpl",
             "default": "<div></div>",
@@ -3031,7 +3104,7 @@
         },
         {
             "file": "src\\components\\fields\\plugins\\Radio.js",
-            "line": 88,
+            "line": 90,
             "itemtype": "property",
             "name": "inputclass, attached to the <label> wrapper instead of the input element",
             "type": "string",
@@ -3042,7 +3115,7 @@
         },
         {
             "file": "src\\components\\fields\\Checkbox.js",
-            "line": 14,
+            "line": 15,
             "itemtype": "property",
             "name": "uiName",
             "type": "{String}",
@@ -3052,7 +3125,7 @@
         },
         {
             "file": "src\\components\\fields\\Checkbox.js",
-            "line": 19,
+            "line": 20,
             "itemtype": "property",
             "name": "type",
             "type": "{String}",
@@ -3063,7 +3136,7 @@
         },
         {
             "file": "src\\components\\fields\\Checkbox.js",
-            "line": 25,
+            "line": 26,
             "itemtype": "property",
             "name": "dataType",
             "type": "{String}",
@@ -3074,7 +3147,7 @@
         },
         {
             "file": "src\\components\\fields\\Checkbox.js",
-            "line": 31,
+            "line": 32,
             "itemtype": "method",
             "name": "bindings",
             "return": {
@@ -3087,7 +3160,7 @@
         },
         {
             "file": "src\\components\\fields\\Email.js",
-            "line": 14,
+            "line": 15,
             "itemtype": "property",
             "name": "uiName",
             "type": "{String}",
@@ -3097,7 +3170,7 @@
         },
         {
             "file": "src\\components\\fields\\Email.js",
-            "line": 19,
+            "line": 20,
             "itemtype": "property",
             "name": "type",
             "type": "{String}",
@@ -3108,7 +3181,7 @@
         },
         {
             "file": "src\\components\\fields\\Email.js",
-            "line": 25,
+            "line": 26,
             "itemtype": "property",
             "name": "dataType",
             "type": "{String}",
@@ -3119,7 +3192,7 @@
         },
         {
             "file": "src\\components\\fields\\Input.js",
-            "line": 14,
+            "line": 15,
             "itemtype": "property",
             "name": "uiName",
             "type": "{String}",
@@ -3129,7 +3202,7 @@
         },
         {
             "file": "src\\components\\fields\\Input.js",
-            "line": 19,
+            "line": 20,
             "itemtype": "property",
             "name": "subTpl",
             "type": "{String} html",
@@ -3139,7 +3212,7 @@
         },
         {
             "file": "src\\components\\fields\\Input.js",
-            "line": 24,
+            "line": 25,
             "itemtype": "property",
             "name": "type",
             "type": "{String}",
@@ -3150,7 +3223,7 @@
         },
         {
             "file": "src\\components\\fields\\Input.js",
-            "line": 30,
+            "line": 31,
             "itemtype": "property",
             "name": "label",
             "type": "{String}",
@@ -3161,7 +3234,7 @@
         },
         {
             "file": "src\\components\\fields\\Input.js",
-            "line": 36,
+            "line": 37,
             "itemtype": "property",
             "name": "value",
             "type": "{String}",
@@ -3172,7 +3245,7 @@
         },
         {
             "file": "src\\components\\fields\\Input.js",
-            "line": 42,
+            "line": 43,
             "itemtype": "property",
             "name": "tpl",
             "type": "{String} html",
@@ -3182,7 +3255,7 @@
         },
         {
             "file": "src\\components\\fields\\Input.js",
-            "line": 47,
+            "line": 48,
             "itemtype": "property",
             "name": "formGroupClass",
             "type": "{String}",
@@ -3193,7 +3266,7 @@
         },
         {
             "file": "src\\components\\fields\\Input.js",
-            "line": 53,
+            "line": 54,
             "description": "show form-control class",
             "itemtype": "property",
             "name": "formControlClass",
@@ -3205,7 +3278,7 @@
         },
         {
             "file": "src\\components\\fields\\Input.js",
-            "line": 60,
+            "line": 61,
             "itemtype": "property",
             "name": "colLabelSize",
             "type": "{Int}",
@@ -3216,7 +3289,7 @@
         },
         {
             "file": "src\\components\\fields\\Input.js",
-            "line": 66,
+            "line": 67,
             "itemtype": "property",
             "name": "colInputSize",
             "type": "{Int}",
@@ -3227,7 +3300,7 @@
         },
         {
             "file": "src\\components\\fields\\Input.js",
-            "line": 72,
+            "line": 73,
             "itemtype": "property",
             "name": "deviceSize",
             "type": "{String}",
@@ -3238,7 +3311,7 @@
         },
         {
             "file": "src\\components\\fields\\Input.js",
-            "line": 78,
+            "line": 79,
             "itemtype": "property",
             "name": "hideLabel",
             "type": "{Boolean}",
@@ -3249,7 +3322,7 @@
         },
         {
             "file": "src\\components\\fields\\Input.js",
-            "line": 84,
+            "line": 85,
             "itemtype": "property",
             "name": "readOnly",
             "type": "{Boolean}",
@@ -3260,7 +3333,7 @@
         },
         {
             "file": "src\\components\\fields\\Input.js",
-            "line": 90,
+            "line": 91,
             "itemtype": "property",
             "name": "disabled",
             "type": "{Boolean}",
@@ -3271,7 +3344,7 @@
         },
         {
             "file": "src\\components\\fields\\Input.js",
-            "line": 96,
+            "line": 97,
             "itemtype": "property",
             "name": "inputSize",
             "type": "{Boolean|String} string (sm || lg)",
@@ -3282,7 +3355,7 @@
         },
         {
             "file": "src\\components\\fields\\Input.js",
-            "line": 102,
+            "line": 103,
             "itemtype": "property",
             "name": "controlLabel",
             "type": "{Boolean}",
@@ -3293,7 +3366,7 @@
         },
         {
             "file": "src\\components\\fields\\Input.js",
-            "line": 108,
+            "line": 109,
             "description": "help text",
             "itemtype": "property",
             "name": "helpText",
@@ -3305,7 +3378,7 @@
         },
         {
             "file": "src\\components\\fields\\Input.js",
-            "line": 115,
+            "line": 116,
             "description": "help text",
             "itemtype": "property",
             "name": "helpBlockClass",
@@ -3317,7 +3390,7 @@
         },
         {
             "file": "src\\components\\fields\\Input.js",
-            "line": 122,
+            "line": 123,
             "itemtype": "property",
             "name": "placeholder",
             "type": "{String}",
@@ -3328,7 +3401,7 @@
         },
         {
             "file": "src\\components\\fields\\Input.js",
-            "line": 128,
+            "line": 129,
             "itemtype": "property",
             "name": "showStateIcon",
             "type": "{Boolean}",
@@ -3339,7 +3412,7 @@
         },
         {
             "file": "src\\components\\fields\\Input.js",
-            "line": 134,
+            "line": 135,
             "itemtype": "property",
             "name": "formControlFeedbackClass",
             "type": "{String}",
@@ -3350,7 +3423,7 @@
         },
         {
             "file": "src\\components\\fields\\Input.js",
-            "line": 140,
+            "line": 141,
             "description": "input addon",
             "itemtype": "property",
             "name": "inputAddon",
@@ -3362,7 +3435,7 @@
         },
         {
             "file": "src\\components\\fields\\Input.js",
-            "line": 147,
+            "line": 148,
             "itemtype": "property",
             "name": "inputAddonClass",
             "type": "{String}",
@@ -3373,7 +3446,7 @@
         },
         {
             "file": "src\\components\\fields\\Input.js",
-            "line": 153,
+            "line": 154,
             "itemtype": "property",
             "name": "horizontal",
             "type": "{Boolean}",
@@ -3384,7 +3457,7 @@
         },
         {
             "file": "src\\components\\fields\\Input.js",
-            "line": 159,
+            "line": 160,
             "description": "Feedback css bindings",
             "itemtype": "property",
             "name": "feedback_success",
@@ -3396,7 +3469,7 @@
         },
         {
             "file": "src\\components\\fields\\Input.js",
-            "line": 166,
+            "line": 167,
             "description": "Feedback css bindings",
             "itemtype": "property",
             "name": "feedback_warning",
@@ -3408,7 +3481,7 @@
         },
         {
             "file": "src\\components\\fields\\Input.js",
-            "line": 173,
+            "line": 174,
             "description": "Feedback css bindings",
             "itemtype": "property",
             "name": "feedback_error",
@@ -3420,7 +3493,7 @@
         },
         {
             "file": "src\\components\\fields\\Input.js",
-            "line": 180,
+            "line": 181,
             "itemtype": "property",
             "name": "multiplesInline",
             "type": "{Boolean|String}",
@@ -3431,7 +3504,7 @@
         },
         {
             "file": "src\\components\\fields\\Input.js",
-            "line": 186,
+            "line": 187,
             "itemtype": "property",
             "name": "inplaceEdit",
             "type": "{Boolean}",
@@ -3442,7 +3515,7 @@
         },
         {
             "file": "src\\components\\fields\\Input.js",
-            "line": 192,
+            "line": 193,
             "itemtype": "property",
             "name": "showInplaceTitle",
             "type": "{Boolean}",
@@ -3453,7 +3526,7 @@
         },
         {
             "file": "src\\components\\fields\\Input.js",
-            "line": 198,
+            "line": 199,
             "description": "if none specified then the name is set to that of this.type",
             "itemtype": "property",
             "name": "name",
@@ -3465,7 +3538,7 @@
         },
         {
             "file": "src\\components\\fields\\Input.js",
-            "line": 205,
+            "line": 206,
             "itemtype": "method",
             "name": "containerBindings",
             "return": {
@@ -3478,7 +3551,7 @@
         },
         {
             "file": "src\\components\\fields\\Input.js",
-            "line": 225,
+            "line": 226,
             "itemtype": "method",
             "name": "helpBlockBindings",
             "return": {
@@ -3491,7 +3564,7 @@
         },
         {
             "file": "src\\components\\fields\\Input.js",
-            "line": 234,
+            "line": 235,
             "itemtype": "method",
             "name": "feedbackBindings",
             "return": {
@@ -3504,7 +3577,7 @@
         },
         {
             "file": "src\\components\\fields\\Input.js",
-            "line": 261,
+            "line": 262,
             "itemtype": "method",
             "name": "bindings",
             "return": {
@@ -3517,7 +3590,7 @@
         },
         {
             "file": "src\\components\\fields\\Input.js",
-            "line": 293,
+            "line": 294,
             "itemtype": "method",
             "name": "inputAddonBindings",
             "return": {
@@ -3530,7 +3603,7 @@
         },
         {
             "file": "src\\components\\fields\\Input.js",
-            "line": 308,
+            "line": 309,
             "itemtype": "method",
             "name": "labelBindings",
             "return": {
@@ -3543,7 +3616,7 @@
         },
         {
             "file": "src\\components\\fields\\Input.js",
-            "line": 325,
+            "line": 326,
             "itemtype": "method",
             "name": "inputContainerBindings",
             "return": {
@@ -3556,7 +3629,7 @@
         },
         {
             "file": "src\\components\\fields\\Radio.js",
-            "line": 14,
+            "line": 15,
             "itemtype": "property",
             "name": "uiName",
             "type": "{String}",
@@ -3566,7 +3639,7 @@
         },
         {
             "file": "src\\components\\fields\\Radio.js",
-            "line": 19,
+            "line": 20,
             "itemtype": "property",
             "name": "type",
             "type": "{String}",
@@ -3577,7 +3650,7 @@
         },
         {
             "file": "src\\components\\fields\\Radio.js",
-            "line": 25,
+            "line": 26,
             "itemtype": "property",
             "name": "dataType",
             "type": "{String}",
@@ -3588,7 +3661,7 @@
         },
         {
             "file": "src\\components\\fields\\Radio.js",
-            "line": 31,
+            "line": 32,
             "itemtype": "property",
             "name": "subTpl",
             "type": "{String} html",
@@ -3598,7 +3671,7 @@
         },
         {
             "file": "src\\components\\fields\\Radio.js",
-            "line": 36,
+            "line": 37,
             "itemtype": "property",
             "name": "defaultChecked",
             "type": "{String}",
@@ -3609,7 +3682,7 @@
         },
         {
             "file": "src\\components\\fields\\Radio.js",
-            "line": 42,
+            "line": 43,
             "description": "radio options",
             "itemtype": "property",
             "name": "options",
@@ -3621,7 +3694,7 @@
         },
         {
             "file": "src\\components\\fields\\Radio.js",
-            "line": 49,
+            "line": 50,
             "itemtype": "method",
             "name": "optionLabelBindings",
             "return": {
@@ -3634,7 +3707,7 @@
         },
         {
             "file": "src\\components\\fields\\Radio.js",
-            "line": 62,
+            "line": 63,
             "itemtype": "method",
             "name": "optionLabelContainerBindings",
             "return": {
@@ -3647,7 +3720,7 @@
         },
         {
             "file": "src\\components\\fields\\Radio.js",
-            "line": 74,
+            "line": 75,
             "itemtype": "method",
             "name": "inputContainerBindings",
             "return": {
@@ -3660,7 +3733,7 @@
         },
         {
             "file": "src\\components\\fields\\Radio.js",
-            "line": 86,
+            "line": 87,
             "itemtype": "method",
             "name": "bindings",
             "return": {
@@ -3673,7 +3746,7 @@
         },
         {
             "file": "src\\components\\fields\\SelectBox.js",
-            "line": 14,
+            "line": 15,
             "itemtype": "property",
             "name": "uiName",
             "type": "{String}",
@@ -3683,7 +3756,7 @@
         },
         {
             "file": "src\\components\\fields\\SelectBox.js",
-            "line": 19,
+            "line": 20,
             "itemtype": "property",
             "name": "multiSelect",
             "type": "{Boolean}",
@@ -3694,7 +3767,7 @@
         },
         {
             "file": "src\\components\\fields\\SelectBox.js",
-            "line": 25,
+            "line": 26,
             "itemtype": "property",
             "name": "subTpl",
             "type": "{String} html",
@@ -3704,7 +3777,7 @@
         },
         {
             "file": "src\\components\\fields\\SelectBox.js",
-            "line": 30,
+            "line": 31,
             "itemtype": "property",
             "name": "data",
             "type": "{String|Function}",
@@ -3715,7 +3788,7 @@
         },
         {
             "file": "src\\components\\fields\\SelectBox.js",
-            "line": 36,
+            "line": 37,
             "itemtype": "property",
             "name": "dataType",
             "type": "{String}",
@@ -3726,7 +3799,7 @@
         },
         {
             "file": "src\\components\\fields\\SelectBox.js",
-            "line": 42,
+            "line": 43,
             "itemtype": "property",
             "name": "selectedOptions",
             "type": "{String}",
@@ -3737,7 +3810,7 @@
         },
         {
             "file": "src\\components\\fields\\SelectBox.js",
-            "line": 48,
+            "line": 49,
             "itemtype": "property",
             "name": "optionsValue",
             "type": "{String}",
@@ -3748,7 +3821,7 @@
         },
         {
             "file": "src\\components\\fields\\SelectBox.js",
-            "line": 54,
+            "line": 55,
             "itemtype": "property",
             "name": "optionsText",
             "type": "{String}",
@@ -3759,7 +3832,7 @@
         },
         {
             "file": "src\\components\\fields\\SelectBox.js",
-            "line": 60,
+            "line": 61,
             "itemtype": "method",
             "name": "bindings",
             "return": {
@@ -3772,7 +3845,7 @@
         },
         {
             "file": "src\\components\\fields\\TextArea.js",
-            "line": 14,
+            "line": 15,
             "itemtype": "property",
             "name": "uiName",
             "type": "{String}",
@@ -3782,7 +3855,7 @@
         },
         {
             "file": "src\\components\\fields\\TextArea.js",
-            "line": 19,
+            "line": 20,
             "description": "number of rows high",
             "itemtype": "property",
             "name": "rows",
@@ -3794,7 +3867,7 @@
         },
         {
             "file": "src\\components\\fields\\TextArea.js",
-            "line": 26,
+            "line": 27,
             "itemtype": "property",
             "name": "subTpl",
             "type": "{String}",
@@ -3804,7 +3877,7 @@
         },
         {
             "file": "src\\components\\fields\\TextArea.js",
-            "line": 31,
+            "line": 32,
             "itemtype": "property",
             "name": "dataType",
             "type": "{String}",
@@ -3815,7 +3888,7 @@
         },
         {
             "file": "src\\components\\nav\\List.js",
-            "line": 16,
+            "line": 17,
             "description": "overriding property from list",
             "itemtype": "property",
             "name": "preItemTpl",
@@ -3827,7 +3900,7 @@
         },
         {
             "file": "src\\components\\nav\\List.js",
-            "line": 25,
+            "line": 26,
             "description": "overriding property from list",
             "itemtype": "property",
             "name": "postItemTpl",
@@ -3839,7 +3912,7 @@
         },
         {
             "file": "src\\components\\nav\\List.js",
-            "line": 32,
+            "line": 33,
             "itemtype": "method",
             "name": "navLinkBindings",
             "return": {
@@ -3852,7 +3925,7 @@
         },
         {
             "file": "src\\components\\nav\\Navbar.js",
-            "line": 16,
+            "line": 17,
             "description": "false to deactivate",
             "itemtype": "property",
             "name": "navTypeClass",
@@ -3864,7 +3937,7 @@
         },
         {
             "file": "src\\components\\nav\\Navbar.js",
-            "line": 23,
+            "line": 24,
             "description": "whether \"navbar-default\" is used",
             "itemtype": "property",
             "name": "navbarDefaultClass",
@@ -3876,7 +3949,7 @@
         },
         {
             "file": "src\\components\\nav\\Navbar.js",
-            "line": 30,
+            "line": 31,
             "description": "whether \"navbar\" css class is used",
             "itemtype": "property",
             "name": "navbarClass",
@@ -3888,7 +3961,7 @@
         },
         {
             "file": "src\\components\\nav\\Navbar.js",
-            "line": 37,
+            "line": 38,
             "description": "css class: navbar-header",
             "itemtype": "property",
             "name": "navbarHeaderClass",
@@ -3900,7 +3973,7 @@
         },
         {
             "file": "src\\components\\nav\\Navbar.js",
-            "line": 44,
+            "line": 45,
             "description": "if false then the navigation won't collapse to the small menu button",
             "itemtype": "property",
             "name": "toggleButton",
@@ -3912,7 +3985,7 @@
         },
         {
             "file": "src\\components\\nav\\Navbar.js",
-            "line": 51,
+            "line": 52,
             "itemtype": "property",
             "name": "toggleText",
             "type": "{String}",
@@ -3923,7 +3996,7 @@
         },
         {
             "file": "src\\components\\nav\\Navbar.js",
-            "line": 57,
+            "line": 58,
             "itemtype": "property",
             "name": "brandClass",
             "type": "{Boolean|String}",
@@ -3934,7 +4007,7 @@
         },
         {
             "file": "src\\components\\nav\\Navbar.js",
-            "line": 63,
+            "line": 64,
             "description": "false to deactivate",
             "itemtype": "property",
             "name": "brandLink",
@@ -3946,7 +4019,7 @@
         },
         {
             "file": "src\\components\\nav\\Navbar.js",
-            "line": 70,
+            "line": 71,
             "description": "brand text - false to show none or if you wish to use brandTpl instead",
             "itemtype": "property",
             "name": "brandText",
@@ -3958,7 +4031,7 @@
         },
         {
             "file": "src\\components\\nav\\Navbar.js",
-            "line": 77,
+            "line": 78,
             "description": "false to deactivate",
             "itemtype": "property",
             "name": "brandTpl",
@@ -3970,7 +4043,7 @@
         },
         {
             "file": "src\\components\\nav\\Navbar.js",
-            "line": 84,
+            "line": 85,
             "description": "data to populate navigation with",
             "itemtype": "property",
             "name": "data",
@@ -3982,7 +4055,7 @@
         },
         {
             "file": "src\\components\\nav\\Navbar.js",
-            "line": 91,
+            "line": 92,
             "description": "overriding parent",
             "itemtype": "property",
             "name": "listGroupClass",
@@ -3993,7 +4066,7 @@
         },
         {
             "file": "src\\components\\nav\\Navbar.js",
-            "line": 97,
+            "line": 98,
             "description": "sets nav && nav-bar css classes to the list container",
             "itemtype": "property",
             "name": "navClass",
@@ -4005,7 +4078,7 @@
         },
         {
             "file": "src\\components\\nav\\Navbar.js",
-            "line": 104,
+            "line": 105,
             "itemtype": "method",
             "name": "navBindings",
             "return": {
@@ -4018,7 +4091,7 @@
         },
         {
             "file": "src\\components\\nav\\Navbar.js",
-            "line": 124,
+            "line": 125,
             "itemtype": "method",
             "name": "brandBindings",
             "return": {
@@ -4031,7 +4104,7 @@
         },
         {
             "file": "src\\components\\nav\\Navbar.js",
-            "line": 144,
+            "line": 145,
             "description": "overriding parent",
             "itemtype": "method",
             "name": "listContainerBindings",
@@ -4045,7 +4118,7 @@
         },
         {
             "file": "src\\components\\nav\\Navbar.js",
-            "line": 156,
+            "line": 157,
             "description": "overriding parent",
             "itemtype": "method",
             "name": "bindings",
@@ -4059,7 +4132,7 @@
         },
         {
             "file": "src\\components\\nav\\Navbar.js",
-            "line": 167,
+            "line": 168,
             "description": "overriding parent",
             "itemtype": "method",
             "name": "listItemBindings",
@@ -4073,7 +4146,7 @@
         },
         {
             "file": "src\\components\\nav\\Navbar.js",
-            "line": 181,
+            "line": 180,
             "itemtype": "method",
             "name": "navbarHeaderBindings",
             "return": {
@@ -4086,7 +4159,7 @@
         },
         {
             "file": "src\\components\\nav\\Navbar.js",
-            "line": 193,
+            "line": 192,
             "itemtype": "method",
             "name": "navbarContainerBindings",
             "return": {
@@ -4099,7 +4172,7 @@
         },
         {
             "file": "src\\components\\nav\\Navbar.js",
-            "line": 211,
+            "line": 210,
             "itemtype": "method",
             "name": "toggleTextBindings",
             "return": {
@@ -4112,7 +4185,7 @@
         },
         {
             "file": "src\\components\\nav\\Navbar.js",
-            "line": 220,
+            "line": 219,
             "itemtype": "method",
             "name": "toggleButtonBindings",
             "return": {
@@ -4125,7 +4198,7 @@
         },
         {
             "file": "src\\components\\nav\\Navbar.js",
-            "line": 243,
+            "line": 242,
             "itemtype": "method",
             "name": "navbarHeaderContainerBindings",
             "return": {
@@ -4138,7 +4211,7 @@
         },
         {
             "file": "src\\components\\nav\\Pagination.js",
-            "line": 15,
+            "line": 16,
             "description": "\"lg\", \"sm\"",
             "itemtype": "property",
             "name": "paginationSize",
@@ -4150,7 +4223,7 @@
         },
         {
             "file": "src\\components\\nav\\Pagination.js",
-            "line": 22,
+            "line": 23,
             "description": "override from parent",
             "itemtype": "method",
             "name": "listContainerBindings",
@@ -4164,7 +4237,7 @@
         },
         {
             "file": "src\\components\\table\\Table.js",
-            "line": 14,
+            "line": 15,
             "itemtype": "property",
             "name": "uiName",
             "type": "{String}",
@@ -4174,7 +4247,7 @@
         },
         {
             "file": "src\\components\\table\\Table.js",
-            "line": 19,
+            "line": 20,
             "itemtype": "property",
             "name": "tpl",
             "type": "{String} html",
@@ -4184,7 +4257,7 @@
         },
         {
             "file": "src\\components\\table\\Table.js",
-            "line": 24,
+            "line": 25,
             "description": "sets the bootstrap css class \"responsive\" to the table",
             "itemtype": "property",
             "name": "responsiveClass",
@@ -4196,7 +4269,7 @@
         },
         {
             "file": "src\\components\\table\\Table.js",
-            "line": 31,
+            "line": 32,
             "description": "activates the responsive-table-js package on the table",
             "itemtype": "property",
             "name": "responsive",
@@ -4208,7 +4281,7 @@
         },
         {
             "file": "src\\components\\table\\Table.js",
-            "line": 38,
+            "line": 39,
             "description": "{\n\tcols:[{}]\n\trows:[{}]\n}",
             "itemtype": "property",
             "name": "data",
@@ -4220,7 +4293,7 @@
         },
         {
             "file": "src\\components\\table\\Table.js",
-            "line": 48,
+            "line": 49,
             "itemtype": "property",
             "name": "tableStriped",
             "type": "{Boolean|String}",
@@ -4231,7 +4304,7 @@
         },
         {
             "file": "src\\components\\table\\Table.js",
-            "line": 54,
+            "line": 55,
             "itemtype": "property",
             "name": "tableHover",
             "type": "{Boolean|String}",
@@ -4242,7 +4315,7 @@
         },
         {
             "file": "src\\components\\table\\Table.js",
-            "line": 60,
+            "line": 61,
             "itemtype": "property",
             "name": "tableCondensed",
             "type": "{Boolean|String}",
@@ -4253,7 +4326,7 @@
         },
         {
             "file": "src\\components\\table\\Table.js",
-            "line": 66,
+            "line": 67,
             "itemtype": "property",
             "name": "tableBordered",
             "type": "{Boolean|String}",
@@ -4264,7 +4337,7 @@
         },
         {
             "file": "src\\components\\table\\Table.js",
-            "line": 72,
+            "line": 73,
             "itemtype": "property",
             "name": "showHeadings",
             "type": "{Boolean}",
@@ -4275,7 +4348,7 @@
         },
         {
             "file": "src\\components\\table\\Table.js",
-            "line": 78,
+            "line": 79,
             "itemtype": "property",
             "name": "showRows",
             "type": "{Boolean}",
@@ -4286,7 +4359,7 @@
         },
         {
             "file": "src\\components\\table\\Table.js",
-            "line": 84,
+            "line": 85,
             "description": "activate the datatables plugin",
             "itemtype": "property",
             "name": "datatable",
@@ -4298,7 +4371,7 @@
         },
         {
             "file": "src\\components\\table\\Table.js",
-            "line": 91,
+            "line": 92,
             "description": "activate the treetable plugin",
             "itemtype": "property",
             "name": "treetable",
@@ -4310,7 +4383,7 @@
         },
         {
             "file": "src\\components\\table\\Table.js",
-            "line": 98,
+            "line": 99,
             "description": "return js object to pass to the DataTable function for configuring the table on componentReady",
             "itemtype": "property",
             "name": "dataTableConfig",
@@ -4326,7 +4399,7 @@
         },
         {
             "file": "src\\components\\table\\Table.js",
-            "line": 108,
+            "line": 118,
             "description": "works with parameter treetable",
             "itemtype": "property",
             "name": "expandable",
@@ -4338,7 +4411,7 @@
         },
         {
             "file": "src\\components\\table\\Table.js",
-            "line": 115,
+            "line": 125,
             "description": "works with parameter treetable",
             "itemtype": "property",
             "name": "showCaption",
@@ -4350,7 +4423,7 @@
         },
         {
             "file": "src\\components\\table\\Table.js",
-            "line": 122,
+            "line": 132,
             "description": "works with parameter treetable",
             "itemtype": "property",
             "name": "expandText",
@@ -4362,7 +4435,7 @@
         },
         {
             "file": "src\\components\\table\\Table.js",
-            "line": 129,
+            "line": 139,
             "description": "works with parameter treetable",
             "itemtype": "property",
             "name": "collapseText",
@@ -4374,7 +4447,19 @@
         },
         {
             "file": "src\\components\\table\\Table.js",
-            "line": 136,
+            "line": 146,
+            "description": "whether to show the collapse / expand buttons for the treetable",
+            "itemtype": "property",
+            "name": "showOptions",
+            "type": "{Boolean}",
+            "default": "true",
+            "class": "components.table.Table",
+            "module": "Firebrick.ui.components",
+            "namespace": "components.table"
+        },
+        {
+            "file": "src\\components\\table\\Table.js",
+            "line": 153,
             "description": "return js object to pass to the Treetable function for configuring the table on componentReady",
             "itemtype": "property",
             "name": "treeTableConfig",
@@ -4390,7 +4475,7 @@
         },
         {
             "file": "src\\components\\table\\Table.js",
-            "line": 149,
+            "line": 166,
             "itemtype": "method",
             "name": "init",
             "class": "components.table.Table",
@@ -4399,7 +4484,7 @@
         },
         {
             "file": "src\\components\\table\\Table.js",
-            "line": 169,
+            "line": 190,
             "itemtype": "method",
             "name": "containerBindings",
             "return": {
@@ -4412,7 +4497,7 @@
         },
         {
             "file": "src\\components\\table\\Table.js",
-            "line": 181,
+            "line": 202,
             "itemtype": "method",
             "name": "_getData",
             "access": "private",
@@ -4427,7 +4512,7 @@
         },
         {
             "file": "src\\components\\table\\Table.js",
-            "line": 193,
+            "line": 214,
             "itemtype": "method",
             "name": "bindings",
             "return": {
@@ -4440,7 +4525,7 @@
         },
         {
             "file": "src\\components\\table\\Table.js",
-            "line": 211,
+            "line": 232,
             "itemtype": "method",
             "name": "theadBindings",
             "return": {
@@ -4453,20 +4538,7 @@
         },
         {
             "file": "src\\components\\table\\Table.js",
-            "line": 220,
-            "itemtype": "method",
-            "name": "tbodyBindings",
-            "return": {
-                "description": "",
-                "type": "Object"
-            },
-            "class": "components.table.Table",
-            "module": "Firebrick.ui.components",
-            "namespace": "components.table"
-        },
-        {
-            "file": "src\\components\\table\\Table.js",
-            "line": 229,
+            "line": 241,
             "itemtype": "method",
             "name": "theadTRBindings",
             "return": {
@@ -4479,7 +4551,7 @@
         },
         {
             "file": "src\\components\\table\\Table.js",
-            "line": 238,
+            "line": 250,
             "itemtype": "method",
             "name": "theadTRTDBindings",
             "return": {
@@ -4492,7 +4564,7 @@
         },
         {
             "file": "src\\components\\table\\Table.js",
-            "line": 247,
+            "line": 259,
             "itemtype": "method",
             "name": "tbodyBindings",
             "return": {
@@ -4505,7 +4577,7 @@
         },
         {
             "file": "src\\components\\table\\Table.js",
-            "line": 256,
+            "line": 268,
             "itemtype": "method",
             "name": "tbodyTRBindings",
             "return": {
@@ -4518,7 +4590,7 @@
         },
         {
             "file": "src\\components\\table\\Table.js",
-            "line": 269,
+            "line": 281,
             "itemtype": "method",
             "name": "tbodyTRTDBindings",
             "return": {
@@ -4531,7 +4603,7 @@
         },
         {
             "file": "src\\components\\table\\Table.js",
-            "line": 278,
+            "line": 290,
             "itemtype": "method",
             "name": "captionBindings",
             "return": {
@@ -4544,7 +4616,27 @@
         },
         {
             "file": "src\\components\\table\\Table.js",
-            "line": 288,
+            "line": 300,
+            "itemtype": "method",
+            "name": "generateOnclick",
+            "params": [
+                {
+                    "name": "type",
+                    "description": "expandAll, collapseAll",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "Function"
+            },
+            "class": "components.table.Table",
+            "module": "Firebrick.ui.components",
+            "namespace": "components.table"
+        },
+        {
+            "file": "src\\components\\table\\Table.js",
+            "line": 312,
             "itemtype": "method",
             "name": "expandBindings",
             "return": {
@@ -4557,7 +4649,7 @@
         },
         {
             "file": "src\\components\\table\\Table.js",
-            "line": 302,
+            "line": 326,
             "itemtype": "method",
             "name": "collapseBindings",
             "return": {
@@ -4570,7 +4662,7 @@
         },
         {
             "file": "src\\components\\table\\TreeTable.js",
-            "line": 14,
+            "line": 15,
             "itemtype": "property",
             "name": "uiName",
             "type": "{String}",
@@ -4580,7 +4672,7 @@
         },
         {
             "file": "src\\components\\table\\TreeTable.js",
-            "line": 19,
+            "line": 20,
             "itemtype": "property",
             "name": "data",
             "type": "{Object|String}",
@@ -4591,7 +4683,7 @@
         },
         {
             "file": "src\\components\\table\\TreeTable.js",
-            "line": 25,
+            "line": 26,
             "itemtype": "property",
             "name": "treetable",
             "type": "{Boolean}",
@@ -4602,7 +4694,7 @@
         },
         {
             "file": "src\\firebrick.ui.js",
-            "line": 36,
+            "line": 38,
             "description": "library version number",
             "itemtype": "property",
             "name": "version",
@@ -4614,7 +4706,7 @@
         },
         {
             "file": "src\\firebrick.ui.js",
-            "line": 44,
+            "line": 46,
             "description": "used to cache pointers to classes when searching by \"uiName\"",
             "access": "private",
             "tagname": "",
@@ -4626,7 +4718,7 @@
         },
         {
             "file": "src\\firebrick.ui.js",
-            "line": 53,
+            "line": 55,
             "description": "populate a target with fields and data",
             "itemtype": "method",
             "name": "build",
@@ -4663,7 +4755,18 @@
         },
         {
             "file": "src\\firebrick.ui.js",
-            "line": 90,
+            "line": 92,
+            "description": "components uiNames are populated into this map for variable access\nfb.ui.cmp.input",
+            "itemtype": "property",
+            "name": "cmp",
+            "type": "{Object}",
+            "default": "{}",
+            "class": "ui",
+            "module": "Firebrick.ui"
+        },
+        {
+            "file": "src\\firebrick.ui.js",
+            "line": 101,
             "description": "recursive function\ncreate components and html from an array of items",
             "access": "private",
             "tagname": "",
@@ -4678,7 +4781,7 @@
         },
         {
             "file": "src\\firebrick.ui.js",
-            "line": 139,
+            "line": 156,
             "description": "get a component class by its shortname... uiName",
             "itemtype": "method",
             "name": "getByShortName",
@@ -4698,7 +4801,7 @@
         },
         {
             "file": "src\\firebrick.ui.js",
-            "line": 165,
+            "line": 186,
             "description": "alias for Firebrick.get",
             "itemtype": "method",
             "name": "get",
@@ -4718,7 +4821,7 @@
         },
         {
             "file": "src\\firebrick.ui.js",
-            "line": 182,
+            "line": 203,
             "description": "convert a JS Object into a simple \"json\" type string, this is mainly used for the data-bind attribute in Knockout",
             "itemtype": "method",
             "name": "stringify",
@@ -4735,20 +4838,39 @@
             },
             "class": "utils",
             "module": "Firebrick.ui"
+        },
+        {
+            "file": "src\\firebrick.ui.js",
+            "line": 248,
+            "itemtype": "property",
+            "name": "listeners",
+            "type": "{Object}",
+            "class": "view.Base",
+            "module": "Firebrick.ui"
+        },
+        {
+            "file": "src\\firebrick.ui.js",
+            "line": 262,
+            "itemtype": "property",
+            "name": "items",
+            "type": "{Array|Function}",
+            "default": "null",
+            "class": "view.Base",
+            "module": "Firebrick.ui"
+        },
+        {
+            "file": "src\\firebrick.ui.js",
+            "line": 268,
+            "itemtype": "property",
+            "name": "tpl",
+            "type": "{Function}",
+            "return": {
+                "description": "",
+                "type": "String"
+            },
+            "class": "view.Base",
+            "module": "Firebrick.ui"
         }
     ],
-    "warnings": [
-        {
-            "message": "unknown tag: usage",
-            "line": " src\\components\\display\\Image.js:34"
-        },
-        {
-            "message": "unknown tag: usage",
-            "line": " src\\components\\display\\Image.js:42"
-        },
-        {
-            "message": "Missing item type",
-            "line": " src\\components\\common\\Base.js:77"
-        }
-    ]
+    "warnings": []
 }

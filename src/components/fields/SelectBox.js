@@ -9,6 +9,7 @@
  * @class SelectBox
  */
 define(["text!./SelectBox.html", "jquery", "./Input"], function(subTpl, $){
+	"use strict";
 	return Firebrick.define("Firebrick.ui.fields.SelectBox", {
 		extend:'Firebrick.ui.fields.Input',
 		/**
@@ -63,7 +64,7 @@ define(["text!./SelectBox.html", "jquery", "./Input"], function(subTpl, $){
 		 */
 		bindings:function(){
 			var me = this,
-				obj = me.callParent(),
+				obj = me.callParent(arguments),
 				data = $.isFunction(me.data) ? me.data() : me.data;
 			obj.attr.multiple = me.multiSelect;
 			
@@ -77,9 +78,9 @@ define(["text!./SelectBox.html", "jquery", "./Input"], function(subTpl, $){
 						optionsText:me.optionsText,
 						options:data,
 						type: me.parseBind( me.dataType )
-				}
+				};
 			}
 			return obj;
 		}
-	})
+	});
 });

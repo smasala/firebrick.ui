@@ -9,13 +9,14 @@
  * @class Breadcrumbs
  */
 define(["../display/List"], function(){
+	"use strict";
 	return Firebrick.define("Firebrick.ui.display.Breadcrumbs", {
 		extend:"Firebrick.ui.display.List",
 		uiName:"fb-ui-breadcrumbs",
 		listType: "ol",
 		listContainerBindings: function(){
 			var me = this,
-				obj = this.callParent();
+				obj = me.callParent(arguments);
 			obj.css.breadcrumb = true;
 			return obj;
 		}

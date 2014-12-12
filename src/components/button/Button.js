@@ -9,11 +9,17 @@
  * @class Button
  */
 define(["text!./Button.html", "../common/Base", "../common/mixins/Items", "./dropdown/List"], function(tpl){
+	"use strict";
 	return Firebrick.define("Firebrick.ui.button.Button", {
 		extend:"Firebrick.ui.common.Base",
 		mixins:"Firebrick.ui.common.mixins.Items",
 		uiName: "fb-ui-button",
 		tpl:tpl,
+		/**
+		 * @property text
+		 * @type {String}
+		 * @default ""
+		 */
 		text:"",
 		/**
 		 * @property btnSize
@@ -62,7 +68,7 @@ define(["text!./Button.html", "../common/Base", "../common/mixins/Items", "./dro
 					css:{
 						"'btn'": true
 					}
-				}
+				};
 			if(me.btnStyle){
 				obj.css[ me.parseBind("btn-"+me.btnStyle)] = true;
 			}
@@ -72,7 +78,7 @@ define(["text!./Button.html", "../common/Base", "../common/mixins/Items", "./dro
 			
 			if(me.items){
 				obj.css["'dropdown-toggle'"] = true;
-				obj.attr["'data-toggle'"] = "'dropdown'"
+				obj.attr["'data-toggle'"] = "'dropdown'";
 			}
 			
 			return obj;
@@ -84,7 +90,7 @@ define(["text!./Button.html", "../common/Base", "../common/mixins/Items", "./dro
 		buttonTextBindings: function(){
 			return {
 				text: "fb.text('" + this.text + "')"
-			}
+			};
 		},
 		/**
 		 * @method caretBindings
@@ -95,7 +101,7 @@ define(["text!./Button.html", "../common/Base", "../common/mixins/Items", "./dro
 				css: {
 					caret: true
 				}
-			}
+			};
 		},
 		/**
 		 * @method dropdownContainerBindings
@@ -106,7 +112,7 @@ define(["text!./Button.html", "../common/Base", "../common/mixins/Items", "./dro
 				css: {
 					dropdown: true
 				}
-			}
+			};
 		}
-	})
+	});
 });

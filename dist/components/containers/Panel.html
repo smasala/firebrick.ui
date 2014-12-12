@@ -1,19 +1,19 @@
-<div id="{{getId}}" data-bind="{{data-bind}}">
-	<div data-bind="{{data-bind 'panelHeaderBindings'}}">
-		{{#if collapsible}}
-			<a data-bind="{{data-bind 'collapsibleLinkBindings'}}">
-		{{/if}}
-			<span data-bind="{{data-bind 'panelHeaderTextBindings'}}"></span>	
-		{{#if collapsible}}
+<div id="{{=it.getId()}}" data-bind="{{=it.dataBind()}}">
+	<div data-bind="{{=it.dataBind('panelHeaderBindings')}}">
+		{{?it.collapsible}}
+			<a data-bind="{{=it.dataBind('collapsibleLinkBindings')}}">
+		{{?}}
+			<span data-bind="{{=it.dataBind('panelHeaderTextBindings')}}"></span>	
+		{{?it.collapsible}}
 			</a>
-		{{/if}}
-		{{#if headerIcons}}
-			<div data-bind="{{data-bind 'headerIconBindings'}}">
-				{{{../getItemsScoped ../this 'headerIcons'}}}
+		{{?}}
+		{{?it.headerIcons}}
+			<div data-bind="{{=it.dataBind('headerIconBindings')}}">
+				{{=it.getItemsProp('headerIcons')}}
 			</div>
-		{{/if}}
+		{{?}}
 	</div>
-		<div data-bind="{{data-bind 'tabBindings'}}">
-			<div data-bind="{{data-bind 'panelBodyBindings'}}" >{{{getItems}}}</div>
+		<div data-bind="{{=it.dataBind('tabBindings')}}">
+			<div data-bind="{{=it.dataBind('panelBodyBindings')}}" >{{=it.getItems()}}</div>
 		</div>
 </div>
