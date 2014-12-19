@@ -53,14 +53,14 @@ define(["text!./Progress.html", "../common/Base"], function(tpl){
 		 * @return {Object}
 		 */
 		bindings: function(){
-			var me = this;
-			return {
-				attr:{
-					max: me.max,
-					value: me.value
-				},
-				text: me.parseBind(me.value+"%")
-			};
+			var me = this,
+				obj = me.callParent(arguments);
+			
+			obj.attr.max = me.max;
+			obj.attr.value = me.value;
+			obj.text = me.parseBind(me.value+"%");
+			
+			return obj;
 		},
 		/**
 		 * @method progressLabelBindings
@@ -75,7 +75,7 @@ define(["text!./Progress.html", "../common/Base"], function(tpl){
 					"'data-symbol'": me.parseBind(me.dataSymbol),
 					"'data-value'": me.value
 				},
-				text: "fb.text('" + me.label + "')",
+				text: me.textBind(me.label),
 				style: {
 					width: me.parseBind(me.value+"%")
 				}

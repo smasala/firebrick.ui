@@ -5,5 +5,5 @@ define(["Firebrick.ui/fields/Input"], function(){
 		label: "Username",
 		value: "username",
 		inplaceEdit:true
-	})
+	});
 });

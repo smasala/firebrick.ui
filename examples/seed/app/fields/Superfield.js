@@ -3,5 +3,5 @@ define(["Firebrick.ui/fields/Input"], function(){
 		extend:"Firebrick.ui.fields.Input",
 		uiName:"superfield",
 		label:"John"
-	})
+	});
 });

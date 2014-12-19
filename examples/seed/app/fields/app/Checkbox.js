@@ -6,5 +6,5 @@ define(["Firebrick.ui/fields/Checkbox"], function(){
 		options:"options1",
 		selectedOptions:"selected1",
 		multiplesInline:true,
-	})
+	});
 });

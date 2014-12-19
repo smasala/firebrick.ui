@@ -80,11 +80,9 @@ define(["text!./Text.html", "../common/Base"], function(tpl){
 		 */
 		bindings:function(){
 			var me = this,
-				obj = {
-					css:{
-						lead: me.leadCSS
-					}
-				};
+				obj = me.callParent(arguments);
+			
+			obj.css.lead = me.leadCSS;
 			
 			if(me.textAlignment){
 				obj.css[ me.parseBind("text-"+me.textAlignment) ] = true;	
@@ -93,7 +91,7 @@ define(["text!./Text.html", "../common/Base"], function(tpl){
 			if(me.html){
 				obj.html = me.text; 
 			}else if(me.text){
-				obj.text = "fb.text('" + me.text + "')";
+				obj.text = me.textBind(me.text);
 			}
 			
 			return obj;

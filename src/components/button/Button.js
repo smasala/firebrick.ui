@@ -22,6 +22,20 @@ define(["text!./Button.html", "../common/Base", "../common/mixins/Items", "./dro
 		 */
 		text:"",
 		/**
+		 * type: button, submit
+		 * @property type
+		 * @type {String}
+		 * @default "button"
+		 */
+		type: "button",
+		/**
+		 * if true - att "navbar-btn" class to the button
+		 * @property navbarItem
+		 * @type {Boolean}
+		 * @default false
+		 */
+		navbarItem: false,
+		/**
 		 * @property btnSize
 		 * @type {Boolean|String} false |  ("sm", "lg", "xs")
 		 * @default false
@@ -61,14 +75,11 @@ define(["text!./Button.html", "../common/Base", "../common/mixins/Items", "./dro
 		 */
 		bindings: function(){
 			var me = this,
-				obj = {
-					attr:{
-						type: "'button'"
-					},
-					css:{
-						"'btn'": true
-					}
-				};
+				obj = me.callParent(arguments);
+			
+			obj.attr.type = me.parseBind(me.type);
+			obj.css.btn = true;
+			
 			if(me.btnStyle){
 				obj.css[ me.parseBind("btn-"+me.btnStyle)] = true;
 			}
@@ -81,6 +92,10 @@ define(["text!./Button.html", "../common/Base", "../common/mixins/Items", "./dro
 				obj.attr["'data-toggle'"] = "'dropdown'";
 			}
 			
+			if(me.navbarItem){
+				obj.css["'navbar-btn'"] = true;
+			}
+			
 			return obj;
 		},
 		/**
@@ -88,8 +103,9 @@ define(["text!./Button.html", "../common/Base", "../common/mixins/Items", "./dro
 		 * @return {Object}
 		 */
 		buttonTextBindings: function(){
+			var me = this;
 			return {
-				text: "fb.text('" + this.text + "')"
+				text: me.textBind(me.text)
 			};
 		},
 		/**

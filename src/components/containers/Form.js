@@ -150,7 +150,8 @@ define(["text!./Form.html", "jquery", "./Base"], function(tpl, $){
 		 * @return {Object}
 		 */
 		getFormData: function(){
-			return new window.FormData($("#"+this.getId()));
+			var me = this;
+			return new window.FormData(me.getElement());
 		},
 		/**
 		 * @method init
@@ -158,11 +159,11 @@ define(["text!./Form.html", "jquery", "./Base"], function(tpl, $){
 		init: function(){
 			var me = this;
 				
-			me.on("componentReady", function(){
-				me._form = $("#" + me.getId());
+			me.on("rendered", function(){
+				me._form = me.getElement();
 			});
 			
-			return this.callParent(arguments);
+			return me.callParent(arguments);
 		},
 		/**
 		 * make sure this.url is set before calling this function
@@ -171,7 +172,7 @@ define(["text!./Form.html", "jquery", "./Base"], function(tpl, $){
 		submit: function(){
 			var me = this;
 
-			if(!me.url || typeof me.url != "string"){
+			if(!me.url || typeof me.url !== "string"){
 				console.error("unable to submit form. No url is set or is set incorrectly", me.url, me);
 				return;
 			}
@@ -202,18 +203,16 @@ define(["text!./Form.html", "jquery", "./Base"], function(tpl, $){
 		 * @method formBindings
 		 * @return {Object}
 		 */
-		formBindings:function(){
-			var me = this;
-			return {
-				attr:{
-					role:  me.parseBind(me.formRole),
-					enctype:  me.parseBind(me.enctype)
-				},
-				css:{
-					"'form-horizontal'": this.horizontal,
-					"'form-inline'": this.inline
-				}
-			};
+		bindings:function(){
+			var me = this,
+				obj = {css:{},attr:{}};
+			
+			obj.attr.role =  me.parseBind(me.formRole);
+			obj.attr.enctype =  me.parseBind(me.enctype);
+			obj.css["'form-horizontal'"] =  me.horizontal;
+			obj.attr["'form-inline'"] =  me.inline;
+			
+			return obj;
 		}
 	});
 });

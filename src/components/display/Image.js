@@ -19,7 +19,7 @@ define(["text!./Image.html", "../common/Base", "responsive-images"], function(tp
 		 */
 		init: function(){
 			var me = this;
-			me.on("componentReady", function(){
+			me.on("rendered", function(){
 				if(window.responsiveImages){
 					window.responsiveImages.update(me.getId());
 				}
@@ -68,14 +68,14 @@ define(["text!./Image.html", "../common/Base", "responsive-images"], function(tp
 		 */
 		bindings: function(){
 			var me = this,
-				obj = {
-					css: {
-							"'img-responsive'": me.responsiveClass
-						}
-				};
+				obj = me.callParent(arguments);
+			
+			obj.css["'img-responsive'"] = me.responsiveClass;
+
 			if(me.imgTypeClass){
 				obj.css[ me.parseBind( "img-"+me.imgTypeClass ) ] = true;
 			}
+			
 			return obj;
 		},
 		/**

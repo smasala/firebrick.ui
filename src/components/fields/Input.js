@@ -163,21 +163,21 @@ define(["text!./Base.html", "text!./Input.html", "../common/Base", "x-editable",
 		 * @type {Boolean|String}
 		 * @default false
 		 */
-		feedback_success:false,
+		feedbackSuccess:false,
 		/**
 		 * Feedback css bindings
 		 * @property feedback_warning
 		 * @type {Boolean|String}
 		 * @default false
 		 */
-		feedback_warning:false,
+		feedbackWarning:false,
 		/**
 		 * Feedback css bindings
 		 * @property feedback_error
 		 * @type {Boolean|String}
 		 * @default false
 		 */
-		feedback_error: false,
+		feedbackError: false,
 		/**
 		 * @property multiplesInline
 		 * @type {Boolean|String}
@@ -211,10 +211,10 @@ define(["text!./Base.html", "text!./Input.html", "../common/Base", "x-editable",
 			var me = this,
 				obj = { 
 					css: {
-						"'has-success'": me.feedback_success,
-						"'has-warning'": me.feedback_warning,
-						"'has-error'": me.feedback_error,
-						"'has-feedback'": me.feedback_success || me.feedback_warning || me.feedback_error,
+						"'has-success'": me.feedbackSuccess,
+						"'has-warning'": me.feedbackWarning,
+						"'has-error'": me.feedbackError,
+						"'has-feedback'": me.feedbackSuccess || me.feedbackWarning || me.feedbackError,
 						"'sr-only'": me.hideLabel
 					}
 				};
@@ -228,8 +228,9 @@ define(["text!./Base.html", "text!./Input.html", "../common/Base", "x-editable",
 		 * @return {Object}
 		 */
 		helpBlockBindings: function(){
+			var me = this;
 			return {
-				text: "fb.text('" + this.helpText + "')"
+				text: me.textBind(me.helpText)
 			};
 		},
 		/**
@@ -266,27 +267,25 @@ define(["text!./Base.html", "text!./Input.html", "../common/Base", "x-editable",
 		bindings:function(){
 			var me = this,
 				type =  me.parseBind( me.type ),
-				obj = {
-					attr:{
-						disabled:me.disabled,
-						readonly:me.readOnly,
-						type: type,
-						name: me.name ?  me.parseBind( me.name ) : type
-					},
-					css:{},
-					value: me.value
-				};
+				obj = me.callParent(arguments);
+			
+			obj.attr.disabled = me.disabled;
+			obj.attr.readonly = me.readOnly; 
+			obj.attr.type = type;
+			obj.attr.name = me.name ?  me.parseBind( me.name ) : type;
+						
+			obj.value = me.value;
 			
 			if(me.inplaceEdit){
 				obj.editableOptions = {};
 				obj.attr["'data-type'"] = me.dataType ?  me.parseBind( me.dataType ) : type;
 				obj.editable = me.value;
-				if(me.showInplaceTitle || $.fn.editable.defaults.mode != "inline"){
-					obj.attr["'data-title'"] = "fb.text('" + (me.dataTitle || me.label) + "')";	
+				if(me.showInplaceTitle || $.fn.editable.defaults.mode !== "inline"){
+					obj.attr["'data-title'"] = me.textBind( me.dataTitle || me.label );	
 				}
 			}else{
 				obj.css["'form-control'"] = me.formControlClass;
-				obj.attr.placeholder = "fb.text('" + me.placeholder + "')";
+				obj.attr.placeholder = me.textBind( me.placeholder );
 			}
 			
 			return obj;
@@ -313,7 +312,7 @@ define(["text!./Base.html", "text!./Input.html", "../common/Base", "x-editable",
 		labelBindings: function(){
 			var me = this,
 				obj = {
-					text: "fb.text('"+me.label+"')",
+					text: me.textBind( me.label ),
 					css:{
 						"'control-label'": me.controlLabel
 					}

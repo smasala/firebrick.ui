@@ -11,7 +11,7 @@
  * @namespace components.common
  * @class Base
  */
-define(["doT"], function(tplEngine){
+define(["doT", "firebrick"], function(tplEngine){
 
 	"use strict";
 	
@@ -26,7 +26,7 @@ define(["doT"], function(tplEngine){
 		_idPrefix: "fb-ui-",
 		/**
 		 * component id, not the _classId - however if none specified it will default to the _classId
-		 * @property id,
+		 * @property id
 		 * @type {String}
 		 * @default null
 		 */
@@ -85,6 +85,65 @@ define(["doT"], function(tplEngine){
 		 * @default null
 		 */
 		uiName:null,
+		/**
+		 * @property _element
+		 * @type {Null|jQuery Object}
+		 * @default null
+		 */
+		_element: null,
+		/**
+		 * @property tooltip
+		 * @type {Boolean|String} set to false to deactivate, string to set the text
+		 * @default false
+		 */
+		tooltip:false,
+		/**
+		 * where the tooltip should appear: "top", "left", "right", "bottom"
+		 * @property tooltipLocation
+		 * @type {String}
+		 * @default "top"
+		 */
+		tooltipLocation:"top",
+		/**
+		 * options defined by bootstrap
+		 * @property tooltipOptions
+		 * @type {Object}
+		 * @default null
+		 */
+		tooltipOptions: null,
+		/**
+		 * pass a binding Object and this method will add the tooltip relevant properties
+		 * @method addTooltipBind
+		 * @param bindObj {Object}
+		 * @return {Object} new Object
+		 */
+		addTooltipBind: function(bindObj){
+			var me = this;
+			if(me.tooltip && bindObj && $.isPlainObject(bindObj)){
+				if(!bindObj.attr){
+					bindObj.attr = {};
+				}
+				bindObj.attr["'data-toggle'"] = "'tooltip'";
+				bindObj.attr.title = me.textBind(me.tooltip);
+				bindObj.attr["'data-placement'"] = me.parseBind(me.tooltipLocation);
+			}
+			return bindObj;
+		},
+		/**
+		 * @method getElement
+		 * @return {Object} jquery element object
+		 */
+		getElement: function(){
+			var me = this;
+			if(!me._element){
+				me._element = $("#" + me.getId());
+				if(!me._element.length){
+					//set to null if jquery object returned empty []
+					me._element = null;
+				}
+			}
+			return me._element;
+		},
 		/**
 		 * called when defining the class
 		 * @method constructor
@@ -147,14 +206,34 @@ define(["doT"], function(tplEngine){
 				me.tpl = me.build();
 			}
 			
-			
-			return this.callParent(arguments);
+			if(me.tooltip){
+				//require the plugin if needed
+				require(["bootstrap.plugins/tooltip"], function(){
+					var t = me.getElement();
+					if(t){
+						t.tooltip(me.tooltipOptions);
+					}
+				});
+			}
+
+			return me.callParent(arguments);
+		},
+		/**
+		 * mother of all basic bindings
+		 * @method bindings
+		 * @return {Object} {attr:{}, css:{}}
+		 */
+		bindings: function(){
+			return this.addTooltipBind({
+				attr:{},
+				css:{}
+			});
 		},
 		/**
 		 * compile the template
 		 * @method template
-		 * @property prop {String} [prop=tpl] optional - name of property to template
-		 * @property force {Boolean} [force=false] optional - set to true to force a retemplate
+		 * @param prop {String} [prop=tpl] optional - name of property to template
+		 * @param force {Boolean} [force=false] optional - set to true to force a retemplate
 		 * @return {Function} template function
 		 */
 		template: function(prop, force){
@@ -168,7 +247,7 @@ define(["doT"], function(tplEngine){
 		/**
 		 * build the compiled template
 		 * @method build
-		 * @property prop {String} [prop="tpl"] optional - name of property to build
+		 * @param prop {String} [prop="tpl"] optional - name of property to build
 		 * @return {String} html 
 		 */
 		build: function(prop){
@@ -177,7 +256,6 @@ define(["doT"], function(tplEngine){
 			me._build[prop] = me._template[prop](me);
 			return me._build[prop];
 		},
-		
 		/**
 		 * @method dataBind
 		 * @param {String} [property=this.bindings]
@@ -185,9 +263,10 @@ define(["doT"], function(tplEngine){
 		 * @return {String}
 		 */
 		dataBind: function(property){
-			var prop = property ? this[property] : this.bindings;
+			var me = this,
+				prop = property ? me[property] : me.bindings;
 			if($.isFunction(prop)){
-				prop = prop.call(this);
+				prop = prop.call(me);
 			}
 			return Firebrick.ui.utils.stringify( prop );
 		},
@@ -224,8 +303,8 @@ define(["doT"], function(tplEngine){
 			var me = clazz || this,
 				p = Object.getPrototypeOf(me);
 
-			if(me._classname != p._classname){
-				if((me.subTpl != p.subTpl) || (me.tpl != p.tpl)){
+			if(me._classname !== p._classname){
+				if((me.subTpl !== p.subTpl) || (me.tpl !== p.tpl)){
 					return p;
 				}
 			}
@@ -265,6 +344,18 @@ define(["doT"], function(tplEngine){
 		 */
 		parseBind: function(str){
 			return "'" + str + "'";
+		},
+		/**
+		 * takes a string and prepares it for Firebrick text call
+		 * @example
+		 * 	textBind("mystring.abc.key")
+		 * 	// returns = fb.text('mystring.abc.key')
+		 * @method textBind
+		 * @param key {String}
+		 * @return {String}
+		 */
+		textBind: function(key){
+			return "fb.text('" + key + "')";
 		}
 	});
 });

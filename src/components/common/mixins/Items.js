@@ -12,13 +12,20 @@ define(["jquery"], function($){
 	"use strict";
 	return Firebrick.define("Firebrick.ui.common.mixins.Items", {
 		/**
+		 * default configuration for direct children - i.e. direct items
+		 * @property defaults
+		 * @type {Object}
+		 * @default null 
+		 */
+		defaults: null,
+		/**
 		 * @property items
 		 * @type {String|Object|Array of Object}
 		 * @default null
 		 */
 		items:null,
 		listeners:{
-			componentReady: function(){
+			rendered: function(){
 				var me = this,
 					items = me.items,
 					args = arguments;
@@ -55,7 +62,7 @@ define(["jquery"], function($){
 		 */
 		getItemsProp: function(itemsName){
 			var me = this;
-			itemsName = typeof itemsName == "string" ? me[itemsName] : me.items;
+			itemsName = typeof itemsName === "string" ? me[itemsName] : me.items;
 			var items = me._getItems(itemsName);
 			return items ? items.html || items : "";
 		},
@@ -72,6 +79,16 @@ define(["jquery"], function($){
 				if(!$.isArray(items) && !$.isFunction(items)){
 					items = [items];
 				}
+				
+				if(me.defaults){
+					//get all defaults down the prototype tree
+					Firebrick.utils.merge("defaults", me);
+					//add the defaults to direct items
+					for(var i = 0, l = items.length; i<l; i++){
+						items[i] = Firebrick.utils.overwrite(items[i], me.defaults);
+					}
+				}
+				
 				return Firebrick.ui._populate(items, me);
 			}
 			return null;

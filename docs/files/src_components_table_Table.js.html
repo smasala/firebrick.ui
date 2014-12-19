@@ -19,7 +19,7 @@
             
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 0.8.20</em>
+            <em>API Docs for: 0.9.0</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -53,6 +53,8 @@
             
                 <li><a href="../classes/components.common.mixins.Items.html">components.common.mixins.Items</a></li>
             
+                <li><a href="../classes/components.common.mixins.Toolbars.html">components.common.mixins.Toolbars</a></li>
+            
                 <li><a href="../classes/components.common.MultiplesBase.html">components.common.MultiplesBase</a></li>
             
                 <li><a href="../classes/components.containers.Base.html">components.containers.Base</a></li>
@@ -65,7 +67,11 @@
             
                 <li><a href="../classes/components.containers.GridColumn.html">components.containers.GridColumn</a></li>
             
+                <li><a href="../classes/components.containers.Modal.html">components.containers.Modal</a></li>
+            
                 <li><a href="../classes/components.containers.Panel.html">components.containers.Panel</a></li>
+            
+                <li><a href="../classes/components.display.Alert.html">components.display.Alert</a></li>
             
                 <li><a href="../classes/components.display.Header.html">components.display.Header</a></li>
             
@@ -91,6 +97,8 @@
             
                 <li><a href="../classes/components.fields.TextArea.html">components.fields.TextArea</a></li>
             
+                <li><a href="../classes/components.nav.Base.html">components.nav.Base</a></li>
+            
                 <li><a href="../classes/components.nav.Breadcrumbs.html">components.nav.Breadcrumbs</a></li>
             
                 <li><a href="../classes/components.nav.List.html">components.nav.List</a></li>
@@ -98,6 +106,8 @@
                 <li><a href="../classes/components.nav.Navbar.html">components.nav.Navbar</a></li>
             
                 <li><a href="../classes/components.nav.Pagination.html">components.nav.Pagination</a></li>
+            
+                <li><a href="../classes/components.nav.Toolbar.html">components.nav.Toolbar</a></li>
             
                 <li><a href="../classes/components.table.Table.html">components.table.Table</a></li>
             
@@ -259,7 +269,7 @@ define([&quot;jquery&quot;, &quot;text!./Table.html&quot;, &quot;../common/Base&
 		 */
 		treetable:false,
 		/**
-		 * return js object to pass to the DataTable function for configuring the table on componentReady
+		 * return js object to pass to the DataTable function for configuring the table on rendered
 		 * @property dataTableConfig
 		 * @type {Function}
 		 * @return {object}
@@ -313,7 +323,7 @@ define([&quot;jquery&quot;, &quot;text!./Table.html&quot;, &quot;../common/Base&
 		 */
 		showOptions: true,
 		/**
-		 * return js object to pass to the Treetable function for configuring the table on componentReady
+		 * return js object to pass to the Treetable function for configuring the table on rendered
 		 * @property treeTableConfig
 		 * @type {Function}
 		 * @return {Object}
@@ -330,9 +340,9 @@ define([&quot;jquery&quot;, &quot;text!./Table.html&quot;, &quot;../common/Base&
 		 */
 		init:function(){
 			var me = this;
-			me.on(&quot;componentReady&quot;, function(){
+			me.on(&quot;rendered&quot;, function(){
 				var id = me.getId(),
-					table = $(&quot;#&quot; + id);
+					table = me.getElement();
 				if(me.datatable){
 					table.DataTable(me.dataTableConfig());
 				}
@@ -378,18 +388,18 @@ define([&quot;jquery&quot;, &quot;text!./Table.html&quot;, &quot;../common/Base&
 		 * @return {Object}
 		 */
 		bindings: function(){
-			var me = this;
-			return {
-				&quot;with&quot;: me._getData(),
-				css:{
-					&quot;&#x27;table&#x27;&quot;: true,
-					&quot;&#x27;table-striped&#x27;&quot;: me.tableStriped,
-					&quot;&#x27;table-hover&#x27;&quot;: me.tableHover,
-					&quot;&#x27;table-condensed&#x27;&quot;: me.tableCondensed,
-					&quot;&#x27;table-bordered&#x27;&quot;: me.tableBordered,
-					&quot;&#x27;responsive&#x27;&quot; : me.responsive
-				}
-			};
+			var me = this,
+				obj = me.callParent(arguments);
+			
+			obj[&quot;with&quot;] = me._getData();
+			obj.css.table = true;
+			obj.css[&quot;&#x27;table-striped&#x27;&quot;] = me.tableStriped;
+			obj.css[&quot;&#x27;table-hover&#x27;&quot;] = me.tableHover;
+			obj.css[&quot;&#x27;table-condensed&#x27;&quot;] = me.tableCondensed;
+			obj.css[&quot;&#x27;table-bordered&#x27;&quot;] = me.tableBordered;
+			obj.css[&quot;&#x27;responsive&#x27;&quot;] =  me.responsive;
+			
+			return obj;
 		},
 		/**
 		 * @method theadBindings
@@ -465,9 +475,9 @@ define([&quot;jquery&quot;, &quot;text!./Table.html&quot;, &quot;../common/Base&
 		 * @return {Function}
 		 */
 		generateOnclick: function(type){
-			var id = this.getId();
+			var me = this;
 			return function(){
-				$(&quot;#&quot; + id).treetable(type); 
+				me.getElement().treetable(type); 
 				return false;
 			};
 		},
@@ -478,7 +488,7 @@ define([&quot;jquery&quot;, &quot;text!./Table.html&quot;, &quot;../common/Base&
 		expandBindings:function(){
 			var me = this;
 			return {
-				text: &quot;fb.text(&#x27;&quot;+ me.expandText +&quot;&#x27;)&quot;,
+				text: me.textBind( me.expandText ),
 				attr:{
 					id: me.parseBind(&quot;fb-expand-&quot; + me.getId()),
 					href:&quot;&#x27;&#x27;&quot;
@@ -492,7 +502,7 @@ define([&quot;jquery&quot;, &quot;text!./Table.html&quot;, &quot;../common/Base&
 		collapseBindings:function(){
 			var me = this;
 			return {
-				text: &quot;fb.text(&#x27;&quot;+ me.collapseText +&quot;&#x27;)&quot;,
+				text: me.textBind( me.collapseText ),
 				attr:{
 					id: me.parseBind(&quot;fb-collapse-&quot; + me.getId()),
 					href:&quot;&#x27;&#x27;&quot;

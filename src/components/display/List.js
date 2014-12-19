@@ -117,8 +117,11 @@ define(["text!./List.html", "../common/Base"], function(tpl){
 		 * @return {Object}
 		 */
 		bindings:function(){
-			var obj = {};
-				obj.text = "$data.text ? $data.text : $data";
+			var me = this,
+				obj = me.callParent(arguments);
+			
+			obj.text = "$data.text ? $data.text : $data";
+			
 			return obj;
 		},
 		

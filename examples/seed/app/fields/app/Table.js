@@ -4,4 +4,4 @@ define(["Firebrick.ui/table/Table"], function(){
 		uiName:"ui-app-table",
 		data:"tableData"
 	});
-})
+});

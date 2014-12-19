@@ -19,7 +19,7 @@
             
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 0.8.20</em>
+            <em>API Docs for: 0.9.0</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -53,6 +53,8 @@
             
                 <li><a href="../classes/components.common.mixins.Items.html">components.common.mixins.Items</a></li>
             
+                <li><a href="../classes/components.common.mixins.Toolbars.html">components.common.mixins.Toolbars</a></li>
+            
                 <li><a href="../classes/components.common.MultiplesBase.html">components.common.MultiplesBase</a></li>
             
                 <li><a href="../classes/components.containers.Base.html">components.containers.Base</a></li>
@@ -65,7 +67,11 @@
             
                 <li><a href="../classes/components.containers.GridColumn.html">components.containers.GridColumn</a></li>
             
+                <li><a href="../classes/components.containers.Modal.html">components.containers.Modal</a></li>
+            
                 <li><a href="../classes/components.containers.Panel.html">components.containers.Panel</a></li>
+            
+                <li><a href="../classes/components.display.Alert.html">components.display.Alert</a></li>
             
                 <li><a href="../classes/components.display.Header.html">components.display.Header</a></li>
             
@@ -91,6 +97,8 @@
             
                 <li><a href="../classes/components.fields.TextArea.html">components.fields.TextArea</a></li>
             
+                <li><a href="../classes/components.nav.Base.html">components.nav.Base</a></li>
+            
                 <li><a href="../classes/components.nav.Breadcrumbs.html">components.nav.Breadcrumbs</a></li>
             
                 <li><a href="../classes/components.nav.List.html">components.nav.List</a></li>
@@ -98,6 +106,8 @@
                 <li><a href="../classes/components.nav.Navbar.html">components.nav.Navbar</a></li>
             
                 <li><a href="../classes/components.nav.Pagination.html">components.nav.Pagination</a></li>
+            
+                <li><a href="../classes/components.nav.Toolbar.html">components.nav.Toolbar</a></li>
             
                 <li><a href="../classes/components.table.Table.html">components.table.Table</a></li>
             
@@ -203,7 +213,7 @@
 			 * @private
 			 * @type {String}
 			 */
-			version: &quot;0.8.20&quot;,
+			version: &quot;0.9.0&quot;,
 			
 			/**
 			 * used to cache pointers to classes when searching by &quot;uiName&quot;
@@ -221,7 +231,7 @@
 			 * @param {Object} config
 			 * @param {Object} config.target selector string, jquery object (optional) if none passed, html is returned
 			 * @param {Object} config.items array of strings or objects [&quot;fb-ui-input&quot;, {uiName:&quot;fb-ui-textarea&quot;}]
-			 * @param {Object} config.view Firebrick view class (optional), must be defined for componentReady event to be fired
+			 * @param {Object} config.view Firebrick view class (optional), must be defined for rendered event to be fired
 			 * @return {String} html
 			 */
 			build: function(config){
@@ -229,13 +239,13 @@
 					target = Firebrick.views.getTarget(config.target),
 					r, html;
 				
-				if(config.view){
-					config.view.on(&quot;ready&quot;, function(){
-						for(var i = 0, l = r.items.length; i&lt;l; i++){
-							r.items[i].fireEvent(&quot;componentReady&quot;);	
-						}
-					});
-				}
+//				if(config.view){
+//					config.view.on(&quot;ready&quot;, function(){
+//						for(var i = 0, l = r.items.length; i&lt;l; i++){
+//							r.items[i].fireEvent(&quot;rendered&quot;);	
+//						}
+//					});
+//				}
 				
 				r = me._populate(config.items, config.view);
 				html = r.html;
@@ -282,7 +292,7 @@
 				for(var i = 0, l = items.length; i&lt;l; i++){
 					v = items[i];
 					if(v.isView){
-						if(v._state == &quot;initial&quot;){
+						if(v._state === &quot;initial&quot;){
 							component = v.init();
 						}
 						h += component.tpl;
@@ -330,7 +340,7 @@
 					for(k in Firebrick.classes.classRegistry){
 						if(Firebrick.classes.classRegistry.hasOwnProperty(k)){
 							v = Firebrick.classes.classRegistry[k];
-							if(v.uiComponent &amp;&amp; v.uiName == name){
+							if(v.uiComponent &amp;&amp; v.uiName === name){
 								item = v;
 								me._searchCache[name] = v;
 								break;
@@ -386,7 +396,7 @@
 								}
 							}
 							//remove last &quot;, &quot;
-							p = p.substr(-1) == &quot;,&quot; ? p.substring(0, p.length-1) : p;
+							p = p.substr(-1) === &quot;,&quot; ? p.substring(0, p.length-1) : p;
 							p += f ? &quot;&quot; : &quot;},&quot;;
 							return p;
 						};
@@ -412,11 +422,11 @@
 		 * @type {Object}
 		 */
 		listeners:{
-			componentReady: function(){
+			rendered: function(){
 				var me = this;
 				if($.isArray(me.items)){
 					for(var i = 0, l = me.items.length; i&lt;l; i++){
-						me.items[i].fireEvent(&quot;componentReady&quot;);
+						me.items[i].fireEvent(&quot;rendered&quot;);
 					}
 				}
 			}

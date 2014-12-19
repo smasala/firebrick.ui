@@ -156,6 +156,21 @@ progress[value]::-moz-progress-bar {
 	/* Firefox doesn't support CSS3 keyframe animations on progress element. Hence, we did not include animate-stripes in this code block */
 }
 
+progress[value]::-webkit-progress-value{
+	/* Gradient background with Stripes */
+	background-image:
+	-webkit-linear-gradient( 135deg,
+													 transparent,
+													 transparent 33%,
+													 rgba(0,0,0,.1) 33%,
+													 rgba(0,0,0,.1) 66%,
+													 transparent 66%),
+    -webkit-linear-gradient( top,
+														rgba(255, 255, 255, .25),
+														rgba(0,0,0,.2)),
+     -webkit-linear-gradient( left, #09c, #f44);
+}
+
 /* /Progress Element */
 
 /** BS 3 re-enable nested dropdowns 
@@ -168,3 +183,25 @@ progress[value]::-moz-progress-bar {
 .dropdown-submenu:hover>a:after{border-left-color:#ffffff;}
 .dropdown-submenu.pull-left{float:none;}.dropdown-submenu.pull-left>.dropdown-menu{left:-100%;margin-left:10px;-webkit-border-radius:6px 0 6px 6px;-moz-border-radius:6px 0 6px 6px;border-radius:6px 0 6px 6px;}
 /** /BS nested dropdown **/
+
+
+/** Panel toolbars **/
+.fb-ui-toolbar-container {
+	position:relative;
+}
+
+.fb-ui-toolbar {
+	position:absolute;
+	box-shadow:none;
+}
+
+.fb-ui-toolbar-container.fb-ui-toolbar-top {
+	padding-top:70px;
+}
+
+.fb-ui-toolbar-container.fb-ui-toolbar-bottom {
+	padding-bottom:70px;
+}
+
+
+/** /Panel toolbars **/

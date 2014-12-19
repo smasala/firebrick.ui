@@ -5,5 +5,5 @@ define(["Firebrick.ui/fields/Radio"], function(){
 		label:"Houston...",
 		options:"options1",
 		selectedOptions:"selected",
-	})
+	});
 });

@@ -4,5 +4,5 @@ define(["Firebrick.ui/fields/TextArea"], function(){
 		uiName:"ui-app-description",
 		label: "Description",
 		value: "description"
-	})
+	});
 });

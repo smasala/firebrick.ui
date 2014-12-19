@@ -59,11 +59,9 @@ define(["text!./GridColumn.html", "./Base"], function(tpl){
 		 */
 		bindings: function(){
 			var me = this,
-				obj = {
-					css:{}
-				};
-				
-			obj.css[ me.parseBind( "col-"+me.deviceSize+"-"+me._getColumnWidth() )] = true;
+				obj = me.callParent(arguments);
+			
+			obj.css["'col-"+me.deviceSize+"-"+me._getColumnWidth()+"'"] = true;
 			
 			return obj;
 		}

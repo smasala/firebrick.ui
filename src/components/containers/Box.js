@@ -13,13 +13,6 @@ define(["text!./Box.html", "./Base"], function(tpl){
 	return Firebrick.define("Firebrick.ui.containers.Box", {
 		extend:"Firebrick.ui.containers.Base",
 		tpl: tpl,
-		uiName:"fb-ui-box",
-		/**
-		 * @method bindings
-		 * @return {Object}
-		 */
-		bindings: function(){
-			return {};
-		}
+		uiName:"fb-ui-box"
 	});
 });

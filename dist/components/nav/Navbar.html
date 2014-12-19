@@ -1,5 +1,6 @@
 <nav data-bind="{{=it.dataBind('navBindings')}}">
-	<div data-bind="{{=it.dataBind('navbarHeaderContainerBindings')}}">
+	<div data-bind="{{=it.dataBind('navbarWrapperBindings')}}">
+		{{?it.showNavbarHeader}}
 		<div data-bind="{{=it.dataBind('navbarHeaderBindings')}}">
 			{{?it.toggleButton}}
 				<button data-bind="{{=it.dataBind('toggleButtonBindings')}}">
@@ -9,10 +10,13 @@
 		         	<span class="icon-bar"></span>
 	       		</button>
        		{{?}}
-      	<a data-bind="{{=it.dataBind('brandBindings')}}">{{=it.brandTpl}}</a>
-	</div>
+       		{{?it.showBranding}}
+      			<a data-bind="{{=it.dataBind('brandBindings')}}">{{=it.brandTpl}}</a>
+      		{{?}}
+		</div>
+		{{?}}
 		<div data-bind="{{=it.dataBind('navbarContainerBindings')}}">
-     		{{=it.getParentTpl()}}
+     		{{=it.getItems()}}
      	</div>
 	</div>
 </nav>

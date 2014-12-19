@@ -19,7 +19,7 @@
             
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 0.8.20</em>
+            <em>API Docs for: 0.9.0</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -53,6 +53,8 @@
             
                 <li><a href="../classes/components.common.mixins.Items.html">components.common.mixins.Items</a></li>
             
+                <li><a href="../classes/components.common.mixins.Toolbars.html">components.common.mixins.Toolbars</a></li>
+            
                 <li><a href="../classes/components.common.MultiplesBase.html">components.common.MultiplesBase</a></li>
             
                 <li><a href="../classes/components.containers.Base.html">components.containers.Base</a></li>
@@ -65,7 +67,11 @@
             
                 <li><a href="../classes/components.containers.GridColumn.html">components.containers.GridColumn</a></li>
             
+                <li><a href="../classes/components.containers.Modal.html">components.containers.Modal</a></li>
+            
                 <li><a href="../classes/components.containers.Panel.html">components.containers.Panel</a></li>
+            
+                <li><a href="../classes/components.display.Alert.html">components.display.Alert</a></li>
             
                 <li><a href="../classes/components.display.Header.html">components.display.Header</a></li>
             
@@ -91,6 +97,8 @@
             
                 <li><a href="../classes/components.fields.TextArea.html">components.fields.TextArea</a></li>
             
+                <li><a href="../classes/components.nav.Base.html">components.nav.Base</a></li>
+            
                 <li><a href="../classes/components.nav.Breadcrumbs.html">components.nav.Breadcrumbs</a></li>
             
                 <li><a href="../classes/components.nav.List.html">components.nav.List</a></li>
@@ -98,6 +106,8 @@
                 <li><a href="../classes/components.nav.Navbar.html">components.nav.Navbar</a></li>
             
                 <li><a href="../classes/components.nav.Pagination.html">components.nav.Pagination</a></li>
+            
+                <li><a href="../classes/components.nav.Toolbar.html">components.nav.Toolbar</a></li>
             
                 <li><a href="../classes/components.table.Table.html">components.table.Table</a></li>
             
@@ -173,7 +183,7 @@
  * @namespace components.common
  * @class Base
  */
-define([&quot;doT&quot;], function(tplEngine){
+define([&quot;doT&quot;, &quot;firebrick&quot;], function(tplEngine){
 
 	&quot;use strict&quot;;
 	
@@ -188,7 +198,7 @@ define([&quot;doT&quot;], function(tplEngine){
 		_idPrefix: &quot;fb-ui-&quot;,
 		/**
 		 * component id, not the _classId - however if none specified it will default to the _classId
-		 * @property id,
+		 * @property id
 		 * @type {String}
 		 * @default null
 		 */
@@ -247,6 +257,65 @@ define([&quot;doT&quot;], function(tplEngine){
 		 * @default null
 		 */
 		uiName:null,
+		/**
+		 * @property _element
+		 * @type {Null|jQuery Object}
+		 * @default null
+		 */
+		_element: null,
+		/**
+		 * @property tooltip
+		 * @type {Boolean|String} set to false to deactivate, string to set the text
+		 * @default false
+		 */
+		tooltip:false,
+		/**
+		 * where the tooltip should appear: &quot;top&quot;, &quot;left&quot;, &quot;right&quot;, &quot;bottom&quot;
+		 * @property tooltipLocation
+		 * @type {String}
+		 * @default &quot;top&quot;
+		 */
+		tooltipLocation:&quot;top&quot;,
+		/**
+		 * options defined by bootstrap
+		 * @property tooltipOptions
+		 * @type {Object}
+		 * @default null
+		 */
+		tooltipOptions: null,
+		/**
+		 * pass a binding Object and this method will add the tooltip relevant properties
+		 * @method addTooltipBind
+		 * @param bindObj {Object}
+		 * @return {Object} new Object
+		 */
+		addTooltipBind: function(bindObj){
+			var me = this;
+			if(me.tooltip &amp;&amp; bindObj &amp;&amp; $.isPlainObject(bindObj)){
+				if(!bindObj.attr){
+					bindObj.attr = {};
+				}
+				bindObj.attr[&quot;&#x27;data-toggle&#x27;&quot;] = &quot;&#x27;tooltip&#x27;&quot;;
+				bindObj.attr.title = me.textBind(me.tooltip);
+				bindObj.attr[&quot;&#x27;data-placement&#x27;&quot;] = me.parseBind(me.tooltipLocation);
+			}
+			return bindObj;
+		},
+		/**
+		 * @method getElement
+		 * @return {Object} jquery element object
+		 */
+		getElement: function(){
+			var me = this;
+			if(!me._element){
+				me._element = $(&quot;#&quot; + me.getId());
+				if(!me._element.length){
+					//set to null if jquery object returned empty []
+					me._element = null;
+				}
+			}
+			return me._element;
+		},
 		/**
 		 * called when defining the class
 		 * @method constructor
@@ -309,14 +378,34 @@ define([&quot;doT&quot;], function(tplEngine){
 				me.tpl = me.build();
 			}
 			
-			
-			return this.callParent(arguments);
+			if(me.tooltip){
+				//require the plugin if needed
+				require([&quot;bootstrap.plugins/tooltip&quot;], function(){
+					var t = me.getElement();
+					if(t){
+						t.tooltip(me.tooltipOptions);
+					}
+				});
+			}
+
+			return me.callParent(arguments);
+		},
+		/**
+		 * mother of all basic bindings
+		 * @method bindings
+		 * @return {Object} {attr:{}, css:{}}
+		 */
+		bindings: function(){
+			return this.addTooltipBind({
+				attr:{},
+				css:{}
+			});
 		},
 		/**
 		 * compile the template
 		 * @method template
-		 * @property prop {String} [prop=tpl] optional - name of property to template
-		 * @property force {Boolean} [force=false] optional - set to true to force a retemplate
+		 * @param prop {String} [prop=tpl] optional - name of property to template
+		 * @param force {Boolean} [force=false] optional - set to true to force a retemplate
 		 * @return {Function} template function
 		 */
 		template: function(prop, force){
@@ -330,7 +419,7 @@ define([&quot;doT&quot;], function(tplEngine){
 		/**
 		 * build the compiled template
 		 * @method build
-		 * @property prop {String} [prop=&quot;tpl&quot;] optional - name of property to build
+		 * @param prop {String} [prop=&quot;tpl&quot;] optional - name of property to build
 		 * @return {String} html 
 		 */
 		build: function(prop){
@@ -339,7 +428,6 @@ define([&quot;doT&quot;], function(tplEngine){
 			me._build[prop] = me._template[prop](me);
 			return me._build[prop];
 		},
-		
 		/**
 		 * @method dataBind
 		 * @param {String} [property=this.bindings]
@@ -347,9 +435,10 @@ define([&quot;doT&quot;], function(tplEngine){
 		 * @return {String}
 		 */
 		dataBind: function(property){
-			var prop = property ? this[property] : this.bindings;
+			var me = this,
+				prop = property ? me[property] : me.bindings;
 			if($.isFunction(prop)){
-				prop = prop.call(this);
+				prop = prop.call(me);
 			}
 			return Firebrick.ui.utils.stringify( prop );
 		},
@@ -386,8 +475,8 @@ define([&quot;doT&quot;], function(tplEngine){
 			var me = clazz || this,
 				p = Object.getPrototypeOf(me);
 
-			if(me._classname != p._classname){
-				if((me.subTpl != p.subTpl) || (me.tpl != p.tpl)){
+			if(me._classname !== p._classname){
+				if((me.subTpl !== p.subTpl) || (me.tpl !== p.tpl)){
 					return p;
 				}
 			}
@@ -427,6 +516,18 @@ define([&quot;doT&quot;], function(tplEngine){
 		 */
 		parseBind: function(str){
 			return &quot;&#x27;&quot; + str + &quot;&#x27;&quot;;
+		},
+		/**
+		 * takes a string and prepares it for Firebrick text call
+		 * @example
+		 * 	textBind(&quot;mystring.abc.key&quot;)
+		 * 	// returns = fb.text(&#x27;mystring.abc.key&#x27;)
+		 * @method textBind
+		 * @param key {String}
+		 * @return {String}
+		 */
+		textBind: function(key){
+			return &quot;fb.text(&#x27;&quot; + key + &quot;&#x27;)&quot;;
 		}
 	});
 });

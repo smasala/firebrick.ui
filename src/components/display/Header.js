@@ -59,9 +59,12 @@ define(["text!./Header.html", "../common/Base"], function(tpl){
 		 * @return Object
 		 */
 		bindings: function(){
-			return {
-				text: "fb.text('" + this.text + "')"
-			};
+			var me = this,
+				obj = me.callParent(arguments);
+			
+			obj.text = me.textBind(me.text);
+			
+			return obj;
 		},
 		/**
 		 * @method secondaryTextBindings

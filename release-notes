@@ -1,3 +1,15 @@
+v0.9.0
+----------------------------
+* fix webkit css for progress bar
+* remove "evil twins" http://archive.oreilly.com/pub/a/javascript/excerpts/javascript-good-parts/bad-parts.html
+* added tooltip functionality for components
+* added bindings function to base component - all bindings() must call this.callParent(arguments) first
+* changed event componentReady to "rendered"
+* new component Modal - bootstrap popup
+* toolbar component
+* components with have the "items" property can now default an object "defaults" these property are passed down to all direct children
+* new component Alert
+
 v0.8.20
 ----------------------------
 * css for loader - taken from Firebrick MVC

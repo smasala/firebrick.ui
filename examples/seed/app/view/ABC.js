@@ -8,5 +8,5 @@ define(["text!./ABC.html", "Firebrick.ui/containers/Form", "../fields/Superfield
 				uiName:"superfield"
 			}]
 		}]
-	})
+	});
 });

@@ -4,23 +4,34 @@
 
 /**
  * @module Firebrick.ui.components
- * @extends components.nav.List
+ * @extends components.nav.Base
  * @namespace components.nav
  * @class Navbar
  */
-define(["text!./Navbar.html", "../common/Base", "./List"], function(tpl){
+define(["text!./Navbar.html", "./Base", "./List"], function(tpl){
 	"use strict";
 	return Firebrick.define("Firebrick.ui.nav.Navbar", {
-		extend:"Firebrick.ui.nav.List",
+		extend:"Firebrick.ui.nav.Base",
 		tpl:tpl,
 		uiName:"fb-ui-navbar",
+		/**
+		 * passed on to the toolbar items (direct children only)
+		 * @property toolbarDefaults
+		 * @type {Object}
+		 * @default {Object} {
+		 * 		navbarItem: true
+		 * }
+		 */
+		defaults:{
+			navbarItem: true
+		},
 		/**
 		 * false to deactivate
 		 * @property navTypeClass
 		 * @type {Boolean|String} string: navbar-fixed-top, navbar-static-top, navbar-fixed-top, navbar-fixed-bottom, navbar-inverse (navbarDefaultClass=false)
 		 * @default "'navbar-static-top'"
 		 */
-		navTypeClass: "'navbar-static-top'",
+		navTypeClass: "navbar-static-top",
 		/**
 		 * whether "navbar-default" is used
 		 * @property navbarDefaultClass
@@ -65,16 +76,16 @@ define(["text!./Navbar.html", "../common/Base", "./List"], function(tpl){
 		 * false to deactivate
 		 * @property brandLink
 		 * @type {Boolean|String}
-		 * @default "'/'"
+		 * @default "/"
 		 */
-		brandLink: "'/'",
+		brandLink: "/",
 		/**
 		 * brand text - false to show none or if you wish to use brandTpl instead
 		 * @property brandText
 		 * @type {Boolean|String}
-		 * @default "'Firebrick.ui'"
+		 * @default "Firebrick.ui"
 		 */
-		brandText:"'Firebrick.ui'",
+		brandText:"Firebrick.ui",
 		/**
 		 * false to deactivate
 		 * @property brandTpl
@@ -103,6 +114,18 @@ define(["text!./Navbar.html", "../common/Base", "./List"], function(tpl){
 		 */
 		navClass: true,
 		/**
+		 * @property showNavbarHeader
+		 * @type {Boolean}
+		 * @default true
+		 */
+		showNavbarHeader: true,
+		/**
+		 * @property showBranding
+		 * @type {Boolean}
+		 * @default true
+		 */
+		showBranding: true,
+		/**
 		 * @method navBindings
 		 * @return {Object}
 		 */
@@ -118,7 +141,7 @@ define(["text!./Navbar.html", "../common/Base", "./List"], function(tpl){
 					}
 			};
 			if(me.navTypeClass){
-				obj.css[me.navTypeClass] = true;
+				obj.css[me.parseBind(me.navTypeClass)] = true;
 			}
 			return obj;
 		},
@@ -131,14 +154,14 @@ define(["text!./Navbar.html", "../common/Base", "./List"], function(tpl){
 				obj = {
 					css:{},
 					attr:{
-						href: me.brandLink
+						href: me.parseBind(me.brandLink)
 					}
 				};
 			if(me.brandClass){
 				obj.css["'navbar-brand'"] = me.brandClass;
 			}
 			if(me.brandText && !me.brandTpl){
-				obj.text = me.brandText;
+				obj.text = me.parseBind(me.brandText);
 			}
 			return obj;
 		},
@@ -212,8 +235,9 @@ define(["text!./Navbar.html", "../common/Base", "./List"], function(tpl){
 		 * @return {Object}
 		 */
 		toggleTextBindings: function(){
+			var me = this;
 			return {
-				text: "fb.text('" + this.toggleText + "')"
+				text: me.textBind( me.toggleText )
 			};
 		},
 		/**
@@ -240,10 +264,10 @@ define(["text!./Navbar.html", "../common/Base", "./List"], function(tpl){
 			return obj;
 		},
 		/**
-		 * @method navbarHeaderContainerBindings
+		 * @method navbarWrapperBindings
 		 * @return {Object}
 		 */
-		navbarHeaderContainerBindings: function(){
+		navbarWrapperBindings: function(){
 			return {
 				css:{
 					"container": true

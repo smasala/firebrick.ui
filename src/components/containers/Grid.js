@@ -33,12 +33,12 @@ define(["text!./Grid.html", "jquery", "./Base"], function(tpl, $){
 		 * @return {Object}
 		 */
 		bindings: function(){
-			var me = this;
-			return {
-				css: {
-					row: me.rowClass
-				}
-			};
+			var me = this,
+				obj = me.callParent(arguments);
+			
+			obj.css.row = me.rowClass;
+			
+			return obj;
 		},
 		/**
 		 * @method getBasicBindings

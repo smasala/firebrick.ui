@@ -8,10 +8,11 @@
  * @namespace components.containers
  * @class Panel
  */
-define(["text!./Panel.html", "./Base"], function(tpl){
+define(["text!./Panel.html", "./Base", "../nav/Toolbar", "../common/mixins/Toolbars"], function(tpl){
 	"use strict";
 	return Firebrick.define("Firebrick.ui.containers.Panel", {
 		extend:"Firebrick.ui.containers.Base",
+		mixins:"Firebrick.ui.common.mixins.Toolbars",
 		/**
 		 * @property uiName
 		 * @type {String}
@@ -98,20 +99,40 @@ define(["text!./Panel.html", "./Base"], function(tpl){
 		 */
 		headerIconPosition: "pull-right",
 		/**
+		 * use this to provide the given panel with toolbars
+		 * @example
+		 * 	toolbar:[{
+		 * 		position: "top",
+		 * 		items: [{...}]
+		 * 	}]
+		 * @example
+		 * 	toolbar:[{
+		 * 		position: "top",
+		 * 		items: [{...}]
+		 * 	},{
+		 * 		position: "bottom",
+		 * 		items: [{...}]
+		 * 	}]
+		 * @property toolbar
+		 * @type {Array of Objects}
+		 * @default null
+		 */
+		toolbar:null,
+		/**
 		 * Data bindings
 		 * @method bindings
 		 * @return {Object}
 		 */
 		bindings: function(){
 			var me = this,
-				obj = {
-						css:{
-							"panel": me.panelClass
-						}
-					};
+				obj = me.callParent(arguments);
+
+			obj.css.panel = me.panelClass;
+
 			if(me.panelTypeClass){
-				obj.css[ me.parseBind("panel-"+me.panelTypeClass)] = true;
+				obj.css[ me.parseBind("panel-" + me.panelTypeClass) ] = true;
 			}
+			
 			return obj;
 		},
 		/**
@@ -177,7 +198,7 @@ define(["text!./Panel.html", "./Base"], function(tpl){
 				attr:{
 					"'data-toggle'":  "'collapse'",
 					"href":  me.parseBind("#" + id ),
-					"'aria-expanded'": typeof me.collapsed == "boolean" ? me.collapsed : true,
+					"'aria-expanded'": typeof me.collapsed === "boolean" ? me.collapsed : true,
 					"'aria-controls'":  me.parseBind( id ),
 				}
 			};
@@ -187,8 +208,9 @@ define(["text!./Panel.html", "./Base"], function(tpl){
 		 * @return {Object}
 		 */
 		panelHeaderTextBindings: function(){
+			var me = this;
 			return {
-				text: "fb.text('" + this.title + "')"
+				text: me.textBind(me.title)
 			};
 		},
 		/**
@@ -198,15 +220,18 @@ define(["text!./Panel.html", "./Base"], function(tpl){
 		panelBodyBindings: function(){
 			var me = this,
 				obj = {
-						css:{
-							"'panel-body'": me.panelBodyClass
-						}
-					};
+					css:{
+						"'panel-body'": me.panelBodyClass
+					}
+				};
 			
 			if(!me.items && me.content){
-				obj.html = me.contentTextual ? "fb.text('" + me.content + "')" : me.content;
+				obj.html = me.contentTextual ? me.textBind(me.content) : me.content;
 			}
+			
+			me.toolbarContainer(obj);
+			
 			return obj;
-		}
+		},
 	});
 });

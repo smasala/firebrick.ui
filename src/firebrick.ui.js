@@ -41,7 +41,7 @@
 			 * @private
 			 * @type {String}
 			 */
-			version: "0.8.20",
+			version: "0.9.0",
 			
 			/**
 			 * used to cache pointers to classes when searching by "uiName"
@@ -59,7 +59,7 @@
 			 * @param {Object} config
 			 * @param {Object} config.target selector string, jquery object (optional) if none passed, html is returned
 			 * @param {Object} config.items array of strings or objects ["fb-ui-input", {uiName:"fb-ui-textarea"}]
-			 * @param {Object} config.view Firebrick view class (optional), must be defined for componentReady event to be fired
+			 * @param {Object} config.view Firebrick view class (optional), must be defined for rendered event to be fired
 			 * @return {String} html
 			 */
 			build: function(config){
@@ -67,13 +67,13 @@
 					target = Firebrick.views.getTarget(config.target),
 					r, html;
 				
-				if(config.view){
-					config.view.on("ready", function(){
-						for(var i = 0, l = r.items.length; i<l; i++){
-							r.items[i].fireEvent("componentReady");	
-						}
-					});
-				}
+//				if(config.view){
+//					config.view.on("ready", function(){
+//						for(var i = 0, l = r.items.length; i<l; i++){
+//							r.items[i].fireEvent("rendered");	
+//						}
+//					});
+//				}
 				
 				r = me._populate(config.items, config.view);
 				html = r.html;
@@ -120,7 +120,7 @@
 				for(var i = 0, l = items.length; i<l; i++){
 					v = items[i];
 					if(v.isView){
-						if(v._state == "initial"){
+						if(v._state === "initial"){
 							component = v.init();
 						}
 						h += component.tpl;
@@ -168,7 +168,7 @@
 					for(k in Firebrick.classes.classRegistry){
 						if(Firebrick.classes.classRegistry.hasOwnProperty(k)){
 							v = Firebrick.classes.classRegistry[k];
-							if(v.uiComponent && v.uiName == name){
+							if(v.uiComponent && v.uiName === name){
 								item = v;
 								me._searchCache[name] = v;
 								break;
@@ -224,7 +224,7 @@
 								}
 							}
 							//remove last ", "
-							p = p.substr(-1) == "," ? p.substring(0, p.length-1) : p;
+							p = p.substr(-1) === "," ? p.substring(0, p.length-1) : p;
 							p += f ? "" : "},";
 							return p;
 						};
@@ -250,11 +250,11 @@
 		 * @type {Object}
 		 */
 		listeners:{
-			componentReady: function(){
+			rendered: function(){
 				var me = this;
 				if($.isArray(me.items)){
 					for(var i = 0, l = me.items.length; i<l; i++){
-						me.items[i].fireEvent("componentReady");
+						me.items[i].fireEvent("rendered");
 					}
 				}
 			}

@@ -2,7 +2,7 @@
     "project": {
         "name": "Firebrick UI API",
         "description": "Firebrick UI API: a component library for Firebrick MVC, Knockout JS, jQuery and Bootstrap",
-        "version": "0.8.20",
+        "version": "0.9.0",
         "url": "https://github.com/smasala",
         "logo": "fbui_small.png"
     },
@@ -56,6 +56,17 @@
             "modules": {},
             "classes": {
                 "components.common.mixins.Items": 1
+            },
+            "fors": {},
+            "namespaces": {
+                "components.common.mixins": 1
+            }
+        },
+        "src\\components\\common\\mixins\\Toolbars.js": {
+            "name": "src\\components\\common\\mixins\\Toolbars.js",
+            "modules": {},
+            "classes": {
+                "components.common.mixins.Toolbars": 1
             },
             "fors": {},
             "namespaces": {
@@ -139,6 +150,17 @@
                 "components.containers": 1
             }
         },
+        "src\\components\\containers\\Modal.js": {
+            "name": "src\\components\\containers\\Modal.js",
+            "modules": {},
+            "classes": {
+                "components.containers.Modal": 1
+            },
+            "fors": {},
+            "namespaces": {
+                "components.containers": 1
+            }
+        },
         "src\\components\\containers\\Panel.js": {
             "name": "src\\components\\containers\\Panel.js",
             "modules": {},
@@ -148,6 +170,17 @@
             "fors": {},
             "namespaces": {
                 "components.containers": 1
+            }
+        },
+        "src\\components\\display\\Alert.js": {
+            "name": "src\\components\\display\\Alert.js",
+            "modules": {},
+            "classes": {
+                "components.display.Alert": 1
+            },
+            "fors": {},
+            "namespaces": {
+                "components.display": 1
             }
         },
         "src\\components\\display\\Header.js": {
@@ -297,6 +330,17 @@
                 "components.fields": 1
             }
         },
+        "src\\components\\nav\\Base.js": {
+            "name": "src\\components\\nav\\Base.js",
+            "modules": {},
+            "classes": {
+                "components.nav.Base": 1
+            },
+            "fors": {},
+            "namespaces": {
+                "components.nav": 1
+            }
+        },
         "src\\components\\nav\\Breadcrumbs.js": {
             "name": "src\\components\\nav\\Breadcrumbs.js",
             "modules": {},
@@ -335,6 +379,17 @@
             "modules": {},
             "classes": {
                 "components.nav.Pagination": 1
+            },
+            "fors": {},
+            "namespaces": {
+                "components.nav": 1
+            }
+        },
+        "src\\components\\nav\\Toolbar.js": {
+            "name": "src\\components\\nav\\Toolbar.js",
+            "modules": {},
+            "classes": {
+                "components.nav.Toolbar": 1
             },
             "fors": {},
             "namespaces": {
@@ -389,6 +444,7 @@
                 "components.button.Icon": 1,
                 "components.button.ToggleButton": 1,
                 "components.common.mixins.Items": 1,
+                "components.common.mixins.Toolbars": 1,
                 "components.common.Base": 1,
                 "components.common.MultiplesBase": 1,
                 "components.containers.Base": 1,
@@ -396,7 +452,9 @@
                 "components.containers.Form": 1,
                 "components.containers.Grid": 1,
                 "components.containers.GridColumn": 1,
+                "components.containers.Modal": 1,
                 "components.containers.Panel": 1,
+                "components.display.Alert": 1,
                 "components.display.Header": 1,
                 "components.display.Image": 1,
                 "components.display.List": 1,
@@ -409,10 +467,12 @@
                 "components.fields.Radio": 1,
                 "components.fields.SelectBox": 1,
                 "components.fields.TextArea": 1,
+                "components.nav.Base": 1,
                 "components.nav.Breadcrumbs": 1,
                 "components.nav.List": 1,
                 "components.nav.Navbar": 1,
                 "components.nav.Pagination": 1,
+                "components.nav.Toolbar": 1,
                 "components.table.Table": 1,
                 "components.table.TreeTable": 1
             },
@@ -534,11 +594,26 @@
             "extensions": [],
             "plugin_for": [],
             "extension_for": [
-                "components.containers.Base"
+                "components.containers.Base",
+                "components.display.Alert",
+                "components.nav.Base"
             ],
             "module": "Firebrick.ui.components",
             "namespace": "components.common.mixins",
             "file": "src\\components\\common\\mixins\\Items.js",
+            "line": 5
+        },
+        "components.common.mixins.Toolbars": {
+            "name": "components.common.mixins.Toolbars",
+            "shortname": "components.common.mixins.Toolbars",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "Firebrick.ui.components",
+            "namespace": "components.common.mixins",
+            "file": "src\\components\\common\\mixins\\Toolbars.js",
             "line": 5
         },
         "components.common.Base": {
@@ -644,6 +719,20 @@
             "line": 5,
             "extends": "components.containers.Base"
         },
+        "components.containers.Modal": {
+            "name": "components.containers.Modal",
+            "shortname": "components.containers.Modal",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "Firebrick.ui.components",
+            "namespace": "components.containers",
+            "file": "src\\components\\containers\\Modal.js",
+            "line": 5,
+            "extends": "components.containers.Base"
+        },
         "components.containers.Panel": {
             "name": "components.containers.Panel",
             "shortname": "components.containers.Panel",
@@ -657,6 +746,23 @@
             "file": "src\\components\\containers\\Panel.js",
             "line": 5,
             "extends": "components.containers.Base"
+        },
+        "components.display.Alert": {
+            "name": "components.display.Alert",
+            "shortname": "components.display.Alert",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "Firebrick.ui.components",
+            "namespace": "components.display",
+            "file": "src\\components\\display\\Alert.js",
+            "line": 5,
+            "extends": "components.common.Base",
+            "uses": [
+                "components.common.mixins.Items"
+            ]
         },
         "components.display.Header": {
             "name": "components.display.Header",
@@ -839,6 +945,23 @@
             "line": 5,
             "extends": "components.fields.Input"
         },
+        "components.nav.Base": {
+            "name": "components.nav.Base",
+            "shortname": "components.nav.Base",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "Firebrick.ui.components",
+            "namespace": "components.nav",
+            "file": "src\\components\\nav\\Base.js",
+            "line": 5,
+            "extends": "components.common.Base",
+            "uses": [
+                "components.common.mixins.Items"
+            ]
+        },
         "components.nav.Breadcrumbs": {
             "name": "components.nav.Breadcrumbs",
             "shortname": "components.nav.Breadcrumbs",
@@ -879,7 +1002,7 @@
             "namespace": "components.nav",
             "file": "src\\components\\nav\\Navbar.js",
             "line": 5,
-            "extends": "components.nav.List"
+            "extends": "components.nav.Base"
         },
         "components.nav.Pagination": {
             "name": "components.nav.Pagination",
@@ -894,6 +1017,20 @@
             "file": "src\\components\\nav\\Pagination.js",
             "line": 5,
             "extends": "components.display.List"
+        },
+        "components.nav.Toolbar": {
+            "name": "components.nav.Toolbar",
+            "shortname": "components.nav.Toolbar",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "Firebrick.ui.components",
+            "namespace": "components.nav",
+            "file": "src\\components\\nav\\Toolbar.js",
+            "line": 5,
+            "extends": "components.nav.Navbar"
         },
         "components.table.Table": {
             "name": "components.table.Table",
@@ -1033,6 +1170,30 @@
         {
             "file": "src\\components\\button\\Button.js",
             "line": 24,
+            "description": "type: button, submit",
+            "itemtype": "property",
+            "name": "type",
+            "type": "{String}",
+            "default": "\"button\"",
+            "class": "components.button.Button",
+            "module": "Firebrick.ui.components",
+            "namespace": "components.button"
+        },
+        {
+            "file": "src\\components\\button\\Button.js",
+            "line": 31,
+            "description": "if true - att \"navbar-btn\" class to the button",
+            "itemtype": "property",
+            "name": "navbarItem",
+            "type": "{Boolean}",
+            "default": "false",
+            "class": "components.button.Button",
+            "module": "Firebrick.ui.components",
+            "namespace": "components.button"
+        },
+        {
+            "file": "src\\components\\button\\Button.js",
+            "line": 38,
             "itemtype": "property",
             "name": "btnSize",
             "type": "{Boolean|String} false |  (\"sm\", \"lg\", \"xs\")",
@@ -1043,7 +1204,7 @@
         },
         {
             "file": "src\\components\\button\\Button.js",
-            "line": 30,
+            "line": 44,
             "itemtype": "property",
             "name": "btnStyle",
             "type": "{Boolean|String} false | (default, primary, success, info, warning, danger, link)",
@@ -1054,7 +1215,7 @@
         },
         {
             "file": "src\\components\\button\\Button.js",
-            "line": 36,
+            "line": 50,
             "description": "used to inject something before the text <span>",
             "itemtype": "property",
             "name": "beforeText",
@@ -1066,7 +1227,7 @@
         },
         {
             "file": "src\\components\\button\\Button.js",
-            "line": 43,
+            "line": 57,
             "description": "used to inject something after the text <span>",
             "itemtype": "property",
             "name": "afterText",
@@ -1078,7 +1239,7 @@
         },
         {
             "file": "src\\components\\button\\Button.js",
-            "line": 50,
+            "line": 64,
             "description": "passed to list data property",
             "itemtype": "property",
             "name": "items",
@@ -1090,7 +1251,7 @@
         },
         {
             "file": "src\\components\\button\\Button.js",
-            "line": 57,
+            "line": 71,
             "description": "default bindings called by data-bind={{data-bind}}",
             "itemtype": "method",
             "name": "bindings",
@@ -1104,7 +1265,7 @@
         },
         {
             "file": "src\\components\\button\\Button.js",
-            "line": 86,
+            "line": 101,
             "itemtype": "property",
             "name": "buttonTextBindings",
             "return": {
@@ -1117,7 +1278,7 @@
         },
         {
             "file": "src\\components\\button\\Button.js",
-            "line": 95,
+            "line": 111,
             "itemtype": "method",
             "name": "caretBindings",
             "return": {
@@ -1130,7 +1291,7 @@
         },
         {
             "file": "src\\components\\button\\Button.js",
-            "line": 106,
+            "line": 122,
             "itemtype": "method",
             "name": "dropdownContainerBindings",
             "return": {
@@ -1364,6 +1525,18 @@
         {
             "file": "src\\components\\common\\mixins\\Items.js",
             "line": 14,
+            "description": "default configuration for direct children - i.e. direct items",
+            "itemtype": "property",
+            "name": "defaults",
+            "type": "{Object}",
+            "default": "null",
+            "class": "components.common.mixins.Items",
+            "module": "Firebrick.ui.components",
+            "namespace": "components.common.mixins"
+        },
+        {
+            "file": "src\\components\\common\\mixins\\Items.js",
+            "line": 21,
             "itemtype": "property",
             "name": "items",
             "type": "{String|Object|Array of Object}",
@@ -1374,7 +1547,7 @@
         },
         {
             "file": "src\\components\\common\\mixins\\Items.js",
-            "line": 36,
+            "line": 43,
             "description": "inject sub items",
             "itemtype": "method",
             "name": "getItems",
@@ -1388,7 +1561,7 @@
         },
         {
             "file": "src\\components\\common\\mixins\\Items.js",
-            "line": 49,
+            "line": 56,
             "description": "if you are calling _getItems from a nested scope then use this function",
             "itemtype": "method",
             "name": "_getItemsScoped",
@@ -1415,7 +1588,7 @@
         },
         {
             "file": "src\\components\\common\\mixins\\Items.js",
-            "line": 62,
+            "line": 69,
             "description": "use getItems",
             "access": "private",
             "tagname": "",
@@ -1437,6 +1610,52 @@
             "namespace": "components.common.mixins"
         },
         {
+            "file": "src\\components\\common\\mixins\\Toolbars.js",
+            "line": 14,
+            "description": "passed on to the toolbar items (direct children only)",
+            "itemtype": "property",
+            "name": "toolbarDefaults",
+            "type": "{Object}",
+            "default": "{Object} {\n\t\tnavbarItem: true\n}",
+            "class": "components.common.mixins.Toolbars",
+            "module": "Firebrick.ui.components",
+            "namespace": "components.common.mixins"
+        },
+        {
+            "file": "src\\components\\common\\mixins\\Toolbars.js",
+            "line": 25,
+            "description": "add css classes and other configuration to the container",
+            "itemtype": "method",
+            "name": "toolbarContainer",
+            "params": [
+                {
+                    "name": "obj",
+                    "description": "obj that is later pass to the binder",
+                    "type": "Object"
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "Object"
+            },
+            "class": "components.common.mixins.Toolbars",
+            "module": "Firebrick.ui.components",
+            "namespace": "components.common.mixins"
+        },
+        {
+            "file": "src\\components\\common\\mixins\\Toolbars.js",
+            "line": 49,
+            "itemtype": "method",
+            "name": "getToolbars",
+            "return": {
+                "description": "",
+                "type": "Html"
+            },
+            "class": "components.common.mixins.Toolbars",
+            "module": "Firebrick.ui.components",
+            "namespace": "components.common.mixins"
+        },
+        {
             "file": "src\\components\\common\\Base.js",
             "line": 20,
             "description": "Override class id",
@@ -1454,7 +1673,7 @@
             "line": 27,
             "description": "component id, not the _classId - however if none specified it will default to the _classId",
             "itemtype": "property",
-            "name": "id,",
+            "name": "id",
             "type": "{String}",
             "default": "null",
             "class": "components.common.Base",
@@ -1554,6 +1773,86 @@
         {
             "file": "src\\components\\common\\Base.js",
             "line": 88,
+            "itemtype": "property",
+            "name": "_element",
+            "type": "{Null|jQuery Object}",
+            "default": "null",
+            "class": "components.common.Base",
+            "module": "Firebrick.ui.components",
+            "namespace": "components.common"
+        },
+        {
+            "file": "src\\components\\common\\Base.js",
+            "line": 94,
+            "itemtype": "property",
+            "name": "tooltip",
+            "type": "{Boolean|String} set to false to deactivate, string to set the text",
+            "default": "false",
+            "class": "components.common.Base",
+            "module": "Firebrick.ui.components",
+            "namespace": "components.common"
+        },
+        {
+            "file": "src\\components\\common\\Base.js",
+            "line": 100,
+            "description": "where the tooltip should appear: \"top\", \"left\", \"right\", \"bottom\"",
+            "itemtype": "property",
+            "name": "tooltipLocation",
+            "type": "{String}",
+            "default": "\"top\"",
+            "class": "components.common.Base",
+            "module": "Firebrick.ui.components",
+            "namespace": "components.common"
+        },
+        {
+            "file": "src\\components\\common\\Base.js",
+            "line": 107,
+            "description": "options defined by bootstrap",
+            "itemtype": "property",
+            "name": "tooltipOptions",
+            "type": "{Object}",
+            "default": "null",
+            "class": "components.common.Base",
+            "module": "Firebrick.ui.components",
+            "namespace": "components.common"
+        },
+        {
+            "file": "src\\components\\common\\Base.js",
+            "line": 114,
+            "description": "pass a binding Object and this method will add the tooltip relevant properties",
+            "itemtype": "method",
+            "name": "addTooltipBind",
+            "params": [
+                {
+                    "name": "bindObj",
+                    "description": "",
+                    "type": "Object"
+                }
+            ],
+            "return": {
+                "description": "new Object",
+                "type": "Object"
+            },
+            "class": "components.common.Base",
+            "module": "Firebrick.ui.components",
+            "namespace": "components.common"
+        },
+        {
+            "file": "src\\components\\common\\Base.js",
+            "line": 132,
+            "itemtype": "method",
+            "name": "getElement",
+            "return": {
+                "description": "jquery element object",
+                "type": "Object"
+            },
+            "class": "components.common.Base",
+            "module": "Firebrick.ui.components",
+            "namespace": "components.common"
+        },
+        {
+            "file": "src\\components\\common\\Base.js",
+            "line": 147,
             "description": "called when defining the class",
             "itemtype": "method",
             "name": "constructor",
@@ -1567,7 +1866,7 @@
         },
         {
             "file": "src\\components\\common\\Base.js",
-            "line": 107,
+            "line": 166,
             "description": "compile and cache template",
             "itemtype": "method",
             "name": "_precompile",
@@ -1581,7 +1880,7 @@
         },
         {
             "file": "src\\components\\common\\Base.js",
-            "line": 130,
+            "line": 189,
             "description": "use this as a wrapper in a template if the property you wish to call COULD be either a primitive or a function",
             "itemtype": "method",
             "name": "b",
@@ -1602,7 +1901,7 @@
         },
         {
             "file": "src\\components\\common\\Base.js",
-            "line": 139,
+            "line": 198,
             "description": "when overriding this or any other method, this.callParent(arguments) calls the method in the super class",
             "itemtype": "method",
             "name": "init",
@@ -1612,11 +1911,36 @@
         },
         {
             "file": "src\\components\\common\\Base.js",
-            "line": 153,
+            "line": 221,
+            "description": "mother of all basic bindings",
+            "itemtype": "method",
+            "name": "bindings",
+            "return": {
+                "description": "{attr:{}, css:{}}",
+                "type": "Object"
+            },
+            "class": "components.common.Base",
+            "module": "Firebrick.ui.components",
+            "namespace": "components.common"
+        },
+        {
+            "file": "src\\components\\common\\Base.js",
+            "line": 232,
             "description": "compile the template",
-            "itemtype": "property",
-            "name": "force {Boolean} [force=false] optional - set to true to force a retemplate",
-            "type": "String",
+            "itemtype": "method",
+            "name": "template",
+            "params": [
+                {
+                    "name": "prop",
+                    "description": "[prop=tpl] optional - name of property to template",
+                    "type": "String"
+                },
+                {
+                    "name": "force",
+                    "description": "[force=false] optional - set to true to force a retemplate",
+                    "type": "Boolean"
+                }
+            ],
             "return": {
                 "description": "template function",
                 "type": "Function"
@@ -1627,11 +1951,17 @@
         },
         {
             "file": "src\\components\\common\\Base.js",
-            "line": 168,
+            "line": 247,
             "description": "build the compiled template",
-            "itemtype": "property",
-            "name": "prop  [prop=\"tpl\"] optional - name of property to build",
-            "type": "String",
+            "itemtype": "method",
+            "name": "build",
+            "params": [
+                {
+                    "name": "prop",
+                    "description": "[prop=\"tpl\"] optional - name of property to build",
+                    "type": "String"
+                }
+            ],
             "return": {
                 "description": "html",
                 "type": "String"
@@ -1642,7 +1972,7 @@
         },
         {
             "file": "src\\components\\common\\Base.js",
-            "line": 181,
+            "line": 259,
             "itemtype": "method",
             "name": "dataBind",
             "params": [
@@ -1666,7 +1996,7 @@
         },
         {
             "file": "src\\components\\common\\Base.js",
-            "line": 194,
+            "line": 273,
             "description": "if no id is specified it will call getClassId() and use that value",
             "itemtype": "method",
             "name": "getId",
@@ -1680,7 +2010,7 @@
         },
         {
             "file": "src\\components\\common\\Base.js",
-            "line": 208,
+            "line": 287,
             "description": "called when calling {{{getSubTpl}}} in component template",
             "itemtype": "method",
             "name": "getSubTpl",
@@ -1694,7 +2024,7 @@
         },
         {
             "file": "src\\components\\common\\Base.js",
-            "line": 216,
+            "line": 295,
             "description": "find the parent of this class\niterate up the inheritance tree looking for a classname that differs from the current and that \"subTpl\" or \"tpl\" don't match either",
             "access": "private",
             "tagname": "",
@@ -1710,7 +2040,7 @@
         },
         {
             "file": "src\\components\\common\\Base.js",
-            "line": 234,
+            "line": 313,
             "description": "called when calling {{{getParentTpl}}} in component template",
             "itemtype": "method",
             "name": "getParentTpl",
@@ -1724,7 +2054,7 @@
         },
         {
             "file": "src\\components\\common\\Base.js",
-            "line": 243,
+            "line": 322,
             "description": "called when calling {{{getParentSubTpl}}} in component template",
             "itemtype": "method",
             "name": "getParentSubTpl",
@@ -1738,7 +2068,7 @@
         },
         {
             "file": "src\\components\\common\\Base.js",
-            "line": 252,
+            "line": 331,
             "description": "clean string - i.e. remove all ' from string",
             "itemtype": "method",
             "name": "cleanString",
@@ -1752,7 +2082,7 @@
         },
         {
             "file": "src\\components\\common\\Base.js",
-            "line": 260,
+            "line": 339,
             "description": "attach ' to the start and end of the string for KO binds",
             "itemtype": "method",
             "name": "parseBind",
@@ -1772,6 +2102,30 @@
             "namespace": "components.common"
         },
         {
+            "file": "src\\components\\common\\Base.js",
+            "line": 348,
+            "description": "takes a string and prepares it for Firebrick text call",
+            "example": [
+                "\n\ttextBind(\"mystring.abc.key\")\n\t// returns = fb.text('mystring.abc.key')"
+            ],
+            "itemtype": "method",
+            "name": "textBind",
+            "params": [
+                {
+                    "name": "key",
+                    "description": "",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "String"
+            },
+            "class": "components.common.Base",
+            "module": "Firebrick.ui.components",
+            "namespace": "components.common"
+        },
+        {
             "file": "src\\components\\common\\MultiplesBase.js",
             "line": 16,
             "itemtype": "method",
@@ -1783,19 +2137,6 @@
             "class": "components.common.MultiplesBase",
             "module": "Firebrick.ui.components",
             "namespace": "components.common"
-        },
-        {
-            "file": "src\\components\\containers\\Box.js",
-            "line": 17,
-            "itemtype": "method",
-            "name": "bindings",
-            "return": {
-                "description": "",
-                "type": "Object"
-            },
-            "class": "components.containers.Box",
-            "module": "Firebrick.ui.components",
-            "namespace": "components.containers"
         },
         {
             "file": "src\\components\\containers\\Form.js",
@@ -2016,7 +2357,7 @@
         },
         {
             "file": "src\\components\\containers\\Form.js",
-            "line": 155,
+            "line": 156,
             "itemtype": "method",
             "name": "init",
             "class": "components.containers.Form",
@@ -2025,7 +2366,7 @@
         },
         {
             "file": "src\\components\\containers\\Form.js",
-            "line": 167,
+            "line": 168,
             "description": "make sure this.url is set before calling this function",
             "itemtype": "method",
             "name": "submit",
@@ -2035,7 +2376,7 @@
         },
         {
             "file": "src\\components\\containers\\Form.js",
-            "line": 201,
+            "line": 202,
             "itemtype": "method",
             "name": "formBindings",
             "return": {
@@ -2208,8 +2549,309 @@
             "namespace": "components.containers"
         },
         {
+            "file": "src\\components\\containers\\Modal.js",
+            "line": 31,
+            "description": "show the modal",
+            "itemtype": "method",
+            "name": "showMe",
+            "return": {
+                "description": "self",
+                "type": "Object"
+            },
+            "class": "components.containers.Modal",
+            "module": "Firebrick.ui.components",
+            "namespace": "components.containers"
+        },
+        {
+            "file": "src\\components\\containers\\Modal.js",
+            "line": 43,
+            "itemtype": "property",
+            "name": "ariaDescribedBy",
+            "type": "{String}",
+            "default": "\"\"",
+            "class": "components.containers.Modal",
+            "module": "Firebrick.ui.components",
+            "namespace": "components.containers"
+        },
+        {
+            "file": "src\\components\\containers\\Modal.js",
+            "line": 49,
+            "description": "if true - the modal will popup after .create() has been called",
+            "itemtype": "property",
+            "name": "showOnCreate",
+            "type": "{Boolean}",
+            "default": "false",
+            "class": "components.containers.Modal",
+            "module": "Firebrick.ui.components",
+            "namespace": "components.containers"
+        },
+        {
+            "file": "src\\components\\containers\\Modal.js",
+            "line": 56,
+            "itemtype": "property",
+            "name": "title",
+            "type": "{String}",
+            "default": "\"\"",
+            "class": "components.containers.Modal",
+            "module": "Firebrick.ui.components",
+            "namespace": "components.containers"
+        },
+        {
+            "file": "src\\components\\containers\\Modal.js",
+            "line": 62,
+            "itemtype": "property",
+            "name": "titleClass",
+            "type": "{Boolean}",
+            "default": "true",
+            "class": "components.containers.Modal",
+            "module": "Firebrick.ui.components",
+            "namespace": "components.containers"
+        },
+        {
+            "file": "src\\components\\containers\\Modal.js",
+            "line": 68,
+            "itemtype": "property",
+            "name": "bodyClass",
+            "type": "{Boolean}",
+            "default": "true",
+            "class": "components.containers.Modal",
+            "module": "Firebrick.ui.components",
+            "namespace": "components.containers"
+        },
+        {
+            "file": "src\\components\\containers\\Modal.js",
+            "line": 74,
+            "itemtype": "property",
+            "name": "animationClass",
+            "type": "{String}",
+            "default": "\"fade\"",
+            "class": "components.containers.Modal",
+            "module": "Firebrick.ui.components",
+            "namespace": "components.containers"
+        },
+        {
+            "file": "src\\components\\containers\\Modal.js",
+            "line": 80,
+            "itemtype": "property",
+            "name": "dialogClass",
+            "type": "{Boolean}",
+            "default": "true",
+            "class": "components.containers.Modal",
+            "module": "Firebrick.ui.components",
+            "namespace": "components.containers"
+        },
+        {
+            "file": "src\\components\\containers\\Modal.js",
+            "line": 86,
+            "itemtype": "property",
+            "name": "contentClass",
+            "type": "{Boolean}",
+            "default": "true",
+            "class": "components.containers.Modal",
+            "module": "Firebrick.ui.components",
+            "namespace": "components.containers"
+        },
+        {
+            "file": "src\\components\\containers\\Modal.js",
+            "line": 92,
+            "itemtype": "property",
+            "name": "headerClass",
+            "type": "{Boolean}",
+            "default": "true",
+            "class": "components.containers.Modal",
+            "module": "Firebrick.ui.components",
+            "namespace": "components.containers"
+        },
+        {
+            "file": "src\\components\\containers\\Modal.js",
+            "line": 98,
+            "itemtype": "property",
+            "name": "isModal",
+            "type": "{Boolean}",
+            "default": "true",
+            "class": "components.containers.Modal",
+            "module": "Firebrick.ui.components",
+            "namespace": "components.containers"
+        },
+        {
+            "file": "src\\components\\containers\\Modal.js",
+            "line": 104,
+            "itemtype": "property",
+            "name": "footerClass",
+            "type": "{Boolean}",
+            "default": "true",
+            "class": "components.containers.Modal",
+            "module": "Firebrick.ui.components",
+            "namespace": "components.containers"
+        },
+        {
+            "file": "src\\components\\containers\\Modal.js",
+            "line": 110,
+            "description": "used to created the <h{int}></h{int}> tags in the header",
+            "itemtype": "property",
+            "name": "titleSize",
+            "type": "{Integer}",
+            "default": "4",
+            "class": "components.containers.Modal",
+            "module": "Firebrick.ui.components",
+            "namespace": "components.containers"
+        },
+        {
+            "file": "src\\components\\containers\\Modal.js",
+            "line": 117,
+            "itemtype": "property",
+            "name": "showCloseIcon",
+            "type": "{Boolean}",
+            "default": "true",
+            "class": "components.containers.Modal",
+            "module": "Firebrick.ui.components",
+            "namespace": "components.containers"
+        },
+        {
+            "file": "src\\components\\containers\\Modal.js",
+            "line": 123,
+            "description": "screen reader text",
+            "itemtype": "property",
+            "name": "srCloseText",
+            "type": "{String}",
+            "default": "\"Close\"",
+            "class": "components.containers.Modal",
+            "module": "Firebrick.ui.components",
+            "namespace": "components.containers"
+        },
+        {
+            "file": "src\\components\\containers\\Modal.js",
+            "line": 130,
+            "itemtype": "method",
+            "name": "srCloseIconBindings",
+            "return": {
+                "description": "",
+                "type": "Object"
+            },
+            "class": "components.containers.Modal",
+            "module": "Firebrick.ui.components",
+            "namespace": "components.containers"
+        },
+        {
+            "file": "src\\components\\containers\\Modal.js",
+            "line": 143,
+            "itemtype": "method",
+            "name": "closeButtonBindings",
+            "return": {
+                "description": "",
+                "type": "Object"
+            },
+            "class": "components.containers.Modal",
+            "module": "Firebrick.ui.components",
+            "namespace": "components.containers"
+        },
+        {
+            "file": "src\\components\\containers\\Modal.js",
+            "line": 158,
+            "itemtype": "method",
+            "name": "getTitleId",
+            "return": {
+                "description": "",
+                "type": "String"
+            },
+            "class": "components.containers.Modal",
+            "module": "Firebrick.ui.components",
+            "namespace": "components.containers"
+        },
+        {
+            "file": "src\\components\\containers\\Modal.js",
+            "line": 165,
+            "itemtype": "method",
+            "name": "bindings",
+            "return": {
+                "description": "",
+                "type": "Object"
+            },
+            "class": "components.containers.Modal",
+            "module": "Firebrick.ui.components",
+            "namespace": "components.containers"
+        },
+        {
+            "file": "src\\components\\containers\\Modal.js",
+            "line": 187,
+            "itemtype": "method",
+            "name": "dialogBindings",
+            "return": {
+                "description": "",
+                "type": "Object"
+            },
+            "class": "components.containers.Modal",
+            "module": "Firebrick.ui.components",
+            "namespace": "components.containers"
+        },
+        {
+            "file": "src\\components\\containers\\Modal.js",
+            "line": 199,
+            "itemtype": "method",
+            "name": "contentBindings",
+            "return": {
+                "description": "",
+                "type": "Object"
+            },
+            "class": "components.containers.Modal",
+            "module": "Firebrick.ui.components",
+            "namespace": "components.containers"
+        },
+        {
+            "file": "src\\components\\containers\\Modal.js",
+            "line": 211,
+            "itemtype": "method",
+            "name": "headerBindings",
+            "return": {
+                "description": "",
+                "type": "Object"
+            },
+            "class": "components.containers.Modal",
+            "module": "Firebrick.ui.components",
+            "namespace": "components.containers"
+        },
+        {
+            "file": "src\\components\\containers\\Modal.js",
+            "line": 223,
+            "itemtype": "method",
+            "name": "titleBindings",
+            "return": {
+                "description": "",
+                "type": "Object"
+            },
+            "class": "components.containers.Modal",
+            "module": "Firebrick.ui.components",
+            "namespace": "components.containers"
+        },
+        {
+            "file": "src\\components\\containers\\Modal.js",
+            "line": 236,
+            "itemtype": "method",
+            "name": "bodyBindings",
+            "return": {
+                "description": "",
+                "type": "Object"
+            },
+            "class": "components.containers.Modal",
+            "module": "Firebrick.ui.components",
+            "namespace": "components.containers"
+        },
+        {
+            "file": "src\\components\\containers\\Modal.js",
+            "line": 248,
+            "itemtype": "method",
+            "name": "footerBindings",
+            "return": {
+                "description": "",
+                "type": "Object"
+            },
+            "class": "components.containers.Modal",
+            "module": "Firebrick.ui.components",
+            "namespace": "components.containers"
+        },
+        {
             "file": "src\\components\\containers\\Panel.js",
-            "line": 15,
+            "line": 16,
             "itemtype": "property",
             "name": "uiName",
             "type": "{String}",
@@ -2219,7 +2861,7 @@
         },
         {
             "file": "src\\components\\containers\\Panel.js",
-            "line": 20,
+            "line": 21,
             "itemtype": "property",
             "name": "tpl",
             "type": "{String} html",
@@ -2229,7 +2871,7 @@
         },
         {
             "file": "src\\components\\containers\\Panel.js",
-            "line": 25,
+            "line": 26,
             "itemtype": "property",
             "name": "title",
             "type": "{String}",
@@ -2240,7 +2882,7 @@
         },
         {
             "file": "src\\components\\containers\\Panel.js",
-            "line": 31,
+            "line": 32,
             "itemtype": "property",
             "name": "panelClass",
             "type": "{Boolean|String}",
@@ -2251,7 +2893,7 @@
         },
         {
             "file": "src\\components\\containers\\Panel.js",
-            "line": 37,
+            "line": 38,
             "description": "string = (default, primary, success, info, warning, danger)",
             "itemtype": "property",
             "name": "panelTypeClass",
@@ -2263,7 +2905,7 @@
         },
         {
             "file": "src\\components\\containers\\Panel.js",
-            "line": 44,
+            "line": 45,
             "itemtype": "property",
             "name": "panelHeaderClass",
             "type": "{Boolean|String}",
@@ -2274,7 +2916,7 @@
         },
         {
             "file": "src\\components\\containers\\Panel.js",
-            "line": 50,
+            "line": 51,
             "itemtype": "property",
             "name": "panelBodyClass",
             "type": "{Boolean|String}",
@@ -2285,7 +2927,7 @@
         },
         {
             "file": "src\\components\\containers\\Panel.js",
-            "line": 56,
+            "line": 57,
             "itemtype": "property",
             "name": "showPanelHeader",
             "type": "{Boolean|String}",
@@ -2296,7 +2938,7 @@
         },
         {
             "file": "src\\components\\containers\\Panel.js",
-            "line": 62,
+            "line": 63,
             "description": "fill the panel body (can be html too)",
             "itemtype": "property",
             "name": "content",
@@ -2308,7 +2950,7 @@
         },
         {
             "file": "src\\components\\containers\\Panel.js",
-            "line": 69,
+            "line": 70,
             "description": "whether the content is just text",
             "itemtype": "property",
             "name": "contentTextual",
@@ -2320,7 +2962,7 @@
         },
         {
             "file": "src\\components\\containers\\Panel.js",
-            "line": 76,
+            "line": 77,
             "itemtype": "property",
             "name": "collapsible",
             "type": "{Boolean|String}",
@@ -2331,7 +2973,7 @@
         },
         {
             "file": "src\\components\\containers\\Panel.js",
-            "line": 82,
+            "line": 83,
             "itemtype": "property",
             "name": "collapsed",
             "type": "{Boolean|String}",
@@ -2342,7 +2984,7 @@
         },
         {
             "file": "src\\components\\containers\\Panel.js",
-            "line": 88,
+            "line": 89,
             "itemtype": "property",
             "name": "headerIcons",
             "type": "{Boolean|Object} boolean = false, if object use the same way as the \"items\" property",
@@ -2353,7 +2995,7 @@
         },
         {
             "file": "src\\components\\containers\\Panel.js",
-            "line": 94,
+            "line": 95,
             "itemtype": "property",
             "name": "headerIconPosition",
             "type": "{String} css class \"pull-right\", \"pull-left\" etc",
@@ -2364,7 +3006,23 @@
         },
         {
             "file": "src\\components\\containers\\Panel.js",
-            "line": 100,
+            "line": 101,
+            "description": "use this to provide the given panel with toolbars",
+            "example": [
+                "\n\ttoolbar:[{\n\t\tposition: \"top\",\n\t\titems: [{...}]\n\t}]",
+                "\n\ttoolbar:[{\n\t\tposition: \"top\",\n\t\titems: [{...}]\n\t},{\n\t\tposition: \"bottom\",\n\t\titems: [{...}]\n\t}]"
+            ],
+            "itemtype": "property",
+            "name": "toolbar",
+            "type": "{Array of Objects}",
+            "default": "null",
+            "class": "components.containers.Panel",
+            "module": "Firebrick.ui.components",
+            "namespace": "components.containers"
+        },
+        {
+            "file": "src\\components\\containers\\Panel.js",
+            "line": 121,
             "description": "Data bindings",
             "itemtype": "method",
             "name": "bindings",
@@ -2378,7 +3036,7 @@
         },
         {
             "file": "src\\components\\containers\\Panel.js",
-            "line": 117,
+            "line": 138,
             "itemtype": "method",
             "name": "tabBindings",
             "return": {
@@ -2391,7 +3049,7 @@
         },
         {
             "file": "src\\components\\containers\\Panel.js",
-            "line": 138,
+            "line": 159,
             "itemtype": "method",
             "name": "panelHeaderBindings",
             "return": {
@@ -2404,7 +3062,7 @@
         },
         {
             "file": "src\\components\\containers\\Panel.js",
-            "line": 152,
+            "line": 173,
             "itemtype": "method",
             "name": "headerIconBindings",
             "return": {
@@ -2417,7 +3075,7 @@
         },
         {
             "file": "src\\components\\containers\\Panel.js",
-            "line": 169,
+            "line": 190,
             "itemtype": "method",
             "name": "collapsibleLinkBindings",
             "return": {
@@ -2430,7 +3088,7 @@
         },
         {
             "file": "src\\components\\containers\\Panel.js",
-            "line": 185,
+            "line": 206,
             "itemtype": "method",
             "name": "panelHeaderTextBindings",
             "return": {
@@ -2443,7 +3101,7 @@
         },
         {
             "file": "src\\components\\containers\\Panel.js",
-            "line": 194,
+            "line": 216,
             "itemtype": "method",
             "name": "panelBodyBindings",
             "return": {
@@ -2453,6 +3111,116 @@
             "class": "components.containers.Panel",
             "module": "Firebrick.ui.components",
             "namespace": "components.containers"
+        },
+        {
+            "file": "src\\components\\display\\Alert.js",
+            "line": 19,
+            "description": "whether the alert is dismissible - also controls whether the X button is shown or not",
+            "itemtype": "property",
+            "name": "dismissible",
+            "type": "{Boolean}",
+            "default": "true",
+            "class": "components.display.Alert",
+            "module": "Firebrick.ui.components",
+            "namespace": "components.display"
+        },
+        {
+            "file": "src\\components\\display\\Alert.js",
+            "line": 26,
+            "itemtype": "property",
+            "name": "animationClasses",
+            "type": "{String|false}",
+            "default": "\"fade in\"",
+            "class": "components.display.Alert",
+            "module": "Firebrick.ui.components",
+            "namespace": "components.display"
+        },
+        {
+            "file": "src\\components\\display\\Alert.js",
+            "line": 32,
+            "description": "alert type, \"danger\", \"info\", \"warn\" etc",
+            "itemtype": "property",
+            "name": "type",
+            "type": "{String}",
+            "default": "\"danger\"",
+            "class": "components.display.Alert",
+            "module": "Firebrick.ui.components",
+            "namespace": "components.display"
+        },
+        {
+            "file": "src\\components\\display\\Alert.js",
+            "line": 39,
+            "description": "if set, .items will be ignored",
+            "itemtype": "property",
+            "name": "title",
+            "type": "{String}",
+            "default": "\"\"",
+            "class": "components.display.Alert",
+            "module": "Firebrick.ui.components",
+            "namespace": "components.display"
+        },
+        {
+            "file": "src\\components\\display\\Alert.js",
+            "line": 46,
+            "description": "if set, .items will be ignored",
+            "itemtype": "property",
+            "name": "content",
+            "type": "{String}",
+            "default": "\"\"",
+            "class": "components.display.Alert",
+            "module": "Firebrick.ui.components",
+            "namespace": "components.display"
+        },
+        {
+            "file": "src\\components\\display\\Alert.js",
+            "line": 53,
+            "itemtype": "method",
+            "name": "bindings",
+            "return": {
+                "description": "",
+                "type": "Object"
+            },
+            "class": "components.display.Alert",
+            "module": "Firebrick.ui.components",
+            "namespace": "components.display"
+        },
+        {
+            "file": "src\\components\\display\\Alert.js",
+            "line": 71,
+            "description": "screen reader text",
+            "itemtype": "property",
+            "name": "srCloseText",
+            "type": "{String}",
+            "default": "\"Close\"",
+            "class": "components.display.Alert",
+            "module": "Firebrick.ui.components",
+            "namespace": "components.display"
+        },
+        {
+            "file": "src\\components\\display\\Alert.js",
+            "line": 78,
+            "itemtype": "method",
+            "name": "srCloseIconBindings",
+            "return": {
+                "description": "",
+                "type": "Object"
+            },
+            "class": "components.display.Alert",
+            "module": "Firebrick.ui.components",
+            "namespace": "components.display"
+        },
+        {
+            "file": "src\\components\\display\\Alert.js",
+            "line": 91,
+            "itemtype": "method",
+            "name": "closeButtonBindings",
+            "return": {
+                "description": "",
+                "type": "Object"
+            },
+            "class": "components.display.Alert",
+            "module": "Firebrick.ui.components",
+            "namespace": "components.display"
         },
         {
             "file": "src\\components\\display\\Header.js",
@@ -2545,7 +3313,7 @@
         },
         {
             "file": "src\\components\\display\\Header.js",
-            "line": 66,
+            "line": 69,
             "itemtype": "method",
             "name": "secondaryTextBindings",
             "return": {
@@ -2557,7 +3325,7 @@
         },
         {
             "file": "src\\components\\display\\Header.js",
-            "line": 82,
+            "line": 85,
             "itemtype": "method",
             "name": "labelBindings",
             "return": {
@@ -3068,7 +3836,7 @@
         },
         {
             "file": "src\\components\\display\\Text.js",
-            "line": 101,
+            "line": 99,
             "itemtype": "method",
             "name": "blockQuoteBindings",
             "return": {
@@ -3081,7 +3849,7 @@
         },
         {
             "file": "src\\components\\display\\Text.js",
-            "line": 112,
+            "line": 110,
             "itemtype": "method",
             "name": "blockQuoteFooterBindings",
             "return": {
@@ -3564,7 +4332,7 @@
         },
         {
             "file": "src\\components\\fields\\Input.js",
-            "line": 235,
+            "line": 236,
             "itemtype": "method",
             "name": "feedbackBindings",
             "return": {
@@ -3577,7 +4345,7 @@
         },
         {
             "file": "src\\components\\fields\\Input.js",
-            "line": 262,
+            "line": 263,
             "itemtype": "method",
             "name": "bindings",
             "return": {
@@ -3590,7 +4358,7 @@
         },
         {
             "file": "src\\components\\fields\\Input.js",
-            "line": 294,
+            "line": 293,
             "itemtype": "method",
             "name": "inputAddonBindings",
             "return": {
@@ -3603,7 +4371,7 @@
         },
         {
             "file": "src\\components\\fields\\Input.js",
-            "line": 309,
+            "line": 308,
             "itemtype": "method",
             "name": "labelBindings",
             "return": {
@@ -3616,7 +4384,7 @@
         },
         {
             "file": "src\\components\\fields\\Input.js",
-            "line": 326,
+            "line": 325,
             "itemtype": "method",
             "name": "inputContainerBindings",
             "return": {
@@ -3889,6 +4657,18 @@
         {
             "file": "src\\components\\nav\\List.js",
             "line": 17,
+            "description": "if true - att \"navbar-btn\" class to the button",
+            "itemtype": "property",
+            "name": "navbarItem",
+            "type": "{Boolean}",
+            "default": "false",
+            "class": "components.nav.List",
+            "module": "Firebrick.ui.components",
+            "namespace": "components.nav"
+        },
+        {
+            "file": "src\\components\\nav\\List.js",
+            "line": 24,
             "description": "overriding property from list",
             "itemtype": "property",
             "name": "preItemTpl",
@@ -3900,7 +4680,7 @@
         },
         {
             "file": "src\\components\\nav\\List.js",
-            "line": 26,
+            "line": 33,
             "description": "overriding property from list",
             "itemtype": "property",
             "name": "postItemTpl",
@@ -3912,7 +4692,7 @@
         },
         {
             "file": "src\\components\\nav\\List.js",
-            "line": 33,
+            "line": 40,
             "itemtype": "method",
             "name": "navLinkBindings",
             "return": {
@@ -3924,8 +4704,33 @@
             "namespace": "components.nav"
         },
         {
+            "file": "src\\components\\nav\\List.js",
+            "line": 52,
+            "itemtype": "method",
+            "name": "listContainerBindings",
+            "return": {
+                "description": "",
+                "type": "Object"
+            },
+            "class": "components.nav.List",
+            "module": "Firebrick.ui.components",
+            "namespace": "components.nav"
+        },
+        {
             "file": "src\\components\\nav\\Navbar.js",
             "line": 17,
+            "description": "passed on to the toolbar items (direct children only)",
+            "itemtype": "property",
+            "name": "toolbarDefaults",
+            "type": "{Object}",
+            "default": "{Object} {\n\t\tnavbarItem: true\n}",
+            "class": "components.nav.Navbar",
+            "module": "Firebrick.ui.components",
+            "namespace": "components.nav"
+        },
+        {
+            "file": "src\\components\\nav\\Navbar.js",
+            "line": 28,
             "description": "false to deactivate",
             "itemtype": "property",
             "name": "navTypeClass",
@@ -3937,7 +4742,7 @@
         },
         {
             "file": "src\\components\\nav\\Navbar.js",
-            "line": 24,
+            "line": 35,
             "description": "whether \"navbar-default\" is used",
             "itemtype": "property",
             "name": "navbarDefaultClass",
@@ -3949,7 +4754,7 @@
         },
         {
             "file": "src\\components\\nav\\Navbar.js",
-            "line": 31,
+            "line": 42,
             "description": "whether \"navbar\" css class is used",
             "itemtype": "property",
             "name": "navbarClass",
@@ -3961,7 +4766,7 @@
         },
         {
             "file": "src\\components\\nav\\Navbar.js",
-            "line": 38,
+            "line": 49,
             "description": "css class: navbar-header",
             "itemtype": "property",
             "name": "navbarHeaderClass",
@@ -3973,7 +4778,7 @@
         },
         {
             "file": "src\\components\\nav\\Navbar.js",
-            "line": 45,
+            "line": 56,
             "description": "if false then the navigation won't collapse to the small menu button",
             "itemtype": "property",
             "name": "toggleButton",
@@ -3985,7 +4790,7 @@
         },
         {
             "file": "src\\components\\nav\\Navbar.js",
-            "line": 52,
+            "line": 63,
             "itemtype": "property",
             "name": "toggleText",
             "type": "{String}",
@@ -3996,7 +4801,7 @@
         },
         {
             "file": "src\\components\\nav\\Navbar.js",
-            "line": 58,
+            "line": 69,
             "itemtype": "property",
             "name": "brandClass",
             "type": "{Boolean|String}",
@@ -4007,31 +4812,31 @@
         },
         {
             "file": "src\\components\\nav\\Navbar.js",
-            "line": 64,
+            "line": 75,
             "description": "false to deactivate",
             "itemtype": "property",
             "name": "brandLink",
             "type": "{Boolean|String}",
-            "default": "\"'/'\"",
+            "default": "\"/\"",
             "class": "components.nav.Navbar",
             "module": "Firebrick.ui.components",
             "namespace": "components.nav"
         },
         {
             "file": "src\\components\\nav\\Navbar.js",
-            "line": 71,
+            "line": 82,
             "description": "brand text - false to show none or if you wish to use brandTpl instead",
             "itemtype": "property",
             "name": "brandText",
             "type": "{Boolean|String}",
-            "default": "\"'Firebrick.ui'\"",
+            "default": "\"Firebrick.ui\"",
             "class": "components.nav.Navbar",
             "module": "Firebrick.ui.components",
             "namespace": "components.nav"
         },
         {
             "file": "src\\components\\nav\\Navbar.js",
-            "line": 78,
+            "line": 89,
             "description": "false to deactivate",
             "itemtype": "property",
             "name": "brandTpl",
@@ -4043,7 +4848,7 @@
         },
         {
             "file": "src\\components\\nav\\Navbar.js",
-            "line": 85,
+            "line": 96,
             "description": "data to populate navigation with",
             "itemtype": "property",
             "name": "data",
@@ -4055,7 +4860,7 @@
         },
         {
             "file": "src\\components\\nav\\Navbar.js",
-            "line": 92,
+            "line": 103,
             "description": "overriding parent",
             "itemtype": "property",
             "name": "listGroupClass",
@@ -4066,7 +4871,7 @@
         },
         {
             "file": "src\\components\\nav\\Navbar.js",
-            "line": 98,
+            "line": 109,
             "description": "sets nav && nav-bar css classes to the list container",
             "itemtype": "property",
             "name": "navClass",
@@ -4078,7 +4883,29 @@
         },
         {
             "file": "src\\components\\nav\\Navbar.js",
-            "line": 105,
+            "line": 116,
+            "itemtype": "property",
+            "name": "showNavbarHeader",
+            "type": "{Boolean}",
+            "default": "true",
+            "class": "components.nav.Navbar",
+            "module": "Firebrick.ui.components",
+            "namespace": "components.nav"
+        },
+        {
+            "file": "src\\components\\nav\\Navbar.js",
+            "line": 122,
+            "itemtype": "property",
+            "name": "showBranding",
+            "type": "{Boolean}",
+            "default": "true",
+            "class": "components.nav.Navbar",
+            "module": "Firebrick.ui.components",
+            "namespace": "components.nav"
+        },
+        {
+            "file": "src\\components\\nav\\Navbar.js",
+            "line": 128,
             "itemtype": "method",
             "name": "navBindings",
             "return": {
@@ -4091,37 +4918,9 @@
         },
         {
             "file": "src\\components\\nav\\Navbar.js",
-            "line": 125,
+            "line": 148,
             "itemtype": "method",
             "name": "brandBindings",
-            "return": {
-                "description": "",
-                "type": "Object"
-            },
-            "class": "components.nav.Navbar",
-            "module": "Firebrick.ui.components",
-            "namespace": "components.nav"
-        },
-        {
-            "file": "src\\components\\nav\\Navbar.js",
-            "line": 145,
-            "description": "overriding parent",
-            "itemtype": "method",
-            "name": "listContainerBindings",
-            "return": {
-                "description": "",
-                "type": "Object"
-            },
-            "class": "components.nav.Navbar",
-            "module": "Firebrick.ui.components",
-            "namespace": "components.nav"
-        },
-        {
-            "file": "src\\components\\nav\\Navbar.js",
-            "line": 157,
-            "description": "overriding parent",
-            "itemtype": "method",
-            "name": "bindings",
             "return": {
                 "description": "",
                 "type": "Object"
@@ -4135,7 +4934,7 @@
             "line": 168,
             "description": "overriding parent",
             "itemtype": "method",
-            "name": "listItemBindings",
+            "name": "listContainerBindings",
             "return": {
                 "description": "",
                 "type": "Object"
@@ -4147,6 +4946,34 @@
         {
             "file": "src\\components\\nav\\Navbar.js",
             "line": 180,
+            "description": "overriding parent",
+            "itemtype": "method",
+            "name": "bindings",
+            "return": {
+                "description": "",
+                "type": "Object"
+            },
+            "class": "components.nav.Navbar",
+            "module": "Firebrick.ui.components",
+            "namespace": "components.nav"
+        },
+        {
+            "file": "src\\components\\nav\\Navbar.js",
+            "line": 191,
+            "description": "overriding parent",
+            "itemtype": "method",
+            "name": "listItemBindings",
+            "return": {
+                "description": "",
+                "type": "Object"
+            },
+            "class": "components.nav.Navbar",
+            "module": "Firebrick.ui.components",
+            "namespace": "components.nav"
+        },
+        {
+            "file": "src\\components\\nav\\Navbar.js",
+            "line": 203,
             "itemtype": "method",
             "name": "navbarHeaderBindings",
             "return": {
@@ -4159,7 +4986,7 @@
         },
         {
             "file": "src\\components\\nav\\Navbar.js",
-            "line": 192,
+            "line": 215,
             "itemtype": "method",
             "name": "navbarContainerBindings",
             "return": {
@@ -4172,7 +4999,7 @@
         },
         {
             "file": "src\\components\\nav\\Navbar.js",
-            "line": 210,
+            "line": 233,
             "itemtype": "method",
             "name": "toggleTextBindings",
             "return": {
@@ -4185,7 +5012,7 @@
         },
         {
             "file": "src\\components\\nav\\Navbar.js",
-            "line": 219,
+            "line": 243,
             "itemtype": "method",
             "name": "toggleButtonBindings",
             "return": {
@@ -4198,9 +5025,9 @@
         },
         {
             "file": "src\\components\\nav\\Navbar.js",
-            "line": 242,
+            "line": 266,
             "itemtype": "method",
-            "name": "navbarHeaderContainerBindings",
+            "name": "navbarWrapperBindings",
             "return": {
                 "description": "",
                 "type": "Object"
@@ -4232,6 +5059,31 @@
                 "type": "Object"
             },
             "class": "components.nav.Pagination",
+            "module": "Firebrick.ui.components",
+            "namespace": "components.nav"
+        },
+        {
+            "file": "src\\components\\nav\\Toolbar.js",
+            "line": 17,
+            "description": "possible positions: top, bottom",
+            "itemtype": "property",
+            "name": "position",
+            "type": "{String}",
+            "default": "\"top\"",
+            "class": "components.nav.Toolbar",
+            "module": "Firebrick.ui.components",
+            "namespace": "components.nav"
+        },
+        {
+            "file": "src\\components\\nav\\Toolbar.js",
+            "line": 47,
+            "itemtype": "method",
+            "name": "navbarWrapperBindings",
+            "return": {
+                "description": "",
+                "type": "Object"
+            },
+            "class": "components.nav.Toolbar",
             "module": "Firebrick.ui.components",
             "namespace": "components.nav"
         },
@@ -4384,7 +5236,7 @@
         {
             "file": "src\\components\\table\\Table.js",
             "line": 99,
-            "description": "return js object to pass to the DataTable function for configuring the table on componentReady",
+            "description": "return js object to pass to the DataTable function for configuring the table on rendered",
             "itemtype": "property",
             "name": "dataTableConfig",
             "type": "{Function}",
@@ -4460,7 +5312,7 @@
         {
             "file": "src\\components\\table\\Table.js",
             "line": 153,
-            "description": "return js object to pass to the Treetable function for configuring the table on componentReady",
+            "description": "return js object to pass to the Treetable function for configuring the table on rendered",
             "itemtype": "property",
             "name": "treeTableConfig",
             "type": "{Function}",
@@ -4740,7 +5592,7 @@
                         },
                         {
                             "name": "view",
-                            "description": "Firebrick view class (optional), must be defined for componentReady event to be fired",
+                            "description": "Firebrick view class (optional), must be defined for rendered event to be fired",
                             "type": "Object"
                         }
                     ]

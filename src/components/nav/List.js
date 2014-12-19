@@ -15,6 +15,13 @@ define(["doT", "../display/List"], function(tplEngine){
 		uiName:"fb-ui-navlist",
 		unstyled:true,
 		/**
+		 * if true - att "navbar-btn" class to the button
+		 * @property navbarItem
+		 * @type {Boolean}
+		 * @default false
+		 */
+		navbarItem: false,
+		/**
 		 * overriding property from list
 		 * @property preItemTpl
 		 * @type {String}
@@ -40,6 +47,21 @@ define(["doT", "../display/List"], function(tplEngine){
 						href: "$data.link ? $data.link : ''"
 					}
 			};
+			return obj;
+		},
+		/**
+		 * @method listContainerBindings
+		 * @return {Object}
+		 */
+		listContainerBindings: function(){
+			var me = this,
+				obj = me.callParent(arguments);
+			
+			if(me.navbarItem){
+				obj.css["'navbar-nav'"] = true;
+				obj.css.nav = true;
+			}
+			
 			return obj;
 		}
 	});

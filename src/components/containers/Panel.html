@@ -14,6 +14,9 @@
 		{{?}}
 	</div>
 		<div data-bind="{{=it.dataBind('tabBindings')}}">
-			<div data-bind="{{=it.dataBind('panelBodyBindings')}}" >{{=it.getItems()}}</div>
+			<div data-bind="{{=it.dataBind('panelBodyBindings')}}" >
+				{{=it.getToolbars()}}
+				{{=it.getItems()}}
+			</div>
 		</div>
 </div>

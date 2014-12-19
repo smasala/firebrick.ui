@@ -97,7 +97,7 @@ define(["jquery", "text!./Table.html", "../common/Base", "datatables", "responsi
 		 */
 		treetable:false,
 		/**
-		 * return js object to pass to the DataTable function for configuring the table on componentReady
+		 * return js object to pass to the DataTable function for configuring the table on rendered
 		 * @property dataTableConfig
 		 * @type {Function}
 		 * @return {object}
@@ -151,7 +151,7 @@ define(["jquery", "text!./Table.html", "../common/Base", "datatables", "responsi
 		 */
 		showOptions: true,
 		/**
-		 * return js object to pass to the Treetable function for configuring the table on componentReady
+		 * return js object to pass to the Treetable function for configuring the table on rendered
 		 * @property treeTableConfig
 		 * @type {Function}
 		 * @return {Object}
@@ -168,9 +168,9 @@ define(["jquery", "text!./Table.html", "../common/Base", "datatables", "responsi
 		 */
 		init:function(){
 			var me = this;
-			me.on("componentReady", function(){
+			me.on("rendered", function(){
 				var id = me.getId(),
-					table = $("#" + id);
+					table = me.getElement();
 				if(me.datatable){
 					table.DataTable(me.dataTableConfig());
 				}
@@ -216,18 +216,18 @@ define(["jquery", "text!./Table.html", "../common/Base", "datatables", "responsi
 		 * @return {Object}
 		 */
 		bindings: function(){
-			var me = this;
-			return {
-				"with": me._getData(),
-				css:{
-					"'table'": true,
-					"'table-striped'": me.tableStriped,
-					"'table-hover'": me.tableHover,
-					"'table-condensed'": me.tableCondensed,
-					"'table-bordered'": me.tableBordered,
-					"'responsive'" : me.responsive
-				}
-			};
+			var me = this,
+				obj = me.callParent(arguments);
+			
+			obj["with"] = me._getData();
+			obj.css.table = true;
+			obj.css["'table-striped'"] = me.tableStriped;
+			obj.css["'table-hover'"] = me.tableHover;
+			obj.css["'table-condensed'"] = me.tableCondensed;
+			obj.css["'table-bordered'"] = me.tableBordered;
+			obj.css["'responsive'"] =  me.responsive;
+			
+			return obj;
 		},
 		/**
 		 * @method theadBindings
@@ -303,9 +303,9 @@ define(["jquery", "text!./Table.html", "../common/Base", "datatables", "responsi
 		 * @return {Function}
 		 */
 		generateOnclick: function(type){
-			var id = this.getId();
+			var me = this;
 			return function(){
-				$("#" + id).treetable(type); 
+				me.getElement().treetable(type); 
 				return false;
 			};
 		},
@@ -316,7 +316,7 @@ define(["jquery", "text!./Table.html", "../common/Base", "datatables", "responsi
 		expandBindings:function(){
 			var me = this;
 			return {
-				text: "fb.text('"+ me.expandText +"')",
+				text: me.textBind( me.expandText ),
 				attr:{
 					id: me.parseBind("fb-expand-" + me.getId()),
 					href:"''"
@@ -330,7 +330,7 @@ define(["jquery", "text!./Table.html", "../common/Base", "datatables", "responsi
 		collapseBindings:function(){
 			var me = this;
 			return {
-				text: "fb.text('"+ me.collapseText +"')",
+				text: me.textBind( me.collapseText ),
 				attr:{
 					id: me.parseBind("fb-collapse-" + me.getId()),
 					href:"''"

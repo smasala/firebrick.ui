@@ -11,6 +11,7 @@ define(function(){
 			"knockout-mapping": "../bower_components/knockout-mapping/knockout.mapping",
 			"firebrick": "../bower_components/firebrick/dist/firebrick",
 			"bootstrap": "../bower_components/bootstrap/dist/js/bootstrap.min",
+			"bootstrap.plugins": "../bower_components/bootstrap/js",
 			"text": "../bower_components/text/text",
 			"firebrick-ui": "../bower_components/firebrick.ui/dist/firebrick.ui",
 			"doT": "../bower_components/doT/doT.min",
