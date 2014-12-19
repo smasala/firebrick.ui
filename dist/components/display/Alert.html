@@ -1,0 +1,14 @@
+<div data-bind="{{=it.dataBind()}}">
+	{{?it.dismissible}}
+      <button data-bind="{{=it.dataBind('closeButtonBindings')}}"><span aria-hidden="true">&times;</span><span data-bind="{{=it.dataBind('srCloseIconBindings')}}"></span></button>
+    {{?}}
+    {{?it.title || it.content}}
+    	<h4>{{=fb.text(it.title)}}</h4>
+    	<p>
+    		{{=fb.text(it.content)}}
+    	</p>
+    {{?? true }}
+    	{{=it.getItems()}}
+    {{?}}
+	
+</div>

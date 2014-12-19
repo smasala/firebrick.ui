@@ -1,0 +1,81 @@
+/*!
+ * @author Steven Masala [me@smasala.com]
+ */
+
+/**
+ * @module Firebrick.ui.components
+ * @namespace components.common.mixins
+ * @class Toolbars
+ * @static
+ */
+define(["jquery", "./Items"], function($){
+	"use strict";
+	return Firebrick.define("Firebrick.ui.common.mixins.Toolbars", {
+		/**
+		 * passed on to the toolbar items (direct children only)
+		 * @property toolbarDefaults
+		 * @type {Object}
+		 * @default {Object} {
+		 * 		navbarItem: true
+		 * }
+		 */
+		toolbarDefaults:{
+			navbarItem: true
+		},
+		/**
+		 * add css classes and other configuration to the container
+		 * @method toolbarContainer
+		 * @param obj {Object} obj that is later pass to the binder
+		 * @return {Object}
+		 */
+		toolbarContainer: function(obj){
+			var me = this,
+				toolbarPosition;
+			
+			if(me.toolbars && $.isArray(me.toolbars)){
+				
+				obj.css["'fb-ui-toolbar-container'"] = true;
+				
+				for(var i = 0, l = me.toolbars.length; i<l; i++){
+					toolbarPosition = me.toolbars[i].position;
+					if(toolbarPosition){
+						obj.css[ me.parseBind("fb-ui-toolbar-" + toolbarPosition) ] = true;
+					}
+				}
+			}
+			return obj;
+		},
+		
+		/**
+		 * @method getToolbars
+		 * @return {html}
+		 */
+		getToolbars: function(){
+			var me = this,
+				toolbars = me.toolbars,
+				tbItem,
+				html = "";
+			
+			if(toolbars){
+				if($.isArray(toolbars)){
+					for(var i = 0, l = toolbars.length; i<l; i++){
+						tbItem = toolbars[i];
+						if(tbItem.items){
+							//wrap the items inside a toolbar component
+							tbItem.uiName = fb.ui.cmp.toolbar;
+							tbItem.defaults = Firebrick.utils.overwrite(me.toolbarDefaults, (tbItem.defaults || {}));
+							//load the html for the template compiler
+							html += me._getItems(tbItem).html;
+						}else{
+							console.warn("a toolbar was found without the items property and didn't render");
+						}
+					}
+				}else{
+					console.warn("unable to load toolbars for this panel", me, "toolbars property must be an array of objects");
+				}
+			}
+			
+			return html;
+		}
+	});
+});

@@ -1,0 +1,20 @@
+<div id="{{=it.getId()}}" data-bind="{{=it.dataBind()}}">
+  <div data-bind="{{=it.dataBind('dialogBindings')}}">
+    <div data-bind="{{=it.dataBind('contentBindings')}}">
+      <div data-bind="{{=it.dataBind('headerBindings')}}">
+      	{{?it.showCloseIcon}}
+      		<button data-bind="{{=it.dataBind('closeButtonBindings')}}"><span aria-hidden="true">&times;</span><span data-bind="{{=it.dataBind('srCloseIconBindings')}}"></span></button>
+      	{{?}}
+        <h{{=it.titleSize}} id="{{=it.getTitleId()}}" data-bind="{{=it.dataBind('titleBindings')}}"></h{{=it.titleSize}}>
+      </div>
+      <div data-bind="{{=it.dataBind('bodyBindings')}}">
+        {{=it.getItems()}}
+      </div>
+      {{?it.footerItems}}
+	      <div data-bind="{{=it.dataBind('footerBindings')}}">
+	      	{{=it.getItemsProp('footerItems')}}
+	      </div>
+      {{?}}
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
