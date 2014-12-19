@@ -19,7 +19,7 @@
             
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 0.7.7</em>
+            <em>API Docs for: 0.9.0</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -53,6 +53,8 @@
             
                 <li><a href="../classes/components.common.mixins.Items.html">components.common.mixins.Items</a></li>
             
+                <li><a href="../classes/components.common.mixins.Toolbars.html">components.common.mixins.Toolbars</a></li>
+            
                 <li><a href="../classes/components.common.MultiplesBase.html">components.common.MultiplesBase</a></li>
             
                 <li><a href="../classes/components.containers.Base.html">components.containers.Base</a></li>
@@ -65,7 +67,11 @@
             
                 <li><a href="../classes/components.containers.GridColumn.html">components.containers.GridColumn</a></li>
             
+                <li><a href="../classes/components.containers.Modal.html">components.containers.Modal</a></li>
+            
                 <li><a href="../classes/components.containers.Panel.html">components.containers.Panel</a></li>
+            
+                <li><a href="../classes/components.display.Alert.html">components.display.Alert</a></li>
             
                 <li><a href="../classes/components.display.Header.html">components.display.Header</a></li>
             
@@ -91,6 +97,8 @@
             
                 <li><a href="../classes/components.fields.TextArea.html">components.fields.TextArea</a></li>
             
+                <li><a href="../classes/components.nav.Base.html">components.nav.Base</a></li>
+            
                 <li><a href="../classes/components.nav.Breadcrumbs.html">components.nav.Breadcrumbs</a></li>
             
                 <li><a href="../classes/components.nav.List.html">components.nav.List</a></li>
@@ -98,6 +106,8 @@
                 <li><a href="../classes/components.nav.Navbar.html">components.nav.Navbar</a></li>
             
                 <li><a href="../classes/components.nav.Pagination.html">components.nav.Pagination</a></li>
+            
+                <li><a href="../classes/components.nav.Toolbar.html">components.nav.Toolbar</a></li>
             
                 <li><a href="../classes/components.table.Table.html">components.table.Table</a></li>
             
@@ -108,6 +118,8 @@
                 <li><a href="../classes/ui.html">ui</a></li>
             
                 <li><a href="../classes/utils.html">utils</a></li>
+            
+                <li><a href="../classes/view.Base.html">view.Base</a></li>
             
             </ul>
 
@@ -169,7 +181,15 @@
  * @static
  */
 define([&quot;jquery&quot;], function($){
+	&quot;use strict&quot;;
 	return Firebrick.define(&quot;Firebrick.ui.common.mixins.Items&quot;, {
+		/**
+		 * default configuration for direct children - i.e. direct items
+		 * @property defaults
+		 * @type {Object}
+		 * @default null 
+		 */
+		defaults: null,
 		/**
 		 * @property items
 		 * @type {String|Object|Array of Object}
@@ -177,16 +197,18 @@ define([&quot;jquery&quot;], function($){
 		 */
 		items:null,
 		listeners:{
-			componentReady: function(){
+			rendered: function(){
 				var me = this,
 					items = me.items,
 					args = arguments;
 				if($.isArray(items)){
-					$.each(items, function(i,cmp){
+					var cmp;
+					for(var i = 0, l = items.length; i&lt;l; i++){
+						cmp = items[i];
 						if(cmp.passEvent){
 							cmp.passEvent(args);
 						}
-					});
+					}
 				}
 			}
 		},
@@ -210,8 +232,9 @@ define([&quot;jquery&quot;], function($){
 		 * @param [itemsName] {String}  name of property to get items from
 		 * @return {String} html
 		 */
-		getItemsScoped: function(me, itemsName){
-			itemsName = typeof itemsName == &quot;string&quot; ? me[itemsName] : me.items;
+		getItemsProp: function(itemsName){
+			var me = this;
+			itemsName = typeof itemsName === &quot;string&quot; ? me[itemsName] : me.items;
 			var items = me._getItems(itemsName);
 			return items ? items.html || items : &quot;&quot;;
 		},
@@ -225,9 +248,19 @@ define([&quot;jquery&quot;], function($){
 		_getItems: function(items){
 			var me = this;
 			if(items){
-				if(!$.isArray(items)){
+				if(!$.isArray(items) &amp;&amp; !$.isFunction(items)){
 					items = [items];
 				}
+				
+				if(me.defaults){
+					//get all defaults down the prototype tree
+					Firebrick.utils.merge(&quot;defaults&quot;, me);
+					//add the defaults to direct items
+					for(var i = 0, l = items.length; i&lt;l; i++){
+						items[i] = Firebrick.utils.overwrite(items[i], me.defaults);
+					}
+				}
+				
 				return Firebrick.ui._populate(items, me);
 			}
 			return null;

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>src\components\display\Text.js - Firebrick UI API</title>
+    <title>src\components\display\Alert.js - Firebrick UI API</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -166,7 +166,7 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-                        <h1 class="file-heading">File: src\components\display\Text.js</h1>
+                        <h1 class="file-heading">File: src\components\display\Alert.js</h1>
 
 <div class="file">
     <pre class="code prettyprint linenums">
@@ -178,121 +178,103 @@
  * @module Firebrick.ui.components
  * @extends components.common.Base
  * @namespace components.display
- * @class Text
+ * @uses components.common.mixins.Items
+ * @class Alert
  */
-define([&quot;text!./Text.html&quot;, &quot;../common/Base&quot;], function(tpl){
+define([&quot;text!./Alert.html&quot;, &quot;../common/Base&quot;], function(tpl){
 	&quot;use strict&quot;;
-	return Firebrick.define(&quot;Firebrick.ui.display.Text&quot;, {
+	return Firebrick.define(&quot;Firebrick.ui.display.Alert&quot;, {
 		extend: &quot;Firebrick.ui.common.Base&quot;,
+		mixins:&quot;Firebrick.ui.common.mixins.Items&quot;,
+		tpl: tpl,
+		uiName:&quot;fb-ui-alert&quot;,
 		/**
-		 * @property uiName
-		 * @type {String}
-		 */
-		uiName:&quot;fb-ui-text&quot;,
-		/**
-		 * @property tpl
-		 * @type {String}
-		 */
-		tpl:tpl,
-		/**
-		 * whether text is raw html or not
-		 * @property isHtml
+		 * whether the alert is dismissible - also controls whether the X button is shown or not
+		 * @property dismissible
 		 * @type {Boolean}
-		 * @default false
+		 * @default true
 		 */
-		isHtml:false,
+		dismissible: true,
 		/**
-		 * @property text
+		 * @property animationClasses
+		 * @type {String|false}
+		 * @default &quot;fade in&quot;
+		 */
+		animationClasses:&quot;fade in&quot;,
+		/**
+		 * alert type, &quot;danger&quot;, &quot;info&quot;, &quot;warn&quot; etc
+		 * @property type
+		 * @type {String}
+		 * @default &quot;danger&quot; 
+		 */
+		type: &quot;danger&quot;,
+		/**
+		 * if set, .items will be ignored
+		 * @property title
 		 * @type {String}
 		 * @default &quot;&quot;
 		 */
-		text:&quot;&quot;,
+		title:&quot;&quot;,
 		/**
-		 * @property leadCSS
-		 * @type {Boolean}
-		 * @default false
+		 * if set, .items will be ignored
+		 * @property content
+		 * @type {String}
+		 * @default &quot;&quot;
 		 */
-		leadCSS:false,
+		content:&quot;&quot;,
 		/**
-		 * @property blockQuote
-		 * @type {Boolean}
-		 * @default false
-		 */
-		blockQuote:false,
-		/**
-		 * @property blockQuoteReverseCSS
-		 * @type {Boolean}
-		 * @default false
-		 */
-		blockQuoteReverseCSS: false,
-		/**
-		 * false not to show, string for footer text
-		 * @property blockQuoteFooter
-		 * @type {Boolean|String}
-		 * @default false
-		 */
-		blockQuoteFooter:false,
-		/**
-		 * @property isBlockQuoteFooterHTML
-		 * @type {Boolean}
-		 * @default false
-		 */
-		isBlockQuoteFooterHTML: false,
-		/**
-		 * false || string :: &#x27;left&#x27;, &#x27;center&#x27;, &#x27;right&#x27;, &#x27;justify&#x27;, &#x27;no-wrap&#x27; (defaults to: left)
-		 * @property textAlignment
-		 * @type {Boolean|String}
-		 * @default &quot;justify&quot;
-		 */
-		textAlignment:&quot;justify&quot;,
-		/**
-		 * Bindings
 		 * @method bindings
 		 * @return {Object}
 		 */
-		bindings:function(){
+		bindings: function(){
 			var me = this,
 				obj = me.callParent(arguments);
 			
-			obj.css.lead = me.leadCSS;
-			
-			if(me.textAlignment){
-				obj.css[ me.parseBind(&quot;text-&quot;+me.textAlignment) ] = true;	
+			obj.attr.role = &quot;&#x27;alert&#x27;&quot;;
+			obj.css.alert = true;
+			obj.css[&quot;&#x27;alert-dismissible&#x27;&quot;] = me.dismissible;
+			if(me.animationClasses){
+				obj.css[me.parseBind(me.animationClasses)] = true;
 			}
-			
-			if(me.html){
-				obj.html = me.text; 
-			}else if(me.text){
-				obj.text = me.textBind(me.text);
-			}
+			obj.css[me.parseBind(&quot;alert-&quot; + me.type)] = true;
 			
 			return obj;
 		},
 		/**
-		 * @method blockQuoteBindings
+		 * screen reader text
+		 * @property srCloseText
+		 * @type {String}
+		 * @default &quot;Close&quot;
+		 */
+		srCloseText: &quot;Close&quot;,
+		/**
+		 * @method srCloseIconBindings
 		 * @return {Object}
 		 */
-		blockQuoteBindings: function(){
+		srCloseIconBindings: function(){
+			var me = this;
 			return {
 				css:{
-					&quot;&#x27;blockquote-reverse&#x27;&quot;: this.blockQuoteReverseCSS
-				}
+					&quot;&#x27;sr-only&#x27;&quot;: true
+				},
+				text: me.parseBind(me.srCloseText)
 			};
 		},
 		/**
-		 * @method blockQuoteFooterBindings
+		 * @method closeButtonBindings
 		 * @return {Object}
 		 */
-		blockQuoteFooterBindings: function(){
-			var me = this,
-				obj = {};
-			if(me.html){
-				obj.html = me.blockQuoteFooter; 
-			}else{
-				obj.text = me.blockQuoteFooter;
-			}
-			return obj;
-		}
+		closeButtonBindings: function(){
+			return {
+				attr:{
+					type: &quot;&#x27;button&#x27;&quot;,
+					&quot;&#x27;data-dismiss&#x27;&quot;: &quot;&#x27;alert&#x27;&quot;
+				},
+				css:{
+					close: true
+				}
+			};
+		},
 	});
 });
     </pre>

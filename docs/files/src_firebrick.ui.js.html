@@ -19,7 +19,7 @@
             
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 0.7.7</em>
+            <em>API Docs for: 0.9.0</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -53,6 +53,8 @@
             
                 <li><a href="../classes/components.common.mixins.Items.html">components.common.mixins.Items</a></li>
             
+                <li><a href="../classes/components.common.mixins.Toolbars.html">components.common.mixins.Toolbars</a></li>
+            
                 <li><a href="../classes/components.common.MultiplesBase.html">components.common.MultiplesBase</a></li>
             
                 <li><a href="../classes/components.containers.Base.html">components.containers.Base</a></li>
@@ -65,7 +67,11 @@
             
                 <li><a href="../classes/components.containers.GridColumn.html">components.containers.GridColumn</a></li>
             
+                <li><a href="../classes/components.containers.Modal.html">components.containers.Modal</a></li>
+            
                 <li><a href="../classes/components.containers.Panel.html">components.containers.Panel</a></li>
+            
+                <li><a href="../classes/components.display.Alert.html">components.display.Alert</a></li>
             
                 <li><a href="../classes/components.display.Header.html">components.display.Header</a></li>
             
@@ -91,6 +97,8 @@
             
                 <li><a href="../classes/components.fields.TextArea.html">components.fields.TextArea</a></li>
             
+                <li><a href="../classes/components.nav.Base.html">components.nav.Base</a></li>
+            
                 <li><a href="../classes/components.nav.Breadcrumbs.html">components.nav.Breadcrumbs</a></li>
             
                 <li><a href="../classes/components.nav.List.html">components.nav.List</a></li>
@@ -98,6 +106,8 @@
                 <li><a href="../classes/components.nav.Navbar.html">components.nav.Navbar</a></li>
             
                 <li><a href="../classes/components.nav.Pagination.html">components.nav.Pagination</a></li>
+            
+                <li><a href="../classes/components.nav.Toolbar.html">components.nav.Toolbar</a></li>
             
                 <li><a href="../classes/components.table.Table.html">components.table.Table</a></li>
             
@@ -108,6 +118,8 @@
                 <li><a href="../classes/ui.html">ui</a></li>
             
                 <li><a href="../classes/utils.html">utils</a></li>
+            
+                <li><a href="../classes/view.Base.html">view.Base</a></li>
             
             </ul>
 
@@ -167,18 +179,20 @@
 (function(root, factory) {
 	
   &quot;use strict&quot;;
-
+  
   if (typeof define === &quot;function&quot; &amp;&amp; define.amd) {
-    define([&quot;jquery&quot;, &quot;firebrick&quot;, &quot;knockout&quot;, &quot;knockout-mapping&quot;, &quot;text&quot;, &quot;handlebars&quot;], function($, fb, ko, kom, text, hb) {
+    define([&quot;jquery&quot;, &quot;firebrick&quot;, &quot;knockout&quot;, &quot;knockout-mapping&quot;, &quot;text&quot;], function($, fb, ko, kom, text, hb) {
     	ko.mapping = kom;
     	return factory($, fb, ko, hb);
     });
   } else {
-	  return factory(root.jQuery, root.Firebrick, root.ko, root.Handlebars);
+	  return factory(root.jQuery, root.Firebrick, root.ko);
   }
 
-})(this, function($, Firebrick, ko, Handlebars) {
+})(this, function($, Firebrick, ko) {
 	
+	&quot;use strict&quot;;
+
 	if(!Firebrick){
 		console.error(&quot;Firebrick has not been loaded, Firebrick-UI requires Firebrick JS to function&quot;);
 		return;
@@ -199,7 +213,7 @@
 			 * @private
 			 * @type {String}
 			 */
-			version: &quot;0.7.7&quot;,
+			version: &quot;0.9.0&quot;,
 			
 			/**
 			 * used to cache pointers to classes when searching by &quot;uiName&quot;
@@ -217,7 +231,7 @@
 			 * @param {Object} config
 			 * @param {Object} config.target selector string, jquery object (optional) if none passed, html is returned
 			 * @param {Object} config.items array of strings or objects [&quot;fb-ui-input&quot;, {uiName:&quot;fb-ui-textarea&quot;}]
-			 * @param {Object} config.view Firebrick view class (optional), must be defined for componentReady event to be fired
+			 * @param {Object} config.view Firebrick view class (optional), must be defined for rendered event to be fired
 			 * @return {String} html
 			 */
 			build: function(config){
@@ -225,13 +239,13 @@
 					target = Firebrick.views.getTarget(config.target),
 					r, html;
 				
-				if(config.view){
-					config.view.on(&quot;ready&quot;, function(){
-						$.each(r.items, function(i,f){
-							f.fireEvent(&quot;componentReady&quot;);
-						});
-					});
-				}
+//				if(config.view){
+//					config.view.on(&quot;ready&quot;, function(){
+//						for(var i = 0, l = r.items.length; i&lt;l; i++){
+//							r.items[i].fireEvent(&quot;rendered&quot;);	
+//						}
+//					});
+//				}
 				
 				r = me._populate(config.items, config.view);
 				html = r.html;
@@ -248,6 +262,15 @@
 			},
 			
 			/**
+			 * components uiNames are populated into this map for variable access
+			 * fb.ui.cmp.input
+			 * @property cmp
+			 * @type {Object}
+			 * @default {}
+			 */
+			cmp:{},
+			
+			/**
 			 * recursive function
 			 * create components and html from an array of items
 			 * @private
@@ -261,9 +284,15 @@
 					h = &quot;&quot;, 
 					component, tmp;
 
-				$.each(items, function(i,v){
+				if($.isFunction(items)){
+					items = items();
+				}
+				
+				var v;
+				for(var i = 0, l = items.length; i&lt;l; i++){
+					v = items[i];
 					if(v.isView){
-						if(v._state == &quot;initial&quot;){
+						if(v._state === &quot;initial&quot;){
 							component = v.init();
 						}
 						h += component.tpl;
@@ -291,7 +320,7 @@
 						component._parent = parent;
 					}
 					x.push(component);
-				});
+				}
 				
 				return {html: h, items: x};
 			},
@@ -307,13 +336,17 @@
 				var me = this,
 					item = me._searchCache[name];
 				if(!item){
-					$.each(Firebrick.classes.classRegistry, function(k, v){
-						if(v.uiComponent &amp;&amp; v.uiName == name){
-							item = v;
-							me._searchCache[name] = v;
-							return false;
+					var k, v;
+					for(k in Firebrick.classes.classRegistry){
+						if(Firebrick.classes.classRegistry.hasOwnProperty(k)){
+							v = Firebrick.classes.classRegistry[k];
+							if(v.uiComponent &amp;&amp; v.uiName === name){
+								item = v;
+								me._searchCache[name] = v;
+								break;
+							}
 						}
-					});
+					}
 				}
 				
 				if(!item){
@@ -350,19 +383,23 @@
 					if(objToConvert){
 						
 						var loop = function(obj, f){
-							var p = f ? &quot;&quot; : &quot;{&quot;;
-							$.each(obj, function(k,v){
-								if($.isPlainObject(v)){
-									p += k + &quot;:&quot; + loop(v);
-								}else{
-									p += k + &quot;: &quot; + v + &quot;,&quot;
+							var p = f ? &quot;&quot; : &quot;{&quot;,
+								k,v;
+							for(k in obj){
+								if(obj.hasOwnProperty(k)){
+									v = obj[k];
+									if($.isPlainObject(v)){
+										p += k + &quot;:&quot; + loop(v);
+									}else{
+										p += k + &quot;: &quot; + v + &quot;,&quot;;
+									}
 								}
-							});
+							}
 							//remove last &quot;, &quot;
-							p = p.substr(-1) == &quot;,&quot; ? p.substring(0, p.length-1) : p;
+							p = p.substr(-1) === &quot;,&quot; ? p.substring(0, p.length-1) : p;
 							p += f ? &quot;&quot; : &quot;},&quot;;
 							return p;
-						}
+						};
 						
 						return loop(objToConvert, true);
 					}
@@ -373,6 +410,49 @@
 			
 			
 	};
+	
+	/**
+	 * Overwrites &quot;Firebrick.view.Base&quot; 
+	 * @extends class.Base
+	 * @class view.Base
+	 */
+	Firebrick.classes.overwrite(&quot;Firebrick.view.Base&quot;, {
+		/**
+		 * @property listeners
+		 * @type {Object}
+		 */
+		listeners:{
+			rendered: function(){
+				var me = this;
+				if($.isArray(me.items)){
+					for(var i = 0, l = me.items.length; i&lt;l; i++){
+						me.items[i].fireEvent(&quot;rendered&quot;);
+					}
+				}
+			}
+		},
+		/**
+	 	 * @property items
+		 * @type {Array|Function}
+		 * @default null
+		 */
+		items: null,
+		/**
+		 * @property tpl
+		 * @type {Function}
+		 * @return {String}
+		 */
+		tpl: function(){
+			var me = this;
+			if(me.items){
+				return Firebrick.ui.build({
+					items: me.items,
+					view: me
+				});
+			}
+		}
+	});
+	
 	/*
 	 * use withProperties to pass extra properties down to the descendants
 	 * http://knockoutjs.com/documentation/custom-bindings-controlling-descendant-bindings.html

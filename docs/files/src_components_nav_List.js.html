@@ -19,7 +19,7 @@
             
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 0.7.7</em>
+            <em>API Docs for: 0.9.0</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -53,6 +53,8 @@
             
                 <li><a href="../classes/components.common.mixins.Items.html">components.common.mixins.Items</a></li>
             
+                <li><a href="../classes/components.common.mixins.Toolbars.html">components.common.mixins.Toolbars</a></li>
+            
                 <li><a href="../classes/components.common.MultiplesBase.html">components.common.MultiplesBase</a></li>
             
                 <li><a href="../classes/components.containers.Base.html">components.containers.Base</a></li>
@@ -65,7 +67,11 @@
             
                 <li><a href="../classes/components.containers.GridColumn.html">components.containers.GridColumn</a></li>
             
+                <li><a href="../classes/components.containers.Modal.html">components.containers.Modal</a></li>
+            
                 <li><a href="../classes/components.containers.Panel.html">components.containers.Panel</a></li>
+            
+                <li><a href="../classes/components.display.Alert.html">components.display.Alert</a></li>
             
                 <li><a href="../classes/components.display.Header.html">components.display.Header</a></li>
             
@@ -91,6 +97,8 @@
             
                 <li><a href="../classes/components.fields.TextArea.html">components.fields.TextArea</a></li>
             
+                <li><a href="../classes/components.nav.Base.html">components.nav.Base</a></li>
+            
                 <li><a href="../classes/components.nav.Breadcrumbs.html">components.nav.Breadcrumbs</a></li>
             
                 <li><a href="../classes/components.nav.List.html">components.nav.List</a></li>
@@ -98,6 +106,8 @@
                 <li><a href="../classes/components.nav.Navbar.html">components.nav.Navbar</a></li>
             
                 <li><a href="../classes/components.nav.Pagination.html">components.nav.Pagination</a></li>
+            
+                <li><a href="../classes/components.nav.Toolbar.html">components.nav.Toolbar</a></li>
             
                 <li><a href="../classes/components.table.Table.html">components.table.Table</a></li>
             
@@ -108,6 +118,8 @@
                 <li><a href="../classes/ui.html">ui</a></li>
             
                 <li><a href="../classes/utils.html">utils</a></li>
+            
+                <li><a href="../classes/view.Base.html">view.Base</a></li>
             
             </ul>
 
@@ -168,11 +180,19 @@
  * @namespace components.nav
  * @class List
  */
-define([&quot;handlebars&quot;, &quot;../display/List&quot;], function(Handlebars){
+define([&quot;doT&quot;, &quot;../display/List&quot;], function(tplEngine){
+	&quot;use strict&quot;;
 	return Firebrick.define(&quot;Firebrick.ui.nav.List&quot;, {
 		extend: &quot;Firebrick.ui.display.List&quot;, 
 		uiName:&quot;fb-ui-navlist&quot;,
 		unstyled:true,
+		/**
+		 * if true - att &quot;navbar-btn&quot; class to the button
+		 * @property navbarItem
+		 * @type {Boolean}
+		 * @default false
+		 */
+		navbarItem: false,
 		/**
 		 * overriding property from list
 		 * @property preItemTpl
@@ -180,7 +200,7 @@ define([&quot;handlebars&quot;, &quot;../display/List&quot;], function(Handlebar
 		 * @default &quot;&lt;a data-bind=&quot;{{data-bind &#x27;navLinkBindings&#x27;}}&quot;&gt;&quot;
 		 */
 		preItemTpl:function(){
-			return Handlebars.compile(&#x27;&lt;a data-bind=&quot;{{data-bind \&#x27;navLinkBindings\&#x27;}}&quot;&gt;&#x27;)(this);
+			return tplEngine.template(&#x27;&lt;a data-bind=&quot;{{=it.dataBind(\&#x27;navLinkBindings\&#x27;)}}&quot;&gt;&#x27;)(this);
 		},
 		/**
 		 * overriding property from list
@@ -194,16 +214,30 @@ define([&quot;handlebars&quot;, &quot;../display/List&quot;], function(Handlebar
 		 * @return {Object}
 		 */
 		navLinkBindings: function(){
-			var me = this,
-				obj = {
+			var obj = {
 					attr:{
 						href: &quot;$data.link ? $data.link : &#x27;&#x27;&quot;
 					}
 			};
 			return obj;
+		},
+		/**
+		 * @method listContainerBindings
+		 * @return {Object}
+		 */
+		listContainerBindings: function(){
+			var me = this,
+				obj = me.callParent(arguments);
+			
+			if(me.navbarItem){
+				obj.css[&quot;&#x27;navbar-nav&#x27;&quot;] = true;
+				obj.css.nav = true;
+			}
+			
+			return obj;
 		}
 	});
-})
+});
     </pre>
 </div>
 

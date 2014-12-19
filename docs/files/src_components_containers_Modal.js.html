@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>src\components\display\Text.js - Firebrick UI API</title>
+    <title>src\components\containers\Modal.js - Firebrick UI API</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -166,7 +166,7 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-                        <h1 class="file-heading">File: src\components\display\Text.js</h1>
+                        <h1 class="file-heading">File: src\components\containers\Modal.js</h1>
 
 <div class="file">
     <pre class="code prettyprint linenums">
@@ -176,124 +176,261 @@
 
 /**
  * @module Firebrick.ui.components
- * @extends components.common.Base
- * @namespace components.display
- * @class Text
+ * @extends components.containers.Base
+ * @namespace components.containers
+ * @class Modal
  */
-define([&quot;text!./Text.html&quot;, &quot;../common/Base&quot;], function(tpl){
+define([&quot;text!./Modal.html&quot;, &quot;./Base&quot;], function(tpl){
+	
 	&quot;use strict&quot;;
-	return Firebrick.define(&quot;Firebrick.ui.display.Text&quot;, {
-		extend: &quot;Firebrick.ui.common.Base&quot;,
+	
+	return Firebrick.define(&quot;Firebrick.ui.containers.Modal&quot;, {
+		extend:&quot;Firebrick.ui.containers.Base&quot;,
+		tpl: tpl,
+		target:&quot;body&quot;,
+		appendTarget: true,
+		uiName:&quot;fb-ui-modal&quot;,
+		init: function(){
+			var me = this;
+			me.on(&quot;rendered&quot;, function(){
+				if(me.showOnCreate){
+					return me.showMe();	
+				}
+			});
+			return me.callParent(arguments);
+		},
+		enclosedBind:true,
 		/**
-		 * @property uiName
-		 * @type {String}
+		 * show the modal
+		 * @method showMe
+		 * @return {Object} self
 		 */
-		uiName:&quot;fb-ui-text&quot;,
+		showMe: function(){
+			var me = this,
+				modal = me.getElement();
+			if(modal){
+				modal.modal();
+			}
+		},
 		/**
-		 * @property tpl
-		 * @type {String}
-		 */
-		tpl:tpl,
-		/**
-		 * whether text is raw html or not
-		 * @property isHtml
-		 * @type {Boolean}
-		 * @default false
-		 */
-		isHtml:false,
-		/**
-		 * @property text
+		 * @property ariaDescribedBy
 		 * @type {String}
 		 * @default &quot;&quot;
 		 */
-		text:&quot;&quot;,
+		ariaDescribedBy: &quot;&quot;,
 		/**
-		 * @property leadCSS
+		 * if true - the modal will popup after .create() has been called
+		 * @property showOnCreate
 		 * @type {Boolean}
 		 * @default false
 		 */
-		leadCSS:false,
+		showOnCreate: true,
 		/**
-		 * @property blockQuote
+		 * @property title
+		 * @type {String}
+		 * @default &quot;&quot;
+		 */
+		title:&quot;&quot;,
+		/**
+		 * @property titleClass
 		 * @type {Boolean}
-		 * @default false
+		 * @default true
 		 */
-		blockQuote:false,
+		titleClass: true,
 		/**
-		 * @property blockQuoteReverseCSS
+		 * @property bodyClass
 		 * @type {Boolean}
-		 * @default false
+		 * @default true
 		 */
-		blockQuoteReverseCSS: false,
+		bodyClass: true,
 		/**
-		 * false not to show, string for footer text
-		 * @property blockQuoteFooter
-		 * @type {Boolean|String}
-		 * @default false
+		 * @property animationClass
+		 * @type {String}
+		 * @default &quot;fade&quot;
 		 */
-		blockQuoteFooter:false,
+		animationClass: &quot;fade&quot;,
 		/**
-		 * @property isBlockQuoteFooterHTML
+		 * @property dialogClass
 		 * @type {Boolean}
-		 * @default false
+		 * @default true
 		 */
-		isBlockQuoteFooterHTML: false,
+		dialogClass: true,
 		/**
-		 * false || string :: &#x27;left&#x27;, &#x27;center&#x27;, &#x27;right&#x27;, &#x27;justify&#x27;, &#x27;no-wrap&#x27; (defaults to: left)
-		 * @property textAlignment
-		 * @type {Boolean|String}
-		 * @default &quot;justify&quot;
+		 * @property contentClass
+		 * @type {Boolean}
+		 * @default true
 		 */
-		textAlignment:&quot;justify&quot;,
+		contentClass: true,
 		/**
-		 * Bindings
-		 * @method bindings
+		 * @property headerClass
+		 * @type {Boolean}
+		 * @default true
+		 */
+		headerClass: true,
+		/**
+		 * @property isModal
+		 * @type {Boolean}
+		 * @default true
+		 */
+		isModal: true,
+		/**
+		 * @property footerClass
+		 * @type {Boolean}
+		 * @default true
+		 */
+		footerClass: true,
+		/**
+		 * used to created the &lt;h{int}&gt;&lt;/h{int}&gt; tags in the header
+		 * @property titleSize
+		 * @type {Integer}
+		 * @default 4
+		 */
+		titleSize:4,
+		/**
+		 * @property showCloseIcon
+		 * @type {Boolean}
+		 * @default true
+		 */
+		showCloseIcon: true,
+		/**
+		 * screen reader text
+		 * @property srCloseText
+		 * @type {String}
+		 * @default &quot;Close&quot;
+		 */
+		srCloseText: &quot;Close&quot;,
+		/**
+		 * @method srCloseIconBindings
 		 * @return {Object}
 		 */
-		bindings:function(){
-			var me = this,
-				obj = me.callParent(arguments);
-			
-			obj.css.lead = me.leadCSS;
-			
-			if(me.textAlignment){
-				obj.css[ me.parseBind(&quot;text-&quot;+me.textAlignment) ] = true;	
-			}
-			
-			if(me.html){
-				obj.html = me.text; 
-			}else if(me.text){
-				obj.text = me.textBind(me.text);
-			}
-			
-			return obj;
-		},
-		/**
-		 * @method blockQuoteBindings
-		 * @return {Object}
-		 */
-		blockQuoteBindings: function(){
+		srCloseIconBindings: function(){
+			var me = this;
 			return {
 				css:{
-					&quot;&#x27;blockquote-reverse&#x27;&quot;: this.blockQuoteReverseCSS
+					&quot;&#x27;sr-only&#x27;&quot;: true
+				},
+				text: me.parseBind(me.srCloseText)
+			};
+		},
+		/**
+		 * @method closeButtonBindings
+		 * @return {Object}
+		 */
+		closeButtonBindings: function(){
+			return {
+				attr:{
+					type: &quot;&#x27;button&#x27;&quot;,
+					&quot;&#x27;data-dismiss&#x27;&quot;: &quot;&#x27;modal&#x27;&quot;
+				},
+				css:{
+					close: true
 				}
 			};
 		},
 		/**
-		 * @method blockQuoteFooterBindings
+		 * @method getTitleId
+		 * @return {String}
+		 */
+		getTitleId: function(){
+			return &quot;fb-modal-title-&quot; + this.getId();
+		},
+		/**
+		 * @method bindings
 		 * @return {Object}
 		 */
-		blockQuoteFooterBindings: function(){
+		bindings: function(){
 			var me = this,
-				obj = {};
-			if(me.html){
-				obj.html = me.blockQuoteFooter; 
-			}else{
-				obj.text = me.blockQuoteFooter;
+				obj = this.callParent();
+			
+			obj.css.modal = me.isModal;
+			
+			obj.attr[&quot;&#x27;aria-labelledby&#x27;&quot;] = me.parseBind(me.getTitleId());
+			obj.attr[&quot;&#x27;aria-describedby&#x27;&quot;] = me.parseBind(me.ariaDescribedBy);
+			obj.attr.role = &quot;&#x27;dialog&#x27;&quot;;
+			obj.attr.tabindex = -1;
+			obj.attr[&quot;&#x27;aria-hidden&#x27;&quot;] = true;
+			
+			if(me.animationClass){
+				obj.css[me.animationClass] = true;
 			}
+			
 			return obj;
+		},
+		/**
+		 * @method dialogBindings
+		 * @return {Object}
+		 */
+		dialogBindings: function(){
+			var me = this;
+			return {
+				css: {
+					&quot;&#x27;modal-dialog&#x27;&quot;: me.dialogClass
+				}
+			};
+		},
+		/**
+		 * @method contentBindings
+		 * @return {Object}
+		 */
+		contentBindings: function(){
+			var me = this;
+			return {
+				css: {
+					&quot;&#x27;modal-content&#x27;&quot;: me.contentClass
+				}
+			};
+		},
+		/**
+		 * @method headerBindings
+		 * @return {Object}
+		 */
+		headerBindings: function(){
+			var me = this;
+			return {
+				css: {
+					&quot;&#x27;modal-header&#x27;&quot;: me.headerClass
+				}
+			};
+		},
+		/**
+		 * @method titleBindings
+		 * @return {Object}
+		 */
+		titleBindings: function(){
+			var me = this;
+			return {
+				text: me.textBind( me.title ),
+				css: {
+					&quot;&#x27;modal-title&#x27;&quot;: me.titleClass
+				}
+			};
+		},
+		/**
+		 * @method bodyBindings
+		 * @return {Object}
+		 */
+		bodyBindings: function(){
+			var me = this;
+			return {
+				css:{
+					&quot;&#x27;modal-body&#x27;&quot;: me.bodyClass
+				}
+			};
+		},
+		/**
+		 * @method footerBindings
+		 * @return {Object}
+		 */
+		footerBindings: function(){
+			var me = this;
+			return {
+				css:{
+					&quot;&#x27;modal-footer&#x27;&quot;: me.footerClass
+				}
+			};
 		}
 	});
+	
 });
     </pre>
 </div>

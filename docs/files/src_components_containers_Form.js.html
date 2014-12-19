@@ -19,7 +19,7 @@
             
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 0.7.7</em>
+            <em>API Docs for: 0.9.0</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -53,6 +53,8 @@
             
                 <li><a href="../classes/components.common.mixins.Items.html">components.common.mixins.Items</a></li>
             
+                <li><a href="../classes/components.common.mixins.Toolbars.html">components.common.mixins.Toolbars</a></li>
+            
                 <li><a href="../classes/components.common.MultiplesBase.html">components.common.MultiplesBase</a></li>
             
                 <li><a href="../classes/components.containers.Base.html">components.containers.Base</a></li>
@@ -65,7 +67,11 @@
             
                 <li><a href="../classes/components.containers.GridColumn.html">components.containers.GridColumn</a></li>
             
+                <li><a href="../classes/components.containers.Modal.html">components.containers.Modal</a></li>
+            
                 <li><a href="../classes/components.containers.Panel.html">components.containers.Panel</a></li>
+            
+                <li><a href="../classes/components.display.Alert.html">components.display.Alert</a></li>
             
                 <li><a href="../classes/components.display.Header.html">components.display.Header</a></li>
             
@@ -91,6 +97,8 @@
             
                 <li><a href="../classes/components.fields.TextArea.html">components.fields.TextArea</a></li>
             
+                <li><a href="../classes/components.nav.Base.html">components.nav.Base</a></li>
+            
                 <li><a href="../classes/components.nav.Breadcrumbs.html">components.nav.Breadcrumbs</a></li>
             
                 <li><a href="../classes/components.nav.List.html">components.nav.List</a></li>
@@ -98,6 +106,8 @@
                 <li><a href="../classes/components.nav.Navbar.html">components.nav.Navbar</a></li>
             
                 <li><a href="../classes/components.nav.Pagination.html">components.nav.Pagination</a></li>
+            
+                <li><a href="../classes/components.nav.Toolbar.html">components.nav.Toolbar</a></li>
             
                 <li><a href="../classes/components.table.Table.html">components.table.Table</a></li>
             
@@ -108,6 +118,8 @@
                 <li><a href="../classes/ui.html">ui</a></li>
             
                 <li><a href="../classes/utils.html">utils</a></li>
+            
+                <li><a href="../classes/view.Base.html">view.Base</a></li>
             
             </ul>
 
@@ -169,6 +181,7 @@
  * @class Form
  */
 define([&quot;text!./Form.html&quot;, &quot;jquery&quot;, &quot;./Base&quot;], function(tpl, $){
+	&quot;use strict&quot;;
 	return Firebrick.define(&quot;Firebrick.ui.containers.Form&quot;, {
 		extend:&quot;Firebrick.ui.containers.Base&quot;,
 		/**
@@ -273,7 +286,7 @@ define([&quot;text!./Form.html&quot;, &quot;jquery&quot;, &quot;./Base&quot;], f
 		 * @default 
 		 */
 		success: function(){
-			console.info(&quot;success&quot;)
+			console.info(&quot;success&quot;);
 		},
 		/**
 		 * method called on submit ajax
@@ -282,7 +295,7 @@ define([&quot;text!./Form.html&quot;, &quot;jquery&quot;, &quot;./Base&quot;], f
 		 * @default 
 		 */
 		failure: function(){
-			console.info(&quot;failure&quot;)
+			console.info(&quot;failure&quot;);
 		},
 		/**
 		 * method called on submit ajax
@@ -290,7 +303,7 @@ define([&quot;text!./Form.html&quot;, &quot;jquery&quot;, &quot;./Base&quot;], f
 		 * @type {Function}
 		 * @default function(){}
 		 */
-		complete: function(){console.info(&quot;complete&quot;)},
+		complete: function(){},
 		/**
 		 * method called after ajax
 		 * @method always
@@ -309,7 +322,8 @@ define([&quot;text!./Form.html&quot;, &quot;jquery&quot;, &quot;./Base&quot;], f
 		 * @return {Object}
 		 */
 		getFormData: function(){
-			return new FormData($(&quot;#&quot;+this.getId()));
+			var me = this;
+			return new window.FormData(me.getElement());
 		},
 		/**
 		 * @method init
@@ -317,11 +331,11 @@ define([&quot;text!./Form.html&quot;, &quot;jquery&quot;, &quot;./Base&quot;], f
 		init: function(){
 			var me = this;
 				
-			me.on(&quot;componentReady&quot;, function(){
-				me._form = $(&quot;#&quot; + me.getId());
+			me.on(&quot;rendered&quot;, function(){
+				me._form = me.getElement();
 			});
 			
-			return this.callParent();
+			return me.callParent(arguments);
 		},
 		/**
 		 * make sure this.url is set before calling this function
@@ -330,7 +344,7 @@ define([&quot;text!./Form.html&quot;, &quot;jquery&quot;, &quot;./Base&quot;], f
 		submit: function(){
 			var me = this;
 
-			if(!me.url || typeof me.url != &quot;string&quot;){
+			if(!me.url || typeof me.url !== &quot;string&quot;){
 				console.error(&quot;unable to submit form. No url is set or is set incorrectly&quot;, me.url, me);
 				return;
 			}
@@ -345,7 +359,7 @@ define([&quot;text!./Form.html&quot;, &quot;jquery&quot;, &quot;./Base&quot;], f
 					xhr: me.xhr,
 					url: me.url, 
 					type: me.submitType, 
-					data: new FormData(me._form[0]), 
+					data: new window.FormData(me._form[0]), 
 					processData: me.ajaxProcessData, 
 					contentType: me.enctype,
 					beforeSend: me.beforeSend.bind(me),
@@ -361,20 +375,18 @@ define([&quot;text!./Form.html&quot;, &quot;jquery&quot;, &quot;./Base&quot;], f
 		 * @method formBindings
 		 * @return {Object}
 		 */
-		formBindings:function(){
-			var me = this;
-			return {
-				attr:{
-					role:  me.parseBind(me.formRole),
-					enctype:  me.parseBind(me.enctype)
-				},
-				css:{
-					&quot;&#x27;form-horizontal&#x27;&quot;: this.horizontal,
-					&quot;&#x27;form-inline&#x27;&quot;: this.inline
-				}
-			};
+		bindings:function(){
+			var me = this,
+				obj = {css:{},attr:{}};
+			
+			obj.attr.role =  me.parseBind(me.formRole);
+			obj.attr.enctype =  me.parseBind(me.enctype);
+			obj.css[&quot;&#x27;form-horizontal&#x27;&quot;] =  me.horizontal;
+			obj.attr[&quot;&#x27;form-inline&#x27;&quot;] =  me.inline;
+			
+			return obj;
 		}
-	})
+	});
 });
     </pre>
 </div>

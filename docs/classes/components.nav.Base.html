@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>components.nav.Navbar - Firebrick UI API</title>
+    <title>components.nav.Base - Firebrick UI API</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -166,19 +166,28 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-                        <h1>components.nav.Navbar Class</h1>
+                        <h1>components.nav.Base Class</h1>
 <div class="box meta">
+    
+        <div class="uses">
+            Uses
+            <ul class="inline commas">
+                
+                    <li><a href="components.common.mixins.Items.html">components.common.mixins.Items</a></li>
+                
+            </ul>
+        </div>
     
 
     
         <div class="extends">
-            Extends <a href="../classes/components.nav.Base.html" class="crosslink">components.nav.Base</a>
+            Extends <a href="../classes/components.common.Base.html" class="crosslink">components.common.Base</a>
         </div>
     
 
     
         <div class="foundat">
-            Defined in: <a href="../files/src_components_nav_Navbar.js.html#l5"><code>src\components\nav\Navbar.js:5</code></a>
+            Defined in: <a href="../files/src_components_nav_Base.js.html#l5"><code>src\components\nav\Base.js:5</code></a>
         </div>
     
 
@@ -272,13 +281,6 @@
                                 
                             </li>
                         
-                            <li class="index-item method">
-                                <a href="#method_brandBindings">brandBindings</a>
-
-                                
-                                
-                            </li>
-                        
                             <li class="index-item method inherited">
                                 <a href="#method_build">build</a>
 
@@ -356,48 +358,6 @@
                                 
                             </li>
                         
-                            <li class="index-item method">
-                                <a href="#method_listContainerBindings">listContainerBindings</a>
-
-                                
-                                
-                            </li>
-                        
-                            <li class="index-item method">
-                                <a href="#method_listItemBindings">listItemBindings</a>
-
-                                
-                                
-                            </li>
-                        
-                            <li class="index-item method">
-                                <a href="#method_navbarContainerBindings">navbarContainerBindings</a>
-
-                                
-                                
-                            </li>
-                        
-                            <li class="index-item method">
-                                <a href="#method_navbarHeaderBindings">navbarHeaderBindings</a>
-
-                                
-                                
-                            </li>
-                        
-                            <li class="index-item method">
-                                <a href="#method_navbarWrapperBindings">navbarWrapperBindings</a>
-
-                                
-                                
-                            </li>
-                        
-                            <li class="index-item method">
-                                <a href="#method_navBindings">navBindings</a>
-
-                                
-                                
-                            </li>
-                        
                             <li class="index-item method inherited">
                                 <a href="#method_parseBind">parseBind</a>
 
@@ -414,20 +374,6 @@
                         
                             <li class="index-item method inherited">
                                 <a href="#method_textBind">textBind</a>
-
-                                
-                                
-                            </li>
-                        
-                            <li class="index-item method">
-                                <a href="#method_toggleButtonBindings">toggleButtonBindings</a>
-
-                                
-                                
-                            </li>
-                        
-                            <li class="index-item method">
-                                <a href="#method_toggleTextBindings">toggleTextBindings</a>
 
                                 
                                 
@@ -471,41 +417,6 @@
                                 
                             </li>
                         
-                            <li class="index-item property">
-                                <a href="#property_brandClass">brandClass</a>
-
-                                
-                                
-                            </li>
-                        
-                            <li class="index-item property">
-                                <a href="#property_brandLink">brandLink</a>
-
-                                
-                                
-                            </li>
-                        
-                            <li class="index-item property">
-                                <a href="#property_brandText">brandText</a>
-
-                                
-                                
-                            </li>
-                        
-                            <li class="index-item property">
-                                <a href="#property_brandTpl">brandTpl</a>
-
-                                
-                                
-                            </li>
-                        
-                            <li class="index-item property">
-                                <a href="#property_data">data</a>
-
-                                
-                                
-                            </li>
-                        
                             <li class="index-item property inherited">
                                 <a href="#property_defaults">defaults</a>
 
@@ -534,85 +445,8 @@
                                 
                             </li>
                         
-                            <li class="index-item property">
-                                <a href="#property_listGroupClass">listGroupClass</a>
-
-                                
-                                
-                            </li>
-                        
-                            <li class="index-item property">
-                                <a href="#property_navbarClass">navbarClass</a>
-
-                                
-                                
-                            </li>
-                        
-                            <li class="index-item property">
-                                <a href="#property_navbarDefaultClass">navbarDefaultClass</a>
-
-                                
-                                
-                            </li>
-                        
-                            <li class="index-item property">
-                                <a href="#property_navbarHeaderClass">navbarHeaderClass</a>
-
-                                
-                                
-                            </li>
-                        
-                            <li class="index-item property">
-                                <a href="#property_navClass">navClass</a>
-
-                                
-                                
-                            </li>
-                        
-                            <li class="index-item property">
-                                <a href="#property_navTypeClass">navTypeClass</a>
-
-                                
-                                
-                            </li>
-                        
-                            <li class="index-item property">
-                                <a href="#property_showBranding">showBranding</a>
-
-                                
-                                
-                            </li>
-                        
-                            <li class="index-item property">
-                                <a href="#property_showNavbarHeader">showNavbarHeader</a>
-
-                                
-                                
-                            </li>
-                        
                             <li class="index-item property inherited">
                                 <a href="#property_subTpl">subTpl</a>
-
-                                
-                                
-                            </li>
-                        
-                            <li class="index-item property">
-                                <a href="#property_toggleButton">toggleButton</a>
-
-                                
-                                
-                            </li>
-                        
-                            <li class="index-item property">
-                                <a href="#property_toggleText">toggleText</a>
-
-                                
-                                
-                            </li>
-                        
-                            <li class="index-item property">
-                                <a href="#property_toolbarDefaults">toolbarDefaults</a>
 
                                 
                                 
@@ -749,7 +583,7 @@
                     
 
                     <div class="param-description">
-                         
+                        
                     </div>
 
                     
@@ -1120,7 +954,7 @@ iterate up the inheritance tree looking for a classname that differs from the cu
                     
 
                     <div class="param-description">
-                         
+                        
                     </div>
 
                     
@@ -1223,7 +1057,7 @@ iterate up the inheritance tree looking for a classname that differs from the cu
                     
 
                     <div class="param-description">
-                         
+                        
                     </div>
 
                     
@@ -1251,7 +1085,7 @@ iterate up the inheritance tree looking for a classname that differs from the cu
 </div>
 
                 
-                    <div id="method_bindings" class="method item">
+                    <div id="method_bindings" class="method item inherited">
     <h3 class="name"><code>bindings</code></h3>
 
     
@@ -1278,16 +1112,13 @@ iterate up the inheritance tree looking for a classname that differs from the cu
 
     <div class="meta">
         
-            <p>Inherited from
-            <a href="../classes/components.common.Base.html#method_bindings">
-                components.common.Base
-            </a>
             
-            but overwritten in
+                <p>Inherited from
+                <a href="../classes/components.common.Base.html#method_bindings">components.common.Base</a>:
             
         
         
-        <a href="../files/src_components_nav_Navbar.js.html#l180"><code>src\components\nav\Navbar.js:180</code></a>
+        <a href="../files/src_components_common_Base.js.html#l221"><code>src\components\common\Base.js:221</code></a>
         
         </p>
 
@@ -1298,7 +1129,7 @@ iterate up the inheritance tree looking for a classname that differs from the cu
     </div>
 
     <div class="description">
-        <p>overriding parent</p>
+        <p>mother of all basic bindings</p>
 
     </div>
 
@@ -1313,76 +1144,8 @@ iterate up the inheritance tree looking for a classname that differs from the cu
                     
                         <span class="type">Object</span>:
                     
-                
-            </div>
-        </div>
-    
+                    <p>{attr:{}, css:{}}</p>
 
-    
-</div>
-
-                
-                    <div id="method_brandBindings" class="method item">
-    <h3 class="name"><code>brandBindings</code></h3>
-
-    
-        <span class="paren">()</span>
-    
-
-    
-        <span class="returns-inline">
-            <span class="type">Object</span>
-        </span>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/src_components_nav_Navbar.js.html#l148"><code>src\components\nav\Navbar.js:148</code></a>
-        
-        </p>
-
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        
-    </div>
-
-    
-
-    
-        <div class="returns">
-            <h4>Returns:</h4>
-
-            <div class="returns-description">
-                
-                    
-                        <span class="type">Object</span>:
-                    
                 
             </div>
         </div>
@@ -1709,7 +1472,7 @@ iterate up the inheritance tree looking for a classname that differs from the cu
                     
 
                     <div class="param-description">
-                         
+                        
                     </div>
 
                     
@@ -2202,428 +1965,6 @@ iterate up the inheritance tree looking for a classname that differs from the cu
 </div>
 
                 
-                    <div id="method_listContainerBindings" class="method item">
-    <h3 class="name"><code>listContainerBindings</code></h3>
-
-    
-        <span class="paren">()</span>
-    
-
-    
-        <span class="returns-inline">
-            <span class="type">Object</span>
-        </span>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/src_components_nav_Navbar.js.html#l168"><code>src\components\nav\Navbar.js:168</code></a>
-        
-        </p>
-
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>overriding parent</p>
-
-    </div>
-
-    
-
-    
-        <div class="returns">
-            <h4>Returns:</h4>
-
-            <div class="returns-description">
-                
-                    
-                        <span class="type">Object</span>:
-                    
-                
-            </div>
-        </div>
-    
-
-    
-</div>
-
-                
-                    <div id="method_listItemBindings" class="method item">
-    <h3 class="name"><code>listItemBindings</code></h3>
-
-    
-        <span class="paren">()</span>
-    
-
-    
-        <span class="returns-inline">
-            <span class="type">Object</span>
-        </span>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/src_components_nav_Navbar.js.html#l191"><code>src\components\nav\Navbar.js:191</code></a>
-        
-        </p>
-
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>overriding parent</p>
-
-    </div>
-
-    
-
-    
-        <div class="returns">
-            <h4>Returns:</h4>
-
-            <div class="returns-description">
-                
-                    
-                        <span class="type">Object</span>:
-                    
-                
-            </div>
-        </div>
-    
-
-    
-</div>
-
-                
-                    <div id="method_navbarContainerBindings" class="method item">
-    <h3 class="name"><code>navbarContainerBindings</code></h3>
-
-    
-        <span class="paren">()</span>
-    
-
-    
-        <span class="returns-inline">
-            <span class="type">Object</span>
-        </span>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/src_components_nav_Navbar.js.html#l215"><code>src\components\nav\Navbar.js:215</code></a>
-        
-        </p>
-
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        
-    </div>
-
-    
-
-    
-        <div class="returns">
-            <h4>Returns:</h4>
-
-            <div class="returns-description">
-                
-                    
-                        <span class="type">Object</span>:
-                    
-                
-            </div>
-        </div>
-    
-
-    
-</div>
-
-                
-                    <div id="method_navbarHeaderBindings" class="method item">
-    <h3 class="name"><code>navbarHeaderBindings</code></h3>
-
-    
-        <span class="paren">()</span>
-    
-
-    
-        <span class="returns-inline">
-            <span class="type">Object</span>
-        </span>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/src_components_nav_Navbar.js.html#l203"><code>src\components\nav\Navbar.js:203</code></a>
-        
-        </p>
-
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        
-    </div>
-
-    
-
-    
-        <div class="returns">
-            <h4>Returns:</h4>
-
-            <div class="returns-description">
-                
-                    
-                        <span class="type">Object</span>:
-                    
-                
-            </div>
-        </div>
-    
-
-    
-</div>
-
-                
-                    <div id="method_navbarWrapperBindings" class="method item">
-    <h3 class="name"><code>navbarWrapperBindings</code></h3>
-
-    
-        <span class="paren">()</span>
-    
-
-    
-        <span class="returns-inline">
-            <span class="type">Object</span>
-        </span>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/src_components_nav_Navbar.js.html#l266"><code>src\components\nav\Navbar.js:266</code></a>
-        
-        </p>
-
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        
-    </div>
-
-    
-
-    
-        <div class="returns">
-            <h4>Returns:</h4>
-
-            <div class="returns-description">
-                
-                    
-                        <span class="type">Object</span>:
-                    
-                
-            </div>
-        </div>
-    
-
-    
-</div>
-
-                
-                    <div id="method_navBindings" class="method item">
-    <h3 class="name"><code>navBindings</code></h3>
-
-    
-        <span class="paren">()</span>
-    
-
-    
-        <span class="returns-inline">
-            <span class="type">Object</span>
-        </span>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/src_components_nav_Navbar.js.html#l128"><code>src\components\nav\Navbar.js:128</code></a>
-        
-        </p>
-
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        
-    </div>
-
-    
-
-    
-        <div class="returns">
-            <h4>Returns:</h4>
-
-            <div class="returns-description">
-                
-                    
-                        <span class="type">Object</span>:
-                    
-                
-            </div>
-        </div>
-    
-
-    
-</div>
-
-                
                     <div id="method_parseBind" class="method item inherited">
     <h3 class="name"><code>parseBind</code></h3>
 
@@ -2697,7 +2038,7 @@ iterate up the inheritance tree looking for a classname that differs from the cu
                     
 
                     <div class="param-description">
-                         
+                        
                     </div>
 
                     
@@ -2926,7 +2267,7 @@ iterate up the inheritance tree looking for a classname that differs from the cu
                     
 
                     <div class="param-description">
-                         
+                        
                     </div>
 
                     
@@ -2960,146 +2301,6 @@ iterate up the inheritance tree looking for a classname that differs from the cu
 
             </div>
         </div>
-    
-</div>
-
-                
-                    <div id="method_toggleButtonBindings" class="method item">
-    <h3 class="name"><code>toggleButtonBindings</code></h3>
-
-    
-        <span class="paren">()</span>
-    
-
-    
-        <span class="returns-inline">
-            <span class="type">Object</span>
-        </span>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/src_components_nav_Navbar.js.html#l243"><code>src\components\nav\Navbar.js:243</code></a>
-        
-        </p>
-
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        
-    </div>
-
-    
-
-    
-        <div class="returns">
-            <h4>Returns:</h4>
-
-            <div class="returns-description">
-                
-                    
-                        <span class="type">Object</span>:
-                    
-                
-            </div>
-        </div>
-    
-
-    
-</div>
-
-                
-                    <div id="method_toggleTextBindings" class="method item">
-    <h3 class="name"><code>toggleTextBindings</code></h3>
-
-    
-        <span class="paren">()</span>
-    
-
-    
-        <span class="returns-inline">
-            <span class="type">Object</span>
-        </span>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/src_components_nav_Navbar.js.html#l233"><code>src\components\nav\Navbar.js:233</code></a>
-        
-        </p>
-
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        
-    </div>
-
-    
-
-    
-        <div class="returns">
-            <h4>Returns:</h4>
-
-            <div class="returns-description">
-                
-                    
-                        <span class="type">Object</span>:
-                    
-                
-            </div>
-        </div>
-    
-
     
 </div>
 
@@ -3291,240 +2492,6 @@ iterate up the inheritance tree looking for a classname that differs from the cu
 </div>
 
                 
-                    <div id="property_brandClass" class="property item">
-    <h3 class="name"><code>brandClass</code></h3>
-    <span class="type">Boolean | String</span>
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/src_components_nav_Navbar.js.html#l69"><code>src\components\nav\Navbar.js:69</code></a>
-        
-        </p>
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        
-    </div>
-
-    
-        <p><strong>Default:</strong> true</p>
-    
-
-    
-
-    
-</div>
-
-                
-                    <div id="property_brandLink" class="property item">
-    <h3 class="name"><code>brandLink</code></h3>
-    <span class="type">Boolean | String</span>
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/src_components_nav_Navbar.js.html#l75"><code>src\components\nav\Navbar.js:75</code></a>
-        
-        </p>
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>false to deactivate</p>
-
-    </div>
-
-    
-        <p><strong>Default:</strong> &quot;/&quot;</p>
-    
-
-    
-
-    
-</div>
-
-                
-                    <div id="property_brandText" class="property item">
-    <h3 class="name"><code>brandText</code></h3>
-    <span class="type">Boolean | String</span>
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/src_components_nav_Navbar.js.html#l82"><code>src\components\nav\Navbar.js:82</code></a>
-        
-        </p>
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>brand text - false to show none or if you wish to use brandTpl instead</p>
-
-    </div>
-
-    
-        <p><strong>Default:</strong> &quot;Firebrick.ui&quot;</p>
-    
-
-    
-
-    
-</div>
-
-                
-                    <div id="property_brandTpl" class="property item">
-    <h3 class="name"><code>brandTpl</code></h3>
-    <span class="type">Boolean | String</span>
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/src_components_nav_Navbar.js.html#l89"><code>src\components\nav\Navbar.js:89</code></a>
-        
-        </p>
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>false to deactivate</p>
-
-    </div>
-
-    
-        <p><strong>Default:</strong> false</p>
-    
-
-    
-
-    
-</div>
-
-                
-                    <div id="property_data" class="property item">
-    <h3 class="name"><code>data</code></h3>
-    <span class="type">String</span>
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/src_components_nav_Navbar.js.html#l96"><code>src\components\nav\Navbar.js:96</code></a>
-        
-        </p>
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>data to populate navigation with</p>
-
-    </div>
-
-    
-        <p><strong>Default:</strong> null</p>
-    
-
-    
-
-    
-</div>
-
-                
                     <div id="property_defaults" class="property item inherited">
     <h3 class="name"><code>defaults</code></h3>
     <span class="type">Object</span>
@@ -3699,380 +2666,6 @@ iterate up the inheritance tree looking for a classname that differs from the cu
 </div>
 
                 
-                    <div id="property_listGroupClass" class="property item">
-    <h3 class="name"><code>listGroupClass</code></h3>
-    <span class="type">Unknown</span>
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/src_components_nav_Navbar.js.html#l103"><code>src\components\nav\Navbar.js:103</code></a>
-        
-        </p>
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>overriding parent</p>
-
-    </div>
-
-    
-        <p><strong>Default:</strong> false</p>
-    
-
-    
-
-    
-</div>
-
-                
-                    <div id="property_navbarClass" class="property item">
-    <h3 class="name"><code>navbarClass</code></h3>
-    <span class="type">Boolean</span>
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/src_components_nav_Navbar.js.html#l42"><code>src\components\nav\Navbar.js:42</code></a>
-        
-        </p>
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>whether &quot;navbar&quot; css class is used</p>
-
-    </div>
-
-    
-        <p><strong>Default:</strong> true</p>
-    
-
-    
-
-    
-</div>
-
-                
-                    <div id="property_navbarDefaultClass" class="property item">
-    <h3 class="name"><code>navbarDefaultClass</code></h3>
-    <span class="type">Boolean</span>
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/src_components_nav_Navbar.js.html#l35"><code>src\components\nav\Navbar.js:35</code></a>
-        
-        </p>
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>whether &quot;navbar-default&quot; is used</p>
-
-    </div>
-
-    
-        <p><strong>Default:</strong> true</p>
-    
-
-    
-
-    
-</div>
-
-                
-                    <div id="property_navbarHeaderClass" class="property item">
-    <h3 class="name"><code>navbarHeaderClass</code></h3>
-    <span class="type">Boolean</span>
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/src_components_nav_Navbar.js.html#l49"><code>src\components\nav\Navbar.js:49</code></a>
-        
-        </p>
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>css class: navbar-header</p>
-
-    </div>
-
-    
-        <p><strong>Default:</strong> true</p>
-    
-
-    
-
-    
-</div>
-
-                
-                    <div id="property_navClass" class="property item">
-    <h3 class="name"><code>navClass</code></h3>
-    <span class="type">String | Boolean</span>
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/src_components_nav_Navbar.js.html#l109"><code>src\components\nav\Navbar.js:109</code></a>
-        
-        </p>
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>sets nav &amp;&amp; nav-bar css classes to the list container</p>
-
-    </div>
-
-    
-        <p><strong>Default:</strong> true</p>
-    
-
-    
-
-    
-</div>
-
-                
-                    <div id="property_navTypeClass" class="property item">
-    <h3 class="name"><code>navTypeClass</code></h3>
-    <span class="type">Boolean | String string: navbar-fixed-top, navbar-static-top, navbar-fixed-top, navbar-fixed-bottom, navbar-inverse (navbarDefaultClass=false)</span>
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/src_components_nav_Navbar.js.html#l28"><code>src\components\nav\Navbar.js:28</code></a>
-        
-        </p>
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>false to deactivate</p>
-
-    </div>
-
-    
-        <p><strong>Default:</strong> &quot;&#x27;navbar-static-top&#x27;&quot;</p>
-    
-
-    
-
-    
-</div>
-
-                
-                    <div id="property_showBranding" class="property item">
-    <h3 class="name"><code>showBranding</code></h3>
-    <span class="type">Boolean</span>
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/src_components_nav_Navbar.js.html#l122"><code>src\components\nav\Navbar.js:122</code></a>
-        
-        </p>
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        
-    </div>
-
-    
-        <p><strong>Default:</strong> true</p>
-    
-
-    
-
-    
-</div>
-
-                
-                    <div id="property_showNavbarHeader" class="property item">
-    <h3 class="name"><code>showNavbarHeader</code></h3>
-    <span class="type">Boolean</span>
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/src_components_nav_Navbar.js.html#l116"><code>src\components\nav\Navbar.js:116</code></a>
-        
-        </p>
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        
-    </div>
-
-    
-        <p><strong>Default:</strong> true</p>
-    
-
-    
-
-    
-</div>
-
-                
                     <div id="property_subTpl" class="property item inherited">
     <h3 class="name"><code>subTpl</code></h3>
     <span class="type">String html</span>
@@ -4109,148 +2702,6 @@ iterate up the inheritance tree looking for a classname that differs from the cu
 
     
         <p><strong>Default:</strong> null</p>
-    
-
-    
-
-    
-</div>
-
-                
-                    <div id="property_toggleButton" class="property item">
-    <h3 class="name"><code>toggleButton</code></h3>
-    <span class="type">Boolean</span>
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/src_components_nav_Navbar.js.html#l56"><code>src\components\nav\Navbar.js:56</code></a>
-        
-        </p>
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>if false then the navigation won&#39;t collapse to the small menu button</p>
-
-    </div>
-
-    
-        <p><strong>Default:</strong> true</p>
-    
-
-    
-
-    
-</div>
-
-                
-                    <div id="property_toggleText" class="property item">
-    <h3 class="name"><code>toggleText</code></h3>
-    <span class="type">String</span>
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/src_components_nav_Navbar.js.html#l63"><code>src\components\nav\Navbar.js:63</code></a>
-        
-        </p>
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        
-    </div>
-
-    
-        <p><strong>Default:</strong> &quot;Toggle navigation&quot;</p>
-    
-
-    
-
-    
-</div>
-
-                
-                    <div id="property_toolbarDefaults" class="property item">
-    <h3 class="name"><code>toolbarDefaults</code></h3>
-    <span class="type">Object</span>
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/src_components_nav_Navbar.js.html#l17"><code>src\components\nav\Navbar.js:17</code></a>
-        
-        </p>
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>passed on to the toolbar items (direct children only)</p>
-
-    </div>
-
-    
-        <p><strong>Default:</strong> {Object} {
-		navbarItem: true
-}</p>
     
 
     

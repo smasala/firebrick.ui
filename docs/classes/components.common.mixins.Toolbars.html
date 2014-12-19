@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>src\components\display\Text.js - Firebrick UI API</title>
+    <title>components.common.mixins.Toolbars - Firebrick UI API</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -166,136 +166,343 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-                        <h1 class="file-heading">File: src\components\display\Text.js</h1>
+                        <h1>components.common.mixins.Toolbars Class</h1>
+<div class="box meta">
+    
 
-<div class="file">
-    <pre class="code prettyprint linenums">
-/*!
- * @author Steven Masala [me@smasala.com]
- */
+    
 
-/**
- * @module Firebrick.ui.components
- * @extends components.common.Base
- * @namespace components.display
- * @class Text
- */
-define([&quot;text!./Text.html&quot;, &quot;../common/Base&quot;], function(tpl){
-	&quot;use strict&quot;;
-	return Firebrick.define(&quot;Firebrick.ui.display.Text&quot;, {
-		extend: &quot;Firebrick.ui.common.Base&quot;,
-		/**
-		 * @property uiName
-		 * @type {String}
-		 */
-		uiName:&quot;fb-ui-text&quot;,
-		/**
-		 * @property tpl
-		 * @type {String}
-		 */
-		tpl:tpl,
-		/**
-		 * whether text is raw html or not
-		 * @property isHtml
-		 * @type {Boolean}
-		 * @default false
-		 */
-		isHtml:false,
-		/**
-		 * @property text
-		 * @type {String}
-		 * @default &quot;&quot;
-		 */
-		text:&quot;&quot;,
-		/**
-		 * @property leadCSS
-		 * @type {Boolean}
-		 * @default false
-		 */
-		leadCSS:false,
-		/**
-		 * @property blockQuote
-		 * @type {Boolean}
-		 * @default false
-		 */
-		blockQuote:false,
-		/**
-		 * @property blockQuoteReverseCSS
-		 * @type {Boolean}
-		 * @default false
-		 */
-		blockQuoteReverseCSS: false,
-		/**
-		 * false not to show, string for footer text
-		 * @property blockQuoteFooter
-		 * @type {Boolean|String}
-		 * @default false
-		 */
-		blockQuoteFooter:false,
-		/**
-		 * @property isBlockQuoteFooterHTML
-		 * @type {Boolean}
-		 * @default false
-		 */
-		isBlockQuoteFooterHTML: false,
-		/**
-		 * false || string :: &#x27;left&#x27;, &#x27;center&#x27;, &#x27;right&#x27;, &#x27;justify&#x27;, &#x27;no-wrap&#x27; (defaults to: left)
-		 * @property textAlignment
-		 * @type {Boolean|String}
-		 * @default &quot;justify&quot;
-		 */
-		textAlignment:&quot;justify&quot;,
-		/**
-		 * Bindings
-		 * @method bindings
-		 * @return {Object}
-		 */
-		bindings:function(){
-			var me = this,
-				obj = me.callParent(arguments);
-			
-			obj.css.lead = me.leadCSS;
-			
-			if(me.textAlignment){
-				obj.css[ me.parseBind(&quot;text-&quot;+me.textAlignment) ] = true;	
-			}
-			
-			if(me.html){
-				obj.html = me.text; 
-			}else if(me.text){
-				obj.text = me.textBind(me.text);
-			}
-			
-			return obj;
-		},
-		/**
-		 * @method blockQuoteBindings
-		 * @return {Object}
-		 */
-		blockQuoteBindings: function(){
-			return {
-				css:{
-					&quot;&#x27;blockquote-reverse&#x27;&quot;: this.blockQuoteReverseCSS
-				}
-			};
-		},
-		/**
-		 * @method blockQuoteFooterBindings
-		 * @return {Object}
-		 */
-		blockQuoteFooterBindings: function(){
-			var me = this,
-				obj = {};
-			if(me.html){
-				obj.html = me.blockQuoteFooter; 
-			}else{
-				obj.text = me.blockQuoteFooter;
-			}
-			return obj;
-		}
-	});
-});
-    </pre>
+    
+        <div class="foundat">
+            Defined in: <a href="../files/src_components_common_mixins_Toolbars.js.html#l5"><code>src\components\common\mixins\Toolbars.js:5</code></a>
+        </div>
+    
+
+    
+        
+            Module: <a href="../modules/Firebrick.ui.components.html">Firebrick.ui.components</a>
+        
+    
+
+    
+</div>
+
+
+
+<div class="box intro">
+    
+</div>
+
+
+
+<div id="classdocs" class="tabview">
+    <ul class="api-class-tabs">
+        <li class="api-class-tab index"><a href="#index">Index</a></li>
+
+        
+            <li class="api-class-tab methods"><a href="#methods">Methods</a></li>
+        
+        
+            <li class="api-class-tab properties"><a href="#properties">Properties</a></li>
+        
+        
+        
+    </ul>
+
+    <div>
+        <div id="index" class="api-class-tabpanel index">
+            <h2 class="off-left">Item Index</h2>
+
+            
+                <div class="index-section methods">
+                    <h3>Methods</h3>
+
+                    <ul class="index-list methods">
+                        
+                            <li class="index-item method">
+                                <a href="#method_getToolbars">getToolbars</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
+                                <a href="#method_toolbarContainer">toolbarContainer</a>
+
+                                
+                                
+                            </li>
+                        
+                    </ul>
+                </div>
+            
+
+            
+                <div class="index-section properties">
+                    <h3>Properties</h3>
+
+                    <ul class="index-list properties">
+                        
+                            <li class="index-item property">
+                                <a href="#property_toolbarDefaults">toolbarDefaults</a>
+
+                                
+                                
+                            </li>
+                        
+                    </ul>
+                </div>
+            
+
+            
+
+            
+        </div>
+
+        
+            <div id="methods" class="api-class-tabpanel">
+                <h2 class="off-left">Methods</h2>
+
+                
+                    <div id="method_getToolbars" class="method item">
+    <h3 class="name"><code>getToolbars</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+        <span class="returns-inline">
+            <span class="type">Html</span>
+        </span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/src_components_common_mixins_Toolbars.js.html#l49"><code>src\components\common\mixins\Toolbars.js:49</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        
+    </div>
+
+    
+
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                        <span class="type">Html</span>:
+                    
+                
+            </div>
+        </div>
+    
+
+    
+</div>
+
+                
+                    <div id="method_toolbarContainer" class="method item">
+    <h3 class="name"><code>toolbarContainer</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>obj</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+        <span class="returns-inline">
+            <span class="type">Object</span>
+        </span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/src_components_common_mixins_Toolbars.js.html#l25"><code>src\components\common\mixins\Toolbars.js:25</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>add css classes and other configuration to the container</p>
+
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">obj</code>
+                        <span class="type">Object</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>obj that is later pass to the binder</p>
+
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                        <span class="type">Object</span>:
+                    
+                
+            </div>
+        </div>
+    
+
+    
+</div>
+
+                
+            </div>
+        
+
+        
+            <div id="properties" class="api-class-tabpanel">
+                <h2 class="off-left">Properties</h2>
+
+                
+                    <div id="property_toolbarDefaults" class="property item">
+    <h3 class="name"><code>toolbarDefaults</code></h3>
+    <span class="type">Object</span>
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/src_components_common_mixins_Toolbars.js.html#l14"><code>src\components\common\mixins\Toolbars.js:14</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>passed on to the toolbar items (direct children only)</p>
+
+    </div>
+
+    
+        <p><strong>Default:</strong> {Object} {
+		navbarItem: true
+}</p>
+    
+
+    
+
+    
+</div>
+
+                
+            </div>
+        
+
+        
+
+        
+    </div>
 </div>
 
                     </div>

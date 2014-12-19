@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>src\components\display\Text.js - Firebrick UI API</title>
+    <title>src\components\nav\Base.js - Firebrick UI API</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -166,7 +166,7 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-                        <h1 class="file-heading">File: src\components\display\Text.js</h1>
+                        <h1 class="file-heading">File: src\components\nav\Base.js</h1>
 
 <div class="file">
     <pre class="code prettyprint linenums">
@@ -177,123 +177,19 @@
 /**
  * @module Firebrick.ui.components
  * @extends components.common.Base
- * @namespace components.display
- * @class Text
+ * @namespace components.nav
+ * @uses components.common.mixins.Items
+ * @class Base
  */
-define([&quot;text!./Text.html&quot;, &quot;../common/Base&quot;], function(tpl){
+define([&quot;../common/Base&quot;, &quot;../common/mixins/Items&quot;], function(){
+	
 	&quot;use strict&quot;;
-	return Firebrick.define(&quot;Firebrick.ui.display.Text&quot;, {
-		extend: &quot;Firebrick.ui.common.Base&quot;,
-		/**
-		 * @property uiName
-		 * @type {String}
-		 */
-		uiName:&quot;fb-ui-text&quot;,
-		/**
-		 * @property tpl
-		 * @type {String}
-		 */
-		tpl:tpl,
-		/**
-		 * whether text is raw html or not
-		 * @property isHtml
-		 * @type {Boolean}
-		 * @default false
-		 */
-		isHtml:false,
-		/**
-		 * @property text
-		 * @type {String}
-		 * @default &quot;&quot;
-		 */
-		text:&quot;&quot;,
-		/**
-		 * @property leadCSS
-		 * @type {Boolean}
-		 * @default false
-		 */
-		leadCSS:false,
-		/**
-		 * @property blockQuote
-		 * @type {Boolean}
-		 * @default false
-		 */
-		blockQuote:false,
-		/**
-		 * @property blockQuoteReverseCSS
-		 * @type {Boolean}
-		 * @default false
-		 */
-		blockQuoteReverseCSS: false,
-		/**
-		 * false not to show, string for footer text
-		 * @property blockQuoteFooter
-		 * @type {Boolean|String}
-		 * @default false
-		 */
-		blockQuoteFooter:false,
-		/**
-		 * @property isBlockQuoteFooterHTML
-		 * @type {Boolean}
-		 * @default false
-		 */
-		isBlockQuoteFooterHTML: false,
-		/**
-		 * false || string :: &#x27;left&#x27;, &#x27;center&#x27;, &#x27;right&#x27;, &#x27;justify&#x27;, &#x27;no-wrap&#x27; (defaults to: left)
-		 * @property textAlignment
-		 * @type {Boolean|String}
-		 * @default &quot;justify&quot;
-		 */
-		textAlignment:&quot;justify&quot;,
-		/**
-		 * Bindings
-		 * @method bindings
-		 * @return {Object}
-		 */
-		bindings:function(){
-			var me = this,
-				obj = me.callParent(arguments);
-			
-			obj.css.lead = me.leadCSS;
-			
-			if(me.textAlignment){
-				obj.css[ me.parseBind(&quot;text-&quot;+me.textAlignment) ] = true;	
-			}
-			
-			if(me.html){
-				obj.html = me.text; 
-			}else if(me.text){
-				obj.text = me.textBind(me.text);
-			}
-			
-			return obj;
-		},
-		/**
-		 * @method blockQuoteBindings
-		 * @return {Object}
-		 */
-		blockQuoteBindings: function(){
-			return {
-				css:{
-					&quot;&#x27;blockquote-reverse&#x27;&quot;: this.blockQuoteReverseCSS
-				}
-			};
-		},
-		/**
-		 * @method blockQuoteFooterBindings
-		 * @return {Object}
-		 */
-		blockQuoteFooterBindings: function(){
-			var me = this,
-				obj = {};
-			if(me.html){
-				obj.html = me.blockQuoteFooter; 
-			}else{
-				obj.text = me.blockQuoteFooter;
-			}
-			return obj;
-		}
+	
+	return Firebrick.define(&quot;Firebrick.ui.nav.Base&quot;, {
+		extend:&quot;Firebrick.ui.common.Base&quot;,
+		mixins:&quot;Firebrick.ui.common.mixins.Items&quot;
 	});
+	
 });
     </pre>
 </div>
