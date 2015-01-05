@@ -146,3 +146,6 @@ progress[value]::-webkit-progress-value{
 .fb-ui-toolbar-container.fb-ui-toolbar-bottom {
 	padding-bottom:70px;
 }
+a:hover{
+	cursor:pointer;
+}

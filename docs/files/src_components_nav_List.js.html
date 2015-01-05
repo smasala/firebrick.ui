@@ -19,7 +19,7 @@
             
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 0.9.7</em>
+            <em>API Docs for: 0.9.18</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -192,13 +192,6 @@ define([&quot;doT&quot;, &quot;../display/List&quot;], function(tplEngine){
 		unstyled:true,
 		linkedList: true,
 		/**
-		 * if true - att &quot;navbar-btn&quot; class to the button
-		 * @property navbarItem
-		 * @type {Boolean}
-		 * @default false
-		 */
-		navbarItem: false,
-		/**
 		 * @method listLinkBindings
 		 * @return {Object}
 		 */
@@ -218,10 +211,8 @@ define([&quot;doT&quot;, &quot;../display/List&quot;], function(tplEngine){
 			var me = this,
 				obj = me.callParent(arguments);
 			
-			if(me.navbarItem){
-				obj.css[&quot;&#x27;navbar-nav&#x27;&quot;] = true;
-				obj.css.nav = true;
-			}
+			obj.css[&quot;&#x27;navbar-nav&#x27;&quot;] = true;
+			obj.css.nav = true;
 			
 			return obj;
 		}

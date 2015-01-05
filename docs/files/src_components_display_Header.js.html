@@ -19,7 +19,7 @@
             
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 0.9.7</em>
+            <em>API Docs for: 0.9.18</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -200,11 +200,11 @@ define([&quot;text!./Header.html&quot;, &quot;../common/Base&quot;], function(tp
 		tpl:tpl,
 		/**
 		 * use to determine whether h1, h2, h3 etc - default = 1
-		 * @property headerType
+		 * @property headerSize
 		 * @type {Int}
 		 * @default 1
 		 */
-		headerType:1,
+		headerSize:1,
 		/**
 		 * @property text
 		 * @type {String}
@@ -230,6 +230,13 @@ define([&quot;text!./Header.html&quot;, &quot;../common/Base&quot;], function(tp
 		 * @default &quot;default&quot;
 		 */
 		labelCSS: &quot;default&quot;,
+		/**
+		 * change to a url if you wish to convert the header into a link
+		 * @property href
+		 * @type {String}
+		 * @default null
+		 */
+		href: null,
 		/**
 		 * @method bindings
 		 * @return Object
@@ -267,7 +274,7 @@ define([&quot;text!./Header.html&quot;, &quot;../common/Base&quot;], function(tp
 				obj;
 			if(me.labelText){
 				obj = {
-						text: me.labelText,
+						text: me.parseBind(me.labelText),
 						css:{
 							label: true
 						}
@@ -281,6 +288,14 @@ define([&quot;text!./Header.html&quot;, &quot;../common/Base&quot;], function(tp
 					visible:false
 				};
 			}
+		},
+		
+		/**
+		 * @method hrefBindings
+		 * @return {Object}
+		 */
+		hrefBindings: function(){
+			return {};
 		}
 		
 	});

@@ -19,7 +19,7 @@
             
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 0.9.7</em>
+            <em>API Docs for: 0.9.18</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -246,9 +246,9 @@ define([&quot;text!./Text.html&quot;, &quot;../common/Base&quot;], function(tpl)
 		 * false || string :: &#x27;left&#x27;, &#x27;center&#x27;, &#x27;right&#x27;, &#x27;justify&#x27;, &#x27;no-wrap&#x27; (defaults to: left)
 		 * @property textAlignment
 		 * @type {Boolean|String}
-		 * @default &quot;justify&quot;
+		 * @default &quot;&quot;
 		 */
-		textAlignment:&quot;justify&quot;,
+		textAlignment:&quot;&quot;,
 		/**
 		 * Bindings
 		 * @method bindings
@@ -264,7 +264,7 @@ define([&quot;text!./Text.html&quot;, &quot;../common/Base&quot;], function(tpl)
 				obj.css[ me.parseBind(&quot;text-&quot;+me.textAlignment) ] = true;	
 			}
 			
-			if(me.html){
+			if(me.isHtml){
 				obj.html = me.text; 
 			}else if(me.text){
 				obj.text = me.textBind(me.text);
@@ -290,7 +290,7 @@ define([&quot;text!./Text.html&quot;, &quot;../common/Base&quot;], function(tpl)
 		blockQuoteFooterBindings: function(){
 			var me = this,
 				obj = {};
-			if(me.html){
+			if(me.isHtml){
 				obj.html = me.blockQuoteFooter; 
 			}else{
 				obj.text = me.blockQuoteFooter;
