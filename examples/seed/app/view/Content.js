@@ -30,6 +30,11 @@ define(["store/MyStore",
         "./ABC"
     ], function(myStore){
 	
+			Firebrick.ui.renderer.add("abc", function(d){
+				console.info("abc renderer", arguments);
+				return "<b>" + d.text() + "</b>";
+			});
+	
 			return Firebrick.create("MyApp.view.Content", {
 				extend:"Firebrick.view.Base",
 				target:"#content",
@@ -53,7 +58,7 @@ define(["store/MyStore",
 							items:[{
 								uiName:"fb-ui-button",
 								items:[{
-									uiName: "fb-ui-dropdown-list",
+									uiName: "fb-ui-dropdownlist",
 									data: "navs1"
 								}],
 								text:"Dropdown"
@@ -79,10 +84,14 @@ define(["store/MyStore",
 											id:"superbutton1"
 										},{
 											uiName:fb.ui.cmp.button,
-											text:"Toolbar Button 2"
+											text:"Toolbar Button 2",
+											popover:"Hello There",
+											popoverTitle:"A Title as well!!!"
 										},{
 											uiName:fb.ui.cmp.button,
-											text:"Toolbar Button 3"
+											text:"Toolbar Button 3",
+											loadingText: "Loading...",
+											id:"superbutton2"
 										}]
 									}],
 									headerIcons:[{

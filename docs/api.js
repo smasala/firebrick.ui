@@ -7,6 +7,7 @@ YUI.add("yuidoc-meta", function(Y) {
         "components.button.dropdown.List",
         "components.common.Base",
         "components.common.MultiplesBase",
+        "components.common.mixins.Badges",
         "components.common.mixins.Items",
         "components.common.mixins.Toolbars",
         "components.containers.Base",
@@ -38,6 +39,7 @@ YUI.add("yuidoc-meta", function(Y) {
         "components.table.Table",
         "components.table.TreeTable",
         "plugins.RadioList",
+        "renderer",
         "ui",
         "utils",
         "view.Base"

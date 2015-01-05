@@ -3,7 +3,21 @@
 <script type="text/html" id="{{=it.getId()}}">
 	<!-- ko {{=it.dataBind('virtualContainerBindings')}} -->
 		<{{=it.listType}} data-bind="{{=it.dataBind('listContainerBindings')}}">
-			<li data-bind="{{=it.dataBind('listItemBindings')}}">{{=it.b(it.preItemTpl)}}<span data-bind="{{=it.dataBind()}}"></span>{{=it.b(it.postItemTpl)}}
+			<li data-bind="{{=it.dataBind('listItemBindings')}}">
+				{{=it.b(it.preItemTpl)}}
+					{{?it.linkedList}}
+						<a data-bind="{{=it.dataBind('listLinkBindings')}}">
+					{{?}}
+							<span data-bind="{{=it.dataBind()}}"></span>
+	
+							{{?it.badge}}
+								<span data-bind="{{=it.dataBind('badgeBindings')}}"></span>
+							{{?}}
+
+					{{?it.linkedList}}
+						</a>
+					{{?}}
+				{{=it.b(it.postItemTpl)}}
 				<!-- ko {{=it.dataBind('childrenBindings')}} --><!-- /ko -->
 			</li>
 		</{{=it.listType}}>

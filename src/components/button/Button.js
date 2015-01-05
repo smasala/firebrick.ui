@@ -8,11 +8,11 @@
  * @namespace components.button
  * @class Button
  */
-define(["text!./Button.html", "../common/Base", "../common/mixins/Items", "./dropdown/List"], function(tpl){
+define(["text!./Button.html", "../common/Base", "../common/mixins/Items", "../common/mixins/Badges", "./dropdown/List"], function(tpl){
 	"use strict";
 	return Firebrick.define("Firebrick.ui.button.Button", {
 		extend:"Firebrick.ui.common.Base",
-		mixins:"Firebrick.ui.common.mixins.Items",
+		mixins:["Firebrick.ui.common.mixins.Items", "Firebrick.ui.common.mixins.Badges"],
 		uiName: "fb-ui-button",
 		tpl:tpl,
 		/**
@@ -62,6 +62,13 @@ define(["text!./Button.html", "../common/Base", "../common/mixins/Items", "./dro
 		 */
 		afterText: "",
 		/**
+		 * set as string to give the button stateful capabilities.
+		 * @property loadingText
+		 * @type {Boolean|String} when set as string, the value is assigned to the button "button-loading-text" attribute
+		 * @default false
+		 */
+		loadingText: false,
+		/**
 		 * passed to list data property
 		 * @property items
 		 * @type {String}
@@ -80,6 +87,9 @@ define(["text!./Button.html", "../common/Base", "../common/mixins/Items", "./dro
 			obj.attr.type = me.parseBind(me.type);
 			obj.css.btn = true;
 			
+			//firefox bug fix
+			obj.attr.autocomplete = "'off'";
+			
 			if(me.btnStyle){
 				obj.css[ me.parseBind("btn-"+me.btnStyle)] = true;
 			}
@@ -94,6 +104,10 @@ define(["text!./Button.html", "../common/Base", "../common/mixins/Items", "./dro
 			
 			if(me.navbarItem){
 				obj.css["'navbar-btn'"] = true;
+			}
+			
+			if(me.loadingText){
+				obj.attr["'data-loading-text'"] = me.textBind( me.loadingText );
 			}
 			
 			return obj;

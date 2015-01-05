@@ -7,6 +7,10 @@
 			<span data-bind="{{=it.dataBind('buttonTextBindings')}}"></span>
 			{{=it.b(it.afterText)}}
 			
+			{{?it.badge}}
+				<span data-bind="{{=it.dataBind('badgeBindings')}}"></span>
+			{{?}}
+			
 			{{?it.items}}
 				<span data-bind="{{=it.dataBind('caretBindings')}}"></span>
 			{{?}}

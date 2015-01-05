@@ -101,7 +101,16 @@ define(["jquery", "text!./Table.html", "../common/Base", "datatables", "responsi
 		 * @property dataTableConfig
 		 * @type {Function}
 		 * @return {object}
-		 * @default {}
+		 * @default {
+		 * 	"language": {
+		 *			"paginate": {
+		 *				"first": "First",
+		 *				"last": "Last",
+		 *				"next": "Next",
+		 *				"previous": "Previous"
+		 *			}
+		 *		}
+		 * }
 		 */
 		dataTableConfig: function(){
 			return {
@@ -109,8 +118,8 @@ define(["jquery", "text!./Table.html", "../common/Base", "datatables", "responsi
 					"paginate": {
 						"first": "First",
 						"last": "Last",
-						"next": "Nex1t",
-						"previous": "Previous1"
+						"next": "Next",
+						"previous": "Previous"
 					}
 				}
 			};
@@ -168,6 +177,7 @@ define(["jquery", "text!./Table.html", "../common/Base", "datatables", "responsi
 		 */
 		init:function(){
 			var me = this;
+			
 			me.on("rendered", function(){
 				var id = me.getId(),
 					table = me.getElement();
@@ -253,7 +263,7 @@ define(["jquery", "text!./Table.html", "../common/Base", "datatables", "responsi
 		 */
 		theadTRTDBindings:function(){
 			return {
-				"text": "$data"
+				"html": "$data.renderer ? fb.ui.renderer.get($data.renderer())($data, $context, $parent, $root) : ($data.text ? $data.text : $data)"
 			};
 		},
 		/**
@@ -284,7 +294,7 @@ define(["jquery", "text!./Table.html", "../common/Base", "datatables", "responsi
 		 */
 		tbodyTRTDBindings:function(){
 			return {
-				"text": "$data.text ? $data.text : $data"
+				"html": "$data.renderer ? fb.ui.renderer.get($data.renderer())($data, $context, $parent, $root) : ($data.text ? $data.text : $data)"
 			};
 		},
 		/**

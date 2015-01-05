@@ -19,7 +19,7 @@
             
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 0.9.0</em>
+            <em>API Docs for: 0.9.7</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -50,6 +50,8 @@
                 <li><a href="../classes/components.button.ToggleButton.html">components.button.ToggleButton</a></li>
             
                 <li><a href="../classes/components.common.Base.html">components.common.Base</a></li>
+            
+                <li><a href="../classes/components.common.mixins.Badges.html">components.common.mixins.Badges</a></li>
             
                 <li><a href="../classes/components.common.mixins.Items.html">components.common.mixins.Items</a></li>
             
@@ -114,6 +116,8 @@
                 <li><a href="../classes/components.table.TreeTable.html">components.table.TreeTable</a></li>
             
                 <li><a href="../classes/plugins.RadioList.html">plugins.RadioList</a></li>
+            
+                <li><a href="../classes/renderer.html">renderer</a></li>
             
                 <li><a href="../classes/ui.html">ui</a></li>
             
@@ -186,6 +190,7 @@ define([&quot;doT&quot;, &quot;../display/List&quot;], function(tplEngine){
 		extend: &quot;Firebrick.ui.display.List&quot;, 
 		uiName:&quot;fb-ui-navlist&quot;,
 		unstyled:true,
+		linkedList: true,
 		/**
 		 * if true - att &quot;navbar-btn&quot; class to the button
 		 * @property navbarItem
@@ -194,26 +199,10 @@ define([&quot;doT&quot;, &quot;../display/List&quot;], function(tplEngine){
 		 */
 		navbarItem: false,
 		/**
-		 * overriding property from list
-		 * @property preItemTpl
-		 * @type {String}
-		 * @default &quot;&lt;a data-bind=&quot;{{data-bind &#x27;navLinkBindings&#x27;}}&quot;&gt;&quot;
-		 */
-		preItemTpl:function(){
-			return tplEngine.template(&#x27;&lt;a data-bind=&quot;{{=it.dataBind(\&#x27;navLinkBindings\&#x27;)}}&quot;&gt;&#x27;)(this);
-		},
-		/**
-		 * overriding property from list
-		 * @property postItemTpl
-		 * @type {String}
-		 * @default &quot;&lt;/a&gt;&quot;
-		 */
-		postItemTpl:&quot;&lt;/a&gt;&quot;,
-		/**
-		 * @method navLinkBindings
+		 * @method listLinkBindings
 		 * @return {Object}
 		 */
-		navLinkBindings: function(){
+		listLinkBindings: function(){
 			var obj = {
 					attr:{
 						href: &quot;$data.link ? $data.link : &#x27;&#x27;&quot;

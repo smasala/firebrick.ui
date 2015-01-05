@@ -1,3 +1,13 @@
+v0.9.7
+----------------------------
+* fix panel header icons bug in chrome
+* change dropdownlist uiName from: "fb-ui-dropdown-list" to "fb-ui-dropdownlist"
+* add BS3 popover capability to all components - popover & popoverTitle properties
+* add statefulness to buttons
+* add renderer with Firebrick.ui.renderer.add("renderername", function($data, $context, $parent, $root){})
+* when passing table data using object notations {"text": "row1 col1"}, you can now add a renderer function {"renderer": "myrenderer", "text": "row1 col1"} - "myrenderer" is called when col/row is rendered
+* Badges mixin - badges added to link and button components
+
 v0.9.0
 ----------------------------
 * fix webkit css for progress bar

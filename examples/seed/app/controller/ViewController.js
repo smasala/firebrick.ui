@@ -8,6 +8,9 @@ define(["../store/MyStore"], function(s){
 				"#superbutton1": {
 					click: me.showModal
 				},
+				"#superbutton2": {
+					click: me.loadButton
+				},
 				scope: me
 			})
 			
@@ -24,6 +27,15 @@ define(["../store/MyStore"], function(s){
 					content: "Change this and that and try again. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Cras mattis consectetur purus sit amet fermentum."
 				}]
 			});
+		},
+		
+		loadButton: function(event, el){
+			var $btn = $(el).button('loading')
+		    // business logic...
+			Firebrick.delay(function(){
+				$btn.button('reset')
+			}, 3000);
 		}
+		
 	})
 });

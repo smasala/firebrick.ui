@@ -14,6 +14,7 @@ define(["doT", "../display/List"], function(tplEngine){
 		extend: "Firebrick.ui.display.List", 
 		uiName:"fb-ui-navlist",
 		unstyled:true,
+		linkedList: true,
 		/**
 		 * if true - att "navbar-btn" class to the button
 		 * @property navbarItem
@@ -22,26 +23,10 @@ define(["doT", "../display/List"], function(tplEngine){
 		 */
 		navbarItem: false,
 		/**
-		 * overriding property from list
-		 * @property preItemTpl
-		 * @type {String}
-		 * @default "<a data-bind="{{data-bind 'navLinkBindings'}}">"
-		 */
-		preItemTpl:function(){
-			return tplEngine.template('<a data-bind="{{=it.dataBind(\'navLinkBindings\')}}">')(this);
-		},
-		/**
-		 * overriding property from list
-		 * @property postItemTpl
-		 * @type {String}
-		 * @default "</a>"
-		 */
-		postItemTpl:"</a>",
-		/**
-		 * @method navLinkBindings
+		 * @method listLinkBindings
 		 * @return {Object}
 		 */
-		navLinkBindings: function(){
+		listLinkBindings: function(){
 			var obj = {
 					attr:{
 						href: "$data.link ? $data.link : ''"

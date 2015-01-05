@@ -8,10 +8,11 @@
  * @namespace components.display
  * @class List
  */
-define(["text!./List.html", "../common/Base"], function(tpl){
+define(["text!./List.html", "../common/Base", "../common/mixins/Badges"], function(tpl){
 	"use strict";
 	return Firebrick.define("Firebrick.ui.display.List", {
 		extend:"Firebrick.ui.common.Base",
+		mixins:"Firebrick.ui.common.mixins.Badges",
 		/**
 		 * @property uiName
 		 * @type {String}
@@ -73,6 +74,13 @@ define(["text!./List.html", "../common/Base"], function(tpl){
 		 * @default ""
 		 */
 		postItemTpl:"",
+		/**
+		 * wrap the list element content in a <a></a> link
+		 * @property linkedList
+		 * @type {Boolean}
+		 * @default false
+		 */
+		linkedList: false,
 		/**
 		 * @method virtualContainerBindings
 		 * @return {Object}

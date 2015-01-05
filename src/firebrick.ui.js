@@ -41,7 +41,7 @@
 			 * @private
 			 * @type {String}
 			 */
-			version: "0.9.0",
+			version: "0.9.7",
 			
 			/**
 			 * used to cache pointers to classes when searching by "uiName"
@@ -234,6 +234,45 @@
 					return "";
 				}
 				
+			},
+			
+
+			/**
+			 * renderer methods
+			 * @for ui
+			 * @class renderer
+			 */
+			renderer: {
+				/**
+				 * @property _registry
+				 * @type {Object}
+				 * @private
+				 */
+				_registry:{},
+				
+				/**
+				 * @method add
+				 * @param name {String} name of the renderer
+				 * @param func {Function} function to call when the renderer is used - parameters given to the function when called: $data, $context, $parent, $root
+				 * @return self
+				 */
+				add: function(name, func){
+					var me = this;
+					
+					me._registry[name] = func;
+					
+					return me;
+				},
+				
+				/**
+				 * @method get
+				 * @param name {String} name of the renderer
+				 * @return {Function || null}
+				 */
+				get: function(name){
+					var me = this;
+					return me._registry[name];
+				}
 			}
 			
 			

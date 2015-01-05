@@ -19,7 +19,7 @@
             
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 0.9.0</em>
+            <em>API Docs for: 0.9.7</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -50,6 +50,8 @@
                 <li><a href="../classes/components.button.ToggleButton.html">components.button.ToggleButton</a></li>
             
                 <li><a href="../classes/components.common.Base.html">components.common.Base</a></li>
+            
+                <li><a href="../classes/components.common.mixins.Badges.html">components.common.mixins.Badges</a></li>
             
                 <li><a href="../classes/components.common.mixins.Items.html">components.common.mixins.Items</a></li>
             
@@ -114,6 +116,8 @@
                 <li><a href="../classes/components.table.TreeTable.html">components.table.TreeTable</a></li>
             
                 <li><a href="../classes/plugins.RadioList.html">plugins.RadioList</a></li>
+            
+                <li><a href="../classes/renderer.html">renderer</a></li>
             
                 <li><a href="../classes/ui.html">ui</a></li>
             
@@ -284,20 +288,81 @@ define([&quot;doT&quot;, &quot;firebrick&quot;], function(tplEngine){
 		 */
 		tooltipOptions: null,
 		/**
-		 * pass a binding Object and this method will add the tooltip relevant properties
-		 * @method addTooltipBind
+		 * @property popover
+		 * @type {Boolean|String} set to false to deactivate, string to set the text
+		 * @default false
+		 */
+		popover:false,
+		/**
+		 * @property popoverTitle
+		 * @type {Boolean|String} optional - set to false to deactivate, string to set the title
+		 * @default false
+		 */
+		popoverTitle:false,
+		/**
+		 * where the popover should appear: &quot;top&quot;, &quot;left&quot;, &quot;right&quot;, &quot;bottom&quot;
+		 * @property popoverLocation
+		 * @type {String}
+		 * @default &quot;top&quot;
+		 */
+		popoverLocation:&quot;top&quot;,
+		/**
+		 * options defined by bootstrap
+		 * @property popoverOptions
+		 * @type {Object}
+		 * @default null
+		 */
+		popoverOptions: null,
+		/**
+		 * @property popoverDismissible
+		 * @type {Boolean}
+		 * @default true
+		 */
+		popoverDismissible: true,
+		/**
+		 * pass a binding Object and this method will add the tooltip/popover relevant properties
+		 * @method addTooltipPopoverBind
 		 * @param bindObj {Object}
 		 * @return {Object} new Object
 		 */
-		addTooltipBind: function(bindObj){
+		addTooltipPopoverBind: function(bindObj){
+			var me = this;
+			if(me.tooltip || me.popover){
+				if(bindObj &amp;&amp; $.isPlainObject(bindObj)){
+					if(!bindObj.attr){
+						bindObj.attr = {};
+					}
+					bindObj.attr[&quot;&#x27;data-toggle&#x27;&quot;] = me.parseBind( me.tooltip ? &quot;tooltip&quot; : &quot;popover&quot; );
+					if(me.tooltip || me.popoverTitle){
+						bindObj.attr.title = me.textBind(me.tooltip || me.popoverTitle);
+					}
+					if(me.popover){
+						bindObj.attr[&quot;&#x27;data-content&#x27;&quot;] = me.textBind(me.popover);
+						bindObj.attr[&quot;&#x27;data-container&#x27;&quot;] = &quot;&#x27;body&#x27;&quot;;
+						if(me.popoverDismissible){
+							bindObj.attr[&quot;&#x27;data-trigger&#x27;&quot;] = &quot;&#x27;focus&#x27;&quot;;
+						}
+					}
+					bindObj.attr[&quot;&#x27;data-placement&#x27;&quot;] = me.parseBind(me.tooltipLocation || me.popoverLocation);
+				}
+			}
+			return bindObj;
+		},
+		/**
+		 * pass a binding Object and this method will add the popover relevant properties
+		 * @method addPopoverBind
+		 * @param bindObj {Object}
+		 * @return {Object} new Object
+		 */
+		addPopoverBind: function(bindObj){
 			var me = this;
 			if(me.tooltip &amp;&amp; bindObj &amp;&amp; $.isPlainObject(bindObj)){
 				if(!bindObj.attr){
 					bindObj.attr = {};
 				}
-				bindObj.attr[&quot;&#x27;data-toggle&#x27;&quot;] = &quot;&#x27;tooltip&#x27;&quot;;
-				bindObj.attr.title = me.textBind(me.tooltip);
-				bindObj.attr[&quot;&#x27;data-placement&#x27;&quot;] = me.parseBind(me.tooltipLocation);
+				bindObj.attr[&quot;&#x27;data-toggle&#x27;&quot;] = &quot;&#x27;popover&#x27;&quot;;
+				bindObj.attr.title = me.textBind(me.popover);
+				bindObj.attr[&quot;&#x27;data-placement&#x27;&quot;] = me.parseBind(me.popoverLocation);
 			}
 			return bindObj;
 		},
@@ -387,6 +452,16 @@ define([&quot;doT&quot;, &quot;firebrick&quot;], function(tplEngine){
 					}
 				});
 			}
+			
+			if(me.popover){
+				//require the plugin if needed
+				require([&quot;bootstrap.plugins/tooltip&quot;, &quot;bootstrap.plugins/popover&quot;], function(){
+					var t = me.getElement();
+					if(t){
+						t.popover(me.popoverOptions);
+					}
+				});
+			}
 
 			return me.callParent(arguments);
 		},
@@ -396,10 +471,13 @@ define([&quot;doT&quot;, &quot;firebrick&quot;], function(tplEngine){
 		 * @return {Object} {attr:{}, css:{}}
 		 */
 		bindings: function(){
-			return this.addTooltipBind({
-				attr:{},
-				css:{}
-			});
+			var me = this,
+				obj = {
+					attr:{},
+					css:{}
+				};
+			
+			return me.addTooltipPopoverBind(obj);
 		},
 		/**
 		 * compile the template

@@ -30,7 +30,8 @@ define(function(){
 			"datatables": ["jquery"],
 			"x-editable": ["bootstrap"],
 			"responsive-images": ["jquery"],
-			"responsive-tables-js": ["jquery"]
+			"responsive-tables-js": ["jquery"],
+			"popover": ["tooltip"]
 		}
 	});	
 });

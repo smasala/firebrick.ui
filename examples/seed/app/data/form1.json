@@ -30,10 +30,10 @@
 					"ui-app-description"
 	           ],
 	"tableData": {
-		"cols":["Col1", "Col2", "Col3"],
+		"cols":["Col1", {"renderer":"abc", "text":"Col2"}, "Col3"],
 		"rows": [
 			["row1Col1", "row1Col2", "row1Col3"],
-			["row2Col1", "row2Col2", "row2Col3"],
+			["row2Col1", {"renderer": "abc", "text":"row2Col2"}, "row2Col3"],
 			["row3Col1", "row3Col2", "row3Col3"],
 			["row4Col1", "row4Col2", "row4Col3"]
 		]

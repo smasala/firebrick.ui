@@ -88,7 +88,7 @@ define(["text!./Panel.html", "./Base", "../nav/Toolbar", "../common/mixins/Toolb
 		collapsed:false,
 		/**
 		 * @property headerIcons
-		 * @type {Boolean|Object} boolean = false, if object use the same way as the "items" property
+		 * @type {Boolean|Array of Objects} boolean = false, if object use the same way as the "items" property
 		 * @default false
 		 */
 		headerIcons: false,
@@ -168,6 +168,11 @@ define(["text!./Panel.html", "./Base", "../nav/Toolbar", "../common/mixins/Toolb
 					},
 					visible: me.showPanelHeader
 				};
+			
+			if(me.headerIcons){
+				obj.css.clearfix = true;
+			}
+			
 			return obj;
 		},
 		/**
@@ -208,10 +213,17 @@ define(["text!./Panel.html", "./Base", "../nav/Toolbar", "../common/mixins/Toolb
 		 * @return {Object}
 		 */
 		panelHeaderTextBindings: function(){
-			var me = this;
-			return {
-				text: me.textBind(me.title)
-			};
+			var me = this,
+				obj = {
+						text: me.textBind(me.title),
+						css:{}
+					};
+			
+			if(me.headerIcons){
+				obj.css["'pull-left'"] = true;
+			}
+			
+			return obj;
 		},
 		/**
 		 * @method panelBodyBindings
