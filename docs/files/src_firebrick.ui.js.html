@@ -19,7 +19,7 @@
             
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 0.9.0</em>
+            <em>API Docs for: 0.9.7</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -50,6 +50,8 @@
                 <li><a href="../classes/components.button.ToggleButton.html">components.button.ToggleButton</a></li>
             
                 <li><a href="../classes/components.common.Base.html">components.common.Base</a></li>
+            
+                <li><a href="../classes/components.common.mixins.Badges.html">components.common.mixins.Badges</a></li>
             
                 <li><a href="../classes/components.common.mixins.Items.html">components.common.mixins.Items</a></li>
             
@@ -114,6 +116,8 @@
                 <li><a href="../classes/components.table.TreeTable.html">components.table.TreeTable</a></li>
             
                 <li><a href="../classes/plugins.RadioList.html">plugins.RadioList</a></li>
+            
+                <li><a href="../classes/renderer.html">renderer</a></li>
             
                 <li><a href="../classes/ui.html">ui</a></li>
             
@@ -213,7 +217,7 @@
 			 * @private
 			 * @type {String}
 			 */
-			version: &quot;0.9.0&quot;,
+			version: &quot;0.9.7&quot;,
 			
 			/**
 			 * used to cache pointers to classes when searching by &quot;uiName&quot;
@@ -406,6 +410,45 @@
 					return &quot;&quot;;
 				}
 				
+			},
+			
+
+			/**
+			 * renderer methods
+			 * @for ui
+			 * @class renderer
+			 */
+			renderer: {
+				/**
+				 * @property _registry
+				 * @type {Object}
+				 * @private
+				 */
+				_registry:{},
+				
+				/**
+				 * @method add
+				 * @param name {String} name of the renderer
+				 * @param func {Function} function to call when the renderer is used - parameters given to the function when called: $data, $context, $parent, $root
+				 * @return self
+				 */
+				add: function(name, func){
+					var me = this;
+					
+					me._registry[name] = func;
+					
+					return me;
+				},
+				
+				/**
+				 * @method get
+				 * @param name {String} name of the renderer
+				 * @return {Function || null}
+				 */
+				get: function(name){
+					var me = this;
+					return me._registry[name];
+				}
 			}
 			
 			

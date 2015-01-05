@@ -19,7 +19,7 @@
             
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 0.9.0</em>
+            <em>API Docs for: 0.9.7</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -50,6 +50,8 @@
                 <li><a href="../classes/components.button.ToggleButton.html">components.button.ToggleButton</a></li>
             
                 <li><a href="../classes/components.common.Base.html">components.common.Base</a></li>
+            
+                <li><a href="../classes/components.common.mixins.Badges.html">components.common.mixins.Badges</a></li>
             
                 <li><a href="../classes/components.common.mixins.Items.html">components.common.mixins.Items</a></li>
             
@@ -114,6 +116,8 @@
                 <li><a href="../classes/components.table.TreeTable.html">components.table.TreeTable</a></li>
             
                 <li><a href="../classes/plugins.RadioList.html">plugins.RadioList</a></li>
+            
+                <li><a href="../classes/renderer.html">renderer</a></li>
             
                 <li><a href="../classes/ui.html">ui</a></li>
             
@@ -273,7 +277,16 @@ define([&quot;jquery&quot;, &quot;text!./Table.html&quot;, &quot;../common/Base&
 		 * @property dataTableConfig
 		 * @type {Function}
 		 * @return {object}
-		 * @default {}
+		 * @default {
+		 * 	&quot;language&quot;: {
+		 *			&quot;paginate&quot;: {
+		 *				&quot;first&quot;: &quot;First&quot;,
+		 *				&quot;last&quot;: &quot;Last&quot;,
+		 *				&quot;next&quot;: &quot;Next&quot;,
+		 *				&quot;previous&quot;: &quot;Previous&quot;
+		 *			}
+		 *		}
+		 * }
 		 */
 		dataTableConfig: function(){
 			return {
@@ -281,8 +294,8 @@ define([&quot;jquery&quot;, &quot;text!./Table.html&quot;, &quot;../common/Base&
 					&quot;paginate&quot;: {
 						&quot;first&quot;: &quot;First&quot;,
 						&quot;last&quot;: &quot;Last&quot;,
-						&quot;next&quot;: &quot;Nex1t&quot;,
-						&quot;previous&quot;: &quot;Previous1&quot;
+						&quot;next&quot;: &quot;Next&quot;,
+						&quot;previous&quot;: &quot;Previous&quot;
 					}
 				}
 			};
@@ -340,6 +353,7 @@ define([&quot;jquery&quot;, &quot;text!./Table.html&quot;, &quot;../common/Base&
 		 */
 		init:function(){
 			var me = this;
+			
 			me.on(&quot;rendered&quot;, function(){
 				var id = me.getId(),
 					table = me.getElement();
@@ -425,7 +439,7 @@ define([&quot;jquery&quot;, &quot;text!./Table.html&quot;, &quot;../common/Base&
 		 */
 		theadTRTDBindings:function(){
 			return {
-				&quot;text&quot;: &quot;$data&quot;
+				&quot;html&quot;: &quot;$data.renderer ? fb.ui.renderer.get($data.renderer())($data, $context, $parent, $root) : ($data.text ? $data.text : $data)&quot;
 			};
 		},
 		/**
@@ -456,7 +470,7 @@ define([&quot;jquery&quot;, &quot;text!./Table.html&quot;, &quot;../common/Base&
 		 */
 		tbodyTRTDBindings:function(){
 			return {
-				&quot;text&quot;: &quot;$data.text ? $data.text : $data&quot;
+				&quot;html&quot;: &quot;$data.renderer ? fb.ui.renderer.get($data.renderer())($data, $context, $parent, $root) : ($data.text ? $data.text : $data)&quot;
 			};
 		},
 		/**

@@ -19,7 +19,7 @@
             
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 0.9.0</em>
+            <em>API Docs for: 0.9.7</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -50,6 +50,8 @@
                 <li><a href="../classes/components.button.ToggleButton.html">components.button.ToggleButton</a></li>
             
                 <li><a href="../classes/components.common.Base.html">components.common.Base</a></li>
+            
+                <li><a href="../classes/components.common.mixins.Badges.html">components.common.mixins.Badges</a></li>
             
                 <li><a href="../classes/components.common.mixins.Items.html">components.common.mixins.Items</a></li>
             
@@ -114,6 +116,8 @@
                 <li><a href="../classes/components.table.TreeTable.html">components.table.TreeTable</a></li>
             
                 <li><a href="../classes/plugins.RadioList.html">plugins.RadioList</a></li>
+            
+                <li><a href="../classes/renderer.html">renderer</a></li>
             
                 <li><a href="../classes/ui.html">ui</a></li>
             
@@ -260,7 +264,7 @@ define([&quot;text!./Panel.html&quot;, &quot;./Base&quot;, &quot;../nav/Toolbar&
 		collapsed:false,
 		/**
 		 * @property headerIcons
-		 * @type {Boolean|Object} boolean = false, if object use the same way as the &quot;items&quot; property
+		 * @type {Boolean|Array of Objects} boolean = false, if object use the same way as the &quot;items&quot; property
 		 * @default false
 		 */
 		headerIcons: false,
@@ -340,6 +344,11 @@ define([&quot;text!./Panel.html&quot;, &quot;./Base&quot;, &quot;../nav/Toolbar&
 					},
 					visible: me.showPanelHeader
 				};
+			
+			if(me.headerIcons){
+				obj.css.clearfix = true;
+			}
+			
 			return obj;
 		},
 		/**
@@ -380,10 +389,17 @@ define([&quot;text!./Panel.html&quot;, &quot;./Base&quot;, &quot;../nav/Toolbar&
 		 * @return {Object}
 		 */
 		panelHeaderTextBindings: function(){
-			var me = this;
-			return {
-				text: me.textBind(me.title)
-			};
+			var me = this,
+				obj = {
+						text: me.textBind(me.title),
+						css:{}
+					};
+			
+			if(me.headerIcons){
+				obj.css[&quot;&#x27;pull-left&#x27;&quot;] = true;
+			}
+			
+			return obj;
 		},
 		/**
 		 * @method panelBodyBindings
