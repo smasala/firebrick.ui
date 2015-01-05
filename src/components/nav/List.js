@@ -16,18 +16,6 @@ define(["doT", "../display/List"], function(tplEngine){
 		unstyled:true,
 		linkedList: true,
 		/**
-		 * @method listLinkBindings
-		 * @return {Object}
-		 */
-		listLinkBindings: function(){
-			var obj = {
-					attr:{
-						href: "$data.link ? $data.link : ''"
-					}
-			};
-			return obj;
-		},
-		/**
 		 * @method listContainerBindings
 		 * @return {Object}
 		 */

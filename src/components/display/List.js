@@ -151,6 +151,19 @@ define(["text!./List.html", "../common/Base", "../common/mixins/Badges"], functi
 					data: "$data.children"
 				}
 			};
+		},
+		
+		/**
+		 * @method listLinkBindings
+		 * @return {Object}
+		 */
+		listLinkBindings: function(){
+			var obj = {
+					attr:{
+						href: "$data.link ? $data.link : ''"
+					}
+			};
+			return obj;
 		}
 	});
 });
