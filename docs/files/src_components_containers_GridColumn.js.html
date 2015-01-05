@@ -19,7 +19,7 @@
             
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 0.9.7</em>
+            <em>API Docs for: 0.9.18</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -237,6 +237,7 @@ define([&quot;text!./GridColumn.html&quot;, &quot;./Base&quot;], function(tpl){
 			var me = this,
 				obj = me.callParent(arguments);
 			
+			obj.css.col = true;
 			obj.css[&quot;&#x27;col-&quot;+me.deviceSize+&quot;-&quot;+me._getColumnWidth()+&quot;&#x27;&quot;] = true;
 			
 			return obj;

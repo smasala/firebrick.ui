@@ -19,7 +19,7 @@
             
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 0.9.7</em>
+            <em>API Docs for: 0.9.18</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -210,13 +210,13 @@ define([&quot;text!./List.html&quot;, &quot;../common/Base&quot;, &quot;../commo
 		listType:&quot;ul&quot;,
 		/**
 		 * is a list group?
-		 * @property listGroupClass
+		 * @property listGroup
 		 * @type {Boolean|String}
 		 * @default true
 		 */
-		listGroupClass:false,
+		listGroup:false,
 		/**
-		 * defaults to true but only comes into effect with property &quot;listGroupClass&quot;
+		 * defaults to true but only comes into effect with property &quot;listGroup&quot;
 		 * @property listItemGroupClass
 		 * @type {Boolean|String}
 		 * @default true
@@ -271,8 +271,8 @@ define([&quot;text!./List.html&quot;, &quot;../common/Base&quot;, &quot;../commo
 		listContainerBindings: function(){
 			var me = this,
 				obj = {css:{}};
-			if(me.listGroupClass){
-				obj.css[&quot;&#x27;list-group&#x27;&quot;] = me.listGroupClass;
+			if(me.listGroup){
+				obj.css[&quot;&#x27;list-group&#x27;&quot;] = me.listGroup;
 			}
 			if(me.unstyled){
 				obj.css[&quot;&#x27;list-unstyled&#x27;&quot;] = me.unstyled;
@@ -290,7 +290,7 @@ define([&quot;text!./List.html&quot;, &quot;../common/Base&quot;, &quot;../commo
 			var me  = this,
 				obj = {css:{}};
 			
-			if(me.listGroupClass &amp;&amp; me.listItemGroupClass){
+			if(me.listGroup &amp;&amp; me.listItemGroupClass){
 				obj.css[&quot;&#x27;list-group-item&#x27;&quot;] = me.listItemGroupClass;
 			}
 

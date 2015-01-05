@@ -2,7 +2,7 @@
     "project": {
         "name": "Firebrick UI API",
         "description": "Firebrick UI API: a component library for Firebrick MVC, Knockout JS, jQuery and Bootstrap",
-        "version": "0.9.7",
+        "version": "0.9.18",
         "url": "https://github.com/smasala",
         "logo": "fbui_small.png"
     },
@@ -1847,6 +1847,18 @@
         {
             "file": "src\\components\\common\\Base.js",
             "line": 77,
+            "description": "all css classes (comma separated) are added to the standard bindings function",
+            "itemtype": "property",
+            "name": "css",
+            "type": "{String}",
+            "default": "null",
+            "class": "components.common.Base",
+            "module": "Firebrick.ui.components",
+            "namespace": "components.common"
+        },
+        {
+            "file": "src\\components\\common\\Base.js",
+            "line": 84,
             "description": "variable shortcuts are created using the uiName. by default the string after the last \"-\" is used",
             "example": [
                 "\n\t\tuiName:\"fb-ui-input\"\n\t\t//becomes accessible via: {Firebrick|fb}.ui.cmp.input\n\t\t//defining another component e.g \"myapp-field-input\" would overwrite the default input as \"input\" is found after the last \"-\""
@@ -1861,7 +1873,7 @@
         },
         {
             "file": "src\\components\\common\\Base.js",
-            "line": 88,
+            "line": 95,
             "itemtype": "property",
             "name": "_element",
             "type": "{Null|jQuery Object}",
@@ -1872,7 +1884,7 @@
         },
         {
             "file": "src\\components\\common\\Base.js",
-            "line": 94,
+            "line": 101,
             "itemtype": "property",
             "name": "tooltip",
             "type": "{Boolean|String} set to false to deactivate, string to set the text",
@@ -1883,7 +1895,7 @@
         },
         {
             "file": "src\\components\\common\\Base.js",
-            "line": 100,
+            "line": 107,
             "description": "where the tooltip should appear: \"top\", \"left\", \"right\", \"bottom\"",
             "itemtype": "property",
             "name": "tooltipLocation",
@@ -1895,7 +1907,7 @@
         },
         {
             "file": "src\\components\\common\\Base.js",
-            "line": 107,
+            "line": 114,
             "description": "options defined by bootstrap",
             "itemtype": "property",
             "name": "tooltipOptions",
@@ -1907,7 +1919,7 @@
         },
         {
             "file": "src\\components\\common\\Base.js",
-            "line": 114,
+            "line": 121,
             "itemtype": "property",
             "name": "popover",
             "type": "{Boolean|String} set to false to deactivate, string to set the text",
@@ -1918,7 +1930,7 @@
         },
         {
             "file": "src\\components\\common\\Base.js",
-            "line": 120,
+            "line": 127,
             "itemtype": "property",
             "name": "popoverTitle",
             "type": "{Boolean|String} optional - set to false to deactivate, string to set the title",
@@ -1929,7 +1941,7 @@
         },
         {
             "file": "src\\components\\common\\Base.js",
-            "line": 126,
+            "line": 133,
             "description": "where the popover should appear: \"top\", \"left\", \"right\", \"bottom\"",
             "itemtype": "property",
             "name": "popoverLocation",
@@ -1941,7 +1953,7 @@
         },
         {
             "file": "src\\components\\common\\Base.js",
-            "line": 133,
+            "line": 140,
             "description": "options defined by bootstrap",
             "itemtype": "property",
             "name": "popoverOptions",
@@ -1953,7 +1965,7 @@
         },
         {
             "file": "src\\components\\common\\Base.js",
-            "line": 140,
+            "line": 147,
             "itemtype": "property",
             "name": "popoverDismissible",
             "type": "{Boolean}",
@@ -1964,7 +1976,7 @@
         },
         {
             "file": "src\\components\\common\\Base.js",
-            "line": 146,
+            "line": 153,
             "description": "pass a binding Object and this method will add the tooltip/popover relevant properties",
             "itemtype": "method",
             "name": "addTooltipPopoverBind",
@@ -1985,7 +1997,7 @@
         },
         {
             "file": "src\\components\\common\\Base.js",
-            "line": 175,
+            "line": 182,
             "description": "pass a binding Object and this method will add the popover relevant properties",
             "itemtype": "method",
             "name": "addPopoverBind",
@@ -2006,7 +2018,7 @@
         },
         {
             "file": "src\\components\\common\\Base.js",
-            "line": 193,
+            "line": 200,
             "itemtype": "method",
             "name": "getElement",
             "return": {
@@ -2019,7 +2031,7 @@
         },
         {
             "file": "src\\components\\common\\Base.js",
-            "line": 208,
+            "line": 215,
             "description": "called when defining the class",
             "itemtype": "method",
             "name": "constructor",
@@ -2033,7 +2045,7 @@
         },
         {
             "file": "src\\components\\common\\Base.js",
-            "line": 227,
+            "line": 234,
             "description": "compile and cache template",
             "itemtype": "method",
             "name": "_precompile",
@@ -2047,7 +2059,7 @@
         },
         {
             "file": "src\\components\\common\\Base.js",
-            "line": 250,
+            "line": 257,
             "description": "use this as a wrapper in a template if the property you wish to call COULD be either a primitive or a function",
             "itemtype": "method",
             "name": "b",
@@ -2068,7 +2080,7 @@
         },
         {
             "file": "src\\components\\common\\Base.js",
-            "line": 259,
+            "line": 266,
             "description": "when overriding this or any other method, this.callParent(arguments) calls the method in the super class",
             "itemtype": "method",
             "name": "init",
@@ -2078,7 +2090,22 @@
         },
         {
             "file": "src\\components\\common\\Base.js",
-            "line": 292,
+            "line": 299,
+            "itemtype": "method",
+            "name": "_getCSSClasses",
+            "access": "private",
+            "tagname": "",
+            "return": {
+                "description": "",
+                "type": "Object"
+            },
+            "class": "components.common.Base",
+            "module": "Firebrick.ui.components",
+            "namespace": "components.common"
+        },
+        {
+            "file": "src\\components\\common\\Base.js",
+            "line": 320,
             "description": "mother of all basic bindings",
             "itemtype": "method",
             "name": "bindings",
@@ -2092,7 +2119,7 @@
         },
         {
             "file": "src\\components\\common\\Base.js",
-            "line": 306,
+            "line": 334,
             "description": "compile the template",
             "itemtype": "method",
             "name": "template",
@@ -2118,7 +2145,7 @@
         },
         {
             "file": "src\\components\\common\\Base.js",
-            "line": 321,
+            "line": 349,
             "description": "build the compiled template",
             "itemtype": "method",
             "name": "build",
@@ -2139,7 +2166,7 @@
         },
         {
             "file": "src\\components\\common\\Base.js",
-            "line": 333,
+            "line": 361,
             "itemtype": "method",
             "name": "dataBind",
             "params": [
@@ -2163,7 +2190,7 @@
         },
         {
             "file": "src\\components\\common\\Base.js",
-            "line": 347,
+            "line": 375,
             "description": "if no id is specified it will call getClassId() and use that value",
             "itemtype": "method",
             "name": "getId",
@@ -2177,7 +2204,7 @@
         },
         {
             "file": "src\\components\\common\\Base.js",
-            "line": 361,
+            "line": 389,
             "description": "called when calling {{{getSubTpl}}} in component template",
             "itemtype": "method",
             "name": "getSubTpl",
@@ -2191,7 +2218,7 @@
         },
         {
             "file": "src\\components\\common\\Base.js",
-            "line": 369,
+            "line": 397,
             "description": "find the parent of this class\niterate up the inheritance tree looking for a classname that differs from the current and that \"subTpl\" or \"tpl\" don't match either",
             "access": "private",
             "tagname": "",
@@ -2207,7 +2234,7 @@
         },
         {
             "file": "src\\components\\common\\Base.js",
-            "line": 387,
+            "line": 415,
             "description": "called when calling {{{getParentTpl}}} in component template",
             "itemtype": "method",
             "name": "getParentTpl",
@@ -2221,7 +2248,7 @@
         },
         {
             "file": "src\\components\\common\\Base.js",
-            "line": 396,
+            "line": 424,
             "description": "called when calling {{{getParentSubTpl}}} in component template",
             "itemtype": "method",
             "name": "getParentSubTpl",
@@ -2235,7 +2262,7 @@
         },
         {
             "file": "src\\components\\common\\Base.js",
-            "line": 405,
+            "line": 433,
             "description": "clean string - i.e. remove all ' from string",
             "itemtype": "method",
             "name": "cleanString",
@@ -2249,7 +2276,7 @@
         },
         {
             "file": "src\\components\\common\\Base.js",
-            "line": 413,
+            "line": 441,
             "description": "attach ' to the start and end of the string for KO binds",
             "itemtype": "method",
             "name": "parseBind",
@@ -2270,7 +2297,7 @@
         },
         {
             "file": "src\\components\\common\\Base.js",
-            "line": 422,
+            "line": 450,
             "description": "takes a string and prepares it for Firebrick text call",
             "example": [
                 "\n\ttextBind(\"mystring.abc.key\")\n\t// returns = fb.text('mystring.abc.key')"
@@ -3414,7 +3441,7 @@
             "line": 25,
             "description": "use to determine whether h1, h2, h3 etc - default = 1",
             "itemtype": "property",
-            "name": "headerType",
+            "name": "headerSize",
             "type": "{Int}",
             "default": "1",
             "class": "components.display.Header",
@@ -3469,6 +3496,18 @@
         {
             "file": "src\\components\\display\\Header.js",
             "line": 57,
+            "description": "change to a url if you wish to convert the header into a link",
+            "itemtype": "property",
+            "name": "href",
+            "type": "{String}",
+            "default": "null",
+            "class": "components.display.Header",
+            "module": "Firebrick.ui.components",
+            "namespace": "components.display"
+        },
+        {
+            "file": "src\\components\\display\\Header.js",
+            "line": 64,
             "itemtype": "method",
             "name": "bindings",
             "return": {
@@ -3480,7 +3519,7 @@
         },
         {
             "file": "src\\components\\display\\Header.js",
-            "line": 69,
+            "line": 76,
             "itemtype": "method",
             "name": "secondaryTextBindings",
             "return": {
@@ -3492,11 +3531,24 @@
         },
         {
             "file": "src\\components\\display\\Header.js",
-            "line": 85,
+            "line": 92,
             "itemtype": "method",
             "name": "labelBindings",
             "return": {
                 "description": "Object"
+            },
+            "class": "components.display.Header",
+            "module": "Firebrick.ui.components",
+            "namespace": "components.display"
+        },
+        {
+            "file": "src\\components\\display\\Header.js",
+            "line": 117,
+            "itemtype": "method",
+            "name": "hrefBindings",
+            "return": {
+                "description": "",
+                "type": "Object"
             },
             "class": "components.display.Header",
             "module": "Firebrick.ui.components",
@@ -3667,7 +3719,7 @@
             "line": 35,
             "description": "is a list group?",
             "itemtype": "property",
-            "name": "listGroupClass",
+            "name": "listGroup",
             "type": "{Boolean|String}",
             "default": "true",
             "class": "components.display.List",
@@ -3677,7 +3729,7 @@
         {
             "file": "src\\components\\display\\List.js",
             "line": 42,
-            "description": "defaults to true but only comes into effect with property \"listGroupClass\"",
+            "description": "defaults to true but only comes into effect with property \"listGroup\"",
             "itemtype": "property",
             "name": "listItemGroupClass",
             "type": "{Boolean|String}",
@@ -3994,7 +4046,7 @@
             "itemtype": "property",
             "name": "textAlignment",
             "type": "{Boolean|String}",
-            "default": "\"justify\"",
+            "default": "\"\"",
             "class": "components.display.Text",
             "module": "Firebrick.ui.components",
             "namespace": "components.display"
@@ -4836,18 +4888,6 @@
         {
             "file": "src\\components\\nav\\List.js",
             "line": 18,
-            "description": "if true - att \"navbar-btn\" class to the button",
-            "itemtype": "property",
-            "name": "navbarItem",
-            "type": "{Boolean}",
-            "default": "false",
-            "class": "components.nav.List",
-            "module": "Firebrick.ui.components",
-            "namespace": "components.nav"
-        },
-        {
-            "file": "src\\components\\nav\\List.js",
-            "line": 25,
             "itemtype": "method",
             "name": "listLinkBindings",
             "return": {
@@ -4860,7 +4900,7 @@
         },
         {
             "file": "src\\components\\nav\\List.js",
-            "line": 37,
+            "line": 30,
             "itemtype": "method",
             "name": "listContainerBindings",
             "return": {
