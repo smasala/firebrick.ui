@@ -70,9 +70,9 @@ define(["text!./Text.html", "../common/Base"], function(tpl){
 		 * false || string :: 'left', 'center', 'right', 'justify', 'no-wrap' (defaults to: left)
 		 * @property textAlignment
 		 * @type {Boolean|String}
-		 * @default "justify"
+		 * @default ""
 		 */
-		textAlignment:"justify",
+		textAlignment:"",
 		/**
 		 * Bindings
 		 * @method bindings
@@ -88,7 +88,7 @@ define(["text!./Text.html", "../common/Base"], function(tpl){
 				obj.css[ me.parseBind("text-"+me.textAlignment) ] = true;	
 			}
 			
-			if(me.html){
+			if(me.isHtml){
 				obj.html = me.text; 
 			}else if(me.text){
 				obj.text = me.textBind(me.text);
@@ -114,7 +114,7 @@ define(["text!./Text.html", "../common/Base"], function(tpl){
 		blockQuoteFooterBindings: function(){
 			var me = this,
 				obj = {};
-			if(me.html){
+			if(me.isHtml){
 				obj.html = me.blockQuoteFooter; 
 			}else{
 				obj.text = me.blockQuoteFooter;

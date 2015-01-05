@@ -1,5 +1,11 @@
-<h{{=it.headerType}} data-bind="{{=it.dataBind('headerBindings')}}">
+<h{{=it.headerSize}} id="{{=it.getId()}}" data-bind="{{=it.dataBind('headerBindings')}}">
+	{{?it.href}}
+		<a href="{{=it.href}}" data-bind="{{=it.dataBind('hrefBindings')}}">
+	{{?}}
 	<span data-bind="{{=it.dataBind()}}"></span>
 	<small data-bind="{{=it.dataBind('secondaryTextBindings')}}"></small>
 	<span data-bind="{{=it.dataBind('labelBindings')}}"></span>
-</h{{=it.headerType}}>
+	{{?it.href}}
+		</a>
+	{{?}}
+</h{{=it.headerSize}}>

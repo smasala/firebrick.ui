@@ -16,13 +16,6 @@ define(["doT", "../display/List"], function(tplEngine){
 		unstyled:true,
 		linkedList: true,
 		/**
-		 * if true - att "navbar-btn" class to the button
-		 * @property navbarItem
-		 * @type {Boolean}
-		 * @default false
-		 */
-		navbarItem: false,
-		/**
 		 * @method listLinkBindings
 		 * @return {Object}
 		 */
@@ -42,10 +35,8 @@ define(["doT", "../display/List"], function(tplEngine){
 			var me = this,
 				obj = me.callParent(arguments);
 			
-			if(me.navbarItem){
-				obj.css["'navbar-nav'"] = true;
-				obj.css.nav = true;
-			}
+			obj.css["'navbar-nav'"] = true;
+			obj.css.nav = true;
 			
 			return obj;
 		}

@@ -75,6 +75,13 @@ define(["doT", "firebrick"], function(tplEngine){
 		 */
 		subTpl: null,
 		/**
+		 * all css classes (comma separated) are added to the standard bindings function
+		 * @property css
+		 * @type {String}
+		 * @default null
+		 */
+		css: null,
+		/**
 		 * variable shortcuts are created using the uiName. by default the string after the last "-" is used
 		 * @example
 		 * 		uiName:"fb-ui-input"
@@ -290,6 +297,27 @@ define(["doT", "firebrick"], function(tplEngine){
 			return me.callParent(arguments);
 		},
 		/**
+		 * @method _getCSSClasses
+		 * @private
+		 * @return {Object}
+		 */
+		_getCSSClasses: function(){
+			var me = this,
+				obj = {},
+				classes;
+			
+			if(me.css){
+				classes = me.css.split(",");
+				if(classes.length){
+					for(var i = 0, l = classes.length; i<l; i++){
+						obj[me.parseBind(classes[i])] = true;
+					}
+				}
+			}
+			
+			return obj;
+		},
+		/**
 		 * mother of all basic bindings
 		 * @method bindings
 		 * @return {Object} {attr:{}, css:{}}
@@ -298,7 +326,7 @@ define(["doT", "firebrick"], function(tplEngine){
 			var me = this,
 				obj = {
 					attr:{},
-					css:{}
+					css:me._getCSSClasses()
 				};
 			
 			return me.addTooltipPopoverBind(obj);

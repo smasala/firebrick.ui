@@ -205,3 +205,12 @@ progress[value]::-webkit-progress-value{
 
 
 /** /Panel toolbars **/
+
+/** MISC **/
+
+/** linked list cursor **/
+a:hover{
+	cursor:pointer;
+}
+
+/** /MISC **/

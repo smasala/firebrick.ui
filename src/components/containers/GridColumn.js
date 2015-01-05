@@ -61,6 +61,7 @@ define(["text!./GridColumn.html", "./Base"], function(tpl){
 			var me = this,
 				obj = me.callParent(arguments);
 			
+			obj.css.col = true;
 			obj.css["'col-"+me.deviceSize+"-"+me._getColumnWidth()+"'"] = true;
 			
 			return obj;

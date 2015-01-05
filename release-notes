@@ -1,3 +1,17 @@
+v0.9.18
+----------------------------
+* gridcol dependency on grid component
+* navlist bug fix
+* isHtml bug fix in Text component
+* listGroupClass renamed to listGroup
+* add "css" property to all component. comma separated string - all classes are automatically added to the bindings functions
+* add "col" class to all gridcol components
+* headerType to headerSize for header components
+* fix labelText in header parse bug
+* textAlignment default from "justify" to none for text components
+* property "href" in header components to change the header into a link
+* add id attribute to header component
+
 v0.9.7
 ----------------------------
 * fix panel header icons bug in chrome

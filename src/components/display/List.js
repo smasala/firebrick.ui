@@ -34,13 +34,13 @@ define(["text!./List.html", "../common/Base", "../common/mixins/Badges"], functi
 		listType:"ul",
 		/**
 		 * is a list group?
-		 * @property listGroupClass
+		 * @property listGroup
 		 * @type {Boolean|String}
 		 * @default true
 		 */
-		listGroupClass:false,
+		listGroup:false,
 		/**
-		 * defaults to true but only comes into effect with property "listGroupClass"
+		 * defaults to true but only comes into effect with property "listGroup"
 		 * @property listItemGroupClass
 		 * @type {Boolean|String}
 		 * @default true
@@ -95,8 +95,8 @@ define(["text!./List.html", "../common/Base", "../common/mixins/Badges"], functi
 		listContainerBindings: function(){
 			var me = this,
 				obj = {css:{}};
-			if(me.listGroupClass){
-				obj.css["'list-group'"] = me.listGroupClass;
+			if(me.listGroup){
+				obj.css["'list-group'"] = me.listGroup;
 			}
 			if(me.unstyled){
 				obj.css["'list-unstyled'"] = me.unstyled;
@@ -114,7 +114,7 @@ define(["text!./List.html", "../common/Base", "../common/mixins/Badges"], functi
 			var me  = this,
 				obj = {css:{}};
 			
-			if(me.listGroupClass && me.listItemGroupClass){
+			if(me.listGroup && me.listItemGroupClass){
 				obj.css["'list-group-item'"] = me.listItemGroupClass;
 			}
 

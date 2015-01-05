@@ -8,7 +8,7 @@
  * @namespace components.containers
  * @class Grid
  */
-define(["text!./Grid.html", "jquery", "./Base"], function(tpl, $){
+define(["text!./Grid.html", "jquery", "./Base", "./GridColumn"], function(tpl, $){
 	"use strict";
 	return Firebrick.define("Firebrick.ui.containers.Grid", {
 		extend:"Firebrick.ui.containers.Base",

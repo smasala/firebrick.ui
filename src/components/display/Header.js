@@ -24,11 +24,11 @@ define(["text!./Header.html", "../common/Base"], function(tpl){
 		tpl:tpl,
 		/**
 		 * use to determine whether h1, h2, h3 etc - default = 1
-		 * @property headerType
+		 * @property headerSize
 		 * @type {Int}
 		 * @default 1
 		 */
-		headerType:1,
+		headerSize:1,
 		/**
 		 * @property text
 		 * @type {String}
@@ -54,6 +54,13 @@ define(["text!./Header.html", "../common/Base"], function(tpl){
 		 * @default "default"
 		 */
 		labelCSS: "default",
+		/**
+		 * change to a url if you wish to convert the header into a link
+		 * @property href
+		 * @type {String}
+		 * @default null
+		 */
+		href: null,
 		/**
 		 * @method bindings
 		 * @return Object
@@ -91,7 +98,7 @@ define(["text!./Header.html", "../common/Base"], function(tpl){
 				obj;
 			if(me.labelText){
 				obj = {
-						text: me.labelText,
+						text: me.parseBind(me.labelText),
 						css:{
 							label: true
 						}
@@ -105,6 +112,14 @@ define(["text!./Header.html", "../common/Base"], function(tpl){
 					visible:false
 				};
 			}
+		},
+		
+		/**
+		 * @method hrefBindings
+		 * @return {Object}
+		 */
+		hrefBindings: function(){
+			return {};
 		}
 		
 	});
