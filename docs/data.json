@@ -3851,6 +3851,19 @@
             "namespace": "components.display"
         },
         {
+            "file": "src\\components\\display\\List.js",
+            "line": 156,
+            "itemtype": "method",
+            "name": "listLinkBindings",
+            "return": {
+                "description": "",
+                "type": "Object"
+            },
+            "class": "components.display.List",
+            "module": "Firebrick.ui.components",
+            "namespace": "components.display"
+        },
+        {
             "file": "src\\components\\display\\Progress.js",
             "line": 17,
             "description": "progress html5 element max attribute",
@@ -4888,19 +4901,6 @@
         {
             "file": "src\\components\\nav\\List.js",
             "line": 18,
-            "itemtype": "method",
-            "name": "listLinkBindings",
-            "return": {
-                "description": "",
-                "type": "Object"
-            },
-            "class": "components.nav.List",
-            "module": "Firebrick.ui.components",
-            "namespace": "components.nav"
-        },
-        {
-            "file": "src\\components\\nav\\List.js",
-            "line": 30,
             "itemtype": "method",
             "name": "listContainerBindings",
             "return": {

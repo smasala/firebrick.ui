@@ -327,6 +327,19 @@ define([&quot;text!./List.html&quot;, &quot;../common/Base&quot;, &quot;../commo
 					data: &quot;$data.children&quot;
 				}
 			};
+		},
+		
+		/**
+		 * @method listLinkBindings
+		 * @return {Object}
+		 */
+		listLinkBindings: function(){
+			var obj = {
+					attr:{
+						href: &quot;$data.link ? $data.link : &#x27;&#x27;&quot;
+					}
+			};
+			return obj;
 		}
 	});
 });
