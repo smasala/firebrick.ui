@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>src\components\containers\Form.js - Firebrick UI API</title>
+    <title>src\components\fields\DatePicker.js - Firebrick UI API</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -172,7 +172,7 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-                        <h1 class="file-heading">File: src\components\containers\Form.js</h1>
+                        <h1 class="file-heading">File: src\components\fields\DatePicker.js</h1>
 
 <div class="file">
     <pre class="code prettyprint linenums">
@@ -181,214 +181,98 @@
  */
 
 /**
+ * http://www.eyecon.ro/bootstrap-datepicker/
  * @module Firebrick.ui.components
- * @extends components.containers.Base
- * @namespace components.containers
- * @class Form
+ * @extends components.fields.Input
+ * @namespace components.fields
+ * @class Datepicker
  */
-define([&quot;text!./Form.html&quot;, &quot;jquery&quot;, &quot;./Base&quot;], function(tpl, $){
+define([&quot;./Input&quot;], function(){
 	&quot;use strict&quot;;
-	return Firebrick.define(&quot;Firebrick.ui.containers.Form&quot;, {
-		extend:&quot;Firebrick.ui.containers.Base&quot;,
+	return Firebrick.define(&quot;Firebrick.ui.fields.DatePicker&quot;, {
+		extend:&quot;Firebrick.ui.fields.Input&quot;,
 		/**
-		 * @property uiName
+		 * @property dateFormat
 		 * @type {String}
+		 * @default &quot;yyyy/mm/dd&quot;
 		 */
-		uiName: &quot;fb-ui-form&quot;,
+		dateFormat: &quot;dd/mm/yyyy&quot;,
 		/**
-		 * @property tpl
-		 * @type {String} html
+		 * Sunday = 0, Saturday = 6 
+		 * @property weekStart
+		 * @type {Integer}
+		 * @default 1
 		 */
-		tpl:tpl,
+		weekStart: 1,
 		/**
-		 * @property formRole
-		 * @type {String}
-		 * @default &quot;&#x27;form&#x27;&quot;
+		 * @property datePickerOptions
+		 * @type {Object|null}
+		 * @default null
 		 */
-		formRole:&quot;form&quot;,
-		/**
-		 * @property horizontal
-		 * @type {Boolean|String}
-		 * @default true
-		 */
-		horizontal:true,
-		/**
-		 * @property inline
-		 * @type {Boolean|String}
-		 * @default false
-		 */
-		inline:false,
-		/**
-		 * @property enctype
-		 * @type {String}
-		 * @default &quot;multipart/form-data&quot;
-		 */
-		enctype: &quot;multipart/form-data&quot;,
-		/**
-		 * whether the progress bar should be shown on form submission
-		 * @property showProgress
-		 * @type {Boolean}
-		 * @default true
-		 */
-		showProgress: true,
-		/**
-		 * see &quot;ProcessData&quot; in http://api.jquery.com/jquery.ajax/
-		 * @property ajaxProcessData
-		 * @type {Boolean}
-		 * @default true
-		 */
-		ajaxProcessData: false,
-		/**
-		 * used for submitting the form
-		 * @property url
-		 * @type {String}
-		 * @default &quot;&quot;
-		 */
-		url: &quot;/&quot;,
-		/**
-		 * @property submitType
-		 * @type {String}
-		 * @default &quot;post&quot;
-		 */
-		submitType: &quot;post&quot;,
-		/**
-		 * upload and download progress
-		 * @property xhr
-		 * @type {Function}
-		 */
-		xhr: function(){
-			var xhr = new window.XMLHttpRequest();
-
-			//Upload progress
-		    xhr.upload.addEventListener(&quot;progress&quot;, function(evt){
-		    	if (evt.lengthComputable) {
-		    		var percentComplete = evt.loaded / evt.total;
-		    		//Do something with upload progress
-		    		console.log(percentComplete);
-		    	}
-		    }, false);
-		    
-		    //Download progress
-		    xhr.addEventListener(&quot;progress&quot;, function(evt){
-		    	if (evt.lengthComputable) {
-		    		var percentComplete = evt.loaded / evt.total;
-		    		//Do something with download progress
-		    		console.log(percentComplete);
-		    	}
-		    }, false);
-		    
-		    return xhr;
-		},
-		/**
-		 * stores the current form item
-		 * @property _form
-		 * @type {jQuery Object} &lt;form&gt;&lt;/form&gt;
-		 */
-		_form: null,
-		/**
-		 * method called on submit ajax
-		 * @property success
-		 * @type {Function}
-		 * @default 
-		 */
-		success: function(){
-			console.info(&quot;success&quot;);
-		},
-		/**
-		 * method called on submit ajax
-		 * @property failure
-		 * @type {Function}
-		 * @default 
-		 */
-		failure: function(){
-			console.info(&quot;failure&quot;);
-		},
-		/**
-		 * method called on submit ajax
-		 * @property complete
-		 * @type {Function}
-		 * @default function(){}
-		 */
-		complete: function(){},
-		/**
-		 * method called after ajax
-		 * @method always
-		 * @param {Arguments} always function arguments from ajax
-		 */
-		always: function(){},
-		/**
-		 * method called after ajax
-		 * @method beforeSend
-		 * @param {Arguments} beforeSend function arguments from ajax
-		 */
-		beforeSend: function(){},
-		/**
-		 * this function requires the HTML5 function FormData to be supported
-		 * @method getFormData
-		 * @return {Object}
-		 */
-		getFormData: function(){
-			var me = this;
-			return new window.FormData(me.getElement());
-		},
+		datePickerOptions: null,
 		/**
 		 * @method init
+		 * @return parent
 		 */
 		init: function(){
 			var me = this;
-				
+			
 			me.on(&quot;rendered&quot;, function(){
-				me._form = me.getElement();
+				var el = me.getElement(),
+					opts = me.datePickerOptions;
+				
+				if(!$.isPlainObject(opts)){
+					opts = {};
+				}
+				
+				opts.weekStart = me.weekStart;
+				opts.format = me.dateFormat;
+				
+				if(el.length){
+					el.datepicker(opts);
+				}
 			});
 			
 			return me.callParent(arguments);
 		},
 		/**
-		 * make sure this.url is set before calling this function
-		 * @method submit
+		 * @property uiName
+		 * @type {String}
 		 */
-		submit: function(){
-			var me = this;
-
-			if(!me.url || typeof me.url !== &quot;string&quot;){
-				console.error(&quot;unable to submit form. No url is set or is set incorrectly&quot;, me.url, me);
-				return;
-			}
-			
-			if(!me._form){
-				console.error(&quot;unable to submit form. Form not found for id&quot;, me.getId());
-			}
-			
-			if(window.FormData){
-				//HTML 5 - IE10+ 
-				$.ajax({
-					xhr: me.xhr,
-					url: me.url, 
-					type: me.submitType, 
-					data: new window.FormData(me._form[0]), 
-					processData: me.ajaxProcessData, 
-					contentType: me.enctype,
-					beforeSend: me.beforeSend.bind(me),
-					complete: me.complete.bind(me), //regardless of success of failure
-					success: me.success.bind(me),
-					failure: me.failure.bind(me)
-				}).always(me.always.bind(me));
-			}else{
-				console.error(&quot;FormData is not supported by your browser&quot;);
-			}
-		},
+		uiName: &quot;fb-ui-datepicker&quot;,
+		inputAddon: true,
 		/**
-		 * @method formBindings
+		 * @property value
+		 * @type {String}
+		 * @default current day
+		 */
+		value:(function(){
+			var dt = new Date();
+			return &quot;&#x27;&quot; +  (&quot;0&quot; + dt.getDate()).slice(-2)  + &quot;/&quot; + dt.getMonth() + 1 + &quot;/&quot; +  dt.getFullYear() + &quot;&#x27;&quot;;
+		})(),
+		/**
+		 * glyphicon to so in the inputAddon box
+		 * @property iconClass
+		 * @type {String|false}
+		 * @default &quot;glyphicon-calendar&quot;
+		 */
+		iconClass: &quot;glyphicon-calendar&quot;,
+		/**
+		 * @method inputAddonSpanBindings
 		 * @return {Object}
 		 */
-		bindings:function(){
+		inputAddonSpanBindings: function(){
 			var me = this,
-				obj = {css:{},attr:{}};
+				obj = me.callParent(arguments);
 			
-			obj.attr.role =  me.parseBind(me.formRole);
-			obj.attr.enctype =  me.parseBind(me.enctype);
-			obj.css[&quot;&#x27;form-horizontal&#x27;&quot;] =  me.horizontal;
-			obj.attr[&quot;&#x27;form-inline&#x27;&quot;] =  me.inline;
+			if(!obj.css){
+				obj.css = {};
+			}
+			
+			obj.css[me.parseBind(me.glyphiconClass)] = true;
+			if(me.iconClass){
+				obj.css[me.parseBind(me.iconClass)] = true;	
+			}
 			
 			return obj;
 		}

@@ -2,7 +2,7 @@
     "project": {
         "name": "Firebrick UI API",
         "description": "Firebrick UI API: a component library for Firebrick MVC, Knockout JS, jQuery and Bootstrap",
-        "version": "0.9.18",
+        "version": "0.9.27",
         "url": "https://github.com/smasala",
         "logo": "fbui_small.png"
     },
@@ -275,6 +275,17 @@
                 "components.fields": 1
             }
         },
+        "src\\components\\fields\\DatePicker.js": {
+            "name": "src\\components\\fields\\DatePicker.js",
+            "modules": {},
+            "classes": {
+                "components.fields.Datepicker": 1
+            },
+            "fors": {},
+            "namespaces": {
+                "components.fields": 1
+            }
+        },
         "src\\components\\fields\\Email.js": {
             "name": "src\\components\\fields\\Email.js",
             "modules": {},
@@ -474,6 +485,7 @@
                 "components.display.Progress": 1,
                 "components.display.Text": 1,
                 "components.fields.Checkbox": 1,
+                "components.fields.Datepicker": 1,
                 "components.fields.Email": 1,
                 "components.fields.File": 1,
                 "components.fields.Input": 1,
@@ -539,7 +551,7 @@
             "namespaces": {},
             "tag": "module",
             "file": "src\\firebrick.ui.js",
-            "line": 281,
+            "line": 301,
             "description": "Firebrick component library for Firebrick JS MVC"
         }
     },
@@ -888,6 +900,21 @@
             "line": 5,
             "extends": "components.fields.Radio"
         },
+        "components.fields.Datepicker": {
+            "name": "components.fields.Datepicker",
+            "shortname": "components.fields.Datepicker",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "Firebrick.ui.components",
+            "namespace": "components.fields",
+            "file": "src\\components\\fields\\DatePicker.js",
+            "line": 5,
+            "description": "http://www.eyecon.ro/bootstrap-datepicker/",
+            "extends": "components.fields.Input"
+        },
         "components.fields.Email": {
             "name": "components.fields.Email",
             "shortname": "components.fields.Email",
@@ -1112,7 +1139,7 @@
             "module": "Firebrick.ui",
             "namespace": "",
             "file": "src\\firebrick.ui.js",
-            "line": 197,
+            "line": 217,
             "description": "util methods"
         },
         "renderer": {
@@ -1126,7 +1153,7 @@
             "module": "Firebrick.ui",
             "namespace": "",
             "file": "src\\firebrick.ui.js",
-            "line": 240,
+            "line": 260,
             "description": "renderer methods"
         },
         "view.Base": {
@@ -1140,7 +1167,7 @@
             "module": "Firebrick.ui",
             "namespace": "",
             "file": "src\\firebrick.ui.js",
-            "line": 281,
+            "line": 301,
             "description": "Overwrites \"Firebrick.view.Base\"",
             "extends": "class.Base"
         }
@@ -1760,18 +1787,6 @@
         {
             "file": "src\\components\\common\\Base.js",
             "line": 27,
-            "description": "component id, not the _classId - however if none specified it will default to the _classId",
-            "itemtype": "property",
-            "name": "id",
-            "type": "{String}",
-            "default": "null",
-            "class": "components.common.Base",
-            "module": "Firebrick.ui.components",
-            "namespace": "components.common"
-        },
-        {
-            "file": "src\\components\\common\\Base.js",
-            "line": 34,
             "description": "used when filtering component classes when searching",
             "itemtype": "property",
             "name": "uiComponent",
@@ -1783,7 +1798,7 @@
         },
         {
             "file": "src\\components\\common\\Base.js",
-            "line": 41,
+            "line": 34,
             "itemtype": "property",
             "name": "glyphiconClass",
             "type": "{String}",
@@ -1794,7 +1809,7 @@
         },
         {
             "file": "src\\components\\common\\Base.js",
-            "line": 47,
+            "line": 40,
             "description": "cache",
             "itemtype": "property",
             "name": "_build",
@@ -1808,7 +1823,7 @@
         },
         {
             "file": "src\\components\\common\\Base.js",
-            "line": 55,
+            "line": 48,
             "description": "compiled template map",
             "itemtype": "property",
             "name": "_template",
@@ -1822,7 +1837,7 @@
         },
         {
             "file": "src\\components\\common\\Base.js",
-            "line": 63,
+            "line": 56,
             "description": "template",
             "itemtype": "property",
             "name": "tpl",
@@ -1834,7 +1849,7 @@
         },
         {
             "file": "src\\components\\common\\Base.js",
-            "line": 70,
+            "line": 63,
             "description": "sub template",
             "itemtype": "property",
             "name": "subTpl",
@@ -1846,7 +1861,7 @@
         },
         {
             "file": "src\\components\\common\\Base.js",
-            "line": 77,
+            "line": 70,
             "description": "all css classes (comma separated) are added to the standard bindings function",
             "itemtype": "property",
             "name": "css",
@@ -1858,7 +1873,7 @@
         },
         {
             "file": "src\\components\\common\\Base.js",
-            "line": 84,
+            "line": 77,
             "description": "variable shortcuts are created using the uiName. by default the string after the last \"-\" is used",
             "example": [
                 "\n\t\tuiName:\"fb-ui-input\"\n\t\t//becomes accessible via: {Firebrick|fb}.ui.cmp.input\n\t\t//defining another component e.g \"myapp-field-input\" would overwrite the default input as \"input\" is found after the last \"-\""
@@ -1873,7 +1888,7 @@
         },
         {
             "file": "src\\components\\common\\Base.js",
-            "line": 95,
+            "line": 88,
             "itemtype": "property",
             "name": "_element",
             "type": "{Null|jQuery Object}",
@@ -1884,7 +1899,7 @@
         },
         {
             "file": "src\\components\\common\\Base.js",
-            "line": 101,
+            "line": 94,
             "itemtype": "property",
             "name": "tooltip",
             "type": "{Boolean|String} set to false to deactivate, string to set the text",
@@ -1895,7 +1910,7 @@
         },
         {
             "file": "src\\components\\common\\Base.js",
-            "line": 107,
+            "line": 100,
             "description": "where the tooltip should appear: \"top\", \"left\", \"right\", \"bottom\"",
             "itemtype": "property",
             "name": "tooltipLocation",
@@ -1907,7 +1922,7 @@
         },
         {
             "file": "src\\components\\common\\Base.js",
-            "line": 114,
+            "line": 107,
             "description": "options defined by bootstrap",
             "itemtype": "property",
             "name": "tooltipOptions",
@@ -1919,7 +1934,7 @@
         },
         {
             "file": "src\\components\\common\\Base.js",
-            "line": 121,
+            "line": 114,
             "itemtype": "property",
             "name": "popover",
             "type": "{Boolean|String} set to false to deactivate, string to set the text",
@@ -1930,7 +1945,7 @@
         },
         {
             "file": "src\\components\\common\\Base.js",
-            "line": 127,
+            "line": 120,
             "itemtype": "property",
             "name": "popoverTitle",
             "type": "{Boolean|String} optional - set to false to deactivate, string to set the title",
@@ -1941,7 +1956,7 @@
         },
         {
             "file": "src\\components\\common\\Base.js",
-            "line": 133,
+            "line": 126,
             "description": "where the popover should appear: \"top\", \"left\", \"right\", \"bottom\"",
             "itemtype": "property",
             "name": "popoverLocation",
@@ -1953,7 +1968,7 @@
         },
         {
             "file": "src\\components\\common\\Base.js",
-            "line": 140,
+            "line": 133,
             "description": "options defined by bootstrap",
             "itemtype": "property",
             "name": "popoverOptions",
@@ -1965,7 +1980,7 @@
         },
         {
             "file": "src\\components\\common\\Base.js",
-            "line": 147,
+            "line": 140,
             "itemtype": "property",
             "name": "popoverDismissible",
             "type": "{Boolean}",
@@ -1976,7 +1991,7 @@
         },
         {
             "file": "src\\components\\common\\Base.js",
-            "line": 153,
+            "line": 146,
             "description": "pass a binding Object and this method will add the tooltip/popover relevant properties",
             "itemtype": "method",
             "name": "addTooltipPopoverBind",
@@ -1997,7 +2012,7 @@
         },
         {
             "file": "src\\components\\common\\Base.js",
-            "line": 182,
+            "line": 175,
             "description": "pass a binding Object and this method will add the popover relevant properties",
             "itemtype": "method",
             "name": "addPopoverBind",
@@ -2018,7 +2033,7 @@
         },
         {
             "file": "src\\components\\common\\Base.js",
-            "line": 200,
+            "line": 193,
             "itemtype": "method",
             "name": "getElement",
             "return": {
@@ -2031,7 +2046,7 @@
         },
         {
             "file": "src\\components\\common\\Base.js",
-            "line": 215,
+            "line": 208,
             "description": "called when defining the class",
             "itemtype": "method",
             "name": "constructor",
@@ -2045,7 +2060,7 @@
         },
         {
             "file": "src\\components\\common\\Base.js",
-            "line": 234,
+            "line": 227,
             "description": "compile and cache template",
             "itemtype": "method",
             "name": "_precompile",
@@ -2059,7 +2074,7 @@
         },
         {
             "file": "src\\components\\common\\Base.js",
-            "line": 257,
+            "line": 250,
             "description": "use this as a wrapper in a template if the property you wish to call COULD be either a primitive or a function",
             "itemtype": "method",
             "name": "b",
@@ -2080,7 +2095,7 @@
         },
         {
             "file": "src\\components\\common\\Base.js",
-            "line": 266,
+            "line": 259,
             "description": "when overriding this or any other method, this.callParent(arguments) calls the method in the super class",
             "itemtype": "method",
             "name": "init",
@@ -2090,7 +2105,7 @@
         },
         {
             "file": "src\\components\\common\\Base.js",
-            "line": 299,
+            "line": 292,
             "itemtype": "method",
             "name": "_getCSSClasses",
             "access": "private",
@@ -2105,7 +2120,7 @@
         },
         {
             "file": "src\\components\\common\\Base.js",
-            "line": 320,
+            "line": 313,
             "description": "mother of all basic bindings",
             "itemtype": "method",
             "name": "bindings",
@@ -2119,7 +2134,7 @@
         },
         {
             "file": "src\\components\\common\\Base.js",
-            "line": 334,
+            "line": 327,
             "description": "compile the template",
             "itemtype": "method",
             "name": "template",
@@ -2145,7 +2160,7 @@
         },
         {
             "file": "src\\components\\common\\Base.js",
-            "line": 349,
+            "line": 342,
             "description": "build the compiled template",
             "itemtype": "method",
             "name": "build",
@@ -2166,7 +2181,7 @@
         },
         {
             "file": "src\\components\\common\\Base.js",
-            "line": 361,
+            "line": 354,
             "itemtype": "method",
             "name": "dataBind",
             "params": [
@@ -2190,21 +2205,7 @@
         },
         {
             "file": "src\\components\\common\\Base.js",
-            "line": 375,
-            "description": "if no id is specified it will call getClassId() and use that value",
-            "itemtype": "method",
-            "name": "getId",
-            "return": {
-                "description": "uniqueId",
-                "type": "String"
-            },
-            "class": "components.common.Base",
-            "module": "Firebrick.ui.components",
-            "namespace": "components.common"
-        },
-        {
-            "file": "src\\components\\common\\Base.js",
-            "line": 389,
+            "line": 368,
             "description": "called when calling {{{getSubTpl}}} in component template",
             "itemtype": "method",
             "name": "getSubTpl",
@@ -2218,7 +2219,7 @@
         },
         {
             "file": "src\\components\\common\\Base.js",
-            "line": 397,
+            "line": 376,
             "description": "find the parent of this class\niterate up the inheritance tree looking for a classname that differs from the current and that \"subTpl\" or \"tpl\" don't match either",
             "access": "private",
             "tagname": "",
@@ -2234,7 +2235,7 @@
         },
         {
             "file": "src\\components\\common\\Base.js",
-            "line": 415,
+            "line": 394,
             "description": "called when calling {{{getParentTpl}}} in component template",
             "itemtype": "method",
             "name": "getParentTpl",
@@ -2248,7 +2249,7 @@
         },
         {
             "file": "src\\components\\common\\Base.js",
-            "line": 424,
+            "line": 403,
             "description": "called when calling {{{getParentSubTpl}}} in component template",
             "itemtype": "method",
             "name": "getParentSubTpl",
@@ -2262,7 +2263,7 @@
         },
         {
             "file": "src\\components\\common\\Base.js",
-            "line": 433,
+            "line": 412,
             "description": "clean string - i.e. remove all ' from string",
             "itemtype": "method",
             "name": "cleanString",
@@ -2276,7 +2277,7 @@
         },
         {
             "file": "src\\components\\common\\Base.js",
-            "line": 441,
+            "line": 420,
             "description": "attach ' to the start and end of the string for KO binds",
             "itemtype": "method",
             "name": "parseBind",
@@ -2297,7 +2298,7 @@
         },
         {
             "file": "src\\components\\common\\Base.js",
-            "line": 450,
+            "line": 429,
             "description": "takes a string and prepares it for Firebrick text call",
             "example": [
                 "\n\ttextBind(\"mystring.abc.key\")\n\t// returns = fb.text('mystring.abc.key')"
@@ -4171,6 +4172,98 @@
             "namespace": "components.fields"
         },
         {
+            "file": "src\\components\\fields\\DatePicker.js",
+            "line": 16,
+            "itemtype": "property",
+            "name": "dateFormat",
+            "type": "{String}",
+            "default": "\"yyyy/mm/dd\"",
+            "class": "components.fields.Datepicker",
+            "module": "Firebrick.ui.components",
+            "namespace": "components.fields"
+        },
+        {
+            "file": "src\\components\\fields\\DatePicker.js",
+            "line": 22,
+            "description": "Sunday = 0, Saturday = 6",
+            "itemtype": "property",
+            "name": "weekStart",
+            "type": "{Integer}",
+            "default": "1",
+            "class": "components.fields.Datepicker",
+            "module": "Firebrick.ui.components",
+            "namespace": "components.fields"
+        },
+        {
+            "file": "src\\components\\fields\\DatePicker.js",
+            "line": 29,
+            "itemtype": "property",
+            "name": "datePickerOptions",
+            "type": "{Object|null}",
+            "default": "null",
+            "class": "components.fields.Datepicker",
+            "module": "Firebrick.ui.components",
+            "namespace": "components.fields"
+        },
+        {
+            "file": "src\\components\\fields\\DatePicker.js",
+            "line": 35,
+            "itemtype": "method",
+            "name": "init",
+            "return": {
+                "description": "parent"
+            },
+            "class": "components.fields.Datepicker",
+            "module": "Firebrick.ui.components",
+            "namespace": "components.fields"
+        },
+        {
+            "file": "src\\components\\fields\\DatePicker.js",
+            "line": 60,
+            "itemtype": "property",
+            "name": "uiName",
+            "type": "{String}",
+            "class": "components.fields.Datepicker",
+            "module": "Firebrick.ui.components",
+            "namespace": "components.fields"
+        },
+        {
+            "file": "src\\components\\fields\\DatePicker.js",
+            "line": 66,
+            "itemtype": "property",
+            "name": "value",
+            "type": "{String}",
+            "default": "current day",
+            "class": "components.fields.Datepicker",
+            "module": "Firebrick.ui.components",
+            "namespace": "components.fields"
+        },
+        {
+            "file": "src\\components\\fields\\DatePicker.js",
+            "line": 75,
+            "description": "glyphicon to so in the inputAddon box",
+            "itemtype": "property",
+            "name": "iconClass",
+            "type": "{String|false}",
+            "default": "\"glyphicon-calendar\"",
+            "class": "components.fields.Datepicker",
+            "module": "Firebrick.ui.components",
+            "namespace": "components.fields"
+        },
+        {
+            "file": "src\\components\\fields\\DatePicker.js",
+            "line": 82,
+            "itemtype": "method",
+            "name": "inputAddonSpanBindings",
+            "return": {
+                "description": "",
+                "type": "Object"
+            },
+            "class": "components.fields.Datepicker",
+            "module": "Firebrick.ui.components",
+            "namespace": "components.fields"
+        },
+        {
             "file": "src\\components\\fields\\Email.js",
             "line": 15,
             "itemtype": "property",
@@ -4439,7 +4532,7 @@
             "description": "input addon",
             "itemtype": "property",
             "name": "inputAddon",
-            "type": "{Boolean|String}",
+            "type": "{Boolean|String} - string for inputAddon text - false to deactive, true to simply activate without text, true if you just wan an icon",
             "default": "false",
             "class": "components.fields.Input",
             "module": "Firebrick.ui.components",
@@ -4451,7 +4544,7 @@
             "itemtype": "property",
             "name": "inputAddonClass",
             "type": "{String}",
-            "default": "\"'input-group-addon'\"",
+            "default": "\"input-group-addon\"",
             "class": "components.fields.Input",
             "module": "Firebrick.ui.components",
             "namespace": "components.fields"
@@ -4459,6 +4552,17 @@
         {
             "file": "src\\components\\fields\\Input.js",
             "line": 154,
+            "itemtype": "property",
+            "name": "inputAddonSpanClass",
+            "type": "{String}",
+            "default": "\"\"",
+            "class": "components.fields.Input",
+            "module": "Firebrick.ui.components",
+            "namespace": "components.fields"
+        },
+        {
+            "file": "src\\components\\fields\\Input.js",
+            "line": 160,
             "itemtype": "property",
             "name": "horizontal",
             "type": "{Boolean}",
@@ -4469,7 +4573,7 @@
         },
         {
             "file": "src\\components\\fields\\Input.js",
-            "line": 160,
+            "line": 166,
             "description": "Feedback css bindings",
             "itemtype": "property",
             "name": "feedback_success",
@@ -4481,7 +4585,7 @@
         },
         {
             "file": "src\\components\\fields\\Input.js",
-            "line": 167,
+            "line": 173,
             "description": "Feedback css bindings",
             "itemtype": "property",
             "name": "feedback_warning",
@@ -4493,7 +4597,7 @@
         },
         {
             "file": "src\\components\\fields\\Input.js",
-            "line": 174,
+            "line": 180,
             "description": "Feedback css bindings",
             "itemtype": "property",
             "name": "feedback_error",
@@ -4505,7 +4609,7 @@
         },
         {
             "file": "src\\components\\fields\\Input.js",
-            "line": 181,
+            "line": 187,
             "itemtype": "property",
             "name": "multiplesInline",
             "type": "{Boolean|String}",
@@ -4516,7 +4620,7 @@
         },
         {
             "file": "src\\components\\fields\\Input.js",
-            "line": 187,
+            "line": 193,
             "itemtype": "property",
             "name": "inplaceEdit",
             "type": "{Boolean}",
@@ -4527,7 +4631,7 @@
         },
         {
             "file": "src\\components\\fields\\Input.js",
-            "line": 193,
+            "line": 199,
             "itemtype": "property",
             "name": "showInplaceTitle",
             "type": "{Boolean}",
@@ -4538,7 +4642,19 @@
         },
         {
             "file": "src\\components\\fields\\Input.js",
-            "line": 199,
+            "line": 205,
+            "description": "adds html5 required attribute",
+            "itemtype": "property",
+            "name": "required",
+            "type": "{Boolean}",
+            "default": "false",
+            "class": "components.fields.Input",
+            "module": "Firebrick.ui.components",
+            "namespace": "components.fields"
+        },
+        {
+            "file": "src\\components\\fields\\Input.js",
+            "line": 212,
             "description": "if none specified then the name is set to that of this.type",
             "itemtype": "property",
             "name": "name",
@@ -4550,7 +4666,55 @@
         },
         {
             "file": "src\\components\\fields\\Input.js",
-            "line": 206,
+            "line": 219,
+            "itemtype": "method",
+            "name": "init",
+            "return": {
+                "description": ".callParent(arguments)"
+            },
+            "class": "components.fields.Input",
+            "module": "Firebrick.ui.components",
+            "namespace": "components.fields"
+        },
+        {
+            "file": "src\\components\\fields\\Input.js",
+            "line": 235,
+            "description": "this functions is called when the component is rendered and determines what to do when the component is changed",
+            "itemtype": "method",
+            "name": "onChange",
+            "class": "components.fields.Input",
+            "module": "Firebrick.ui.components",
+            "namespace": "components.fields"
+        },
+        {
+            "file": "src\\components\\fields\\Input.js",
+            "line": 264,
+            "description": "use this to set a particular BS3 has-* status - e.g \"has-error\"",
+            "itemtype": "method",
+            "name": "setStatus",
+            "params": [
+                {
+                    "name": "name",
+                    "description": "\"error\", \"warning\", \"success\"",
+                    "type": "String"
+                },
+                {
+                    "name": "element",
+                    "description": "[default=getElement()] - set if you wish to set the status to a different element - e.g. like the components parent",
+                    "type": "JQuery Object"
+                }
+            ],
+            "return": {
+                "description": "self",
+                "type": "Object"
+            },
+            "class": "components.fields.Input",
+            "module": "Firebrick.ui.components",
+            "namespace": "components.fields"
+        },
+        {
+            "file": "src\\components\\fields\\Input.js",
+            "line": 294,
             "itemtype": "method",
             "name": "containerBindings",
             "return": {
@@ -4563,7 +4727,7 @@
         },
         {
             "file": "src\\components\\fields\\Input.js",
-            "line": 226,
+            "line": 314,
             "itemtype": "method",
             "name": "helpBlockBindings",
             "return": {
@@ -4576,7 +4740,7 @@
         },
         {
             "file": "src\\components\\fields\\Input.js",
-            "line": 236,
+            "line": 324,
             "itemtype": "method",
             "name": "feedbackBindings",
             "return": {
@@ -4589,7 +4753,7 @@
         },
         {
             "file": "src\\components\\fields\\Input.js",
-            "line": 263,
+            "line": 351,
             "itemtype": "method",
             "name": "bindings",
             "return": {
@@ -4602,7 +4766,7 @@
         },
         {
             "file": "src\\components\\fields\\Input.js",
-            "line": 293,
+            "line": 385,
             "itemtype": "method",
             "name": "inputAddonBindings",
             "return": {
@@ -4615,7 +4779,20 @@
         },
         {
             "file": "src\\components\\fields\\Input.js",
-            "line": 308,
+            "line": 399,
+            "itemtype": "method",
+            "name": "inputAddonSpanBindings",
+            "return": {
+                "description": "",
+                "type": "Object"
+            },
+            "class": "components.fields.Input",
+            "module": "Firebrick.ui.components",
+            "namespace": "components.fields"
+        },
+        {
+            "file": "src\\components\\fields\\Input.js",
+            "line": 413,
             "itemtype": "method",
             "name": "labelBindings",
             "return": {
@@ -4628,9 +4805,22 @@
         },
         {
             "file": "src\\components\\fields\\Input.js",
-            "line": 325,
+            "line": 430,
             "itemtype": "method",
             "name": "inputContainerBindings",
+            "return": {
+                "description": "",
+                "type": "Object"
+            },
+            "class": "components.fields.Input",
+            "module": "Firebrick.ui.components",
+            "namespace": "components.fields"
+        },
+        {
+            "file": "src\\components\\fields\\Input.js",
+            "line": 444,
+            "itemtype": "method",
+            "name": "fieldBindings",
             "return": {
                 "description": "",
                 "type": "Object"
@@ -5766,6 +5956,18 @@
         {
             "file": "src\\firebrick.ui.js",
             "line": 55,
+            "description": "used to cache pointers to component when searching by id",
+            "access": "private",
+            "tagname": "",
+            "itemtype": "property",
+            "name": "_componentCache",
+            "type": "{Object}",
+            "class": "ui",
+            "module": "Firebrick.ui"
+        },
+        {
+            "file": "src\\firebrick.ui.js",
+            "line": 63,
             "description": "populate a target with fields and data",
             "itemtype": "method",
             "name": "build",
@@ -5802,7 +6004,7 @@
         },
         {
             "file": "src\\firebrick.ui.js",
-            "line": 92,
+            "line": 100,
             "description": "components uiNames are populated into this map for variable access\nfb.ui.cmp.input",
             "itemtype": "property",
             "name": "cmp",
@@ -5813,7 +6015,7 @@
         },
         {
             "file": "src\\firebrick.ui.js",
-            "line": 101,
+            "line": 109,
             "description": "recursive function\ncreate components and html from an array of items",
             "access": "private",
             "tagname": "",
@@ -5828,7 +6030,7 @@
         },
         {
             "file": "src\\firebrick.ui.js",
-            "line": 156,
+            "line": 167,
             "description": "get a component class by its shortname... uiName",
             "itemtype": "method",
             "name": "getByShortName",
@@ -5848,7 +6050,26 @@
         },
         {
             "file": "src\\firebrick.ui.js",
-            "line": 186,
+            "line": 197,
+            "itemtype": "method",
+            "name": "getCmp",
+            "params": [
+                {
+                    "name": "id",
+                    "description": "",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "Object|null"
+            },
+            "class": "ui",
+            "module": "Firebrick.ui"
+        },
+        {
+            "file": "src\\firebrick.ui.js",
+            "line": 206,
             "description": "alias for Firebrick.get",
             "itemtype": "method",
             "name": "get",
@@ -5868,7 +6089,7 @@
         },
         {
             "file": "src\\firebrick.ui.js",
-            "line": 203,
+            "line": 223,
             "description": "convert a JS Object into a simple \"json\" type string, this is mainly used for the data-bind attribute in Knockout",
             "itemtype": "method",
             "name": "stringify",
@@ -5888,7 +6109,7 @@
         },
         {
             "file": "src\\firebrick.ui.js",
-            "line": 246,
+            "line": 266,
             "itemtype": "property",
             "name": "_registry",
             "type": "{Object}",
@@ -5899,7 +6120,7 @@
         },
         {
             "file": "src\\firebrick.ui.js",
-            "line": 253,
+            "line": 273,
             "itemtype": "method",
             "name": "add",
             "params": [
@@ -5922,7 +6143,7 @@
         },
         {
             "file": "src\\firebrick.ui.js",
-            "line": 267,
+            "line": 287,
             "itemtype": "method",
             "name": "get",
             "params": [
@@ -5941,7 +6162,7 @@
         },
         {
             "file": "src\\firebrick.ui.js",
-            "line": 287,
+            "line": 307,
             "itemtype": "property",
             "name": "listeners",
             "type": "{Object}",
@@ -5950,7 +6171,7 @@
         },
         {
             "file": "src\\firebrick.ui.js",
-            "line": 301,
+            "line": 321,
             "itemtype": "property",
             "name": "items",
             "type": "{Array|Function}",
@@ -5960,7 +6181,7 @@
         },
         {
             "file": "src\\firebrick.ui.js",
-            "line": 307,
+            "line": 327,
             "itemtype": "property",
             "name": "tpl",
             "type": "{Function}",

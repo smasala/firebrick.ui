@@ -24,6 +24,7 @@ YUI.add("yuidoc-meta", function(Y) {
         "components.display.Progress",
         "components.display.Text",
         "components.fields.Checkbox",
+        "components.fields.Datepicker",
         "components.fields.Email",
         "components.fields.File",
         "components.fields.Input",
