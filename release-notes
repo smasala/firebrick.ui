@@ -1,3 +1,12 @@
+v0.9.27
+----------------------------
+* improve with properties to allow content data like $parent
+* datepicker component
+* input fields layout bug fix
+* enable html5 required attribute on fields
+* change status ("has-" BS3 classes) with html5 required
+* Firebrick.ui.getCmp to get a component by Ids - faster than Firebrick.getById 
+
 v0.9.19
 ----------------------------
 * links in normal list fix

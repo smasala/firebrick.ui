@@ -141,16 +141,22 @@ define(["text!./Base.html", "text!./Input.html", "../common/Base", "x-editable",
 		/**
 		 * input addon
 		 * @property inputAddon
-		 * @type {Boolean|String}
+		 * @type {Boolean|String} - string for inputAddon text - false to deactive, true to simply activate without text, true if you just wan an icon
 		 * @default false
 		 */
 		inputAddon:false,
 		/**
 		 * @property inputAddonClass
 		 * @type {String}
-		 * @default "'input-group-addon'"
+		 * @default "input-group-addon"
 		 */
-		inputAddonClass:"'input-group-addon'",
+		inputAddonClass:"input-group-addon",
+		/**
+		 * @property inputAddonSpanClass
+		 * @type {String}
+		 * @default ""
+		 */
+		inputAddonSpanClass: "",
 		/**
 		 * @property horizontal
 		 * @type {Boolean}
@@ -197,12 +203,94 @@ define(["text!./Base.html", "text!./Input.html", "../common/Base", "x-editable",
 		 */
 		showInplaceTitle:true,
 		/**
+		 * adds html5 required attribute
+		 * @property required
+		 * @type {Boolean}
+		 * @default false
+		 */
+		required:false,
+		/**
 		 * if none specified then the name is set to that of this.type
 		 * @property name
 		 * @type {String}
 		 * @default ""
 		 */
 		name:"",
+		/**
+		 * @method init
+		 * @return .callParent(arguments)
+		 */
+		init: function(){
+			var me = this;
+			
+			if(me.required){
+				me.on("rendered", function(){
+					me.onChange();
+				});				
+			}
+			
+			return me.callParent(arguments);
+		},
+		
+		/**
+		 * this functions is called when the component is rendered and determines what to do when the component is changed
+		 * @method onChange
+		 */
+		onChange: function(){
+			var me = this,
+				el = me.getElement(),
+				container;
+			
+			if(me.required){
+				if(el && el.length){
+					el.change(function(){
+						container = el.closest(".form-group");
+						if(container.length){
+							
+							if(el.is(":invalid")){
+								me.setStatus("error", container);
+							}else{
+								me.setStatus("success", container);
+							}
+							
+						}
+						
+					});
+				}
+			}
+			
+		},
+		
+		/**
+		 * use this to set a particular BS3 has-* status - e.g "has-error"
+		 * @method setStatus
+		 * @param name {String} "error", "warning", "success"
+		 * @param element {jQuery Object} [default=getElement()] - set if you wish to set the status to a different element - e.g. like the components parent 
+		 * @return self {Object}
+		 */
+		setStatus: function(status, element){
+			var me = this,
+				el = element || me.getElement();
+			
+			if(el && el.length){
+				
+				if(status){
+					
+					el.attr("class", function(i, str){
+						str = str.replace(/(^|\s)has-\S+/g, '');	//replace all classes that start with "has-"
+						str += " has-feedback";	//add the base class again (deleted by line above)
+						return str;
+					});
+					
+					el.addClass("has-" + status);
+					
+				}
+				
+			}
+			
+			return me;
+		},
+		
 		/**
 		 * @method containerBindings
 		 * @return {Object}
@@ -288,6 +376,10 @@ define(["text!./Base.html", "text!./Input.html", "../common/Base", "x-editable",
 				obj.attr.placeholder = me.textBind( me.placeholder );
 			}
 			
+			if(me.required){
+				obj.attr.required = true;
+			}
+			
 			return obj;
 		},
 		/**
@@ -297,12 +389,25 @@ define(["text!./Base.html", "text!./Input.html", "../common/Base", "x-editable",
 		inputAddonBindings: function(){
 			var me = this,
 				obj = {
-					text: me.inputAddon,
 					css:{}
 				};
 			if(me.inputAddon){
-				obj.css[me.inputAddonClass] = true;
+				obj.css[me.parseBind(me.inputAddonClass)] = true;
 			}
+			return obj;
+		},
+		/**
+		 * @method inputAddonSpanBindings
+		 * @return {Object}
+		 */
+		inputAddonSpanBindings: function(){
+			var me = this,
+				obj = {};
+			
+			if(me.inputAddon && typeof me.inputAddon === "string"){
+				obj.text = me.inputAddon;
+			}
+			
 			return obj;
 		},
 		/**
@@ -329,12 +434,23 @@ define(["text!./Base.html", "text!./Input.html", "../common/Base", "x-editable",
 		inputContainerBindings: function(){
 			var me = this,
 				obj = {
-					css:{
-						"'input-group'": me.inputAddon
-					}
+					css:{}
 				};
 			if(me.horizontal){
 				obj.css[ me.parseBind( "col-" + me.deviceSize + "-" + me.colInputSize ) ] = me.horizontal;
+			}
+			return obj;
+		},
+		/**
+		 * @method fieldBindings
+		 * @return {Object}
+		 */
+		fieldBindings: function(){
+			var me = this, 
+				obj = {
+					css:{
+						"'input-group'": me.inputAddon
+					}
 			}
 			return obj;
 		}

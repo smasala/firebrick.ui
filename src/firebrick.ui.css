@@ -15,7 +15,7 @@
     from { transform: scale(1) rotate(0deg);}
     to { transform: scale(1) rotate(360deg);}
 }
-/* /FB MVC */
+/*-- /FB MVC --*/
 
 table.treetable span.file {
   background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAQAAAC1+jfqAAAABGdBTUEAAK/INwWK6QAAABl0RVh0U29mdHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAADoSURBVBgZBcExblNBGAbA2ceegTRBuIKOgiihSZNTcC5LUHAihNJR0kGKCDcYJY6D3/77MdOinTvzAgCw8ysThIvn/VojIyMjIyPP+bS1sUQIV2s95pBDDvmbP/mdkft83tpYguZq5Jh/OeaYh+yzy8hTHvNlaxNNczm+la9OTlar1UdA/+C2A4trRCnD3jS8BB1obq2Gk6GU6QbQAS4BUaYSQAf4bhhKKTFdAzrAOwAxEUAH+KEM01SY3gM6wBsEAQB0gJ+maZoC3gI6iPYaAIBJsiRmHU0AALOeFC3aK2cWAACUXe7+AwO0lc9eTHYTAAAAAElFTkSuQmCC);
@@ -171,7 +171,7 @@ progress[value]::-webkit-progress-value{
      -webkit-linear-gradient( left, #09c, #f44);
 }
 
-/* /Progress Element */
+/*-- /Progress Element --*/
 
 /** BS 3 re-enable nested dropdowns 
 * http://firdaus.grandexa.com/2013/09/twitter-bootstrap-3-multilevel-dropdown-menu/
@@ -204,7 +204,23 @@ progress[value]::-webkit-progress-value{
 }
 
 
-/** /Panel toolbars **/
+/*-- /Panel toolbars --*/
+
+/** datepicker **/
+.icon-arrow-left, .icon-arrow-right{
+	display:block;
+	height:100%;
+	width:100%;
+}
+
+.icon-arrow-left{
+	background:url(images/arrow_left.png) center center no-repeat;
+}
+
+.icon-arrow-right{
+	background:url(images/arrow_right.png) center center no-repeat;
+}
+/*-- /datepicker --*/
 
 /** MISC **/
 
@@ -213,4 +229,7 @@ a:hover{
 	cursor:pointer;
 }
 
-/** /MISC **/
+/*-- /MISC --*/
+
+
+

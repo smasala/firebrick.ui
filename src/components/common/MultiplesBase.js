@@ -18,21 +18,25 @@ define(["../fields/Input"], function(){
 		 * @return {Object}
 		 */
 		fieldBindings:function(){
-			var me = this;
+			var me = this,
+				obj = me.callParent(arguments);
 			if(!me.inplaceEdit){
-				var obj = {
-					withProperties: {
+				
+				obj.withProperties = {
 							itemId: "'fb-ui-id-' + Firebrick.utils.uniqId()"
-					},
-					css:{}
-				};
+						};
+
 				if(me.multiplesInline){
+					
+					if(!obj.css){
+						obj.css = {};
+					}
+					
 					obj.css[ me.parseBind(me.cleanString(me.type)+"-inline")] = me.multiplesInline;
 				}
-				return obj;
 			}
 			
-			return {};
+			return obj;
 		}
 	});
 });

@@ -19,7 +19,7 @@
             
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 0.9.18</em>
+            <em>API Docs for: 0.9.27</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -86,6 +86,8 @@
                 <li><a href="../classes/components.display.Text.html">components.display.Text</a></li>
             
                 <li><a href="../classes/components.fields.Checkbox.html">components.fields.Checkbox</a></li>
+            
+                <li><a href="../classes/components.fields.Datepicker.html">components.fields.Datepicker</a></li>
             
                 <li><a href="../classes/components.fields.Email.html">components.fields.Email</a></li>
             
@@ -317,16 +319,22 @@ define([&quot;text!./Base.html&quot;, &quot;text!./Input.html&quot;, &quot;../co
 		/**
 		 * input addon
 		 * @property inputAddon
-		 * @type {Boolean|String}
+		 * @type {Boolean|String} - string for inputAddon text - false to deactive, true to simply activate without text, true if you just wan an icon
 		 * @default false
 		 */
 		inputAddon:false,
 		/**
 		 * @property inputAddonClass
 		 * @type {String}
-		 * @default &quot;&#x27;input-group-addon&#x27;&quot;
+		 * @default &quot;input-group-addon&quot;
 		 */
-		inputAddonClass:&quot;&#x27;input-group-addon&#x27;&quot;,
+		inputAddonClass:&quot;input-group-addon&quot;,
+		/**
+		 * @property inputAddonSpanClass
+		 * @type {String}
+		 * @default &quot;&quot;
+		 */
+		inputAddonSpanClass: &quot;&quot;,
 		/**
 		 * @property horizontal
 		 * @type {Boolean}
@@ -373,12 +381,94 @@ define([&quot;text!./Base.html&quot;, &quot;text!./Input.html&quot;, &quot;../co
 		 */
 		showInplaceTitle:true,
 		/**
+		 * adds html5 required attribute
+		 * @property required
+		 * @type {Boolean}
+		 * @default false
+		 */
+		required:false,
+		/**
 		 * if none specified then the name is set to that of this.type
 		 * @property name
 		 * @type {String}
 		 * @default &quot;&quot;
 		 */
 		name:&quot;&quot;,
+		/**
+		 * @method init
+		 * @return .callParent(arguments)
+		 */
+		init: function(){
+			var me = this;
+			
+			if(me.required){
+				me.on(&quot;rendered&quot;, function(){
+					me.onChange();
+				});				
+			}
+			
+			return me.callParent(arguments);
+		},
+		
+		/**
+		 * this functions is called when the component is rendered and determines what to do when the component is changed
+		 * @method onChange
+		 */
+		onChange: function(){
+			var me = this,
+				el = me.getElement(),
+				container;
+			
+			if(me.required){
+				if(el &amp;&amp; el.length){
+					el.change(function(){
+						container = el.closest(&quot;.form-group&quot;);
+						if(container.length){
+							
+							if(el.is(&quot;:invalid&quot;)){
+								me.setStatus(&quot;error&quot;, container);
+							}else{
+								me.setStatus(&quot;success&quot;, container);
+							}
+							
+						}
+						
+					});
+				}
+			}
+			
+		},
+		
+		/**
+		 * use this to set a particular BS3 has-* status - e.g &quot;has-error&quot;
+		 * @method setStatus
+		 * @param name {String} &quot;error&quot;, &quot;warning&quot;, &quot;success&quot;
+		 * @param element {jQuery Object} [default=getElement()] - set if you wish to set the status to a different element - e.g. like the components parent 
+		 * @return self {Object}
+		 */
+		setStatus: function(status, element){
+			var me = this,
+				el = element || me.getElement();
+			
+			if(el &amp;&amp; el.length){
+				
+				if(status){
+					
+					el.attr(&quot;class&quot;, function(i, str){
+						str = str.replace(/(^|\s)has-\S+/g, &#x27;&#x27;);	//replace all classes that start with &quot;has-&quot;
+						str += &quot; has-feedback&quot;;	//add the base class again (deleted by line above)
+						return str;
+					});
+					
+					el.addClass(&quot;has-&quot; + status);
+					
+				}
+				
+			}
+			
+			return me;
+		},
+		
 		/**
 		 * @method containerBindings
 		 * @return {Object}
@@ -464,6 +554,10 @@ define([&quot;text!./Base.html&quot;, &quot;text!./Input.html&quot;, &quot;../co
 				obj.attr.placeholder = me.textBind( me.placeholder );
 			}
 			
+			if(me.required){
+				obj.attr.required = true;
+			}
+			
 			return obj;
 		},
 		/**
@@ -473,12 +567,25 @@ define([&quot;text!./Base.html&quot;, &quot;text!./Input.html&quot;, &quot;../co
 		inputAddonBindings: function(){
 			var me = this,
 				obj = {
-					text: me.inputAddon,
 					css:{}
 				};
 			if(me.inputAddon){
-				obj.css[me.inputAddonClass] = true;
+				obj.css[me.parseBind(me.inputAddonClass)] = true;
 			}
+			return obj;
+		},
+		/**
+		 * @method inputAddonSpanBindings
+		 * @return {Object}
+		 */
+		inputAddonSpanBindings: function(){
+			var me = this,
+				obj = {};
+			
+			if(me.inputAddon &amp;&amp; typeof me.inputAddon === &quot;string&quot;){
+				obj.text = me.inputAddon;
+			}
+			
 			return obj;
 		},
 		/**
@@ -505,12 +612,23 @@ define([&quot;text!./Base.html&quot;, &quot;text!./Input.html&quot;, &quot;../co
 		inputContainerBindings: function(){
 			var me = this,
 				obj = {
-					css:{
-						&quot;&#x27;input-group&#x27;&quot;: me.inputAddon
-					}
+					css:{}
 				};
 			if(me.horizontal){
 				obj.css[ me.parseBind( &quot;col-&quot; + me.deviceSize + &quot;-&quot; + me.colInputSize ) ] = me.horizontal;
+			}
+			return obj;
+		},
+		/**
+		 * @method fieldBindings
+		 * @return {Object}
+		 */
+		fieldBindings: function(){
+			var me = this, 
+				obj = {
+					css:{
+						&quot;&#x27;input-group&#x27;&quot;: me.inputAddon
+					}
 			}
 			return obj;
 		}

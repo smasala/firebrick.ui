@@ -2,9 +2,10 @@
 	<label for="{{=it.getId()}}" data-bind="{{=it.dataBind('labelBindings')}}"></label> 
 	<div data-bind="{{=it.dataBind('inputContainerBindings')}}">
 		<div data-bind="{{=it.dataBind('fieldBindings')}}">
-				
 				{{?it.inputAddon }}
-					<div data-bind="{{=it.dataBind('inputAddonBindings')}}"></div>
+					<div data-bind="{{=it.dataBind('inputAddonBindings')}}">
+						<span data-bind="{{=it.dataBind('inputAddonSpanBindings')}}"></span>
+					</div>
 				{{?}}
 				
 				{{=it.getSubTpl()}}
@@ -15,7 +16,6 @@
 				{{?it.helpText}}
 					<span class="{{=it.helpBlockClass}}" data-bind="{{=it.dataBind('helpBlockBindings')}}"></span>
 			 	{{?}}
-			 	
 		</div>
 	</div>
 </div>

@@ -25,13 +25,6 @@ define(["doT", "firebrick"], function(tplEngine){
 		 */
 		_idPrefix: "fb-ui-",
 		/**
-		 * component id, not the _classId - however if none specified it will default to the _classId
-		 * @property id
-		 * @type {String}
-		 * @default null
-		 */
-		id:null,
-		/**
 		 * used when filtering component classes when searching
 		 * @property uiComponent
 		 * @type {Boolean}
@@ -293,7 +286,7 @@ define(["doT", "firebrick"], function(tplEngine){
 					}
 				});
 			}
-
+			
 			return me.callParent(arguments);
 		},
 		/**
@@ -371,20 +364,6 @@ define(["doT", "firebrick"], function(tplEngine){
 				prop = prop.call(me);
 			}
 			return Firebrick.ui.utils.stringify( prop );
-		},
-		/**
-		 * if no id is specified it will call getClassId() and use that value
-		 * @method getId 
-		 * @return {String} uniqueId
-		 */
-		getId: function(){
-			var me = this,
-				id = me.id;
-			if(!id){
-				id = this.getClassId();
-				me.id = id;
-			}
-			return id;
 		},
 		/**
 		 * called when calling {{{getSubTpl}}} in component template

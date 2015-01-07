@@ -41,7 +41,7 @@
 			 * @private
 			 * @type {String}
 			 */
-			version: "0.9.18",
+			version: "0.9.27",
 			
 			/**
 			 * used to cache pointers to classes when searching by "uiName"
@@ -51,6 +51,14 @@
 			 * @type {Object}
 			 */
 			_searchCache:{},
+			
+			/**
+			 * used to cache pointers to component when searching by id
+			 * @private
+			 * @property _componentCache
+			 * @type {Object}
+			 */
+			_componentCache:{},
 			
 			/**
 			 * populate a target with fields and data
@@ -105,7 +113,6 @@
 			 * @method _populate
 			 * @return {Object} :: {html: string, items: array of objects}
 			 */
-			i:0,
 			_populate: function(items, parent){
 				var me = this,
 					x = [],
@@ -147,6 +154,10 @@
 						//if not set yet
 						component._parent = parent;
 					}
+					
+					//cache component pointer so it can be found by id
+					me._componentCache[component.getId()] = component;
+					
 					x.push(component);
 				}
 				
@@ -181,6 +192,15 @@
 					console.error("ui component", name, "not found");
 				}
 				return item;
+			},
+			
+			/**
+			 * @method getCmp
+			 * @param id {String}
+			 * @return {Object|null}
+			 */
+			getCmp: function(id){
+				return this._componentCache[id];
 			},
 			
 			/**
@@ -327,8 +347,14 @@
 	ko.bindingHandlers.withProperties = {
 	    init: function(element, valueAccessor, allBindings, viewModel, bindingContext) {
 	        // Make a modified binding context, with a extra properties, and apply it to descendant elements
-	        var innerBindingContext = bindingContext.extend(valueAccessor);
-	        ko.applyBindingsToDescendants(innerBindingContext, element);
+	        var childBindingContext = bindingContext.createChildContext(
+	            bindingContext.$rawData,
+	            null, // Optionally, pass a string here as an alias for the data item in descendant contexts
+	            function(context) {
+	                ko.utils.extend(context, valueAccessor());
+	            });
+	        ko.applyBindingsToDescendants(childBindingContext, element);
+	 
 	        // Also tell KO *not* to bind the descendants itself, otherwise they will be bound twice
 	        return { controlsDescendantBindings: true };
 	    }

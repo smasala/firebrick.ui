@@ -19,7 +19,7 @@
             
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 0.9.18</em>
+            <em>API Docs for: 0.9.27</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -86,6 +86,8 @@
                 <li><a href="../classes/components.display.Text.html">components.display.Text</a></li>
             
                 <li><a href="../classes/components.fields.Checkbox.html">components.fields.Checkbox</a></li>
+            
+                <li><a href="../classes/components.fields.Datepicker.html">components.fields.Datepicker</a></li>
             
                 <li><a href="../classes/components.fields.Email.html">components.fields.Email</a></li>
             
@@ -200,13 +202,6 @@ define([&quot;doT&quot;, &quot;firebrick&quot;], function(tplEngine){
 		 * @type {String}
 		 */
 		_idPrefix: &quot;fb-ui-&quot;,
-		/**
-		 * component id, not the _classId - however if none specified it will default to the _classId
-		 * @property id
-		 * @type {String}
-		 * @default null
-		 */
-		id:null,
 		/**
 		 * used when filtering component classes when searching
 		 * @property uiComponent
@@ -469,7 +464,7 @@ define([&quot;doT&quot;, &quot;firebrick&quot;], function(tplEngine){
 					}
 				});
 			}
-
+			
 			return me.callParent(arguments);
 		},
 		/**
@@ -547,20 +542,6 @@ define([&quot;doT&quot;, &quot;firebrick&quot;], function(tplEngine){
 				prop = prop.call(me);
 			}
 			return Firebrick.ui.utils.stringify( prop );
-		},
-		/**
-		 * if no id is specified it will call getClassId() and use that value
-		 * @method getId 
-		 * @return {String} uniqueId
-		 */
-		getId: function(){
-			var me = this,
-				id = me.id;
-			if(!id){
-				id = this.getClassId();
-				me.id = id;
-			}
-			return id;
 		},
 		/**
 		 * called when calling {{{getSubTpl}}} in component template
