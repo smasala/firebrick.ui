@@ -19,7 +19,7 @@
             
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 0.9.27</em>
+            <em>API Docs for: 0.10.0</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -43,6 +43,10 @@
             
                 <li><a href="../classes/components.button.Button.html">components.button.Button</a></li>
             
+                <li><a href="../classes/components.button.ButtonGroup.html">components.button.ButtonGroup</a></li>
+            
+                <li><a href="../classes/components.button.ButtonGroupBase.html">components.button.ButtonGroupBase</a></li>
+            
                 <li><a href="../classes/components.button.dropdown.List.html">components.button.dropdown.List</a></li>
             
                 <li><a href="../classes/components.button.Icon.html">components.button.Icon</a></li>
@@ -65,6 +69,8 @@
             
                 <li><a href="../classes/components.containers.Form.html">components.containers.Form</a></li>
             
+                <li><a href="../classes/components.containers.FormPanel.html">components.containers.FormPanel</a></li>
+            
                 <li><a href="../classes/components.containers.Grid.html">components.containers.Grid</a></li>
             
                 <li><a href="../classes/components.containers.GridColumn.html">components.containers.GridColumn</a></li>
@@ -74,6 +80,8 @@
                 <li><a href="../classes/components.containers.Panel.html">components.containers.Panel</a></li>
             
                 <li><a href="../classes/components.display.Alert.html">components.display.Alert</a></li>
+            
+                <li><a href="../classes/components.display.Divider.html">components.display.Divider</a></li>
             
                 <li><a href="../classes/components.display.Header.html">components.display.Header</a></li>
             
@@ -88,6 +96,8 @@
                 <li><a href="../classes/components.fields.Checkbox.html">components.fields.Checkbox</a></li>
             
                 <li><a href="../classes/components.fields.Datepicker.html">components.fields.Datepicker</a></li>
+            
+                <li><a href="../classes/components.fields.Display.html">components.fields.Display</a></li>
             
                 <li><a href="../classes/components.fields.Email.html">components.fields.Email</a></li>
             
@@ -209,10 +219,30 @@ define([&quot;text!./GridColumn.html&quot;, &quot;./Base&quot;], function(tpl){
 		/**
 		 * auto will attempt to provide the column width by dividing the number of items in the parent Grid by 12 - decimals will be rounded down
 		 * @property columnWidth
-		 * @type {Int|String} number 1 to 12 or &quot;auto&quot;
+		 * @type {Integer|String} number 1 to 12 or &quot;auto&quot;
 		 * @default &quot;auto&quot;
 		 */
 		columnWidth:&quot;auto&quot;,
+		/**
+		 * use this to offset the column by x columns
+		 * http://getbootstrap.com/css/#grid-offsetting
+		 * @property columnOffset
+		 * @type {Integer|null} 1 to 12
+		 * @default null
+		 */
+		columnOffset:null,
+		/**
+		 * use this to offset the column by x columns
+		 * http://getbootstrap.com/css/#grid-column-ordering
+		 * @example
+		 * 		pull-3
+		 * @example
+		 * 		push-4
+		 * @property columnOrder
+		 * @type {String|null} &quot;push-{x}&quot; or &quot;pull-{x}&quot; - x = 1 to 12
+		 * @default null
+		 */
+		columnOrder:null,
 		/**
 		 * when property columnWidth is set to &quot;auto&quot;, this function will attempt to calculate the correct size for each column.
 		 * Note: this function will round down to the nearest whole number - 5 columns will result in size 2 for each column
@@ -240,7 +270,15 @@ define([&quot;text!./GridColumn.html&quot;, &quot;./Base&quot;], function(tpl){
 				obj = me.callParent(arguments);
 			
 			obj.css.col = true;
-			obj.css[&quot;&#x27;col-&quot;+me.deviceSize+&quot;-&quot;+me._getColumnWidth()+&quot;&#x27;&quot;] = true;
+			obj.css[ me.parseBind(&quot;col-&quot;+me.deviceSize+&quot;-&quot;+me._getColumnWidth()) ] = true;
+			
+			if(me.columnOffset){
+				obj.css[ me.parseBind(&quot;col-&quot; + me.deviceSize + &quot;-offset-&quot; + me.columnOffset) ] = true;
+			}
+			
+			if(me.columnOrder){
+				obj.css[ me.parseBind(&quot;col-&quot; + me.deviceSize + &quot;-&quot; + me.columnOrder) ] = true;
+			}
 			
 			return obj;
 		}

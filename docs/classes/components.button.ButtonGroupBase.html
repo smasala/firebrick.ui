@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>components.display.Alert - Firebrick UI API</title>
+    <title>components.button.ButtonGroupBase - Firebrick UI API</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -182,17 +182,8 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-                        <h1>components.display.Alert Class</h1>
+                        <h1>components.button.ButtonGroupBase Class</h1>
 <div class="box meta">
-    
-        <div class="uses">
-            Uses
-            <ul class="inline commas">
-                
-                    <li><a href="components.common.mixins.Items.html">components.common.mixins.Items</a></li>
-                
-            </ul>
-        </div>
     
 
     
@@ -203,7 +194,7 @@
 
     
         <div class="foundat">
-            Defined in: <a href="../files/src_components_display_Alert.js.html#l5"><code>src\components\display\Alert.js:5</code></a>
+            Defined in: <a href="../files/src_components_button_Base.js.html#l5"><code>src\components\button\Base.js:5</code></a>
         </div>
     
 
@@ -219,7 +210,8 @@
 
 
 <div class="box intro">
-    
+    <p>do not extend from this but from Firebrick.ui.button.ButtonGroup</p>
+
 </div>
 
 
@@ -250,20 +242,6 @@
                         
                             <li class="index-item method private inherited">
                                 <a href="#method__getCSSClasses">_getCSSClasses</a>
-
-                                
-                                
-                            </li>
-                        
-                            <li class="index-item method private inherited">
-                                <a href="#method__getItems">_getItems</a>
-
-                                
-                                
-                            </li>
-                        
-                            <li class="index-item method inherited">
-                                <a href="#method__getItemsScoped">_getItemsScoped</a>
 
                                 
                                 
@@ -325,13 +303,6 @@
                                 
                             </li>
                         
-                            <li class="index-item method">
-                                <a href="#method_closeButtonBindings">closeButtonBindings</a>
-
-                                
-                                
-                            </li>
-                        
                             <li class="index-item method inherited">
                                 <a href="#method_constructor">constructor</a>
 
@@ -348,13 +319,6 @@
                         
                             <li class="index-item method inherited">
                                 <a href="#method_getElement">getElement</a>
-
-                                
-                                
-                            </li>
-                        
-                            <li class="index-item method inherited">
-                                <a href="#method_getItems">getItems</a>
 
                                 
                                 
@@ -390,13 +354,6 @@
                         
                             <li class="index-item method inherited">
                                 <a href="#method_parseBind">parseBind</a>
-
-                                
-                                
-                            </li>
-                        
-                            <li class="index-item method">
-                                <a href="#method_srCloseIconBindings">srCloseIconBindings</a>
 
                                 
                                 
@@ -461,20 +418,6 @@
                                 
                             </li>
                         
-                            <li class="index-item property">
-                                <a href="#property_animationClasses">animationClasses</a>
-
-                                
-                                
-                            </li>
-                        
-                            <li class="index-item property">
-                                <a href="#property_content">content</a>
-
-                                
-                                
-                            </li>
-                        
                             <li class="index-item property inherited">
                                 <a href="#property_css">css</a>
 
@@ -483,42 +426,7 @@
                             </li>
                         
                             <li class="index-item property inherited">
-                                <a href="#property_defaults">defaults</a>
-
-                                
-                                
-                            </li>
-                        
-                            <li class="index-item property">
-                                <a href="#property_dismissible">dismissible</a>
-
-                                
-                                
-                            </li>
-                        
-                            <li class="index-item property inherited">
                                 <a href="#property_glyphiconClass">glyphiconClass</a>
-
-                                
-                                
-                            </li>
-                        
-                            <li class="index-item property inherited">
-                                <a href="#property_items">items</a>
-
-                                
-                                
-                            </li>
-                        
-                            <li class="index-item property inherited">
-                                <a href="#property_itemsAlign">itemsAlign</a>
-
-                                
-                                
-                            </li>
-                        
-                            <li class="index-item property private inherited">
-                                <a href="#property_listeners">listeners</a>
 
                                 
                                 
@@ -559,22 +467,8 @@
                                 
                             </li>
                         
-                            <li class="index-item property">
-                                <a href="#property_srCloseText">srCloseText</a>
-
-                                
-                                
-                            </li>
-                        
                             <li class="index-item property inherited">
                                 <a href="#property_subTpl">subTpl</a>
-
-                                
-                                
-                            </li>
-                        
-                            <li class="index-item property">
-                                <a href="#property_title">title</a>
 
                                 
                                 
@@ -603,13 +497,6 @@
                         
                             <li class="index-item property inherited">
                                 <a href="#property_tpl">tpl</a>
-
-                                
-                                
-                            </li>
-                        
-                            <li class="index-item property">
-                                <a href="#property_type">type</a>
 
                                 
                                 
@@ -703,238 +590,6 @@
                     
                         <span class="type">Object</span>:
                     
-                
-            </div>
-        </div>
-    
-
-    
-</div>
-
-                
-                    <div id="method__getItems" class="method item private inherited">
-    <h3 class="name"><code>_getItems</code></h3>
-
-    
-        <div class="args">
-            <span class="paren">(</span><ul class="args-list inline commas">
-            
-                <li class="arg">
-                    
-                        <code>items</code>
-                    
-                </li>
-            
-            </ul><span class="paren">)</span>
-        </div>
-    
-
-    
-        <span class="returns-inline">
-            <span class="type">Object, Null</span>
-        </span>
-    
-
-    
-
-    
-        <span class="flag private">private</span>
-    
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                <p>Inherited from
-                <a href="../classes/components.common.mixins.Items.html#method__getItems">components.common.mixins.Items</a>:
-            
-        
-        
-        <a href="../files/src_components_common_mixins_Items.js.html#l82"><code>src\components\common\mixins\Items.js:82</code></a>
-        
-        </p>
-
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>use getItems</p>
-
-    </div>
-
-    
-        <div class="params">
-            <h4>Parameters:</h4>
-
-            <ul class="params-list">
-            
-                <li class="param">
-                    
-                        <code class="param-name">items</code>
-                        <span class="type">Object</span>
-                    
-
-                    
-
-                    <div class="param-description">
-                        
-                    </div>
-
-                    
-                </li>
-            
-            </ul>
-        </div>
-    
-
-    
-        <div class="returns">
-            <h4>Returns:</h4>
-
-            <div class="returns-description">
-                
-                    
-                        <span class="type">Object, Null</span>:
-                    
-                    <p>object - {html:&quot;&quot;, items:[]}</p>
-
-                
-            </div>
-        </div>
-    
-
-    
-</div>
-
-                
-                    <div id="method__getItemsScoped" class="method item inherited">
-    <h3 class="name"><code>_getItemsScoped</code></h3>
-
-    
-        <div class="args">
-            <span class="paren">(</span><ul class="args-list inline commas">
-            
-                <li class="arg">
-                    
-                        <code>me</code>
-                    
-                </li>
-            
-                <li class="arg">
-                    
-                        <code class="optional">[itemsName]</code>
-                    
-                </li>
-            
-            </ul><span class="paren">)</span>
-        </div>
-    
-
-    
-        <span class="returns-inline">
-            <span class="type">String</span>
-        </span>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                <p>Inherited from
-                <a href="../classes/components.common.mixins.Items.html#method__getItemsScoped">components.common.mixins.Items</a>:
-            
-        
-        
-        <a href="../files/src_components_common_mixins_Items.js.html#l68"><code>src\components\common\mixins\Items.js:68</code></a>
-        
-        </p>
-
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>if you are calling _getItems from a nested scope or you want items from a different property other than .items - then use this function</p>
-
-    </div>
-
-    
-        <div class="params">
-            <h4>Parameters:</h4>
-
-            <ul class="params-list">
-            
-                <li class="param">
-                    
-                        <code class="param-name">me</code>
-                        <span class="type">Object</span>
-                    
-
-                    
-
-                    <div class="param-description">
-                        <p>me component class (this)</p>
-
-                    </div>
-
-                    
-                </li>
-            
-                <li class="param">
-                    
-                        <code class="param-name optional">[itemsName]</code>
-                        <span class="type">String</span>
-                        <span class="flag optional" title="This parameter is optional.">optional</span>
-                    
-
-                    
-
-                    <div class="param-description">
-                        <p>name of property to get items from</p>
-
-                    </div>
-
-                    
-                </li>
-            
-            </ul>
-        </div>
-    
-
-    
-        <div class="returns">
-            <h4>Returns:</h4>
-
-            <div class="returns-description">
-                
-                    
-                        <span class="type">String</span>:
-                    
-                    <p>html</p>
-
                 
             </div>
         </div>
@@ -1158,7 +813,7 @@ iterate up the inheritance tree looking for a classname that differs from the cu
                     
 
                     <div class="param-description">
-                         
+                        
                     </div>
 
                     
@@ -1261,7 +916,7 @@ iterate up the inheritance tree looking for a classname that differs from the cu
                     
 
                     <div class="param-description">
-                         
+                        
                     </div>
 
                     
@@ -1364,7 +1019,7 @@ iterate up the inheritance tree looking for a classname that differs from the cu
                     
 
                     <div class="param-description">
-                         
+                        
                     </div>
 
                     
@@ -1392,7 +1047,7 @@ iterate up the inheritance tree looking for a classname that differs from the cu
 </div>
 
                 
-                    <div id="method_bindings" class="method item">
+                    <div id="method_bindings" class="method item inherited">
     <h3 class="name"><code>bindings</code></h3>
 
     
@@ -1419,16 +1074,13 @@ iterate up the inheritance tree looking for a classname that differs from the cu
 
     <div class="meta">
         
-            <p>Inherited from
-            <a href="../classes/components.common.Base.html#method_bindings">
-                components.common.Base
-            </a>
             
-            but overwritten in
+                <p>Inherited from
+                <a href="../classes/components.common.Base.html#method_bindings">components.common.Base</a>:
             
         
         
-        <a href="../files/src_components_display_Alert.js.html#l53"><code>src\components\display\Alert.js:53</code></a>
+        <a href="../files/src_components_common_Base.js.html#l319"><code>src\components\common\Base.js:319</code></a>
         
         </p>
 
@@ -1439,7 +1091,8 @@ iterate up the inheritance tree looking for a classname that differs from the cu
     </div>
 
     <div class="description">
-        
+        <p>mother of all basic bindings</p>
+
     </div>
 
     
@@ -1453,6 +1106,8 @@ iterate up the inheritance tree looking for a classname that differs from the cu
                     
                         <span class="type">Object</span>:
                     
+                    <p>{attr:{}, css:{}}</p>
+
                 
             </div>
         </div>
@@ -1634,76 +1289,6 @@ iterate up the inheritance tree looking for a classname that differs from the cu
 </div>
 
                 
-                    <div id="method_closeButtonBindings" class="method item">
-    <h3 class="name"><code>closeButtonBindings</code></h3>
-
-    
-        <span class="paren">()</span>
-    
-
-    
-        <span class="returns-inline">
-            <span class="type">Object</span>
-        </span>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/src_components_display_Alert.js.html#l91"><code>src\components\display\Alert.js:91</code></a>
-        
-        </p>
-
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        
-    </div>
-
-    
-
-    
-        <div class="returns">
-            <h4>Returns:</h4>
-
-            <div class="returns-description">
-                
-                    
-                        <span class="type">Object</span>:
-                    
-                
-            </div>
-        </div>
-    
-
-    
-</div>
-
-                
                     <div id="method_constructor" class="method item inherited">
     <h3 class="name"><code>constructor</code></h3>
 
@@ -1849,7 +1434,7 @@ iterate up the inheritance tree looking for a classname that differs from the cu
                     
 
                     <div class="param-description">
-                         
+                        
                     </div>
 
                     
@@ -1936,76 +1521,6 @@ iterate up the inheritance tree looking for a classname that differs from the cu
                         <span class="type">Object</span>:
                     
                     <p>jquery element object</p>
-
-                
-            </div>
-        </div>
-    
-
-    
-</div>
-
-                
-                    <div id="method_getItems" class="method item inherited">
-    <h3 class="name"><code>getItems</code></h3>
-
-    
-        <span class="paren">()</span>
-    
-
-    
-        <span class="returns-inline">
-            <span class="type">String</span>
-        </span>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                <p>Inherited from
-                <a href="../classes/components.common.mixins.Items.html#method_getItems">components.common.mixins.Items</a>:
-            
-        
-        
-        <a href="../files/src_components_common_mixins_Items.js.html#l55"><code>src\components\common\mixins\Items.js:55</code></a>
-        
-        </p>
-
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>inject sub items</p>
-
-    </div>
-
-    
-
-    
-        <div class="returns">
-            <h4>Returns:</h4>
-
-            <div class="returns-description">
-                
-                    
-                        <span class="type">String</span>:
-                    
-                    <p>html</p>
 
                 
             </div>
@@ -2345,7 +1860,7 @@ iterate up the inheritance tree looking for a classname that differs from the cu
                     
 
                     <div class="param-description">
-                         
+                        
                     </div>
 
                     
@@ -2366,76 +1881,6 @@ iterate up the inheritance tree looking for a classname that differs from the cu
                     
                     <p>&quot;&#39;&quot; + str + &quot;&#39;&quot;</p>
 
-                
-            </div>
-        </div>
-    
-
-    
-</div>
-
-                
-                    <div id="method_srCloseIconBindings" class="method item">
-    <h3 class="name"><code>srCloseIconBindings</code></h3>
-
-    
-        <span class="paren">()</span>
-    
-
-    
-        <span class="returns-inline">
-            <span class="type">Object</span>
-        </span>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/src_components_display_Alert.js.html#l78"><code>src\components\display\Alert.js:78</code></a>
-        
-        </p>
-
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        
-    </div>
-
-    
-
-    
-        <div class="returns">
-            <h4>Returns:</h4>
-
-            <div class="returns-description">
-                
-                    
-                        <span class="type">Object</span>:
-                    
                 
             </div>
         </div>
@@ -2644,7 +2089,7 @@ iterate up the inheritance tree looking for a classname that differs from the cu
                     
 
                     <div class="param-description">
-                         
+                        
                     </div>
 
                     
@@ -2912,99 +2357,6 @@ iterate up the inheritance tree looking for a classname that differs from the cu
 </div>
 
                 
-                    <div id="property_animationClasses" class="property item">
-    <h3 class="name"><code>animationClasses</code></h3>
-    <span class="type">String | False</span>
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/src_components_display_Alert.js.html#l26"><code>src\components\display\Alert.js:26</code></a>
-        
-        </p>
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        
-    </div>
-
-    
-        <p><strong>Default:</strong> &quot;fade in&quot;</p>
-    
-
-    
-
-    
-</div>
-
-                
-                    <div id="property_content" class="property item">
-    <h3 class="name"><code>content</code></h3>
-    <span class="type">String</span>
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/src_components_display_Alert.js.html#l46"><code>src\components\display\Alert.js:46</code></a>
-        
-        </p>
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>if set, .items will be ignored</p>
-
-    </div>
-
-    
-        <p><strong>Default:</strong> &quot;&quot;</p>
-    
-
-    
-
-    
-</div>
-
-                
                     <div id="property_css" class="property item inherited">
     <h3 class="name"><code>css</code></h3>
     <span class="type">String</span>
@@ -3049,97 +2401,6 @@ iterate up the inheritance tree looking for a classname that differs from the cu
 </div>
 
                 
-                    <div id="property_defaults" class="property item inherited">
-    <h3 class="name"><code>defaults</code></h3>
-    <span class="type">Object</span>
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                <p>Inherited from
-                <a href="../classes/components.common.mixins.Items.html#property_defaults">components.common.mixins.Items</a>:
-            
-        
-        
-        <a href="../files/src_components_common_mixins_Items.js.html#l14"><code>src\components\common\mixins\Items.js:14</code></a>
-        
-        </p>
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>default configuration for direct children - i.e. direct items</p>
-
-    </div>
-
-    
-        <p><strong>Default:</strong> null</p>
-    
-
-    
-
-    
-</div>
-
-                
-                    <div id="property_dismissible" class="property item">
-    <h3 class="name"><code>dismissible</code></h3>
-    <span class="type">Boolean</span>
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/src_components_display_Alert.js.html#l19"><code>src\components\display\Alert.js:19</code></a>
-        
-        </p>
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>whether the alert is dismissible - also controls whether the X button is shown or not</p>
-
-    </div>
-
-    
-        <p><strong>Default:</strong> true</p>
-    
-
-    
-
-    
-</div>
-
-                
                     <div id="property_glyphiconClass" class="property item inherited">
     <h3 class="name"><code>glyphiconClass</code></h3>
     <span class="type">String</span>
@@ -3175,134 +2436,6 @@ iterate up the inheritance tree looking for a classname that differs from the cu
 
     
         <p><strong>Default:</strong> &quot;glyphicon&quot;</p>
-    
-
-    
-
-    
-</div>
-
-                
-                    <div id="property_items" class="property item inherited">
-    <h3 class="name"><code>items</code></h3>
-    <span class="type">String | Object | Array of Object</span>
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                <p>Inherited from
-                <a href="../classes/components.common.mixins.Items.html#property_items">components.common.mixins.Items</a>:
-            
-        
-        
-        <a href="../files/src_components_common_mixins_Items.js.html#l28"><code>src\components\common\mixins\Items.js:28</code></a>
-        
-        </p>
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        
-    </div>
-
-    
-        <p><strong>Default:</strong> null</p>
-    
-
-    
-
-    
-</div>
-
-                
-                    <div id="property_itemsAlign" class="property item inherited">
-    <h3 class="name"><code>itemsAlign</code></h3>
-    <span class="type">String | Null "center"</span>
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                <p>Inherited from
-                <a href="../classes/components.common.mixins.Items.html#property_itemsAlign">components.common.mixins.Items</a>:
-            
-        
-        
-        <a href="../files/src_components_common_mixins_Items.js.html#l21"><code>src\components\common\mixins\Items.js:21</code></a>
-        
-        </p>
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>alignment of its children components</p>
-
-    </div>
-
-    
-
-    
-
-    
-</div>
-
-                
-                    <div id="property_listeners" class="property item private inherited">
-    <h3 class="name"><code>listeners</code></h3>
-    <span class="type">Object</span>
-
-    
-
-    
-        <span class="flag private">private</span>
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                <p>Inherited from
-                <a href="../classes/components.common.mixins.Items.html#property_listeners">components.common.mixins.Items</a>:
-            
-        
-        
-        <a href="../files/src_components_common_mixins_Items.js.html#l34"><code>src\components\common\mixins\Items.js:34</code></a>
-        
-        </p>
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        
-    </div>
-
     
 
     
@@ -3528,53 +2661,6 @@ iterate up the inheritance tree looking for a classname that differs from the cu
 </div>
 
                 
-                    <div id="property_srCloseText" class="property item">
-    <h3 class="name"><code>srCloseText</code></h3>
-    <span class="type">String</span>
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/src_components_display_Alert.js.html#l71"><code>src\components\display\Alert.js:71</code></a>
-        
-        </p>
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>screen reader text</p>
-
-    </div>
-
-    
-        <p><strong>Default:</strong> &quot;Close&quot;</p>
-    
-
-    
-
-    
-</div>
-
-                
                     <div id="property_subTpl" class="property item inherited">
     <h3 class="name"><code>subTpl</code></h3>
     <span class="type">String html</span>
@@ -3611,53 +2697,6 @@ iterate up the inheritance tree looking for a classname that differs from the cu
 
     
         <p><strong>Default:</strong> null</p>
-    
-
-    
-
-    
-</div>
-
-                
-                    <div id="property_title" class="property item">
-    <h3 class="name"><code>title</code></h3>
-    <span class="type">String</span>
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/src_components_display_Alert.js.html#l39"><code>src\components\display\Alert.js:39</code></a>
-        
-        </p>
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>if set, .items will be ignored</p>
-
-    </div>
-
-    
-        <p><strong>Default:</strong> &quot;&quot;</p>
     
 
     
@@ -3833,53 +2872,6 @@ iterate up the inheritance tree looking for a classname that differs from the cu
 
     
         <p><strong>Default:</strong> null</p>
-    
-
-    
-
-    
-</div>
-
-                
-                    <div id="property_type" class="property item">
-    <h3 class="name"><code>type</code></h3>
-    <span class="type">String</span>
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/src_components_display_Alert.js.html#l32"><code>src\components\display\Alert.js:32</code></a>
-        
-        </p>
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>alert type, &quot;danger&quot;, &quot;info&quot;, &quot;warn&quot; etc</p>
-
-    </div>
-
-    
-        <p><strong>Default:</strong> &quot;danger&quot;</p>
     
 
     

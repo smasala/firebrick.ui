@@ -19,7 +19,7 @@
             
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 0.9.27</em>
+            <em>API Docs for: 0.10.0</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -43,6 +43,10 @@
             
                 <li><a href="../classes/components.button.Button.html">components.button.Button</a></li>
             
+                <li><a href="../classes/components.button.ButtonGroup.html">components.button.ButtonGroup</a></li>
+            
+                <li><a href="../classes/components.button.ButtonGroupBase.html">components.button.ButtonGroupBase</a></li>
+            
                 <li><a href="../classes/components.button.dropdown.List.html">components.button.dropdown.List</a></li>
             
                 <li><a href="../classes/components.button.Icon.html">components.button.Icon</a></li>
@@ -65,6 +69,8 @@
             
                 <li><a href="../classes/components.containers.Form.html">components.containers.Form</a></li>
             
+                <li><a href="../classes/components.containers.FormPanel.html">components.containers.FormPanel</a></li>
+            
                 <li><a href="../classes/components.containers.Grid.html">components.containers.Grid</a></li>
             
                 <li><a href="../classes/components.containers.GridColumn.html">components.containers.GridColumn</a></li>
@@ -74,6 +80,8 @@
                 <li><a href="../classes/components.containers.Panel.html">components.containers.Panel</a></li>
             
                 <li><a href="../classes/components.display.Alert.html">components.display.Alert</a></li>
+            
+                <li><a href="../classes/components.display.Divider.html">components.display.Divider</a></li>
             
                 <li><a href="../classes/components.display.Header.html">components.display.Header</a></li>
             
@@ -88,6 +96,8 @@
                 <li><a href="../classes/components.fields.Checkbox.html">components.fields.Checkbox</a></li>
             
                 <li><a href="../classes/components.fields.Datepicker.html">components.fields.Datepicker</a></li>
+            
+                <li><a href="../classes/components.fields.Display.html">components.fields.Display</a></li>
             
                 <li><a href="../classes/components.fields.Email.html">components.fields.Email</a></li>
             
@@ -186,10 +196,11 @@
  * @namespace components.fields
  * @class Input
  */
-define([&quot;text!./Base.html&quot;, &quot;text!./Input.html&quot;, &quot;../common/Base&quot;, &quot;x-editable&quot;, &quot;knockout-x-editable&quot;], function(tpl, subTpl){
+define([&quot;text!./Base.html&quot;, &quot;text!./Input.html&quot;, &quot;../common/Base&quot;, &quot;x-editable&quot;, &quot;knockout-x-editable&quot;, &quot;../common/mixins/Items&quot;], function(tpl, subTpl){
 	&quot;use strict&quot;;
 	return Firebrick.define(&quot;Firebrick.ui.fields.Input&quot;, {
 		extend:&quot;Firebrick.ui.common.Base&quot;,
+		mixins:[&quot;Firebrick.ui.common.mixins.Items&quot;],
 		/**
 		 * @property uiName
 		 * @type {String}
@@ -215,9 +226,9 @@ define([&quot;text!./Base.html&quot;, &quot;text!./Input.html&quot;, &quot;../co
 		/**
 		 * @property value
 		 * @type {String}
-		 * @default &quot;&#x27;&#x27;&quot;
+		 * @default null
 		 */
-		value: &quot;&#x27;&#x27;&quot;,
+		value: null,
 		/**
 		 * @property tpl
 		 * @type {String} html
@@ -233,9 +244,9 @@ define([&quot;text!./Base.html&quot;, &quot;text!./Input.html&quot;, &quot;../co
 		 * show form-control class
 		 * @property formControlClass
 		 * @type {String}
-		 * @default true
+		 * @default &quot;form-control&quot;
 		 */
-		formControlClass: true,
+		formControlClass: &quot;form-control&quot;,
 		/**
 		 * @property colLabelSize
 		 * @type {Int}
@@ -243,11 +254,12 @@ define([&quot;text!./Base.html&quot;, &quot;text!./Input.html&quot;, &quot;../co
 		 */
 		colLabelSize: 3,
 		/**
-		 * @property colInputSize
+		 * use grid system value
+		 * @property inputWidth
 		 * @type {Int}
 		 * @default 9
 		 */
-		colInputSize: 9,
+		inputWidth: 9,
 		/**
 		 * @property deviceSize
 		 * @type {String}
@@ -307,9 +319,9 @@ define([&quot;text!./Base.html&quot;, &quot;text!./Input.html&quot;, &quot;../co
 		/**
 		 * @property showStateIcon
 		 * @type {Boolean}
-		 * @default true
+		 * @default false
 		 */
-		showStateIcon:true,
+		showStateIcon:false,
 		/**
 		 * @property formControlFeedbackClass
 		 * @type {String}
@@ -319,7 +331,7 @@ define([&quot;text!./Base.html&quot;, &quot;text!./Input.html&quot;, &quot;../co
 		/**
 		 * input addon
 		 * @property inputAddon
-		 * @type {Boolean|String} - string for inputAddon text - false to deactive, true to simply activate without text, true if you just wan an icon
+		 * @type {Boolean|String} - string for inputAddon text - false to deactive, true to simply activate without text, true if you just want an icon (property: iconClass)
 		 * @default false
 		 */
 		inputAddon:false,
@@ -395,6 +407,26 @@ define([&quot;text!./Base.html&quot;, &quot;text!./Input.html&quot;, &quot;../co
 		 */
 		name:&quot;&quot;,
 		/**
+		 * @property inputAddonPosition
+		 * @type {String}
+		 * @default &quot;left&quot;
+		 */
+		inputAddonPosition: &quot;left&quot;,
+		/**
+		 * @property _inputAddonTplId
+		 * @private
+		 * @type {String}
+		 * @default null
+		 */
+		_inputAddonTplId: null,
+		/**
+		 * glyphicon to so in the inputAddon box
+		 * @property iconClass
+		 * @type {String|false}
+		 * @default false
+		 */
+		iconClass: false,
+		/**
 		 * @method init
 		 * @return .callParent(arguments)
 		 */
@@ -418,7 +450,7 @@ define([&quot;text!./Base.html&quot;, &quot;text!./Input.html&quot;, &quot;../co
 			var me = this,
 				el = me.getElement(),
 				container;
-			
+
 			if(me.required){
 				if(el &amp;&amp; el.length){
 					el.change(function(){
@@ -484,6 +516,11 @@ define([&quot;text!./Base.html&quot;, &quot;text!./Input.html&quot;, &quot;../co
 						&quot;&#x27;sr-only&#x27;&quot;: me.hideLabel
 					}
 				};
+			
+			if(me.align){
+				obj.css[me.parseBind(&quot;pull-&quot; + me.align)] = true;
+			}
+			
 			if(this.inputSize){
 				obj.css[me.parseBind(&quot;form-group-&quot; + me.inputSize)] = me.inputSize ? true : false;	
 			}
@@ -539,8 +576,10 @@ define([&quot;text!./Base.html&quot;, &quot;text!./Input.html&quot;, &quot;../co
 			obj.attr.readonly = me.readOnly; 
 			obj.attr.type = type;
 			obj.attr.name = me.name ?  me.parseBind( me.name ) : type;
-						
-			obj.value = me.value;
+			
+			if(obj.value !== null){
+				obj.value = me.value;	
+			}			
 			
 			if(me.inplaceEdit){
 				obj.editableOptions = {};
@@ -550,7 +589,9 @@ define([&quot;text!./Base.html&quot;, &quot;text!./Input.html&quot;, &quot;../co
 					obj.attr[&quot;&#x27;data-title&#x27;&quot;] = me.textBind( me.dataTitle || me.label );	
 				}
 			}else{
-				obj.css[&quot;&#x27;form-control&#x27;&quot;] = me.formControlClass;
+				if(me.formControlClass){
+					obj.css[me.parseBind(me.formControlClass)] = true;
+				}
 				obj.attr.placeholder = me.textBind( me.placeholder );
 			}
 			
@@ -570,6 +611,19 @@ define([&quot;text!./Base.html&quot;, &quot;text!./Input.html&quot;, &quot;../co
 					css:{}
 				};
 			if(me.inputAddon){
+				if($.isPlainObject(me.inputAddon)){
+					
+					//button has been loaded
+					if(fb.ui.cmp.button){
+						if(me.inputAddon.uiName === fb.ui.cmp.button){
+							//the addon is a button
+							//remove if exists
+							me.inputAddonClass = me.inputAddonClass.replace(&quot;input-group-addon&quot;, &quot;&quot;);
+							//add the correct class
+							me.inputAddonClass += &quot; input-group-btn&quot;;
+						}
+					}
+				}
 				obj.css[me.parseBind(me.inputAddonClass)] = true;
 			}
 			return obj;
@@ -580,13 +634,45 @@ define([&quot;text!./Base.html&quot;, &quot;text!./Input.html&quot;, &quot;../co
 		 */
 		inputAddonSpanBindings: function(){
 			var me = this,
-				obj = {};
+				obj = {css:{}};
 			
 			if(me.inputAddon &amp;&amp; typeof me.inputAddon === &quot;string&quot;){
 				obj.text = me.inputAddon;
 			}
 			
+			obj.css[me.parseBind(me.glyphiconClass)] = true;
+			
+			if(me.iconClass){
+				obj.css[me.parseBind(me.iconClass)] = true;	
+			}
+			
 			return obj;
+		},
+		/**
+		 * @method inputAddonTemplateBindings
+		 * @return {Object}
+		 */
+		inputAddonTemplateBindings: function(){
+			var me = this,
+				obj = {
+					template:me.parseBind(me.getAddonId()),
+					data: &quot;$data&quot;
+				};
+			return obj;
+		},
+		/**
+		 * 
+		 * @method getAddonId
+		 * @return {String} unique id
+		 */
+		getAddonId: function(){
+			var me = this;
+			
+			if(!me._inputAddonTplId){
+				me._inputAddonTplId = &quot;fb-inputaddon-&quot; + Firebrick.utils.uniqId();
+			}
+			
+			return me._inputAddonTplId;
 		},
 		/**
 		 * @method labelBindings
@@ -615,7 +701,7 @@ define([&quot;text!./Base.html&quot;, &quot;text!./Input.html&quot;, &quot;../co
 					css:{}
 				};
 			if(me.horizontal){
-				obj.css[ me.parseBind( &quot;col-&quot; + me.deviceSize + &quot;-&quot; + me.colInputSize ) ] = me.horizontal;
+				obj.css[ me.parseBind( &quot;col-&quot; + me.deviceSize + &quot;-&quot; + me.inputWidth ) ] = me.horizontal;
 			}
 			return obj;
 		},
@@ -627,9 +713,14 @@ define([&quot;text!./Base.html&quot;, &quot;text!./Input.html&quot;, &quot;../co
 			var me = this, 
 				obj = {
 					css:{
-						&quot;&#x27;input-group&#x27;&quot;: me.inputAddon
+						&quot;&#x27;input-group&#x27;&quot;: me.inputAddon ? true : false
 					}
 			}
+			
+			if(me.align){
+				obj.css[me.parseBind(&quot;pull-&quot; + me.align)] = true;
+			}
+			
 			return obj;
 		}
 	});

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>src\components\nav\Base.js - Firebrick UI API</title>
+    <title>src\components\containers\FormPanel.js - Firebrick UI API</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -182,7 +182,7 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-                        <h1 class="file-heading">File: src\components\nav\Base.js</h1>
+                        <h1 class="file-heading">File: src\components\containers\FormPanel.js</h1>
 
 <div class="file">
     <pre class="code prettyprint linenums">
@@ -192,20 +192,37 @@
 
 /**
  * @module Firebrick.ui.components
- * @extends components.common.Base
- * @namespace components.nav
- * @uses components.common.mixins.Items
- * @class Base
+ * @extends components.containers.Base
+ * @namespace components.containers
+ * @class FormPanel
  */
-define([&quot;../common/Base&quot;, &quot;../common/mixins/Items&quot;], function(){
-	
+define([&quot;./Panel&quot;, &quot;./Form&quot;], function(){
 	&quot;use strict&quot;;
-	
-	return Firebrick.define(&quot;Firebrick.ui.nav.Base&quot;, {
-		extend:&quot;Firebrick.ui.common.Base&quot;,
-		mixins:&quot;Firebrick.ui.common.mixins.Items&quot;
+	return Firebrick.define(&quot;Firebrick.ui.containers.FormPanel&quot;, {
+		extend:&quot;Firebrick.ui.containers.Panel&quot;,
+		/**
+		 * configuration to pass to the form section of the Panel
+		 * @property formConfig
+		 * @type {Object}
+		 * @default null
+		 */
+		formConfig:null,
+		/**
+		 * @method build
+		 * @private
+		 */
+		build: function(){
+			var me = this,
+			formItem = me.formConfig || {};
+				
+			formItem.uiName = fb.ui.cmp.form;	
+			
+			formItem.items = me.items;
+			me.items = formItem;
+			
+			return me.callParent(arguments);
+		}
 	});
-	
 });
     </pre>
 </div>

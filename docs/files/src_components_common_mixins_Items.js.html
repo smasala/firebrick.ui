@@ -19,7 +19,7 @@
             
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 0.9.27</em>
+            <em>API Docs for: 0.10.0</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -43,6 +43,10 @@
             
                 <li><a href="../classes/components.button.Button.html">components.button.Button</a></li>
             
+                <li><a href="../classes/components.button.ButtonGroup.html">components.button.ButtonGroup</a></li>
+            
+                <li><a href="../classes/components.button.ButtonGroupBase.html">components.button.ButtonGroupBase</a></li>
+            
                 <li><a href="../classes/components.button.dropdown.List.html">components.button.dropdown.List</a></li>
             
                 <li><a href="../classes/components.button.Icon.html">components.button.Icon</a></li>
@@ -65,6 +69,8 @@
             
                 <li><a href="../classes/components.containers.Form.html">components.containers.Form</a></li>
             
+                <li><a href="../classes/components.containers.FormPanel.html">components.containers.FormPanel</a></li>
+            
                 <li><a href="../classes/components.containers.Grid.html">components.containers.Grid</a></li>
             
                 <li><a href="../classes/components.containers.GridColumn.html">components.containers.GridColumn</a></li>
@@ -74,6 +80,8 @@
                 <li><a href="../classes/components.containers.Panel.html">components.containers.Panel</a></li>
             
                 <li><a href="../classes/components.display.Alert.html">components.display.Alert</a></li>
+            
+                <li><a href="../classes/components.display.Divider.html">components.display.Divider</a></li>
             
                 <li><a href="../classes/components.display.Header.html">components.display.Header</a></li>
             
@@ -88,6 +96,8 @@
                 <li><a href="../classes/components.fields.Checkbox.html">components.fields.Checkbox</a></li>
             
                 <li><a href="../classes/components.fields.Datepicker.html">components.fields.Datepicker</a></li>
+            
+                <li><a href="../classes/components.fields.Display.html">components.fields.Display</a></li>
             
                 <li><a href="../classes/components.fields.Email.html">components.fields.Email</a></li>
             
@@ -197,11 +207,23 @@ define([&quot;jquery&quot;], function($){
 		 */
 		defaults: null,
 		/**
+		 * alignment of its children components
+		 * @property itemsAlign
+		 * @type {String|null} &quot;center&quot;
+		 * @default
+		 */
+		itemsAlign:null,
+		/**
 		 * @property items
 		 * @type {String|Object|Array of Object}
 		 * @default null
 		 */
 		items:null,
+		/**
+		 * @property listeners
+		 * @type {Object}
+		 * @private
+		 */
 		listeners:{
 			rendered: function(){
 				var me = this,
@@ -232,16 +254,17 @@ define([&quot;jquery&quot;], function($){
 			return r ? r.html || r : &quot;&quot;;
 		},
 		/**
-		 * if you are calling _getItems from a nested scope then use this function
+		 * if you are calling _getItems from a nested scope or you want items from a different property other than .items - then use this function
 		 * @method _getItemsScoped
 		 * @param me {Object} me component class (this)
 		 * @param [itemsName] {String}  name of property to get items from
 		 * @return {String} html
 		 */
 		getItemsProp: function(itemsName){
-			var me = this;
+			var me = this, 
+				items;
 			itemsName = typeof itemsName === &quot;string&quot; ? me[itemsName] : me.items;
-			var items = me._getItems(itemsName);
+			items = me._getItems(itemsName);
 			return items ? items.html || items : &quot;&quot;;
 		},
 		/**
@@ -257,13 +280,13 @@ define([&quot;jquery&quot;], function($){
 				if(!$.isArray(items) &amp;&amp; !$.isFunction(items)){
 					items = [items];
 				}
-				
+
 				if(me.defaults){
 					//get all defaults down the prototype tree
 					Firebrick.utils.merge(&quot;defaults&quot;, me);
 					//add the defaults to direct items
 					for(var i = 0, l = items.length; i&lt;l; i++){
-						items[i] = Firebrick.utils.overwrite(items[i], me.defaults);
+						items[i] = Firebrick.utils.copyover(items[i], me.defaults);
 					}
 				}
 				
