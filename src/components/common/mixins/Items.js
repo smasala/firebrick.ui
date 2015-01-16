@@ -19,11 +19,23 @@ define(["jquery"], function($){
 		 */
 		defaults: null,
 		/**
+		 * alignment of its children components
+		 * @property itemsAlign
+		 * @type {String|null} "center"
+		 * @default
+		 */
+		itemsAlign:null,
+		/**
 		 * @property items
 		 * @type {String|Object|Array of Object}
 		 * @default null
 		 */
 		items:null,
+		/**
+		 * @property listeners
+		 * @type {Object}
+		 * @private
+		 */
 		listeners:{
 			rendered: function(){
 				var me = this,
@@ -54,16 +66,17 @@ define(["jquery"], function($){
 			return r ? r.html || r : "";
 		},
 		/**
-		 * if you are calling _getItems from a nested scope then use this function
+		 * if you are calling _getItems from a nested scope or you want items from a different property other than .items - then use this function
 		 * @method _getItemsScoped
 		 * @param me {Object} me component class (this)
 		 * @param [itemsName] {String}  name of property to get items from
 		 * @return {String} html
 		 */
 		getItemsProp: function(itemsName){
-			var me = this;
+			var me = this, 
+				items;
 			itemsName = typeof itemsName === "string" ? me[itemsName] : me.items;
-			var items = me._getItems(itemsName);
+			items = me._getItems(itemsName);
 			return items ? items.html || items : "";
 		},
 		/**
@@ -79,13 +92,13 @@ define(["jquery"], function($){
 				if(!$.isArray(items) && !$.isFunction(items)){
 					items = [items];
 				}
-				
+
 				if(me.defaults){
 					//get all defaults down the prototype tree
 					Firebrick.utils.merge("defaults", me);
 					//add the defaults to direct items
 					for(var i = 0, l = items.length; i<l; i++){
-						items[i] = Firebrick.utils.overwrite(items[i], me.defaults);
+						items[i] = Firebrick.utils.copyover(items[i], me.defaults);
 					}
 				}
 				

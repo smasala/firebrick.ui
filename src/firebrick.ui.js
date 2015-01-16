@@ -41,7 +41,7 @@
 			 * @private
 			 * @type {String}
 			 */
-			version: "0.9.27",
+			version: "0.10.0",
 			
 			/**
 			 * used to cache pointers to classes when searching by "uiName"
@@ -115,53 +115,101 @@
 			 */
 			_populate: function(items, parent){
 				var me = this,
-					x = [],
-					h = "", 
-					component, tmp;
+					_items = [],
+					html = "",
+					component;
 
 				if($.isFunction(items)){
 					items = items();
 				}
 				
-				var v;
 				for(var i = 0, l = items.length; i<l; i++){
-					v = items[i];
-					if(v.isView){
-						if(v._state === "initial"){
-							component = v.init();
-						}
-						h += component.tpl;
-					}else if(v.viewName){
-						//Creates a view from a JS file
-						//Firebrick.create("MyApp.view.MyView", {})
-						component = Firebrick.create(v.viewName, v);
-						h += component.tpl;
-					}else{
-						if(!v.uiComponent){
-							//v can be string or object
-							tmp = me.getByShortName(v.uiName || v);
-							//Object.getPrototypeOf(object.create) to make a new copy of the properties and not a pointer to v
-							component = Firebrick.create(tmp._classname, (v.uiName ? Object.getPrototypeOf(Object.create(v)) : null));
-						}else{
-							//v is already a field class
-							component = v;
-						}
-						//sometimes needed before build - grid column for example
-						component._parent = parent;
-						h += component.build();
-					}
-					if(!component._parent){
-						//if not set yet
-						component._parent = parent;
-					}
-					
+					component = me._buildComponent(items[i], parent);
+					html += component.html;
 					//cache component pointer so it can be found by id
 					me._componentCache[component.getId()] = component;
-					
-					x.push(component);
+					_items.push(component);
 				}
 				
-				return {html: h, items: x};
+				return {html: html, items: _items};
+			},
+			
+			/**
+			 * method used by _populate
+			 * @private
+			 * @method _buildComponent
+			 * @param v {Object|String} component or name of component
+			 * @param parent {Object} component parent object
+			 * @return {Object} component
+			 */
+			_buildComponent: function(v, parent){
+				var me = this,
+					component, 
+					tmp;
+				
+				if(v.isView){
+					if(v._state === "initial"){
+						component = v.init();
+					}
+				}else if(v.viewName){
+					//Creates a view from a JS file
+					//Firebrick.create("MyApp.view.MyView", {})
+					component = Firebrick.create(v.viewName, v);
+				}else{
+					
+					v = me._componentFilter(v);
+					
+					if(!v.uiComponent){
+						//v can be string or object
+						tmp = me.getByShortName(v.uiName || v);
+						if(!tmp){
+							console.error("Has", (v.uiName || v), "been added as a dependancy?");
+						}
+						//Object.getPrototypeOf(object.create) to make a new copy of the properties and not a pointer to v
+						component = Firebrick.create(tmp._classname, (v.uiName ? Object.getPrototypeOf(Object.create(v)) : null));
+					}else{
+						//v is already a field class
+						component = v;
+					}
+					//sometimes needed before build - grid column for example
+					component._parent = parent;
+					component.html = component.build();
+				}
+				
+				if(!component._parent){
+					//if not set yet
+					component._parent = parent;
+				}
+				
+				if(!me._componentCache[parent.getId()]){
+					me._componentCache[parent.getId()] = parent;
+				}
+				
+				return component;
+			},
+			
+			/**
+			 * this method converts shorthand component definitions
+			 * @example
+			 * 		//component definition    "|"
+			 * 		//converts to the component <hr>  -  fb.ui.cmp.hr
+			 * @method _componentFilter
+			 * @private
+			 * @param v {String}
+			 * @return {String}
+			 */
+			_componentFilter: function(name){
+				//var me = this;
+				
+				if(typeof name === "string"){
+					switch(name){
+						case "|":
+							name = "fb-ui-divider";
+							break;
+					}
+				}
+				
+				return name;
 			},
 			
 			/**
@@ -291,6 +339,10 @@
 				 */
 				get: function(name){
 					var me = this;
+					if($.isFunction(name)){
+						//catch KO function variation
+						name = name();
+					}
 					return me._registry[name];
 				}
 			}
@@ -339,6 +391,7 @@
 			}
 		}
 	});
+	
 	
 	/*
 	 * use withProperties to pass extra properties down to the descendants

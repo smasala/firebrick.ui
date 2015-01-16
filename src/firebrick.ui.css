@@ -203,6 +203,9 @@ progress[value]::-webkit-progress-value{
 	padding-bottom:70px;
 }
 
+.fb-ui-toolbar .fb-ui-navbar.form-horizontal .form-group{
+	margin-bottom:0px;
+}
 
 /*-- /Panel toolbars --*/
 
@@ -222,11 +225,118 @@ progress[value]::-webkit-progress-value{
 }
 /*-- /datepicker --*/
 
+/** toggle button helpers
+	colours are copied directly from BS3
+ **/
+ .btn.fb-ui-default.active, .btn.fb-ui-primary:active,
+ .btn.fb-ui-primary.active, .btn.fb-ui-primary:active,
+ .btn.fb-ui-success.active, .btn.fb-ui-success:active,
+ .btn.fb-ui-info.active, .btn.fb-ui-info:active,
+ .btn.fb-ui-warning.active, .btn.fb-ui-warning:active,
+ .btn.fb-ui-danger.active, .btn.fb-ui-danger:active{
+ 	background-repeat: repeat-x;
+ }
+ 
+ .btn.fb-ui-primary.active, .btn.fb-ui-primary:active,
+ .btn.fb-ui-success.active, .btn.fb-ui-success:active,
+ .btn.fb-ui-info.active, .btn.fb-ui-info:active,
+ .btn.fb-ui-warning.active, .btn.fb-ui-warning:active,
+ .btn.fb-ui-danger.active, .btn.fb-ui-danger:active{
+ 	color: #fff;
+ }
+ 
+.btn.fb-ui-default.active, .btn.fb-ui-primary:active {
+    background-image: linear-gradient(to bottom, #fff 0%, #e0e0e0 100%);
+    border-color: #ccc;
+}
+.btn.fb-ui-primary.active, .btn.fb-ui-primary:active {
+    background-image: linear-gradient(to bottom, #337ab7 0%, #265a88 100%);
+    border-color: #245580;
+}
+.btn.fb-ui-success.active, .btn.fb-ui-success:active {
+    background-image: linear-gradient(to bottom, #5cb85c 0%, #419641 100%);
+    border-color: #3e8f3e;
+}
+.btn.fb-ui-info.active, .btn.fb-ui-info:active {
+     background-image: linear-gradient(to bottom, #5bc0de 0%, #2aabd2 100%);
+    border-color: #28a4c9;
+}
+.btn.fb-ui-warning.active, .btn.fb-ui-warning:active {
+    background-image: linear-gradient(to bottom, #f0ad4e 0%, #eb9316 100%);
+    border-color: #e38d13;
+}
+.btn.fb-ui-danger.active, .btn.fb-ui-danger:active {
+    background-image: linear-gradient(to bottom, #d9534f 0%, #c12e2a 100%);
+    border-color: #b92c28;
+}
+/** overwrite hover bits too from BS3 theme **/
+
+.btn.fb-ui-default.active:hover, .btn.fb-ui-default.active:focus, .btn.fb-ui-primary:active,
+.btn.fb-ui-primary.active:hover, .btn.fb-ui-primary.active:focus, .btn.fb-ui-primary:active,
+.btn.fb-ui-success.active:hover, .btn.fb-ui-success.active:focus, .btn.fb-ui-success:active,
+.btn.fb-ui-info.active:hover, .btn.fb-ui-info.active:focus, .btn.fb-ui-info:active,
+.btn.fb-ui-warning.active:hover, .btn.fb-ui-warning.active:focus, .btn.fb-ui-warning:active,
+.btn.fb-ui-danger.active:hover, .btn.fb-ui-danger.active:focus, .btn.fb-ui-danger:active {
+	background-position: 0 -15px;
+}
+
+.btn.fb-ui-default.active:hover, .btn.fb-ui-default.active:focus, .btn.fb-ui-primary:active {
+    background-color: #e0e0e0;
+}
+.btn.fb-ui-primary.active:hover, .btn.fb-ui-primary.active:focus, .btn.fb-ui-primary:active {
+    background-color: #265a88;
+}
+.btn.fb-ui-success.active:hover, .btn.fb-ui-success.active:focus, .btn.fb-ui-success:active {
+    background-color: #419641;
+}
+.btn.fb-ui-info.active:hover, .btn.fb-ui-info.active:focus, .btn.fb-ui-info:active {
+    background-color: #2aabd2;
+}
+.btn.fb-ui-warning.active:hover, .btn.fb-ui-warning.active:focus, .btn.fb-ui-warning:active {
+	background-color: #eb9316;
+}
+.btn.fb-ui-danger.active:hover, .btn.fb-ui-danger.active:focus, .btn.fb-ui-danger:active {
+    background-color: #c12e2a;
+}
+/*-- /toggle button helpers --*/
+
 /** MISC **/
+
+.fb-ui-items-align-left{
+	text-align: left;
+}
+
+.fb-ui-items-align-center{
+	text-align: center;
+}
+
+.fb-ui-items-align-right{
+	text-align: right;
+}
+
+/** display field **/
+.form-control-static.fb-ui-field-display{
+	background: none !important;
+	border: none !important;
+	width:100%;
+}
+/*-- /display field --*/
 
 /** linked list cursor **/
 a:hover{
 	cursor:pointer;
+}
+
+.input-group-addon .control-label{
+	display:none;
+}
+
+.fb-ui-toolbar .fb-ui-navbar > .row{
+	margin-top:7px;
+}
+
+.panel-title.pull-left{
+	margin-top: 3px;
 }
 
 /*-- /MISC --*/

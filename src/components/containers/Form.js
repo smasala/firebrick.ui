@@ -29,12 +29,14 @@ define(["text!./Form.html", "jquery", "./Base"], function(tpl, $){
 		 */
 		formRole:"form",
 		/**
+		 * controls the css class form-horizontal
 		 * @property horizontal
 		 * @type {Boolean|String}
 		 * @default true
 		 */
 		horizontal:true,
 		/**
+		 * controls the css class form-inline
 		 * @property inline
 		 * @type {Boolean|String}
 		 * @default false
@@ -205,12 +207,12 @@ define(["text!./Form.html", "jquery", "./Base"], function(tpl, $){
 		 */
 		bindings:function(){
 			var me = this,
-				obj = {css:{},attr:{}};
+				obj = me.callParent(arguments);
 			
 			obj.attr.role =  me.parseBind(me.formRole);
 			obj.attr.enctype =  me.parseBind(me.enctype);
 			obj.css["'form-horizontal'"] =  me.horizontal;
-			obj.attr["'form-inline'"] =  me.inline;
+			obj.css["'form-inline'"] =  me.inline;
 			
 			return obj;
 		}

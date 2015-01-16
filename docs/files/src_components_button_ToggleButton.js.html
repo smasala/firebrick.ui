@@ -19,7 +19,7 @@
             
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 0.9.27</em>
+            <em>API Docs for: 0.10.0</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -43,6 +43,10 @@
             
                 <li><a href="../classes/components.button.Button.html">components.button.Button</a></li>
             
+                <li><a href="../classes/components.button.ButtonGroup.html">components.button.ButtonGroup</a></li>
+            
+                <li><a href="../classes/components.button.ButtonGroupBase.html">components.button.ButtonGroupBase</a></li>
+            
                 <li><a href="../classes/components.button.dropdown.List.html">components.button.dropdown.List</a></li>
             
                 <li><a href="../classes/components.button.Icon.html">components.button.Icon</a></li>
@@ -65,6 +69,8 @@
             
                 <li><a href="../classes/components.containers.Form.html">components.containers.Form</a></li>
             
+                <li><a href="../classes/components.containers.FormPanel.html">components.containers.FormPanel</a></li>
+            
                 <li><a href="../classes/components.containers.Grid.html">components.containers.Grid</a></li>
             
                 <li><a href="../classes/components.containers.GridColumn.html">components.containers.GridColumn</a></li>
@@ -74,6 +80,8 @@
                 <li><a href="../classes/components.containers.Panel.html">components.containers.Panel</a></li>
             
                 <li><a href="../classes/components.display.Alert.html">components.display.Alert</a></li>
+            
+                <li><a href="../classes/components.display.Divider.html">components.display.Divider</a></li>
             
                 <li><a href="../classes/components.display.Header.html">components.display.Header</a></li>
             
@@ -88,6 +96,8 @@
                 <li><a href="../classes/components.fields.Checkbox.html">components.fields.Checkbox</a></li>
             
                 <li><a href="../classes/components.fields.Datepicker.html">components.fields.Datepicker</a></li>
+            
+                <li><a href="../classes/components.fields.Display.html">components.fields.Display</a></li>
             
                 <li><a href="../classes/components.fields.Email.html">components.fields.Email</a></li>
             
@@ -186,8 +196,44 @@
  * @namespace components.button
  * @class ToggleButton
  */
-define([&quot;text!./ToggleButton.html&quot;, &quot;../common/MultiplesBase&quot;], function(subTpl){
+define([&quot;text!./ToggleButton.html&quot;, &quot;knockout&quot;, &quot;jquery&quot;, &quot;../common/MultiplesBase&quot;], function(subTpl, ko, $){
 	&quot;use strict&quot;;
+	
+	/*
+	 * optionsRenderer for togglebuttons
+	 * create dynamic css along with static
+	 */
+	ko.bindingHandlers.toggleRenderer = {
+	    init: function(element, valueAccessor, allBindings, viewModel, bindingContext) {
+			var me = Firebrick.ui.getCmp(valueAccessor()),
+				currentStyle = &quot;btn-&quot;+me.btnStyle,
+				$el = $(element),
+				inputId = allBindings().withProperties.inputItemId;
+			if($.isFunction(inputId)){
+				//ko data bound observable
+				inputId = inputId();
+			}
+			if($el.length){
+				if(viewModel){
+					if(viewModel.btnStyle){
+						//replace element className with the new one defined in the binding
+						$el.attr(&quot;class&quot;, function(i, v){
+							return v.replace(currentStyle, &quot;btn-&quot;+viewModel.btnStyle());
+						});
+					}
+					if(viewModel.css){
+						$el.addClass(viewModel.css());
+					}
+				}
+				//add the correct &quot;for&quot; attribute id and the input id
+				$el.attr(&quot;for&quot;, inputId);
+				$(&quot;&gt; input&quot;, $el).attr(&quot;id&quot;, inputId);
+			}
+			
+	    }
+	};
+	
+	
 	return Firebrick.define(&quot;Firebrick.ui.button.ToggleButton&quot;, {
 		extend:&quot;Firebrick.ui.common.MultiplesBase&quot;,
 		/**
@@ -214,12 +260,6 @@ define([&quot;text!./ToggleButton.html&quot;, &quot;../common/MultiplesBase&quot
 		 */
 		btnClass: true,
 		/**
-		 * @property btnPrimaryClass
-		 * @type {Boolean|String}
-		 * @default true
-		 */
-		btnPrimaryClass: true,
-		/**
 		 * @property defaultActive
 		 * @type {Boolean|String}
 		 * @default false
@@ -228,11 +268,18 @@ define([&quot;text!./ToggleButton.html&quot;, &quot;../common/MultiplesBase&quot
 		/**
 		 * @property dataToggle
 		 * @type {Boolean|String}
-		 * @default &quot;&#x27;buttons&#x27;&quot;
+		 * @default &quot;buttons&quot;
 		 */
-		dataToggle: &quot;&#x27;buttons&#x27;&quot;,
+		dataToggle: &quot;buttons&quot;,
 		/**
-		 * options that are to be shown by the toggle button : [{text:&quot;abc&quot;, active:true}, &quot;b&quot;, &quot;c&quot;, &quot;d&quot;]
+		 * default, primary, success, danger, warning, info
+		 * @property btnStyle
+		 * @type {String|false}
+		 * @default &quot;primary&quot;
+		 */
+		btnStyle: &quot;default&quot;,
+		/**
+		 * options that are to be shown by the toggle button : [{text:&quot;abc&quot;, active:true, config:{btnStyle:&quot;success&quot;}, &quot;b&quot;, &quot;c&quot;, &quot;d&quot;]
 		 * @property options
 		 * @type {String}
 		 * @default &quot;&#x27;&#x27;&quot;
@@ -245,6 +292,12 @@ define([&quot;text!./ToggleButton.html&quot;, &quot;../common/MultiplesBase&quot
 		 */
 		showLabel: true,
 		/**
+		 * @property optionsRenderer
+		 * @type {String}
+		 * @default &quot;optionsRenderer&quot;
+		 */
+		optionsRenderer: &quot;optionsRenderer&quot;,
+		/**
 		 * @method btnGroupBindings
 		 * @return {Object}
 		 */
@@ -255,9 +308,9 @@ define([&quot;text!./ToggleButton.html&quot;, &quot;../common/MultiplesBase&quot
 					&quot;&#x27;btn-group&#x27;&quot;: me.btnGroupClass
 				},
 				attr:{
-					&quot;&#x27;data-toggle&#x27;&quot;: me.dataToggle
+					&quot;&#x27;data-toggle&#x27;&quot;: me.parseBind(me.dataToggle)
 				},
-				foreach: me.options
+				foreach: $.isArray(me.options) ? &quot;Firebrick.ui.getCmp(&#x27;&quot; + me.getId() + &quot;&#x27;).options&quot; : me.options
 			};
 		},
 		/**
@@ -265,28 +318,44 @@ define([&quot;text!./ToggleButton.html&quot;, &quot;../common/MultiplesBase&quot
 		 * @return {Object}
 		 */
 		toggleInputBindings: function(){
+			var me = this;
 			return {
 				attr:{
-					id: &quot;itemId&quot;
-				}
+					//id attribute is parsed by the toggleRenderer
+					name: me.parseBind(me.name)
+				},
+				value:&quot;$data.value || $data.text ? $data.value || $data.text : $data&quot;
 			};
 		},
+		
 		/**
 		 * @method toggleLabelBindings
 		 * @return {Object}
 		 */
 		toggleLabelBindings: function(){
-			var me = this;
-			return {
-				attr:{
-					id: &quot;itemId&quot;
-				},
-				css:{
-					btn: &quot;$data.btnClass ? $data.btnClass : &quot; + me.btnClass,
-					&quot;&#x27;btn-primary&#x27;&quot;: &quot;$data.btnPrimaryClass ? $data.btnPrimaryClass : &quot; + me.btnPrimaryClass,
-					active: &quot;$data.hasOwnProperty &amp;&amp; $data.hasOwnProperty(&#x27;active&#x27;) ? $data : &quot; + me.defaultActive 
-				}
-			};
+			var me = this,
+				obj = {
+					attr:{
+						id: &quot;$data.labelId || &#x27;fb-ui-id-&#x27; + Firebrick.utils.uniqId()&quot;
+					},
+					withProperties:{
+						inputItemId:&quot;$data.id || &#x27;fb-ui-id-&#x27; + Firebrick.utils.uniqId()&quot;
+					},
+					css:{
+						active: &quot;Firebrick.ui.getCmp(&#x27;&quot;+me.getId()+&quot;&#x27;)._valueChecker(&quot;+me.value+&quot;, $data)&quot;
+					},
+					toggleRenderer: me.parseBind(me.getId()) 
+				};
+
+			if(me.btnClass){
+				obj.css.btn = true;
+			}
+			
+			if(me.btnStyle){
+				obj.css[me.parseBind(&quot;btn-&quot; + me.btnStyle)] = true;
+			}
+			
+			return obj;
 		},
 		/**
 		 * @method toggleLabelTextBindings

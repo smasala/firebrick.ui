@@ -8,8 +8,44 @@
  * @namespace components.button
  * @class ToggleButton
  */
-define(["text!./ToggleButton.html", "../common/MultiplesBase"], function(subTpl){
+define(["text!./ToggleButton.html", "knockout", "jquery", "../common/MultiplesBase"], function(subTpl, ko, $){
 	"use strict";
+	
+	/*
+	 * optionsRenderer for togglebuttons
+	 * create dynamic css along with static
+	 */
+	ko.bindingHandlers.toggleRenderer = {
+	    init: function(element, valueAccessor, allBindings, viewModel, bindingContext) {
+			var me = Firebrick.ui.getCmp(valueAccessor()),
+				currentStyle = "btn-"+me.btnStyle,
+				$el = $(element),
+				inputId = allBindings().withProperties.inputItemId;
+			if($.isFunction(inputId)){
+				//ko data bound observable
+				inputId = inputId();
+			}
+			if($el.length){
+				if(viewModel){
+					if(viewModel.btnStyle){
+						//replace element className with the new one defined in the binding
+						$el.attr("class", function(i, v){
+							return v.replace(currentStyle, "btn-"+viewModel.btnStyle());
+						});
+					}
+					if(viewModel.css){
+						$el.addClass(viewModel.css());
+					}
+				}
+				//add the correct "for" attribute id and the input id
+				$el.attr("for", inputId);
+				$("> input", $el).attr("id", inputId);
+			}
+			
+	    }
+	};
+	
+	
 	return Firebrick.define("Firebrick.ui.button.ToggleButton", {
 		extend:"Firebrick.ui.common.MultiplesBase",
 		/**
@@ -36,12 +72,6 @@ define(["text!./ToggleButton.html", "../common/MultiplesBase"], function(subTpl)
 		 */
 		btnClass: true,
 		/**
-		 * @property btnPrimaryClass
-		 * @type {Boolean|String}
-		 * @default true
-		 */
-		btnPrimaryClass: true,
-		/**
 		 * @property defaultActive
 		 * @type {Boolean|String}
 		 * @default false
@@ -50,11 +80,18 @@ define(["text!./ToggleButton.html", "../common/MultiplesBase"], function(subTpl)
 		/**
 		 * @property dataToggle
 		 * @type {Boolean|String}
-		 * @default "'buttons'"
+		 * @default "buttons"
 		 */
-		dataToggle: "'buttons'",
+		dataToggle: "buttons",
 		/**
-		 * options that are to be shown by the toggle button : [{text:"abc", active:true}, "b", "c", "d"]
+		 * default, primary, success, danger, warning, info
+		 * @property btnStyle
+		 * @type {String|false}
+		 * @default "primary"
+		 */
+		btnStyle: "default",
+		/**
+		 * options that are to be shown by the toggle button : [{text:"abc", active:true, config:{btnStyle:"success"}, "b", "c", "d"]
 		 * @property options
 		 * @type {String}
 		 * @default "''"
@@ -67,6 +104,12 @@ define(["text!./ToggleButton.html", "../common/MultiplesBase"], function(subTpl)
 		 */
 		showLabel: true,
 		/**
+		 * @property optionsRenderer
+		 * @type {String}
+		 * @default "optionsRenderer"
+		 */
+		optionsRenderer: "optionsRenderer",
+		/**
 		 * @method btnGroupBindings
 		 * @return {Object}
 		 */
@@ -77,9 +120,9 @@ define(["text!./ToggleButton.html", "../common/MultiplesBase"], function(subTpl)
 					"'btn-group'": me.btnGroupClass
 				},
 				attr:{
-					"'data-toggle'": me.dataToggle
+					"'data-toggle'": me.parseBind(me.dataToggle)
 				},
-				foreach: me.options
+				foreach: $.isArray(me.options) ? "Firebrick.ui.getCmp('" + me.getId() + "').options" : me.options
 			};
 		},
 		/**
@@ -87,28 +130,44 @@ define(["text!./ToggleButton.html", "../common/MultiplesBase"], function(subTpl)
 		 * @return {Object}
 		 */
 		toggleInputBindings: function(){
+			var me = this;
 			return {
 				attr:{
-					id: "itemId"
-				}
+					//id attribute is parsed by the toggleRenderer
+					name: me.parseBind(me.name)
+				},
+				value:"$data.value || $data.text ? $data.value || $data.text : $data"
 			};
 		},
+		
 		/**
 		 * @method toggleLabelBindings
 		 * @return {Object}
 		 */
 		toggleLabelBindings: function(){
-			var me = this;
-			return {
-				attr:{
-					id: "itemId"
-				},
-				css:{
-					btn: "$data.btnClass ? $data.btnClass : " + me.btnClass,
-					"'btn-primary'": "$data.btnPrimaryClass ? $data.btnPrimaryClass : " + me.btnPrimaryClass,
-					active: "$data.hasOwnProperty && $data.hasOwnProperty('active') ? $data : " + me.defaultActive 
-				}
-			};
+			var me = this,
+				obj = {
+					attr:{
+						id: "$data.labelId || 'fb-ui-id-' + Firebrick.utils.uniqId()"
+					},
+					withProperties:{
+						inputItemId:"$data.id || 'fb-ui-id-' + Firebrick.utils.uniqId()"
+					},
+					css:{
+						active: "Firebrick.ui.getCmp('"+me.getId()+"')._valueChecker("+me.value+", $data)"
+					},
+					toggleRenderer: me.parseBind(me.getId()) 
+				};
+
+			if(me.btnClass){
+				obj.css.btn = true;
+			}
+			
+			if(me.btnStyle){
+				obj.css[me.parseBind("btn-" + me.btnStyle)] = true;
+			}
+			
+			return obj;
 		},
 		/**
 		 * @method toggleLabelTextBindings

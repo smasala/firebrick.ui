@@ -8,10 +8,11 @@
  * @namespace components.fields
  * @class Input
  */
-define(["text!./Base.html", "text!./Input.html", "../common/Base", "x-editable", "knockout-x-editable"], function(tpl, subTpl){
+define(["text!./Base.html", "text!./Input.html", "../common/Base", "x-editable", "knockout-x-editable", "../common/mixins/Items"], function(tpl, subTpl){
 	"use strict";
 	return Firebrick.define("Firebrick.ui.fields.Input", {
 		extend:"Firebrick.ui.common.Base",
+		mixins:["Firebrick.ui.common.mixins.Items"],
 		/**
 		 * @property uiName
 		 * @type {String}
@@ -37,9 +38,9 @@ define(["text!./Base.html", "text!./Input.html", "../common/Base", "x-editable",
 		/**
 		 * @property value
 		 * @type {String}
-		 * @default "''"
+		 * @default null
 		 */
-		value: "''",
+		value: null,
 		/**
 		 * @property tpl
 		 * @type {String} html
@@ -55,9 +56,9 @@ define(["text!./Base.html", "text!./Input.html", "../common/Base", "x-editable",
 		 * show form-control class
 		 * @property formControlClass
 		 * @type {String}
-		 * @default true
+		 * @default "form-control"
 		 */
-		formControlClass: true,
+		formControlClass: "form-control",
 		/**
 		 * @property colLabelSize
 		 * @type {Int}
@@ -65,11 +66,12 @@ define(["text!./Base.html", "text!./Input.html", "../common/Base", "x-editable",
 		 */
 		colLabelSize: 3,
 		/**
-		 * @property colInputSize
+		 * use grid system value
+		 * @property inputWidth
 		 * @type {Int}
 		 * @default 9
 		 */
-		colInputSize: 9,
+		inputWidth: 9,
 		/**
 		 * @property deviceSize
 		 * @type {String}
@@ -129,9 +131,9 @@ define(["text!./Base.html", "text!./Input.html", "../common/Base", "x-editable",
 		/**
 		 * @property showStateIcon
 		 * @type {Boolean}
-		 * @default true
+		 * @default false
 		 */
-		showStateIcon:true,
+		showStateIcon:false,
 		/**
 		 * @property formControlFeedbackClass
 		 * @type {String}
@@ -141,7 +143,7 @@ define(["text!./Base.html", "text!./Input.html", "../common/Base", "x-editable",
 		/**
 		 * input addon
 		 * @property inputAddon
-		 * @type {Boolean|String} - string for inputAddon text - false to deactive, true to simply activate without text, true if you just wan an icon
+		 * @type {Boolean|String} - string for inputAddon text - false to deactive, true to simply activate without text, true if you just want an icon (property: iconClass)
 		 * @default false
 		 */
 		inputAddon:false,
@@ -217,6 +219,26 @@ define(["text!./Base.html", "text!./Input.html", "../common/Base", "x-editable",
 		 */
 		name:"",
 		/**
+		 * @property inputAddonPosition
+		 * @type {String}
+		 * @default "left"
+		 */
+		inputAddonPosition: "left",
+		/**
+		 * @property _inputAddonTplId
+		 * @private
+		 * @type {String}
+		 * @default null
+		 */
+		_inputAddonTplId: null,
+		/**
+		 * glyphicon to so in the inputAddon box
+		 * @property iconClass
+		 * @type {String|false}
+		 * @default false
+		 */
+		iconClass: false,
+		/**
 		 * @method init
 		 * @return .callParent(arguments)
 		 */
@@ -240,7 +262,7 @@ define(["text!./Base.html", "text!./Input.html", "../common/Base", "x-editable",
 			var me = this,
 				el = me.getElement(),
 				container;
-			
+
 			if(me.required){
 				if(el && el.length){
 					el.change(function(){
@@ -306,6 +328,11 @@ define(["text!./Base.html", "text!./Input.html", "../common/Base", "x-editable",
 						"'sr-only'": me.hideLabel
 					}
 				};
+			
+			if(me.align){
+				obj.css[me.parseBind("pull-" + me.align)] = true;
+			}
+			
 			if(this.inputSize){
 				obj.css[me.parseBind("form-group-" + me.inputSize)] = me.inputSize ? true : false;	
 			}
@@ -361,8 +388,10 @@ define(["text!./Base.html", "text!./Input.html", "../common/Base", "x-editable",
 			obj.attr.readonly = me.readOnly; 
 			obj.attr.type = type;
 			obj.attr.name = me.name ?  me.parseBind( me.name ) : type;
-						
-			obj.value = me.value;
+			
+			if(obj.value !== null){
+				obj.value = me.value;	
+			}			
 			
 			if(me.inplaceEdit){
 				obj.editableOptions = {};
@@ -372,7 +401,9 @@ define(["text!./Base.html", "text!./Input.html", "../common/Base", "x-editable",
 					obj.attr["'data-title'"] = me.textBind( me.dataTitle || me.label );	
 				}
 			}else{
-				obj.css["'form-control'"] = me.formControlClass;
+				if(me.formControlClass){
+					obj.css[me.parseBind(me.formControlClass)] = true;
+				}
 				obj.attr.placeholder = me.textBind( me.placeholder );
 			}
 			
@@ -392,6 +423,19 @@ define(["text!./Base.html", "text!./Input.html", "../common/Base", "x-editable",
 					css:{}
 				};
 			if(me.inputAddon){
+				if($.isPlainObject(me.inputAddon)){
+					
+					//button has been loaded
+					if(fb.ui.cmp.button){
+						if(me.inputAddon.uiName === fb.ui.cmp.button){
+							//the addon is a button
+							//remove if exists
+							me.inputAddonClass = me.inputAddonClass.replace("input-group-addon", "");
+							//add the correct class
+							me.inputAddonClass += " input-group-btn";
+						}
+					}
+				}
 				obj.css[me.parseBind(me.inputAddonClass)] = true;
 			}
 			return obj;
@@ -402,13 +446,45 @@ define(["text!./Base.html", "text!./Input.html", "../common/Base", "x-editable",
 		 */
 		inputAddonSpanBindings: function(){
 			var me = this,
-				obj = {};
+				obj = {css:{}};
 			
 			if(me.inputAddon && typeof me.inputAddon === "string"){
 				obj.text = me.inputAddon;
 			}
 			
+			obj.css[me.parseBind(me.glyphiconClass)] = true;
+			
+			if(me.iconClass){
+				obj.css[me.parseBind(me.iconClass)] = true;	
+			}
+			
 			return obj;
+		},
+		/**
+		 * @method inputAddonTemplateBindings
+		 * @return {Object}
+		 */
+		inputAddonTemplateBindings: function(){
+			var me = this,
+				obj = {
+					template:me.parseBind(me.getAddonId()),
+					data: "$data"
+				};
+			return obj;
+		},
+		/**
+		 * 
+		 * @method getAddonId
+		 * @return {String} unique id
+		 */
+		getAddonId: function(){
+			var me = this;
+			
+			if(!me._inputAddonTplId){
+				me._inputAddonTplId = "fb-inputaddon-" + Firebrick.utils.uniqId();
+			}
+			
+			return me._inputAddonTplId;
 		},
 		/**
 		 * @method labelBindings
@@ -437,7 +513,7 @@ define(["text!./Base.html", "text!./Input.html", "../common/Base", "x-editable",
 					css:{}
 				};
 			if(me.horizontal){
-				obj.css[ me.parseBind( "col-" + me.deviceSize + "-" + me.colInputSize ) ] = me.horizontal;
+				obj.css[ me.parseBind( "col-" + me.deviceSize + "-" + me.inputWidth ) ] = me.horizontal;
 			}
 			return obj;
 		},
@@ -449,9 +525,14 @@ define(["text!./Base.html", "text!./Input.html", "../common/Base", "x-editable",
 			var me = this, 
 				obj = {
 					css:{
-						"'input-group'": me.inputAddon
+						"'input-group'": me.inputAddon ? true : false
 					}
 			}
+			
+			if(me.align){
+				obj.css[me.parseBind("pull-" + me.align)] = true;
+			}
+			
 			return obj;
 		}
 	});

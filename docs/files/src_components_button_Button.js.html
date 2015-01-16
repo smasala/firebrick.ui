@@ -19,7 +19,7 @@
             
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 0.9.27</em>
+            <em>API Docs for: 0.10.0</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -43,6 +43,10 @@
             
                 <li><a href="../classes/components.button.Button.html">components.button.Button</a></li>
             
+                <li><a href="../classes/components.button.ButtonGroup.html">components.button.ButtonGroup</a></li>
+            
+                <li><a href="../classes/components.button.ButtonGroupBase.html">components.button.ButtonGroupBase</a></li>
+            
                 <li><a href="../classes/components.button.dropdown.List.html">components.button.dropdown.List</a></li>
             
                 <li><a href="../classes/components.button.Icon.html">components.button.Icon</a></li>
@@ -65,6 +69,8 @@
             
                 <li><a href="../classes/components.containers.Form.html">components.containers.Form</a></li>
             
+                <li><a href="../classes/components.containers.FormPanel.html">components.containers.FormPanel</a></li>
+            
                 <li><a href="../classes/components.containers.Grid.html">components.containers.Grid</a></li>
             
                 <li><a href="../classes/components.containers.GridColumn.html">components.containers.GridColumn</a></li>
@@ -74,6 +80,8 @@
                 <li><a href="../classes/components.containers.Panel.html">components.containers.Panel</a></li>
             
                 <li><a href="../classes/components.display.Alert.html">components.display.Alert</a></li>
+            
+                <li><a href="../classes/components.display.Divider.html">components.display.Divider</a></li>
             
                 <li><a href="../classes/components.display.Header.html">components.display.Header</a></li>
             
@@ -88,6 +96,8 @@
                 <li><a href="../classes/components.fields.Checkbox.html">components.fields.Checkbox</a></li>
             
                 <li><a href="../classes/components.fields.Datepicker.html">components.fields.Datepicker</a></li>
+            
+                <li><a href="../classes/components.fields.Display.html">components.fields.Display</a></li>
             
                 <li><a href="../classes/components.fields.Email.html">components.fields.Email</a></li>
             
@@ -186,11 +196,11 @@
  * @namespace components.button
  * @class Button
  */
-define([&quot;text!./Button.html&quot;, &quot;../common/Base&quot;, &quot;../common/mixins/Items&quot;, &quot;../common/mixins/Badges&quot;, &quot;./dropdown/List&quot;], function(tpl){
+define([&quot;text!./Button.html&quot;, &quot;./Base&quot;, &quot;../common/mixins/Badges&quot;, &quot;./dropdown/List&quot;], function(tpl){
 	&quot;use strict&quot;;
 	return Firebrick.define(&quot;Firebrick.ui.button.Button&quot;, {
-		extend:&quot;Firebrick.ui.common.Base&quot;,
-		mixins:[&quot;Firebrick.ui.common.mixins.Items&quot;, &quot;Firebrick.ui.common.mixins.Badges&quot;],
+		extend:&quot;Firebrick.ui.button.Base&quot;,
+		mixins:[&quot;Firebrick.ui.common.mixins.Badges&quot;],
 		uiName: &quot;fb-ui-button&quot;,
 		tpl:tpl,
 		/**
@@ -206,6 +216,12 @@ define([&quot;text!./Button.html&quot;, &quot;../common/Base&quot;, &quot;../com
 		 * @default &quot;button&quot;
 		 */
 		type: &quot;button&quot;,
+		/**
+		 * @property dropdownContainerClass
+		 * @type {String|false}
+		 * @default &quot;dropdown&quot;
+		 */
+		dropdownContainerClass: &quot;dropdown&quot;,
 		/**
 		 * if true - att &quot;navbar-btn&quot; class to the button
 		 * @property navbarItem
@@ -247,12 +263,18 @@ define([&quot;text!./Button.html&quot;, &quot;../common/Base&quot;, &quot;../com
 		 */
 		loadingText: false,
 		/**
-		 * passed to list data property
-		 * @property items
-		 * @type {String}
+		 * add data to turn button into a dropdown button
+		 * @property data
+		 * @type {String} ko data object
 		 * @default null
 		 */
-		items:null,
+		data: null,
+		/**
+		 * @property dropdownConfig
+		 * @type {Object}
+		 * @default null
+		 */
+		dropdownConfig: null,
 		/**
 		 * default bindings called by data-bind={{data-bind}}
 		 * @method bindings
@@ -275,7 +297,7 @@ define([&quot;text!./Button.html&quot;, &quot;../common/Base&quot;, &quot;../com
 				obj.css[ me.parseBind(&quot;btn-&quot; + me.btnSize)] = true;
 			}
 			
-			if(me.items){
+			if(me.data){
 				obj.css[&quot;&#x27;dropdown-toggle&#x27;&quot;] = true;
 				obj.attr[&quot;&#x27;data-toggle&#x27;&quot;] = &quot;&#x27;dropdown&#x27;&quot;;
 			}
@@ -316,11 +338,31 @@ define([&quot;text!./Button.html&quot;, &quot;../common/Base&quot;, &quot;../com
 		 * @return {Object}
 		 */
 		dropdownContainerBindings: function(){
-			return {
-				css: {
-					dropdown: true
-				}
-			};
+			var me = this,
+				obj = {
+					css:{}
+				};
+			
+			if(me.dropdownContainerClass){
+				obj.css[me.parseBind( me.dropdownContainerClass )] = true;	
+			}
+			
+			return obj;
+		},
+		/**
+		 * @method getDropdown
+		 * @return {Object}
+		 */
+		getDropdown: function(){
+			var me = this,
+				obj = {
+					uiName: fb.ui.cmp.dropdownlist,
+					data: $.isArray(me.data) ? &quot;Firebrick.ui.getCmp(&#x27;&quot; + me.getId() + &quot;&#x27;).data&quot; : me.data
+				};
+			
+			obj = Firebrick.utils.copyover(obj, me.dropdownConfig);
+
+			return me._getItems(obj).html;
 		}
 	});
 });

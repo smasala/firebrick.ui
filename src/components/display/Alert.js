@@ -9,7 +9,7 @@
  * @uses components.common.mixins.Items
  * @class Alert
  */
-define(["text!./Alert.html", "../common/Base"], function(tpl){
+define(["text!./Alert.html", "../common/Base", "../common/mixins/Items"], function(tpl){
 	"use strict";
 	return Firebrick.define("Firebrick.ui.display.Alert", {
 		extend: "Firebrick.ui.common.Base",

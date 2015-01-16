@@ -19,7 +19,7 @@
             
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 0.9.27</em>
+            <em>API Docs for: 0.10.0</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -43,6 +43,10 @@
             
                 <li><a href="../classes/components.button.Button.html">components.button.Button</a></li>
             
+                <li><a href="../classes/components.button.ButtonGroup.html">components.button.ButtonGroup</a></li>
+            
+                <li><a href="../classes/components.button.ButtonGroupBase.html">components.button.ButtonGroupBase</a></li>
+            
                 <li><a href="../classes/components.button.dropdown.List.html">components.button.dropdown.List</a></li>
             
                 <li><a href="../classes/components.button.Icon.html">components.button.Icon</a></li>
@@ -65,6 +69,8 @@
             
                 <li><a href="../classes/components.containers.Form.html">components.containers.Form</a></li>
             
+                <li><a href="../classes/components.containers.FormPanel.html">components.containers.FormPanel</a></li>
+            
                 <li><a href="../classes/components.containers.Grid.html">components.containers.Grid</a></li>
             
                 <li><a href="../classes/components.containers.GridColumn.html">components.containers.GridColumn</a></li>
@@ -74,6 +80,8 @@
                 <li><a href="../classes/components.containers.Panel.html">components.containers.Panel</a></li>
             
                 <li><a href="../classes/components.display.Alert.html">components.display.Alert</a></li>
+            
+                <li><a href="../classes/components.display.Divider.html">components.display.Divider</a></li>
             
                 <li><a href="../classes/components.display.Header.html">components.display.Header</a></li>
             
@@ -88,6 +96,8 @@
                 <li><a href="../classes/components.fields.Checkbox.html">components.fields.Checkbox</a></li>
             
                 <li><a href="../classes/components.fields.Datepicker.html">components.fields.Datepicker</a></li>
+            
+                <li><a href="../classes/components.fields.Display.html">components.fields.Display</a></li>
             
                 <li><a href="../classes/components.fields.Email.html">components.fields.Email</a></li>
             
@@ -203,10 +213,17 @@ define([&quot;text!./Panel.html&quot;, &quot;./Base&quot;, &quot;../nav/Toolbar&
 		tpl:tpl,
 		/**
 		 * @property title
-		 * @type {String}
+		 * @type {String|false} set to false to hide the title
 		 * @default &quot;&quot;
 		 */
 		title:&quot;&quot;,
+		/**
+		 * use to determine whether h1, h2, h3 etc - default = 3
+		 * @property headerSize
+		 * @type {Int}
+		 * @default 3
+		 */
+		headerSize:3,
 		/**
 		 * @property panelClass
 		 * @type {Boolean|String}
@@ -233,8 +250,15 @@ define([&quot;text!./Panel.html&quot;, &quot;./Base&quot;, &quot;../nav/Toolbar&
 		 */
 		panelBodyClass: true,
 		/**
+		 * determines whether &quot;panel-title&quot; class is used
+		 * @property
+		 * @type {Boolean}
+		 * @default true
+		 */
+		panelTitleClass: true,
+		/**
 		 * @property showPanelHeader
-		 * @type {Boolean|String}
+		 * @type {Boolean}
 		 * @default true
 		 */
 		showPanelHeader:true,
@@ -265,17 +289,17 @@ define([&quot;text!./Panel.html&quot;, &quot;./Base&quot;, &quot;../nav/Toolbar&
 		 */
 		collapsed:false,
 		/**
-		 * @property headerIcons
+		 * @property headerItems
 		 * @type {Boolean|Array of Objects} boolean = false, if object use the same way as the &quot;items&quot; property
 		 * @default false
 		 */
-		headerIcons: false,
+		headerItems: false,
 		/**
-		 * @property headerIconPosition
-		 * @type {String} css class &quot;pull-right&quot;, &quot;pull-left&quot; etc
+		 * @property headerIconsPosition
+		 * @type {String|false} css class &quot;pull-right&quot;, &quot;pull-left&quot; etc
 		 * @default &quot;pull-right&quot;
 		 */
-		headerIconPosition: &quot;pull-right&quot;,
+		headerItemsPosition: &quot;pull-right&quot;,
 		/**
 		 * use this to provide the given panel with toolbars
 		 * @example
@@ -343,21 +367,20 @@ define([&quot;text!./Panel.html&quot;, &quot;./Base&quot;, &quot;../nav/Toolbar&
 				obj = {
 					css:{
 						&quot;&#x27;panel-heading&#x27;&quot;: me.panelHeaderClass
-					},
-					visible: me.showPanelHeader
-				};
+					}
+			};
 			
-			if(me.headerIcons){
+			if(me.headerItems){
 				obj.css.clearfix = true;
 			}
 			
 			return obj;
 		},
 		/**
-		 * @method headerIconBindings
+		 * @method headerItemsBindings
 		 * @return {Object}
 		 */
-		headerIconBindings: function(){
+		headerItemsBindings: function(){
 			var me = this,
 				obj= {
 					css: {
@@ -365,7 +388,9 @@ define([&quot;text!./Panel.html&quot;, &quot;./Base&quot;, &quot;../nav/Toolbar&
 					}
 				};
 			
-			obj.css[me.parseBind(me.headerIconPosition)] = true;
+			if(me.headerItemsPosition){
+				obj.css[me.parseBind(me.headerItemsPosition)] = true;
+			}
 				
 			return obj;
 			
@@ -394,10 +419,12 @@ define([&quot;text!./Panel.html&quot;, &quot;./Base&quot;, &quot;../nav/Toolbar&
 			var me = this,
 				obj = {
 						text: me.textBind(me.title),
-						css:{}
+						css:{
+							&quot;&#x27;panel-title&#x27;&quot;: me.panelTitleClass
+						}
 					};
 			
-			if(me.headerIcons){
+			if(me.headerItems){
 				obj.css[&quot;&#x27;pull-left&#x27;&quot;] = true;
 			}
 			

@@ -33,6 +33,13 @@ define(["./Input"], function(){
 		 */
 		datePickerOptions: null,
 		/**
+		 * glyphicon to so in the inputAddon box
+		 * @property iconClass
+		 * @type {String|false}
+		 * @default "glyphicon-calendar"
+		 */
+		iconClass: "glyphicon-calendar",
+		/**
 		 * @method init
 		 * @return parent
 		 */
@@ -71,32 +78,6 @@ define(["./Input"], function(){
 		value:(function(){
 			var dt = new Date();
 			return "'" +  ("0" + dt.getDate()).slice(-2)  + "/" + dt.getMonth() + 1 + "/" +  dt.getFullYear() + "'";
-		})(),
-		/**
-		 * glyphicon to so in the inputAddon box
-		 * @property iconClass
-		 * @type {String|false}
-		 * @default "glyphicon-calendar"
-		 */
-		iconClass: "glyphicon-calendar",
-		/**
-		 * @method inputAddonSpanBindings
-		 * @return {Object}
-		 */
-		inputAddonSpanBindings: function(){
-			var me = this,
-				obj = me.callParent(arguments);
-			
-			if(!obj.css){
-				obj.css = {};
-			}
-			
-			obj.css[me.parseBind(me.glyphiconClass)] = true;
-			if(me.iconClass){
-				obj.css[me.parseBind(me.iconClass)] = true;	
-			}
-			
-			return obj;
-		}
+		})()
 	});
 });

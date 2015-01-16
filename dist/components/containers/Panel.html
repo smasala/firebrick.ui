@@ -1,18 +1,22 @@
 <div id="{{=it.getId()}}" data-bind="{{=it.dataBind()}}">
+	{{?it.showPanelHeader === true}}
 	<div data-bind="{{=it.dataBind('panelHeaderBindings')}}">
-		{{?it.collapsible}}
-			<a data-bind="{{=it.dataBind('collapsibleLinkBindings')}}">
+		{{? it.title !== false }}
+			{{?it.collapsible}}
+				<a data-bind="{{=it.dataBind('collapsibleLinkBindings')}}">
+			{{?}}
+				<h{{=it.headerSize}} data-bind="{{=it.dataBind('panelHeaderTextBindings')}}"></h{{=it.headerSize}}>	
+			{{?it.collapsible}}
+				</a>
+			{{?}}
 		{{?}}
-			<span data-bind="{{=it.dataBind('panelHeaderTextBindings')}}"></span>	
-		{{?it.collapsible}}
-			</a>
-		{{?}}
-		{{?it.headerIcons}}
-			<div data-bind="{{=it.dataBind('headerIconBindings')}}">
-				{{=it.getItemsProp('headerIcons')}}
+		{{?it.headerItems}}
+			<div data-bind="{{=it.dataBind('headerItemsBindings')}}">
+				{{=it.getItemsProp('headerItems')}}
 			</div>
 		{{?}}
 	</div>
+	{{?}}
 		<div data-bind="{{=it.dataBind('tabBindings')}}">
 			<div data-bind="{{=it.dataBind('panelBodyBindings')}}" >
 				{{=it.getToolbars()}}

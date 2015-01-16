@@ -50,9 +50,9 @@ define(["text!./List.html", "../common/Base", "../common/mixins/Badges"], functi
 		 * items to parse into the list
 		 * @property data
 		 * @type {String}
-		 * @default false
+		 * @default null
 		 */
-		data:false,
+		data:null,
 		/**
 		 * unstyled - applies list-unstyled css class to list container (ul/ol)
 		 * @property unstyled
@@ -117,6 +117,8 @@ define(["text!./List.html", "../common/Base", "../common/mixins/Badges"], functi
 			if(me.listGroup && me.listItemGroupClass){
 				obj.css["'list-group-item'"] = me.listItemGroupClass;
 			}
+			
+			obj.css.divider = "$data === '|' || $data.divider ? true : false";
 
 			return obj;
 		},
@@ -138,7 +140,7 @@ define(["text!./List.html", "../common/Base", "../common/mixins/Badges"], functi
 			return {
 				template: {
 					name:  me.parseBind(me.getId()),
-					data: me.data
+					data: $.isArray(me.data) ? "Firebrick.ui.getCmp('" + me.getId() + "').data" : me.data
 				}
 			};
 		},

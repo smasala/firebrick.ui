@@ -8,11 +8,11 @@
  * @namespace components.button
  * @class Button
  */
-define(["text!./Button.html", "../common/Base", "../common/mixins/Items", "../common/mixins/Badges", "./dropdown/List"], function(tpl){
+define(["text!./Button.html", "./Base", "../common/mixins/Badges", "./dropdown/List"], function(tpl){
 	"use strict";
 	return Firebrick.define("Firebrick.ui.button.Button", {
-		extend:"Firebrick.ui.common.Base",
-		mixins:["Firebrick.ui.common.mixins.Items", "Firebrick.ui.common.mixins.Badges"],
+		extend:"Firebrick.ui.button.Base",
+		mixins:["Firebrick.ui.common.mixins.Badges"],
 		uiName: "fb-ui-button",
 		tpl:tpl,
 		/**
@@ -28,6 +28,12 @@ define(["text!./Button.html", "../common/Base", "../common/mixins/Items", "../co
 		 * @default "button"
 		 */
 		type: "button",
+		/**
+		 * @property dropdownContainerClass
+		 * @type {String|false}
+		 * @default "dropdown"
+		 */
+		dropdownContainerClass: "dropdown",
 		/**
 		 * if true - att "navbar-btn" class to the button
 		 * @property navbarItem
@@ -69,12 +75,18 @@ define(["text!./Button.html", "../common/Base", "../common/mixins/Items", "../co
 		 */
 		loadingText: false,
 		/**
-		 * passed to list data property
-		 * @property items
-		 * @type {String}
+		 * add data to turn button into a dropdown button
+		 * @property data
+		 * @type {String} ko data object
 		 * @default null
 		 */
-		items:null,
+		data: null,
+		/**
+		 * @property dropdownConfig
+		 * @type {Object}
+		 * @default null
+		 */
+		dropdownConfig: null,
 		/**
 		 * default bindings called by data-bind={{data-bind}}
 		 * @method bindings
@@ -97,7 +109,7 @@ define(["text!./Button.html", "../common/Base", "../common/mixins/Items", "../co
 				obj.css[ me.parseBind("btn-" + me.btnSize)] = true;
 			}
 			
-			if(me.items){
+			if(me.data){
 				obj.css["'dropdown-toggle'"] = true;
 				obj.attr["'data-toggle'"] = "'dropdown'";
 			}
@@ -138,11 +150,31 @@ define(["text!./Button.html", "../common/Base", "../common/mixins/Items", "../co
 		 * @return {Object}
 		 */
 		dropdownContainerBindings: function(){
-			return {
-				css: {
-					dropdown: true
-				}
-			};
+			var me = this,
+				obj = {
+					css:{}
+				};
+			
+			if(me.dropdownContainerClass){
+				obj.css[me.parseBind( me.dropdownContainerClass )] = true;	
+			}
+			
+			return obj;
+		},
+		/**
+		 * @method getDropdown
+		 * @return {Object}
+		 */
+		getDropdown: function(){
+			var me = this,
+				obj = {
+					uiName: fb.ui.cmp.dropdownlist,
+					data: $.isArray(me.data) ? "Firebrick.ui.getCmp('" + me.getId() + "').data" : me.data
+				};
+			
+			obj = Firebrick.utils.copyover(obj, me.dropdownConfig);
+
+			return me._getItems(obj).html;
 		}
 	});
 });

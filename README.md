@@ -1,4 +1,4 @@
-#Firebrick UI version: 0.9.27
+#Firebrick UI version: 0.10.0
 
 UI extendable component library built for:
 

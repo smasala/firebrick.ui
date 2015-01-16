@@ -1,4 +1,4 @@
-{{?it.items}}
+{{?it.data}}
 	<div data-bind="{{=it.dataBind('dropdownContainerBindings')}}">
 {{?}}
 		<button id="{{=it.getId()}}" data-bind="{{=it.dataBind()}}">
@@ -11,12 +11,12 @@
 				<span data-bind="{{=it.dataBind('badgeBindings')}}"></span>
 			{{?}}
 			
-			{{?it.items}}
+			{{?it.data}}
 				<span data-bind="{{=it.dataBind('caretBindings')}}"></span>
 			{{?}}
 		</button>
 		 
-{{?it.items}}
-		{{=it.getItems()}}
+{{?it.data}}
+		{{=it.getDropdown()}}
 	</div>
 {{?}}

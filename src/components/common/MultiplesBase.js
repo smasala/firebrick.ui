@@ -9,7 +9,7 @@
  * @namespace components.common
  * @class MultiplesBase
  */
-define(["../fields/Input"], function(){
+define(["knockout-mapping", "../fields/Input"], function(kom){
 	"use strict";
 	return Firebrick.define("Firebrick.ui.common.MultiplesBase", {
 		extend:"Firebrick.ui.fields.Input",
@@ -37,6 +37,46 @@ define(["../fields/Input"], function(){
 			}
 			
 			return obj;
+		},
+		
+		/**
+		 * used to check which item should be selected by default
+		 * @method _valueChecker
+		 * @private
+		 * @param $default {Any} optional
+		 * @param $data {Any} value of iteration item
+		 * @default {Boolean}
+		 */
+		_valueChecker: function($default, $data){
+			var me = this;
+			
+			
+			if(kom.isMapped($data)){
+				$data = kom.toJS($data);
+			}
+			
+			if($.isPlainObject($data)){
+				if($data.active){
+					//active property wins
+					return $data.active;
+				}else if($data.value){
+					//get the value prop
+					$data = $data.value;
+				}
+			}
+
+			//something to compare too
+			if($default){
+				//ko function?
+				if($.isFunction($default)){
+					$default = $default();
+				}
+				//compare
+				return $default === $data;
+			}
+						
+			//just return default
+			return me.defaultActive;
 		}
 	});
 });

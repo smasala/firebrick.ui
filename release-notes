@@ -1,3 +1,34 @@
+v0.10.0
+----------------------------
+* set panel title as false to remove it completely
+* panel headerItemsPosition can be set to false to remove all alignment
+* panel headerIcons renamed to headerItems
+* colInputSize renamed to inputWidth
+* togglebutton unique id fix
+* togglebutton options data-bind new properties {id:"", labelId:"", btnStyle:"default", css:"class1 class2"} - reserved classes for togglebuttons: "fb-ui-[success, danger, info... etc]"
+* container components new property "itemsAlign" - left, right center. Applies text-align css class to the container to align its children
+* new component containers.FormPanel - creates a panel and places its items inside form.items property. To configure the form use the property formConfig:{}
+* add property columnOffset to gridColumns to take advantage of offsetting grid columns : http://getbootstrap.com/css/#grid-offsetting
+* add property columnOrder to gridColumns for column ordering : http://getbootstrap.com/css/#grid-column-ordering
+* by default the type of button.items is fb-ui-dropdownlist
+* button no longer needs items:[] for dropdown but rather just directly pass the KO object to the data property. to configure the dropdown, use the object property dropdownConfig:{}
+* add "|" or {divider: true} into dropdown list ko data object to create a seperator in the list - see example in http://getbootstrap.com/components/#btn-dropdowns-single  (<li class="divider"></li>)
+* fix base class jquery dependency
+* input addon position can now be changed with inputAddonPosition ("left" (default) or "right")
+* inputAddon supports text, boolean (use inconjunction with iconClass) and Object {uiName:fb.ui.cmp.button, text:"hello"}. Radio and Checkbox elements are also supported
+* remove navbar-nav class on panel toolbars and add own fb-ui-navbar
+* radio, togglebutton, checkbox and table can all take options/data as a direct js array/object
+* toggle button default style "default" not "primary"
+* set value property for toggle buttons to set a default selected item
+* radio & checkbox "defaultChecked" replaced with property "value"
+* fix components that were missing dependencies
+* change panel title to from <span> to <h{n}> element
+* toggle button label and btn-group id fix
+* new component display field
+* add missing (bug fix) parent (top view/component) to _componentCache
+* new component <hr> - Firebrick.ui/display/Divider - uiName: fb.ui.cmp.divider - or via the shorthand connotation "|" ... e.g. items:[ {...},  "|", {...} ]
+* nav, list and dropdown buttons can all have JS objects aswell
+
 v0.9.27
 ----------------------------
 * improve with properties to allow content data like $parent

@@ -25,10 +25,17 @@ define(["text!./Panel.html", "./Base", "../nav/Toolbar", "../common/mixins/Toolb
 		tpl:tpl,
 		/**
 		 * @property title
-		 * @type {String}
+		 * @type {String|false} set to false to hide the title
 		 * @default ""
 		 */
 		title:"",
+		/**
+		 * use to determine whether h1, h2, h3 etc - default = 3
+		 * @property headerSize
+		 * @type {Int}
+		 * @default 3
+		 */
+		headerSize:3,
 		/**
 		 * @property panelClass
 		 * @type {Boolean|String}
@@ -55,8 +62,15 @@ define(["text!./Panel.html", "./Base", "../nav/Toolbar", "../common/mixins/Toolb
 		 */
 		panelBodyClass: true,
 		/**
+		 * determines whether "panel-title" class is used
+		 * @property
+		 * @type {Boolean}
+		 * @default true
+		 */
+		panelTitleClass: true,
+		/**
 		 * @property showPanelHeader
-		 * @type {Boolean|String}
+		 * @type {Boolean}
 		 * @default true
 		 */
 		showPanelHeader:true,
@@ -87,17 +101,17 @@ define(["text!./Panel.html", "./Base", "../nav/Toolbar", "../common/mixins/Toolb
 		 */
 		collapsed:false,
 		/**
-		 * @property headerIcons
+		 * @property headerItems
 		 * @type {Boolean|Array of Objects} boolean = false, if object use the same way as the "items" property
 		 * @default false
 		 */
-		headerIcons: false,
+		headerItems: false,
 		/**
-		 * @property headerIconPosition
-		 * @type {String} css class "pull-right", "pull-left" etc
+		 * @property headerIconsPosition
+		 * @type {String|false} css class "pull-right", "pull-left" etc
 		 * @default "pull-right"
 		 */
-		headerIconPosition: "pull-right",
+		headerItemsPosition: "pull-right",
 		/**
 		 * use this to provide the given panel with toolbars
 		 * @example
@@ -165,21 +179,20 @@ define(["text!./Panel.html", "./Base", "../nav/Toolbar", "../common/mixins/Toolb
 				obj = {
 					css:{
 						"'panel-heading'": me.panelHeaderClass
-					},
-					visible: me.showPanelHeader
-				};
+					}
+			};
 			
-			if(me.headerIcons){
+			if(me.headerItems){
 				obj.css.clearfix = true;
 			}
 			
 			return obj;
 		},
 		/**
-		 * @method headerIconBindings
+		 * @method headerItemsBindings
 		 * @return {Object}
 		 */
-		headerIconBindings: function(){
+		headerItemsBindings: function(){
 			var me = this,
 				obj= {
 					css: {
@@ -187,7 +200,9 @@ define(["text!./Panel.html", "./Base", "../nav/Toolbar", "../common/mixins/Toolb
 					}
 				};
 			
-			obj.css[me.parseBind(me.headerIconPosition)] = true;
+			if(me.headerItemsPosition){
+				obj.css[me.parseBind(me.headerItemsPosition)] = true;
+			}
 				
 			return obj;
 			
@@ -216,10 +231,12 @@ define(["text!./Panel.html", "./Base", "../nav/Toolbar", "../common/mixins/Toolb
 			var me = this,
 				obj = {
 						text: me.textBind(me.title),
-						css:{}
+						css:{
+							"'panel-title'": me.panelTitleClass
+						}
 					};
 			
-			if(me.headerIcons){
+			if(me.headerItems){
 				obj.css["'pull-left'"] = true;
 			}
 			

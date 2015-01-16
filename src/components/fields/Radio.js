@@ -35,11 +35,11 @@ define(["text!./Radio.html", "../common/MultiplesBase", "./plugins/Radio"], func
 		 */
 		subTpl:subTpl,
 		/**
-		 * @property defaultChecked
-		 * @type {String}
-		 * @default "$data.checked ? $data.checked : false"
+		 * @property showOptionLabel
+		 * @type {Boolean}
+		 * @default true
 		 */
-		defaultChecked:"$data.checked ? $data.checked : false",
+		showOptionLabel: true,
 		/**
 		 * radio options
 		 * @property options
@@ -47,6 +47,18 @@ define(["text!./Radio.html", "../common/MultiplesBase", "./plugins/Radio"], func
 		 * @default false
 		 */
 		options:false,
+		/**
+		 * @property optionsPropValue
+		 * @type {String}
+		 * @default "value"
+		 */
+		optionsPropValue: "value",
+		/**
+		 * @property optionsPropText
+		 * @type {String}
+		 * @default "text"
+		 */
+		optionsPropText: "text",
 		/**
 		 * @method optionLabelBindings
 		 * @return {Object}
@@ -80,7 +92,7 @@ define(["text!./Radio.html", "../common/MultiplesBase", "./plugins/Radio"], func
 			var me = this,
 				obj = me.callParent(arguments);
 			if(me.options && !me.inplaceEdit){
-				obj.foreach = me.options;
+				obj.foreach = $.isArray(me.options) ? "Firebrick.ui.getCmp('" + me.getId() + "').options" : me.options;
 			}
 			return obj;
 		},
@@ -95,8 +107,8 @@ define(["text!./Radio.html", "../common/MultiplesBase", "./plugins/Radio"], func
 			if(me.inplaceEdit){
 				obj.editable = me.selectedOptions || false;
 				obj.editableOptions = {
-						optionsValue:"'value'",
-						optionsText:"'text'",
+						optionsValue:me.parseBind(me.optionsPropValue),
+						optionsText:me.parseBind(me.optionsPropText),
 						options:me.options,
 						type:"'checklist'"
 				};
@@ -110,7 +122,7 @@ define(["text!./Radio.html", "../common/MultiplesBase", "./plugins/Radio"], func
 				obj.attr.id =  me.parseBind(me.getId());
 			}
 			obj.attr.name = me.parseBind( me.cleanString(me.type)+"-group-"+Firebrick.utils.uniqId() );
-			obj.checked = me.defaultChecked;
+			obj.checked = me.value + " !== null ? " + me.value + " === ($data.value || $data) : $data.checked ? $data.checked : false";
 			return obj;
 		}
 	});

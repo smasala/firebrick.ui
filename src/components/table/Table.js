@@ -217,7 +217,7 @@ define(["jquery", "text!./Table.html", "../common/Base", "datatables", "responsi
 		_getData: function(){
 			var me = this;
 			if($.isPlainObject(me.data)){
-				return JSON.stringify(me.data);
+				return "Firebrick.ui.getCmp('" + me.getId() + "').data";
 			}
 			return me.data;
 		},
@@ -263,7 +263,7 @@ define(["jquery", "text!./Table.html", "../common/Base", "datatables", "responsi
 		 */
 		theadTRTDBindings:function(){
 			return {
-				"html": "$data.renderer ? fb.ui.renderer.get($data.renderer())($data, $context, $parent, $root) : ($data.text ? $data.text : $data)"
+				"html": "$data.renderer ? fb.ui.renderer.get($data.renderer)($data, $context, $parent, $root) : ($data.text ? $data.text : $data)"
 			};
 		},
 		/**
@@ -294,7 +294,7 @@ define(["jquery", "text!./Table.html", "../common/Base", "datatables", "responsi
 		 */
 		tbodyTRTDBindings:function(){
 			return {
-				"html": "$data.renderer ? fb.ui.renderer.get($data.renderer())($data, $context, $parent, $root) : ($data.text ? $data.text : $data)"
+				"html": "$data.renderer ? fb.ui.renderer.get($data.renderer)($data, $context, $parent, $root) : ($data.text ? $data.text : $data)"
 			};
 		},
 		/**

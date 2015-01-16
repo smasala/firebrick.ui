@@ -2,4 +2,4 @@
  * @author Steven Masala [me@smasala.com]
  */
 
-define(["../fields/Input"],function(){return Firebrick.define("Firebrick.ui.common.MultiplesBase",{extend:"Firebrick.ui.fields.Input",fieldBindings:function(){var e=this,t=e.callParent(arguments);return e.inplaceEdit||(t.withProperties={itemId:"'fb-ui-id-' + Firebrick.utils.uniqId()"},e.multiplesInline&&(t.css||(t.css={}),t.css[e.parseBind(e.cleanString(e.type)+"-inline")]=e.multiplesInline)),t}})});
+define(["knockout-mapping","../fields/Input"],function(e){return Firebrick.define("Firebrick.ui.common.MultiplesBase",{extend:"Firebrick.ui.fields.Input",fieldBindings:function(){var e=this,t=e.callParent(arguments);return e.inplaceEdit||(t.withProperties={itemId:"'fb-ui-id-' + Firebrick.utils.uniqId()"},e.multiplesInline&&(t.css||(t.css={}),t.css[e.parseBind(e.cleanString(e.type)+"-inline")]=e.multiplesInline)),t},_valueChecker:function(t,n){var r=this;e.isMapped(n)&&(n=e.toJS(n));if($.isPlainObject(n)){if(n.active)return n.active;n.value&&(n=n.value)}return t?($.isFunction(t)&&(t=t()),t===n):r.defaultActive}})});

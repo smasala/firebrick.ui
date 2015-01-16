@@ -2,10 +2,11 @@
 	<label for="{{=it.getId()}}" data-bind="{{=it.dataBind('labelBindings')}}"></label> 
 	<div data-bind="{{=it.dataBind('inputContainerBindings')}}">
 		<div data-bind="{{=it.dataBind('fieldBindings')}}">
-				{{?it.inputAddon }}
-					<div data-bind="{{=it.dataBind('inputAddonBindings')}}">
-						<span data-bind="{{=it.dataBind('inputAddonSpanBindings')}}"></span>
-					</div>
+				
+				{{?it.inputAddon}}
+					{{?it.inputAddonPosition === "left"}}
+						<!-- ko {{=it.dataBind('inputAddonTemplateBindings')}} --><!-- /ko -->
+					{{?}}
 				{{?}}
 				
 				{{=it.getSubTpl()}}
@@ -16,6 +17,26 @@
 				{{?it.helpText}}
 					<span class="{{=it.helpBlockClass}}" data-bind="{{=it.dataBind('helpBlockBindings')}}"></span>
 			 	{{?}}
+			 	
+			 	{{?it.inputAddon}}
+				 	{{?it.inputAddonPosition === "right"}}
+						<!-- ko {{=it.dataBind('inputAddonTemplateBindings')}} --><!-- /ko -->
+					{{?}}
+				{{?}}
+			 	
 		</div>
+		
+		{{?it.inputAddon}}
+		 	<script type="text/html" id="{{=it.getAddonId()}}">
+				<span data-bind="{{=it.dataBind('inputAddonBindings')}}">
+					{{?typeof it.inputAddon === "object"}}
+						{{=it.getItemsProp('inputAddon')}}
+					{{?? true}}
+						<span data-bind="{{=it.dataBind('inputAddonSpanBindings')}}"></span>							
+					{{?}}
+				</span>
+			 </script>
+	 	{{?}}
+		
 	</div>
 </div>

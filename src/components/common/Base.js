@@ -11,7 +11,7 @@
  * @namespace components.common
  * @class Base
  */
-define(["doT", "firebrick"], function(tplEngine){
+define(["doT", "firebrick", "jquery"], function(tplEngine, fb, $){
 
 	"use strict";
 	
@@ -143,6 +143,12 @@ define(["doT", "firebrick"], function(tplEngine){
 		 * @default true
 		 */
 		popoverDismissible: true,
+		/**
+		 * @property align
+		 * @type {String|null} right, left
+		 * @default null
+		 */
+		align:null,
 		/**
 		 * pass a binding Object and this method will add the tooltip/popover relevant properties
 		 * @method addTooltipPopoverBind

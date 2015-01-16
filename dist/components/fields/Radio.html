@@ -1,4 +1,8 @@
+{{?it.showOptionLabel}}
 <label data-bind="{{=it.dataBind('optionLabelContainerBindings')}}">
+{{?}}
 	{{=it.getParentSubTpl()}}
+{{?it.showOptionLabel}}
 	<span data-bind="{{=it.dataBind('optionLabelBindings')}}"></span>
 </label>
+{{?}}

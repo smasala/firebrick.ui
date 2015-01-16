@@ -40,7 +40,9 @@ define(["./Navbar"], function(){
 			var me = this,
 				obj = me.callParent(arguments);
 			
-			obj.css["'navbar-nav'"] = true;
+			obj.css["'navbar-nav'"] = false;
+			obj.css["'fb-ui-navbar'"] = true;
+			obj.css["'form-horizontal'"] = true;
 			
 			return obj;
 		},

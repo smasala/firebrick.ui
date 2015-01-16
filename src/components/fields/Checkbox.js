@@ -40,8 +40,8 @@ define(["./Radio"], function(){
 			if(me.inplaceEdit){
 				obj.editable = me.selectedOptions || false;
 				obj.editableOptions = {
-						optionsValue:"'value'",
-						optionsText:"'text'",
+						optionsValue:me.parseBind(me.optionsPropValue),
+						optionsText:me.parseBind(me.optionsPropText),
 						options:me.options,
 						type:  me.parseBind( me.dataType )
 				};

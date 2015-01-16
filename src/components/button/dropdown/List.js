@@ -3,12 +3,14 @@
  */
 
 /**
+ * use Button with property "data" and "dropdownConfig:{}"
+ * @private
  * @module Firebrick.ui.components
  * @extends components.nav.List
  * @namespace components.button.dropdown
  * @class List
  */
-define(["../../nav/List"], function(){
+define(["jquery", "../../nav/List"], function($){
 	"use strict";
 	return Firebrick.define("Firebrick.ui.button.dropdown.List", {
 		extend: "Firebrick.ui.nav.List",
@@ -34,20 +36,49 @@ define(["../../nav/List"], function(){
 			}
 			obj.attr.role = "'menu'";
 			obj.attr["'aria-labelledby'"] = me.parseBind(me.ariaLabelledBy);
+
 			return obj;
 		},
+		
 		/**
-		 * completely overwrite parent
+		 * @method _hasChildren
+		 * @param $data {Object|Function} ko binding object
+		 * @return {Boolean}
+		 */
+		_hasChildren: function($data){
+			
+			if($data){
+				if($data.children){
+					if($.isFunction($data.children)){
+						//return true or false depending on whether length >= 0
+						return !!($data.children().length);
+					}else{
+						if($data.children.length){
+							//has children
+							return true;
+						}
+					}
+				}
+			}
+			
+			//no children
+			return false;
+		},
+		
+		/**
 		 * @method listItemBindings
 		 * @return {Object}
 		 */
 		listItemBindings: function(){
-			return {
-				role: "'presentation'",
-				css:{
-					"'dropdown-submenu'" : "$data.children && $data.children().length ? true : false"
-				}
-			};
+			var me = this,
+				obj = me.callParent(arguments);
+			
+			obj.attr = obj.attr || {}; 
+			
+			obj.attr.role = "'presentation'";
+			obj.css["'dropdown-submenu'"] = "Firebrick.ui.getCmp('" + me.getId() + "')._hasChildren($data)";
+			
+			return obj;
 		},
 		/**
 		 * @method listLinkBindings
