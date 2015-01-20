@@ -1,14 +1,14 @@
 <!-- ko {{=it.dataBind('listTemplateBindings')}} --><!-- /ko -->
 
-<script type="text/html" id="{{=it.getId()}}">
+<script type="text/html" id="{{=it._getTplId()}}">
 	<!-- ko {{=it.dataBind('virtualContainerBindings')}} -->
-		<{{=it.listType}} data-bind="{{=it.dataBind('listContainerBindings')}}">
+		<{{=it.listType}} data-bind="{{=it.dataBind()}}">
 			<li data-bind="{{=it.dataBind('listItemBindings')}}">
 				{{=it.b(it.preItemTpl)}}
 					{{?it.linkedList}}
 						<a data-bind="{{=it.dataBind('listLinkBindings')}}">
 					{{?}}
-							<span data-bind="{{=it.dataBind()}}"></span>
+							<span data-bind="{{=it.dataBind('listItemTextBindings')}}"></span>
 	
 							{{?it.badge}}
 								<span data-bind="{{=it.dataBind('badgeBindings')}}"></span>

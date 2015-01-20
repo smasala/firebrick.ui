@@ -167,18 +167,6 @@ define(["text!./Navbar.html", "./Base", "./List"], function(tpl){
 		},
 		/**
 		 * overriding parent
-		 * @method listContainerBindings
-		 * @return {Object}
-		 */
-		listContainerBindings: function(){
-			var me = this,
-				obj = me.callParent(arguments);
-			obj.css.nav = me.navClass;
-			obj.css["'navbar-nav'"] = me.navClass;
-			return obj;
-		},
-		/**
-		 * overriding parent
 		 * @method bindings
 		 * @return {Object}
 		 */

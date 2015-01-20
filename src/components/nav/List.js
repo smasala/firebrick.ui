@@ -8,7 +8,7 @@
  * @namespace components.nav
  * @class List
  */
-define(["doT", "../display/List"], function(tplEngine){
+define(["../display/List"], function(){
 	"use strict";
 	return Firebrick.define("Firebrick.ui.nav.List", {
 		extend: "Firebrick.ui.display.List", 
@@ -16,14 +16,24 @@ define(["doT", "../display/List"], function(tplEngine){
 		unstyled:true,
 		linkedList: true,
 		/**
-		 * @method listContainerBindings
+		 * whether navbar-nav class is applied to list
+		 * @property navbarNavClass
+		 * @type {Boolean}
+		 * @default true
+		 */
+		navbarNavClass: true,
+		/**
+		 * @method bindings
 		 * @return {Object}
 		 */
-		listContainerBindings: function(){
+		bindings: function(){
 			var me = this,
 				obj = me.callParent(arguments);
 			
-			obj.css["'navbar-nav'"] = true;
+			if(me.navbarNavClass){
+				obj.css["'navbar-nav'"] = true;
+			}
+
 			obj.css.nav = true;
 			
 			return obj;

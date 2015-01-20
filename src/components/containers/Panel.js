@@ -75,19 +75,19 @@ define(["text!./Panel.html", "./Base", "../nav/Toolbar", "../common/mixins/Toolb
 		 */
 		showPanelHeader:true,
 		/**
-		 * fill the panel body (can be html too)
+		 * fill the panel body (can be html too) - use in conjunction with contentHTML property
 		 * @property content
 		 * @type {String}
 		 * @default ""
 		 */
 		content: "",
 		/**
-		 * whether the content is just text
-		 * @property contentTextual
+		 * whether the content is html content
+		 * @property contentHTML
 		 * @type {Boolean}
-		 * @default true
+		 * @default false
 		 */
-		contentTextual: true,
+		contentHTML: false,
 		/**
 		 * @property collapsible
 		 * @type {Boolean|String}
@@ -255,7 +255,7 @@ define(["text!./Panel.html", "./Base", "../nav/Toolbar", "../common/mixins/Toolb
 				};
 			
 			if(!me.items && me.content){
-				obj.html = me.contentTextual ? me.textBind(me.content) : me.content;
+				obj.html = me.contentHTML ? me.content : me.textBind(me.content);
 			}
 			
 			me.toolbarContainer(obj);

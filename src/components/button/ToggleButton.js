@@ -11,40 +11,48 @@
 define(["text!./ToggleButton.html", "knockout", "jquery", "../common/MultiplesBase"], function(subTpl, ko, $){
 	"use strict";
 	
-	/*
-	 * optionsRenderer for togglebuttons
-	 * create dynamic css along with static
-	 */
-	ko.bindingHandlers.toggleRenderer = {
-	    init: function(element, valueAccessor, allBindings, viewModel, bindingContext) {
-			var me = Firebrick.ui.getCmp(valueAccessor()),
-				currentStyle = "btn-"+me.btnStyle,
-				$el = $(element),
-				inputId = allBindings().withProperties.inputItemId;
-			if($.isFunction(inputId)){
-				//ko data bound observable
-				inputId = inputId();
-			}
-			if($el.length){
-				if(viewModel){
-					if(viewModel.btnStyle){
-						//replace element className with the new one defined in the binding
-						$el.attr("class", function(i, v){
-							return v.replace(currentStyle, "btn-"+viewModel.btnStyle());
-						});
-					}
-					if(viewModel.css){
-						$el.addClass(viewModel.css());
-					}
-				}
-				//add the correct "for" attribute id and the input id
-				$el.attr("for", inputId);
-				$("> input", $el).attr("id", inputId);
-			}
-			
-	    }
+	var _getVal = function(a){
+		if($.isFunction(a)){
+			return a();
+		}
+		return a;
 	};
 	
+	if(!ko.bindingHandlers.toggleRenderer){
+		/*
+		 * optionsRenderer for togglebuttons
+		 * create dynamic css along with static
+		 */
+		ko.bindingHandlers.toggleRenderer = {
+		    init: function(element, valueAccessor, allBindings, viewModel, bindingContext) {
+				var me = Firebrick.ui.getCmp(valueAccessor()),
+					currentStyle = "btn-"+me.btnStyle,
+					$el = $(element),
+					inputId = allBindings().withProperties.inputItemId;
+
+				//ko data bound observable
+				inputId = _getVal(inputId);
+				
+				if($el.length){
+					if(viewModel){
+						if(viewModel.btnStyle){
+							//replace element className with the new one defined in the binding
+							$el.attr("class", function(i, v){
+								return v.replace(currentStyle, "btn-"+_getVal(viewModel.btnStyle));
+							});
+						}
+						if(viewModel.css){
+							$el.addClass(_getVal(viewModel.css));
+						}
+					}
+					//add the correct "for" attribute id and the input id
+					$el.attr("for", inputId);
+					$("> input", $el).attr("id", inputId);
+				}
+				
+		    }
+		};
+	}
 	
 	return Firebrick.define("Firebrick.ui.button.ToggleButton", {
 		extend:"Firebrick.ui.common.MultiplesBase",
