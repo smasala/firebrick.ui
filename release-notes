@@ -1,3 +1,11 @@
+v0.10.5
+----------------------------
+* toggle button value bug fix "string is not a function"
+* panel property "contentTextual" changed to "contentHTML" {Boolean}
+* display.List component property rename: bindings -> listItemTextBindings, listContainerBindings -> bindings
+* fix list id bug where child lists were getting the same id as their parents
+* add missing id to Navbar component 
+
 v0.10.0
 ----------------------------
 * set panel title as false to remove it completely

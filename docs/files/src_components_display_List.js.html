@@ -19,7 +19,7 @@
             
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 0.10.0</em>
+            <em>API Docs for: 0.10.5</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -196,11 +196,36 @@
  * @namespace components.display
  * @class List
  */
-define([&quot;text!./List.html&quot;, &quot;../common/Base&quot;, &quot;../common/mixins/Badges&quot;], function(tpl){
+define([&quot;text!./List.html&quot;, &quot;knockout&quot;, &quot;jquery&quot;, &quot;../common/Base&quot;,  &quot;../common/mixins/Items&quot;, &quot;../common/mixins/Badges&quot;], function(tpl, ko, $){
 	&quot;use strict&quot;;
+	
+	if(!ko.bindingHandlers.listRenderer){
+		/*
+		 * optionsRenderer for togglebuttons
+		 * create dynamic css along with static
+		 */
+		ko.virtualElements.allowedBindings.listRenderer = true;
+		ko.bindingHandlers.listRenderer = {
+		    init: function(element, valueAccessor, allBindings, viewModel, bindingContext) {
+		    	var childNodes = ko.virtualElements.childNodes(element),
+		    		node,
+		    		ul;
+
+		    	for(var i = 0, l = childNodes.length; i&lt;l; i++){
+		    		node = childNodes[i];
+		    		if(node instanceof HTMLUListElement){
+		    			//list item
+		    			$(node).attr(&quot;id&quot;, valueAccessor())
+		    		}
+		    	}
+		    	
+		    }
+		};
+	}
+	
 	return Firebrick.define(&quot;Firebrick.ui.display.List&quot;, {
 		extend:&quot;Firebrick.ui.common.Base&quot;,
-		mixins:&quot;Firebrick.ui.common.mixins.Badges&quot;,
+		mixins:[&quot;Firebrick.ui.common.mixins.Items&quot;, &quot;Firebrick.ui.common.mixins.Badges&quot;],
 		/**
 		 * @property uiName
 		 * @type {String}
@@ -276,13 +301,15 @@ define([&quot;text!./List.html&quot;, &quot;../common/Base&quot;, &quot;../commo
 		virtualContainerBindings: function(){
 			return {&quot;if&quot;: &quot;$data &amp;&amp; $data.length&quot;};
 		},
+		
 		/**
-		 * @method listContainerBindings
+		 * @method bindings
 		 * @return {Object}
 		 */
-		listContainerBindings: function(){
+		bindings: function(){
 			var me = this,
-				obj = {css:{}};
+				obj = me.callParent(arguments);
+
 			if(me.listGroup){
 				obj.css[&quot;&#x27;list-group&#x27;&quot;] = me.listGroup;
 			}
@@ -307,37 +334,53 @@ define([&quot;text!./List.html&quot;, &quot;../common/Base&quot;, &quot;../commo
 			}
 			
 			obj.css.divider = &quot;$data === &#x27;|&#x27; || $data.divider ? true : false&quot;;
-
+			
 			return obj;
 		},
 		/**
-		 * @method bindings
+		 * @method listItemTextBindings
 		 * @return {Object}
 		 */
-		bindings:function(){
-			var me = this,
-				obj = me.callParent(arguments);
-			
-			obj.text = &quot;$data.text ? $data.text : $data&quot;;
-			
-			return obj;
+		listItemTextBindings:function(){
+			//var me = this;
+			return {
+				text: &quot;$data.text ? $data.text : $data&quot;
+			};
 		},
 		
+		/**
+		 * @method listTemplateBindings
+		 * @return {Object}
+		 */
 		listTemplateBindings: function(){
 			var me = this;
 			return {
 				template: {
-					name:  me.parseBind(me.getId()),
-					data: $.isArray(me.data) ? &quot;Firebrick.ui.getCmp(&#x27;&quot; + me.getId() + &quot;&#x27;).data&quot; : me.data
-				}
+					name:  me.parseBind(me._getTplId()),
+					data: $.isArray(me.data) ? &quot;Firebrick.ui.getCmp(&#x27;&quot; + me.getId() + &quot;&#x27;).data&quot; : me.data,
+				},
+				listRenderer: me.parseBind(me.getId())
 			};
 		},
 		
+		/**
+		 * @private
+		 * @method _getTplId
+		 * @return {String}
+		 */
+		_getTplId: function(){
+			return &quot;fb-ui-tpl-&quot; + this.getId(); 
+		},
+		
+		/**
+		 * @method childrenBindings
+		 * @return {Object}
+		 */
 		childrenBindings: function(){
 			var me = this;
 			return {
 				template: {
-					name:  me.parseBind(me.getId()),
+					name:  me.parseBind(me._getTplId()),
 					data: &quot;$data.children&quot;
 				}
 			};
@@ -350,9 +393,10 @@ define([&quot;text!./List.html&quot;, &quot;../common/Base&quot;, &quot;../commo
 		listLinkBindings: function(){
 			var obj = {
 					attr:{
-						href: &quot;$data.link ? $data.link : &#x27;&#x27;&quot;
+						href: &quot;typeof $data.link === &#x27;string&#x27; ? $data.link : &#x27;#&#x27;&quot;
 					}
 			};
+			obj.attr[&quot;&#x27;data-target&#x27;&quot;] = &quot;$data.dataTarget ? $data.dataTarget : false&quot;;
 			return obj;
 		}
 	});

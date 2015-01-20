@@ -41,7 +41,7 @@
 			 * @private
 			 * @type {String}
 			 */
-			version: "0.10.0",
+			version: "0.10.5",
 			
 			/**
 			 * used to cache pointers to classes when searching by "uiName"
@@ -171,15 +171,15 @@
 						//v is already a field class
 						component = v;
 					}
-					//sometimes needed before build - grid column for example
-					component._parent = parent;
-					component.html = component.build();
+					
 				}
 				
 				if(!component._parent){
 					//if not set yet
 					component._parent = parent;
 				}
+				
+				component.html = component.build();
 				
 				if(!me._componentCache[parent.getId()]){
 					me._componentCache[parent.getId()] = parent;
@@ -399,6 +399,7 @@
 	 */
 	ko.bindingHandlers.withProperties = {
 	    init: function(element, valueAccessor, allBindings, viewModel, bindingContext) {
+	    	console.info(arguments,  valueAccessor(), allBindings())
 	        // Make a modified binding context, with a extra properties, and apply it to descendant elements
 	        var childBindingContext = bindingContext.createChildContext(
 	            bindingContext.$rawData,

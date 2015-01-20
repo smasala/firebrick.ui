@@ -8,11 +8,36 @@
  * @namespace components.display
  * @class List
  */
-define(["text!./List.html", "../common/Base", "../common/mixins/Badges"], function(tpl){
+define(["text!./List.html", "knockout", "jquery", "../common/Base",  "../common/mixins/Items", "../common/mixins/Badges"], function(tpl, ko, $){
 	"use strict";
+	
+	if(!ko.bindingHandlers.listRenderer){
+		/*
+		 * optionsRenderer for togglebuttons
+		 * create dynamic css along with static
+		 */
+		ko.virtualElements.allowedBindings.listRenderer = true;
+		ko.bindingHandlers.listRenderer = {
+		    init: function(element, valueAccessor, allBindings, viewModel, bindingContext) {
+		    	var childNodes = ko.virtualElements.childNodes(element),
+		    		node,
+		    		ul;
+
+		    	for(var i = 0, l = childNodes.length; i<l; i++){
+		    		node = childNodes[i];
+		    		if(node instanceof HTMLUListElement){
+		    			//list item
+		    			$(node).attr("id", valueAccessor())
+		    		}
+		    	}
+		    	
+		    }
+		};
+	}
+	
 	return Firebrick.define("Firebrick.ui.display.List", {
 		extend:"Firebrick.ui.common.Base",
-		mixins:"Firebrick.ui.common.mixins.Badges",
+		mixins:["Firebrick.ui.common.mixins.Items", "Firebrick.ui.common.mixins.Badges"],
 		/**
 		 * @property uiName
 		 * @type {String}
@@ -88,13 +113,15 @@ define(["text!./List.html", "../common/Base", "../common/mixins/Badges"], functi
 		virtualContainerBindings: function(){
 			return {"if": "$data && $data.length"};
 		},
+		
 		/**
-		 * @method listContainerBindings
+		 * @method bindings
 		 * @return {Object}
 		 */
-		listContainerBindings: function(){
+		bindings: function(){
 			var me = this,
-				obj = {css:{}};
+				obj = me.callParent(arguments);
+
 			if(me.listGroup){
 				obj.css["'list-group'"] = me.listGroup;
 			}
@@ -119,37 +146,53 @@ define(["text!./List.html", "../common/Base", "../common/mixins/Badges"], functi
 			}
 			
 			obj.css.divider = "$data === '|' || $data.divider ? true : false";
-
+			
 			return obj;
 		},
 		/**
-		 * @method bindings
+		 * @method listItemTextBindings
 		 * @return {Object}
 		 */
-		bindings:function(){
-			var me = this,
-				obj = me.callParent(arguments);
-			
-			obj.text = "$data.text ? $data.text : $data";
-			
-			return obj;
+		listItemTextBindings:function(){
+			//var me = this;
+			return {
+				text: "$data.text ? $data.text : $data"
+			};
 		},
 		
+		/**
+		 * @method listTemplateBindings
+		 * @return {Object}
+		 */
 		listTemplateBindings: function(){
 			var me = this;
 			return {
 				template: {
-					name:  me.parseBind(me.getId()),
-					data: $.isArray(me.data) ? "Firebrick.ui.getCmp('" + me.getId() + "').data" : me.data
-				}
+					name:  me.parseBind(me._getTplId()),
+					data: $.isArray(me.data) ? "Firebrick.ui.getCmp('" + me.getId() + "').data" : me.data,
+				},
+				listRenderer: me.parseBind(me.getId())
 			};
 		},
 		
+		/**
+		 * @private
+		 * @method _getTplId
+		 * @return {String}
+		 */
+		_getTplId: function(){
+			return "fb-ui-tpl-" + this.getId(); 
+		},
+		
+		/**
+		 * @method childrenBindings
+		 * @return {Object}
+		 */
 		childrenBindings: function(){
 			var me = this;
 			return {
 				template: {
-					name:  me.parseBind(me.getId()),
+					name:  me.parseBind(me._getTplId()),
 					data: "$data.children"
 				}
 			};
@@ -162,9 +205,10 @@ define(["text!./List.html", "../common/Base", "../common/mixins/Badges"], functi
 		listLinkBindings: function(){
 			var obj = {
 					attr:{
-						href: "$data.link ? $data.link : ''"
+						href: "typeof $data.link === 'string' ? $data.link : '#'"
 					}
 			};
+			obj.attr["'data-target'"] = "$data.dataTarget ? $data.dataTarget : false";
 			return obj;
 		}
 	});

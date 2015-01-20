@@ -19,7 +19,7 @@
             
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 0.10.0</em>
+            <em>API Docs for: 0.10.5</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -263,19 +263,19 @@ define([&quot;text!./Panel.html&quot;, &quot;./Base&quot;, &quot;../nav/Toolbar&
 		 */
 		showPanelHeader:true,
 		/**
-		 * fill the panel body (can be html too)
+		 * fill the panel body (can be html too) - use in conjunction with contentHTML property
 		 * @property content
 		 * @type {String}
 		 * @default &quot;&quot;
 		 */
 		content: &quot;&quot;,
 		/**
-		 * whether the content is just text
-		 * @property contentTextual
+		 * whether the content is html content
+		 * @property contentHTML
 		 * @type {Boolean}
-		 * @default true
+		 * @default false
 		 */
-		contentTextual: true,
+		contentHTML: false,
 		/**
 		 * @property collapsible
 		 * @type {Boolean|String}
@@ -443,7 +443,7 @@ define([&quot;text!./Panel.html&quot;, &quot;./Base&quot;, &quot;../nav/Toolbar&
 				};
 			
 			if(!me.items &amp;&amp; me.content){
-				obj.html = me.contentTextual ? me.textBind(me.content) : me.content;
+				obj.html = me.contentHTML ? me.content : me.textBind(me.content);
 			}
 			
 			me.toolbarContainer(obj);
