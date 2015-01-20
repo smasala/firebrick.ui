@@ -19,7 +19,7 @@
             
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 0.10.0</em>
+            <em>API Docs for: 0.10.5</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -196,7 +196,7 @@
  * @namespace components.nav
  * @class List
  */
-define([&quot;doT&quot;, &quot;../display/List&quot;], function(tplEngine){
+define([&quot;../display/List&quot;], function(){
 	&quot;use strict&quot;;
 	return Firebrick.define(&quot;Firebrick.ui.nav.List&quot;, {
 		extend: &quot;Firebrick.ui.display.List&quot;, 
@@ -204,14 +204,24 @@ define([&quot;doT&quot;, &quot;../display/List&quot;], function(tplEngine){
 		unstyled:true,
 		linkedList: true,
 		/**
-		 * @method listContainerBindings
+		 * whether navbar-nav class is applied to list
+		 * @property navbarNavClass
+		 * @type {Boolean}
+		 * @default true
+		 */
+		navbarNavClass: true,
+		/**
+		 * @method bindings
 		 * @return {Object}
 		 */
-		listContainerBindings: function(){
+		bindings: function(){
 			var me = this,
 				obj = me.callParent(arguments);
 			
-			obj.css[&quot;&#x27;navbar-nav&#x27;&quot;] = true;
+			if(me.navbarNavClass){
+				obj.css[&quot;&#x27;navbar-nav&#x27;&quot;] = true;
+			}
+
 			obj.css.nav = true;
 			
 			return obj;

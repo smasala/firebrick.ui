@@ -2,7 +2,7 @@
     "project": {
         "name": "Firebrick UI API",
         "description": "Firebrick UI API: a component library for Firebrick MVC, Knockout JS, jQuery and Bootstrap",
-        "version": "0.10.0",
+        "version": "0.10.5",
         "url": "https://github.com/smasala",
         "logo": "fbui_small.png"
     },
@@ -1715,7 +1715,7 @@
         },
         {
             "file": "src\\components\\button\\ToggleButton.js",
-            "line": 51,
+            "line": 59,
             "description": "component alias",
             "itemtype": "property",
             "name": "uiName",
@@ -1726,7 +1726,7 @@
         },
         {
             "file": "src\\components\\button\\ToggleButton.js",
-            "line": 57,
+            "line": 65,
             "itemtype": "property",
             "name": "subTpl",
             "type": "{String} html",
@@ -1736,7 +1736,7 @@
         },
         {
             "file": "src\\components\\button\\ToggleButton.js",
-            "line": 62,
+            "line": 70,
             "itemtype": "property",
             "name": "btnGroupClass",
             "type": "{Boolean|String}",
@@ -1747,7 +1747,7 @@
         },
         {
             "file": "src\\components\\button\\ToggleButton.js",
-            "line": 68,
+            "line": 76,
             "itemtype": "property",
             "name": "btnClass",
             "type": "{Boolean|String}",
@@ -1758,7 +1758,7 @@
         },
         {
             "file": "src\\components\\button\\ToggleButton.js",
-            "line": 74,
+            "line": 82,
             "itemtype": "property",
             "name": "defaultActive",
             "type": "{Boolean|String}",
@@ -1769,7 +1769,7 @@
         },
         {
             "file": "src\\components\\button\\ToggleButton.js",
-            "line": 80,
+            "line": 88,
             "itemtype": "property",
             "name": "dataToggle",
             "type": "{Boolean|String}",
@@ -1780,7 +1780,7 @@
         },
         {
             "file": "src\\components\\button\\ToggleButton.js",
-            "line": 86,
+            "line": 94,
             "description": "default, primary, success, danger, warning, info",
             "itemtype": "property",
             "name": "btnStyle",
@@ -1792,7 +1792,7 @@
         },
         {
             "file": "src\\components\\button\\ToggleButton.js",
-            "line": 93,
+            "line": 101,
             "description": "options that are to be shown by the toggle button : [{text:\"abc\", active:true, config:{btnStyle:\"success\"}, \"b\", \"c\", \"d\"]",
             "itemtype": "property",
             "name": "options",
@@ -1804,7 +1804,7 @@
         },
         {
             "file": "src\\components\\button\\ToggleButton.js",
-            "line": 100,
+            "line": 108,
             "itemtype": "property",
             "name": "showLabel",
             "type": "{Boolean}",
@@ -1815,7 +1815,7 @@
         },
         {
             "file": "src\\components\\button\\ToggleButton.js",
-            "line": 106,
+            "line": 114,
             "itemtype": "property",
             "name": "optionsRenderer",
             "type": "{String}",
@@ -1826,7 +1826,7 @@
         },
         {
             "file": "src\\components\\button\\ToggleButton.js",
-            "line": 112,
+            "line": 120,
             "itemtype": "method",
             "name": "btnGroupBindings",
             "return": {
@@ -1839,7 +1839,7 @@
         },
         {
             "file": "src\\components\\button\\ToggleButton.js",
-            "line": 128,
+            "line": 136,
             "itemtype": "method",
             "name": "toggleInputBindings",
             "return": {
@@ -1852,7 +1852,7 @@
         },
         {
             "file": "src\\components\\button\\ToggleButton.js",
-            "line": 143,
+            "line": 151,
             "itemtype": "method",
             "name": "toggleLabelBindings",
             "return": {
@@ -1865,7 +1865,7 @@
         },
         {
             "file": "src\\components\\button\\ToggleButton.js",
-            "line": 172,
+            "line": 180,
             "itemtype": "method",
             "name": "toggleLabelTextBindings",
             "return": {
@@ -3545,7 +3545,7 @@
         {
             "file": "src\\components\\containers\\Panel.js",
             "line": 77,
-            "description": "fill the panel body (can be html too)",
+            "description": "fill the panel body (can be html too) - use in conjunction with contentHTML property",
             "itemtype": "property",
             "name": "content",
             "type": "{String}",
@@ -3557,11 +3557,11 @@
         {
             "file": "src\\components\\containers\\Panel.js",
             "line": 84,
-            "description": "whether the content is just text",
+            "description": "whether the content is html content",
             "itemtype": "property",
-            "name": "contentTextual",
+            "name": "contentHTML",
             "type": "{Boolean}",
-            "default": "true",
+            "default": "false",
             "class": "components.containers.Panel",
             "module": "Firebrick.ui.components",
             "namespace": "components.containers"
@@ -4114,7 +4114,7 @@
         },
         {
             "file": "src\\components\\display\\List.js",
-            "line": 16,
+            "line": 41,
             "itemtype": "property",
             "name": "uiName",
             "type": "{String}",
@@ -4125,7 +4125,7 @@
         },
         {
             "file": "src\\components\\display\\List.js",
-            "line": 22,
+            "line": 47,
             "itemtype": "property",
             "name": "tpl",
             "type": "{String} html",
@@ -4136,7 +4136,7 @@
         },
         {
             "file": "src\\components\\display\\List.js",
-            "line": 28,
+            "line": 53,
             "description": "type of list, ul or ol",
             "itemtype": "property",
             "name": "listType",
@@ -4148,7 +4148,7 @@
         },
         {
             "file": "src\\components\\display\\List.js",
-            "line": 35,
+            "line": 60,
             "description": "is a list group?",
             "itemtype": "property",
             "name": "listGroup",
@@ -4160,7 +4160,7 @@
         },
         {
             "file": "src\\components\\display\\List.js",
-            "line": 42,
+            "line": 67,
             "description": "defaults to true but only comes into effect with property \"listGroup\"",
             "itemtype": "property",
             "name": "listItemGroupClass",
@@ -4172,7 +4172,7 @@
         },
         {
             "file": "src\\components\\display\\List.js",
-            "line": 49,
+            "line": 74,
             "description": "items to parse into the list",
             "itemtype": "property",
             "name": "data",
@@ -4184,7 +4184,7 @@
         },
         {
             "file": "src\\components\\display\\List.js",
-            "line": 56,
+            "line": 81,
             "description": "unstyled - applies list-unstyled css class to list container (ul/ol)",
             "itemtype": "property",
             "name": "unstyled",
@@ -4196,7 +4196,7 @@
         },
         {
             "file": "src\\components\\display\\List.js",
-            "line": 63,
+            "line": 88,
             "description": "inject a template into the <li>{preItemTpl}<span></span>{postItemTpl}</li> item",
             "itemtype": "property",
             "name": "preItemTpl",
@@ -4208,7 +4208,7 @@
         },
         {
             "file": "src\\components\\display\\List.js",
-            "line": 70,
+            "line": 95,
             "description": "inject a template into the <li>{preItemTpl}<span></span>{postItemTpl}</li> item",
             "itemtype": "property",
             "name": "postItemTpl",
@@ -4220,7 +4220,7 @@
         },
         {
             "file": "src\\components\\display\\List.js",
-            "line": 77,
+            "line": 102,
             "description": "wrap the list element content in a <a></a> link",
             "itemtype": "property",
             "name": "linkedList",
@@ -4232,7 +4232,7 @@
         },
         {
             "file": "src\\components\\display\\List.js",
-            "line": 84,
+            "line": 109,
             "itemtype": "method",
             "name": "virtualContainerBindings",
             "return": {
@@ -4245,33 +4245,7 @@
         },
         {
             "file": "src\\components\\display\\List.js",
-            "line": 91,
-            "itemtype": "method",
-            "name": "listContainerBindings",
-            "return": {
-                "description": "",
-                "type": "Object"
-            },
-            "class": "components.display.List",
-            "module": "Firebrick.ui.components",
-            "namespace": "components.display"
-        },
-        {
-            "file": "src\\components\\display\\List.js",
-            "line": 109,
-            "itemtype": "method",
-            "name": "listItemBindings",
-            "return": {
-                "description": "",
-                "type": "Object"
-            },
-            "class": "components.display.List",
-            "module": "Firebrick.ui.components",
-            "namespace": "components.display"
-        },
-        {
-            "file": "src\\components\\display\\List.js",
-            "line": 125,
+            "line": 117,
             "itemtype": "method",
             "name": "bindings",
             "return": {
@@ -4284,7 +4258,74 @@
         },
         {
             "file": "src\\components\\display\\List.js",
-            "line": 158,
+            "line": 136,
+            "itemtype": "method",
+            "name": "listItemBindings",
+            "return": {
+                "description": "",
+                "type": "Object"
+            },
+            "class": "components.display.List",
+            "module": "Firebrick.ui.components",
+            "namespace": "components.display"
+        },
+        {
+            "file": "src\\components\\display\\List.js",
+            "line": 152,
+            "itemtype": "method",
+            "name": "listItemTextBindings",
+            "return": {
+                "description": "",
+                "type": "Object"
+            },
+            "class": "components.display.List",
+            "module": "Firebrick.ui.components",
+            "namespace": "components.display"
+        },
+        {
+            "file": "src\\components\\display\\List.js",
+            "line": 163,
+            "itemtype": "method",
+            "name": "listTemplateBindings",
+            "return": {
+                "description": "",
+                "type": "Object"
+            },
+            "class": "components.display.List",
+            "module": "Firebrick.ui.components",
+            "namespace": "components.display"
+        },
+        {
+            "file": "src\\components\\display\\List.js",
+            "line": 178,
+            "access": "private",
+            "tagname": "",
+            "itemtype": "method",
+            "name": "_getTplId",
+            "return": {
+                "description": "",
+                "type": "String"
+            },
+            "class": "components.display.List",
+            "module": "Firebrick.ui.components",
+            "namespace": "components.display"
+        },
+        {
+            "file": "src\\components\\display\\List.js",
+            "line": 187,
+            "itemtype": "method",
+            "name": "childrenBindings",
+            "return": {
+                "description": "",
+                "type": "Object"
+            },
+            "class": "components.display.List",
+            "module": "Firebrick.ui.components",
+            "namespace": "components.display"
+        },
+        {
+            "file": "src\\components\\display\\List.js",
+            "line": 201,
             "itemtype": "method",
             "name": "listLinkBindings",
             "return": {
@@ -5628,8 +5669,20 @@
         {
             "file": "src\\components\\nav\\List.js",
             "line": 18,
+            "description": "whether navbar-nav class is applied to list",
+            "itemtype": "property",
+            "name": "navbarNavClass",
+            "type": "{Boolean}",
+            "default": "true",
+            "class": "components.nav.List",
+            "module": "Firebrick.ui.components",
+            "namespace": "components.nav"
+        },
+        {
+            "file": "src\\components\\nav\\List.js",
+            "line": 25,
             "itemtype": "method",
-            "name": "listContainerBindings",
+            "name": "bindings",
             "return": {
                 "description": "",
                 "type": "Object"
@@ -5856,20 +5909,6 @@
             "line": 168,
             "description": "overriding parent",
             "itemtype": "method",
-            "name": "listContainerBindings",
-            "return": {
-                "description": "",
-                "type": "Object"
-            },
-            "class": "components.nav.Navbar",
-            "module": "Firebrick.ui.components",
-            "namespace": "components.nav"
-        },
-        {
-            "file": "src\\components\\nav\\Navbar.js",
-            "line": 180,
-            "description": "overriding parent",
-            "itemtype": "method",
             "name": "bindings",
             "return": {
                 "description": "",
@@ -5881,7 +5920,7 @@
         },
         {
             "file": "src\\components\\nav\\Navbar.js",
-            "line": 191,
+            "line": 179,
             "description": "overriding parent",
             "itemtype": "method",
             "name": "listItemBindings",
@@ -5895,7 +5934,7 @@
         },
         {
             "file": "src\\components\\nav\\Navbar.js",
-            "line": 203,
+            "line": 191,
             "itemtype": "method",
             "name": "navbarHeaderBindings",
             "return": {
@@ -5908,7 +5947,7 @@
         },
         {
             "file": "src\\components\\nav\\Navbar.js",
-            "line": 215,
+            "line": 203,
             "itemtype": "method",
             "name": "navbarContainerBindings",
             "return": {
@@ -5921,7 +5960,7 @@
         },
         {
             "file": "src\\components\\nav\\Navbar.js",
-            "line": 233,
+            "line": 221,
             "itemtype": "method",
             "name": "toggleTextBindings",
             "return": {
@@ -5934,7 +5973,7 @@
         },
         {
             "file": "src\\components\\nav\\Navbar.js",
-            "line": 243,
+            "line": 231,
             "itemtype": "method",
             "name": "toggleButtonBindings",
             "return": {
@@ -5947,7 +5986,7 @@
         },
         {
             "file": "src\\components\\nav\\Navbar.js",
-            "line": 266,
+            "line": 254,
             "itemtype": "method",
             "name": "navbarWrapperBindings",
             "return": {
