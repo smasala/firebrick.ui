@@ -2,7 +2,7 @@
     "project": {
         "name": "Firebrick UI API",
         "description": "Firebrick UI API: a component library for Firebrick MVC, Knockout JS, jQuery and Bootstrap",
-        "version": "0.10.5",
+        "version": "0.10.6",
         "url": "https://github.com/smasala",
         "logo": "fbui_small.png"
     },
@@ -613,7 +613,7 @@
             "namespaces": {},
             "tag": "module",
             "file": "src\\firebrick.ui.js",
-            "line": 353,
+            "line": 358,
             "description": "Firebrick component library for Firebrick JS MVC"
         }
     },
@@ -1279,7 +1279,7 @@
             "module": "Firebrick.ui",
             "namespace": "",
             "file": "src\\firebrick.ui.js",
-            "line": 265,
+            "line": 270,
             "description": "util methods"
         },
         "renderer": {
@@ -1293,7 +1293,7 @@
             "module": "Firebrick.ui",
             "namespace": "",
             "file": "src\\firebrick.ui.js",
-            "line": 308,
+            "line": 313,
             "description": "renderer methods"
         },
         "view.Base": {
@@ -1307,7 +1307,7 @@
             "module": "Firebrick.ui",
             "namespace": "",
             "file": "src\\firebrick.ui.js",
-            "line": 353,
+            "line": 358,
             "description": "Overwrites \"Firebrick.view.Base\"",
             "extends": "class.Base"
         }
@@ -1328,7 +1328,7 @@
             "file": "src\\components\\button\\dropdown\\List.js",
             "line": 24,
             "itemtype": "method",
-            "name": "listContainerBindings",
+            "name": "bindings",
             "return": {
                 "description": "",
                 "type": "Object"
@@ -6012,9 +6012,9 @@
         {
             "file": "src\\components\\nav\\Pagination.js",
             "line": 23,
-            "description": "override from parent",
+            "description": "override parent",
             "itemtype": "method",
-            "name": "listContainerBindings",
+            "name": "bindings",
             "return": {
                 "description": "",
                 "type": "Object"
@@ -6633,7 +6633,7 @@
         },
         {
             "file": "src\\firebrick.ui.js",
-            "line": 191,
+            "line": 196,
             "description": "this method converts shorthand component definitions",
             "example": [
                 "\n\t\t//component definition    \"|\"\n\t\t//converts to the component <hr>  -  fb.ui.cmp.hr"
@@ -6658,7 +6658,7 @@
         },
         {
             "file": "src\\firebrick.ui.js",
-            "line": 215,
+            "line": 220,
             "description": "get a component class by its shortname... uiName",
             "itemtype": "method",
             "name": "getByShortName",
@@ -6678,7 +6678,7 @@
         },
         {
             "file": "src\\firebrick.ui.js",
-            "line": 245,
+            "line": 250,
             "itemtype": "method",
             "name": "getCmp",
             "params": [
@@ -6697,7 +6697,7 @@
         },
         {
             "file": "src\\firebrick.ui.js",
-            "line": 254,
+            "line": 259,
             "description": "alias for Firebrick.get",
             "itemtype": "method",
             "name": "get",
@@ -6717,7 +6717,7 @@
         },
         {
             "file": "src\\firebrick.ui.js",
-            "line": 271,
+            "line": 276,
             "description": "convert a JS Object into a simple \"json\" type string, this is mainly used for the data-bind attribute in Knockout",
             "itemtype": "method",
             "name": "stringify",
@@ -6737,7 +6737,7 @@
         },
         {
             "file": "src\\firebrick.ui.js",
-            "line": 314,
+            "line": 319,
             "itemtype": "property",
             "name": "_registry",
             "type": "{Object}",
@@ -6748,7 +6748,7 @@
         },
         {
             "file": "src\\firebrick.ui.js",
-            "line": 321,
+            "line": 326,
             "itemtype": "method",
             "name": "add",
             "params": [
@@ -6771,7 +6771,7 @@
         },
         {
             "file": "src\\firebrick.ui.js",
-            "line": 335,
+            "line": 340,
             "itemtype": "method",
             "name": "get",
             "params": [
@@ -6790,7 +6790,7 @@
         },
         {
             "file": "src\\firebrick.ui.js",
-            "line": 359,
+            "line": 364,
             "itemtype": "property",
             "name": "listeners",
             "type": "{Object}",
@@ -6799,7 +6799,7 @@
         },
         {
             "file": "src\\firebrick.ui.js",
-            "line": 373,
+            "line": 378,
             "itemtype": "property",
             "name": "items",
             "type": "{Array|Function}",
@@ -6809,7 +6809,7 @@
         },
         {
             "file": "src\\firebrick.ui.js",
-            "line": 379,
+            "line": 384,
             "itemtype": "property",
             "name": "tpl",
             "type": "{Function}",

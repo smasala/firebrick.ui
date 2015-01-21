@@ -19,7 +19,7 @@
             
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 0.10.5</em>
+            <em>API Docs for: 0.10.6</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -202,7 +202,7 @@ define([&quot;../display/List&quot;], function(){
 		extend:&quot;Firebrick.ui.display.List&quot;,
 		uiName:&quot;fb-ui-breadcrumbs&quot;,
 		listType: &quot;ol&quot;,
-		listContainerBindings: function(){
+		bindings: function(){
 			var me = this,
 				obj = me.callParent(arguments);
 			obj.css.breadcrumb = true;
