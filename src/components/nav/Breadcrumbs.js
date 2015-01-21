@@ -14,7 +14,7 @@ define(["../display/List"], function(){
 		extend:"Firebrick.ui.display.List",
 		uiName:"fb-ui-breadcrumbs",
 		listType: "ol",
-		listContainerBindings: function(){
+		bindings: function(){
 			var me = this,
 				obj = me.callParent(arguments);
 			obj.css.breadcrumb = true;

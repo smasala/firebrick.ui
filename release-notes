@@ -1,3 +1,7 @@
+v0.10.6
+----------------------------
+* fix dropdown, pagination and breadcrumb after the list changes
+
 v0.10.5
 ----------------------------
 * toggle button value bug fix "string is not a function"

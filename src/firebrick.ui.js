@@ -41,7 +41,7 @@
 			 * @private
 			 * @type {String}
 			 */
-			version: "0.10.5",
+			version: "0.10.6",
 			
 			/**
 			 * used to cache pointers to classes when searching by "uiName"
@@ -148,13 +148,14 @@
 					tmp;
 				
 				if(v.isView){
-					if(v._state === "initial"){
+					if(v._state !== "initial"){
 						component = v.init();
 					}
 				}else if(v.viewName){
 					//Creates a view from a JS file
 					//Firebrick.create("MyApp.view.MyView", {})
 					component = Firebrick.create(v.viewName, v);
+					console.info("in here")
 				}else{
 					
 					v = me._componentFilter(v);
@@ -179,7 +180,11 @@
 					component._parent = parent;
 				}
 				
-				component.html = component.build();
+				if(component.build){
+					//view that is no a component
+					component.html = component.build();	
+				}
+				
 				
 				if(!me._componentCache[parent.getId()]){
 					me._componentCache[parent.getId()] = parent;
@@ -399,7 +404,6 @@
 	 */
 	ko.bindingHandlers.withProperties = {
 	    init: function(element, valueAccessor, allBindings, viewModel, bindingContext) {
-	    	console.info(arguments,  valueAccessor(), allBindings())
 	        // Make a modified binding context, with a extra properties, and apply it to descendant elements
 	        var childBindingContext = bindingContext.createChildContext(
 	            bindingContext.$rawData,

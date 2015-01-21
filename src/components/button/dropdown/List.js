@@ -22,10 +22,10 @@ define(["jquery", "../../nav/List"], function($){
 		 */
 		ariaLabelledBy: "",
 		/**
-		 * @method listContainerBindings
+		 * @method bindings
 		 * @return {Object}
 		 */ 
-		listContainerBindings: function(){
+		bindings: function(){
 			var me = this,
 				obj = me.callParent(arguments);
 			obj.css = {

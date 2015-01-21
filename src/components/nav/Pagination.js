@@ -21,13 +21,13 @@ define(["../display/List"], function(){
 		 */
 		paginationSize:null,
 		/**
-		 * override from parent
-		 * @method listContainerBindings
+		 * override parent
+		 * @method bindings
 		 * @return {Object}
 		 */
-		listContainerBindings: function(){
+		bindings: function(){
 			var me = this,
-				obj = this.callParent(arguments);
+				obj = me.callParent(arguments);
 			obj.css.pagination = true;
 			if(me.paginationSize){
 				obj.css[ me.parseBind("pagination-"+me.paginationSize) ] = true;
