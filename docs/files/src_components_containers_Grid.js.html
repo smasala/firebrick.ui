@@ -19,7 +19,7 @@
             
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 0.10.6</em>
+            <em>API Docs for: 0.11.0</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -104,6 +104,8 @@
                 <li><a href="../classes/components.fields.File.html">components.fields.File</a></li>
             
                 <li><a href="../classes/components.fields.Input.html">components.fields.Input</a></li>
+            
+                <li><a href="../classes/components.fields.Password.html">components.fields.Password</a></li>
             
                 <li><a href="../classes/components.fields.Radio.html">components.fields.Radio</a></li>
             
@@ -255,10 +257,6 @@ define([&quot;text!./Grid.html&quot;, &quot;jquery&quot;, &quot;./Base&quot;, &q
 			if(newItem){
 				//replace items with the new object - _getItems returns an object {html:&quot;&quot;, items:[]}
 				me.items[index] = newItem.items[0];
-				
-				if(!$.isPlainObject(item)){
-					return &#x27;&lt;div data-bind=&quot;&#x27; + Firebrick.ui.utils.stringify(me.getBasicBindings()) + &#x27;&quot;&gt;&#x27; + newItem.html + &#x27;&lt;/div&gt;&#x27;;
-				}
 				
 				return newItem.html;
 			}

@@ -2,7 +2,7 @@
     "project": {
         "name": "Firebrick UI API",
         "description": "Firebrick UI API: a component library for Firebrick MVC, Knockout JS, jQuery and Bootstrap",
-        "version": "0.10.6",
+        "version": "0.11.0",
         "url": "https://github.com/smasala",
         "logo": "fbui_small.png"
     },
@@ -374,6 +374,17 @@
                 "components.fields": 1
             }
         },
+        "src\\components\\fields\\Password.js": {
+            "name": "src\\components\\fields\\Password.js",
+            "modules": {},
+            "classes": {
+                "components.fields.Password": 1
+            },
+            "fors": {},
+            "namespaces": {
+                "components.fields": 1
+            }
+        },
         "src\\components\\fields\\Radio.js": {
             "name": "src\\components\\fields\\Radio.js",
             "modules": {},
@@ -549,6 +560,7 @@
                 "components.fields.Email": 1,
                 "components.fields.File": 1,
                 "components.fields.Input": 1,
+                "components.fields.Password": 1,
                 "components.fields.Radio": 1,
                 "components.fields.SelectBox": 1,
                 "components.fields.TextArea": 1,
@@ -613,7 +625,7 @@
             "namespaces": {},
             "tag": "module",
             "file": "src\\firebrick.ui.js",
-            "line": 358,
+            "line": 360,
             "description": "Firebrick component library for Firebrick JS MVC"
         }
     },
@@ -1097,6 +1109,20 @@
             "line": 5,
             "extends": "components.fields.Base"
         },
+        "components.fields.Password": {
+            "name": "components.fields.Password",
+            "shortname": "components.fields.Password",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "Firebrick.ui.components",
+            "namespace": "components.fields",
+            "file": "src\\components\\fields\\Password.js",
+            "line": 5,
+            "extends": "components.fields.Input"
+        },
         "components.fields.Radio": {
             "name": "components.fields.Radio",
             "shortname": "components.fields.Radio",
@@ -1279,7 +1305,7 @@
             "module": "Firebrick.ui",
             "namespace": "",
             "file": "src\\firebrick.ui.js",
-            "line": 270,
+            "line": 272,
             "description": "util methods"
         },
         "renderer": {
@@ -1293,7 +1319,7 @@
             "module": "Firebrick.ui",
             "namespace": "",
             "file": "src\\firebrick.ui.js",
-            "line": 313,
+            "line": 315,
             "description": "renderer methods"
         },
         "view.Base": {
@@ -1307,7 +1333,7 @@
             "module": "Firebrick.ui",
             "namespace": "",
             "file": "src\\firebrick.ui.js",
-            "line": 358,
+            "line": 360,
             "description": "Overwrites \"Firebrick.view.Base\"",
             "extends": "class.Base"
         }
@@ -1793,11 +1819,11 @@
         {
             "file": "src\\components\\button\\ToggleButton.js",
             "line": 101,
-            "description": "options that are to be shown by the toggle button : [{text:\"abc\", active:true, config:{btnStyle:\"success\"}, \"b\", \"c\", \"d\"]",
+            "description": "lg,md,xs,sm",
             "itemtype": "property",
-            "name": "options",
-            "type": "{String}",
-            "default": "\"''\"",
+            "name": "btnSize",
+            "type": "{String|false}",
+            "default": "\"md\"",
             "class": "components.button.ToggleButton",
             "module": "Firebrick.ui.components",
             "namespace": "components.button"
@@ -1805,6 +1831,18 @@
         {
             "file": "src\\components\\button\\ToggleButton.js",
             "line": 108,
+            "description": "options that are to be shown by the toggle button : [{text:\"abc\", active:true, config:{btnStyle:\"success\"}, \"b\", \"c\", \"d\"]",
+            "itemtype": "property",
+            "name": "options",
+            "type": "{String|Array of Objects}",
+            "default": "\"''\"",
+            "class": "components.button.ToggleButton",
+            "module": "Firebrick.ui.components",
+            "namespace": "components.button"
+        },
+        {
+            "file": "src\\components\\button\\ToggleButton.js",
+            "line": 115,
             "itemtype": "property",
             "name": "showLabel",
             "type": "{Boolean}",
@@ -1815,7 +1853,7 @@
         },
         {
             "file": "src\\components\\button\\ToggleButton.js",
-            "line": 114,
+            "line": 121,
             "itemtype": "property",
             "name": "optionsRenderer",
             "type": "{String}",
@@ -1826,7 +1864,7 @@
         },
         {
             "file": "src\\components\\button\\ToggleButton.js",
-            "line": 120,
+            "line": 127,
             "itemtype": "method",
             "name": "btnGroupBindings",
             "return": {
@@ -1839,7 +1877,7 @@
         },
         {
             "file": "src\\components\\button\\ToggleButton.js",
-            "line": 136,
+            "line": 143,
             "itemtype": "method",
             "name": "toggleInputBindings",
             "return": {
@@ -1852,7 +1890,7 @@
         },
         {
             "file": "src\\components\\button\\ToggleButton.js",
-            "line": 151,
+            "line": 158,
             "itemtype": "method",
             "name": "toggleLabelBindings",
             "return": {
@@ -1865,7 +1903,7 @@
         },
         {
             "file": "src\\components\\button\\ToggleButton.js",
-            "line": 180,
+            "line": 191,
             "itemtype": "method",
             "name": "toggleLabelTextBindings",
             "return": {
@@ -1879,10 +1917,10 @@
         {
             "file": "src\\components\\common\\mixins\\Badges.js",
             "line": 14,
-            "description": "show badge or not",
+            "description": "false to hide badge, string to show text",
             "itemtype": "property",
             "name": "badge",
-            "type": "{Boolean}",
+            "type": "{String|False}",
             "default": "false",
             "class": "components.common.mixins.Badges",
             "module": "Firebrick.ui.components",
@@ -1891,17 +1929,6 @@
         {
             "file": "src\\components\\common\\mixins\\Badges.js",
             "line": 21,
-            "itemtype": "property",
-            "name": "badgeText",
-            "type": "{String}",
-            "default": "\"\"",
-            "class": "components.common.mixins.Badges",
-            "module": "Firebrick.ui.components",
-            "namespace": "components.common.mixins"
-        },
-        {
-            "file": "src\\components\\common\\mixins\\Badges.js",
-            "line": 27,
             "itemtype": "method",
             "name": "badgeBindings",
             "return": {
@@ -2668,6 +2695,18 @@
             "namespace": "components.common"
         },
         {
+            "file": "src\\components\\containers\\Box.js",
+            "line": 17,
+            "description": "set as string to fill the div/box with html content",
+            "itemtype": "property",
+            "name": "htmlContent",
+            "type": "{String|false}",
+            "default": "false",
+            "class": "components.containers.Box",
+            "module": "Firebrick.ui.components",
+            "namespace": "components.containers"
+        },
+        {
             "file": "src\\components\\containers\\Form.js",
             "line": 15,
             "itemtype": "property",
@@ -2921,6 +2960,17 @@
         {
             "file": "src\\components\\containers\\FormPanel.js",
             "line": 15,
+            "itemtype": "property",
+            "name": "uiName",
+            "type": "{String}",
+            "default": "\"fb-ui-formpanel\"",
+            "class": "components.containers.FormPanel",
+            "module": "Firebrick.ui.components",
+            "namespace": "components.containers"
+        },
+        {
+            "file": "src\\components\\containers\\FormPanel.js",
+            "line": 21,
             "description": "configuration to pass to the form section of the Panel",
             "itemtype": "property",
             "name": "formConfig",
@@ -2932,7 +2982,7 @@
         },
         {
             "file": "src\\components\\containers\\FormPanel.js",
-            "line": 22,
+            "line": 28,
             "itemtype": "method",
             "name": "build",
             "access": "private",
@@ -3182,9 +3232,9 @@
             "file": "src\\components\\containers\\Modal.js",
             "line": 62,
             "itemtype": "property",
-            "name": "titleClass",
-            "type": "{Boolean}",
-            "default": "true",
+            "name": "content",
+            "type": "{String}",
+            "default": "\"\"",
             "class": "components.containers.Modal",
             "module": "Firebrick.ui.components",
             "namespace": "components.containers"
@@ -3193,7 +3243,7 @@
             "file": "src\\components\\containers\\Modal.js",
             "line": 68,
             "itemtype": "property",
-            "name": "bodyClass",
+            "name": "titleClass",
             "type": "{Boolean}",
             "default": "true",
             "class": "components.containers.Modal",
@@ -3204,6 +3254,17 @@
             "file": "src\\components\\containers\\Modal.js",
             "line": 74,
             "itemtype": "property",
+            "name": "bodyClass",
+            "type": "{Boolean}",
+            "default": "true",
+            "class": "components.containers.Modal",
+            "module": "Firebrick.ui.components",
+            "namespace": "components.containers"
+        },
+        {
+            "file": "src\\components\\containers\\Modal.js",
+            "line": 80,
+            "itemtype": "property",
             "name": "animationClass",
             "type": "{String}",
             "default": "\"fade\"",
@@ -3213,7 +3274,7 @@
         },
         {
             "file": "src\\components\\containers\\Modal.js",
-            "line": 80,
+            "line": 86,
             "itemtype": "property",
             "name": "dialogClass",
             "type": "{Boolean}",
@@ -3224,7 +3285,7 @@
         },
         {
             "file": "src\\components\\containers\\Modal.js",
-            "line": 86,
+            "line": 92,
             "itemtype": "property",
             "name": "contentClass",
             "type": "{Boolean}",
@@ -3235,7 +3296,7 @@
         },
         {
             "file": "src\\components\\containers\\Modal.js",
-            "line": 92,
+            "line": 98,
             "itemtype": "property",
             "name": "headerClass",
             "type": "{Boolean}",
@@ -3246,7 +3307,7 @@
         },
         {
             "file": "src\\components\\containers\\Modal.js",
-            "line": 98,
+            "line": 104,
             "itemtype": "property",
             "name": "isModal",
             "type": "{Boolean}",
@@ -3257,7 +3318,7 @@
         },
         {
             "file": "src\\components\\containers\\Modal.js",
-            "line": 104,
+            "line": 110,
             "itemtype": "property",
             "name": "footerClass",
             "type": "{Boolean}",
@@ -3268,7 +3329,7 @@
         },
         {
             "file": "src\\components\\containers\\Modal.js",
-            "line": 110,
+            "line": 116,
             "description": "used to created the <h{int}></h{int}> tags in the header",
             "itemtype": "property",
             "name": "titleSize",
@@ -3280,7 +3341,7 @@
         },
         {
             "file": "src\\components\\containers\\Modal.js",
-            "line": 117,
+            "line": 123,
             "itemtype": "property",
             "name": "showCloseIcon",
             "type": "{Boolean}",
@@ -3291,7 +3352,7 @@
         },
         {
             "file": "src\\components\\containers\\Modal.js",
-            "line": 123,
+            "line": 129,
             "description": "screen reader text",
             "itemtype": "property",
             "name": "srCloseText",
@@ -3303,7 +3364,7 @@
         },
         {
             "file": "src\\components\\containers\\Modal.js",
-            "line": 130,
+            "line": 136,
             "itemtype": "method",
             "name": "srCloseIconBindings",
             "return": {
@@ -3316,7 +3377,7 @@
         },
         {
             "file": "src\\components\\containers\\Modal.js",
-            "line": 143,
+            "line": 149,
             "itemtype": "method",
             "name": "closeButtonBindings",
             "return": {
@@ -3329,7 +3390,7 @@
         },
         {
             "file": "src\\components\\containers\\Modal.js",
-            "line": 158,
+            "line": 164,
             "itemtype": "method",
             "name": "getTitleId",
             "return": {
@@ -3342,7 +3403,7 @@
         },
         {
             "file": "src\\components\\containers\\Modal.js",
-            "line": 165,
+            "line": 171,
             "itemtype": "method",
             "name": "bindings",
             "return": {
@@ -3355,7 +3416,7 @@
         },
         {
             "file": "src\\components\\containers\\Modal.js",
-            "line": 187,
+            "line": 193,
             "itemtype": "method",
             "name": "dialogBindings",
             "return": {
@@ -3368,7 +3429,7 @@
         },
         {
             "file": "src\\components\\containers\\Modal.js",
-            "line": 199,
+            "line": 205,
             "itemtype": "method",
             "name": "contentBindings",
             "return": {
@@ -3381,7 +3442,7 @@
         },
         {
             "file": "src\\components\\containers\\Modal.js",
-            "line": 211,
+            "line": 217,
             "itemtype": "method",
             "name": "headerBindings",
             "return": {
@@ -3394,7 +3455,7 @@
         },
         {
             "file": "src\\components\\containers\\Modal.js",
-            "line": 223,
+            "line": 229,
             "itemtype": "method",
             "name": "titleBindings",
             "return": {
@@ -3407,7 +3468,7 @@
         },
         {
             "file": "src\\components\\containers\\Modal.js",
-            "line": 236,
+            "line": 242,
             "itemtype": "method",
             "name": "bodyBindings",
             "return": {
@@ -3420,7 +3481,7 @@
         },
         {
             "file": "src\\components\\containers\\Modal.js",
-            "line": 248,
+            "line": 257,
             "itemtype": "method",
             "name": "footerBindings",
             "return": {
@@ -3918,7 +3979,7 @@
             "line": 50,
             "description": "string = \"default\", \"primary\", \"success\" \"info\", \"warning\", \"danger\"",
             "itemtype": "property",
-            "name": "labelCSS",
+            "name": "labelStyle",
             "type": "{Boolean|String}",
             "default": "\"default\"",
             "class": "components.display.Header",
@@ -4053,7 +4114,7 @@
             "line": 58,
             "description": "\"rounded, \"circle\", \"thumbnail\"",
             "itemtype": "property",
-            "name": "imgTypeClass",
+            "name": "imgType",
             "type": "{String|Boolean}",
             "default": "\"rounded\"",
             "class": "components.display.Image",
@@ -4074,47 +4135,8 @@
             "namespace": "components.display"
         },
         {
-            "file": "src\\components\\display\\Image.js",
-            "line": 81,
-            "itemtype": "method",
-            "name": "getSizes",
-            "return": {
-                "description": "data-sizes=\"xl,s\"",
-                "type": "String"
-            },
-            "class": "components.display.Image",
-            "module": "Firebrick.ui.components",
-            "namespace": "components.display"
-        },
-        {
-            "file": "src\\components\\display\\Image.js",
-            "line": 89,
-            "itemtype": "method",
-            "name": "getSrcset",
-            "return": {
-                "description": "data-srcset=\"a.jpg, b.jpg\"",
-                "type": "String"
-            },
-            "class": "components.display.Image",
-            "module": "Firebrick.ui.components",
-            "namespace": "components.display"
-        },
-        {
-            "file": "src\\components\\display\\Image.js",
-            "line": 97,
-            "itemtype": "method",
-            "name": "getSrc",
-            "return": {
-                "description": "src=\"a.jpg\"",
-                "type": "String"
-            },
-            "class": "components.display.Image",
-            "module": "Firebrick.ui.components",
-            "namespace": "components.display"
-        },
-        {
             "file": "src\\components\\display\\List.js",
-            "line": 41,
+            "line": 64,
             "itemtype": "property",
             "name": "uiName",
             "type": "{String}",
@@ -4125,7 +4147,7 @@
         },
         {
             "file": "src\\components\\display\\List.js",
-            "line": 47,
+            "line": 70,
             "itemtype": "property",
             "name": "tpl",
             "type": "{String} html",
@@ -4136,7 +4158,7 @@
         },
         {
             "file": "src\\components\\display\\List.js",
-            "line": 53,
+            "line": 76,
             "description": "type of list, ul or ol",
             "itemtype": "property",
             "name": "listType",
@@ -4148,7 +4170,7 @@
         },
         {
             "file": "src\\components\\display\\List.js",
-            "line": 60,
+            "line": 83,
             "description": "is a list group?",
             "itemtype": "property",
             "name": "listGroup",
@@ -4160,7 +4182,7 @@
         },
         {
             "file": "src\\components\\display\\List.js",
-            "line": 67,
+            "line": 90,
             "description": "defaults to true but only comes into effect with property \"listGroup\"",
             "itemtype": "property",
             "name": "listItemGroupClass",
@@ -4172,7 +4194,7 @@
         },
         {
             "file": "src\\components\\display\\List.js",
-            "line": 74,
+            "line": 97,
             "description": "items to parse into the list",
             "itemtype": "property",
             "name": "data",
@@ -4184,7 +4206,7 @@
         },
         {
             "file": "src\\components\\display\\List.js",
-            "line": 81,
+            "line": 104,
             "description": "unstyled - applies list-unstyled css class to list container (ul/ol)",
             "itemtype": "property",
             "name": "unstyled",
@@ -4196,7 +4218,7 @@
         },
         {
             "file": "src\\components\\display\\List.js",
-            "line": 88,
+            "line": 111,
             "description": "inject a template into the <li>{preItemTpl}<span></span>{postItemTpl}</li> item",
             "itemtype": "property",
             "name": "preItemTpl",
@@ -4208,7 +4230,7 @@
         },
         {
             "file": "src\\components\\display\\List.js",
-            "line": 95,
+            "line": 118,
             "description": "inject a template into the <li>{preItemTpl}<span></span>{postItemTpl}</li> item",
             "itemtype": "property",
             "name": "postItemTpl",
@@ -4220,7 +4242,7 @@
         },
         {
             "file": "src\\components\\display\\List.js",
-            "line": 102,
+            "line": 125,
             "description": "wrap the list element content in a <a></a> link",
             "itemtype": "property",
             "name": "linkedList",
@@ -4232,7 +4254,7 @@
         },
         {
             "file": "src\\components\\display\\List.js",
-            "line": 109,
+            "line": 132,
             "itemtype": "method",
             "name": "virtualContainerBindings",
             "return": {
@@ -4245,7 +4267,7 @@
         },
         {
             "file": "src\\components\\display\\List.js",
-            "line": 117,
+            "line": 140,
             "itemtype": "method",
             "name": "bindings",
             "return": {
@@ -4258,7 +4280,7 @@
         },
         {
             "file": "src\\components\\display\\List.js",
-            "line": 136,
+            "line": 159,
             "itemtype": "method",
             "name": "listItemBindings",
             "return": {
@@ -4271,7 +4293,7 @@
         },
         {
             "file": "src\\components\\display\\List.js",
-            "line": 152,
+            "line": 177,
             "itemtype": "method",
             "name": "listItemTextBindings",
             "return": {
@@ -4284,7 +4306,7 @@
         },
         {
             "file": "src\\components\\display\\List.js",
-            "line": 163,
+            "line": 188,
             "itemtype": "method",
             "name": "listTemplateBindings",
             "return": {
@@ -4297,7 +4319,7 @@
         },
         {
             "file": "src\\components\\display\\List.js",
-            "line": 178,
+            "line": 203,
             "access": "private",
             "tagname": "",
             "itemtype": "method",
@@ -4312,7 +4334,7 @@
         },
         {
             "file": "src\\components\\display\\List.js",
-            "line": 187,
+            "line": 212,
             "itemtype": "method",
             "name": "childrenBindings",
             "return": {
@@ -4325,7 +4347,7 @@
         },
         {
             "file": "src\\components\\display\\List.js",
-            "line": 201,
+            "line": 226,
             "itemtype": "method",
             "name": "listLinkBindings",
             "return": {
@@ -5386,6 +5408,28 @@
             "namespace": "components.fields"
         },
         {
+            "file": "src\\components\\fields\\Password.js",
+            "line": 15,
+            "itemtype": "property",
+            "name": "uiName",
+            "type": "{String}",
+            "default": "\"fb-ui-password\"",
+            "class": "components.fields.Password",
+            "module": "Firebrick.ui.components",
+            "namespace": "components.fields"
+        },
+        {
+            "file": "src\\components\\fields\\Password.js",
+            "line": 21,
+            "itemtype": "property",
+            "name": "type",
+            "type": "{String}",
+            "default": "\"password\"",
+            "class": "components.fields.Password",
+            "module": "Firebrick.ui.components",
+            "namespace": "components.fields"
+        },
+        {
             "file": "src\\components\\fields\\Radio.js",
             "line": 15,
             "itemtype": "property",
@@ -5513,7 +5557,7 @@
         },
         {
             "file": "src\\components\\fields\\Radio.js",
-            "line": 99,
+            "line": 108,
             "itemtype": "method",
             "name": "bindings",
             "return": {
@@ -5559,8 +5603,8 @@
             "file": "src\\components\\fields\\SelectBox.js",
             "line": 31,
             "itemtype": "property",
-            "name": "data",
-            "type": "{String|Function}",
+            "name": "options",
+            "type": "{String|Function|Array of Objects}",
             "default": "false",
             "class": "components.fields.SelectBox",
             "module": "Firebrick.ui.components",
@@ -5742,6 +5786,18 @@
         {
             "file": "src\\components\\nav\\Navbar.js",
             "line": 49,
+            "description": "whether \"navbar-form\" css class is used",
+            "itemtype": "property",
+            "name": "navbarFormClass",
+            "type": "{Boolean}",
+            "default": "true",
+            "class": "components.nav.Navbar",
+            "module": "Firebrick.ui.components",
+            "namespace": "components.nav"
+        },
+        {
+            "file": "src\\components\\nav\\Navbar.js",
+            "line": 56,
             "description": "css class: navbar-header",
             "itemtype": "property",
             "name": "navbarHeaderClass",
@@ -5753,7 +5809,7 @@
         },
         {
             "file": "src\\components\\nav\\Navbar.js",
-            "line": 56,
+            "line": 63,
             "description": "if false then the navigation won't collapse to the small menu button",
             "itemtype": "property",
             "name": "toggleButton",
@@ -5765,7 +5821,7 @@
         },
         {
             "file": "src\\components\\nav\\Navbar.js",
-            "line": 63,
+            "line": 70,
             "itemtype": "property",
             "name": "toggleText",
             "type": "{String}",
@@ -5776,7 +5832,7 @@
         },
         {
             "file": "src\\components\\nav\\Navbar.js",
-            "line": 69,
+            "line": 76,
             "itemtype": "property",
             "name": "brandClass",
             "type": "{Boolean|String}",
@@ -5787,7 +5843,7 @@
         },
         {
             "file": "src\\components\\nav\\Navbar.js",
-            "line": 75,
+            "line": 82,
             "description": "false to deactivate",
             "itemtype": "property",
             "name": "brandLink",
@@ -5799,7 +5855,7 @@
         },
         {
             "file": "src\\components\\nav\\Navbar.js",
-            "line": 82,
+            "line": 89,
             "description": "brand text - false to show none or if you wish to use brandTpl instead",
             "itemtype": "property",
             "name": "brandText",
@@ -5811,7 +5867,7 @@
         },
         {
             "file": "src\\components\\nav\\Navbar.js",
-            "line": 89,
+            "line": 96,
             "description": "false to deactivate",
             "itemtype": "property",
             "name": "brandTpl",
@@ -5823,7 +5879,7 @@
         },
         {
             "file": "src\\components\\nav\\Navbar.js",
-            "line": 96,
+            "line": 103,
             "description": "data to populate navigation with",
             "itemtype": "property",
             "name": "data",
@@ -5835,7 +5891,7 @@
         },
         {
             "file": "src\\components\\nav\\Navbar.js",
-            "line": 103,
+            "line": 110,
             "description": "overriding parent",
             "itemtype": "property",
             "name": "listGroupClass",
@@ -5846,7 +5902,7 @@
         },
         {
             "file": "src\\components\\nav\\Navbar.js",
-            "line": 109,
+            "line": 116,
             "description": "sets nav && nav-bar css classes to the list container",
             "itemtype": "property",
             "name": "navClass",
@@ -5858,7 +5914,7 @@
         },
         {
             "file": "src\\components\\nav\\Navbar.js",
-            "line": 116,
+            "line": 123,
             "itemtype": "property",
             "name": "showNavbarHeader",
             "type": "{Boolean}",
@@ -5869,7 +5925,7 @@
         },
         {
             "file": "src\\components\\nav\\Navbar.js",
-            "line": 122,
+            "line": 129,
             "itemtype": "property",
             "name": "showBranding",
             "type": "{Boolean}",
@@ -5880,7 +5936,7 @@
         },
         {
             "file": "src\\components\\nav\\Navbar.js",
-            "line": 128,
+            "line": 135,
             "itemtype": "method",
             "name": "navBindings",
             "return": {
@@ -5893,7 +5949,7 @@
         },
         {
             "file": "src\\components\\nav\\Navbar.js",
-            "line": 148,
+            "line": 155,
             "itemtype": "method",
             "name": "brandBindings",
             "return": {
@@ -5906,7 +5962,7 @@
         },
         {
             "file": "src\\components\\nav\\Navbar.js",
-            "line": 168,
+            "line": 175,
             "description": "overriding parent",
             "itemtype": "method",
             "name": "bindings",
@@ -5920,7 +5976,7 @@
         },
         {
             "file": "src\\components\\nav\\Navbar.js",
-            "line": 179,
+            "line": 186,
             "description": "overriding parent",
             "itemtype": "method",
             "name": "listItemBindings",
@@ -5934,7 +5990,7 @@
         },
         {
             "file": "src\\components\\nav\\Navbar.js",
-            "line": 191,
+            "line": 198,
             "itemtype": "method",
             "name": "navbarHeaderBindings",
             "return": {
@@ -5947,7 +6003,7 @@
         },
         {
             "file": "src\\components\\nav\\Navbar.js",
-            "line": 203,
+            "line": 210,
             "itemtype": "method",
             "name": "navbarContainerBindings",
             "return": {
@@ -5960,7 +6016,7 @@
         },
         {
             "file": "src\\components\\nav\\Navbar.js",
-            "line": 221,
+            "line": 233,
             "itemtype": "method",
             "name": "toggleTextBindings",
             "return": {
@@ -5973,7 +6029,7 @@
         },
         {
             "file": "src\\components\\nav\\Navbar.js",
-            "line": 231,
+            "line": 243,
             "itemtype": "method",
             "name": "toggleButtonBindings",
             "return": {
@@ -5986,7 +6042,7 @@
         },
         {
             "file": "src\\components\\nav\\Navbar.js",
-            "line": 254,
+            "line": 266,
             "itemtype": "method",
             "name": "navbarWrapperBindings",
             "return": {
@@ -6606,7 +6662,7 @@
         },
         {
             "file": "src\\firebrick.ui.js",
-            "line": 137,
+            "line": 140,
             "description": "method used by _populate",
             "access": "private",
             "tagname": "",
@@ -6633,7 +6689,7 @@
         },
         {
             "file": "src\\firebrick.ui.js",
-            "line": 196,
+            "line": 198,
             "description": "this method converts shorthand component definitions",
             "example": [
                 "\n\t\t//component definition    \"|\"\n\t\t//converts to the component <hr>  -  fb.ui.cmp.hr"
@@ -6658,7 +6714,7 @@
         },
         {
             "file": "src\\firebrick.ui.js",
-            "line": 220,
+            "line": 222,
             "description": "get a component class by its shortname... uiName",
             "itemtype": "method",
             "name": "getByShortName",
@@ -6678,7 +6734,7 @@
         },
         {
             "file": "src\\firebrick.ui.js",
-            "line": 250,
+            "line": 252,
             "itemtype": "method",
             "name": "getCmp",
             "params": [
@@ -6697,7 +6753,7 @@
         },
         {
             "file": "src\\firebrick.ui.js",
-            "line": 259,
+            "line": 261,
             "description": "alias for Firebrick.get",
             "itemtype": "method",
             "name": "get",
@@ -6717,7 +6773,7 @@
         },
         {
             "file": "src\\firebrick.ui.js",
-            "line": 276,
+            "line": 278,
             "description": "convert a JS Object into a simple \"json\" type string, this is mainly used for the data-bind attribute in Knockout",
             "itemtype": "method",
             "name": "stringify",
@@ -6737,7 +6793,7 @@
         },
         {
             "file": "src\\firebrick.ui.js",
-            "line": 319,
+            "line": 321,
             "itemtype": "property",
             "name": "_registry",
             "type": "{Object}",
@@ -6748,7 +6804,7 @@
         },
         {
             "file": "src\\firebrick.ui.js",
-            "line": 326,
+            "line": 328,
             "itemtype": "method",
             "name": "add",
             "params": [
@@ -6771,7 +6827,7 @@
         },
         {
             "file": "src\\firebrick.ui.js",
-            "line": 340,
+            "line": 342,
             "itemtype": "method",
             "name": "get",
             "params": [
@@ -6790,7 +6846,7 @@
         },
         {
             "file": "src\\firebrick.ui.js",
-            "line": 364,
+            "line": 366,
             "itemtype": "property",
             "name": "listeners",
             "type": "{Object}",
@@ -6799,7 +6855,7 @@
         },
         {
             "file": "src\\firebrick.ui.js",
-            "line": 378,
+            "line": 380,
             "itemtype": "property",
             "name": "items",
             "type": "{Array|Function}",
@@ -6809,7 +6865,7 @@
         },
         {
             "file": "src\\firebrick.ui.js",
-            "line": 384,
+            "line": 386,
             "itemtype": "property",
             "name": "tpl",
             "type": "{Function}",

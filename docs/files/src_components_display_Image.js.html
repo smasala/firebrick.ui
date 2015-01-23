@@ -19,7 +19,7 @@
             
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 0.10.6</em>
+            <em>API Docs for: 0.11.0</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -104,6 +104,8 @@
                 <li><a href="../classes/components.fields.File.html">components.fields.File</a></li>
             
                 <li><a href="../classes/components.fields.Input.html">components.fields.Input</a></li>
+            
+                <li><a href="../classes/components.fields.Password.html">components.fields.Password</a></li>
             
                 <li><a href="../classes/components.fields.Radio.html">components.fields.Radio</a></li>
             
@@ -245,11 +247,11 @@ define([&quot;text!./Image.html&quot;, &quot;../common/Base&quot;, &quot;respons
 		responsiveClass: true,
 		/**
 		 * &quot;rounded, &quot;circle&quot;, &quot;thumbnail&quot;
-		 * @property imgTypeClass
+		 * @property imgType
 		 * @type {String|Boolean}
 		 * @default &quot;rounded&quot;
 		 */
-		imgTypeClass: &quot;rounded&quot;,
+		imgType: &quot;rounded&quot;,
 		/**
 		 * @method bindings
 		 * @return {Object}
@@ -260,35 +262,23 @@ define([&quot;text!./Image.html&quot;, &quot;../common/Base&quot;, &quot;respons
 			
 			obj.css[&quot;&#x27;img-responsive&#x27;&quot;] = me.responsiveClass;
 
-			if(me.imgTypeClass){
-				obj.css[ me.parseBind( &quot;img-&quot;+me.imgTypeClass ) ] = true;
+			if(me.imgType){
+				obj.css[ me.parseBind( &quot;img-&quot;+me.imgType ) ] = true;
+			}
+			
+			if(me.sizes){
+				obj.attr[&quot;&#x27;data-sizes&#x27;&quot;] = me.sizes;
+			}
+			
+			if(me.srcset){
+				obj.attr[&quot;&#x27;data-srcset&#x27;&quot;] = me.srcset;
+			}
+			
+			if(me.src){
+				obj.attr.src = me.src;
 			}
 			
 			return obj;
-		},
-		/**
-		 * @method getSizes
-		 * @return {String} data-sizes=&quot;xl,s&quot;
-		 */
-		getSizes: function(){
-			var me = this;
-			return me.sizes ? &quot;data-sizes=&#x27;&quot; + me.sizes + &quot;&#x27;&quot; : &quot;&quot;;
-		},
-		/**
-		 * @method getSrcset
-		 * @return {String} data-srcset=&quot;a.jpg, b.jpg&quot;
-		 */
-		getSrcset: function(){
-			var me = this;
-			return me.srcset ? &quot;data-srcset=&#x27;&quot; + me.srcset + &quot;&#x27;&quot; : &quot;&quot;;
-		},
-		/**
-		 * @method getSrc
-		 * @return {String} src=&quot;a.jpg&quot;
-		 */
-		getSrc: function(){
-			var me = this;
-			return me.src ? &quot;src=&#x27;&quot; + me.src + &quot;&#x27;&quot; : &quot;&quot;;
 		}
 	});
 });

@@ -33,6 +33,7 @@ YUI.add("yuidoc-meta", function(Y) {
         "components.fields.Email",
         "components.fields.File",
         "components.fields.Input",
+        "components.fields.Password",
         "components.fields.Radio",
         "components.fields.SelectBox",
         "components.fields.TextArea",

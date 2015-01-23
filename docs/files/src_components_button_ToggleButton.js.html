@@ -19,7 +19,7 @@
             
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 0.10.6</em>
+            <em>API Docs for: 0.11.0</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -104,6 +104,8 @@
                 <li><a href="../classes/components.fields.File.html">components.fields.File</a></li>
             
                 <li><a href="../classes/components.fields.Input.html">components.fields.Input</a></li>
+            
+                <li><a href="../classes/components.fields.Password.html">components.fields.Password</a></li>
             
                 <li><a href="../classes/components.fields.Radio.html">components.fields.Radio</a></li>
             
@@ -287,9 +289,16 @@ define([&quot;text!./ToggleButton.html&quot;, &quot;knockout&quot;, &quot;jquery
 		 */
 		btnStyle: &quot;default&quot;,
 		/**
+		 * lg,md,xs,sm
+		 * @property btnSize
+		 * @type {String|false}
+		 * @default &quot;md&quot;
+		 */
+		btnSize: &quot;md&quot;,
+		/**
 		 * options that are to be shown by the toggle button : [{text:&quot;abc&quot;, active:true, config:{btnStyle:&quot;success&quot;}, &quot;b&quot;, &quot;c&quot;, &quot;d&quot;]
 		 * @property options
-		 * @type {String}
+		 * @type {String|Array of Objects}
 		 * @default &quot;&#x27;&#x27;&quot;
 		 */
 		options:&quot;&#x27;&#x27;&quot;,
@@ -361,6 +370,10 @@ define([&quot;text!./ToggleButton.html&quot;, &quot;knockout&quot;, &quot;jquery
 			
 			if(me.btnStyle){
 				obj.css[me.parseBind(&quot;btn-&quot; + me.btnStyle)] = true;
+			}
+			
+			if(me.btnSize){
+				obj.css[me.parseBind(&quot;btn-&quot; + me.btnSize)] = true;
 			}
 			
 			return obj;
