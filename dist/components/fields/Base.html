@@ -1,5 +1,7 @@
 <div class="{{=it.formGroupClass}}" data-bind="{{=it.dataBind('containerBindings')}}">
-	<label for="{{=it.getId()}}" data-bind="{{=it.dataBind('labelBindings')}}"></label> 
+	{{?it.label !== false }}
+		<label for="{{=it.getId()}}" data-bind="{{=it.dataBind('labelBindings')}}"></label> 
+	{{?}}
 	<div data-bind="{{=it.dataBind('inputContainerBindings')}}">
 		<div data-bind="{{=it.dataBind('fieldBindings')}}">
 				

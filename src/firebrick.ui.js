@@ -41,7 +41,7 @@
 			 * @private
 			 * @type {String}
 			 */
-			version: "0.10.6",
+			version: "0.11.0",
 			
 			/**
 			 * used to cache pointers to classes when searching by "uiName"
@@ -127,6 +127,9 @@
 					component = me._buildComponent(items[i], parent);
 					html += component.html;
 					//cache component pointer so it can be found by id
+					if(!component.getId){
+						console.error("something went wrong", items[i], "is it defined correctly? Check the item name and dependency include");
+					}
 					me._componentCache[component.getId()] = component;
 					_items.push(component);
 				}
@@ -151,11 +154,11 @@
 					if(v._state !== "initial"){
 						component = v.init();
 					}
+					component = v;
 				}else if(v.viewName){
 					//Creates a view from a JS file
 					//Firebrick.create("MyApp.view.MyView", {})
 					component = Firebrick.create(v.viewName, v);
-					console.info("in here")
 				}else{
 					
 					v = me._componentFilter(v);
@@ -164,7 +167,7 @@
 						//v can be string or object
 						tmp = me.getByShortName(v.uiName || v);
 						if(!tmp){
-							console.error("Has", (v.uiName || v), "been added as a dependancy?");
+							console.error("Has", (v.uiName || v), "been added as a dependency?");
 						}
 						//Object.getPrototypeOf(object.create) to make a new copy of the properties and not a pointer to v
 						component = Firebrick.create(tmp._classname, (v.uiName ? Object.getPrototypeOf(Object.create(v)) : null));
@@ -172,7 +175,6 @@
 						//v is already a field class
 						component = v;
 					}
-					
 				}
 				
 				if(!component._parent){

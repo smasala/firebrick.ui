@@ -449,7 +449,7 @@ define(["text!./Base.html", "text!./Input.html", "../common/Base", "x-editable",
 				obj = {css:{}};
 			
 			if(me.inputAddon && typeof me.inputAddon === "string"){
-				obj.text = me.inputAddon;
+				obj.text = me.textBind(me.inputAddon);
 			}
 			
 			obj.css[me.parseBind(me.glyphiconClass)] = true;

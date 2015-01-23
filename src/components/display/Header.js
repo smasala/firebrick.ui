@@ -49,11 +49,11 @@ define(["text!./Header.html", "../common/Base"], function(tpl){
 		labelText:"",
 		/**
 		 * string = "default", "primary", "success" "info", "warning", "danger"  
-		 * @property labelCSS
+		 * @property labelStyle
 		 * @type {Boolean|String}
 		 * @default "default"
 		 */
-		labelCSS: "default",
+		labelStyle: "default",
 		/**
 		 * change to a url if you wish to convert the header into a link
 		 * @property href
@@ -81,7 +81,7 @@ define(["text!./Header.html", "../common/Base"], function(tpl){
 			var me = this;
 			if(me.secondaryText){
 				return {
-					text: me.secondaryText
+					text: me.textBind(me.secondaryText)
 				};
 			}else{
 				return {
@@ -98,13 +98,13 @@ define(["text!./Header.html", "../common/Base"], function(tpl){
 				obj;
 			if(me.labelText){
 				obj = {
-						text: me.parseBind(me.labelText),
+						text: me.textBind(me.labelText),
 						css:{
 							label: true
 						}
 					};
-				if(me.labelCSS){
-					obj.css[ me.parseBind( "label-"+me.labelCSS ) ] = true;
+				if(me.labelStyle){
+					obj.css[ me.parseBind( "label-"+me.labelStyle ) ] = true;
 				}
 				return obj;
 			}else{

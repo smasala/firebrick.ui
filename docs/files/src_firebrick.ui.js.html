@@ -19,7 +19,7 @@
             
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 0.10.6</em>
+            <em>API Docs for: 0.11.0</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -104,6 +104,8 @@
                 <li><a href="../classes/components.fields.File.html">components.fields.File</a></li>
             
                 <li><a href="../classes/components.fields.Input.html">components.fields.Input</a></li>
+            
+                <li><a href="../classes/components.fields.Password.html">components.fields.Password</a></li>
             
                 <li><a href="../classes/components.fields.Radio.html">components.fields.Radio</a></li>
             
@@ -229,7 +231,7 @@
 			 * @private
 			 * @type {String}
 			 */
-			version: &quot;0.10.6&quot;,
+			version: &quot;0.11.0&quot;,
 			
 			/**
 			 * used to cache pointers to classes when searching by &quot;uiName&quot;
@@ -315,6 +317,9 @@
 					component = me._buildComponent(items[i], parent);
 					html += component.html;
 					//cache component pointer so it can be found by id
+					if(!component.getId){
+						console.error(&quot;something went wrong&quot;, items[i], &quot;is it defined correctly? Check the item name and dependency include&quot;);
+					}
 					me._componentCache[component.getId()] = component;
 					_items.push(component);
 				}
@@ -339,11 +344,11 @@
 					if(v._state !== &quot;initial&quot;){
 						component = v.init();
 					}
+					component = v;
 				}else if(v.viewName){
 					//Creates a view from a JS file
 					//Firebrick.create(&quot;MyApp.view.MyView&quot;, {})
 					component = Firebrick.create(v.viewName, v);
-					console.info(&quot;in here&quot;)
 				}else{
 					
 					v = me._componentFilter(v);
@@ -352,7 +357,7 @@
 						//v can be string or object
 						tmp = me.getByShortName(v.uiName || v);
 						if(!tmp){
-							console.error(&quot;Has&quot;, (v.uiName || v), &quot;been added as a dependancy?&quot;);
+							console.error(&quot;Has&quot;, (v.uiName || v), &quot;been added as a dependency?&quot;);
 						}
 						//Object.getPrototypeOf(object.create) to make a new copy of the properties and not a pointer to v
 						component = Firebrick.create(tmp._classname, (v.uiName ? Object.getPrototypeOf(Object.create(v)) : null));
@@ -360,7 +365,6 @@
 						//v is already a field class
 						component = v;
 					}
-					
 				}
 				
 				if(!component._parent){

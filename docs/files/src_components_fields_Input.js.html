@@ -19,7 +19,7 @@
             
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 0.10.6</em>
+            <em>API Docs for: 0.11.0</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -104,6 +104,8 @@
                 <li><a href="../classes/components.fields.File.html">components.fields.File</a></li>
             
                 <li><a href="../classes/components.fields.Input.html">components.fields.Input</a></li>
+            
+                <li><a href="../classes/components.fields.Password.html">components.fields.Password</a></li>
             
                 <li><a href="../classes/components.fields.Radio.html">components.fields.Radio</a></li>
             
@@ -637,7 +639,7 @@ define([&quot;text!./Base.html&quot;, &quot;text!./Input.html&quot;, &quot;../co
 				obj = {css:{}};
 			
 			if(me.inputAddon &amp;&amp; typeof me.inputAddon === &quot;string&quot;){
-				obj.text = me.inputAddon;
+				obj.text = me.textBind(me.inputAddon);
 			}
 			
 			obj.css[me.parseBind(me.glyphiconClass)] = true;

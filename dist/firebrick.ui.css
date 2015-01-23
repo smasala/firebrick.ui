@@ -149,6 +149,14 @@ progress[value]::-webkit-progress-value{
 .fb-ui-toolbar .fb-ui-navbar.form-horizontal .form-group{
 	margin-bottom:0px;
 }
+.navbar-form{
+	margin-top:0px;
+	margin-bottom:0px;
+}
+.navbar .dropdown{
+	display:inline-block;
+	margin-right:4px;
+}
 .icon-arrow-left, .icon-arrow-right{
 	display:block;
 	height:100%;

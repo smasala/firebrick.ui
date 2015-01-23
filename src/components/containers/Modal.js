@@ -60,6 +60,12 @@ define(["text!./Modal.html", "./Base"], function(tpl){
 		 */
 		title:"",
 		/**
+		 * @property content
+		 * @type {String}
+		 * @default ""
+		 */
+		content:"",
+		/**
 		 * @property titleClass
 		 * @type {Boolean}
 		 * @default true
@@ -238,12 +244,15 @@ define(["text!./Modal.html", "./Base"], function(tpl){
 		 * @return {Object}
 		 */
 		bodyBindings: function(){
-			var me = this;
-			return {
-				css:{
-					"'modal-body'": me.bodyClass
-				}
-			};
+			var me = this , obj ={
+					css:{
+						"'modal-body'": me.bodyClass
+					}
+				};
+			if(me.content){
+				obj.text=me.textBind(me.content);
+			}
+			return obj;
 		},
 		/**
 		 * @method footerBindings

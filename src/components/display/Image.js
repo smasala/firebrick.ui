@@ -57,11 +57,11 @@ define(["text!./Image.html", "../common/Base", "responsive-images"], function(tp
 		responsiveClass: true,
 		/**
 		 * "rounded, "circle", "thumbnail"
-		 * @property imgTypeClass
+		 * @property imgType
 		 * @type {String|Boolean}
 		 * @default "rounded"
 		 */
-		imgTypeClass: "rounded",
+		imgType: "rounded",
 		/**
 		 * @method bindings
 		 * @return {Object}
@@ -72,35 +72,23 @@ define(["text!./Image.html", "../common/Base", "responsive-images"], function(tp
 			
 			obj.css["'img-responsive'"] = me.responsiveClass;
 
-			if(me.imgTypeClass){
-				obj.css[ me.parseBind( "img-"+me.imgTypeClass ) ] = true;
+			if(me.imgType){
+				obj.css[ me.parseBind( "img-"+me.imgType ) ] = true;
+			}
+			
+			if(me.sizes){
+				obj.attr["'data-sizes'"] = me.sizes;
+			}
+			
+			if(me.srcset){
+				obj.attr["'data-srcset'"] = me.srcset;
+			}
+			
+			if(me.src){
+				obj.attr.src = me.src;
 			}
 			
 			return obj;
-		},
-		/**
-		 * @method getSizes
-		 * @return {String} data-sizes="xl,s"
-		 */
-		getSizes: function(){
-			var me = this;
-			return me.sizes ? "data-sizes='" + me.sizes + "'" : "";
-		},
-		/**
-		 * @method getSrcset
-		 * @return {String} data-srcset="a.jpg, b.jpg"
-		 */
-		getSrcset: function(){
-			var me = this;
-			return me.srcset ? "data-srcset='" + me.srcset + "'" : "";
-		},
-		/**
-		 * @method getSrc
-		 * @return {String} src="a.jpg"
-		 */
-		getSrc: function(){
-			var me = this;
-			return me.src ? "src='" + me.src + "'" : "";
 		}
 	});
 });

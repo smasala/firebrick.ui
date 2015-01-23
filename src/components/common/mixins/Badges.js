@@ -12,18 +12,12 @@ define([], function(){
 	"use strict";
 	return Firebrick.define("Firebrick.ui.common.mixins.Badges", {
 		/**
-		 * show badge or not
+		 * false to hide badge, string to show text
 		 * @property badge
-		 * @type {Boolean}
+		 * @type {String|False}
 		 * @default false
 		 */
 		badge: false,
-		/**
-		 * @property badgeText
-		 * @type {String}
-		 * @default ""
-		 */
-		badgeText:"",
 		/**
 		 * @method badgeBindings
 		 * @return {Object}
@@ -35,7 +29,7 @@ define([], function(){
 					css:{
 						badge: true
 					},
-					text: me.textBind( me.badgeText )
+					text: me.textBind( me.badge )
 				};
 			return obj;
 		}

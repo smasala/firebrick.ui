@@ -1,3 +1,27 @@
+v0.11.0
+----------------------------
+* better error feedback when trying to create/include an item/view that eithe rhas an incorrect name or missing dependency
+* add missing id on gridcolumn
+* allow modal to have content (text)
+* add toggle btnSize property (xs, md etc)
+* add id to list items <li>
+* add javascript:void(0) to list links without a link value
+* box component has property html, for filling the div directly with HTML content
+* add missing uiName to component FormPanel
+* add component password
+* add missing textBind on inputAddon Property
+* selectbox bug fix when passing js array of data
+* change selectbox property data to options
+* add missing button dependency on buttongroup component
+* fix header text and secondary text bind
+* header property labelCSS to labelStyle
+* badgeText property removed and refactored to single property badge
+* imgTypeClass to imgType (image component)
+* fix text blockquote footer to work for strings and not just bindings
+* fix ui build bug
+* fix class creation bug when creating SPA 
+* add ability to add css classes to list items.  [{text:"item 1", id:"itm1", css:"class1 class2"}]
+
 v0.10.6
 ----------------------------
 * fix dropdown, pagination and breadcrumb after the list changes

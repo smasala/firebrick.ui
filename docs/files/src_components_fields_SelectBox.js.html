@@ -19,7 +19,7 @@
             
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 0.10.6</em>
+            <em>API Docs for: 0.11.0</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -104,6 +104,8 @@
                 <li><a href="../classes/components.fields.File.html">components.fields.File</a></li>
             
                 <li><a href="../classes/components.fields.Input.html">components.fields.Input</a></li>
+            
+                <li><a href="../classes/components.fields.Password.html">components.fields.Password</a></li>
             
                 <li><a href="../classes/components.fields.Radio.html">components.fields.Radio</a></li>
             
@@ -217,11 +219,11 @@ define([&quot;text!./SelectBox.html&quot;, &quot;jquery&quot;, &quot;./Input&quo
 		 */
 		subTpl:subTpl,
 		/**
-		 * @property data
-		 * @type {String|Function}
+		 * @property options
+		 * @type {String|Function|Array of Objects}
 		 * @default false
 		 */
-		data:false,
+		options:false,
 		/**
 		 * @property dataType
 		 * @type {String}
@@ -253,12 +255,21 @@ define([&quot;text!./SelectBox.html&quot;, &quot;jquery&quot;, &quot;./Input&quo
 		bindings:function(){
 			var me = this,
 				obj = me.callParent(arguments),
-				data = $.isFunction(me.data) ? me.data() : me.data;
+				data = me.options;
+			
+			if($.isFunction(data)){
+				data = data();
+			}else if($.isArray(data)){
+				data = &quot;Firebrick.ui.getCmp(&#x27;&quot; + me.getId() + &quot;&#x27;).options&quot;;
+			}
+			
 			obj.attr.multiple = me.multiSelect;
 			
 			if(!me.inplaceEdit){
 				obj.options = data;
 				obj.selectedOptions = me.selectedOptions;
+				obj.optionsText = me.optionsText;
+				obj.optionsValue = me.optionsValue;
 			}else{
 				obj.editable = me.selectedOptions;
 				obj.editableOptions = {

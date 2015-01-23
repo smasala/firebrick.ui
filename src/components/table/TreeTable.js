@@ -22,7 +22,7 @@ define(["./Table", "jquery-treetable"], function(){
 		 * @type {Object|String}
 		 * @default "''"
 		 */
-		data:"''",
+		data:false,
 		/**
 		 * @property treetable
 		 * @type {Boolean}

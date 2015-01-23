@@ -90,10 +90,19 @@ define(["text!./Radio.html", "../common/MultiplesBase", "./plugins/Radio"], func
 		 */
 		inputContainerBindings:function(){
 			var me = this,
-				obj = me.callParent(arguments);
-			if(me.options && !me.inplaceEdit){
-				obj.foreach = $.isArray(me.options) ? "Firebrick.ui.getCmp('" + me.getId() + "').options" : me.options;
+				obj = me.callParent(arguments),
+				data = me.options;
+			
+			if($.isFunction(data)){
+				data = data();
+			}else if($.isArray(data)){
+				data = "Firebrick.ui.getCmp('" + me.getId() + "').options";
 			}
+			
+			if(me.options && !me.inplaceEdit){
+				obj.foreach = data;
+			}
+			
 			return obj;
 		},
 		/**

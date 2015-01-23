@@ -47,6 +47,13 @@ define(["text!./Navbar.html", "./Base", "./List"], function(tpl){
 		 */
 		navbarClass:true,
 		/**
+		 * whether "navbar-form" css class is used
+		 * @property navbarFormClass
+		 * @type {Boolean}
+		 * @default true
+		 */
+		navbarFormClass: true,
+		/**
 		 * css class: navbar-header
 		 * @property navbarHeaderClass
 		 * @type {Boolean}
@@ -216,6 +223,11 @@ define(["text!./Navbar.html", "./Base", "./List"], function(tpl){
 				obj.css.collapse = true;
 				obj.css["'navbar-collapse'"] = true;
 			}
+			
+			if(me.navbarFormClass){
+				obj.css["'navbar-form'"] = true;
+			}
+			
 			return obj;
 		},
 		/**

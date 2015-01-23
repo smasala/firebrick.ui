@@ -11,7 +11,7 @@
  * @namespace components.button
  * @class ButtonGroup
  */
-define(["text!./ButtonGroup.html", "./Base"], function(tpl){
+define(["text!./ButtonGroup.html", "./Base", "./Button"], function(tpl){
 	"use strict";
 
 	return Firebrick.define("Firebrick.ui.button.ButtonGroup", {

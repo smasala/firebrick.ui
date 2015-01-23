@@ -68,10 +68,6 @@ define(["text!./Grid.html", "jquery", "./Base", "./GridColumn"], function(tpl, $
 				//replace items with the new object - _getItems returns an object {html:"", items:[]}
 				me.items[index] = newItem.items[0];
 				
-				if(!$.isPlainObject(item)){
-					return '<div data-bind="' + Firebrick.ui.utils.stringify(me.getBasicBindings()) + '">' + newItem.html + '</div>';
-				}
-				
 				return newItem.html;
 			}
 			return "";

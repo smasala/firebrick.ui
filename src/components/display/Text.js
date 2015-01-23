@@ -117,7 +117,7 @@ define(["text!./Text.html", "../common/Base"], function(tpl){
 			if(me.isHtml){
 				obj.html = me.blockQuoteFooter; 
 			}else{
-				obj.text = me.blockQuoteFooter;
+				obj.text = me.textBind(me.blockQuoteFooter);
 			}
 			return obj;
 		}

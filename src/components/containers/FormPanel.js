@@ -13,6 +13,12 @@ define(["./Panel", "./Form"], function(){
 	return Firebrick.define("Firebrick.ui.containers.FormPanel", {
 		extend:"Firebrick.ui.containers.Panel",
 		/**
+		 * @property uiName
+		 * @type {String}
+		 * @default "fb-ui-formpanel"
+		 */
+		uiName:"fb-ui-formpanel",
+		/**
 		 * configuration to pass to the form section of the Panel
 		 * @property formConfig
 		 * @type {Object}

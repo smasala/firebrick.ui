@@ -209,6 +209,18 @@ progress[value]::-webkit-progress-value{
 
 /*-- /Panel toolbars --*/
 
+
+/** navbar **/
+.navbar-form{
+	margin-top:0px;
+	margin-bottom:0px;
+}
+.navbar .dropdown{
+	display:inline-block;
+	margin-right:4px;
+}
+/*-- /navbar --*/
+
 /** datepicker **/
 .icon-arrow-left, .icon-arrow-right{
 	display:block;

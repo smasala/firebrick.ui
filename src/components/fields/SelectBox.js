@@ -29,11 +29,11 @@ define(["text!./SelectBox.html", "jquery", "./Input"], function(subTpl, $){
 		 */
 		subTpl:subTpl,
 		/**
-		 * @property data
-		 * @type {String|Function}
+		 * @property options
+		 * @type {String|Function|Array of Objects}
 		 * @default false
 		 */
-		data:false,
+		options:false,
 		/**
 		 * @property dataType
 		 * @type {String}
@@ -65,12 +65,21 @@ define(["text!./SelectBox.html", "jquery", "./Input"], function(subTpl, $){
 		bindings:function(){
 			var me = this,
 				obj = me.callParent(arguments),
-				data = $.isFunction(me.data) ? me.data() : me.data;
+				data = me.options;
+			
+			if($.isFunction(data)){
+				data = data();
+			}else if($.isArray(data)){
+				data = "Firebrick.ui.getCmp('" + me.getId() + "').options";
+			}
+			
 			obj.attr.multiple = me.multiSelect;
 			
 			if(!me.inplaceEdit){
 				obj.options = data;
 				obj.selectedOptions = me.selectedOptions;
+				obj.optionsText = me.optionsText;
+				obj.optionsValue = me.optionsValue;
 			}else{
 				obj.editable = me.selectedOptions;
 				obj.editableOptions = {

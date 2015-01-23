@@ -99,9 +99,16 @@ define(["text!./ToggleButton.html", "knockout", "jquery", "../common/MultiplesBa
 		 */
 		btnStyle: "default",
 		/**
+		 * lg,md,xs,sm
+		 * @property btnSize
+		 * @type {String|false}
+		 * @default "md"
+		 */
+		btnSize: "md",
+		/**
 		 * options that are to be shown by the toggle button : [{text:"abc", active:true, config:{btnStyle:"success"}, "b", "c", "d"]
 		 * @property options
-		 * @type {String}
+		 * @type {String|Array of Objects}
 		 * @default "''"
 		 */
 		options:"''",
@@ -173,6 +180,10 @@ define(["text!./ToggleButton.html", "knockout", "jquery", "../common/MultiplesBa
 			
 			if(me.btnStyle){
 				obj.css[me.parseBind("btn-" + me.btnStyle)] = true;
+			}
+			
+			if(me.btnSize){
+				obj.css[me.parseBind("btn-" + me.btnSize)] = true;
 			}
 			
 			return obj;

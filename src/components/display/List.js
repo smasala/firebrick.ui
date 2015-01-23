@@ -11,9 +11,16 @@
 define(["text!./List.html", "knockout", "jquery", "../common/Base",  "../common/mixins/Items", "../common/mixins/Badges"], function(tpl, ko, $){
 	"use strict";
 	
+	var _getVal = function(a){
+		if($.isFunction(a)){
+			return a();
+		}
+		return a;
+	};
+	
 	if(!ko.bindingHandlers.listRenderer){
 		/*
-		 * optionsRenderer for togglebuttons
+		 * optionsRenderer for list
 		 * create dynamic css along with static
 		 */
 		ko.virtualElements.allowedBindings.listRenderer = true;
@@ -27,10 +34,26 @@ define(["text!./List.html", "knockout", "jquery", "../common/Base",  "../common/
 		    		node = childNodes[i];
 		    		if(node instanceof HTMLUListElement){
 		    			//list item
-		    			$(node).attr("id", valueAccessor())
+		    			$(node).attr("id", valueAccessor());
 		    		}
 		    	}
 		    	
+		    }
+		};
+	}
+	
+	if(!ko.bindingHandlers.listItemRenderer){
+		ko.bindingHandlers.listItemRenderer = {
+		    init: function(element, valueAccessor, allBindings, viewModel, bindingContext) {
+				var $el = $(element);
+	
+				if($el.length){
+					if(viewModel){
+						if(viewModel.css){
+							$el.addClass(_getVal(viewModel.css));
+						}
+					}
+				}
 		    }
 		};
 	}
@@ -139,13 +162,15 @@ define(["text!./List.html", "knockout", "jquery", "../common/Base",  "../common/
 		 */
 		listItemBindings: function(){
 			var me  = this,
-				obj = {css:{}};
+				obj = {css:{}, attr:{}};
 			
 			if(me.listGroup && me.listItemGroupClass){
 				obj.css["'list-group-item'"] = me.listItemGroupClass;
 			}
 			
 			obj.css.divider = "$data === '|' || $data.divider ? true : false";
+			obj.attr.id = "$data.id || 'fb-ui-listitem-' + Firebrick.utils.uniqId()";
+			obj.listItemRenderer = true;
 			
 			return obj;
 		},
@@ -205,7 +230,7 @@ define(["text!./List.html", "knockout", "jquery", "../common/Base",  "../common/
 		listLinkBindings: function(){
 			var obj = {
 					attr:{
-						href: "typeof $data.link === 'string' ? $data.link : '#'"
+						href: "typeof $data.link === 'string' ? $data.link : 'javascript:void(0);'"
 					}
 			};
 			obj.attr["'data-target'"] = "$data.dataTarget ? $data.dataTarget : false";
