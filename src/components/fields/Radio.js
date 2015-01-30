@@ -90,17 +90,10 @@ define(["text!./Radio.html", "../common/MultiplesBase", "./plugins/Radio"], func
 		 */
 		inputContainerBindings:function(){
 			var me = this,
-				obj = me.callParent(arguments),
-				data = me.options;
-			
-			if($.isFunction(data)){
-				data = data();
-			}else if($.isArray(data)){
-				data = "Firebrick.ui.getCmp('" + me.getId() + "').options";
-			}
+				obj = me.callParent(arguments);
 			
 			if(me.options && !me.inplaceEdit){
-				obj.foreach = data;
+				obj.foreach = Firebrick.ui.helper.optionString(me);
 			}
 			
 			return obj;
@@ -118,7 +111,7 @@ define(["text!./Radio.html", "../common/MultiplesBase", "./plugins/Radio"], func
 				obj.editableOptions = {
 						optionsValue:me.parseBind(me.optionsPropValue),
 						optionsText:me.parseBind(me.optionsPropText),
-						options:me.options,
+						options:Firebrick.ui.helper.optionString(me),
 						type:"'checklist'"
 				};
 			}

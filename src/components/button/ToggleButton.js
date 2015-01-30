@@ -11,13 +11,6 @@
 define(["text!./ToggleButton.html", "knockout", "jquery", "../common/MultiplesBase"], function(subTpl, ko, $){
 	"use strict";
 	
-	var _getVal = function(a){
-		if($.isFunction(a)){
-			return a();
-		}
-		return a;
-	};
-	
 	if(!ko.bindingHandlers.toggleRenderer){
 		/*
 		 * optionsRenderer for togglebuttons
@@ -31,18 +24,18 @@ define(["text!./ToggleButton.html", "knockout", "jquery", "../common/MultiplesBa
 					inputId = allBindings().withProperties.inputItemId;
 
 				//ko data bound observable
-				inputId = _getVal(inputId);
+				inputId = Firebrick.ui.utils.getValue(inputId);
 				
 				if($el.length){
 					if(viewModel){
 						if(viewModel.btnStyle){
 							//replace element className with the new one defined in the binding
 							$el.attr("class", function(i, v){
-								return v.replace(currentStyle, "btn-"+_getVal(viewModel.btnStyle));
+								return v.replace(currentStyle, "btn-" + Firebrick.ui.utils.getValue(viewModel.btnStyle));
 							});
 						}
 						if(viewModel.css){
-							$el.addClass(_getVal(viewModel.css));
+							$el.addClass(Firebrick.ui.utils.getValue(viewModel.css));
 						}
 					}
 					//add the correct "for" attribute id and the input id
@@ -137,7 +130,7 @@ define(["text!./ToggleButton.html", "knockout", "jquery", "../common/MultiplesBa
 				attr:{
 					"'data-toggle'": me.parseBind(me.dataToggle)
 				},
-				foreach: $.isArray(me.options) ? "Firebrick.ui.getCmp('" + me.getId() + "').options" : me.options
+				foreach: Firebrick.ui.helper.optionString(me)
 			};
 		},
 		/**

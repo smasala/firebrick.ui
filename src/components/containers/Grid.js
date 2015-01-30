@@ -29,6 +29,14 @@ define(["text!./Grid.html", "jquery", "./Base", "./GridColumn"], function(tpl, $
 		 */
 		rowClass:true,
 		/**
+		 * @property defaults
+		 * @type {Object}
+		 * @default {uiName: fb.ui.cmp.gridcol}
+		 */
+		defaults:{
+			uiName: fb.ui.cmp.gridcol
+		},
+		/**
 		 * @method bindings
 		 * @return {Object}
 		 */

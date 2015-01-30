@@ -19,7 +19,7 @@
             
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 0.11.0</em>
+            <em>API Docs for: 0.11.9</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -79,6 +79,10 @@
             
                 <li><a href="../classes/components.containers.Panel.html">components.containers.Panel</a></li>
             
+                <li><a href="../classes/components.containers.tab.Pane.html">components.containers.tab.Pane</a></li>
+            
+                <li><a href="../classes/components.containers.TabPanel.html">components.containers.TabPanel</a></li>
+            
                 <li><a href="../classes/components.display.Alert.html">components.display.Alert</a></li>
             
                 <li><a href="../classes/components.display.Divider.html">components.display.Divider</a></li>
@@ -90,6 +94,8 @@
                 <li><a href="../classes/components.display.List.html">components.display.List</a></li>
             
                 <li><a href="../classes/components.display.Progress.html">components.display.Progress</a></li>
+            
+                <li><a href="../classes/components.display.Span.html">components.display.Span</a></li>
             
                 <li><a href="../classes/components.display.Text.html">components.display.Text</a></li>
             
@@ -128,6 +134,8 @@
                 <li><a href="../classes/components.table.Table.html">components.table.Table</a></li>
             
                 <li><a href="../classes/components.table.TreeTable.html">components.table.TreeTable</a></li>
+            
+                <li><a href="../classes/helper.html">helper</a></li>
             
                 <li><a href="../classes/plugins.RadioList.html">plugins.RadioList</a></li>
             
@@ -232,6 +240,12 @@ define([&quot;text!./Button.html&quot;, &quot;./Base&quot;, &quot;../common/mixi
 		 */
 		navbarItem: false,
 		/**
+		 * @property splitButton
+		 * @type {Boolean}
+		 * @default false
+		 */
+		splitButton: false,
+		/**
 		 * @property btnSize
 		 * @type {Boolean|String} false |  (&quot;sm&quot;, &quot;lg&quot;, &quot;xs&quot;)
 		 * @default false
@@ -278,6 +292,39 @@ define([&quot;text!./Button.html&quot;, &quot;./Base&quot;, &quot;../common/mixi
 		 */
 		dropdownConfig: null,
 		/**
+		 * if defined, this callback method will be applied to the click event of this particular button
+		 * @method callback
+		 * @type {Function}
+		 * @default null
+		 */
+		callback: null,
+		/**
+		 * @property srOnlyText
+		 * @type {String}
+		 * @default &quot;Toggle Dropdown&quot;
+		 */
+		srOnlyText: &quot;Toggle Dropdown&quot;,
+		/**
+		 * @method init
+		 * @return {Object} self
+		 */
+		init: function(){
+			var me = this;
+			
+			if(me.callback){
+				me.on(&quot;rendered&quot;, function(){
+					var el = me.getElement();
+					if(el){
+						el.on(&quot;click&quot;, function(){
+							me.callback.apply(me, arguments);
+						});
+					}
+				});
+			}
+			
+			return me.callParent(arguments);
+		},
+		/**
 		 * default bindings called by data-bind={{data-bind}}
 		 * @method bindings
 		 * @return {Object}
@@ -299,7 +346,7 @@ define([&quot;text!./Button.html&quot;, &quot;./Base&quot;, &quot;../common/mixi
 				obj.css[ me.parseBind(&quot;btn-&quot; + me.btnSize)] = true;
 			}
 			
-			if(me.data){
+			if(me.data &amp;&amp; !me.splitButton){
 				obj.css[&quot;&#x27;dropdown-toggle&#x27;&quot;] = true;
 				obj.attr[&quot;&#x27;data-toggle&#x27;&quot;] = &quot;&#x27;dropdown&#x27;&quot;;
 			}
@@ -345,9 +392,15 @@ define([&quot;text!./Button.html&quot;, &quot;./Base&quot;, &quot;../common/mixi
 					css:{}
 				};
 			
-			if(me.dropdownContainerClass){
-				obj.css[me.parseBind( me.dropdownContainerClass )] = true;	
+			if(me.splitButton){
+				obj.css[&quot;&#x27;btn-group&#x27;&quot;] = true;
+			}else{
+				//standard dropdown
+				if(me.dropdownContainerClass &amp;&amp; !me.splitButton){
+					obj.css[me.parseBind( me.dropdownContainerClass )] = true;	
+				}
 			}
+			
 			
 			return obj;
 		},
@@ -365,6 +418,45 @@ define([&quot;text!./Button.html&quot;, &quot;./Base&quot;, &quot;../common/mixi
 			obj = Firebrick.utils.copyover(obj, me.dropdownConfig);
 
 			return me._getItems(obj).html;
+		},
+		
+		/**
+		 * @method splitButtonBindings
+		 * @return {Object}
+		 */
+		splitButtonBindings: function(){
+			var me = this,
+				obj = {css:{}, attr:{}};
+			
+			obj.attr.type = me.parseBind(me.type);
+			obj.css.btn = true;
+			if(me.btnStyle){
+				obj.css[ me.parseBind(&quot;btn-&quot;+me.btnStyle)] = true;
+			}
+			if(me.btnSize){
+				obj.css[ me.parseBind(&quot;btn-&quot; + me.btnSize)] = true;
+			}
+			if(me.data){
+				obj.css[&quot;&#x27;dropdown-toggle&#x27;&quot;] = true;
+				obj.attr[&quot;&#x27;data-toggle&#x27;&quot;] = &quot;&#x27;dropdown&#x27;&quot;;
+			}
+			obj.attr[&quot;&#x27;aria-expanded&#x27;&quot;] = false;
+			
+			return obj;
+		},
+		
+		/**
+		 * @method splitButtonSrOnlyBinding
+		 * @return {Object}
+		 */
+		splitButtonSrOnlyBinding: function(){
+			var me = this,
+				obj = {css:{}};
+			
+			obj.css[&quot;&#x27;sr-only&#x27;&quot;] = true;
+			obj.text = me.textBind(me.srOnlyText);
+			
+			return obj;
 		}
 	});
 });

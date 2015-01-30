@@ -2,7 +2,7 @@
     "project": {
         "name": "Firebrick UI API",
         "description": "Firebrick UI API: a component library for Firebrick MVC, Knockout JS, jQuery and Bootstrap",
-        "version": "0.11.0",
+        "version": "0.11.9",
         "url": "https://github.com/smasala",
         "logo": "fbui_small.png"
     },
@@ -128,6 +128,17 @@
                 "components.common": 1
             }
         },
+        "src\\components\\containers\\tab\\Pane.js": {
+            "name": "src\\components\\containers\\tab\\Pane.js",
+            "modules": {},
+            "classes": {
+                "components.containers.tab.Pane": 1
+            },
+            "fors": {},
+            "namespaces": {
+                "components.containers.tab": 1
+            }
+        },
         "src\\components\\containers\\Base.js": {
             "name": "src\\components\\containers\\Base.js",
             "modules": {},
@@ -216,6 +227,17 @@
                 "components.containers": 1
             }
         },
+        "src\\components\\containers\\TabPanel.js": {
+            "name": "src\\components\\containers\\TabPanel.js",
+            "modules": {},
+            "classes": {
+                "components.containers.TabPanel": 1
+            },
+            "fors": {},
+            "namespaces": {
+                "components.containers": 1
+            }
+        },
         "src\\components\\display\\Alert.js": {
             "name": "src\\components\\display\\Alert.js",
             "modules": {},
@@ -276,6 +298,17 @@
             "modules": {},
             "classes": {
                 "components.display.Progress": 1
+            },
+            "fors": {},
+            "namespaces": {
+                "components.display": 1
+            }
+        },
+        "src\\components\\display\\Span.js": {
+            "name": "src\\components\\display\\Span.js",
+            "modules": {},
+            "classes": {
+                "components.display.Span": 1
             },
             "fors": {},
             "namespaces": {
@@ -514,6 +547,7 @@
             "classes": {
                 "ui": 1,
                 "utils": 1,
+                "helper": 1,
                 "renderer": 1,
                 "view.Base": 1
             },
@@ -539,6 +573,7 @@
                 "components.common.mixins.Toolbars": 1,
                 "components.common.Base": 1,
                 "components.common.MultiplesBase": 1,
+                "components.containers.tab.Pane": 1,
                 "components.containers.Base": 1,
                 "components.containers.Box": 1,
                 "components.containers.Form": 1,
@@ -547,12 +582,14 @@
                 "components.containers.GridColumn": 1,
                 "components.containers.Modal": 1,
                 "components.containers.Panel": 1,
+                "components.containers.TabPanel": 1,
                 "components.display.Alert": 1,
                 "components.display.Divider": 1,
                 "components.display.Header": 1,
                 "components.display.Image": 1,
                 "components.display.List": 1,
                 "components.display.Progress": 1,
+                "components.display.Span": 1,
                 "components.display.Text": 1,
                 "components.fields.Checkbox": 1,
                 "components.fields.Datepicker": 1,
@@ -579,6 +616,7 @@
                 "components.button": 1,
                 "components.common.mixins": 1,
                 "components.common": 1,
+                "components.containers.tab": 1,
                 "components.containers": 1,
                 "components.display": 1,
                 "components.fields": 1,
@@ -616,6 +654,7 @@
             "classes": {
                 "ui": 1,
                 "utils": 1,
+                "helper": 1,
                 "renderer": 1,
                 "view.Base": 1
             },
@@ -625,7 +664,7 @@
             "namespaces": {},
             "tag": "module",
             "file": "src\\firebrick.ui.js",
-            "line": 360,
+            "line": 496,
             "description": "Firebrick component library for Firebrick JS MVC"
         }
     },
@@ -794,6 +833,20 @@
             "description": "Base for inputs where multiple options are possible: checkboxes, radio and togglesbuttons for example",
             "extends": "components.fields.Input"
         },
+        "components.containers.tab.Pane": {
+            "name": "components.containers.tab.Pane",
+            "shortname": "components.containers.tab.Pane",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "Firebrick.ui.components",
+            "namespace": "components.containers.tab",
+            "file": "src\\components\\containers\\tab\\Pane.js",
+            "line": 5,
+            "extends": "components.containers.Base"
+        },
         "components.containers.Base": {
             "name": "components.containers.Base",
             "shortname": "components.containers.Base",
@@ -909,6 +962,20 @@
             "line": 5,
             "extends": "components.containers.Base"
         },
+        "components.containers.TabPanel": {
+            "name": "components.containers.TabPanel",
+            "shortname": "components.containers.TabPanel",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "Firebrick.ui.components",
+            "namespace": "components.containers",
+            "file": "src\\components\\containers\\TabPanel.js",
+            "line": 5,
+            "extends": "components.containers.Base"
+        },
         "components.display.Alert": {
             "name": "components.display.Alert",
             "shortname": "components.display.Alert",
@@ -993,6 +1060,20 @@
             "module": "Firebrick.ui.components",
             "namespace": "components.display",
             "file": "src\\components\\display\\Progress.js",
+            "line": 5,
+            "extends": "components.common.Base"
+        },
+        "components.display.Span": {
+            "name": "components.display.Span",
+            "shortname": "components.display.Span",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "Firebrick.ui.components",
+            "namespace": "components.display",
+            "file": "src\\components\\display\\Span.js",
             "line": 5,
             "extends": "components.common.Base"
         },
@@ -1305,8 +1386,22 @@
             "module": "Firebrick.ui",
             "namespace": "",
             "file": "src\\firebrick.ui.js",
-            "line": 272,
+            "line": 288,
             "description": "util methods"
+        },
+        "helper": {
+            "name": "helper",
+            "shortname": "helper",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "Firebrick.ui",
+            "namespace": "",
+            "file": "src\\firebrick.ui.js",
+            "line": 388,
+            "description": "similar to utils, but are component related"
         },
         "renderer": {
             "name": "renderer",
@@ -1319,7 +1414,7 @@
             "module": "Firebrick.ui",
             "namespace": "",
             "file": "src\\firebrick.ui.js",
-            "line": 315,
+            "line": 451,
             "description": "renderer methods"
         },
         "view.Base": {
@@ -1333,7 +1428,7 @@
             "module": "Firebrick.ui",
             "namespace": "",
             "file": "src\\firebrick.ui.js",
-            "line": 360,
+            "line": 496,
             "description": "Overwrites \"Firebrick.view.Base\"",
             "extends": "class.Base"
         }
@@ -1459,6 +1554,17 @@
             "file": "src\\components\\button\\Button.js",
             "line": 44,
             "itemtype": "property",
+            "name": "splitButton",
+            "type": "{Boolean}",
+            "default": "false",
+            "class": "components.button.Button",
+            "module": "Firebrick.ui.components",
+            "namespace": "components.button"
+        },
+        {
+            "file": "src\\components\\button\\Button.js",
+            "line": 50,
+            "itemtype": "property",
             "name": "btnSize",
             "type": "{Boolean|String} false |  (\"sm\", \"lg\", \"xs\")",
             "default": "false",
@@ -1468,7 +1574,7 @@
         },
         {
             "file": "src\\components\\button\\Button.js",
-            "line": 50,
+            "line": 56,
             "itemtype": "property",
             "name": "btnStyle",
             "type": "{Boolean|String} false | (default, primary, success, info, warning, danger, link)",
@@ -1479,7 +1585,7 @@
         },
         {
             "file": "src\\components\\button\\Button.js",
-            "line": 56,
+            "line": 62,
             "description": "used to inject something before the text <span>",
             "itemtype": "property",
             "name": "beforeText",
@@ -1491,7 +1597,7 @@
         },
         {
             "file": "src\\components\\button\\Button.js",
-            "line": 63,
+            "line": 69,
             "description": "used to inject something after the text <span>",
             "itemtype": "property",
             "name": "afterText",
@@ -1503,7 +1609,7 @@
         },
         {
             "file": "src\\components\\button\\Button.js",
-            "line": 70,
+            "line": 76,
             "description": "set as string to give the button stateful capabilities.",
             "itemtype": "property",
             "name": "loadingText",
@@ -1515,7 +1621,7 @@
         },
         {
             "file": "src\\components\\button\\Button.js",
-            "line": 77,
+            "line": 83,
             "description": "add data to turn button into a dropdown button",
             "itemtype": "property",
             "name": "data",
@@ -1527,7 +1633,7 @@
         },
         {
             "file": "src\\components\\button\\Button.js",
-            "line": 84,
+            "line": 90,
             "itemtype": "property",
             "name": "dropdownConfig",
             "type": "{Object}",
@@ -1538,7 +1644,43 @@
         },
         {
             "file": "src\\components\\button\\Button.js",
-            "line": 90,
+            "line": 96,
+            "description": "if defined, this callback method will be applied to the click event of this particular button",
+            "itemtype": "method",
+            "name": "callback",
+            "type": "{Function}",
+            "default": "null",
+            "class": "components.button.Button",
+            "module": "Firebrick.ui.components",
+            "namespace": "components.button"
+        },
+        {
+            "file": "src\\components\\button\\Button.js",
+            "line": 103,
+            "itemtype": "property",
+            "name": "srOnlyText",
+            "type": "{String}",
+            "default": "\"Toggle Dropdown\"",
+            "class": "components.button.Button",
+            "module": "Firebrick.ui.components",
+            "namespace": "components.button"
+        },
+        {
+            "file": "src\\components\\button\\Button.js",
+            "line": 109,
+            "itemtype": "method",
+            "name": "init",
+            "return": {
+                "description": "self",
+                "type": "Object"
+            },
+            "class": "components.button.Button",
+            "module": "Firebrick.ui.components",
+            "namespace": "components.button"
+        },
+        {
+            "file": "src\\components\\button\\Button.js",
+            "line": 129,
             "description": "default bindings called by data-bind={{data-bind}}",
             "itemtype": "method",
             "name": "bindings",
@@ -1552,7 +1694,7 @@
         },
         {
             "file": "src\\components\\button\\Button.js",
-            "line": 127,
+            "line": 166,
             "itemtype": "property",
             "name": "buttonTextBindings",
             "return": {
@@ -1565,7 +1707,7 @@
         },
         {
             "file": "src\\components\\button\\Button.js",
-            "line": 137,
+            "line": 176,
             "itemtype": "method",
             "name": "caretBindings",
             "return": {
@@ -1578,7 +1720,7 @@
         },
         {
             "file": "src\\components\\button\\Button.js",
-            "line": 148,
+            "line": 187,
             "itemtype": "method",
             "name": "dropdownContainerBindings",
             "return": {
@@ -1591,9 +1733,35 @@
         },
         {
             "file": "src\\components\\button\\Button.js",
-            "line": 164,
+            "line": 209,
             "itemtype": "method",
             "name": "getDropdown",
+            "return": {
+                "description": "",
+                "type": "Object"
+            },
+            "class": "components.button.Button",
+            "module": "Firebrick.ui.components",
+            "namespace": "components.button"
+        },
+        {
+            "file": "src\\components\\button\\Button.js",
+            "line": 225,
+            "itemtype": "method",
+            "name": "splitButtonBindings",
+            "return": {
+                "description": "",
+                "type": "Object"
+            },
+            "class": "components.button.Button",
+            "module": "Firebrick.ui.components",
+            "namespace": "components.button"
+        },
+        {
+            "file": "src\\components\\button\\Button.js",
+            "line": 250,
+            "itemtype": "method",
+            "name": "splitButtonSrOnlyBinding",
             "return": {
                 "description": "",
                 "type": "Object"
@@ -1741,7 +1909,7 @@
         },
         {
             "file": "src\\components\\button\\ToggleButton.js",
-            "line": 59,
+            "line": 52,
             "description": "component alias",
             "itemtype": "property",
             "name": "uiName",
@@ -1752,7 +1920,7 @@
         },
         {
             "file": "src\\components\\button\\ToggleButton.js",
-            "line": 65,
+            "line": 58,
             "itemtype": "property",
             "name": "subTpl",
             "type": "{String} html",
@@ -1762,7 +1930,7 @@
         },
         {
             "file": "src\\components\\button\\ToggleButton.js",
-            "line": 70,
+            "line": 63,
             "itemtype": "property",
             "name": "btnGroupClass",
             "type": "{Boolean|String}",
@@ -1773,7 +1941,7 @@
         },
         {
             "file": "src\\components\\button\\ToggleButton.js",
-            "line": 76,
+            "line": 69,
             "itemtype": "property",
             "name": "btnClass",
             "type": "{Boolean|String}",
@@ -1784,7 +1952,7 @@
         },
         {
             "file": "src\\components\\button\\ToggleButton.js",
-            "line": 82,
+            "line": 75,
             "itemtype": "property",
             "name": "defaultActive",
             "type": "{Boolean|String}",
@@ -1795,7 +1963,7 @@
         },
         {
             "file": "src\\components\\button\\ToggleButton.js",
-            "line": 88,
+            "line": 81,
             "itemtype": "property",
             "name": "dataToggle",
             "type": "{Boolean|String}",
@@ -1806,7 +1974,7 @@
         },
         {
             "file": "src\\components\\button\\ToggleButton.js",
-            "line": 94,
+            "line": 87,
             "description": "default, primary, success, danger, warning, info",
             "itemtype": "property",
             "name": "btnStyle",
@@ -1818,7 +1986,7 @@
         },
         {
             "file": "src\\components\\button\\ToggleButton.js",
-            "line": 101,
+            "line": 94,
             "description": "lg,md,xs,sm",
             "itemtype": "property",
             "name": "btnSize",
@@ -1830,7 +1998,7 @@
         },
         {
             "file": "src\\components\\button\\ToggleButton.js",
-            "line": 108,
+            "line": 101,
             "description": "options that are to be shown by the toggle button : [{text:\"abc\", active:true, config:{btnStyle:\"success\"}, \"b\", \"c\", \"d\"]",
             "itemtype": "property",
             "name": "options",
@@ -1842,7 +2010,7 @@
         },
         {
             "file": "src\\components\\button\\ToggleButton.js",
-            "line": 115,
+            "line": 108,
             "itemtype": "property",
             "name": "showLabel",
             "type": "{Boolean}",
@@ -1853,7 +2021,7 @@
         },
         {
             "file": "src\\components\\button\\ToggleButton.js",
-            "line": 121,
+            "line": 114,
             "itemtype": "property",
             "name": "optionsRenderer",
             "type": "{String}",
@@ -1864,7 +2032,7 @@
         },
         {
             "file": "src\\components\\button\\ToggleButton.js",
-            "line": 127,
+            "line": 120,
             "itemtype": "method",
             "name": "btnGroupBindings",
             "return": {
@@ -1877,7 +2045,7 @@
         },
         {
             "file": "src\\components\\button\\ToggleButton.js",
-            "line": 143,
+            "line": 136,
             "itemtype": "method",
             "name": "toggleInputBindings",
             "return": {
@@ -1890,7 +2058,7 @@
         },
         {
             "file": "src\\components\\button\\ToggleButton.js",
-            "line": 158,
+            "line": 151,
             "itemtype": "method",
             "name": "toggleLabelBindings",
             "return": {
@@ -1903,7 +2071,7 @@
         },
         {
             "file": "src\\components\\button\\ToggleButton.js",
-            "line": 191,
+            "line": 184,
             "itemtype": "method",
             "name": "toggleLabelTextBindings",
             "return": {
@@ -2065,6 +2233,22 @@
         {
             "file": "src\\components\\common\\mixins\\Toolbars.js",
             "line": 25,
+            "description": "use this to provide the given panel with toolbars",
+            "example": [
+                "\n\ttoolbar:[{\n\t\tposition: \"top\",\n\t\titems: [{...}]\n\t}]",
+                "\n\ttoolbar:[{\n\t\tposition: \"top\",\n\t\titems: [{...}]\n\t},{\n\t\tposition: \"bottom\",\n\t\titems: [{...}]\n\t}]"
+            ],
+            "itemtype": "property",
+            "name": "toolbar",
+            "type": "{Array of Objects}",
+            "default": "null",
+            "class": "components.common.mixins.Toolbars",
+            "module": "Firebrick.ui.components",
+            "namespace": "components.common.mixins"
+        },
+        {
+            "file": "src\\components\\common\\mixins\\Toolbars.js",
+            "line": 45,
             "description": "add css classes and other configuration to the container",
             "itemtype": "method",
             "name": "toolbarContainer",
@@ -2085,7 +2269,7 @@
         },
         {
             "file": "src\\components\\common\\mixins\\Toolbars.js",
-            "line": 49,
+            "line": 69,
             "itemtype": "method",
             "name": "getToolbars",
             "return": {
@@ -2396,7 +2580,7 @@
         },
         {
             "file": "src\\components\\common\\Base.js",
-            "line": 233,
+            "line": 229,
             "description": "compile and cache template",
             "itemtype": "method",
             "name": "_precompile",
@@ -2410,7 +2594,7 @@
         },
         {
             "file": "src\\components\\common\\Base.js",
-            "line": 256,
+            "line": 252,
             "description": "use this as a wrapper in a template if the property you wish to call COULD be either a primitive or a function",
             "itemtype": "method",
             "name": "b",
@@ -2431,7 +2615,7 @@
         },
         {
             "file": "src\\components\\common\\Base.js",
-            "line": 265,
+            "line": 261,
             "description": "when overriding this or any other method, this.callParent(arguments) calls the method in the super class",
             "itemtype": "method",
             "name": "init",
@@ -2441,7 +2625,7 @@
         },
         {
             "file": "src\\components\\common\\Base.js",
-            "line": 298,
+            "line": 294,
             "itemtype": "method",
             "name": "_getCSSClasses",
             "access": "private",
@@ -2456,7 +2640,7 @@
         },
         {
             "file": "src\\components\\common\\Base.js",
-            "line": 319,
+            "line": 315,
             "description": "mother of all basic bindings",
             "itemtype": "method",
             "name": "bindings",
@@ -2470,7 +2654,7 @@
         },
         {
             "file": "src\\components\\common\\Base.js",
-            "line": 333,
+            "line": 329,
             "description": "compile the template",
             "itemtype": "method",
             "name": "template",
@@ -2496,7 +2680,7 @@
         },
         {
             "file": "src\\components\\common\\Base.js",
-            "line": 348,
+            "line": 344,
             "description": "build the compiled template",
             "itemtype": "method",
             "name": "build",
@@ -2517,7 +2701,7 @@
         },
         {
             "file": "src\\components\\common\\Base.js",
-            "line": 360,
+            "line": 356,
             "itemtype": "method",
             "name": "dataBind",
             "params": [
@@ -2541,7 +2725,7 @@
         },
         {
             "file": "src\\components\\common\\Base.js",
-            "line": 374,
+            "line": 370,
             "description": "called when calling {{{getSubTpl}}} in component template",
             "itemtype": "method",
             "name": "getSubTpl",
@@ -2555,7 +2739,7 @@
         },
         {
             "file": "src\\components\\common\\Base.js",
-            "line": 382,
+            "line": 378,
             "description": "find the parent of this class\niterate up the inheritance tree looking for a classname that differs from the current and that \"subTpl\" or \"tpl\" don't match either",
             "access": "private",
             "tagname": "",
@@ -2571,7 +2755,7 @@
         },
         {
             "file": "src\\components\\common\\Base.js",
-            "line": 400,
+            "line": 396,
             "description": "called when calling {{{getParentTpl}}} in component template",
             "itemtype": "method",
             "name": "getParentTpl",
@@ -2585,7 +2769,7 @@
         },
         {
             "file": "src\\components\\common\\Base.js",
-            "line": 409,
+            "line": 405,
             "description": "called when calling {{{getParentSubTpl}}} in component template",
             "itemtype": "method",
             "name": "getParentSubTpl",
@@ -2599,7 +2783,7 @@
         },
         {
             "file": "src\\components\\common\\Base.js",
-            "line": 418,
+            "line": 414,
             "description": "clean string - i.e. remove all ' from string",
             "itemtype": "method",
             "name": "cleanString",
@@ -2613,7 +2797,7 @@
         },
         {
             "file": "src\\components\\common\\Base.js",
-            "line": 426,
+            "line": 422,
             "description": "attach ' to the start and end of the string for KO binds",
             "itemtype": "method",
             "name": "parseBind",
@@ -2634,7 +2818,7 @@
         },
         {
             "file": "src\\components\\common\\Base.js",
-            "line": 435,
+            "line": 431,
             "description": "takes a string and prepares it for Firebrick text call",
             "example": [
                 "\n\ttextBind(\"mystring.abc.key\")\n\t// returns = fb.text('mystring.abc.key')"
@@ -2693,6 +2877,103 @@
             "class": "components.common.MultiplesBase",
             "module": "Firebrick.ui.components",
             "namespace": "components.common"
+        },
+        {
+            "file": "src\\components\\containers\\tab\\Pane.js",
+            "line": 17,
+            "itemtype": "property",
+            "name": "uiName",
+            "type": "{String}",
+            "default": "\"fb-ui-tabpane\"",
+            "class": "components.containers.tab.Pane",
+            "module": "Firebrick.ui.components",
+            "namespace": "components.containers.tab"
+        },
+        {
+            "file": "src\\components\\containers\\tab\\Pane.js",
+            "line": 23,
+            "itemtype": "property",
+            "name": "active",
+            "type": "{Boolean}",
+            "default": "false",
+            "class": "components.containers.tab.Pane",
+            "module": "Firebrick.ui.components",
+            "namespace": "components.containers.tab"
+        },
+        {
+            "file": "src\\components\\containers\\tab\\Pane.js",
+            "line": 29,
+            "itemtype": "property",
+            "name": "content",
+            "type": "{String}",
+            "default": "\"\"",
+            "class": "components.containers.tab.Pane",
+            "module": "Firebrick.ui.components",
+            "namespace": "components.containers.tab"
+        },
+        {
+            "file": "src\\components\\containers\\tab\\Pane.js",
+            "line": 35,
+            "description": "whether the content is html content",
+            "itemtype": "property",
+            "name": "contentHTML",
+            "type": "{Boolean}",
+            "default": "false",
+            "class": "components.containers.tab.Pane",
+            "module": "Firebrick.ui.components",
+            "namespace": "components.containers.tab"
+        },
+        {
+            "file": "src\\components\\containers\\tab\\Pane.js",
+            "line": 42,
+            "description": "returns the Tab component, not the TabPane!",
+            "itemtype": "method",
+            "name": "getTabId",
+            "return": {
+                "description": "",
+                "type": "String"
+            },
+            "class": "components.containers.tab.Pane",
+            "module": "Firebrick.ui.components",
+            "namespace": "components.containers.tab"
+        },
+        {
+            "file": "src\\components\\containers\\tab\\Pane.js",
+            "line": 50,
+            "description": "set by tab",
+            "itemtype": "property",
+            "name": "paneIndex",
+            "type": "{integer}",
+            "default": "0",
+            "class": "components.containers.tab.Pane",
+            "module": "Firebrick.ui.components",
+            "namespace": "components.containers.tab"
+        },
+        {
+            "file": "src\\components\\containers\\tab\\Pane.js",
+            "line": 57,
+            "itemtype": "method",
+            "name": "getPaneId",
+            "return": {
+                "description": "",
+                "type": "String"
+            },
+            "class": "components.containers.tab.Pane",
+            "module": "Firebrick.ui.components",
+            "namespace": "components.containers.tab"
+        },
+        {
+            "file": "src\\components\\containers\\tab\\Pane.js",
+            "line": 67,
+            "itemtype": "method",
+            "name": "bindings",
+            "return": {
+                "description": "",
+                "type": "Object"
+            },
+            "class": "components.containers.tab.Pane",
+            "module": "Firebrick.ui.components",
+            "namespace": "components.containers.tab"
         },
         {
             "file": "src\\components\\containers\\Box.js",
@@ -3025,6 +3306,17 @@
         {
             "file": "src\\components\\containers\\Grid.js",
             "line": 31,
+            "itemtype": "property",
+            "name": "defaults",
+            "type": "{Object}",
+            "default": "{uiName: fb.ui.cmp.gridcol}",
+            "class": "components.containers.Grid",
+            "module": "Firebrick.ui.components",
+            "namespace": "components.containers"
+        },
+        {
+            "file": "src\\components\\containers\\Grid.js",
+            "line": 39,
             "itemtype": "method",
             "name": "bindings",
             "return": {
@@ -3037,7 +3329,7 @@
         },
         {
             "file": "src\\components\\containers\\Grid.js",
-            "line": 43,
+            "line": 51,
             "itemtype": "method",
             "name": "getBasicBindings",
             "return": {
@@ -3050,7 +3342,7 @@
         },
         {
             "file": "src\\components\\containers\\Grid.js",
-            "line": 55,
+            "line": 63,
             "description": "used when calling {{{getGridItem}}} in template",
             "itemtype": "method",
             "name": "getGridItem",
@@ -3674,22 +3966,6 @@
         {
             "file": "src\\components\\containers\\Panel.js",
             "line": 115,
-            "description": "use this to provide the given panel with toolbars",
-            "example": [
-                "\n\ttoolbar:[{\n\t\tposition: \"top\",\n\t\titems: [{...}]\n\t}]",
-                "\n\ttoolbar:[{\n\t\tposition: \"top\",\n\t\titems: [{...}]\n\t},{\n\t\tposition: \"bottom\",\n\t\titems: [{...}]\n\t}]"
-            ],
-            "itemtype": "property",
-            "name": "toolbar",
-            "type": "{Array of Objects}",
-            "default": "null",
-            "class": "components.containers.Panel",
-            "module": "Firebrick.ui.components",
-            "namespace": "components.containers"
-        },
-        {
-            "file": "src\\components\\containers\\Panel.js",
-            "line": 135,
             "description": "Data bindings",
             "itemtype": "method",
             "name": "bindings",
@@ -3703,7 +3979,7 @@
         },
         {
             "file": "src\\components\\containers\\Panel.js",
-            "line": 152,
+            "line": 132,
             "itemtype": "method",
             "name": "tabBindings",
             "return": {
@@ -3716,7 +3992,7 @@
         },
         {
             "file": "src\\components\\containers\\Panel.js",
-            "line": 173,
+            "line": 153,
             "itemtype": "method",
             "name": "panelHeaderBindings",
             "return": {
@@ -3729,7 +4005,7 @@
         },
         {
             "file": "src\\components\\containers\\Panel.js",
-            "line": 191,
+            "line": 171,
             "itemtype": "method",
             "name": "headerItemsBindings",
             "return": {
@@ -3742,7 +4018,7 @@
         },
         {
             "file": "src\\components\\containers\\Panel.js",
-            "line": 210,
+            "line": 190,
             "itemtype": "method",
             "name": "collapsibleLinkBindings",
             "return": {
@@ -3755,7 +4031,7 @@
         },
         {
             "file": "src\\components\\containers\\Panel.js",
-            "line": 226,
+            "line": 206,
             "itemtype": "method",
             "name": "panelHeaderTextBindings",
             "return": {
@@ -3768,7 +4044,7 @@
         },
         {
             "file": "src\\components\\containers\\Panel.js",
-            "line": 245,
+            "line": 225,
             "itemtype": "method",
             "name": "panelBodyBindings",
             "return": {
@@ -3776,6 +4052,258 @@
                 "type": "Object"
             },
             "class": "components.containers.Panel",
+            "module": "Firebrick.ui.components",
+            "namespace": "components.containers"
+        },
+        {
+            "file": "src\\components\\containers\\TabPanel.js",
+            "line": 16,
+            "itemtype": "property",
+            "name": "uiName",
+            "type": "{String}",
+            "default": "\"fb-ui-tabpanel\"",
+            "class": "components.containers.TabPanel",
+            "module": "Firebrick.ui.components",
+            "namespace": "components.containers"
+        },
+        {
+            "file": "src\\components\\containers\\TabPanel.js",
+            "line": 22,
+            "access": "private",
+            "tagname": "",
+            "itemtype": "method",
+            "name": "_getListTplId",
+            "return": {
+                "description": "",
+                "type": "String"
+            },
+            "class": "components.containers.TabPanel",
+            "module": "Firebrick.ui.components",
+            "namespace": "components.containers"
+        },
+        {
+            "file": "src\\components\\containers\\TabPanel.js",
+            "line": 30,
+            "access": "private",
+            "tagname": "",
+            "itemtype": "method",
+            "name": "_getTabPaneTplId",
+            "return": {
+                "description": "",
+                "type": "String"
+            },
+            "class": "components.containers.TabPanel",
+            "module": "Firebrick.ui.components",
+            "namespace": "components.containers"
+        },
+        {
+            "file": "src\\components\\containers\\TabPanel.js",
+            "line": 38,
+            "itemtype": "property",
+            "name": "_tabs",
+            "access": "private",
+            "tagname": "",
+            "type": "{Array}",
+            "default": "null",
+            "class": "components.containers.TabPanel",
+            "module": "Firebrick.ui.components",
+            "namespace": "components.containers"
+        },
+        {
+            "file": "src\\components\\containers\\TabPanel.js",
+            "line": 45,
+            "itemtype": "property",
+            "name": "defaults",
+            "type": "{Object}",
+            "default": "{\n\t\t\t\tuiName:fb.ui.cmp.tabpane\n\t\t\t}",
+            "class": "components.containers.TabPanel",
+            "module": "Firebrick.ui.components",
+            "namespace": "components.containers"
+        },
+        {
+            "file": "src\\components\\containers\\TabPanel.js",
+            "line": 55,
+            "itemtype": "method",
+            "name": "bindings",
+            "return": {
+                "description": "",
+                "type": "Object"
+            },
+            "class": "components.containers.TabPanel",
+            "module": "Firebrick.ui.components",
+            "namespace": "components.containers"
+        },
+        {
+            "file": "src\\components\\containers\\TabPanel.js",
+            "line": 67,
+            "itemtype": "method",
+            "name": "listTemplateBindings",
+            "return": {
+                "description": "",
+                "type": "Object"
+            },
+            "class": "components.containers.TabPanel",
+            "module": "Firebrick.ui.components",
+            "namespace": "components.containers"
+        },
+        {
+            "file": "src\\components\\containers\\TabPanel.js",
+            "line": 83,
+            "itemtype": "method",
+            "name": "listBindings",
+            "return": {
+                "description": "",
+                "type": "Object"
+            },
+            "class": "components.containers.TabPanel",
+            "module": "Firebrick.ui.components",
+            "namespace": "components.containers"
+        },
+        {
+            "file": "src\\components\\containers\\TabPanel.js",
+            "line": 97,
+            "itemtype": "method",
+            "name": "listItemBindings",
+            "return": {
+                "description": "",
+                "type": "Object"
+            },
+            "class": "components.containers.TabPanel",
+            "module": "Firebrick.ui.components",
+            "namespace": "components.containers"
+        },
+        {
+            "file": "src\\components\\containers\\TabPanel.js",
+            "line": 110,
+            "itemtype": "method",
+            "name": "listItemLinkBindings",
+            "return": {
+                "description": "",
+                "type": "Object"
+            },
+            "class": "components.containers.TabPanel",
+            "module": "Firebrick.ui.components",
+            "namespace": "components.containers"
+        },
+        {
+            "file": "src\\components\\containers\\TabPanel.js",
+            "line": 127,
+            "itemtype": "method",
+            "name": "listItemTextBindings",
+            "return": {
+                "description": "",
+                "type": "Object"
+            },
+            "class": "components.containers.TabPanel",
+            "module": "Firebrick.ui.components",
+            "namespace": "components.containers"
+        },
+        {
+            "file": "src\\components\\containers\\TabPanel.js",
+            "line": 140,
+            "itemtype": "method",
+            "name": "tabContentBindings",
+            "return": {
+                "description": "",
+                "type": "Object"
+            },
+            "class": "components.containers.TabPanel",
+            "module": "Firebrick.ui.components",
+            "namespace": "components.containers"
+        },
+        {
+            "file": "src\\components\\containers\\TabPanel.js",
+            "line": 153,
+            "itemtype": "method",
+            "name": "registerTab",
+            "params": [
+                {
+                    "name": "tabId",
+                    "description": "optional - generates one if not supplied",
+                    "type": "String"
+                },
+                {
+                    "name": "index",
+                    "description": "",
+                    "type": "Integer"
+                }
+            ],
+            "return": {
+                "description": "\"#\"",
+                "type": "Id"
+            },
+            "class": "components.containers.TabPanel",
+            "module": "Firebrick.ui.components",
+            "namespace": "components.containers"
+        },
+        {
+            "file": "src\\components\\containers\\TabPanel.js",
+            "line": 174,
+            "itemtype": "method",
+            "name": "addTab",
+            "params": [
+                {
+                    "name": "id",
+                    "description": "",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "self"
+            },
+            "class": "components.containers.TabPanel",
+            "module": "Firebrick.ui.components",
+            "namespace": "components.containers"
+        },
+        {
+            "file": "src\\components\\containers\\TabPanel.js",
+            "line": 188,
+            "description": "returns tab id at index position",
+            "itemtype": "method",
+            "name": "getTabId",
+            "params": [
+                {
+                    "name": "index",
+                    "description": "",
+                    "type": "Integer"
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "String"
+            },
+            "class": "components.containers.TabPanel",
+            "module": "Firebrick.ui.components",
+            "namespace": "components.containers"
+        },
+        {
+            "file": "src\\components\\containers\\TabPanel.js",
+            "line": 198,
+            "description": "used when calling {{{getTabPaneItem}}} in template",
+            "itemtype": "method",
+            "name": "getTabPaneItem",
+            "params": [
+                {
+                    "name": "iteration",
+                    "description": "index",
+                    "type": "Int"
+                },
+                {
+                    "name": "iteration",
+                    "description": "object",
+                    "type": "Object"
+                },
+                {
+                    "name": "iteration",
+                    "description": "context",
+                    "type": "Context"
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "String"
+            },
+            "class": "components.containers.TabPanel",
             "module": "Firebrick.ui.components",
             "namespace": "components.containers"
         },
@@ -4002,7 +4530,7 @@
             "file": "src\\components\\display\\Header.js",
             "line": 64,
             "itemtype": "method",
-            "name": "bindings",
+            "name": "textBindings",
             "return": {
                 "description": "Object"
             },
@@ -4136,7 +4664,7 @@
         },
         {
             "file": "src\\components\\display\\List.js",
-            "line": 64,
+            "line": 57,
             "itemtype": "property",
             "name": "uiName",
             "type": "{String}",
@@ -4147,7 +4675,7 @@
         },
         {
             "file": "src\\components\\display\\List.js",
-            "line": 70,
+            "line": 63,
             "itemtype": "property",
             "name": "tpl",
             "type": "{String} html",
@@ -4158,7 +4686,7 @@
         },
         {
             "file": "src\\components\\display\\List.js",
-            "line": 76,
+            "line": 69,
             "description": "type of list, ul or ol",
             "itemtype": "property",
             "name": "listType",
@@ -4170,7 +4698,7 @@
         },
         {
             "file": "src\\components\\display\\List.js",
-            "line": 83,
+            "line": 76,
             "description": "is a list group?",
             "itemtype": "property",
             "name": "listGroup",
@@ -4182,7 +4710,7 @@
         },
         {
             "file": "src\\components\\display\\List.js",
-            "line": 90,
+            "line": 83,
             "description": "defaults to true but only comes into effect with property \"listGroup\"",
             "itemtype": "property",
             "name": "listItemGroupClass",
@@ -4194,7 +4722,7 @@
         },
         {
             "file": "src\\components\\display\\List.js",
-            "line": 97,
+            "line": 90,
             "description": "items to parse into the list",
             "itemtype": "property",
             "name": "data",
@@ -4206,7 +4734,7 @@
         },
         {
             "file": "src\\components\\display\\List.js",
-            "line": 104,
+            "line": 97,
             "description": "unstyled - applies list-unstyled css class to list container (ul/ol)",
             "itemtype": "property",
             "name": "unstyled",
@@ -4218,7 +4746,7 @@
         },
         {
             "file": "src\\components\\display\\List.js",
-            "line": 111,
+            "line": 104,
             "description": "inject a template into the <li>{preItemTpl}<span></span>{postItemTpl}</li> item",
             "itemtype": "property",
             "name": "preItemTpl",
@@ -4230,7 +4758,7 @@
         },
         {
             "file": "src\\components\\display\\List.js",
-            "line": 118,
+            "line": 111,
             "description": "inject a template into the <li>{preItemTpl}<span></span>{postItemTpl}</li> item",
             "itemtype": "property",
             "name": "postItemTpl",
@@ -4242,7 +4770,7 @@
         },
         {
             "file": "src\\components\\display\\List.js",
-            "line": 125,
+            "line": 118,
             "description": "wrap the list element content in a <a></a> link",
             "itemtype": "property",
             "name": "linkedList",
@@ -4254,7 +4782,7 @@
         },
         {
             "file": "src\\components\\display\\List.js",
-            "line": 132,
+            "line": 125,
             "itemtype": "method",
             "name": "virtualContainerBindings",
             "return": {
@@ -4267,7 +4795,7 @@
         },
         {
             "file": "src\\components\\display\\List.js",
-            "line": 140,
+            "line": 133,
             "itemtype": "method",
             "name": "bindings",
             "return": {
@@ -4280,7 +4808,7 @@
         },
         {
             "file": "src\\components\\display\\List.js",
-            "line": 159,
+            "line": 152,
             "itemtype": "method",
             "name": "listItemBindings",
             "return": {
@@ -4293,7 +4821,7 @@
         },
         {
             "file": "src\\components\\display\\List.js",
-            "line": 177,
+            "line": 170,
             "itemtype": "method",
             "name": "listItemTextBindings",
             "return": {
@@ -4306,7 +4834,7 @@
         },
         {
             "file": "src\\components\\display\\List.js",
-            "line": 188,
+            "line": 181,
             "itemtype": "method",
             "name": "listTemplateBindings",
             "return": {
@@ -4319,7 +4847,7 @@
         },
         {
             "file": "src\\components\\display\\List.js",
-            "line": 203,
+            "line": 196,
             "access": "private",
             "tagname": "",
             "itemtype": "method",
@@ -4334,7 +4862,7 @@
         },
         {
             "file": "src\\components\\display\\List.js",
-            "line": 212,
+            "line": 205,
             "itemtype": "method",
             "name": "childrenBindings",
             "return": {
@@ -4347,7 +4875,7 @@
         },
         {
             "file": "src\\components\\display\\List.js",
-            "line": 226,
+            "line": 219,
             "itemtype": "method",
             "name": "listLinkBindings",
             "return": {
@@ -4445,6 +4973,17 @@
             "itemtype": "method",
             "name": "progressContainerBindings",
             "class": "components.display.Progress",
+            "module": "Firebrick.ui.components",
+            "namespace": "components.display"
+        },
+        {
+            "file": "src\\components\\display\\Span.js",
+            "line": 17,
+            "itemtype": "property",
+            "name": "text",
+            "type": "{String}",
+            "default": "\"\"",
+            "class": "components.display.Span",
             "module": "Firebrick.ui.components",
             "namespace": "components.display"
         },
@@ -5557,7 +6096,7 @@
         },
         {
             "file": "src\\components\\fields\\Radio.js",
-            "line": 108,
+            "line": 101,
             "itemtype": "method",
             "name": "bindings",
             "return": {
@@ -6110,13 +6649,14 @@
             "itemtype": "property",
             "name": "uiName",
             "type": "{String}",
+            "default": "\"fb-ui-table\"",
             "class": "components.table.Table",
             "module": "Firebrick.ui.components",
             "namespace": "components.table"
         },
         {
             "file": "src\\components\\table\\Table.js",
-            "line": 20,
+            "line": 21,
             "itemtype": "property",
             "name": "tpl",
             "type": "{String} html",
@@ -6126,7 +6666,7 @@
         },
         {
             "file": "src\\components\\table\\Table.js",
-            "line": 25,
+            "line": 26,
             "description": "sets the bootstrap css class \"responsive\" to the table",
             "itemtype": "property",
             "name": "responsiveClass",
@@ -6138,7 +6678,7 @@
         },
         {
             "file": "src\\components\\table\\Table.js",
-            "line": 32,
+            "line": 33,
             "description": "activates the responsive-table-js package on the table",
             "itemtype": "property",
             "name": "responsive",
@@ -6150,7 +6690,7 @@
         },
         {
             "file": "src\\components\\table\\Table.js",
-            "line": 39,
+            "line": 40,
             "description": "{\n\tcols:[{}]\n\trows:[{}]\n}",
             "itemtype": "property",
             "name": "data",
@@ -6162,7 +6702,7 @@
         },
         {
             "file": "src\\components\\table\\Table.js",
-            "line": 49,
+            "line": 50,
             "itemtype": "property",
             "name": "tableStriped",
             "type": "{Boolean|String}",
@@ -6173,7 +6713,7 @@
         },
         {
             "file": "src\\components\\table\\Table.js",
-            "line": 55,
+            "line": 56,
             "itemtype": "property",
             "name": "tableHover",
             "type": "{Boolean|String}",
@@ -6184,7 +6724,7 @@
         },
         {
             "file": "src\\components\\table\\Table.js",
-            "line": 61,
+            "line": 62,
             "itemtype": "property",
             "name": "tableCondensed",
             "type": "{Boolean|String}",
@@ -6195,7 +6735,7 @@
         },
         {
             "file": "src\\components\\table\\Table.js",
-            "line": 67,
+            "line": 68,
             "itemtype": "property",
             "name": "tableBordered",
             "type": "{Boolean|String}",
@@ -6206,7 +6746,7 @@
         },
         {
             "file": "src\\components\\table\\Table.js",
-            "line": 73,
+            "line": 74,
             "itemtype": "property",
             "name": "showHeadings",
             "type": "{Boolean}",
@@ -6217,7 +6757,7 @@
         },
         {
             "file": "src\\components\\table\\Table.js",
-            "line": 79,
+            "line": 80,
             "itemtype": "property",
             "name": "showRows",
             "type": "{Boolean}",
@@ -6228,7 +6768,7 @@
         },
         {
             "file": "src\\components\\table\\Table.js",
-            "line": 85,
+            "line": 86,
             "description": "activate the datatables plugin",
             "itemtype": "property",
             "name": "datatable",
@@ -6240,7 +6780,7 @@
         },
         {
             "file": "src\\components\\table\\Table.js",
-            "line": 92,
+            "line": 93,
             "description": "activate the treetable plugin",
             "itemtype": "property",
             "name": "treetable",
@@ -6252,7 +6792,7 @@
         },
         {
             "file": "src\\components\\table\\Table.js",
-            "line": 99,
+            "line": 100,
             "description": "return js object to pass to the DataTable function for configuring the table on rendered",
             "itemtype": "property",
             "name": "dataTableConfig",
@@ -6268,7 +6808,7 @@
         },
         {
             "file": "src\\components\\table\\Table.js",
-            "line": 127,
+            "line": 128,
             "description": "works with parameter treetable",
             "itemtype": "property",
             "name": "expandable",
@@ -6280,7 +6820,7 @@
         },
         {
             "file": "src\\components\\table\\Table.js",
-            "line": 134,
+            "line": 135,
             "description": "works with parameter treetable",
             "itemtype": "property",
             "name": "showCaption",
@@ -6292,7 +6832,7 @@
         },
         {
             "file": "src\\components\\table\\Table.js",
-            "line": 141,
+            "line": 142,
             "description": "works with parameter treetable",
             "itemtype": "property",
             "name": "expandText",
@@ -6304,7 +6844,7 @@
         },
         {
             "file": "src\\components\\table\\Table.js",
-            "line": 148,
+            "line": 149,
             "description": "works with parameter treetable",
             "itemtype": "property",
             "name": "collapseText",
@@ -6316,7 +6856,7 @@
         },
         {
             "file": "src\\components\\table\\Table.js",
-            "line": 155,
+            "line": 156,
             "description": "whether to show the collapse / expand buttons for the treetable",
             "itemtype": "property",
             "name": "showOptions",
@@ -6328,7 +6868,7 @@
         },
         {
             "file": "src\\components\\table\\Table.js",
-            "line": 162,
+            "line": 163,
             "description": "return js object to pass to the Treetable function for configuring the table on rendered",
             "itemtype": "property",
             "name": "treeTableConfig",
@@ -6344,7 +6884,7 @@
         },
         {
             "file": "src\\components\\table\\Table.js",
-            "line": 175,
+            "line": 176,
             "itemtype": "method",
             "name": "init",
             "class": "components.table.Table",
@@ -6353,7 +6893,7 @@
         },
         {
             "file": "src\\components\\table\\Table.js",
-            "line": 200,
+            "line": 201,
             "itemtype": "method",
             "name": "containerBindings",
             "return": {
@@ -6366,7 +6906,7 @@
         },
         {
             "file": "src\\components\\table\\Table.js",
-            "line": 212,
+            "line": 213,
             "itemtype": "method",
             "name": "_getData",
             "access": "private",
@@ -6381,7 +6921,7 @@
         },
         {
             "file": "src\\components\\table\\Table.js",
-            "line": 224,
+            "line": 225,
             "itemtype": "method",
             "name": "bindings",
             "return": {
@@ -6394,7 +6934,7 @@
         },
         {
             "file": "src\\components\\table\\Table.js",
-            "line": 242,
+            "line": 243,
             "itemtype": "method",
             "name": "theadBindings",
             "return": {
@@ -6407,7 +6947,7 @@
         },
         {
             "file": "src\\components\\table\\Table.js",
-            "line": 251,
+            "line": 252,
             "itemtype": "method",
             "name": "theadTRBindings",
             "return": {
@@ -6420,7 +6960,7 @@
         },
         {
             "file": "src\\components\\table\\Table.js",
-            "line": 260,
+            "line": 261,
             "itemtype": "method",
             "name": "theadTRTDBindings",
             "return": {
@@ -6433,7 +6973,7 @@
         },
         {
             "file": "src\\components\\table\\Table.js",
-            "line": 269,
+            "line": 270,
             "itemtype": "method",
             "name": "tbodyBindings",
             "return": {
@@ -6446,7 +6986,7 @@
         },
         {
             "file": "src\\components\\table\\Table.js",
-            "line": 278,
+            "line": 279,
             "itemtype": "method",
             "name": "tbodyTRBindings",
             "return": {
@@ -6459,7 +6999,7 @@
         },
         {
             "file": "src\\components\\table\\Table.js",
-            "line": 291,
+            "line": 292,
             "itemtype": "method",
             "name": "tbodyTRTDBindings",
             "return": {
@@ -6472,7 +7012,7 @@
         },
         {
             "file": "src\\components\\table\\Table.js",
-            "line": 300,
+            "line": 301,
             "itemtype": "method",
             "name": "captionBindings",
             "return": {
@@ -6485,7 +7025,7 @@
         },
         {
             "file": "src\\components\\table\\Table.js",
-            "line": 310,
+            "line": 311,
             "itemtype": "method",
             "name": "generateOnclick",
             "params": [
@@ -6505,7 +7045,7 @@
         },
         {
             "file": "src\\components\\table\\Table.js",
-            "line": 322,
+            "line": 323,
             "itemtype": "method",
             "name": "expandBindings",
             "return": {
@@ -6518,7 +7058,7 @@
         },
         {
             "file": "src\\components\\table\\Table.js",
-            "line": 336,
+            "line": 337,
             "itemtype": "method",
             "name": "collapseBindings",
             "return": {
@@ -6588,18 +7128,6 @@
         {
             "file": "src\\firebrick.ui.js",
             "line": 55,
-            "description": "used to cache pointers to component when searching by id",
-            "access": "private",
-            "tagname": "",
-            "itemtype": "property",
-            "name": "_componentCache",
-            "type": "{Object}",
-            "class": "ui",
-            "module": "Firebrick.ui"
-        },
-        {
-            "file": "src\\firebrick.ui.js",
-            "line": 63,
             "description": "populate a target with fields and data",
             "itemtype": "method",
             "name": "build",
@@ -6636,7 +7164,7 @@
         },
         {
             "file": "src\\firebrick.ui.js",
-            "line": 100,
+            "line": 92,
             "description": "components uiNames are populated into this map for variable access\nfb.ui.cmp.input",
             "itemtype": "property",
             "name": "cmp",
@@ -6647,7 +7175,23 @@
         },
         {
             "file": "src\\firebrick.ui.js",
-            "line": 109,
+            "line": 101,
+            "description": "this function is called when defining a component.",
+            "itemtype": "method",
+            "name": "addUIName",
+            "params": [
+                {
+                    "name": "uiName",
+                    "description": "",
+                    "type": "String"
+                }
+            ],
+            "class": "ui",
+            "module": "Firebrick.ui"
+        },
+        {
+            "file": "src\\firebrick.ui.js",
+            "line": 130,
             "description": "recursive function\ncreate components and html from an array of items",
             "access": "private",
             "tagname": "",
@@ -6662,7 +7206,7 @@
         },
         {
             "file": "src\\firebrick.ui.js",
-            "line": 140,
+            "line": 160,
             "description": "method used by _populate",
             "access": "private",
             "tagname": "",
@@ -6689,7 +7233,7 @@
         },
         {
             "file": "src\\firebrick.ui.js",
-            "line": 198,
+            "line": 214,
             "description": "this method converts shorthand component definitions",
             "example": [
                 "\n\t\t//component definition    \"|\"\n\t\t//converts to the component <hr>  -  fb.ui.cmp.hr"
@@ -6714,7 +7258,7 @@
         },
         {
             "file": "src\\firebrick.ui.js",
-            "line": 222,
+            "line": 238,
             "description": "get a component class by its shortname... uiName",
             "itemtype": "method",
             "name": "getByShortName",
@@ -6734,7 +7278,7 @@
         },
         {
             "file": "src\\firebrick.ui.js",
-            "line": 252,
+            "line": 268,
             "itemtype": "method",
             "name": "getCmp",
             "params": [
@@ -6753,7 +7297,7 @@
         },
         {
             "file": "src\\firebrick.ui.js",
-            "line": 261,
+            "line": 277,
             "description": "alias for Firebrick.get",
             "itemtype": "method",
             "name": "get",
@@ -6773,7 +7317,61 @@
         },
         {
             "file": "src\\firebrick.ui.js",
-            "line": 278,
+            "line": 295,
+            "access": "private",
+            "tagname": "",
+            "itemtype": "method",
+            "name": "_buildDotObj",
+            "example": [
+                " \n\t\t//example: a.b.c.d\n\t\t//convert to:\n\t\t\ta:{ \n\t\t\t\tb:{ \n\t\t\t\t\tc:{ \n\t\t\t\t\t\td:uiName \n\t\t\t\t\t} \n\t\t\t\t} \n\t\t\t}"
+            ],
+            "params": [
+                {
+                    "name": "arr",
+                    "description": "",
+                    "type": "Array of Strings"
+                },
+                {
+                    "name": "uiName",
+                    "description": "the original uiName",
+                    "type": "String"
+                },
+                {
+                    "name": "prev",
+                    "description": "optional, used by recursion",
+                    "type": "Object"
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "Object"
+            },
+            "class": "utils",
+            "module": "Firebrick.ui"
+        },
+        {
+            "file": "src\\firebrick.ui.js",
+            "line": 338,
+            "description": "if you are unsure of the parameters type - use this function to get the raw value. I.e. if its a function it will be called and returned, otherwise it will just return it.\nuseful when working with Knockout objects",
+            "itemtype": "method",
+            "name": "getValue",
+            "params": [
+                {
+                    "name": "val",
+                    "description": "",
+                    "type": "Function|Any"
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "Any"
+            },
+            "class": "utils",
+            "module": "Firebrick.ui"
+        },
+        {
+            "file": "src\\firebrick.ui.js",
+            "line": 352,
             "description": "convert a JS Object into a simple \"json\" type string, this is mainly used for the data-bind attribute in Knockout",
             "itemtype": "method",
             "name": "stringify",
@@ -6793,7 +7391,74 @@
         },
         {
             "file": "src\\firebrick.ui.js",
-            "line": 321,
+            "line": 395,
+            "description": "builds the items string used for functions such as \"foreach\"",
+            "itemtype": "method",
+            "name": "tabBuilder",
+            "params": [
+                {
+                    "name": "componentId",
+                    "description": "",
+                    "type": "Objects"
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "String"
+            },
+            "class": "helper",
+            "module": "Firebrick.ui"
+        },
+        {
+            "file": "src\\firebrick.ui.js",
+            "line": 414,
+            "description": "builds the options string used for functions such as \"foreach\"",
+            "itemtype": "method",
+            "name": "optionString",
+            "params": [
+                {
+                    "name": "component",
+                    "description": "",
+                    "type": "Objects"
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "String"
+            },
+            "class": "helper",
+            "module": "Firebrick.ui"
+        },
+        {
+            "file": "src\\firebrick.ui.js",
+            "line": 432,
+            "description": "builds links, if value then return the value overwise return javascript:void(0)",
+            "itemtype": "method",
+            "name": "linkBuilder",
+            "params": [
+                {
+                    "name": "value",
+                    "description": "- optional",
+                    "type": "Object",
+                    "props": [
+                        {
+                            "name": "link",
+                            "description": "",
+                            "type": "Object"
+                        }
+                    ]
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "String"
+            },
+            "class": "helper",
+            "module": "Firebrick.ui"
+        },
+        {
+            "file": "src\\firebrick.ui.js",
+            "line": 457,
             "itemtype": "property",
             "name": "_registry",
             "type": "{Object}",
@@ -6804,7 +7469,7 @@
         },
         {
             "file": "src\\firebrick.ui.js",
-            "line": 328,
+            "line": 464,
             "itemtype": "method",
             "name": "add",
             "params": [
@@ -6827,7 +7492,7 @@
         },
         {
             "file": "src\\firebrick.ui.js",
-            "line": 342,
+            "line": 478,
             "itemtype": "method",
             "name": "get",
             "params": [
@@ -6846,7 +7511,7 @@
         },
         {
             "file": "src\\firebrick.ui.js",
-            "line": 366,
+            "line": 502,
             "itemtype": "property",
             "name": "listeners",
             "type": "{Object}",
@@ -6855,7 +7520,7 @@
         },
         {
             "file": "src\\firebrick.ui.js",
-            "line": 380,
+            "line": 516,
             "itemtype": "property",
             "name": "items",
             "type": "{Array|Function}",
@@ -6865,7 +7530,7 @@
         },
         {
             "file": "src\\firebrick.ui.js",
-            "line": 386,
+            "line": 522,
             "itemtype": "property",
             "name": "tpl",
             "type": "{Function}",

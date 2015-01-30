@@ -220,11 +220,7 @@ define(["doT", "firebrick", "jquery"], function(tplEngine, fb, $){
 			var me = this,
 				uiName = me.uiName;
 			
-			if(uiName){
-				var n = uiName.substr(uiName.lastIndexOf("-")+1);
-				//create variable
-				Firebrick.ui.cmp[n] = uiName;
-			}
+			Firebrick.ui.addUIName(me.uiName);
 
 			me.precompile();
 			

@@ -11,13 +11,6 @@
 define(["text!./List.html", "knockout", "jquery", "../common/Base",  "../common/mixins/Items", "../common/mixins/Badges"], function(tpl, ko, $){
 	"use strict";
 	
-	var _getVal = function(a){
-		if($.isFunction(a)){
-			return a();
-		}
-		return a;
-	};
-	
 	if(!ko.bindingHandlers.listRenderer){
 		/*
 		 * optionsRenderer for list
@@ -50,7 +43,7 @@ define(["text!./List.html", "knockout", "jquery", "../common/Base",  "../common/
 				if($el.length){
 					if(viewModel){
 						if(viewModel.css){
-							$el.addClass(_getVal(viewModel.css));
+							$el.addClass(Firebrick.ui.utils.getValue(viewModel.css));
 						}
 					}
 				}

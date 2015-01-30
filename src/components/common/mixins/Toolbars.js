@@ -8,7 +8,7 @@
  * @class Toolbars
  * @static
  */
-define(["jquery", "./Items"], function($){
+define(["jquery", "./Items", "Firebrick.ui/nav/Toolbar"], function($){
 	"use strict";
 	return Firebrick.define("Firebrick.ui.common.mixins.Toolbars", {
 		/**
@@ -22,6 +22,26 @@ define(["jquery", "./Items"], function($){
 		toolbarDefaults:{
 			navbarItem: true
 		},
+		/**
+		 * use this to provide the given panel with toolbars
+		 * @example
+		 * 	toolbar:[{
+		 * 		position: "top",
+		 * 		items: [{...}]
+		 * 	}]
+		 * @example
+		 * 	toolbar:[{
+		 * 		position: "top",
+		 * 		items: [{...}]
+		 * 	},{
+		 * 		position: "bottom",
+		 * 		items: [{...}]
+		 * 	}]
+		 * @property toolbar
+		 * @type {Array of Objects}
+		 * @default null
+		 */
+		toolbar:null,
 		/**
 		 * add css classes and other configuration to the container
 		 * @method toolbarContainer

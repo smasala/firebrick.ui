@@ -1,3 +1,16 @@
+v0.11.9
+----------------------------
+* css bug fix toolbar form-group
+* refactorise
+* add helper class Firebrick.ui.helper - here you can define certain component related helper functions
+* new component "TabPanel" - dependency: Firebrick.ui/containers/TabPanel
+* add callback method to button component, scope is button - arguments are jquery on "click" arguments 
+* added property "splitButton" for buttons/dropdowns
+* when using Grid the uiName of GridCol is automatically injected
+* header component updated - bindings:function(){} renamed to textBindings. binding function moved to <h{x}> tag
+* allow dot notation in uiName to build namespaces in fb.ui.cmp...
+
+
 v0.11.0
 ----------------------------
 * better error feedback when trying to create/include an item/view that eithe rhas an incorrect name or missing dependency

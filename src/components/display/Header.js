@@ -62,12 +62,12 @@ define(["text!./Header.html", "../common/Base"], function(tpl){
 		 */
 		href: null,
 		/**
-		 * @method bindings
+		 * @method textBindings
 		 * @return Object
 		 */
-		bindings: function(){
+		textBindings: function(){
 			var me = this,
-				obj = me.callParent(arguments);
+				obj = {};
 			
 			obj.text = me.textBind(me.text);
 			

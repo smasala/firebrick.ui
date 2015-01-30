@@ -1,0 +1,17 @@
+<div id="{{=it.getId()}}" data-bind="{{=it.dataBind()}}">
+
+	<ul data-bind="{{=it.dataBind('listBindings')}}">
+		<!-- ko {{=it.dataBind('listTemplateBindings')}} --><!-- /ko -->
+	</ul>
+	
+	<div data-bind="{{=it.dataBind('tabContentBindings')}}">
+		{{~ it.items :value:index}}
+			{{=it.getTabPaneItem(index, value)}}
+		{{~}}
+	</div>
+	
+	<script type="text/html" id="{{=it._getListTplId()}}">
+		<li data-bind="{{=it.dataBind('listItemBindings')}}"><a data-bind="{{=it.dataBind('listItemLinkBindings')}}"><span data-bind="{{=it.dataBind('listItemTextBindings')}}"></span></a></li>
+	</script>
+
+</div>

@@ -3,33 +3,4 @@
  * @author Steven Masala [me@smasala.com]
 **/
 
-define(function(){
-	return require.config({
-		paths:{
-			"jquery": "../bower_components/jquery/dist/jquery",
-			"knockout": "../bower_components/knockoutjs/dist/knockout",
-			"knockout-mapping": "../bower_components/knockout-mapping/knockout.mapping",
-			"firebrick": "../bower_components/firebrick/dist/firebrick",
-			"bootstrap": "../bower_components/bootstrap/dist/js/bootstrap.min",
-			"bootstrap.plugins": "../bower_components/bootstrap/js",
-			"text": "../bower_components/text/text",
-			"firebrick-ui": "../bower_components/firebrick.ui/dist/firebrick.ui",
-			"doT": "../bower_components/doT/doT.min",
-			"datatables": "../bower_components/datatables/media/js/jquery.dataTables",
-			"jquery-treetable": "../bower_components/jquery-treetable/jquery.treetable",
-			"x-editable": "../bower_components/x-editable/dist/bootstrap3-editable/js/bootstrap-editable",
-			"knockout-x-editable": "../bower_components/knockout-x-editable/knockout.x-editable",
-			"Firebrick.ui": "../bower_components/firebrick.ui/dist/components",
-			"responsive-images": "../bower_components/responsive-images/src/responsiveimages",
-			"responsive-tables-js": "../bower_components/responsive-tables-js/dist/responsivetables" 
-		},
-		shim:{
-			"knockout-mapping": ["knockout"],
-			"bootstrap": ["jquery"],
-			"datatables": ["jquery"],
-			"x-editable": ["bootstrap"],
-			"responsive-images": ["jquery"],
-			"responsive-tables-js": ["jquery"]
-		}
-	});	
-});
+define("configuration",[],function(){var e=window._fbBowerPath||"../bower_components";return require.config({paths:{jquery:e+"/jquery/dist/jquery",knockout:e+"/knockoutjs/dist/knockout","knockout-mapping":e+"/knockout-mapping/knockout.mapping",firebrick:e+"/firebrick/dist/firebrick",bootstrap:e+"/bootstrap/dist/js/bootstrap.min","bootstrap.plugins":e+"/bootstrap/js",text:e+"/text/text","firebrick-ui":e+"/firebrick.ui/dist/firebrick.ui",doT:e+"/doT/doT.min",datatables:e+"/datatables/media/js/jquery.dataTables","jquery-treetable":e+"/jquery-treetable/jquery.treetable","x-editable":e+"/x-editable/dist/bootstrap3-editable/js/bootstrap-editable","knockout-x-editable":e+"/knockout-x-editable/knockout.x-editable","Firebrick.ui":e+"/firebrick.ui/dist/components","responsive-images":e+"/responsive-images/src/responsiveimages","responsive-tables-js":e+"/responsive-tables-js/dist/responsivetables"},shim:{"knockout-mapping":["knockout"],bootstrap:["jquery"],datatables:["jquery"],"x-editable":["bootstrap"],"responsive-images":["jquery"],"responsive-tables-js":["jquery"]}})});

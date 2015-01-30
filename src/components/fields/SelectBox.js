@@ -64,19 +64,12 @@ define(["text!./SelectBox.html", "jquery", "./Input"], function(subTpl, $){
 		 */
 		bindings:function(){
 			var me = this,
-				obj = me.callParent(arguments),
-				data = me.options;
-			
-			if($.isFunction(data)){
-				data = data();
-			}else if($.isArray(data)){
-				data = "Firebrick.ui.getCmp('" + me.getId() + "').options";
-			}
+				obj = me.callParent(arguments);
 			
 			obj.attr.multiple = me.multiSelect;
 			
 			if(!me.inplaceEdit){
-				obj.options = data;
+				obj.options = Firebrick.ui.helper.optionString(me);
 				obj.selectedOptions = me.selectedOptions;
 				obj.optionsText = me.optionsText;
 				obj.optionsValue = me.optionsValue;
@@ -85,7 +78,7 @@ define(["text!./SelectBox.html", "jquery", "./Input"], function(subTpl, $){
 				obj.editableOptions = {
 						optionsValue:me.optionsValue,
 						optionsText:me.optionsText,
-						options:data,
+						options:Firebrick.ui.helper.optionString(me),
 						type: me.parseBind( me.dataType )
 				};
 			}

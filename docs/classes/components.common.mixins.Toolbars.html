@@ -19,7 +19,7 @@
             
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 0.11.0</em>
+            <em>API Docs for: 0.11.9</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -79,6 +79,10 @@
             
                 <li><a href="../classes/components.containers.Panel.html">components.containers.Panel</a></li>
             
+                <li><a href="../classes/components.containers.tab.Pane.html">components.containers.tab.Pane</a></li>
+            
+                <li><a href="../classes/components.containers.TabPanel.html">components.containers.TabPanel</a></li>
+            
                 <li><a href="../classes/components.display.Alert.html">components.display.Alert</a></li>
             
                 <li><a href="../classes/components.display.Divider.html">components.display.Divider</a></li>
@@ -90,6 +94,8 @@
                 <li><a href="../classes/components.display.List.html">components.display.List</a></li>
             
                 <li><a href="../classes/components.display.Progress.html">components.display.Progress</a></li>
+            
+                <li><a href="../classes/components.display.Span.html">components.display.Span</a></li>
             
                 <li><a href="../classes/components.display.Text.html">components.display.Text</a></li>
             
@@ -128,6 +134,8 @@
                 <li><a href="../classes/components.table.Table.html">components.table.Table</a></li>
             
                 <li><a href="../classes/components.table.TreeTable.html">components.table.TreeTable</a></li>
+            
+                <li><a href="../classes/helper.html">helper</a></li>
             
                 <li><a href="../classes/plugins.RadioList.html">plugins.RadioList</a></li>
             
@@ -262,6 +270,13 @@
                     <ul class="index-list properties">
                         
                             <li class="index-item property">
+                                <a href="#property_toolbar">toolbar</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item property">
                                 <a href="#property_toolbarDefaults">toolbarDefaults</a>
 
                                 
@@ -318,7 +333,7 @@
             
         
         
-        <a href="../files/src_components_common_mixins_Toolbars.js.html#l49"><code>src\components\common\mixins\Toolbars.js:49</code></a>
+        <a href="../files/src_components_common_mixins_Toolbars.js.html#l69"><code>src\components\common\mixins\Toolbars.js:69</code></a>
         
         </p>
 
@@ -398,7 +413,7 @@
             
         
         
-        <a href="../files/src_components_common_mixins_Toolbars.js.html#l25"><code>src\components\common\mixins\Toolbars.js:25</code></a>
+        <a href="../files/src_components_common_mixins_Toolbars.js.html#l45"><code>src\components\common\mixins\Toolbars.js:45</code></a>
         
         </p>
 
@@ -463,6 +478,72 @@
         
             <div id="properties" class="api-class-tabpanel">
                 <h2 class="off-left">Properties</h2>
+
+                
+                    <div id="property_toolbar" class="property item">
+    <h3 class="name"><code>toolbar</code></h3>
+    <span class="type">Array of Objects</span>
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/src_components_common_mixins_Toolbars.js.html#l25"><code>src\components\common\mixins\Toolbars.js:25</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>use this to provide the given panel with toolbars</p>
+
+    </div>
+
+    
+        <p><strong>Default:</strong> null</p>
+    
+
+    
+        <div class="example">
+            <h4>Example:</h4>
+
+            <div class="example-content">
+                <pre class="code prettyprint"><code>toolbar:[{
+    position: &quot;top&quot;,
+    items: [{...}]
+}]</code></pre>
+<pre class="code prettyprint"><code>toolbar:[{
+    position: &quot;top&quot;,
+    items: [{...}]
+},{
+    position: &quot;bottom&quot;,
+    items: [{...}]
+}]</code></pre>
+
+            </div>
+        </div>
+    
+
+    
+</div>
 
                 
                     <div id="property_toolbarDefaults" class="property item">

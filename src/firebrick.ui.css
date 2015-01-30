@@ -347,6 +347,10 @@ a:hover{
 	margin-top:7px;
 }
 
+.fb-ui-toolbar .form-group{
+	display: block;
+}
+
 .panel-title.pull-left{
 	margin-top: 3px;
 }

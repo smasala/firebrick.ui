@@ -42,6 +42,12 @@ define(["text!./Button.html", "./Base", "../common/mixins/Badges", "./dropdown/L
 		 */
 		navbarItem: false,
 		/**
+		 * @property splitButton
+		 * @type {Boolean}
+		 * @default false
+		 */
+		splitButton: false,
+		/**
 		 * @property btnSize
 		 * @type {Boolean|String} false |  ("sm", "lg", "xs")
 		 * @default false
@@ -88,6 +94,39 @@ define(["text!./Button.html", "./Base", "../common/mixins/Badges", "./dropdown/L
 		 */
 		dropdownConfig: null,
 		/**
+		 * if defined, this callback method will be applied to the click event of this particular button
+		 * @method callback
+		 * @type {Function}
+		 * @default null
+		 */
+		callback: null,
+		/**
+		 * @property srOnlyText
+		 * @type {String}
+		 * @default "Toggle Dropdown"
+		 */
+		srOnlyText: "Toggle Dropdown",
+		/**
+		 * @method init
+		 * @return {Object} self
+		 */
+		init: function(){
+			var me = this;
+			
+			if(me.callback){
+				me.on("rendered", function(){
+					var el = me.getElement();
+					if(el){
+						el.on("click", function(){
+							me.callback.apply(me, arguments);
+						});
+					}
+				});
+			}
+			
+			return me.callParent(arguments);
+		},
+		/**
 		 * default bindings called by data-bind={{data-bind}}
 		 * @method bindings
 		 * @return {Object}
@@ -109,7 +148,7 @@ define(["text!./Button.html", "./Base", "../common/mixins/Badges", "./dropdown/L
 				obj.css[ me.parseBind("btn-" + me.btnSize)] = true;
 			}
 			
-			if(me.data){
+			if(me.data && !me.splitButton){
 				obj.css["'dropdown-toggle'"] = true;
 				obj.attr["'data-toggle'"] = "'dropdown'";
 			}
@@ -155,9 +194,15 @@ define(["text!./Button.html", "./Base", "../common/mixins/Badges", "./dropdown/L
 					css:{}
 				};
 			
-			if(me.dropdownContainerClass){
-				obj.css[me.parseBind( me.dropdownContainerClass )] = true;	
+			if(me.splitButton){
+				obj.css["'btn-group'"] = true;
+			}else{
+				//standard dropdown
+				if(me.dropdownContainerClass && !me.splitButton){
+					obj.css[me.parseBind( me.dropdownContainerClass )] = true;	
+				}
 			}
+			
 			
 			return obj;
 		},
@@ -175,6 +220,45 @@ define(["text!./Button.html", "./Base", "../common/mixins/Badges", "./dropdown/L
 			obj = Firebrick.utils.copyover(obj, me.dropdownConfig);
 
 			return me._getItems(obj).html;
+		},
+		
+		/**
+		 * @method splitButtonBindings
+		 * @return {Object}
+		 */
+		splitButtonBindings: function(){
+			var me = this,
+				obj = {css:{}, attr:{}};
+			
+			obj.attr.type = me.parseBind(me.type);
+			obj.css.btn = true;
+			if(me.btnStyle){
+				obj.css[ me.parseBind("btn-"+me.btnStyle)] = true;
+			}
+			if(me.btnSize){
+				obj.css[ me.parseBind("btn-" + me.btnSize)] = true;
+			}
+			if(me.data){
+				obj.css["'dropdown-toggle'"] = true;
+				obj.attr["'data-toggle'"] = "'dropdown'";
+			}
+			obj.attr["'aria-expanded'"] = false;
+			
+			return obj;
+		},
+		
+		/**
+		 * @method splitButtonSrOnlyBinding
+		 * @return {Object}
+		 */
+		splitButtonSrOnlyBinding: function(){
+			var me = this,
+				obj = {css:{}};
+			
+			obj.css["'sr-only'"] = true;
+			obj.text = me.textBind(me.srOnlyText);
+			
+			return obj;
 		}
 	});
 });

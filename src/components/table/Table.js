@@ -15,6 +15,7 @@ define(["jquery", "text!./Table.html", "../common/Base", "datatables", "responsi
 		/**
 		 * @property uiName
 		 * @type {String}
+		 * @default "fb-ui-table"
 		 */
 		uiName: "fb-ui-table",
 		/**

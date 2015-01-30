@@ -41,7 +41,7 @@
 			 * @private
 			 * @type {String}
 			 */
-			version: "0.11.0",
+			version: "0.11.9",
 			
 			/**
 			 * used to cache pointers to classes when searching by "uiName"
@@ -51,14 +51,6 @@
 			 * @type {Object}
 			 */
 			_searchCache:{},
-			
-			/**
-			 * used to cache pointers to component when searching by id
-			 * @private
-			 * @property _componentCache
-			 * @type {Object}
-			 */
-			_componentCache:{},
 			
 			/**
 			 * populate a target with fields and data
@@ -107,6 +99,35 @@
 			cmp:{},
 			
 			/**
+			 * this function is called when defining a component.
+			 * @method addUIName
+			 * @param uiName {String}
+			 */
+			addUIName: function(uiName){
+				var name,
+					dot,
+					bits;
+				
+				if(uiName){
+					name = uiName.substr(uiName.lastIndexOf("-")+1);
+					dot = name.indexOf(".");
+					if(dot === 0){
+						console.error("illegal uiName. The name cannot begin with a '.' ", uiName);
+					}else if(dot >= 1){
+						bits = name.split(".");
+						name = bits.shift(); //get and remove first item
+						//get the first item 'a'
+						Firebrick.ui.cmp[ name ] = Firebrick.ui.utils._buildDotObj(bits, uiName);
+					}else{
+						//no dot annotation
+						//create variable
+						Firebrick.ui.cmp[name] = uiName;
+					}
+					
+				}
+			},
+			
+			/**
 			 * recursive function
 			 * create components and html from an array of items
 			 * @private
@@ -130,7 +151,6 @@
 					if(!component.getId){
 						console.error("something went wrong", items[i], "is it defined correctly? Check the item name and dependency include");
 					}
-					me._componentCache[component.getId()] = component;
 					_items.push(component);
 				}
 				
@@ -187,10 +207,6 @@
 					component.html = component.build();	
 				}
 				
-				
-				if(!me._componentCache[parent.getId()]){
-					me._componentCache[parent.getId()] = parent;
-				}
 				
 				return component;
 			},
@@ -255,7 +271,7 @@
 			 * @return {Object|null}
 			 */
 			getCmp: function(id){
-				return this._componentCache[id];
+				return Firebrick.getById(id);
 			},
 			
 			/**
@@ -275,6 +291,64 @@
 			 * @class utils
 			 */
 			utils:{
+				
+				/**
+				 * @private
+				 * @method _buildDotObj
+				 * @example 
+				 * 		//example: a.b.c.d
+				 *		//convert to:
+				 *			a:{ 
+				 *				b:{ 
+				 *					c:{ 
+				 *						d:uiName 
+				 *					} 
+				 *				} 
+				 *			}
+				 * @param arr {Array of Strings}
+				 * @param uiName {String} the original uiName
+				 * @param prev {Object} optional, used by recursion
+				 * @return {Object}
+				 */
+				_buildDotObj: function(arr, uiName, prev){
+					var me = this,
+						prop = arr.shift(); //remove the first item use it as property name
+					
+					//check if prev has already been initialised
+					prev = prev || {};
+						
+					prev[ prop ] = {};
+					
+					//more items in arr?
+					if(arr.length){
+						if(arr[0] !== ""){
+							//call self recursively
+							me._buildDotObj(arr, uiName, prev[ prop ]);
+						}else{
+							console.error("error building uiName, found empty string", arr, prop, uiName);
+						}
+						
+					}else{
+						prev[ prop ] = uiName;
+					}
+					
+					return prev;
+				},
+				
+				/**
+				 * if you are unsure of the parameters type - use this function to get the raw value. I.e. if its a function it will be called and returned, otherwise it will just return it.
+				 * useful when working with Knockout objects
+				 * @method getValue
+				 * @param {Function|Any} val
+				 * @return {Any}
+				 */
+				getValue: function(val){
+					if($.isFunction(val)){
+						return val();
+					}
+					return val;
+				},
+				
 				/**
 				 * convert a JS Object into a simple "json" type string, this is mainly used for the data-bind attribute in Knockout
 				 * 
@@ -311,6 +385,68 @@
 				
 			},
 			
+			/**
+			 * similar to utils, but are component related
+			 * @for ui
+			 * @class helper
+			 */
+			helper: {
+				
+				/**
+				 * builds the items string used for functions such as "foreach"
+				 * @method tabBuilder
+				 * @param componentId {Objects} 
+				 * @return {String} 
+				 */
+				tabBuilder: function(componentId){
+					var component = Firebrick.getById(componentId),
+						data = component.items;
+					
+					if($.isFunction(data)){
+						return "Firebrick.getById('" + componentId + "').items()";
+					}else if($.isArray(data)){
+						return "Firebrick.getById('" + componentId + "').items";
+					}
+					
+					return data;
+				},
+				
+				/**
+				 * builds the options string used for functions such as "foreach"
+				 * @method optionString
+				 * @param component {Objects} 
+				 * @return {String} 
+				 */
+				optionString: function(component){
+					var data = component.options;
+					
+					if($.isFunction(data)){
+						return "Firebrick.ui.getCmp('" + component.getId() + "').options()";
+					}else if($.isArray(data)){
+						return "Firebrick.ui.getCmp('" + component.getId() + "').options";
+					}
+					
+					return data;
+				},
+				
+				/**
+				 * builds links, if value then return the value overwise return javascript:void(0)
+				 * @method linkBuilder
+				 * @param {Object} value - optional
+				 * @param {Object} value.link
+				 * @return {String}
+				 */
+				linkBuilder: function(value){
+					if(value){
+						if(typeof value.link === "string"){
+							return value.link;
+						}
+					}
+					
+					return "javascript:void(0)";
+				}
+				
+			},
 
 			/**
 			 * renderer methods

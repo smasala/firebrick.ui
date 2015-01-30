@@ -11,10 +11,19 @@
 				<span data-bind="{{=it.dataBind('badgeBindings')}}"></span>
 			{{?}}
 			
-			{{?it.data}}
+			{{?it.data && !it.splitButton}}
 				<span data-bind="{{=it.dataBind('caretBindings')}}"></span>
 			{{?}}
 		</button>
+		 
+		 {{?it.data && it.splitButton}}
+
+			<button data-bind="{{=it.dataBind('splitButtonBindings')}}">
+			    <span data-bind="{{=it.dataBind('caretBindings')}}"></span>
+			    <span data-bind="{{=it.dataBind('splitButtonSrOnlyBinding')}}"></span>
+			  </button>
+		 
+		 {{?}}
 		 
 {{?it.data}}
 		{{=it.getDropdown()}}

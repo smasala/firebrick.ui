@@ -113,26 +113,6 @@ define(["text!./Panel.html", "./Base", "../nav/Toolbar", "../common/mixins/Toolb
 		 */
 		headerItemsPosition: "pull-right",
 		/**
-		 * use this to provide the given panel with toolbars
-		 * @example
-		 * 	toolbar:[{
-		 * 		position: "top",
-		 * 		items: [{...}]
-		 * 	}]
-		 * @example
-		 * 	toolbar:[{
-		 * 		position: "top",
-		 * 		items: [{...}]
-		 * 	},{
-		 * 		position: "bottom",
-		 * 		items: [{...}]
-		 * 	}]
-		 * @property toolbar
-		 * @type {Array of Objects}
-		 * @default null
-		 */
-		toolbar:null,
-		/**
 		 * Data bindings
 		 * @method bindings
 		 * @return {Object}
