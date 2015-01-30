@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>renderer - Firebrick UI API</title>
+    <title>src\components\containers\TabPanel.js - Firebrick UI API</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -192,396 +192,234 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-                        <h1>renderer Class</h1>
-<div class="box meta">
-    
-
-    
-
-    
-        <div class="foundat">
-            Defined in: <a href="../files/src_firebrick.ui.js.html#l451"><code>src\firebrick.ui.js:451</code></a>
-        </div>
-    
-
-    
-        
-            Module: <a href="../modules/Firebrick.ui.html">Firebrick.ui</a>
-        
-    
-
-    
-</div>
-
-
-
-<div class="box intro">
-    <p>renderer methods</p>
-
-</div>
-
-
-
-<div id="classdocs" class="tabview">
-    <ul class="api-class-tabs">
-        <li class="api-class-tab index"><a href="#index">Index</a></li>
-
-        
-            <li class="api-class-tab methods"><a href="#methods">Methods</a></li>
-        
-        
-            <li class="api-class-tab properties"><a href="#properties">Properties</a></li>
-        
-        
-        
-    </ul>
-
-    <div>
-        <div id="index" class="api-class-tabpanel index">
-            <h2 class="off-left">Item Index</h2>
-
-            
-                <div class="index-section methods">
-                    <h3>Methods</h3>
-
-                    <ul class="index-list methods">
-                        
-                            <li class="index-item method">
-                                <a href="#method_add">add</a>
-
-                                
-                                
-                            </li>
-                        
-                            <li class="index-item method">
-                                <a href="#method_get">get</a>
-
-                                
-                                
-                            </li>
-                        
-                    </ul>
-                </div>
-            
-
-            
-                <div class="index-section properties">
-                    <h3>Properties</h3>
-
-                    <ul class="index-list properties">
-                        
-                            <li class="index-item property private">
-                                <a href="#property__registry">_registry</a>
-
-                                
-                                
-                            </li>
-                        
-                    </ul>
-                </div>
-            
-
-            
-
-            
-        </div>
-
-        
-            <div id="methods" class="api-class-tabpanel">
-                <h2 class="off-left">Methods</h2>
-
-                
-                    <div id="method_add" class="method item">
-    <h3 class="name"><code>add</code></h3>
-
-    
-        <div class="args">
-            <span class="paren">(</span><ul class="args-list inline commas">
-            
-                <li class="arg">
-                    
-                        <code>name</code>
-                    
-                </li>
-            
-                <li class="arg">
-                    
-                        <code>func</code>
-                    
-                </li>
-            
-            </ul><span class="paren">)</span>
-        </div>
-    
-
-    
-        <span class="returns-inline">
-            <span class="type"></span>
-        </span>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/src_firebrick.ui.js.html#l464"><code>src\firebrick.ui.js:464</code></a>
-        
-        </p>
-
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        
-    </div>
-
-    
-        <div class="params">
-            <h4>Parameters:</h4>
-
-            <ul class="params-list">
-            
-                <li class="param">
-                    
-                        <code class="param-name">name</code>
-                        <span class="type">String</span>
-                    
-
-                    
-
-                    <div class="param-description">
-                        <p>name of the renderer</p>
-
-                    </div>
-
-                    
-                </li>
-            
-                <li class="param">
-                    
-                        <code class="param-name">func</code>
-                        <span class="type">Function</span>
-                    
-
-                    
-
-                    <div class="param-description">
-                        <p>function to call when the renderer is used - parameters given to the function when called: $data, $context, $parent, $root</p>
-
-                    </div>
-
-                    
-                </li>
-            
-            </ul>
-        </div>
-    
-
-    
-        <div class="returns">
-            <h4>Returns:</h4>
-
-            <div class="returns-description">
-                
-                    
-                    <p>self</p>
-
-                
-            </div>
-        </div>
-    
-
-    
-</div>
-
-                
-                    <div id="method_get" class="method item">
-    <h3 class="name"><code>get</code></h3>
-
-    
-        <div class="args">
-            <span class="paren">(</span><ul class="args-list inline commas">
-            
-                <li class="arg">
-                    
-                        <code>name</code>
-                    
-                </li>
-            
-            </ul><span class="paren">)</span>
-        </div>
-    
-
-    
-        <span class="returns-inline">
-            <span class="type">Function |  | null</span>
-        </span>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/src_firebrick.ui.js.html#l478"><code>src\firebrick.ui.js:478</code></a>
-        
-        </p>
-
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        
-    </div>
-
-    
-        <div class="params">
-            <h4>Parameters:</h4>
-
-            <ul class="params-list">
-            
-                <li class="param">
-                    
-                        <code class="param-name">name</code>
-                        <span class="type">String</span>
-                    
-
-                    
-
-                    <div class="param-description">
-                        <p>name of the renderer</p>
-
-                    </div>
-
-                    
-                </li>
-            
-            </ul>
-        </div>
-    
-
-    
-        <div class="returns">
-            <h4>Returns:</h4>
-
-            <div class="returns-description">
-                
-                    
-                        <span class="type">Function |  | null</span>:
-                    
-                
-            </div>
-        </div>
-    
-
-    
-</div>
-
-                
-            </div>
-        
-
-        
-            <div id="properties" class="api-class-tabpanel">
-                <h2 class="off-left">Properties</h2>
-
-                
-                    <div id="property__registry" class="property item private">
-    <h3 class="name"><code>_registry</code></h3>
-    <span class="type">Object</span>
-
-    
-
-    
-        <span class="flag private">private</span>
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/src_firebrick.ui.js.html#l457"><code>src\firebrick.ui.js:457</code></a>
-        
-        </p>
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        
-    </div>
-
-    
-
-    
-
-    
-</div>
-
-                
-            </div>
-        
-
-        
-
-        
-    </div>
+                        <h1 class="file-heading">File: src\components\containers\TabPanel.js</h1>
+
+<div class="file">
+    <pre class="code prettyprint linenums">
+/*!
+ * @author Steven Masala [me@smasala.com]
+ */
+
+/**
+ * @module Firebrick.ui.components
+ * @extends components.containers.Base
+ * @namespace components.containers
+ * @class TabPanel
+ */
+define([&quot;text!./TabPanel.html&quot;, &quot;./Base&quot;, &quot;bootstrap.plugins/tab&quot;, &quot;./tab/Pane&quot;], function(tpl){
+	&quot;use strict&quot;;
+	return Firebrick.define(&quot;Firebrick.ui.containers.TabPanel&quot;, {
+		extend:&quot;Firebrick.ui.containers.Base&quot;,
+		tpl: tpl,
+		/**
+		* @property uiName
+		* @type {String}
+		* @default &quot;fb-ui-tabpanel&quot;
+		*/
+		uiName: &quot;fb-ui-tabpanel&quot;,
+		/**
+		 * @private
+		 * @method _getListTplId
+		 * @return {String}
+		 */
+		_getListTplId: function(){
+			return &quot;fb-ui-tpl-list-&quot; + this.getId(); 
+		},
+		/**
+		 * @private
+		 * @method _getTabPaneTplId
+		 * @return {String}
+		 */
+		_getTabPaneTplId: function(){
+			return &quot;fb-ui-tpl-tabpane-&quot; + this.getId(); 
+		},
+		/**
+		 * @property _tabs
+		 * @private
+		 * @type {Array}
+		 * @default null
+		 */
+		_tabs: null,
+		/**
+		 * @property defaults
+		 * @type {Object}
+		 * @default {
+				uiName:fb.ui.cmp.tabpane
+			}
+		 */
+		defaults:{
+			uiName:fb.ui.cmp.tabpane
+		},
+		/**
+		 * @method bindings
+		 * @return {Object}
+		 */
+		bindings: function(){
+			var me = this,
+				obj = me.callParent();
+			
+			obj.attr.role = &quot;&#x27;tabpanel&#x27;&quot;;
+			
+			return obj;
+		},
+		/**
+		 * @method listTemplateBindings
+		 * @return {Object}
+		 */
+		listTemplateBindings: function(){
+			var me = this,
+				obj = {};
+			
+			obj.template = {
+					name: me.parseBind( me._getListTplId() ),
+					foreach: Firebrick.ui.helper.tabBuilder(me.getId()),
+					as:&quot;&#x27;tab&#x27;&quot;
+			};
+			
+			return obj;
+		},
+		/**
+		 * @method listBindings
+		 * @return {Object}
+		 */
+		listBindings: function(){
+			var me = this,
+				obj = {css:{}, attr:{}};
+			
+			obj.attr.role = &quot;&#x27;tablist&#x27;&quot;;
+			obj.css.nav = true;
+			obj.css[&quot;&#x27;nav-tabs&#x27;&quot;] = true;
+			
+			return obj;
+		},
+		/**
+		 * @method listItemBindings
+		 * @return {Object}
+		 */
+		listItemBindings: function(){
+			var me = this,
+				obj = {css:{}, attr:{}};
+			
+			obj.attr.role = &quot;&#x27;presentation&#x27;&quot;;
+			obj.css.active = &quot;tab.hasOwnProperty(&#x27;active&#x27;) ? tab.active : false&quot;;
+			
+			return obj;
+		},
+		/**
+		 * @method listItemLinkBindings
+		 * @return {Object}
+		 */
+		listItemLinkBindings: function(){
+			var me = this,
+				obj = {css:{}, attr:{}};
+			
+			obj.attr.href = &quot;Firebrick.ui.helper.linkBuilder(tab)&quot;;
+			obj.attr[&quot;&#x27;aria-controls&#x27;&quot;] = &quot;tab.id&quot;;
+			obj.attr[&quot;&#x27;data-target&#x27;&quot;] = &quot;Firebrick.getById(&#x27;&quot;+me.getId()+&quot;&#x27;).registerTab(tab.id, $index)&quot;;
+			obj.attr.role = &quot;&#x27;tab&#x27;&quot;;
+			obj.attr[&quot;&#x27;data-toggle&#x27;&quot;] = &quot;&#x27;tab&#x27;&quot;;
+			
+			
+			return obj;
+		},
+		/**
+		 * @method listItemTextBindings
+		 * @return {Object}
+		 */
+		listItemTextBindings: function(){
+			var me = this,
+				obj = {css:{}, attr:{}};
+			
+			obj.text = me.textBind(&quot;&#x27;+tab.title+&#x27;&quot;);
+			
+			return obj;
+		},
+		
+		/**
+		 * @method tabContentBindings
+		 * @return {Object}
+		 */
+		tabContentBindings: function(){
+			var me = this,
+				obj = {css:{}, attr:{}};
+			
+			obj.css[&quot;&#x27;tab-content&#x27;&quot;] = true;
+			
+			return obj;
+		},
+		
+		/**
+		 * @method registerTab
+		 * @param tabId {String} optional - generates one if not supplied
+		 * @param index {Integer}
+		 * @return &quot;#{id}&quot;
+		 */
+		registerTab: function(tabId, index){
+			var me = this, 
+				id;
+			
+			if($.isFunction(index)){
+				index = index();
+			}
+			
+			id = tabId || &quot;fb-ui-tab-&quot; + me.getId() + &quot;-&quot; + index;
+			
+			me.addTab(id);
+			
+			return &quot;#&quot; + id;
+		},
+		
+		/**
+		 * @method addTab
+		 * @param id {String}
+		 * @return self
+		 */
+		addTab: function(id){
+			var me = this;
+			if(!me._tabs){
+				me._tabs = [];
+			}
+			me._tabs.push(id);
+			return me;
+		},
+		
+		/**
+		 * returns tab id at index position
+		 * @method getTabId
+		 * @param index {Integer}
+		 * @return {String}
+		 */
+		getTabId: function(index){
+			return this._tabs[index];
+		},
+		
+		/**
+		 * used when calling {{{getTabPaneItem}}} in template
+		 * @method getTabPaneItem
+		 * @param {Int} iteration index
+		 * @param {Object} iteration object
+		 * @param {Context} iteration context
+		 * @return {String}
+		 */
+		getTabPaneItem: function(index, item){
+			var me = this,
+				newItem;
+			
+			item.paneIndex = index;
+			
+			newItem = me._getItems(item);
+			
+			if(newItem){
+				//replace items with the new object - _getItems returns an object {html:&quot;&quot;, items:[]}
+				me.items[index] = newItem.items[0];
+				
+				return newItem.html;
+			}
+			return &quot;&quot;;
+		}
+	});
+});
+    </pre>
 </div>
 
                     </div>
