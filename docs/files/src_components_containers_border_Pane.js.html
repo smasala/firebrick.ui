@@ -19,7 +19,7 @@
             
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 0.12.0</em>
+            <em>API Docs for: 0.12.1</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -292,6 +292,13 @@ define([&quot;text!./SplitBar.html&quot;, &quot;jquery&quot;, &quot;../../common
 		 */
 		height: &quot;auto&quot;,
 		/**
+		 * only used for left and right panes
+		 * @property width
+		 * @type {Integer|String}
+		 * @default &quot;33%&quot;
+		 */
+		width: &quot;33%&quot;,
+		/**
 		 * @method init
 		 * @return {Object}
 		 */
@@ -357,7 +364,7 @@ define([&quot;text!./SplitBar.html&quot;, &quot;jquery&quot;, &quot;../../common
 				}
 			}
 			
-			if(me.width){
+			if(position === &quot;left&quot; || position === &quot;right&quot;){
 				el.css(&quot;width&quot;, width);
 				el.css(&quot;min-width&quot;, width);
 			}
@@ -417,7 +424,7 @@ define([&quot;text!./SplitBar.html&quot;, &quot;jquery&quot;, &quot;../../common
 				pane = me.getElement(),
 				paneHeader = $(&quot;&gt; .panel-heading&quot;, pane),
 				vertical = position === &quot;top&quot; || position === &quot;bottom&quot; ? true : false,
-				splitbar = vertical || position === &quot;right&quot; ? pane.prev(&quot;.fb-ui-splitbar&quot;) : pane.next(&quot;.fb-ui-splitbar&quot;);
+				splitbar = position === &quot;top&quot; || position === &quot;left&quot; ? pane.next(&quot;.fb-ui-splitbar&quot;) : pane.prev(&quot;.fb-ui-splitbar&quot;);
 				
 			if(splitbar.length){
 				if(vertical){
@@ -645,7 +652,7 @@ define([&quot;text!./SplitBar.html&quot;, &quot;jquery&quot;, &quot;../../common
 				obj.css[&quot;&#x27;fb-ui-pane-collapsible&#x27;&quot;] = true;
 			}
 			
-			return me.calColumn(obj);
+			return obj;
 		},
 		
 		/**
@@ -661,8 +668,8 @@ define([&quot;text!./SplitBar.html&quot;, &quot;jquery&quot;, &quot;../../common
 			obj.css[me.parseBind(&quot;fb-ui-splitbar-&quot; + me.position )] = true;
 			
 			if(me.position === &quot;top&quot; || me.position === &quot;bottom&quot;){
-				obj.css.col = true;
-				obj.css[me.parseBind(&quot;col-&quot; + me.deviceSize + &quot;-12&quot;)] = true;
+//				obj.css.col = true;
+//				obj.css[me.parseBind(&quot;col-&quot; + me.deviceSize + &quot;-12&quot;)] = true;
 				obj.css[&quot;&#x27;fb-ui-splitbar-horizontal&#x27;&quot;] = true;
 			}else{
 				obj.css[&quot;&#x27;fb-ui-splitbar-vertical&#x27;&quot;] = true;
