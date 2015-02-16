@@ -2,7 +2,7 @@
     "project": {
         "name": "Firebrick UI API",
         "description": "Firebrick UI API: a component library for Firebrick MVC, Knockout JS, jQuery and Bootstrap",
-        "version": "0.12.0",
+        "version": "0.12.1",
         "url": "https://github.com/smasala",
         "logo": "fbui_small.png"
     },
@@ -3229,6 +3229,18 @@
         {
             "file": "src\\components\\containers\\border\\Pane.js",
             "line": 88,
+            "description": "only used for left and right panes",
+            "itemtype": "property",
+            "name": "width",
+            "type": "{Integer|String}",
+            "default": "\"33%\"",
+            "class": "components.containers.border.Pane",
+            "module": "Firebrick.ui.components",
+            "namespace": "components.containers.border"
+        },
+        {
+            "file": "src\\components\\containers\\border\\Pane.js",
+            "line": 95,
             "itemtype": "method",
             "name": "init",
             "return": {
@@ -3241,7 +3253,7 @@
         },
         {
             "file": "src\\components\\containers\\border\\Pane.js",
-            "line": 106,
+            "line": 113,
             "description": "listener for the event htmlRendered\nin this function the splitbar is added to its correct position\nonly if the pane is resizable",
             "access": "private",
             "tagname": "",
@@ -3253,7 +3265,7 @@
         },
         {
             "file": "src\\components\\containers\\border\\Pane.js",
-            "line": 136,
+            "line": 143,
             "description": "accepts no parameters",
             "access": "private",
             "tagname": "",
@@ -3265,7 +3277,7 @@
         },
         {
             "file": "src\\components\\containers\\border\\Pane.js",
-            "line": 161,
+            "line": 168,
             "description": "listener for the event rendered",
             "access": "private",
             "tagname": "",
@@ -3277,7 +3289,7 @@
         },
         {
             "file": "src\\components\\containers\\border\\Pane.js",
-            "line": 178,
+            "line": 185,
             "itemtype": "method",
             "name": "setCollapsibleActions",
             "class": "components.containers.border.Pane",
@@ -3286,7 +3298,7 @@
         },
         {
             "file": "src\\components\\containers\\border\\Pane.js",
-            "line": 205,
+            "line": 212,
             "itemtype": "method",
             "name": "setResizableActions",
             "class": "components.containers.border.Pane",
@@ -3295,7 +3307,7 @@
         },
         {
             "file": "src\\components\\containers\\border\\Pane.js",
-            "line": 290,
+            "line": 297,
             "description": "event callback (jQuery)\ntop and bottom pane",
             "access": "private",
             "tagname": "",
@@ -3319,7 +3331,7 @@
         },
         {
             "file": "src\\components\\containers\\border\\Pane.js",
-            "line": 322,
+            "line": 329,
             "description": "event callback (jQuery)\ntop and bottom pane",
             "access": "private",
             "tagname": "",
@@ -3343,7 +3355,7 @@
         },
         {
             "file": "src\\components\\containers\\border\\Pane.js",
-            "line": 345,
+            "line": 352,
             "description": "right and left pane\nevent callback (jQuery)",
             "access": "private",
             "tagname": "",
@@ -3362,7 +3374,7 @@
         },
         {
             "file": "src\\components\\containers\\border\\Pane.js",
-            "line": 375,
+            "line": 382,
             "description": "right and left pane\nevent callback (jQuery)",
             "access": "private",
             "tagname": "",
@@ -3381,7 +3393,7 @@
         },
         {
             "file": "src\\components\\containers\\border\\Pane.js",
-            "line": 410,
+            "line": 417,
             "description": "enable drags function on element",
             "itemtype": "method",
             "name": "enableDrags",
@@ -3391,7 +3403,7 @@
         },
         {
             "file": "src\\components\\containers\\border\\Pane.js",
-            "line": 418,
+            "line": 425,
             "description": "disable drags function on element",
             "itemtype": "method",
             "name": "disableDrags",
@@ -3401,7 +3413,7 @@
         },
         {
             "file": "src\\components\\containers\\border\\Pane.js",
-            "line": 425,
+            "line": 432,
             "itemtype": "method",
             "name": "bindings",
             "return": {
@@ -3414,7 +3426,7 @@
         },
         {
             "file": "src\\components\\containers\\border\\Pane.js",
-            "line": 445,
+            "line": 452,
             "itemtype": "method",
             "name": "barBindings",
             "return": {
@@ -3427,7 +3439,7 @@
         },
         {
             "file": "src\\components\\containers\\border\\Pane.js",
-            "line": 468,
+            "line": 475,
             "itemtype": "method",
             "name": "getBarId",
             "return": {
@@ -3537,7 +3549,7 @@
         },
         {
             "file": "src\\components\\containers\\BorderLayout.js",
-            "line": 15,
+            "line": 16,
             "itemtype": "property",
             "name": "uiName",
             "type": "{String}",
@@ -3547,7 +3559,7 @@
         },
         {
             "file": "src\\components\\containers\\BorderLayout.js",
-            "line": 21,
+            "line": 22,
             "itemtype": "property",
             "name": "defaults",
             "type": "{Object}",
@@ -3558,7 +3570,7 @@
         },
         {
             "file": "src\\components\\containers\\BorderLayout.js",
-            "line": 32,
+            "line": 33,
             "example": [
                 "\n\t\titems:[{\n\t\t\tposition: \"top\",\t//top, right, bottom, left, center\n\t\t\t//GridCol properties...\n\t\t\titems:[{\n\t\t\t\t...\n\t\t\t}];\n\t\t}]"
             ],
@@ -3572,7 +3584,7 @@
         },
         {
             "file": "src\\components\\containers\\BorderLayout.js",
-            "line": 47,
+            "line": 48,
             "description": "number of cols in Bootstraps grid system\ndo no alter this unless BS changes it",
             "access": "private",
             "tagname": "",
@@ -3586,7 +3598,7 @@
         },
         {
             "file": "src\\components\\containers\\BorderLayout.js",
-            "line": 56,
+            "line": 57,
             "itemtype": "property",
             "name": "defaultSizes",
             "type": "{Object}",
@@ -3633,7 +3645,7 @@
         },
         {
             "file": "src\\components\\containers\\BorderLayout.js",
-            "line": 170,
+            "line": 165,
             "description": "get item border position \n\n---- 0 ----\n1 | 2 | 3 |\n---- 4 ----",
             "itemtype": "method",
             "name": "_itemArrayPosition",
@@ -3654,85 +3666,7 @@
         },
         {
             "file": "src\\components\\containers\\BorderLayout.js",
-            "line": 199,
-            "description": "sets column width offset and other initial properties",
-            "itemtype": "method",
-            "name": "_setColDimensions",
-            "params": [
-                {
-                    "name": "item",
-                    "description": "",
-                    "type": "Object"
-                },
-                {
-                    "name": "map",
-                    "description": "",
-                    "type": "Object of items"
-                }
-            ],
-            "return": {
-                "description": "item",
-                "type": "Object"
-            },
-            "class": "components.containers.BorderLayout",
-            "module": "Firebrick.ui.components",
-            "namespace": "components.containers"
-        },
-        {
-            "file": "src\\components\\containers\\BorderLayout.js",
-            "line": 225,
-            "description": "sets column width offset and other initial properties for the right column (number 3)",
-            "itemtype": "method",
-            "name": "_calcRightPos",
-            "params": [
-                {
-                    "name": "item",
-                    "description": "",
-                    "type": "Object"
-                },
-                {
-                    "name": "map",
-                    "description": "",
-                    "type": "Object of items"
-                }
-            ],
-            "return": {
-                "description": "item",
-                "type": "Object"
-            },
-            "class": "components.containers.BorderLayout",
-            "module": "Firebrick.ui.components",
-            "namespace": "components.containers"
-        },
-        {
-            "file": "src\\components\\containers\\BorderLayout.js",
-            "line": 270,
-            "description": "force center pane to be 100% - regardless of properties",
-            "itemtype": "method",
-            "name": "_calcCenterPos",
-            "params": [
-                {
-                    "name": "item",
-                    "description": "",
-                    "type": "Object"
-                },
-                {
-                    "name": "map",
-                    "description": "",
-                    "type": "Object of items"
-                }
-            ],
-            "return": {
-                "description": "item",
-                "type": "Object"
-            },
-            "class": "components.containers.BorderLayout",
-            "module": "Firebrick.ui.components",
-            "namespace": "components.containers"
-        },
-        {
-            "file": "src\\components\\containers\\BorderLayout.js",
-            "line": 309,
+            "line": 194,
             "itemtype": "method",
             "name": "bindings",
             "return": {

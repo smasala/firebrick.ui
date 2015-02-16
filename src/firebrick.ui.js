@@ -41,7 +41,7 @@
 			 * @private
 			 * @type {String}
 			 */
-			version: "0.12.0",
+			version: "0.12.1",
 			
 			/**
 			 * used to cache pointers to classes when searching by "uiName"
