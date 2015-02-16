@@ -19,7 +19,7 @@
             
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 0.11.9</em>
+            <em>API Docs for: 0.12.0</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -57,6 +57,8 @@
             
                 <li><a href="../classes/components.common.mixins.Badges.html">components.common.mixins.Badges</a></li>
             
+                <li><a href="../classes/components.common.mixins.Column.html">components.common.mixins.Column</a></li>
+            
                 <li><a href="../classes/components.common.mixins.Items.html">components.common.mixins.Items</a></li>
             
                 <li><a href="../classes/components.common.mixins.Toolbars.html">components.common.mixins.Toolbars</a></li>
@@ -65,15 +67,19 @@
             
                 <li><a href="../classes/components.containers.Base.html">components.containers.Base</a></li>
             
+                <li><a href="../classes/components.containers.border.Pane.html">components.containers.border.Pane</a></li>
+            
+                <li><a href="../classes/components.containers.BorderLayout.html">components.containers.BorderLayout</a></li>
+            
                 <li><a href="../classes/components.containers.Box.html">components.containers.Box</a></li>
             
                 <li><a href="../classes/components.containers.Form.html">components.containers.Form</a></li>
             
                 <li><a href="../classes/components.containers.FormPanel.html">components.containers.FormPanel</a></li>
             
-                <li><a href="../classes/components.containers.Grid.html">components.containers.Grid</a></li>
-            
                 <li><a href="../classes/components.containers.GridColumn.html">components.containers.GridColumn</a></li>
+            
+                <li><a href="../classes/components.containers.GridRow.html">components.containers.GridRow</a></li>
             
                 <li><a href="../classes/components.containers.Modal.html">components.containers.Modal</a></li>
             
@@ -136,6 +142,8 @@
                 <li><a href="../classes/components.table.TreeTable.html">components.table.TreeTable</a></li>
             
                 <li><a href="../classes/helper.html">helper</a></li>
+            
+                <li><a href="../classes/plugins.Draggable.html">plugins.Draggable</a></li>
             
                 <li><a href="../classes/plugins.RadioList.html">plugins.RadioList</a></li>
             
@@ -206,10 +214,11 @@
  * @namespace components.containers
  * @class GridColumn
  */
-define([&quot;text!./GridColumn.html&quot;, &quot;./Base&quot;], function(tpl){
+define([&quot;text!./GridColumn.html&quot;, &quot;./Base&quot;, &quot;../common/mixins/Column&quot;], function(tpl){
 	&quot;use strict&quot;;
 	return Firebrick.define(&quot;Firebrick.ui.containers.GridColumn&quot;, {
 		extend:&quot;Firebrick.ui.containers.Base&quot;,
+		mixins:&quot;Firebrick.ui.common.mixins.Column&quot;,
 		/**
 		 * @property uiName
 		 * @type {String}
@@ -221,76 +230,12 @@ define([&quot;text!./GridColumn.html&quot;, &quot;./Base&quot;], function(tpl){
 		 */
 		tpl:tpl,
 		/**
-		 * @property deviceSize
-		 * @type {String}
-		 * @default &quot;md&quot;
-		 */
-		deviceSize:&quot;md&quot;,
-		/**
-		 * auto will attempt to provide the column width by dividing the number of items in the parent Grid by 12 - decimals will be rounded down
-		 * @property columnWidth
-		 * @type {Integer|String} number 1 to 12 or &quot;auto&quot;
-		 * @default &quot;auto&quot;
-		 */
-		columnWidth:&quot;auto&quot;,
-		/**
-		 * use this to offset the column by x columns
-		 * http://getbootstrap.com/css/#grid-offsetting
-		 * @property columnOffset
-		 * @type {Integer|null} 1 to 12
-		 * @default null
-		 */
-		columnOffset:null,
-		/**
-		 * use this to offset the column by x columns
-		 * http://getbootstrap.com/css/#grid-column-ordering
-		 * @example
-		 * 		pull-3
-		 * @example
-		 * 		push-4
-		 * @property columnOrder
-		 * @type {String|null} &quot;push-{x}&quot; or &quot;pull-{x}&quot; - x = 1 to 12
-		 * @default null
-		 */
-		columnOrder:null,
-		/**
-		 * when property columnWidth is set to &quot;auto&quot;, this function will attempt to calculate the correct size for each column.
-		 * Note: this function will round down to the nearest whole number - 5 columns will result in size 2 for each column
-		 * the number of columns are divided by 12 (BS3 grid)
-		 * @method _getColumnWidth
-		 * @private
-		 * @return {Int}
-		 */
-		_getColumnWidth:function(){
-			var me = this,
-				colWidth = me.columnWidth;
-			if(colWidth === &quot;auto&quot;){
-				return Math.floor(12/me._parent.items.length);
-			}
-			return colWidth;
-		},
-		
-		/**
-		 * Bindings
 		 * @method bindings
 		 * @return {Object}
 		 */
 		bindings: function(){
-			var me = this,
-				obj = me.callParent(arguments);
-			
-			obj.css.col = true;
-			obj.css[ me.parseBind(&quot;col-&quot;+me.deviceSize+&quot;-&quot;+me._getColumnWidth()) ] = true;
-			
-			if(me.columnOffset){
-				obj.css[ me.parseBind(&quot;col-&quot; + me.deviceSize + &quot;-offset-&quot; + me.columnOffset) ] = true;
-			}
-			
-			if(me.columnOrder){
-				obj.css[ me.parseBind(&quot;col-&quot; + me.deviceSize + &quot;-&quot; + me.columnOrder) ] = true;
-			}
-			
-			return obj;
+			var me = this;
+			return me.calColumn(me.callParent(arguments));
 		}
 	});
 });

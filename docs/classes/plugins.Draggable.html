@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>src\components\fields\SelectBox.js - Firebrick UI API</title>
+    <title>plugins.Draggable - Firebrick UI API</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -200,99 +200,148 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-                        <h1 class="file-heading">File: src\components\fields\SelectBox.js</h1>
+                        <h1>plugins.Draggable Class</h1>
+<div class="box meta">
+    
 
-<div class="file">
-    <pre class="code prettyprint linenums">
-/*!
- * @author Steven Masala [me@smasala.com]
- */
+    
 
-/**
- * @module Firebrick.ui.components
- * @extends components.fields.Input
- * @namespace components.fields
- * @class SelectBox
- */
-define([&quot;text!./SelectBox.html&quot;, &quot;jquery&quot;, &quot;./Input&quot;], function(subTpl, $){
-	&quot;use strict&quot;;
-	return Firebrick.define(&quot;Firebrick.ui.fields.SelectBox&quot;, {
-		extend:&#x27;Firebrick.ui.fields.Input&#x27;,
-		/**
-		 * @property uiName
-		 * @type {String}
-		 */
-		uiName:&quot;fb-ui-selectbox&quot;,
-		/**
-		 * @property multiSelect
-		 * @type {Boolean}
-		 * @default false
-		 */
-		multiSelect:false,
-		/**
-		 * @property subTpl
-		 * @type {String} html
-		 */
-		subTpl:subTpl,
-		/**
-		 * @property options
-		 * @type {String|Function|Array of Objects}
-		 * @default false
-		 */
-		options:false,
-		/**
-		 * @property dataType
-		 * @type {String}
-		 * @default &quot;&#x27;select&#x27;2
-		 */
-		dataType:&quot;select&quot;,
-		/**
-		 * @property selectedOptions
-		 * @type {String}
-		 * @default false
-		 */
-		selectedOptions:false,
-		/**
-		 * @property optionsValue
-		 * @type {String}
-		 * @default &quot;&#x27;value&#x27;&quot;
-		 */
-		optionsValue:&quot;&#x27;value&#x27;&quot;,
-		/**
-		 * @property optionsText
-		 * @type {String}
-		 * @default &quot;&#x27;text&#x27;&quot;
-		 */
-		optionsText:&quot;&#x27;text&#x27;&quot;,
-		/**
-		 * @method bindings
-		 * @return {Object}
-		 */
-		bindings:function(){
-			var me = this,
-				obj = me.callParent(arguments);
-			
-			obj.attr.multiple = me.multiSelect;
-			
-			if(!me.inplaceEdit){
-				obj.options = Firebrick.ui.helper.optionString(me);
-				obj.selectedOptions = me.selectedOptions;
-				obj.optionsText = me.optionsText;
-				obj.optionsValue = me.optionsValue;
-			}else{
-				obj.editable = me.selectedOptions;
-				obj.editableOptions = {
-						optionsValue:me.optionsValue,
-						optionsText:me.optionsText,
-						options:Firebrick.ui.helper.optionString(me),
-						type: me.parseBind( me.dataType )
-				};
-			}
-			return obj;
-		}
-	});
-});
-    </pre>
+    
+        <div class="foundat">
+            Defined in: <a href="../files/src_components_containers_border_Draggable.js.html#l5"><code>src\components\containers\border\Draggable.js:5</code></a>
+        </div>
+    
+
+    
+        
+            Module: <a href="../modules/plugins.html">plugins</a>
+        
+    
+
+    
+</div>
+
+
+
+<div class="box intro">
+    <p>built on the back of: <a href="http://css-tricks.com/snippets/jquery/draggable-without-jquery-ui/">http://css-tricks.com/snippets/jquery/draggable-without-jquery-ui/</a></p>
+
+</div>
+
+
+
+<div id="classdocs" class="tabview">
+    <ul class="api-class-tabs">
+        <li class="api-class-tab index"><a href="#index">Index</a></li>
+
+        
+        
+        
+        
+            <li class="api-class-tab events"><a href="#events">Events</a></li>
+        
+    </ul>
+
+    <div>
+        <div id="index" class="api-class-tabpanel index">
+            <h2 class="off-left">Item Index</h2>
+
+            
+
+            
+
+            
+
+            
+                <div class="index-section events">
+                    <h3>Events</h3>
+
+                    <ul class="index-list events">
+                        
+                            <li class="index-item event">
+                                <a href="#event_dragged - fired on mouseup
+set property &quot;dragDisabled&quot; on element to disable dragging at anytime">dragged - fired on mouseup
+set property &quot;dragDisabled&quot; on element to disable dragging at anytime</a>
+
+                                
+                                
+                            </li>
+                        
+                    </ul>
+                </div>
+            
+        </div>
+
+        
+
+        
+
+        
+
+        
+            <div id="events" class="api-class-tabpanel">
+                <h2 class="off-left">Events</h2>
+
+                
+                    <div id="event_dragged - fired on mouseup
+set property &quot;dragDisabled&quot; on element to disable dragging at anytime" class="events item">
+    <h3 class="name"><code>dragged - fired on mouseup
+set property &quot;dragDisabled&quot; on element to disable dragging at anytime</code></h3>
+    <span class="type"></span>
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/src_components_containers_border_Draggable.js.html#l15"><code>src\components\containers\border\Draggable.js:15</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        
+    </div>
+
+    
+
+
+    
+        <div class="example">
+            <h4>Example:</h4>
+
+            <div class="example-content">
+                <pre class="code prettyprint"><code>    jqueryEl.prop(&quot;dragDisabled&quot;, {true|false});</code></pre>
+<pre class="code prettyprint"><code>    jqueryEl.drags(&quot;vertical&quot;);
+    jqueryEl.drags(&quot;horizontal&quot;);</code></pre>
+
+            </div>
+        </div>
+    
+</div>
+
+                
+            </div>
+        
+    </div>
 </div>
 
                     </div>

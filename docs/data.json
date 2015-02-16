@@ -2,7 +2,7 @@
     "project": {
         "name": "Firebrick UI API",
         "description": "Firebrick UI API: a component library for Firebrick MVC, Knockout JS, jQuery and Bootstrap",
-        "version": "0.11.9",
+        "version": "0.12.0",
         "url": "https://github.com/smasala",
         "logo": "fbui_small.png"
     },
@@ -84,6 +84,17 @@
                 "components.common.mixins": 1
             }
         },
+        "src\\components\\common\\mixins\\Column.js": {
+            "name": "src\\components\\common\\mixins\\Column.js",
+            "modules": {},
+            "classes": {
+                "components.common.mixins.Column": 1
+            },
+            "fors": {},
+            "namespaces": {
+                "components.common.mixins": 1
+            }
+        },
         "src\\components\\common\\mixins\\Items.js": {
             "name": "src\\components\\common\\mixins\\Items.js",
             "modules": {},
@@ -128,6 +139,28 @@
                 "components.common": 1
             }
         },
+        "src\\components\\containers\\border\\Draggable.js": {
+            "name": "src\\components\\containers\\border\\Draggable.js",
+            "modules": {},
+            "classes": {
+                "plugins.Draggable": 1
+            },
+            "fors": {},
+            "namespaces": {
+                "plugins": 1
+            }
+        },
+        "src\\components\\containers\\border\\Pane.js": {
+            "name": "src\\components\\containers\\border\\Pane.js",
+            "modules": {},
+            "classes": {
+                "components.containers.border.Pane": 1
+            },
+            "fors": {},
+            "namespaces": {
+                "components.containers.border": 1
+            }
+        },
         "src\\components\\containers\\tab\\Pane.js": {
             "name": "src\\components\\containers\\tab\\Pane.js",
             "modules": {},
@@ -144,6 +177,17 @@
             "modules": {},
             "classes": {
                 "components.containers.Base": 1
+            },
+            "fors": {},
+            "namespaces": {
+                "components.containers": 1
+            }
+        },
+        "src\\components\\containers\\BorderLayout.js": {
+            "name": "src\\components\\containers\\BorderLayout.js",
+            "modules": {},
+            "classes": {
+                "components.containers.BorderLayout": 1
             },
             "fors": {},
             "namespaces": {
@@ -183,22 +227,22 @@
                 "components.containers": 1
             }
         },
-        "src\\components\\containers\\Grid.js": {
-            "name": "src\\components\\containers\\Grid.js",
+        "src\\components\\containers\\GridColumn.js": {
+            "name": "src\\components\\containers\\GridColumn.js",
             "modules": {},
             "classes": {
-                "components.containers.Grid": 1
+                "components.containers.GridColumn": 1
             },
             "fors": {},
             "namespaces": {
                 "components.containers": 1
             }
         },
-        "src\\components\\containers\\GridColumn.js": {
-            "name": "src\\components\\containers\\GridColumn.js",
+        "src\\components\\containers\\GridRow.js": {
+            "name": "src\\components\\containers\\GridRow.js",
             "modules": {},
             "classes": {
-                "components.containers.GridColumn": 1
+                "components.containers.GridRow": 1
             },
             "fors": {},
             "namespaces": {
@@ -569,17 +613,20 @@
                 "components.button.Icon": 1,
                 "components.button.ToggleButton": 1,
                 "components.common.mixins.Badges": 1,
+                "components.common.mixins.Column": 1,
                 "components.common.mixins.Items": 1,
                 "components.common.mixins.Toolbars": 1,
                 "components.common.Base": 1,
                 "components.common.MultiplesBase": 1,
+                "components.containers.border.Pane": 1,
                 "components.containers.tab.Pane": 1,
                 "components.containers.Base": 1,
+                "components.containers.BorderLayout": 1,
                 "components.containers.Box": 1,
                 "components.containers.Form": 1,
                 "components.containers.FormPanel": 1,
-                "components.containers.Grid": 1,
                 "components.containers.GridColumn": 1,
+                "components.containers.GridRow": 1,
                 "components.containers.Modal": 1,
                 "components.containers.Panel": 1,
                 "components.containers.TabPanel": 1,
@@ -616,6 +663,7 @@
                 "components.button": 1,
                 "components.common.mixins": 1,
                 "components.common": 1,
+                "components.containers.border": 1,
                 "components.containers.tab": 1,
                 "components.containers": 1,
                 "components.display": 1,
@@ -638,6 +686,7 @@
             "name": "plugins",
             "submodules": {},
             "classes": {
+                "plugins.Draggable": 1,
                 "plugins.RadioList": 1
             },
             "fors": {},
@@ -664,7 +713,7 @@
             "namespaces": {},
             "tag": "module",
             "file": "src\\firebrick.ui.js",
-            "line": 496,
+            "line": 503,
             "description": "Firebrick component library for Firebrick JS MVC"
         }
     },
@@ -773,6 +822,19 @@
             "file": "src\\components\\common\\mixins\\Badges.js",
             "line": 5
         },
+        "components.common.mixins.Column": {
+            "name": "components.common.mixins.Column",
+            "shortname": "components.common.mixins.Column",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "Firebrick.ui.components",
+            "namespace": "components.common.mixins",
+            "file": "src\\components\\common\\mixins\\Column.js",
+            "line": 5
+        },
         "components.common.mixins.Items": {
             "name": "components.common.mixins.Items",
             "shortname": "components.common.mixins.Items",
@@ -833,6 +895,34 @@
             "description": "Base for inputs where multiple options are possible: checkboxes, radio and togglesbuttons for example",
             "extends": "components.fields.Input"
         },
+        "plugins.Draggable": {
+            "name": "plugins.Draggable",
+            "shortname": "plugins.Draggable",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "plugins",
+            "namespace": "plugins",
+            "file": "src\\components\\containers\\border\\Draggable.js",
+            "line": 5,
+            "description": "built on the back of: http://css-tricks.com/snippets/jquery/draggable-without-jquery-ui/"
+        },
+        "components.containers.border.Pane": {
+            "name": "components.containers.border.Pane",
+            "shortname": "components.containers.border.Pane",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "Firebrick.ui.components",
+            "namespace": "components.containers.border",
+            "file": "src\\components\\containers\\border\\Pane.js",
+            "line": 5,
+            "extends": "components.containers.Base"
+        },
         "components.containers.tab.Pane": {
             "name": "components.containers.tab.Pane",
             "shortname": "components.containers.tab.Pane",
@@ -863,6 +953,20 @@
             "uses": [
                 "components.common.mixins.Items"
             ]
+        },
+        "components.containers.BorderLayout": {
+            "name": "components.containers.BorderLayout",
+            "shortname": "components.containers.BorderLayout",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "Firebrick.ui.components",
+            "namespace": "components.containers",
+            "file": "src\\components\\containers\\BorderLayout.js",
+            "line": 5,
+            "extends": "components.containers.Base"
         },
         "components.containers.Box": {
             "name": "components.containers.Box",
@@ -906,20 +1010,6 @@
             "line": 5,
             "extends": "components.containers.Base"
         },
-        "components.containers.Grid": {
-            "name": "components.containers.Grid",
-            "shortname": "components.containers.Grid",
-            "classitems": [],
-            "plugins": [],
-            "extensions": [],
-            "plugin_for": [],
-            "extension_for": [],
-            "module": "Firebrick.ui.components",
-            "namespace": "components.containers",
-            "file": "src\\components\\containers\\Grid.js",
-            "line": 5,
-            "extends": "components.containers.Base"
-        },
         "components.containers.GridColumn": {
             "name": "components.containers.GridColumn",
             "shortname": "components.containers.GridColumn",
@@ -931,6 +1021,20 @@
             "module": "Firebrick.ui.components",
             "namespace": "components.containers",
             "file": "src\\components\\containers\\GridColumn.js",
+            "line": 5,
+            "extends": "components.containers.Base"
+        },
+        "components.containers.GridRow": {
+            "name": "components.containers.GridRow",
+            "shortname": "components.containers.GridRow",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "Firebrick.ui.components",
+            "namespace": "components.containers",
+            "file": "src\\components\\containers\\GridRow.js",
             "line": 5,
             "extends": "components.containers.Base"
         },
@@ -1386,7 +1490,7 @@
             "module": "Firebrick.ui",
             "namespace": "",
             "file": "src\\firebrick.ui.js",
-            "line": 288,
+            "line": 287,
             "description": "util methods"
         },
         "helper": {
@@ -1400,7 +1504,7 @@
             "module": "Firebrick.ui",
             "namespace": "",
             "file": "src\\firebrick.ui.js",
-            "line": 388,
+            "line": 387,
             "description": "similar to utils, but are component related"
         },
         "renderer": {
@@ -1414,7 +1518,7 @@
             "module": "Firebrick.ui",
             "namespace": "",
             "file": "src\\firebrick.ui.js",
-            "line": 451,
+            "line": 458,
             "description": "renderer methods"
         },
         "view.Base": {
@@ -1428,7 +1532,7 @@
             "module": "Firebrick.ui",
             "namespace": "",
             "file": "src\\firebrick.ui.js",
-            "line": 496,
+            "line": 503,
             "description": "Overwrites \"Firebrick.view.Base\"",
             "extends": "class.Base"
         }
@@ -2108,6 +2212,106 @@
             "namespace": "components.common.mixins"
         },
         {
+            "file": "src\\components\\common\\mixins\\Column.js",
+            "line": 15,
+            "itemtype": "property",
+            "name": "deviceSize",
+            "type": "{String}",
+            "default": "\"md\"",
+            "class": "components.common.mixins.Column",
+            "module": "Firebrick.ui.components",
+            "namespace": "components.common.mixins"
+        },
+        {
+            "file": "src\\components\\common\\mixins\\Column.js",
+            "line": 21,
+            "description": "auto will attempt to provide the column width by dividing the number of items in the parent Grid by 12 - decimals will be rounded down",
+            "itemtype": "property",
+            "name": "columnWidth",
+            "type": "{Integer|String} number 1 to 12 or \"auto\"",
+            "default": "\"auto\"",
+            "class": "components.common.mixins.Column",
+            "module": "Firebrick.ui.components",
+            "namespace": "components.common.mixins"
+        },
+        {
+            "file": "src\\components\\common\\mixins\\Column.js",
+            "line": 28,
+            "description": "use this to offset the column by x columns\nhttp://getbootstrap.com/css/#grid-offsetting",
+            "itemtype": "property",
+            "name": "columnOffset",
+            "type": "{Integer|null} 1 to 12",
+            "default": "null",
+            "class": "components.common.mixins.Column",
+            "module": "Firebrick.ui.components",
+            "namespace": "components.common.mixins"
+        },
+        {
+            "file": "src\\components\\common\\mixins\\Column.js",
+            "line": 36,
+            "description": "use this to offset the column by x columns\nhttp://getbootstrap.com/css/#grid-column-ordering",
+            "example": [
+                "\n\t\tpull-3",
+                "\n\t\tpush-4"
+            ],
+            "itemtype": "property",
+            "name": "columnOrder",
+            "type": "{String|null} \"push-{x}\" or \"pull-{x}\" - x = 1 to 12",
+            "default": "null",
+            "class": "components.common.mixins.Column",
+            "module": "Firebrick.ui.components",
+            "namespace": "components.common.mixins"
+        },
+        {
+            "file": "src\\components\\common\\mixins\\Column.js",
+            "line": 48,
+            "description": "when property columnWidth is set to \"auto\", this function will attempt to calculate the correct size for each column.\nNote: this function will round down to the nearest whole number - 5 columns will result in size 2 for each column\nthe number of columns are divided by 12 (BS3 grid)",
+            "itemtype": "method",
+            "name": "_getColumnWidth",
+            "access": "private",
+            "tagname": "",
+            "return": {
+                "description": "",
+                "type": "Int"
+            },
+            "class": "components.common.mixins.Column",
+            "module": "Firebrick.ui.components",
+            "namespace": "components.common.mixins"
+        },
+        {
+            "file": "src\\components\\common\\mixins\\Column.js",
+            "line": 65,
+            "description": "call this in bindings function",
+            "itemtype": "method",
+            "name": "calColumn",
+            "params": [
+                {
+                    "name": "obj",
+                    "description": "",
+                    "type": "Object",
+                    "props": [
+                        {
+                            "name": "css:",
+                            "description": "{}",
+                            "type": "Object"
+                        },
+                        {
+                            "name": "attr:",
+                            "description": "{}",
+                            "type": "Object"
+                        }
+                    ]
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "Object"
+            },
+            "class": "components.common.mixins.Column",
+            "module": "Firebrick.ui.components",
+            "namespace": "components.common.mixins"
+        },
+        {
             "file": "src\\components\\common\\mixins\\Items.js",
             "line": 14,
             "description": "default configuration for direct children - i.e. direct items",
@@ -2156,7 +2360,7 @@
         },
         {
             "file": "src\\components\\common\\mixins\\Items.js",
-            "line": 55,
+            "line": 69,
             "description": "inject sub items",
             "itemtype": "method",
             "name": "getItems",
@@ -2170,7 +2374,7 @@
         },
         {
             "file": "src\\components\\common\\mixins\\Items.js",
-            "line": 68,
+            "line": 82,
             "description": "if you are calling _getItems from a nested scope or you want items from a different property other than .items - then use this function",
             "itemtype": "method",
             "name": "_getItemsScoped",
@@ -2197,7 +2401,7 @@
         },
         {
             "file": "src\\components\\common\\mixins\\Items.js",
-            "line": 82,
+            "line": 96,
             "description": "use getItems",
             "access": "private",
             "tagname": "",
@@ -2879,12 +3083,368 @@
             "namespace": "components.common"
         },
         {
+            "file": "src\\components\\containers\\border\\Draggable.js",
+            "line": 15,
+            "itemtype": "event",
+            "name": "dragged - fired on mouseup\nset property \"dragDisabled\" on element to disable dragging at anytime",
+            "example": [
+                " \n\t\tjqueryEl.prop(\"dragDisabled\", {true|false});",
+                "\n\t\tjqueryEl.drags(\"vertical\");\n\t\tjqueryEl.drags(\"horizontal\");"
+            ],
+            "class": "plugins.Draggable",
+            "module": "plugins",
+            "namespace": "plugins"
+        },
+        {
+            "file": "src\\components\\containers\\border\\Pane.js",
+            "line": 17,
+            "itemtype": "property",
+            "name": "uiName",
+            "type": "{String}",
+            "default": "\"fb-ui-border.pane\"",
+            "class": "components.containers.border.Pane",
+            "module": "Firebrick.ui.components",
+            "namespace": "components.containers.border"
+        },
+        {
+            "file": "src\\components\\containers\\border\\Pane.js",
+            "line": 23,
+            "itemtype": "property",
+            "name": "resizable",
+            "type": "{Boolean}",
+            "default": "false",
+            "class": "components.containers.border.Pane",
+            "module": "Firebrick.ui.components",
+            "namespace": "components.containers.border"
+        },
+        {
+            "file": "src\\components\\containers\\border\\Pane.js",
+            "line": 29,
+            "itemtype": "property",
+            "name": "position",
+            "type": "{String} \"top\", \"left\", \"center\", \"right\", \"bottom\"",
+            "default": "\"\"",
+            "class": "components.containers.border.Pane",
+            "module": "Firebrick.ui.components",
+            "namespace": "components.containers.border"
+        },
+        {
+            "file": "src\\components\\containers\\border\\Pane.js",
+            "line": 35,
+            "itemtype": "property",
+            "name": "collapseDirection",
+            "type": "{String}",
+            "default": "\"left\"",
+            "class": "components.containers.border.Pane",
+            "module": "Firebrick.ui.components",
+            "namespace": "components.containers.border"
+        },
+        {
+            "file": "src\\components\\containers\\border\\Pane.js",
+            "line": 41,
+            "itemtype": "property",
+            "name": "splitbarIdPrefix",
+            "type": "{String}",
+            "default": "\"fb-ui-bar\"",
+            "class": "components.containers.border.Pane",
+            "module": "Firebrick.ui.components",
+            "namespace": "components.containers.border"
+        },
+        {
+            "file": "src\\components\\containers\\border\\Pane.js",
+            "line": 47,
+            "access": "private",
+            "tagname": "",
+            "itemtype": "property",
+            "name": "splitBarTpl",
+            "type": "{HTML}",
+            "default": "SplitBar.html",
+            "class": "components.containers.border.Pane",
+            "module": "Firebrick.ui.components",
+            "namespace": "components.containers.border"
+        },
+        {
+            "file": "src\\components\\containers\\border\\Pane.js",
+            "line": 54,
+            "access": "private",
+            "tagname": "",
+            "itemtype": "property",
+            "name": "_rotatedHeadingClass",
+            "type": "{String}",
+            "default": "\"panel-rotated-heading\"",
+            "class": "components.containers.border.Pane",
+            "module": "Firebrick.ui.components",
+            "namespace": "components.containers.border"
+        },
+        {
+            "file": "src\\components\\containers\\border\\Pane.js",
+            "line": 61,
+            "access": "private",
+            "tagname": "",
+            "itemtype": "property",
+            "name": "_rotatedHeadingClass",
+            "type": "{String}",
+            "default": "\"panel-rotated-heading\"",
+            "class": "components.containers.border.Pane",
+            "module": "Firebrick.ui.components",
+            "namespace": "components.containers.border"
+        },
+        {
+            "file": "src\\components\\containers\\border\\Pane.js",
+            "line": 68,
+            "access": "private",
+            "tagname": "",
+            "itemtype": "property",
+            "name": "_positionPrefixClass",
+            "type": "{String}",
+            "default": "\"fb-ui-pane-position-\"",
+            "class": "components.containers.border.Pane",
+            "module": "Firebrick.ui.components",
+            "namespace": "components.containers.border"
+        },
+        {
+            "file": "src\\components\\containers\\border\\Pane.js",
+            "line": 75,
+            "access": "private",
+            "tagname": "",
+            "itemtype": "property",
+            "name": "_transitionClass",
+            "type": "{String}",
+            "default": "\"fb-ui-transition\"",
+            "class": "components.containers.border.Pane",
+            "module": "Firebrick.ui.components",
+            "namespace": "components.containers.border"
+        },
+        {
+            "file": "src\\components\\containers\\border\\Pane.js",
+            "line": 82,
+            "itemtype": "property",
+            "name": "height",
+            "type": "{Integer|String}",
+            "default": "\"auto\"",
+            "class": "components.containers.border.Pane",
+            "module": "Firebrick.ui.components",
+            "namespace": "components.containers.border"
+        },
+        {
+            "file": "src\\components\\containers\\border\\Pane.js",
+            "line": 88,
+            "itemtype": "method",
+            "name": "init",
+            "return": {
+                "description": "",
+                "type": "Object"
+            },
+            "class": "components.containers.border.Pane",
+            "module": "Firebrick.ui.components",
+            "namespace": "components.containers.border"
+        },
+        {
+            "file": "src\\components\\containers\\border\\Pane.js",
+            "line": 106,
+            "description": "listener for the event htmlRendered\nin this function the splitbar is added to its correct position\nonly if the pane is resizable",
+            "access": "private",
+            "tagname": "",
+            "itemtype": "method",
+            "name": "_htmlRendered",
+            "class": "components.containers.border.Pane",
+            "module": "Firebrick.ui.components",
+            "namespace": "components.containers.border"
+        },
+        {
+            "file": "src\\components\\containers\\border\\Pane.js",
+            "line": 136,
+            "description": "accepts no parameters",
+            "access": "private",
+            "tagname": "",
+            "itemtype": "method",
+            "name": "_setDimensions",
+            "class": "components.containers.border.Pane",
+            "module": "Firebrick.ui.components",
+            "namespace": "components.containers.border"
+        },
+        {
+            "file": "src\\components\\containers\\border\\Pane.js",
+            "line": 161,
+            "description": "listener for the event rendered",
+            "access": "private",
+            "tagname": "",
+            "itemtype": "method",
+            "name": "_rendered",
+            "class": "components.containers.border.Pane",
+            "module": "Firebrick.ui.components",
+            "namespace": "components.containers.border"
+        },
+        {
+            "file": "src\\components\\containers\\border\\Pane.js",
+            "line": 178,
+            "itemtype": "method",
+            "name": "setCollapsibleActions",
+            "class": "components.containers.border.Pane",
+            "module": "Firebrick.ui.components",
+            "namespace": "components.containers.border"
+        },
+        {
+            "file": "src\\components\\containers\\border\\Pane.js",
+            "line": 205,
+            "itemtype": "method",
+            "name": "setResizableActions",
+            "class": "components.containers.border.Pane",
+            "module": "Firebrick.ui.components",
+            "namespace": "components.containers.border"
+        },
+        {
+            "file": "src\\components\\containers\\border\\Pane.js",
+            "line": 290,
+            "description": "event callback (jQuery)\ntop and bottom pane",
+            "access": "private",
+            "tagname": "",
+            "itemtype": "method",
+            "name": "_onTBPaneCollapse",
+            "params": [
+                {
+                    "name": "me",
+                    "description": "this class",
+                    "type": "Object"
+                },
+                {
+                    "name": "el",
+                    "description": "panel|pane",
+                    "type": "JQuery Object"
+                }
+            ],
+            "class": "components.containers.border.Pane",
+            "module": "Firebrick.ui.components",
+            "namespace": "components.containers.border"
+        },
+        {
+            "file": "src\\components\\containers\\border\\Pane.js",
+            "line": 322,
+            "description": "event callback (jQuery)\ntop and bottom pane",
+            "access": "private",
+            "tagname": "",
+            "itemtype": "method",
+            "name": "_onTBPaneExpand",
+            "params": [
+                {
+                    "name": "me",
+                    "description": "this class",
+                    "type": "Object"
+                },
+                {
+                    "name": "el",
+                    "description": "panel|pane",
+                    "type": "JQuery Object"
+                }
+            ],
+            "class": "components.containers.border.Pane",
+            "module": "Firebrick.ui.components",
+            "namespace": "components.containers.border"
+        },
+        {
+            "file": "src\\components\\containers\\border\\Pane.js",
+            "line": 345,
+            "description": "right and left pane\nevent callback (jQuery)",
+            "access": "private",
+            "tagname": "",
+            "itemtype": "method",
+            "name": "_onRLPaneExpand",
+            "params": [
+                {
+                    "name": "event",
+                    "description": "",
+                    "type": "JQuery event Object"
+                }
+            ],
+            "class": "components.containers.border.Pane",
+            "module": "Firebrick.ui.components",
+            "namespace": "components.containers.border"
+        },
+        {
+            "file": "src\\components\\containers\\border\\Pane.js",
+            "line": 375,
+            "description": "right and left pane\nevent callback (jQuery)",
+            "access": "private",
+            "tagname": "",
+            "itemtype": "method",
+            "name": "_onRLPaneCollapse",
+            "params": [
+                {
+                    "name": "event",
+                    "description": "",
+                    "type": "JQuery event Object"
+                }
+            ],
+            "class": "components.containers.border.Pane",
+            "module": "Firebrick.ui.components",
+            "namespace": "components.containers.border"
+        },
+        {
+            "file": "src\\components\\containers\\border\\Pane.js",
+            "line": 410,
+            "description": "enable drags function on element",
+            "itemtype": "method",
+            "name": "enableDrags",
+            "class": "components.containers.border.Pane",
+            "module": "Firebrick.ui.components",
+            "namespace": "components.containers.border"
+        },
+        {
+            "file": "src\\components\\containers\\border\\Pane.js",
+            "line": 418,
+            "description": "disable drags function on element",
+            "itemtype": "method",
+            "name": "disableDrags",
+            "class": "components.containers.border.Pane",
+            "module": "Firebrick.ui.components",
+            "namespace": "components.containers.border"
+        },
+        {
+            "file": "src\\components\\containers\\border\\Pane.js",
+            "line": 425,
+            "itemtype": "method",
+            "name": "bindings",
+            "return": {
+                "description": "",
+                "type": "Object"
+            },
+            "class": "components.containers.border.Pane",
+            "module": "Firebrick.ui.components",
+            "namespace": "components.containers.border"
+        },
+        {
+            "file": "src\\components\\containers\\border\\Pane.js",
+            "line": 445,
+            "itemtype": "method",
+            "name": "barBindings",
+            "return": {
+                "description": "",
+                "type": "Object"
+            },
+            "class": "components.containers.border.Pane",
+            "module": "Firebrick.ui.components",
+            "namespace": "components.containers.border"
+        },
+        {
+            "file": "src\\components\\containers\\border\\Pane.js",
+            "line": 468,
+            "itemtype": "method",
+            "name": "getBarId",
+            "return": {
+                "description": "",
+                "type": "String"
+            },
+            "class": "components.containers.border.Pane",
+            "module": "Firebrick.ui.components",
+            "namespace": "components.containers.border"
+        },
+        {
             "file": "src\\components\\containers\\tab\\Pane.js",
             "line": 17,
             "itemtype": "property",
             "name": "uiName",
             "type": "{String}",
-            "default": "\"fb-ui-tabpane\"",
+            "default": "\"fb-ui-tab.pane\"",
             "class": "components.containers.tab.Pane",
             "module": "Firebrick.ui.components",
             "namespace": "components.containers.tab"
@@ -2974,6 +3534,214 @@
             "class": "components.containers.tab.Pane",
             "module": "Firebrick.ui.components",
             "namespace": "components.containers.tab"
+        },
+        {
+            "file": "src\\components\\containers\\BorderLayout.js",
+            "line": 15,
+            "itemtype": "property",
+            "name": "uiName",
+            "type": "{String}",
+            "class": "components.containers.BorderLayout",
+            "module": "Firebrick.ui.components",
+            "namespace": "components.containers"
+        },
+        {
+            "file": "src\\components\\containers\\BorderLayout.js",
+            "line": 21,
+            "itemtype": "property",
+            "name": "defaults",
+            "type": "{Object}",
+            "default": "{\n\t\tuiName: fb.ui.cmp.borderpane\n}",
+            "class": "components.containers.BorderLayout",
+            "module": "Firebrick.ui.components",
+            "namespace": "components.containers"
+        },
+        {
+            "file": "src\\components\\containers\\BorderLayout.js",
+            "line": 32,
+            "example": [
+                "\n\t\titems:[{\n\t\t\tposition: \"top\",\t//top, right, bottom, left, center\n\t\t\t//GridCol properties...\n\t\t\titems:[{\n\t\t\t\t...\n\t\t\t}];\n\t\t}]"
+            ],
+            "itemtype": "property",
+            "name": "items",
+            "type": "{Array of Objects}",
+            "default": "null",
+            "class": "components.containers.BorderLayout",
+            "module": "Firebrick.ui.components",
+            "namespace": "components.containers"
+        },
+        {
+            "file": "src\\components\\containers\\BorderLayout.js",
+            "line": 47,
+            "description": "number of cols in Bootstraps grid system\ndo no alter this unless BS changes it",
+            "access": "private",
+            "tagname": "",
+            "itemtype": "property",
+            "name": "_maxGridCols",
+            "type": "{Integer}",
+            "default": "12",
+            "class": "components.containers.BorderLayout",
+            "module": "Firebrick.ui.components",
+            "namespace": "components.containers"
+        },
+        {
+            "file": "src\\components\\containers\\BorderLayout.js",
+            "line": 56,
+            "itemtype": "property",
+            "name": "defaultSizes",
+            "type": "{Object}",
+            "default": "{\n\t\ttop: 12,\n\t\tright: 3,\n\t\tbottom: 12,\n\t\tleft: 3,\n\t\tcenter: 6\n}",
+            "class": "components.containers.BorderLayout",
+            "module": "Firebrick.ui.components",
+            "namespace": "components.containers"
+        },
+        {
+            "file": "src\\components\\containers\\BorderLayout.js",
+            "line": 74,
+            "itemtype": "property",
+            "name": "height",
+            "type": "{Integer|String} px value | auto",
+            "default": "\"auto\"",
+            "class": "components.containers.BorderLayout",
+            "module": "Firebrick.ui.components",
+            "namespace": "components.containers"
+        },
+        {
+            "file": "src\\components\\containers\\BorderLayout.js",
+            "line": 80,
+            "itemtype": "method",
+            "name": "init",
+            "return": {
+                "description": "",
+                "type": "Object"
+            },
+            "class": "components.containers.BorderLayout",
+            "module": "Firebrick.ui.components",
+            "namespace": "components.containers"
+        },
+        {
+            "file": "src\\components\\containers\\BorderLayout.js",
+            "line": 101,
+            "description": "overriding base method build",
+            "access": "private",
+            "tagname": "",
+            "itemtype": "method",
+            "name": "build",
+            "class": "components.containers.BorderLayout",
+            "module": "Firebrick.ui.components",
+            "namespace": "components.containers"
+        },
+        {
+            "file": "src\\components\\containers\\BorderLayout.js",
+            "line": 170,
+            "description": "get item border position \n\n---- 0 ----\n1 | 2 | 3 |\n---- 4 ----",
+            "itemtype": "method",
+            "name": "_itemArrayPosition",
+            "params": [
+                {
+                    "name": "position",
+                    "description": "top, right, bottom, left, center",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "Integer"
+            },
+            "class": "components.containers.BorderLayout",
+            "module": "Firebrick.ui.components",
+            "namespace": "components.containers"
+        },
+        {
+            "file": "src\\components\\containers\\BorderLayout.js",
+            "line": 199,
+            "description": "sets column width offset and other initial properties",
+            "itemtype": "method",
+            "name": "_setColDimensions",
+            "params": [
+                {
+                    "name": "item",
+                    "description": "",
+                    "type": "Object"
+                },
+                {
+                    "name": "map",
+                    "description": "",
+                    "type": "Object of items"
+                }
+            ],
+            "return": {
+                "description": "item",
+                "type": "Object"
+            },
+            "class": "components.containers.BorderLayout",
+            "module": "Firebrick.ui.components",
+            "namespace": "components.containers"
+        },
+        {
+            "file": "src\\components\\containers\\BorderLayout.js",
+            "line": 225,
+            "description": "sets column width offset and other initial properties for the right column (number 3)",
+            "itemtype": "method",
+            "name": "_calcRightPos",
+            "params": [
+                {
+                    "name": "item",
+                    "description": "",
+                    "type": "Object"
+                },
+                {
+                    "name": "map",
+                    "description": "",
+                    "type": "Object of items"
+                }
+            ],
+            "return": {
+                "description": "item",
+                "type": "Object"
+            },
+            "class": "components.containers.BorderLayout",
+            "module": "Firebrick.ui.components",
+            "namespace": "components.containers"
+        },
+        {
+            "file": "src\\components\\containers\\BorderLayout.js",
+            "line": 270,
+            "description": "force center pane to be 100% - regardless of properties",
+            "itemtype": "method",
+            "name": "_calcCenterPos",
+            "params": [
+                {
+                    "name": "item",
+                    "description": "",
+                    "type": "Object"
+                },
+                {
+                    "name": "map",
+                    "description": "",
+                    "type": "Object of items"
+                }
+            ],
+            "return": {
+                "description": "item",
+                "type": "Object"
+            },
+            "class": "components.containers.BorderLayout",
+            "module": "Firebrick.ui.components",
+            "namespace": "components.containers"
+        },
+        {
+            "file": "src\\components\\containers\\BorderLayout.js",
+            "line": 309,
+            "itemtype": "method",
+            "name": "bindings",
+            "return": {
+                "description": "",
+                "type": "Object"
+            },
+            "class": "components.containers.BorderLayout",
+            "module": "Firebrick.ui.components",
+            "namespace": "components.containers"
         },
         {
             "file": "src\\components\\containers\\Box.js",
@@ -3273,49 +4041,82 @@
             "namespace": "components.containers"
         },
         {
-            "file": "src\\components\\containers\\Grid.js",
+            "file": "src\\components\\containers\\GridColumn.js",
+            "line": 16,
+            "itemtype": "property",
+            "name": "uiName",
+            "type": "{String}",
+            "class": "components.containers.GridColumn",
+            "module": "Firebrick.ui.components",
+            "namespace": "components.containers"
+        },
+        {
+            "file": "src\\components\\containers\\GridColumn.js",
+            "line": 21,
+            "itemtype": "property",
+            "name": "tpl",
+            "type": "{String} html",
+            "class": "components.containers.GridColumn",
+            "module": "Firebrick.ui.components",
+            "namespace": "components.containers"
+        },
+        {
+            "file": "src\\components\\containers\\GridColumn.js",
+            "line": 26,
+            "itemtype": "method",
+            "name": "bindings",
+            "return": {
+                "description": "",
+                "type": "Object"
+            },
+            "class": "components.containers.GridColumn",
+            "module": "Firebrick.ui.components",
+            "namespace": "components.containers"
+        },
+        {
+            "file": "src\\components\\containers\\GridRow.js",
             "line": 15,
             "itemtype": "property",
             "name": "uiName",
             "type": "{String}",
-            "class": "components.containers.Grid",
+            "class": "components.containers.GridRow",
             "module": "Firebrick.ui.components",
             "namespace": "components.containers"
         },
         {
-            "file": "src\\components\\containers\\Grid.js",
+            "file": "src\\components\\containers\\GridRow.js",
             "line": 20,
             "itemtype": "property",
             "name": "tpl",
             "type": "{String} html",
-            "class": "components.containers.Grid",
+            "class": "components.containers.GridRow",
             "module": "Firebrick.ui.components",
             "namespace": "components.containers"
         },
         {
-            "file": "src\\components\\containers\\Grid.js",
+            "file": "src\\components\\containers\\GridRow.js",
             "line": 25,
             "itemtype": "property",
             "name": "rowClass",
             "type": "{Boolean|String}",
             "default": "true",
-            "class": "components.containers.Grid",
+            "class": "components.containers.GridRow",
             "module": "Firebrick.ui.components",
             "namespace": "components.containers"
         },
         {
-            "file": "src\\components\\containers\\Grid.js",
+            "file": "src\\components\\containers\\GridRow.js",
             "line": 31,
             "itemtype": "property",
             "name": "defaults",
             "type": "{Object}",
             "default": "{uiName: fb.ui.cmp.gridcol}",
-            "class": "components.containers.Grid",
+            "class": "components.containers.GridRow",
             "module": "Firebrick.ui.components",
             "namespace": "components.containers"
         },
         {
-            "file": "src\\components\\containers\\Grid.js",
+            "file": "src\\components\\containers\\GridRow.js",
             "line": 39,
             "itemtype": "method",
             "name": "bindings",
@@ -3323,12 +4124,12 @@
                 "description": "",
                 "type": "Object"
             },
-            "class": "components.containers.Grid",
+            "class": "components.containers.GridRow",
             "module": "Firebrick.ui.components",
             "namespace": "components.containers"
         },
         {
-            "file": "src\\components\\containers\\Grid.js",
+            "file": "src\\components\\containers\\GridRow.js",
             "line": 51,
             "itemtype": "method",
             "name": "getBasicBindings",
@@ -3336,12 +4137,12 @@
                 "description": "",
                 "type": "Object"
             },
-            "class": "components.containers.Grid",
+            "class": "components.containers.GridRow",
             "module": "Firebrick.ui.components",
             "namespace": "components.containers"
         },
         {
-            "file": "src\\components\\containers\\Grid.js",
+            "file": "src\\components\\containers\\GridRow.js",
             "line": 63,
             "description": "used when calling {{{getGridItem}}} in template",
             "itemtype": "method",
@@ -3367,108 +4168,7 @@
                 "description": "",
                 "type": "String"
             },
-            "class": "components.containers.Grid",
-            "module": "Firebrick.ui.components",
-            "namespace": "components.containers"
-        },
-        {
-            "file": "src\\components\\containers\\GridColumn.js",
-            "line": 15,
-            "itemtype": "property",
-            "name": "uiName",
-            "type": "{String}",
-            "class": "components.containers.GridColumn",
-            "module": "Firebrick.ui.components",
-            "namespace": "components.containers"
-        },
-        {
-            "file": "src\\components\\containers\\GridColumn.js",
-            "line": 20,
-            "itemtype": "property",
-            "name": "tpl",
-            "type": "{String} html",
-            "class": "components.containers.GridColumn",
-            "module": "Firebrick.ui.components",
-            "namespace": "components.containers"
-        },
-        {
-            "file": "src\\components\\containers\\GridColumn.js",
-            "line": 25,
-            "itemtype": "property",
-            "name": "deviceSize",
-            "type": "{String}",
-            "default": "\"md\"",
-            "class": "components.containers.GridColumn",
-            "module": "Firebrick.ui.components",
-            "namespace": "components.containers"
-        },
-        {
-            "file": "src\\components\\containers\\GridColumn.js",
-            "line": 31,
-            "description": "auto will attempt to provide the column width by dividing the number of items in the parent Grid by 12 - decimals will be rounded down",
-            "itemtype": "property",
-            "name": "columnWidth",
-            "type": "{Integer|String} number 1 to 12 or \"auto\"",
-            "default": "\"auto\"",
-            "class": "components.containers.GridColumn",
-            "module": "Firebrick.ui.components",
-            "namespace": "components.containers"
-        },
-        {
-            "file": "src\\components\\containers\\GridColumn.js",
-            "line": 38,
-            "description": "use this to offset the column by x columns\nhttp://getbootstrap.com/css/#grid-offsetting",
-            "itemtype": "property",
-            "name": "columnOffset",
-            "type": "{Integer|null} 1 to 12",
-            "default": "null",
-            "class": "components.containers.GridColumn",
-            "module": "Firebrick.ui.components",
-            "namespace": "components.containers"
-        },
-        {
-            "file": "src\\components\\containers\\GridColumn.js",
-            "line": 46,
-            "description": "use this to offset the column by x columns\nhttp://getbootstrap.com/css/#grid-column-ordering",
-            "example": [
-                "\n\t\tpull-3",
-                "\n\t\tpush-4"
-            ],
-            "itemtype": "property",
-            "name": "columnOrder",
-            "type": "{String|null} \"push-{x}\" or \"pull-{x}\" - x = 1 to 12",
-            "default": "null",
-            "class": "components.containers.GridColumn",
-            "module": "Firebrick.ui.components",
-            "namespace": "components.containers"
-        },
-        {
-            "file": "src\\components\\containers\\GridColumn.js",
-            "line": 58,
-            "description": "when property columnWidth is set to \"auto\", this function will attempt to calculate the correct size for each column.\nNote: this function will round down to the nearest whole number - 5 columns will result in size 2 for each column\nthe number of columns are divided by 12 (BS3 grid)",
-            "itemtype": "method",
-            "name": "_getColumnWidth",
-            "access": "private",
-            "tagname": "",
-            "return": {
-                "description": "",
-                "type": "Int"
-            },
-            "class": "components.containers.GridColumn",
-            "module": "Firebrick.ui.components",
-            "namespace": "components.containers"
-        },
-        {
-            "file": "src\\components\\containers\\GridColumn.js",
-            "line": 75,
-            "description": "Bindings",
-            "itemtype": "method",
-            "name": "bindings",
-            "return": {
-                "description": "",
-                "type": "Object"
-            },
-            "class": "components.containers.GridColumn",
+            "class": "components.containers.GridRow",
             "module": "Firebrick.ui.components",
             "namespace": "components.containers"
         },
@@ -3887,17 +4587,6 @@
         {
             "file": "src\\components\\containers\\Panel.js",
             "line": 71,
-            "itemtype": "property",
-            "name": "showPanelHeader",
-            "type": "{Boolean}",
-            "default": "true",
-            "class": "components.containers.Panel",
-            "module": "Firebrick.ui.components",
-            "namespace": "components.containers"
-        },
-        {
-            "file": "src\\components\\containers\\Panel.js",
-            "line": 77,
             "description": "fill the panel body (can be html too) - use in conjunction with contentHTML property",
             "itemtype": "property",
             "name": "content",
@@ -3909,7 +4598,7 @@
         },
         {
             "file": "src\\components\\containers\\Panel.js",
-            "line": 84,
+            "line": 78,
             "description": "whether the content is html content",
             "itemtype": "property",
             "name": "contentHTML",
@@ -3921,11 +4610,22 @@
         },
         {
             "file": "src\\components\\containers\\Panel.js",
-            "line": 91,
+            "line": 85,
             "itemtype": "property",
             "name": "collapsible",
             "type": "{Boolean|String}",
             "default": "false",
+            "class": "components.containers.Panel",
+            "module": "Firebrick.ui.components",
+            "namespace": "components.containers"
+        },
+        {
+            "file": "src\\components\\containers\\Panel.js",
+            "line": 91,
+            "itemtype": "property",
+            "name": "showCollapseIcon",
+            "type": "{Boolean}",
+            "default": "true",
             "class": "components.containers.Panel",
             "module": "Firebrick.ui.components",
             "namespace": "components.containers"
@@ -3966,6 +4666,32 @@
         {
             "file": "src\\components\\containers\\Panel.js",
             "line": 115,
+            "access": "private",
+            "tagname": "",
+            "itemtype": "property",
+            "name": "_collapsedClass",
+            "type": "{String}",
+            "default": "\"fb-ui-is-collapsed\"",
+            "class": "components.containers.Panel",
+            "module": "Firebrick.ui.components",
+            "namespace": "components.containers"
+        },
+        {
+            "file": "src\\components\\containers\\Panel.js",
+            "line": 122,
+            "itemtype": "method",
+            "name": "init",
+            "return": {
+                "description": "",
+                "type": "Object"
+            },
+            "class": "components.containers.Panel",
+            "module": "Firebrick.ui.components",
+            "namespace": "components.containers"
+        },
+        {
+            "file": "src\\components\\containers\\Panel.js",
+            "line": 138,
             "description": "Data bindings",
             "itemtype": "method",
             "name": "bindings",
@@ -3979,7 +4705,7 @@
         },
         {
             "file": "src\\components\\containers\\Panel.js",
-            "line": 132,
+            "line": 155,
             "itemtype": "method",
             "name": "tabBindings",
             "return": {
@@ -3992,7 +4718,7 @@
         },
         {
             "file": "src\\components\\containers\\Panel.js",
-            "line": 153,
+            "line": 177,
             "itemtype": "method",
             "name": "panelHeaderBindings",
             "return": {
@@ -4005,7 +4731,7 @@
         },
         {
             "file": "src\\components\\containers\\Panel.js",
-            "line": 171,
+            "line": 195,
             "itemtype": "method",
             "name": "headerItemsBindings",
             "return": {
@@ -4018,7 +4744,7 @@
         },
         {
             "file": "src\\components\\containers\\Panel.js",
-            "line": 190,
+            "line": 218,
             "itemtype": "method",
             "name": "collapsibleLinkBindings",
             "return": {
@@ -4031,7 +4757,64 @@
         },
         {
             "file": "src\\components\\containers\\Panel.js",
-            "line": 206,
+            "line": 239,
+            "description": "registered collapsibleLinkBindings with the KO \"click\" attribute",
+            "itemtype": "event",
+            "name": "\"fb-ui-panel-state-change\" on panel element",
+            "params": [
+                {
+                    "name": "obj",
+                    "description": ""
+                },
+                {
+                    "name": "event",
+                    "description": "jquery event",
+                    "type": "Object"
+                }
+            ],
+            "class": "components.containers.Panel",
+            "module": "Firebrick.ui.components",
+            "namespace": "components.containers"
+        },
+        {
+            "file": "src\\components\\containers\\Panel.js",
+            "line": 255,
+            "itemtype": "method",
+            "name": "collapsibleIconBindings",
+            "return": {
+                "description": "",
+                "type": "Object"
+            },
+            "class": "components.containers.Panel",
+            "module": "Firebrick.ui.components",
+            "namespace": "components.containers"
+        },
+        {
+            "file": "src\\components\\containers\\Panel.js",
+            "line": 274,
+            "description": "simulate a click on the icon and delegate it to the title",
+            "itemtype": "method",
+            "name": "collapseIconClick",
+            "access": "private",
+            "tagname": "",
+            "params": [
+                {
+                    "name": "obj",
+                    "description": ""
+                },
+                {
+                    "name": "event",
+                    "description": "jquery event",
+                    "type": "Object"
+                }
+            ],
+            "class": "components.containers.Panel",
+            "module": "Firebrick.ui.components",
+            "namespace": "components.containers"
+        },
+        {
+            "file": "src\\components\\containers\\Panel.js",
+            "line": 288,
             "itemtype": "method",
             "name": "panelHeaderTextBindings",
             "return": {
@@ -4044,7 +4827,7 @@
         },
         {
             "file": "src\\components\\containers\\Panel.js",
-            "line": 225,
+            "line": 307,
             "itemtype": "method",
             "name": "panelBodyBindings",
             "return": {
@@ -4988,6 +5771,31 @@
             "namespace": "components.display"
         },
         {
+            "file": "src\\components\\display\\Span.js",
+            "line": 23,
+            "description": "set as \"primary\", \"default\", \"warning\", \"danger\", \"success\", \"info\" to convert the span to a BS label component",
+            "itemtype": "property",
+            "name": "labelStyle",
+            "type": "{String}",
+            "default": "\"\"",
+            "class": "components.display.Span",
+            "module": "Firebrick.ui.components",
+            "namespace": "components.display"
+        },
+        {
+            "file": "src\\components\\display\\Span.js",
+            "line": 30,
+            "itemtype": "method",
+            "name": "bindings",
+            "return": {
+                "description": "",
+                "type": "Object"
+            },
+            "class": "components.display.Span",
+            "module": "Firebrick.ui.components",
+            "namespace": "components.display"
+        },
+        {
             "file": "src\\components\\display\\Text.js",
             "line": 15,
             "itemtype": "property",
@@ -5297,22 +6105,35 @@
         {
             "file": "src\\components\\fields\\Display.js",
             "line": 23,
+            "description": "overwrite input formControlClass",
             "itemtype": "property",
-            "name": "readOnly",
-            "type": "{Boolean}",
-            "default": "true",
+            "name": "formControlClass",
+            "type": "{String}",
+            "default": "\"formControlClass fb-ui-field-display\"",
             "class": "components.fields.Display",
             "module": "Firebrick.ui.components",
             "namespace": "components.fields"
         },
         {
             "file": "src\\components\\fields\\Display.js",
-            "line": 29,
-            "description": "overwrite input formControlClass",
+            "line": 30,
             "itemtype": "property",
-            "name": "formControlClass",
-            "type": "{String}",
-            "default": "\"formControlClass fb-ui-field-display\"",
+            "name": "subTpl",
+            "type": "{html}",
+            "default": "Display.html",
+            "class": "components.fields.Display",
+            "module": "Firebrick.ui.components",
+            "namespace": "components.fields"
+        },
+        {
+            "file": "src\\components\\fields\\Display.js",
+            "line": 36,
+            "itemtype": "method",
+            "name": "bindings",
+            "return": {
+                "description": "",
+                "type": "Object"
+            },
             "class": "components.fields.Display",
             "module": "Firebrick.ui.components",
             "namespace": "components.fields"
@@ -5439,7 +6260,7 @@
             "file": "src\\components\\fields\\Input.js",
             "line": 62,
             "itemtype": "property",
-            "name": "colLabelSize",
+            "name": "labelWidth",
             "type": "{Int}",
             "default": "3",
             "class": "components.fields.Input",
@@ -7233,7 +8054,7 @@
         },
         {
             "file": "src\\firebrick.ui.js",
-            "line": 214,
+            "line": 213,
             "description": "this method converts shorthand component definitions",
             "example": [
                 "\n\t\t//component definition    \"|\"\n\t\t//converts to the component <hr>  -  fb.ui.cmp.hr"
@@ -7258,7 +8079,7 @@
         },
         {
             "file": "src\\firebrick.ui.js",
-            "line": 238,
+            "line": 237,
             "description": "get a component class by its shortname... uiName",
             "itemtype": "method",
             "name": "getByShortName",
@@ -7278,7 +8099,7 @@
         },
         {
             "file": "src\\firebrick.ui.js",
-            "line": 268,
+            "line": 267,
             "itemtype": "method",
             "name": "getCmp",
             "params": [
@@ -7297,7 +8118,7 @@
         },
         {
             "file": "src\\firebrick.ui.js",
-            "line": 277,
+            "line": 276,
             "description": "alias for Firebrick.get",
             "itemtype": "method",
             "name": "get",
@@ -7317,7 +8138,7 @@
         },
         {
             "file": "src\\firebrick.ui.js",
-            "line": 295,
+            "line": 294,
             "access": "private",
             "tagname": "",
             "itemtype": "method",
@@ -7351,7 +8172,7 @@
         },
         {
             "file": "src\\firebrick.ui.js",
-            "line": 338,
+            "line": 337,
             "description": "if you are unsure of the parameters type - use this function to get the raw value. I.e. if its a function it will be called and returned, otherwise it will just return it.\nuseful when working with Knockout objects",
             "itemtype": "method",
             "name": "getValue",
@@ -7371,7 +8192,7 @@
         },
         {
             "file": "src\\firebrick.ui.js",
-            "line": 352,
+            "line": 351,
             "description": "convert a JS Object into a simple \"json\" type string, this is mainly used for the data-bind attribute in Knockout",
             "itemtype": "method",
             "name": "stringify",
@@ -7391,7 +8212,7 @@
         },
         {
             "file": "src\\firebrick.ui.js",
-            "line": 395,
+            "line": 394,
             "description": "builds the items string used for functions such as \"foreach\"",
             "itemtype": "method",
             "name": "tabBuilder",
@@ -7411,7 +8232,7 @@
         },
         {
             "file": "src\\firebrick.ui.js",
-            "line": 414,
+            "line": 413,
             "description": "builds the options string used for functions such as \"foreach\"",
             "itemtype": "method",
             "name": "optionString",
@@ -7431,7 +8252,7 @@
         },
         {
             "file": "src\\firebrick.ui.js",
-            "line": 432,
+            "line": 431,
             "description": "builds links, if value then return the value overwise return javascript:void(0)",
             "itemtype": "method",
             "name": "linkBuilder",
@@ -7458,7 +8279,7 @@
         },
         {
             "file": "src\\firebrick.ui.js",
-            "line": 457,
+            "line": 464,
             "itemtype": "property",
             "name": "_registry",
             "type": "{Object}",
@@ -7469,7 +8290,7 @@
         },
         {
             "file": "src\\firebrick.ui.js",
-            "line": 464,
+            "line": 471,
             "itemtype": "method",
             "name": "add",
             "params": [
@@ -7492,7 +8313,7 @@
         },
         {
             "file": "src\\firebrick.ui.js",
-            "line": 478,
+            "line": 485,
             "itemtype": "method",
             "name": "get",
             "params": [
@@ -7511,7 +8332,7 @@
         },
         {
             "file": "src\\firebrick.ui.js",
-            "line": 502,
+            "line": 509,
             "itemtype": "property",
             "name": "listeners",
             "type": "{Object}",
@@ -7520,7 +8341,7 @@
         },
         {
             "file": "src\\firebrick.ui.js",
-            "line": 516,
+            "line": 531,
             "itemtype": "property",
             "name": "items",
             "type": "{Array|Function}",
@@ -7530,7 +8351,7 @@
         },
         {
             "file": "src\\firebrick.ui.js",
-            "line": 522,
+            "line": 537,
             "itemtype": "property",
             "name": "tpl",
             "type": "{Function}",

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>src\components\fields\SelectBox.js - Firebrick UI API</title>
+    <title>src\components\containers\border\Draggable.js - Firebrick UI API</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -200,7 +200,7 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-                        <h1 class="file-heading">File: src\components\fields\SelectBox.js</h1>
+                        <h1 class="file-heading">File: src\components\containers\border\Draggable.js</h1>
 
 <div class="file">
     <pre class="code prettyprint linenums">
@@ -209,88 +209,110 @@
  */
 
 /**
- * @module Firebrick.ui.components
- * @extends components.fields.Input
- * @namespace components.fields
- * @class SelectBox
+ * built on the back of: http://css-tricks.com/snippets/jquery/draggable-without-jquery-ui/
+ * 
+ * @module plugins
+ * @namespace plugins
+ * @class Draggable
  */
-define([&quot;text!./SelectBox.html&quot;, &quot;jquery&quot;, &quot;./Input&quot;], function(subTpl, $){
+define([&quot;jquery&quot;], function($){
 	&quot;use strict&quot;;
-	return Firebrick.define(&quot;Firebrick.ui.fields.SelectBox&quot;, {
-		extend:&#x27;Firebrick.ui.fields.Input&#x27;,
-		/**
-		 * @property uiName
-		 * @type {String}
-		 */
-		uiName:&quot;fb-ui-selectbox&quot;,
-		/**
-		 * @property multiSelect
-		 * @type {Boolean}
-		 * @default false
-		 */
-		multiSelect:false,
-		/**
-		 * @property subTpl
-		 * @type {String} html
-		 */
-		subTpl:subTpl,
-		/**
-		 * @property options
-		 * @type {String|Function|Array of Objects}
-		 * @default false
-		 */
-		options:false,
-		/**
-		 * @property dataType
-		 * @type {String}
-		 * @default &quot;&#x27;select&#x27;2
-		 */
-		dataType:&quot;select&quot;,
-		/**
-		 * @property selectedOptions
-		 * @type {String}
-		 * @default false
-		 */
-		selectedOptions:false,
-		/**
-		 * @property optionsValue
-		 * @type {String}
-		 * @default &quot;&#x27;value&#x27;&quot;
-		 */
-		optionsValue:&quot;&#x27;value&#x27;&quot;,
-		/**
-		 * @property optionsText
-		 * @type {String}
-		 * @default &quot;&#x27;text&#x27;&quot;
-		 */
-		optionsText:&quot;&#x27;text&#x27;&quot;,
-		/**
-		 * @method bindings
-		 * @return {Object}
-		 */
-		bindings:function(){
-			var me = this,
-				obj = me.callParent(arguments);
-			
-			obj.attr.multiple = me.multiSelect;
-			
-			if(!me.inplaceEdit){
-				obj.options = Firebrick.ui.helper.optionString(me);
-				obj.selectedOptions = me.selectedOptions;
-				obj.optionsText = me.optionsText;
-				obj.optionsValue = me.optionsValue;
-			}else{
-				obj.editable = me.selectedOptions;
-				obj.editableOptions = {
-						optionsValue:me.optionsValue,
-						optionsText:me.optionsText,
-						options:Firebrick.ui.helper.optionString(me),
-						type: me.parseBind( me.dataType )
-				};
-			}
-			return obj;
-		}
-	});
+	
+	/**
+	 * @method drags
+	 * @event dragged - fired on mouseup
+	 * set property &quot;dragDisabled&quot; on element to disable dragging at anytime
+	 * @example 
+	 * 		jqueryEl.prop(&quot;dragDisabled&quot;, {true|false});
+	 * @example
+	 * 		jqueryEl.drags(&quot;vertical&quot;);
+	 * 		jqueryEl.drags(&quot;horizontal&quot;);
+	 */
+    $.fn.drags = function(direction, opt) {
+    	var $el,
+    		origPageX,
+    		origPageY,
+    		top,
+    		left;
+    	
+    	direction = direction.toLowerCase();
+        opt = $.extend({handle:&quot;&quot;}, opt);
+
+        if(opt.handle === &quot;&quot;) {
+            $el = this;
+        } else {
+            $el = this.find(opt.handle);
+        }
+        
+        
+        if($el.prop(&quot;dragSet&quot;) === true){
+        	return $el;
+        }
+        
+        //set a prop on the element to ensure that the event aren&#x27;t registered more than once
+        $el.prop(&quot;dragSet&quot;, true);
+        
+        return $el.on(&quot;mouseover&quot;, function(){
+        		var $drag = $(this);
+        		if($drag.prop(&quot;dragDisabled&quot;) === true){
+        			$drag.css(&quot;cursor&quot;, &quot;auto&quot;);
+        		}else{
+        			$drag.css(&quot;cursor&quot;, &quot;&quot;);
+        		}
+	        }).on(&quot;mousedown&quot;, function(e) {
+	        	var $drag = !opt.handle ? $(this).addClass(&#x27;draggable&#x27;) : $(this).addClass(&#x27;active-handle&#x27;).parent().addClass(&#x27;draggable&#x27;),
+	        		zIdx = $drag.css(&#x27;z-index&#x27;),
+	                drgH = $drag.outerHeight(),
+	                drgW = $drag.outerWidth(),
+	                posY = $drag.offset().top + drgH - e.pageY,
+	                posX = $drag.offset().left + drgW - e.pageX,
+	                mouseMove;
+	        	
+	                origPageY = e.pageY;
+	                origPageX = e.pageX;
+	                
+	                mouseMove = function(e){
+	            		top = (direction === &quot;horizontal&quot; ? origPageY : e.pageY) + posY - drgH;
+	        			left = (direction === &quot;vertical&quot; ? origPageX : e.pageX) + posX - drgW;
+	        			$drag.offset({
+		                    top: top,
+		                    left: left
+		                }).on(&quot;mouseup&quot;, function() {
+		                	$drag.removeClass(&#x27;draggable&#x27;).css(&#x27;z-index&#x27;, zIdx);
+		                	//remove handler
+		                    $(&quot;html&quot;).off(&quot;mousemove&quot;, &quot;body&quot;, mouseMove);
+		                });
+	        		};
+	        	
+	    		if($drag.prop(&quot;dragDisabled&quot;) === true){
+	    			$(&quot;html&quot;).off(&quot;mousemove&quot;, &quot;body&quot;, mouseMove);
+	    		}else{
+	    			$drag.css(&#x27;z-index&#x27;, 1000);
+	            	//add handler
+	            	$(&quot;html&quot;).on(&quot;mousemove&quot;, &quot;body&quot;, mouseMove);
+	    		}
+	        	
+	            
+	            e.preventDefault(); // disable selection
+	            
+	        }).on(&quot;mouseup&quot;, function() {
+	        	var $this = $(this);
+	        	if($this.prop(&quot;dragDisabled&quot;) !== true){
+	        		if(opt.handle === &quot;&quot;) {
+	                	$this.removeClass(&#x27;draggable&#x27;);
+	                } else {
+	                	$this.removeClass(&#x27;active-handle&#x27;).parent().removeClass(&#x27;draggable&#x27;);
+	                }
+	                $this.trigger(&quot;dragged&quot;, [top - origPageY, left - origPageX]);
+	                $this.css({
+	            		top:0,
+	            		left:0
+	            	});
+	        	}
+	        });
+
+    };
+	
 });
     </pre>
 </div>

@@ -1,0 +1,702 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>src\components\containers\border\Pane.js - Firebrick UI API</title>
+    <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
+    <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
+    <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
+    <link rel="shortcut icon" type="image/png" href="../assets/favicon.png">
+    <script src="http://yui.yahooapis.com/combo?3.9.1/build/yui/yui-min.js"></script>
+</head>
+<body class="yui3-skin-sam">
+
+<div id="doc">
+    <div id="hd" class="yui3-g header">
+        <div class="yui3-u-3-4">
+            
+                <h1><img src="..\fbui_small.png" title="Firebrick UI API"></h1>
+            
+        </div>
+        <div class="yui3-u-1-4 version">
+            <em>API Docs for: 0.12.0</em>
+        </div>
+    </div>
+    <div id="bd" class="yui3-g">
+
+        <div class="yui3-u-1-4">
+            <div id="docs-sidebar" class="sidebar apidocs">
+                <div id="api-list">
+    <h2 class="off-left">APIs</h2>
+    <div id="api-tabview" class="tabview">
+        <ul class="tabs">
+            <li><a href="#api-classes">Classes</a></li>
+            <li><a href="#api-modules">Modules</a></li>
+        </ul>
+
+        <div id="api-tabview-filter">
+            <input type="search" id="api-filter" placeholder="Type to filter APIs">
+        </div>
+
+        <div id="api-tabview-panel">
+            <ul id="api-classes" class="apis classes">
+            
+                <li><a href="../classes/components.button.Button.html">components.button.Button</a></li>
+            
+                <li><a href="../classes/components.button.ButtonGroup.html">components.button.ButtonGroup</a></li>
+            
+                <li><a href="../classes/components.button.ButtonGroupBase.html">components.button.ButtonGroupBase</a></li>
+            
+                <li><a href="../classes/components.button.dropdown.List.html">components.button.dropdown.List</a></li>
+            
+                <li><a href="../classes/components.button.Icon.html">components.button.Icon</a></li>
+            
+                <li><a href="../classes/components.button.ToggleButton.html">components.button.ToggleButton</a></li>
+            
+                <li><a href="../classes/components.common.Base.html">components.common.Base</a></li>
+            
+                <li><a href="../classes/components.common.mixins.Badges.html">components.common.mixins.Badges</a></li>
+            
+                <li><a href="../classes/components.common.mixins.Column.html">components.common.mixins.Column</a></li>
+            
+                <li><a href="../classes/components.common.mixins.Items.html">components.common.mixins.Items</a></li>
+            
+                <li><a href="../classes/components.common.mixins.Toolbars.html">components.common.mixins.Toolbars</a></li>
+            
+                <li><a href="../classes/components.common.MultiplesBase.html">components.common.MultiplesBase</a></li>
+            
+                <li><a href="../classes/components.containers.Base.html">components.containers.Base</a></li>
+            
+                <li><a href="../classes/components.containers.border.Pane.html">components.containers.border.Pane</a></li>
+            
+                <li><a href="../classes/components.containers.BorderLayout.html">components.containers.BorderLayout</a></li>
+            
+                <li><a href="../classes/components.containers.Box.html">components.containers.Box</a></li>
+            
+                <li><a href="../classes/components.containers.Form.html">components.containers.Form</a></li>
+            
+                <li><a href="../classes/components.containers.FormPanel.html">components.containers.FormPanel</a></li>
+            
+                <li><a href="../classes/components.containers.GridColumn.html">components.containers.GridColumn</a></li>
+            
+                <li><a href="../classes/components.containers.GridRow.html">components.containers.GridRow</a></li>
+            
+                <li><a href="../classes/components.containers.Modal.html">components.containers.Modal</a></li>
+            
+                <li><a href="../classes/components.containers.Panel.html">components.containers.Panel</a></li>
+            
+                <li><a href="../classes/components.containers.tab.Pane.html">components.containers.tab.Pane</a></li>
+            
+                <li><a href="../classes/components.containers.TabPanel.html">components.containers.TabPanel</a></li>
+            
+                <li><a href="../classes/components.display.Alert.html">components.display.Alert</a></li>
+            
+                <li><a href="../classes/components.display.Divider.html">components.display.Divider</a></li>
+            
+                <li><a href="../classes/components.display.Header.html">components.display.Header</a></li>
+            
+                <li><a href="../classes/components.display.Image.html">components.display.Image</a></li>
+            
+                <li><a href="../classes/components.display.List.html">components.display.List</a></li>
+            
+                <li><a href="../classes/components.display.Progress.html">components.display.Progress</a></li>
+            
+                <li><a href="../classes/components.display.Span.html">components.display.Span</a></li>
+            
+                <li><a href="../classes/components.display.Text.html">components.display.Text</a></li>
+            
+                <li><a href="../classes/components.fields.Checkbox.html">components.fields.Checkbox</a></li>
+            
+                <li><a href="../classes/components.fields.Datepicker.html">components.fields.Datepicker</a></li>
+            
+                <li><a href="../classes/components.fields.Display.html">components.fields.Display</a></li>
+            
+                <li><a href="../classes/components.fields.Email.html">components.fields.Email</a></li>
+            
+                <li><a href="../classes/components.fields.File.html">components.fields.File</a></li>
+            
+                <li><a href="../classes/components.fields.Input.html">components.fields.Input</a></li>
+            
+                <li><a href="../classes/components.fields.Password.html">components.fields.Password</a></li>
+            
+                <li><a href="../classes/components.fields.Radio.html">components.fields.Radio</a></li>
+            
+                <li><a href="../classes/components.fields.SelectBox.html">components.fields.SelectBox</a></li>
+            
+                <li><a href="../classes/components.fields.TextArea.html">components.fields.TextArea</a></li>
+            
+                <li><a href="../classes/components.nav.Base.html">components.nav.Base</a></li>
+            
+                <li><a href="../classes/components.nav.Breadcrumbs.html">components.nav.Breadcrumbs</a></li>
+            
+                <li><a href="../classes/components.nav.List.html">components.nav.List</a></li>
+            
+                <li><a href="../classes/components.nav.Navbar.html">components.nav.Navbar</a></li>
+            
+                <li><a href="../classes/components.nav.Pagination.html">components.nav.Pagination</a></li>
+            
+                <li><a href="../classes/components.nav.Toolbar.html">components.nav.Toolbar</a></li>
+            
+                <li><a href="../classes/components.table.Table.html">components.table.Table</a></li>
+            
+                <li><a href="../classes/components.table.TreeTable.html">components.table.TreeTable</a></li>
+            
+                <li><a href="../classes/helper.html">helper</a></li>
+            
+                <li><a href="../classes/plugins.Draggable.html">plugins.Draggable</a></li>
+            
+                <li><a href="../classes/plugins.RadioList.html">plugins.RadioList</a></li>
+            
+                <li><a href="../classes/renderer.html">renderer</a></li>
+            
+                <li><a href="../classes/ui.html">ui</a></li>
+            
+                <li><a href="../classes/utils.html">utils</a></li>
+            
+                <li><a href="../classes/view.Base.html">view.Base</a></li>
+            
+            </ul>
+
+            <ul id="api-modules" class="apis modules">
+            
+                <li><a href="../modules/Firebrick.ui.html">Firebrick.ui</a></li>
+            
+                <li><a href="../modules/Firebrick.ui.components.html">Firebrick.ui.components</a></li>
+            
+                <li><a href="../modules/plugins.html">plugins</a></li>
+            
+            </ul>
+        </div>
+    </div>
+</div>
+
+            </div>
+        </div>
+        <div class="yui3-u-3-4">
+                <div id="api-options">
+        Show:
+        <label for="api-show-inherited">
+            <input type="checkbox" id="api-show-inherited" checked>
+            Inherited
+        </label>
+
+        <label for="api-show-protected">
+            <input type="checkbox" id="api-show-protected">
+            Protected
+        </label>
+
+        <label for="api-show-private">
+            <input type="checkbox" id="api-show-private">
+            Private
+        </label>
+        <label for="api-show-deprecated">
+            <input type="checkbox" id="api-show-deprecated">
+            Deprecated
+        </label>
+
+    </div>
+
+
+            <div class="apidocs">
+                <div id="docs-main">
+                    <div class="content">
+                        <h1 class="file-heading">File: src\components\containers\border\Pane.js</h1>
+
+<div class="file">
+    <pre class="code prettyprint linenums">
+/*!
+ * @author Steven Masala [me@smasala.com]
+ */
+
+/**
+ * 
+ * @module Firebrick.ui.components
+ * @extends components.containers.Base
+ * @namespace components.containers.border
+ * @class Pane
+ */
+define([&quot;text!./SplitBar.html&quot;, &quot;jquery&quot;, &quot;../../common/mixins/Column&quot;, &quot;./Draggable&quot;, &quot;../Panel&quot;], function(splitBarTpl, $){
+	&quot;use strict&quot;;
+	return Firebrick.define(&quot;Firebrick.ui.containers.border.Pane&quot;, {
+		extend:&quot;Firebrick.ui.containers.Panel&quot;,
+		mixins:&quot;Firebrick.ui.common.mixins.Column&quot;,
+		/**
+		 * @property uiName
+		 * @type {String}
+		 * @default &quot;fb-ui-border.pane&quot;
+		 */
+		uiName:&quot;fb-ui-borderpane&quot;,
+		/**
+		 * @property resizable
+		 * @type {Boolean}
+		 * @default false
+		 */
+		resizable: false,
+		/**
+		 * @property position
+		 * @type {String} &quot;top&quot;, &quot;left&quot;, &quot;center&quot;, &quot;right&quot;, &quot;bottom&quot;
+		 * @default &quot;&quot;
+		 */
+		position: &quot;&quot;,
+		/**
+		 * @property collapseDirection
+		 * @type {String}
+		 * @default &quot;left&quot;
+		 */
+		collapseDirection: &quot;left&quot;,
+		/**
+		 * @property splitbarIdPrefix
+		 * @type {String}
+		 * @default &quot;fb-ui-bar&quot;
+		 */
+		splitbarIdPrefix: &quot;fb-ui-splitbar-&quot;,
+		/**
+		 * @private
+		 * @property splitBarTpl
+		 * @type {HTML}
+		 * @default SplitBar.html
+		 */
+		splitBarTpl: splitBarTpl,
+		/**
+		 * @private
+		 * @property _rotatedHeadingClass
+		 * @type {String}
+		 * @default &quot;panel-rotated-heading&quot;
+		 */
+		_rotatedHeadingClass: &quot;panel-rotated-heading&quot;,
+		/**
+		 * @private
+		 * @property _rotatedHeadingClass
+		 * @type {String}
+		 * @default &quot;panel-rotated-heading&quot;
+		 */
+		_rotatedTitleClass: &quot;panel-rotated-title&quot;,
+		/**
+		 * @private
+		 * @property _positionPrefixClass
+		 * @type {String}
+		 * @default &quot;fb-ui-pane-position-&quot;
+		 */
+		_positionPrefixClass: &quot;fb-ui-pane-position-&quot;,
+		/**
+		 * @private
+		 * @property _transitionClass
+		 * @type {String}
+		 * @default &quot;fb-ui-transition&quot;
+		 */
+		_transitionClass: &quot;fb-ui-transition&quot;,
+		/**
+		 * @property height
+		 * @type {Integer|String}
+		 * @default &quot;auto&quot;
+		 */
+		height: &quot;auto&quot;,
+		/**
+		 * @method init
+		 * @return {Object}
+		 */
+		init: function(){
+			var me = this;
+			
+			me.on(&quot;htmlRendered&quot;, function(){
+				return me._htmlRendered.apply(me, arguments);
+			});
+			
+			me.on(&quot;rendered&quot;, function(){
+				return me._rendered.apply(me, arguments);
+			});
+			
+			return me.callParent(arguments);
+		},
+		
+		/**
+		 * listener for the event htmlRendered
+		 * in this function the splitbar is added to its correct position
+		 * only if the pane is resizable
+		 * @private
+		 * @method _htmlRendered
+		 */
+		_htmlRendered: function(){
+			var me = this,
+				el, splitbarHtml,
+				position = me.position;
+			
+			if(me.resizable &amp;&amp; position !== &quot;center&quot;){
+				el = me.getElement();
+				if(el){
+					me.template(&quot;splitBarTpl&quot;);
+					splitbarHtml = me.build(&quot;splitBarTpl&quot;);
+					if(position !== &quot;right&quot; &amp;&amp; position !== &quot;bottom&quot;){
+						el.after(splitbarHtml);	
+					}else{
+						el.before(splitbarHtml);	
+					}
+					
+				}
+			}
+			
+			me._setDimensions();
+			
+		},
+		
+		/**
+		 * accepts no parameters
+		 * @private
+		 * @method _setDimensions
+		 */
+		_setDimensions: function(){
+			var me = this,
+				el = me.getElement(),
+				position = me.position,
+				height = me.height,
+				width = me.width;
+
+			if(position === &quot;top&quot; || position === &quot;bottom&quot;){
+				if(height !== &quot;auto&quot;){
+					el.css(&quot;height&quot;, height);	
+				}
+			}
+			
+			if(me.width){
+				el.css(&quot;width&quot;, width);
+				el.css(&quot;min-width&quot;, width);
+			}
+			
+		},
+		
+		/**
+		 * listener for the event rendered
+		 * @private
+		 * @method _rendered
+		 */
+		_rendered: function(){
+			var me = this;
+			
+			if (me.collapsible){
+				me.setCollapsibleActions();
+			}
+			
+			if(me.resizable){
+				me.setResizableActions();
+			}	
+		},
+		
+		/**
+		 * @method setCollapsibleActions
+		 */
+		setCollapsibleActions: function(){
+			var me = this,
+				el = me.getElement(),
+				position = me.position;
+			
+			if(position === &quot;left&quot; || position === &quot;right&quot;){
+				$(&quot;&gt; .panel-collapse&quot;, el).on(&quot;hide.bs.collapse&quot;, function(){
+					return me._onRLPaneCollapse.apply(me, arguments);
+				});
+				
+				$(&quot;&gt; .panel-collapse&quot;, el).on(&quot;show.bs.collapse&quot;, function(){
+					return me._onRLPaneExpand.apply(me, arguments);
+				});
+			}else{
+				//bottom &amp; top panes
+				$(&quot;&gt; .panel-collapse&quot;, el).on(&quot;hide.bs.collapse&quot;, function(){
+					return me._onTBPaneCollapse.apply(me, arguments);
+				});
+				$(&quot;&gt; .panel-collapse&quot;, el).on(&quot;show.bs.collapse&quot;, function(){
+					return me._onTBPaneExpand.apply(me, arguments);
+				});
+			}
+		},
+		
+		/**
+		 * @method setResizableActions
+		 */
+		setResizableActions: function(){
+			var me = this,
+				position = me.position,
+				pane = me.getElement(),
+				paneHeader = $(&quot;&gt; .panel-heading&quot;, pane),
+				vertical = position === &quot;top&quot; || position === &quot;bottom&quot; ? true : false,
+				splitbar = vertical || position === &quot;right&quot; ? pane.prev(&quot;.fb-ui-splitbar&quot;) : pane.next(&quot;.fb-ui-splitbar&quot;);
+				
+			if(splitbar.length){
+				if(vertical){
+					//top bottom panes
+
+					//if the class if NOT collapsed from the start, then enable resizing
+					if(!pane.hasClass( me._collapsedClass )){
+						me.enableDrags(splitbar, &quot;vertical&quot;);
+					}
+					
+					pane.on(&quot;fb-ui-panel-state-change&quot;, function(){
+						//disable resize if the pane is collapsed
+						if(pane.hasClass( me._collapsedClass )){
+							me.disableDrags(splitbar);
+						}else{
+							me.enableDrags(splitbar, &quot;vertical&quot;);
+						}
+					});
+					
+					//when the splitbar has been dragged, if the panel a new height
+					splitbar.on(&quot;dragged&quot;, function(event, top/*, left*/){
+						var val;
+						if(position === &quot;top&quot;){
+							val = pane.height() + top;
+							if(val &gt; 0){
+								//subtract the header height to position the splitbar in the right place
+								val -= paneHeader.height();
+							}
+							pane.css(&quot;height&quot;, val);
+							pane.css(&quot;min-height&quot;, val);
+						}else{
+							val = pane.height() - top;
+							if(val &lt; 0){
+								//add the header height to position the splitbar in the right place
+								val += paneHeader.height();
+							}
+							pane.css(&quot;height&quot;, val);
+							pane.css(&quot;min-height&quot;, val);
+						}
+						
+					});
+					
+				}else{
+					
+					//if the pane is NOT collapsed from the start, enable resize functionality
+					if(!pane.hasClass( me._collapsedClass )){
+						me.enableDrags(splitbar, &quot;horizontal&quot;);
+					}
+					
+					pane.on(&quot;fb-ui-panel-state-change&quot;, function(){
+						//disable resize if the panel is collapsed
+						if(pane.hasClass( me._collapsedClass )){
+							me.disableDrags(splitbar);
+						}else{
+							me.enableDrags(splitbar, &quot;horizontal&quot;);
+						}
+					});
+					
+					//when the splitbar has been moved, calculate the new width of the pane
+					splitbar.on(&quot;dragged&quot;, function(event, top, left){
+						var width = pane.width();
+						if(position === &quot;right&quot;){
+							pane.width(width-left);
+							pane.css(&quot;min-width&quot;, width-left);
+						}else{
+							pane.width(width+left);
+							pane.css(&quot;min-width&quot;, width+left);
+						}
+						
+					});
+				}
+
+			}
+		},
+		
+		/**
+		 * event callback (jQuery)
+		 * top and bottom pane
+		 * @private
+		 * @method _onTBPaneCollapse
+		 * @param me {Object} this class
+		 * @param el {jQuery Object} panel|pane
+		 */
+		_onTBPaneCollapse: function(){
+			var me = this,
+				pane = me.getElement(),
+				paneHeader = $(&quot;&gt; .panel-heading&quot;, pane),
+				paneHeaderHeight = paneHeader.outerHeight();
+
+			if(!pane.prop(&quot;_fbResizeHeight&quot;)){
+				//first time this is collapse - set the current height/min-height to the current values
+				//if not set, css snaps a little and does not do the animation/transition properly
+				pane.css(&quot;min-height&quot;, pane.css(&quot;min-height&quot;));
+				pane.css(&quot;height&quot;, pane.css(&quot;height&quot;));
+			}
+			
+			pane.addClass( me._transitionClass );
+
+			pane.prop(&quot;_fbResizeHeight&quot;, pane.css(&quot;height&quot;));	//save the height in the property, this is needed for transitions when the pane is expaneded again
+			pane.css(&quot;min-height&quot;, paneHeaderHeight);
+			pane.css(&quot;height&quot;, paneHeaderHeight);
+			
+			pane.one(&quot;webkitTransitionEnd otransitionend oTransitionEnd msTransitionEnd transitionend&quot;, function() {
+				pane.removeClass( me._transitionClass );
+			});
+		},
+		
+		/**
+		 * event callback (jQuery)
+		 * top and bottom pane
+		 * @private
+		 * @method _onTBPaneExpand
+		 * @param me {Object} this class
+		 * @param el {jQuery Object} panel|pane
+		 */
+		_onTBPaneExpand: function(){
+			var me = this,
+				pane = me.getElement();
+			
+			//start transition
+			pane.addClass( me._transitionClass );
+			pane.css(&quot;min-height&quot;, pane.prop(&quot;_fbResizeHeight&quot;));
+			pane.css(&quot;height&quot;, pane.prop(&quot;_fbResizeHeight&quot;));
+			
+			//listener when the transition has ended
+			pane.one(&quot;webkitTransitionEnd otransitionend oTransitionEnd msTransitionEnd transitionend&quot;, function() {
+				pane.removeClass( me._transitionClass );
+			});
+		},
+		
+		/**
+		 * right and left pane
+		 * event callback (jQuery)
+		 * @private
+		 * @method _onRLPaneExpand
+		 * @param event {jQuery event Object}
+		 */
+		_onRLPaneExpand: function(){
+			var me = this,
+				pane = me.getElement(), 
+				paneHeader = $(&quot;&gt; .panel-heading&quot;, pane),
+				paneTitle = $(&quot;.panel-title&quot;, paneHeader);
+			
+			//start transition
+			pane.addClass( me._transitionClass );
+			pane.trigger(&quot;pane-expanding&quot;);
+			
+			//remove the rotated effect on the panel title
+			paneHeader.removeClass( me._rotatedHeadingClass );
+			paneTitle.removeClass( me._rotatedTitleClass );
+			
+			pane.css(&quot;min-width&quot;, pane.prop(&quot;_fbResizeWidth&quot;));
+			
+			//listener for when the transition has ended
+			pane.one(&quot;webkitTransitionEnd otransitionend oTransitionEnd msTransitionEnd transitionend&quot;, function() {
+				pane.removeClass( me._transitionClass );
+			});
+			
+		},
+		
+		/**
+		 * right and left pane
+		 * event callback (jQuery)
+		 * @private
+		 * @method _onRLPaneCollapse
+		 * @param event {jQuery event Object}
+		 */
+		_onRLPaneCollapse: function(){
+			var me = this,
+				pane = me.getElement(), 
+				paneHeader = $(&quot;&gt; .panel-heading&quot;, pane),
+				paneTitle = $(&quot;.panel-title&quot;, paneHeader),
+				paneHeaderHeight = paneHeader.outerHeight();
+			
+			
+			//start transition
+			pane.addClass( me._transitionClass );
+			pane.trigger(&quot;pane-collapsing&quot;);
+			
+			pane.prop(&quot;_fbResizeWidth&quot;, pane.css(&quot;width&quot;));	//save the width in the property, this is needed for transitions when the pane is expaneded again
+			
+			pane.css(&quot;min-width&quot;, paneHeaderHeight);
+			pane.css(&quot;width&quot;, paneHeaderHeight);
+			
+			//listener for when the transition has ended
+			pane.one(&quot;webkitTransitionEnd otransitionend oTransitionEnd msTransitionEnd transitionend&quot;, function() {
+				//rotate header &amp; title
+				paneHeader.addClass( me._rotatedHeadingClass );
+				paneTitle.addClass( me._rotatedTitleClass );
+				
+				pane.removeClass( me._transitionClass );
+			});
+			
+		},
+		
+		/**
+		 * enable drags function on element
+		 * @method enableDrags
+		 */
+		enableDrags: function(pane, direction){
+			pane.prop(&quot;dragDisabled&quot;, false);
+			pane.drags(direction);
+		},
+		/**
+		 * disable drags function on element
+		 * @method disableDrags
+		 */
+		disableDrags: function(pane){
+			pane.prop(&quot;dragDisabled&quot;, true);
+		},
+		/**
+		 * @method bindings
+		 * @return {Object}
+		 */
+		bindings: function(){
+			var me = this,
+				obj = me.callParent(arguments);
+			
+			obj.css[&quot;&#x27;fb-ui-border-pane&#x27;&quot;] = true;
+			
+			//type of pane - top, right, left etc..
+			obj.css[me.parseBind(me._positionPrefixClass + me.position)] = true;
+			
+			if(me.collapsible){
+				obj.css[&quot;&#x27;fb-ui-pane-collapsible&#x27;&quot;] = true;
+			}
+			
+			return me.calColumn(obj);
+		},
+		
+		/**
+		 * @method barBindings
+		 * @return {Object}
+		 */
+		splitbarBindings: function(){
+			var me = this,
+				obj = {css:{
+					&quot;&#x27;fb-ui-splitbar&#x27;&quot;: true
+				}, attr:{}};
+
+			obj.css[me.parseBind(&quot;fb-ui-splitbar-&quot; + me.position )] = true;
+			
+			if(me.position === &quot;top&quot; || me.position === &quot;bottom&quot;){
+				obj.css.col = true;
+				obj.css[me.parseBind(&quot;col-&quot; + me.deviceSize + &quot;-12&quot;)] = true;
+				obj.css[&quot;&#x27;fb-ui-splitbar-horizontal&#x27;&quot;] = true;
+			}else{
+				obj.css[&quot;&#x27;fb-ui-splitbar-vertical&#x27;&quot;] = true;
+			}
+			
+			return obj;
+		},
+		
+		/**
+		 * @method getBarId
+		 * @return {String}
+		 */
+		getSplitbarId: function(){
+			var me = this;
+			return me.splitbarIdPrefix + me.getId();
+		}
+	});
+});
+    </pre>
+</div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="../assets/vendor/prettify/prettify-min.js"></script>
+<script>prettyPrint();</script>
+<script src="../assets/js/yui-prettify.js"></script>
+<script src="../assets/../api.js"></script>
+<script src="../assets/js/api-filter.js"></script>
+<script src="../assets/js/api-list.js"></script>
+<script src="../assets/js/api-search.js"></script>
+<script src="../assets/js/apidocs.js"></script>
+</body>
+</html>

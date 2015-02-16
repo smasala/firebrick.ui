@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>helper - Firebrick UI API</title>
+    <title>components.common.mixins.Column - Firebrick UI API</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -200,7 +200,7 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-                        <h1>helper Class</h1>
+                        <h1>components.common.mixins.Column Class</h1>
 <div class="box meta">
     
 
@@ -208,13 +208,13 @@
 
     
         <div class="foundat">
-            Defined in: <a href="../files/src_firebrick.ui.js.html#l387"><code>src\firebrick.ui.js:387</code></a>
+            Defined in: <a href="../files/src_components_common_mixins_Column.js.html#l5"><code>src\components\common\mixins\Column.js:5</code></a>
         </div>
     
 
     
         
-            Module: <a href="../modules/Firebrick.ui.html">Firebrick.ui</a>
+            Module: <a href="../modules/Firebrick.ui.components.html">Firebrick.ui.components</a>
         
     
 
@@ -224,8 +224,7 @@
 
 
 <div class="box intro">
-    <p>similar to utils, but are component related</p>
-
+    
 </div>
 
 
@@ -237,6 +236,8 @@
         
             <li class="api-class-tab methods"><a href="#methods">Methods</a></li>
         
+        
+            <li class="api-class-tab properties"><a href="#properties">Properties</a></li>
         
         
         
@@ -252,22 +253,53 @@
 
                     <ul class="index-list methods">
                         
-                            <li class="index-item method">
-                                <a href="#method_linkBuilder">linkBuilder</a>
+                            <li class="index-item method private">
+                                <a href="#method__getColumnWidth">_getColumnWidth</a>
 
                                 
                                 
                             </li>
                         
                             <li class="index-item method">
-                                <a href="#method_optionString">optionString</a>
+                                <a href="#method_calColumn">calColumn</a>
 
                                 
                                 
                             </li>
                         
-                            <li class="index-item method">
-                                <a href="#method_tabBuilder">tabBuilder</a>
+                    </ul>
+                </div>
+            
+
+            
+                <div class="index-section properties">
+                    <h3>Properties</h3>
+
+                    <ul class="index-list properties">
+                        
+                            <li class="index-item property">
+                                <a href="#property_columnOffset">columnOffset</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item property">
+                                <a href="#property_columnOrder">columnOrder</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item property">
+                                <a href="#property_columnWidth">columnWidth</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item property">
+                                <a href="#property_deviceSize">deviceSize</a>
 
                                 
                                 
@@ -280,8 +312,6 @@
             
 
             
-
-            
         </div>
 
         
@@ -289,8 +319,83 @@
                 <h2 class="off-left">Methods</h2>
 
                 
-                    <div id="method_linkBuilder" class="method item">
-    <h3 class="name"><code>linkBuilder</code></h3>
+                    <div id="method__getColumnWidth" class="method item private">
+    <h3 class="name"><code>_getColumnWidth</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+        <span class="returns-inline">
+            <span class="type">Int</span>
+        </span>
+    
+
+    
+
+    
+        <span class="flag private">private</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/src_components_common_mixins_Column.js.html#l48"><code>src\components\common\mixins\Column.js:48</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>when property columnWidth is set to &quot;auto&quot;, this function will attempt to calculate the correct size for each column.
+Note: this function will round down to the nearest whole number - 5 columns will result in size 2 for each column
+the number of columns are divided by 12 (BS3 grid)</p>
+
+    </div>
+
+    
+
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                        <span class="type">Int</span>:
+                    
+                
+            </div>
+        </div>
+    
+
+    
+</div>
+
+                
+                    <div id="method_calColumn" class="method item">
+    <h3 class="name"><code>calColumn</code></h3>
 
     
         <div class="args">
@@ -298,7 +403,7 @@
             
                 <li class="arg">
                     
-                        <code>value</code>
+                        <code>obj</code>
                     
                 </li>
             
@@ -308,7 +413,7 @@
 
     
         <span class="returns-inline">
-            <span class="type">String</span>
+            <span class="type">Object</span>
         </span>
     
 
@@ -335,7 +440,7 @@
             
         
         
-        <a href="../files/src_firebrick.ui.js.html#l431"><code>src\firebrick.ui.js:431</code></a>
+        <a href="../files/src_components_common_mixins_Column.js.html#l65"><code>src\components\common\mixins\Column.js:65</code></a>
         
         </p>
 
@@ -346,7 +451,7 @@
     </div>
 
     <div class="description">
-        <p>builds links, if value then return the value overwise return javascript:void(0)</p>
+        <p>call this in bindings function</p>
 
     </div>
 
@@ -358,17 +463,14 @@
             
                 <li class="param">
                     
-                        <code class="param-name">value</code>
+                        <code class="param-name">obj</code>
                         <span class="type">Object</span>
                     
 
                     
 
                     <div class="param-description">
-                        <ul>
-<li>optional</li>
-</ul>
-
+                         
                     </div>
 
                     
@@ -376,12 +478,27 @@
                             
                             <li class="param">
                                 
-                                    <code class="param-name">link</code>
+                                    <code class="param-name">css:</code>
                                     <span class="type">Object</span>
                                 
 
                                 <div class="param-description">
-                                    
+                                    <p>{}</p>
+
+                                </div>
+
+                                
+                            </li>
+                            
+                            <li class="param">
+                                
+                                    <code class="param-name">attr:</code>
+                                    <span class="type">Object</span>
+                                
+
+                                <div class="param-description">
+                                    <p>{}</p>
+
                                 </div>
 
                                 
@@ -402,7 +519,7 @@
             <div class="returns-description">
                 
                     
-                        <span class="type">String</span>:
+                        <span class="type">Object</span>:
                     
                 
             </div>
@@ -413,32 +530,17 @@
 </div>
 
                 
-                    <div id="method_optionString" class="method item">
-    <h3 class="name"><code>optionString</code></h3>
+            </div>
+        
 
-    
-        <div class="args">
-            <span class="paren">(</span><ul class="args-list inline commas">
-            
-                <li class="arg">
-                    
-                        <code>component</code>
-                    
-                </li>
-            
-            </ul><span class="paren">)</span>
-        </div>
-    
+        
+            <div id="properties" class="api-class-tabpanel">
+                <h2 class="off-left">Properties</h2>
 
-    
-        <span class="returns-inline">
-            <span class="type">String</span>
-        </span>
-    
-
-    
-
-    
+                
+                    <div id="property_columnOffset" class="property item">
+    <h3 class="name"><code>columnOffset</code></h3>
+    <span class="type">Integer | Null 1 to 12</span>
 
     
 
@@ -459,10 +561,9 @@
             
         
         
-        <a href="../files/src_firebrick.ui.js.html#l413"><code>src\firebrick.ui.js:413</code></a>
+        <a href="../files/src_components_common_mixins_Column.js.html#l28"><code>src\components\common\mixins\Column.js:28</code></a>
         
         </p>
-
 
         
 
@@ -470,79 +571,24 @@
     </div>
 
     <div class="description">
-        <p>builds the options string used for functions such as &quot;foreach&quot;</p>
+        <p>use this to offset the column by x columns
+<a href="http://getbootstrap.com/css/#grid-offsetting">http://getbootstrap.com/css/#grid-offsetting</a></p>
 
     </div>
 
     
-        <div class="params">
-            <h4>Parameters:</h4>
-
-            <ul class="params-list">
-            
-                <li class="param">
-                    
-                        <code class="param-name">component</code>
-                        <span class="type">Objects</span>
-                    
-
-                    
-
-                    <div class="param-description">
-                         
-                    </div>
-
-                    
-                </li>
-            
-            </ul>
-        </div>
+        <p><strong>Default:</strong> null</p>
     
 
-    
-        <div class="returns">
-            <h4>Returns:</h4>
-
-            <div class="returns-description">
-                
-                    
-                        <span class="type">String</span>:
-                    
-                
-            </div>
-        </div>
     
 
     
 </div>
 
                 
-                    <div id="method_tabBuilder" class="method item">
-    <h3 class="name"><code>tabBuilder</code></h3>
-
-    
-        <div class="args">
-            <span class="paren">(</span><ul class="args-list inline commas">
-            
-                <li class="arg">
-                    
-                        <code>componentId</code>
-                    
-                </li>
-            
-            </ul><span class="paren">)</span>
-        </div>
-    
-
-    
-        <span class="returns-inline">
-            <span class="type">String</span>
-        </span>
-    
-
-    
-
-    
+                    <div id="property_columnOrder" class="property item">
+    <h3 class="name"><code>columnOrder</code></h3>
+    <span class="type">String | Null "push-x" or "pull-x" - x = 1 to 12</span>
 
     
 
@@ -563,10 +609,9 @@
             
         
         
-        <a href="../files/src_firebrick.ui.js.html#l394"><code>src\firebrick.ui.js:394</code></a>
+        <a href="../files/src_components_common_mixins_Column.js.html#l36"><code>src\components\common\mixins\Column.js:36</code></a>
         
         </p>
-
 
         
 
@@ -574,45 +619,23 @@
     </div>
 
     <div class="description">
-        <p>builds the items string used for functions such as &quot;foreach&quot;</p>
+        <p>use this to offset the column by x columns
+<a href="http://getbootstrap.com/css/#grid-column-ordering">http://getbootstrap.com/css/#grid-column-ordering</a></p>
 
     </div>
 
     
-        <div class="params">
-            <h4>Parameters:</h4>
-
-            <ul class="params-list">
-            
-                <li class="param">
-                    
-                        <code class="param-name">componentId</code>
-                        <span class="type">Objects</span>
-                    
-
-                    
-
-                    <div class="param-description">
-                         
-                    </div>
-
-                    
-                </li>
-            
-            </ul>
-        </div>
+        <p><strong>Default:</strong> null</p>
     
 
     
-        <div class="returns">
-            <h4>Returns:</h4>
+        <div class="example">
+            <h4>Example:</h4>
 
-            <div class="returns-description">
-                
-                    
-                        <span class="type">String</span>:
-                    
-                
+            <div class="example-content">
+                <pre class="code prettyprint"><code>    pull-3</code></pre>
+<pre class="code prettyprint"><code>    push-4</code></pre>
+
             </div>
         </div>
     
@@ -621,9 +644,100 @@
 </div>
 
                 
-            </div>
+                    <div id="property_columnWidth" class="property item">
+    <h3 class="name"><code>columnWidth</code></h3>
+    <span class="type">Integer | String number 1 to 12 or "auto"</span>
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/src_components_common_mixins_Column.js.html#l21"><code>src\components\common\mixins\Column.js:21</code></a>
+        
+        </p>
+
         
 
+        
+    </div>
+
+    <div class="description">
+        <p>auto will attempt to provide the column width by dividing the number of items in the parent Grid by 12 - decimals will be rounded down</p>
+
+    </div>
+
+    
+        <p><strong>Default:</strong> &quot;auto&quot;</p>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="property_deviceSize" class="property item">
+    <h3 class="name"><code>deviceSize</code></h3>
+    <span class="type">String</span>
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/src_components_common_mixins_Column.js.html#l15"><code>src\components\common\mixins\Column.js:15</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        
+    </div>
+
+    
+        <p><strong>Default:</strong> &quot;md&quot;</p>
+    
+
+    
+
+    
+</div>
+
+                
+            </div>
         
 
         

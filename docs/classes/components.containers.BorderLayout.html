@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>components.button.Icon - Firebrick UI API</title>
+    <title>components.containers.BorderLayout - Firebrick UI API</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -200,19 +200,19 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-                        <h1>components.button.Icon Class</h1>
+                        <h1>components.containers.BorderLayout Class</h1>
 <div class="box meta">
     
 
     
         <div class="extends">
-            Extends <a href="../classes/components.button.Button.html" class="crosslink">components.button.Button</a>
+            Extends <a href="../classes/components.containers.Base.html" class="crosslink">components.containers.Base</a>
         </div>
     
 
     
         <div class="foundat">
-            Defined in: <a href="../files/src_components_button_Icon.js.html#l5"><code>src\components\button\Icon.js:5</code></a>
+            Defined in: <a href="../files/src_components_containers_BorderLayout.js.html#l5"><code>src\components\containers\BorderLayout.js:5</code></a>
         </div>
     
 
@@ -257,8 +257,36 @@
 
                     <ul class="index-list methods extends">
                         
+                            <li class="index-item method">
+                                <a href="#method__calcCenterPos">_calcCenterPos</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
+                                <a href="#method__calcRightPos">_calcRightPos</a>
+
+                                
+                                
+                            </li>
+                        
                             <li class="index-item method private inherited">
                                 <a href="#method__getCSSClasses">_getCSSClasses</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method private inherited">
+                                <a href="#method__getItems">_getItems</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method inherited">
+                                <a href="#method__getItemsScoped">_getItemsScoped</a>
 
                                 
                                 
@@ -271,8 +299,22 @@
                                 
                             </li>
                         
+                            <li class="index-item method">
+                                <a href="#method__itemArrayPosition">_itemArrayPosition</a>
+
+                                
+                                
+                            </li>
+                        
                             <li class="index-item method inherited">
                                 <a href="#method__precompile">_precompile</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
+                                <a href="#method__setColDimensions">_setColDimensions</a>
 
                                 
                                 
@@ -299,36 +341,15 @@
                                 
                             </li>
                         
-                            <li class="index-item method inherited inherited">
+                            <li class="index-item method inherited">
                                 <a href="#method_bindings">bindings</a>
 
                                 
                                 
                             </li>
                         
-                            <li class="index-item method inherited">
+                            <li class="index-item method private inherited">
                                 <a href="#method_build">build</a>
-
-                                
-                                
-                            </li>
-                        
-                            <li class="index-item method">
-                                <a href="#method_buttonTextBindings">buttonTextBindings</a>
-
-                                
-                                
-                            </li>
-                        
-                            <li class="index-item method inherited">
-                                <a href="#method_callback">callback</a>
-
-                                
-                                
-                            </li>
-                        
-                            <li class="index-item method inherited">
-                                <a href="#method_caretBindings">caretBindings</a>
 
                                 
                                 
@@ -356,21 +377,14 @@
                             </li>
                         
                             <li class="index-item method inherited">
-                                <a href="#method_dropdownContainerBindings">dropdownContainerBindings</a>
-
-                                
-                                
-                            </li>
-                        
-                            <li class="index-item method inherited">
-                                <a href="#method_getDropdown">getDropdown</a>
-
-                                
-                                
-                            </li>
-                        
-                            <li class="index-item method inherited">
                                 <a href="#method_getElement">getElement</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method inherited">
+                                <a href="#method_getItems">getItems</a>
 
                                 
                                 
@@ -397,7 +411,7 @@
                                 
                             </li>
                         
-                            <li class="index-item method inherited inherited">
+                            <li class="index-item method inherited">
                                 <a href="#method_init">init</a>
 
                                 
@@ -406,20 +420,6 @@
                         
                             <li class="index-item method inherited">
                                 <a href="#method_parseBind">parseBind</a>
-
-                                
-                                
-                            </li>
-                        
-                            <li class="index-item method inherited">
-                                <a href="#method_splitButtonBindings">splitButtonBindings</a>
-
-                                
-                                
-                            </li>
-                        
-                            <li class="index-item method inherited">
-                                <a href="#method_splitButtonSrOnlyBinding">splitButtonSrOnlyBinding</a>
 
                                 
                                 
@@ -470,15 +470,15 @@
                                 
                             </li>
                         
-                            <li class="index-item property private inherited">
-                                <a href="#property__template">_template</a>
+                            <li class="index-item property private">
+                                <a href="#property__maxGridCols">_maxGridCols</a>
 
                                 
                                 
                             </li>
                         
                             <li class="index-item property private inherited">
-                                <a href="#property_afterText">afterText</a>
+                                <a href="#property__template">_template</a>
 
                                 
                                 
@@ -492,41 +492,6 @@
                             </li>
                         
                             <li class="index-item property inherited">
-                                <a href="#property_beforeText">beforeText</a>
-
-                                
-                                
-                            </li>
-                        
-                            <li class="index-item property inherited">
-                                <a href="#property_btnSize">btnSize</a>
-
-                                
-                                
-                            </li>
-                        
-                            <li class="index-item property inherited">
-                                <a href="#property_btnStyle">btnStyle</a>
-
-                                
-                                
-                            </li>
-                        
-                            <li class="index-item property">
-                                <a href="#property_buttonSize">buttonSize</a>
-
-                                
-                                
-                            </li>
-                        
-                            <li class="index-item property inherited">
-                                <a href="#property_buttonTextBindings">buttonTextBindings</a>
-
-                                
-                                
-                            </li>
-                        
-                            <li class="index-item property inherited">
                                 <a href="#property_css">css</a>
 
                                 
@@ -534,28 +499,14 @@
                             </li>
                         
                             <li class="index-item property inherited">
-                                <a href="#property_data">data</a>
-
-                                
-                                
-                            </li>
-                        
-                            <li class="index-item property inherited">
-                                <a href="#property_dropdownConfig">dropdownConfig</a>
-
-                                
-                                
-                            </li>
-                        
-                            <li class="index-item property inherited">
-                                <a href="#property_dropdownContainerClass">dropdownContainerClass</a>
+                                <a href="#property_defaults">defaults</a>
 
                                 
                                 
                             </li>
                         
                             <li class="index-item property">
-                                <a href="#property_glyIcon">glyIcon</a>
+                                <a href="#property_defaultSizes">defaultSizes</a>
 
                                 
                                 
@@ -568,15 +519,29 @@
                                 
                             </li>
                         
-                            <li class="index-item property inherited">
-                                <a href="#property_loadingText">loadingText</a>
+                            <li class="index-item property">
+                                <a href="#property_height">height</a>
 
                                 
                                 
                             </li>
                         
                             <li class="index-item property inherited">
-                                <a href="#property_navbarItem">navbarItem</a>
+                                <a href="#property_items">items</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item property inherited">
+                                <a href="#property_itemsAlign">itemsAlign</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item property private inherited">
+                                <a href="#property_listeners">listeners</a>
 
                                 
                                 
@@ -618,28 +583,7 @@
                             </li>
                         
                             <li class="index-item property inherited">
-                                <a href="#property_splitButton">splitButton</a>
-
-                                
-                                
-                            </li>
-                        
-                            <li class="index-item property inherited">
-                                <a href="#property_srOnlyText">srOnlyText</a>
-
-                                
-                                
-                            </li>
-                        
-                            <li class="index-item property inherited">
                                 <a href="#property_subTpl">subTpl</a>
-
-                                
-                                
-                            </li>
-                        
-                            <li class="index-item property inherited">
-                                <a href="#property_text">text</a>
 
                                 
                                 
@@ -674,13 +618,6 @@
                             </li>
                         
                             <li class="index-item property inherited">
-                                <a href="#property_type">type</a>
-
-                                
-                                
-                            </li>
-                        
-                            <li class="index-item property inherited">
                                 <a href="#property_uiComponent">uiComponent</a>
 
                                 
@@ -706,6 +643,260 @@
         
             <div id="methods" class="api-class-tabpanel">
                 <h2 class="off-left">Methods</h2>
+
+                
+                    <div id="method__calcCenterPos" class="method item">
+    <h3 class="name"><code>_calcCenterPos</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>item</code>
+                    
+                </li>
+            
+                <li class="arg">
+                    
+                        <code>map</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+        <span class="returns-inline">
+            <span class="type">Object</span>
+        </span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/src_components_containers_BorderLayout.js.html#l270"><code>src\components\containers\BorderLayout.js:270</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>force center pane to be 100% - regardless of properties</p>
+
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">item</code>
+                        <span class="type">Object</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                         
+                    </div>
+
+                    
+                </li>
+            
+                <li class="param">
+                    
+                        <code class="param-name">map</code>
+                        <span class="type">Object of items</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                         
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                        <span class="type">Object</span>:
+                    
+                    <p>item</p>
+
+                
+            </div>
+        </div>
+    
+
+    
+</div>
+
+                
+                    <div id="method__calcRightPos" class="method item">
+    <h3 class="name"><code>_calcRightPos</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>item</code>
+                    
+                </li>
+            
+                <li class="arg">
+                    
+                        <code>map</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+        <span class="returns-inline">
+            <span class="type">Object</span>
+        </span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/src_components_containers_BorderLayout.js.html#l225"><code>src\components\containers\BorderLayout.js:225</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>sets column width offset and other initial properties for the right column (number 3)</p>
+
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">item</code>
+                        <span class="type">Object</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                         
+                    </div>
+
+                    
+                </li>
+            
+                <li class="param">
+                    
+                        <code class="param-name">map</code>
+                        <span class="type">Object of items</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                         
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                        <span class="type">Object</span>:
+                    
+                    <p>item</p>
+
+                
+            </div>
+        </div>
+    
+
+    
+</div>
 
                 
                     <div id="method__getCSSClasses" class="method item private inherited">
@@ -768,6 +959,238 @@
                     
                         <span class="type">Object</span>:
                     
+                
+            </div>
+        </div>
+    
+
+    
+</div>
+
+                
+                    <div id="method__getItems" class="method item private inherited">
+    <h3 class="name"><code>_getItems</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>items</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+        <span class="returns-inline">
+            <span class="type">Object, Null</span>
+        </span>
+    
+
+    
+
+    
+        <span class="flag private">private</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                <p>Inherited from
+                <a href="../classes/components.common.mixins.Items.html#method__getItems">components.common.mixins.Items</a>:
+            
+        
+        
+        <a href="../files/src_components_common_mixins_Items.js.html#l96"><code>src\components\common\mixins\Items.js:96</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>use getItems</p>
+
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">items</code>
+                        <span class="type">Object</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                         
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                        <span class="type">Object, Null</span>:
+                    
+                    <p>object - {html:&quot;&quot;, items:[]}</p>
+
+                
+            </div>
+        </div>
+    
+
+    
+</div>
+
+                
+                    <div id="method__getItemsScoped" class="method item inherited">
+    <h3 class="name"><code>_getItemsScoped</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>me</code>
+                    
+                </li>
+            
+                <li class="arg">
+                    
+                        <code class="optional">[itemsName]</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+        <span class="returns-inline">
+            <span class="type">String</span>
+        </span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                <p>Inherited from
+                <a href="../classes/components.common.mixins.Items.html#method__getItemsScoped">components.common.mixins.Items</a>:
+            
+        
+        
+        <a href="../files/src_components_common_mixins_Items.js.html#l82"><code>src\components\common\mixins\Items.js:82</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>if you are calling _getItems from a nested scope or you want items from a different property other than .items - then use this function</p>
+
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">me</code>
+                        <span class="type">Object</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>me component class (this)</p>
+
+                    </div>
+
+                    
+                </li>
+            
+                <li class="param">
+                    
+                        <code class="param-name optional">[itemsName]</code>
+                        <span class="type">String</span>
+                        <span class="flag optional" title="This parameter is optional.">optional</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>name of property to get items from</p>
+
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                        <span class="type">String</span>:
+                    
+                    <p>html</p>
+
                 
             </div>
         </div>
@@ -848,6 +1271,114 @@ iterate up the inheritance tree looking for a classname that differs from the cu
 </div>
 
                 
+                    <div id="method__itemArrayPosition" class="method item">
+    <h3 class="name"><code>_itemArrayPosition</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>position</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+        <span class="returns-inline">
+            <span class="type">Integer</span>
+        </span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/src_components_containers_BorderLayout.js.html#l170"><code>src\components\containers\BorderLayout.js:170</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>get item border position </p>
+<p>---- 0 ----
+1 | 2 | 3 |
+---- 4 ----</p>
+
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">position</code>
+                        <span class="type">String</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>top, right, bottom, left, center</p>
+
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                        <span class="type">Integer</span>:
+                    
+                
+            </div>
+        </div>
+    
+
+    
+</div>
+
+                
                     <div id="method__precompile" class="method item inherited">
     <h3 class="name"><code>_precompile</code></h3>
 
@@ -908,6 +1439,133 @@ iterate up the inheritance tree looking for a classname that differs from the cu
                         <span class="type">Object</span>:
                     
                     <p>self</p>
+
+                
+            </div>
+        </div>
+    
+
+    
+</div>
+
+                
+                    <div id="method__setColDimensions" class="method item">
+    <h3 class="name"><code>_setColDimensions</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>item</code>
+                    
+                </li>
+            
+                <li class="arg">
+                    
+                        <code>map</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+        <span class="returns-inline">
+            <span class="type">Object</span>
+        </span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/src_components_containers_BorderLayout.js.html#l199"><code>src\components\containers\BorderLayout.js:199</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>sets column width offset and other initial properties</p>
+
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">item</code>
+                        <span class="type">Object</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                         
+                    </div>
+
+                    
+                </li>
+            
+                <li class="param">
+                    
+                        <code class="param-name">map</code>
+                        <span class="type">Object of items</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                         
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                        <span class="type">Object</span>:
+                    
+                    <p>item</p>
 
                 
             </div>
@@ -991,7 +1649,7 @@ iterate up the inheritance tree looking for a classname that differs from the cu
                     
 
                     <div class="param-description">
-                         
+                        
                     </div>
 
                     
@@ -1094,7 +1752,7 @@ iterate up the inheritance tree looking for a classname that differs from the cu
                     
 
                     <div class="param-description">
-                         
+                        
                     </div>
 
                     
@@ -1197,7 +1855,7 @@ iterate up the inheritance tree looking for a classname that differs from the cu
                     
 
                     <div class="param-description">
-                         
+                        
                     </div>
 
                     
@@ -1225,7 +1883,7 @@ iterate up the inheritance tree looking for a classname that differs from the cu
 </div>
 
                 
-                    <div id="method_bindings" class="method item inherited">
+                    <div id="method_bindings" class="method item">
     <h3 class="name"><code>bindings</code></h3>
 
     
@@ -1261,7 +1919,7 @@ iterate up the inheritance tree looking for a classname that differs from the cu
             
         
         
-        <a href="../files/src_components_button_Button.js.html#l129"><code>src\components\button\Button.js:129</code></a>
+        <a href="../files/src_components_containers_BorderLayout.js.html#l309"><code>src\components\containers\BorderLayout.js:309</code></a>
         
         </p>
 
@@ -1272,8 +1930,7 @@ iterate up the inheritance tree looking for a classname that differs from the cu
     </div>
 
     <div class="description">
-        <p>default bindings called by data-bind={{data-bind}}</p>
-
+        
     </div>
 
     
@@ -1296,184 +1953,10 @@ iterate up the inheritance tree looking for a classname that differs from the cu
 </div>
 
                 
-                    <div id="method_build" class="method item inherited">
+                    <div id="method_build" class="method item private">
     <h3 class="name"><code>build</code></h3>
 
     
-        <div class="args">
-            <span class="paren">(</span><ul class="args-list inline commas">
-            
-                <li class="arg">
-                    
-                        <code>prop</code>
-                    
-                </li>
-            
-            </ul><span class="paren">)</span>
-        </div>
-    
-
-    
-        <span class="returns-inline">
-            <span class="type">String</span>
-        </span>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                <p>Inherited from
-                <a href="../classes/components.common.Base.html#method_build">components.common.Base</a>:
-            
-        
-        
-        <a href="../files/src_components_common_Base.js.html#l344"><code>src\components\common\Base.js:344</code></a>
-        
-        </p>
-
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>build the compiled template</p>
-
-    </div>
-
-    
-        <div class="params">
-            <h4>Parameters:</h4>
-
-            <ul class="params-list">
-            
-                <li class="param">
-                    
-                        <code class="param-name">prop</code>
-                        <span class="type">String</span>
-                    
-
-                    
-
-                    <div class="param-description">
-                        <p>[prop=&quot;tpl&quot;] optional - name of property to build</p>
-
-                    </div>
-
-                    
-                </li>
-            
-            </ul>
-        </div>
-    
-
-    
-        <div class="returns">
-            <h4>Returns:</h4>
-
-            <div class="returns-description">
-                
-                    
-                        <span class="type">String</span>:
-                    
-                    <p>html</p>
-
-                
-            </div>
-        </div>
-    
-
-    
-</div>
-
-                
-                    <div id="method_buttonTextBindings" class="method item">
-    <h3 class="name"><code>buttonTextBindings</code></h3>
-
-    
-        <span class="paren">()</span>
-    
-
-    
-        <span class="returns-inline">
-            <span class="type">Object</span>
-        </span>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/src_components_button_Icon.js.html#l49"><code>src\components\button\Icon.js:49</code></a>
-        
-        </p>
-
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        
-    </div>
-
-    
-
-    
-        <div class="returns">
-            <h4>Returns:</h4>
-
-            <div class="returns-description">
-                
-                    
-                        <span class="type">Object</span>:
-                    
-                
-            </div>
-        </div>
-    
-
-    
-</div>
-
-                
-                    <div id="method_callback" class="method item inherited">
-    <h3 class="name"><code>callback</code></h3>
-
-    
         <span class="paren">()</span>
     
 
@@ -1482,61 +1965,7 @@ iterate up the inheritance tree looking for a classname that differs from the cu
     
 
     
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                <p>Inherited from
-                <a href="../classes/components.button.Button.html#method_callback">components.button.Button</a>:
-            
-        
-        
-        <a href="../files/src_components_button_Button.js.html#l96"><code>src\components\button\Button.js:96</code></a>
-        
-        </p>
-
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>if defined, this callback method will be applied to the click event of this particular button</p>
-
-    </div>
-
-    
-
-    
-
-    
-</div>
-
-                
-                    <div id="method_caretBindings" class="method item inherited">
-    <h3 class="name"><code>caretBindings</code></h3>
-
-    
-        <span class="paren">()</span>
-    
-
-    
-        <span class="returns-inline">
-            <span class="type">Object</span>
-        </span>
-    
-
-    
-
+        <span class="flag private">private</span>
     
 
     
@@ -1549,13 +1978,16 @@ iterate up the inheritance tree looking for a classname that differs from the cu
 
     <div class="meta">
         
+            <p>Inherited from
+            <a href="../classes/components.common.Base.html#method_build">
+                components.common.Base
+            </a>
             
-                <p>Inherited from
-                <a href="../classes/components.button.Button.html#method_caretBindings">components.button.Button</a>:
+            but overwritten in
             
         
         
-        <a href="../files/src_components_button_Button.js.html#l176"><code>src\components\button\Button.js:176</code></a>
+        <a href="../files/src_components_containers_BorderLayout.js.html#l101"><code>src\components\containers\BorderLayout.js:101</code></a>
         
         </p>
 
@@ -1566,23 +1998,12 @@ iterate up the inheritance tree looking for a classname that differs from the cu
     </div>
 
     <div class="description">
-        
+        <p>overriding base method build</p>
+
     </div>
 
     
 
-    
-        <div class="returns">
-            <h4>Returns:</h4>
-
-            <div class="returns-description">
-                
-                    
-                        <span class="type">Object</span>:
-                    
-                
-            </div>
-        </div>
     
 
     
@@ -1802,7 +2223,7 @@ iterate up the inheritance tree looking for a classname that differs from the cu
                     
 
                     <div class="param-description">
-                         
+                        
                     </div>
 
                     
@@ -1820,140 +2241,6 @@ iterate up the inheritance tree looking for a classname that differs from the cu
                 
                     
                         <span class="type">String</span>:
-                    
-                
-            </div>
-        </div>
-    
-
-    
-</div>
-
-                
-                    <div id="method_dropdownContainerBindings" class="method item inherited">
-    <h3 class="name"><code>dropdownContainerBindings</code></h3>
-
-    
-        <span class="paren">()</span>
-    
-
-    
-        <span class="returns-inline">
-            <span class="type">Object</span>
-        </span>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                <p>Inherited from
-                <a href="../classes/components.button.Button.html#method_dropdownContainerBindings">components.button.Button</a>:
-            
-        
-        
-        <a href="../files/src_components_button_Button.js.html#l187"><code>src\components\button\Button.js:187</code></a>
-        
-        </p>
-
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        
-    </div>
-
-    
-
-    
-        <div class="returns">
-            <h4>Returns:</h4>
-
-            <div class="returns-description">
-                
-                    
-                        <span class="type">Object</span>:
-                    
-                
-            </div>
-        </div>
-    
-
-    
-</div>
-
-                
-                    <div id="method_getDropdown" class="method item inherited">
-    <h3 class="name"><code>getDropdown</code></h3>
-
-    
-        <span class="paren">()</span>
-    
-
-    
-        <span class="returns-inline">
-            <span class="type">Object</span>
-        </span>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                <p>Inherited from
-                <a href="../classes/components.button.Button.html#method_getDropdown">components.button.Button</a>:
-            
-        
-        
-        <a href="../files/src_components_button_Button.js.html#l209"><code>src\components\button\Button.js:209</code></a>
-        
-        </p>
-
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        
-    </div>
-
-    
-
-    
-        <div class="returns">
-            <h4>Returns:</h4>
-
-            <div class="returns-description">
-                
-                    
-                        <span class="type">Object</span>:
                     
                 
             </div>
@@ -2023,6 +2310,76 @@ iterate up the inheritance tree looking for a classname that differs from the cu
                         <span class="type">Object</span>:
                     
                     <p>jquery element object</p>
+
+                
+            </div>
+        </div>
+    
+
+    
+</div>
+
+                
+                    <div id="method_getItems" class="method item inherited">
+    <h3 class="name"><code>getItems</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+        <span class="returns-inline">
+            <span class="type">String</span>
+        </span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                <p>Inherited from
+                <a href="../classes/components.common.mixins.Items.html#method_getItems">components.common.mixins.Items</a>:
+            
+        
+        
+        <a href="../files/src_components_common_mixins_Items.js.html#l69"><code>src\components\common\mixins\Items.js:69</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>inject sub items</p>
+
+    </div>
+
+    
+
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                        <span class="type">String</span>:
+                    
+                    <p>html</p>
 
                 
             </div>
@@ -2237,7 +2594,7 @@ iterate up the inheritance tree looking for a classname that differs from the cu
 </div>
 
                 
-                    <div id="method_init" class="method item inherited">
+                    <div id="method_init" class="method item">
     <h3 class="name"><code>init</code></h3>
 
     
@@ -2273,7 +2630,7 @@ iterate up the inheritance tree looking for a classname that differs from the cu
             
         
         
-        <a href="../files/src_components_button_Button.js.html#l109"><code>src\components\button\Button.js:109</code></a>
+        <a href="../files/src_components_containers_BorderLayout.js.html#l80"><code>src\components\containers\BorderLayout.js:80</code></a>
         
         </p>
 
@@ -2298,8 +2655,6 @@ iterate up the inheritance tree looking for a classname that differs from the cu
                     
                         <span class="type">Object</span>:
                     
-                    <p>self</p>
-
                 
             </div>
         </div>
@@ -2382,7 +2737,7 @@ iterate up the inheritance tree looking for a classname that differs from the cu
                     
 
                     <div class="param-description">
-                         
+                        
                     </div>
 
                     
@@ -2403,140 +2758,6 @@ iterate up the inheritance tree looking for a classname that differs from the cu
                     
                     <p>&quot;&#39;&quot; + str + &quot;&#39;&quot;</p>
 
-                
-            </div>
-        </div>
-    
-
-    
-</div>
-
-                
-                    <div id="method_splitButtonBindings" class="method item inherited">
-    <h3 class="name"><code>splitButtonBindings</code></h3>
-
-    
-        <span class="paren">()</span>
-    
-
-    
-        <span class="returns-inline">
-            <span class="type">Object</span>
-        </span>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                <p>Inherited from
-                <a href="../classes/components.button.Button.html#method_splitButtonBindings">components.button.Button</a>:
-            
-        
-        
-        <a href="../files/src_components_button_Button.js.html#l225"><code>src\components\button\Button.js:225</code></a>
-        
-        </p>
-
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        
-    </div>
-
-    
-
-    
-        <div class="returns">
-            <h4>Returns:</h4>
-
-            <div class="returns-description">
-                
-                    
-                        <span class="type">Object</span>:
-                    
-                
-            </div>
-        </div>
-    
-
-    
-</div>
-
-                
-                    <div id="method_splitButtonSrOnlyBinding" class="method item inherited">
-    <h3 class="name"><code>splitButtonSrOnlyBinding</code></h3>
-
-    
-        <span class="paren">()</span>
-    
-
-    
-        <span class="returns-inline">
-            <span class="type">Object</span>
-        </span>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                <p>Inherited from
-                <a href="../classes/components.button.Button.html#method_splitButtonSrOnlyBinding">components.button.Button</a>:
-            
-        
-        
-        <a href="../files/src_components_button_Button.js.html#l250"><code>src\components\button\Button.js:250</code></a>
-        
-        </p>
-
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        
-    </div>
-
-    
-
-    
-        <div class="returns">
-            <h4>Returns:</h4>
-
-            <div class="returns-description">
-                
-                    
-                        <span class="type">Object</span>:
-                    
                 
             </div>
         </div>
@@ -2745,7 +2966,7 @@ iterate up the inheritance tree looking for a classname that differs from the cu
                     
 
                     <div class="param-description">
-                         
+                        
                     </div>
 
                     
@@ -2924,6 +3145,56 @@ iterate up the inheritance tree looking for a classname that differs from the cu
 </div>
 
                 
+                    <div id="property__maxGridCols" class="property item private">
+    <h3 class="name"><code>_maxGridCols</code></h3>
+    <span class="type">Integer</span>
+
+    
+
+    
+        <span class="flag private">private</span>
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/src_components_containers_BorderLayout.js.html#l47"><code>src\components\containers\BorderLayout.js:47</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>number of cols in Bootstraps grid system
+do no alter this unless BS changes it</p>
+
+    </div>
+
+    
+        <p><strong>Default:</strong> 12</p>
+    
+
+    
+
+    
+</div>
+
+                
                     <div id="property__template" class="property item private inherited">
     <h3 class="name"><code>_template</code></h3>
     <span class="type">Object map of all templates</span>
@@ -2970,52 +3241,6 @@ iterate up the inheritance tree looking for a classname that differs from the cu
 </div>
 
                 
-                    <div id="property_afterText" class="property item private">
-    <h3 class="name"><code>afterText</code></h3>
-    <span class="type">Function</span>
-
-    
-
-    
-        <span class="flag private">private</span>
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            <p>Inherited from
-            <a href="../classes/components.button.Button.html#property_afterText">
-                components.button.Button
-            </a>
-            
-            but overwritten in
-            
-        
-        
-        <a href="../files/src_components_button_Icon.js.html#l40"><code>src\components\button\Icon.js:40</code></a>
-        
-        </p>
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        
-    </div>
-
-    
-
-    
-
-    
-</div>
-
-                
                     <div id="property_align" class="property item inherited">
     <h3 class="name"><code>align</code></h3>
     <span class="type">String | Null right, left</span>
@@ -3051,226 +3276,6 @@ iterate up the inheritance tree looking for a classname that differs from the cu
 
     
         <p><strong>Default:</strong> null</p>
-    
-
-    
-
-    
-</div>
-
-                
-                    <div id="property_beforeText" class="property item inherited">
-    <h3 class="name"><code>beforeText</code></h3>
-    <span class="type">Any</span>
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                <p>Inherited from
-                <a href="../classes/components.button.Button.html#property_beforeText">components.button.Button</a>:
-            
-        
-        
-        <a href="../files/src_components_button_Button.js.html#l62"><code>src\components\button\Button.js:62</code></a>
-        
-        </p>
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>used to inject something before the text <span></p>
-
-    </div>
-
-    
-        <p><strong>Default:</strong> &quot;&quot;</p>
-    
-
-    
-
-    
-</div>
-
-                
-                    <div id="property_btnSize" class="property item inherited">
-    <h3 class="name"><code>btnSize</code></h3>
-    <span class="type">Boolean | String false | ("sm", "lg", "xs")</span>
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                <p>Inherited from
-                <a href="../classes/components.button.Button.html#property_btnSize">components.button.Button</a>:
-            
-        
-        
-        <a href="../files/src_components_button_Button.js.html#l50"><code>src\components\button\Button.js:50</code></a>
-        
-        </p>
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        
-    </div>
-
-    
-        <p><strong>Default:</strong> false</p>
-    
-
-    
-
-    
-</div>
-
-                
-                    <div id="property_btnStyle" class="property item">
-    <h3 class="name"><code>btnStyle</code></h3>
-    <span class="type">String</span>
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            <p>Inherited from
-            <a href="../classes/components.button.Button.html#property_btnStyle">
-                components.button.Button
-            </a>
-            
-            but overwritten in
-            
-        
-        
-        <a href="../files/src_components_button_Icon.js.html#l34"><code>src\components\button\Icon.js:34</code></a>
-        
-        </p>
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        
-    </div>
-
-    
-        <p><strong>Default:</strong> &quot;danger&quot;</p>
-    
-
-    
-
-    
-</div>
-
-                
-                    <div id="property_buttonSize" class="property item">
-    <h3 class="name"><code>buttonSize</code></h3>
-    <span class="type">Boolean | String boolean = false</span>
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/src_components_button_Icon.js.html#l16"><code>src\components\button\Icon.js:16</code></a>
-        
-        </p>
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        
-    </div>
-
-    
-        <p><strong>Default:</strong> &quot;xs&quot;</p>
-    
-
-    
-
-    
-</div>
-
-                
-                    <div id="property_buttonTextBindings" class="property item inherited">
-    <h3 class="name"><code>buttonTextBindings</code></h3>
-    <span class="type">Unknown</span>
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                <p>Inherited from
-                <a href="../classes/components.button.Button.html#property_buttonTextBindings">components.button.Button</a>:
-            
-        
-        
-        <a href="../files/src_components_button_Button.js.html#l166"><code>src\components\button\Button.js:166</code></a>
-        
-        </p>
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        
-    </div>
-
     
 
     
@@ -3323,52 +3328,8 @@ iterate up the inheritance tree looking for a classname that differs from the cu
 </div>
 
                 
-                    <div id="property_data" class="property item inherited">
-    <h3 class="name"><code>data</code></h3>
-    <span class="type">String ko data object</span>
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                <p>Inherited from
-                <a href="../classes/components.button.Button.html#property_data">components.button.Button</a>:
-            
-        
-        
-        <a href="../files/src_components_button_Button.js.html#l83"><code>src\components\button\Button.js:83</code></a>
-        
-        </p>
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>add data to turn button into a dropdown button</p>
-
-    </div>
-
-    
-        <p><strong>Default:</strong> null</p>
-    
-
-    
-
-    
-</div>
-
-                
-                    <div id="property_dropdownConfig" class="property item inherited">
-    <h3 class="name"><code>dropdownConfig</code></h3>
+                    <div id="property_defaults" class="property item">
+    <h3 class="name"><code>defaults</code></h3>
     <span class="type">Object</span>
 
     
@@ -3381,13 +3342,16 @@ iterate up the inheritance tree looking for a classname that differs from the cu
 
     <div class="meta">
         
+            <p>Inherited from
+            <a href="../classes/components.common.mixins.Items.html#property_defaults">
+                components.common.mixins.Items
+            </a>
             
-                <p>Inherited from
-                <a href="../classes/components.button.Button.html#property_dropdownConfig">components.button.Button</a>:
+            but overwritten in
             
         
         
-        <a href="../files/src_components_button_Button.js.html#l90"><code>src\components\button\Button.js:90</code></a>
+        <a href="../files/src_components_containers_BorderLayout.js.html#l21"><code>src\components\containers\BorderLayout.js:21</code></a>
         
         </p>
 
@@ -3401,7 +3365,9 @@ iterate up the inheritance tree looking for a classname that differs from the cu
     </div>
 
     
-        <p><strong>Default:</strong> null</p>
+        <p><strong>Default:</strong> {
+		uiName: fb.ui.cmp.borderpane
+}</p>
     
 
     
@@ -3410,52 +3376,9 @@ iterate up the inheritance tree looking for a classname that differs from the cu
 </div>
 
                 
-                    <div id="property_dropdownContainerClass" class="property item inherited">
-    <h3 class="name"><code>dropdownContainerClass</code></h3>
-    <span class="type">String | False</span>
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                <p>Inherited from
-                <a href="../classes/components.button.Button.html#property_dropdownContainerClass">components.button.Button</a>:
-            
-        
-        
-        <a href="../files/src_components_button_Button.js.html#l31"><code>src\components\button\Button.js:31</code></a>
-        
-        </p>
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        
-    </div>
-
-    
-        <p><strong>Default:</strong> &quot;dropdown&quot;</p>
-    
-
-    
-
-    
-</div>
-
-                
-                    <div id="property_glyIcon" class="property item">
-    <h3 class="name"><code>glyIcon</code></h3>
-    <span class="type">String</span>
+                    <div id="property_defaultSizes" class="property item">
+    <h3 class="name"><code>defaultSizes</code></h3>
+    <span class="type">Object</span>
 
     
 
@@ -3476,7 +3399,7 @@ iterate up the inheritance tree looking for a classname that differs from the cu
             
         
         
-        <a href="../files/src_components_button_Icon.js.html#l28"><code>src\components\button\Icon.js:28</code></a>
+        <a href="../files/src_components_containers_BorderLayout.js.html#l56"><code>src\components\containers\BorderLayout.js:56</code></a>
         
         </p>
 
@@ -3490,7 +3413,13 @@ iterate up the inheritance tree looking for a classname that differs from the cu
     </div>
 
     
-        <p><strong>Default:</strong> &quot;remove&quot;</p>
+        <p><strong>Default:</strong> {
+		top: 12,
+		right: 3,
+		bottom: 12,
+		left: 3,
+		center: 6
+}</p>
     
 
     
@@ -3542,9 +3471,9 @@ iterate up the inheritance tree looking for a classname that differs from the cu
 </div>
 
                 
-                    <div id="property_loadingText" class="property item inherited">
-    <h3 class="name"><code>loadingText</code></h3>
-    <span class="type">Boolean | String when set as string, the value is assigned to the button "button-loading-text" attribute</span>
+                    <div id="property_height" class="property item">
+    <h3 class="name"><code>height</code></h3>
+    <span class="type">Integer | String px value | auto</span>
 
     
 
@@ -3557,12 +3486,15 @@ iterate up the inheritance tree looking for a classname that differs from the cu
     <div class="meta">
         
             
-                <p>Inherited from
-                <a href="../classes/components.button.Button.html#property_loadingText">components.button.Button</a>:
+                
+                <p>
+                
+                Defined in
+                
             
         
         
-        <a href="../files/src_components_button_Button.js.html#l76"><code>src\components\button\Button.js:76</code></a>
+        <a href="../files/src_components_containers_BorderLayout.js.html#l74"><code>src\components\containers\BorderLayout.js:74</code></a>
         
         </p>
 
@@ -3572,12 +3504,11 @@ iterate up the inheritance tree looking for a classname that differs from the cu
     </div>
 
     <div class="description">
-        <p>set as string to give the button stateful capabilities.</p>
-
+        
     </div>
 
     
-        <p><strong>Default:</strong> false</p>
+        <p><strong>Default:</strong> &quot;auto&quot;</p>
     
 
     
@@ -3586,9 +3517,70 @@ iterate up the inheritance tree looking for a classname that differs from the cu
 </div>
 
                 
-                    <div id="property_navbarItem" class="property item inherited">
-    <h3 class="name"><code>navbarItem</code></h3>
-    <span class="type">Boolean</span>
+                    <div id="property_items" class="property item">
+    <h3 class="name"><code>items</code></h3>
+    <span class="type">Array of Objects</span>
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            <p>Inherited from
+            <a href="../classes/components.common.mixins.Items.html#property_items">
+                components.common.mixins.Items
+            </a>
+            
+            but overwritten in
+            
+        
+        
+        <a href="../files/src_components_containers_BorderLayout.js.html#l32"><code>src\components\containers\BorderLayout.js:32</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        
+    </div>
+
+    
+        <p><strong>Default:</strong> null</p>
+    
+
+    
+        <div class="example">
+            <h4>Example:</h4>
+
+            <div class="example-content">
+                <pre class="code prettyprint"><code>    items:[{
+        position: &quot;top&quot;,    //top, right, bottom, left, center
+        //GridCol properties...
+        items:[{
+            ...
+        }];
+    }]</code></pre>
+
+            </div>
+        </div>
+    
+
+    
+</div>
+
+                
+                    <div id="property_itemsAlign" class="property item inherited">
+    <h3 class="name"><code>itemsAlign</code></h3>
+    <span class="type">String | Null "center"</span>
 
     
 
@@ -3602,11 +3594,11 @@ iterate up the inheritance tree looking for a classname that differs from the cu
         
             
                 <p>Inherited from
-                <a href="../classes/components.button.Button.html#property_navbarItem">components.button.Button</a>:
+                <a href="../classes/components.common.mixins.Items.html#property_itemsAlign">components.common.mixins.Items</a>:
             
         
         
-        <a href="../files/src_components_button_Button.js.html#l37"><code>src\components\button\Button.js:37</code></a>
+        <a href="../files/src_components_common_mixins_Items.js.html#l21"><code>src\components\common\mixins\Items.js:21</code></a>
         
         </p>
 
@@ -3616,12 +3608,53 @@ iterate up the inheritance tree looking for a classname that differs from the cu
     </div>
 
     <div class="description">
-        <p>if true - att &quot;navbar-btn&quot; class to the button</p>
+        <p>alignment of its children components</p>
 
     </div>
 
     
-        <p><strong>Default:</strong> false</p>
+
+    
+
+    
+</div>
+
+                
+                    <div id="property_listeners" class="property item private inherited">
+    <h3 class="name"><code>listeners</code></h3>
+    <span class="type">Object</span>
+
+    
+
+    
+        <span class="flag private">private</span>
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                <p>Inherited from
+                <a href="../classes/components.common.mixins.Items.html#property_listeners">components.common.mixins.Items</a>:
+            
+        
+        
+        <a href="../files/src_components_common_mixins_Items.js.html#l34"><code>src\components\common\mixins\Items.js:34</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        
+    </div>
+
     
 
     
@@ -3847,92 +3880,6 @@ iterate up the inheritance tree looking for a classname that differs from the cu
 </div>
 
                 
-                    <div id="property_splitButton" class="property item inherited">
-    <h3 class="name"><code>splitButton</code></h3>
-    <span class="type">Boolean</span>
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                <p>Inherited from
-                <a href="../classes/components.button.Button.html#property_splitButton">components.button.Button</a>:
-            
-        
-        
-        <a href="../files/src_components_button_Button.js.html#l44"><code>src\components\button\Button.js:44</code></a>
-        
-        </p>
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        
-    </div>
-
-    
-        <p><strong>Default:</strong> false</p>
-    
-
-    
-
-    
-</div>
-
-                
-                    <div id="property_srOnlyText" class="property item inherited">
-    <h3 class="name"><code>srOnlyText</code></h3>
-    <span class="type">String</span>
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                <p>Inherited from
-                <a href="../classes/components.button.Button.html#property_srOnlyText">components.button.Button</a>:
-            
-        
-        
-        <a href="../files/src_components_button_Button.js.html#l103"><code>src\components\button\Button.js:103</code></a>
-        
-        </p>
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        
-    </div>
-
-    
-        <p><strong>Default:</strong> &quot;Toggle Dropdown&quot;</p>
-    
-
-    
-
-    
-</div>
-
-                
                     <div id="property_subTpl" class="property item inherited">
     <h3 class="name"><code>subTpl</code></h3>
     <span class="type">String html</span>
@@ -3969,52 +3916,6 @@ iterate up the inheritance tree looking for a classname that differs from the cu
 
     
         <p><strong>Default:</strong> null</p>
-    
-
-    
-
-    
-</div>
-
-                
-                    <div id="property_text" class="property item">
-    <h3 class="name"><code>text</code></h3>
-    <span class="type">String</span>
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            <p>Inherited from
-            <a href="../classes/components.button.Button.html#property_text">
-                components.button.Button
-            </a>
-            
-            but overwritten in
-            
-        
-        
-        <a href="../files/src_components_button_Icon.js.html#l22"><code>src\components\button\Icon.js:22</code></a>
-        
-        </p>
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        
-    </div>
-
-    
-        <p><strong>Default:</strong> false</p>
     
 
     
@@ -4198,50 +4099,6 @@ iterate up the inheritance tree looking for a classname that differs from the cu
 </div>
 
                 
-                    <div id="property_type" class="property item inherited">
-    <h3 class="name"><code>type</code></h3>
-    <span class="type">String</span>
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                <p>Inherited from
-                <a href="../classes/components.button.Button.html#property_type">components.button.Button</a>:
-            
-        
-        
-        <a href="../files/src_components_button_Button.js.html#l24"><code>src\components\button\Button.js:24</code></a>
-        
-        </p>
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>type: button, submit</p>
-
-    </div>
-
-    
-        <p><strong>Default:</strong> &quot;button&quot;</p>
-    
-
-    
-
-    
-</div>
-
-                
                     <div id="property_uiComponent" class="property item inherited">
     <h3 class="name"><code>uiComponent</code></h3>
     <span class="type">Boolean</span>
@@ -4286,7 +4143,7 @@ iterate up the inheritance tree looking for a classname that differs from the cu
 </div>
 
                 
-                    <div id="property_uiName" class="property item inherited">
+                    <div id="property_uiName" class="property item">
     <h3 class="name"><code>uiName</code></h3>
     <span class="type">String</span>
 
@@ -4300,13 +4157,16 @@ iterate up the inheritance tree looking for a classname that differs from the cu
 
     <div class="meta">
         
+            <p>Inherited from
+            <a href="../classes/components.common.Base.html#property_uiName">
+                components.common.Base
+            </a>
             
-                <p>Inherited from
-                <a href="../classes/components.common.Base.html#property_uiName">components.common.Base</a>:
+            but overwritten in
             
         
         
-        <a href="../files/src_components_common_Base.js.html#l77"><code>src\components\common\Base.js:77</code></a>
+        <a href="../files/src_components_containers_BorderLayout.js.html#l15"><code>src\components\containers\BorderLayout.js:15</code></a>
         
         </p>
 
@@ -4316,25 +4176,11 @@ iterate up the inheritance tree looking for a classname that differs from the cu
     </div>
 
     <div class="description">
-        <p>variable shortcuts are created using the uiName. by default the string after the last &quot;-&quot; is used</p>
-
+        
     </div>
 
     
-        <p><strong>Default:</strong> null</p>
-    
 
-    
-        <div class="example">
-            <h4>Example:</h4>
-
-            <div class="example-content">
-                <pre class="code prettyprint"><code>    uiName:&quot;fb-ui-input&quot;
-    //becomes accessible via: {Firebrick|fb}.ui.cmp.input
-    //defining another component e.g &quot;myapp-field-input&quot; would overwrite the default input as &quot;input&quot; is found after the last &quot;-&quot;</code></pre>
-
-            </div>
-        </div>
     
 
     
