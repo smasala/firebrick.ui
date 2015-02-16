@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>src\components\containers\Grid.js - Firebrick UI API</title>
+    <title>src\components\containers\BorderLayout.js - Firebrick UI API</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -19,7 +19,7 @@
             
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 0.11.9</em>
+            <em>API Docs for: 0.12.0</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -57,6 +57,8 @@
             
                 <li><a href="../classes/components.common.mixins.Badges.html">components.common.mixins.Badges</a></li>
             
+                <li><a href="../classes/components.common.mixins.Column.html">components.common.mixins.Column</a></li>
+            
                 <li><a href="../classes/components.common.mixins.Items.html">components.common.mixins.Items</a></li>
             
                 <li><a href="../classes/components.common.mixins.Toolbars.html">components.common.mixins.Toolbars</a></li>
@@ -65,15 +67,19 @@
             
                 <li><a href="../classes/components.containers.Base.html">components.containers.Base</a></li>
             
+                <li><a href="../classes/components.containers.border.Pane.html">components.containers.border.Pane</a></li>
+            
+                <li><a href="../classes/components.containers.BorderLayout.html">components.containers.BorderLayout</a></li>
+            
                 <li><a href="../classes/components.containers.Box.html">components.containers.Box</a></li>
             
                 <li><a href="../classes/components.containers.Form.html">components.containers.Form</a></li>
             
                 <li><a href="../classes/components.containers.FormPanel.html">components.containers.FormPanel</a></li>
             
-                <li><a href="../classes/components.containers.Grid.html">components.containers.Grid</a></li>
-            
                 <li><a href="../classes/components.containers.GridColumn.html">components.containers.GridColumn</a></li>
+            
+                <li><a href="../classes/components.containers.GridRow.html">components.containers.GridRow</a></li>
             
                 <li><a href="../classes/components.containers.Modal.html">components.containers.Modal</a></li>
             
@@ -137,6 +143,8 @@
             
                 <li><a href="../classes/helper.html">helper</a></li>
             
+                <li><a href="../classes/plugins.Draggable.html">plugins.Draggable</a></li>
+            
                 <li><a href="../classes/plugins.RadioList.html">plugins.RadioList</a></li>
             
                 <li><a href="../classes/renderer.html">renderer</a></li>
@@ -192,7 +200,7 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-                        <h1 class="file-heading">File: src\components\containers\Grid.js</h1>
+                        <h1 class="file-heading">File: src\components\containers\BorderLayout.js</h1>
 
 <div class="file">
     <pre class="code prettyprint linenums">
@@ -204,36 +212,306 @@
  * @module Firebrick.ui.components
  * @extends components.containers.Base
  * @namespace components.containers
- * @class Grid
+ * @class BorderLayout
  */
-define([&quot;text!./Grid.html&quot;, &quot;jquery&quot;, &quot;./Base&quot;, &quot;./GridColumn&quot;], function(tpl, $){
+define([&quot;./Base&quot;, &quot;./border/Pane&quot;, &quot;./GridRow&quot;], function(){
 	&quot;use strict&quot;;
-	return Firebrick.define(&quot;Firebrick.ui.containers.Grid&quot;, {
-		extend:&quot;Firebrick.ui.containers.Base&quot;,
+	return Firebrick.define(&quot;Firebrick.ui.containers.BorderLayout&quot;, {
+		extend:&quot;Firebrick.ui.containers.GridRow&quot;,
 		/**
 		 * @property uiName
 		 * @type {String}
 		 */
-		uiName:&quot;fb-ui-grid&quot;,
-		/**
-		 * @property tpl
-		 * @type {String} html
-		 */
-		tpl: tpl,
-		/**
-		 * @property rowClass
-		 * @type {Boolean|String}
-		 * @default true
-		 */
-		rowClass:true,
+		uiName:&quot;fb-ui-borderlayout&quot;,
+		
 		/**
 		 * @property defaults
 		 * @type {Object}
-		 * @default {uiName: fb.ui.cmp.gridcol}
+		 * @default {
+		 * 		uiName: fb.ui.cmp.borderpane
+		 * }
 		 */
-		defaults:{
-			uiName: fb.ui.cmp.gridcol
+		defaults: {
+			uiName: fb.ui.cmp.borderpane
 		},
+		
+		/**
+		 * @example
+		 * 		items:[{
+		 * 			position: &quot;top&quot;,	//top, right, bottom, left, center
+		 * 			//GridCol properties...
+		 * 			items:[{
+		 * 				...
+		 * 			}];
+		 * 		}]
+		 * @property items
+		 * @type {Array of Objects}
+		 * @default null
+		 */
+		items:null,
+		
+		/**
+		 * number of cols in Bootstraps grid system
+		 * do no alter this unless BS changes it
+		 * @private
+		 * @property _maxGridCols
+		 * @type {Integer}
+		 * @default 12
+		 */
+		_maxGridCols: 12,
+		/**
+		 * @property defaultSizes
+		 * @type {Object}
+		 * @default {
+		 * 		top: 12,
+		 * 		right: 3,
+		 * 		bottom: 12,
+		 * 		left: 3,
+		 * 		center: 6
+		 * }
+		 */
+		defaultSizes:{
+			top: 12,
+			right: 3,
+			bottom: 12,
+			left: 3,
+			center: 12 //force 100%
+		},
+		/**
+		 * @property height
+		 * @type {Integer|String} px value | auto
+		 * @default &quot;auto&quot;
+		 */
+		height: &quot;auto&quot;,
+		/**
+		 * @method init
+		 * @return {Object}
+		 */
+		init: function(){
+			var me = this;
+			
+			me.on(&quot;rendered&quot;, function(){
+				var el = me.getElement(),
+					height = me.height;
+				if(height !== &quot;auto&quot;){
+					el.css(&quot;height&quot;, height);
+				}else{
+					//set a fixed height for the borderLayout so that the height
+					//of the vertical panes grow in the correct direction
+					el.css(&quot;height&quot;, el.height());
+				}
+			});
+			
+			return me.callParent(arguments);
+		},
+		/**
+		 * overriding base method build
+		 * @private
+		 * @method build
+		 */
+		build: function(){
+			var me = this,
+				map = {},
+				reorderedItems = [],
+				item,
+				position,
+				length,
+				centerGrid = {
+					uiName: fb.ui.cmp.gridrow,
+					defaults: me.defaults,
+					css:&#x27;row-eq-height&#x27;,
+					items:[]
+				},
+				entered = false;
+			
+			//if items is defined and has &gt;= 1 item
+			if(me.items){
+				
+				length = me.items.length;
+				
+				if(length){
+					for(var i = 0; i&lt;length; i++){
+						item = me.items[i];	//get current item in iteration
+						//get the correct position where this item should be: 0 - 4
+						item.position = item.position.toLowerCase();
+						position = me._itemArrayPosition(item.position);
+						//store the position and item
+						map[position] = item;
+					}
+					
+					for(var ii = 0; ii&lt;5; ii++){
+						//get each item from the map in the correct order
+						item = map[ii];
+						//check if the item was defined
+						if(item){
+							//get the correct dimensions
+							item = me._setColDimensions(item, map);
+							if(ii&gt;0 &amp;&amp; ii&lt;4){
+								//center pieces
+								// 1|2|3
+								centerGrid.items.push(item);
+							}else{
+								if(centerGrid.items.length &amp;&amp; !entered){
+									entered = true;
+									reorderedItems.push(centerGrid);
+								}
+								//place the item in the correct order
+								reorderedItems.push({
+									uiName: fb.ui.cmp.gridrow,
+									defaults: me.defaults,
+									items:[item]
+								});
+							}
+							
+						}
+					}
+					//replace the items with the same ones but in the correct order
+					me.items = reorderedItems;
+				}
+				
+			}
+			return me.callParent(arguments);
+		},
+		
+		/**
+		 * get item border position 
+		 * 
+		 * ---- 0 ----
+		 * 1 | 2 | 3 |
+		 * ---- 4 ----
+		 * 
+		 * @method _itemArrayPosition
+		 * @param position {String} top, right, bottom, left, center
+		 * @return {Integer}
+		 */
+		_itemArrayPosition: function(position){
+			var pos;
+			
+			if(position === &quot;top&quot;){
+				pos = 0;
+			}else if(position === &quot;left&quot;){
+				pos = 1;
+			}else if(position === &quot;center&quot;){
+				pos = 2;
+			}else if(position === &quot;right&quot;){
+				pos = 3;
+			}else if(position === &quot;bottom&quot;){
+				pos = 4;
+			}
+			
+			return pos;
+		},
+		
+		/**
+		 * sets column width offset and other initial properties
+		 * @method _setColDimensions
+		 * @param item {Object}
+		 * @param map {Object of items}
+		 * @return item {Object}
+		 */
+		_setColDimensions: function(item, map){
+			var me = this,
+				position = item.position;
+			if(position){
+
+				if(position === &quot;left&quot;){
+					item.columnWidth = item.columnWidth || me.defaultSizes.left;
+				}else if(position === &quot;center&quot;){
+					item = me._calcCenterPos(item, map);
+				}else if(position === &quot;right&quot;){
+					item = me._calcRightPos(item, map);
+				}else{
+					item.columnWidth = item.columnWidth || 12;
+				}
+			}
+			
+			return item;
+		},
+		
+		/**
+		 * sets column width offset and other initial properties for the right column (number 3)
+		 * @method _calcRightPos
+		 * @param item {Object}
+		 * @param map {Object of items}
+		 * @return item {Object}
+		 */
+		_calcRightPos: function(item, map){
+			var me = this,
+				offset = 0;
+			
+			// ---------------- 0 ----------------
+			// 1 (left) | 2 (center) | 3 (right) |
+			// ---------------- 4 ----------------
+			
+			//offset not set - so calculate it
+			if(!item.columnOffset){
+				//twelve is max, (bootstrap grid
+				//offset is needed if the left/center columns are missing
+				//offset pushes the column to the right side
+				offset = me._maxGridCols - (item.columnWidth || me.defaultSizes.right);
+				
+				//left column exist
+				if(map[1]){
+					offset -= map[1].columnWidth || me.defaultSizes.left;
+					offset -= map[1].columnOffset || 0;
+				}
+				
+				//center column exist
+				if(map[2]){
+					offset -= map[2].columnWidth || me.defaultSizes.center;
+					offset -= map[2].columnOffset || 0;
+				}
+				
+				item.columnOffset = offset &gt;= 0 ? offset : 0;
+			}
+
+			//width not set - set default size
+			if(!item.columnWidth){
+				item.columnWidth = me.defaultSizes.right;
+			}
+				
+			return item;
+		},
+		
+		/**
+		 * force center pane to be 100% - regardless of properties
+		 * @method _calcCenterPos
+		 * @param item {Object}
+		 * @param map {Object of items}
+		 * @return item {Object}
+		 */
+		_calcCenterPos: function(item/*, map*/){
+			var me = this;
+			
+			item.columnWidth = me.defaultSizes.center;
+			item.columnOffset = null;	//delete columnOffset
+			
+			return item;
+			
+//			var me = this,
+//				width = 0;
+//			
+//			// ---------------- 0 ----------------
+//			// 1 (left) | 2 (center) | 3 (right) |
+//			// ---------------- 4 ----------------
+//			
+//			if(!item.columnWidth){
+//				//left column exist
+//				if(map[1]){
+//					width += map[1].columnWidth || me.defaultSizes.left;
+//				}
+//				//right column exist
+//				if(map[3]){
+//					width += map[3].columnWidth || me.defaultSizes.right;
+//				}
+//				
+//				width = me._maxGridCols - width;
+//				item.columnWidth = width;
+//			}
+//			
+//			return item;
+		},
+		
 		/**
 		 * @method bindings
 		 * @return {Object}
@@ -242,42 +520,11 @@ define([&quot;text!./Grid.html&quot;, &quot;jquery&quot;, &quot;./Base&quot;, &q
 			var me = this,
 				obj = me.callParent(arguments);
 			
-			obj.css.row = me.rowClass;
+			obj.css[&quot;&#x27;fb-ui-borderlayout&#x27;&quot;] = true;
 			
 			return obj;
-		},
-		/**
-		 * @method getBasicBindings
-		 * @return {Object}
-		 */
-		getBasicBindings:function(){
-			var me = this,
-				obj = {
-						css:{}
-				};
-			obj.css[ me.parseBind( &quot;col-md-&quot; + (Math.floor(12/me.items.length)) )] = true;
-			return obj;
-		},
-		/**
-		 * used when calling {{{getGridItem}}} in template
-		 * @method getGridItem
-		 * @param {Int} iteration index
-		 * @param {Object} iteration object
-		 * @param {Context} iteration context
-		 * @return {String}
-		 */
-		getGridItem: function(index, item){
-			var me = this,
-				newItem = me._getItems(item);
-			
-			if(newItem){
-				//replace items with the new object - _getItems returns an object {html:&quot;&quot;, items:[]}
-				me.items[index] = newItem.items[0];
-				
-				return newItem.html;
-			}
-			return &quot;&quot;;
 		}
+		
 	});
 });
     </pre>

@@ -19,7 +19,7 @@
             
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 0.11.9</em>
+            <em>API Docs for: 0.12.0</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -57,6 +57,8 @@
             
                 <li><a href="../classes/components.common.mixins.Badges.html">components.common.mixins.Badges</a></li>
             
+                <li><a href="../classes/components.common.mixins.Column.html">components.common.mixins.Column</a></li>
+            
                 <li><a href="../classes/components.common.mixins.Items.html">components.common.mixins.Items</a></li>
             
                 <li><a href="../classes/components.common.mixins.Toolbars.html">components.common.mixins.Toolbars</a></li>
@@ -65,15 +67,19 @@
             
                 <li><a href="../classes/components.containers.Base.html">components.containers.Base</a></li>
             
+                <li><a href="../classes/components.containers.border.Pane.html">components.containers.border.Pane</a></li>
+            
+                <li><a href="../classes/components.containers.BorderLayout.html">components.containers.BorderLayout</a></li>
+            
                 <li><a href="../classes/components.containers.Box.html">components.containers.Box</a></li>
             
                 <li><a href="../classes/components.containers.Form.html">components.containers.Form</a></li>
             
                 <li><a href="../classes/components.containers.FormPanel.html">components.containers.FormPanel</a></li>
             
-                <li><a href="../classes/components.containers.Grid.html">components.containers.Grid</a></li>
-            
                 <li><a href="../classes/components.containers.GridColumn.html">components.containers.GridColumn</a></li>
+            
+                <li><a href="../classes/components.containers.GridRow.html">components.containers.GridRow</a></li>
             
                 <li><a href="../classes/components.containers.Modal.html">components.containers.Modal</a></li>
             
@@ -136,6 +142,8 @@
                 <li><a href="../classes/components.table.TreeTable.html">components.table.TreeTable</a></li>
             
                 <li><a href="../classes/helper.html">helper</a></li>
+            
+                <li><a href="../classes/plugins.Draggable.html">plugins.Draggable</a></li>
             
                 <li><a href="../classes/plugins.RadioList.html">plugins.RadioList</a></li>
             
@@ -436,6 +444,13 @@
                         
                             <li class="index-item property inherited">
                                 <a href="#property_glyphiconClass">glyphiconClass</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item property">
+                                <a href="#property_labelStyle">labelStyle</a>
 
                                 
                                 
@@ -1063,7 +1078,7 @@ iterate up the inheritance tree looking for a classname that differs from the cu
 </div>
 
                 
-                    <div id="method_bindings" class="method item inherited">
+                    <div id="method_bindings" class="method item">
     <h3 class="name"><code>bindings</code></h3>
 
     
@@ -1090,13 +1105,16 @@ iterate up the inheritance tree looking for a classname that differs from the cu
 
     <div class="meta">
         
+            <p>Inherited from
+            <a href="../classes/components.common.Base.html#method_bindings">
+                components.common.Base
+            </a>
             
-                <p>Inherited from
-                <a href="../classes/components.common.Base.html#method_bindings">components.common.Base</a>:
+            but overwritten in
             
         
         
-        <a href="../files/src_components_common_Base.js.html#l315"><code>src\components\common\Base.js:315</code></a>
+        <a href="../files/src_components_display_Span.js.html#l30"><code>src\components\display\Span.js:30</code></a>
         
         </p>
 
@@ -1107,8 +1125,7 @@ iterate up the inheritance tree looking for a classname that differs from the cu
     </div>
 
     <div class="description">
-        <p>mother of all basic bindings</p>
-
+        
     </div>
 
     
@@ -1122,8 +1139,6 @@ iterate up the inheritance tree looking for a classname that differs from the cu
                     
                         <span class="type">Object</span>:
                     
-                    <p>{attr:{}, css:{}}</p>
-
                 
             </div>
         </div>
@@ -2452,6 +2467,53 @@ iterate up the inheritance tree looking for a classname that differs from the cu
 
     
         <p><strong>Default:</strong> &quot;glyphicon&quot;</p>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="property_labelStyle" class="property item">
+    <h3 class="name"><code>labelStyle</code></h3>
+    <span class="type">String</span>
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/src_components_display_Span.js.html#l23"><code>src\components\display\Span.js:23</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>set as &quot;primary&quot;, &quot;default&quot;, &quot;warning&quot;, &quot;danger&quot;, &quot;success&quot;, &quot;info&quot; to convert the span to a BS label component</p>
+
+    </div>
+
+    
+        <p><strong>Default:</strong> &quot;&quot;</p>
     
 
     

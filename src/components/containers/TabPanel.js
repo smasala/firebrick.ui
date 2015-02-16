@@ -50,7 +50,7 @@ define(["text!./TabPanel.html", "./Base", "bootstrap.plugins/tab", "./tab/Pane"]
 			}
 		 */
 		defaults:{
-			uiName:fb.ui.cmp.tabpane
+			uiName:fb.ui.cmp.tab.pane
 		},
 		/**
 		 * @method bindings

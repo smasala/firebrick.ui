@@ -326,14 +326,6 @@ progress[value]::-webkit-progress-value{
 	text-align: right;
 }
 
-/** display field **/
-.form-control-static.fb-ui-field-display{
-	background: none !important;
-	border: none !important;
-	width:100%;
-}
-/*-- /display field --*/
-
 /** linked list cursor **/
 a:hover{
 	cursor:pointer;
@@ -357,5 +349,184 @@ a:hover{
 
 /*-- /MISC --*/
 
+
+/** Border Layout **/
+.fb-ui-borderlayout.row > .row{
+	margin-left:10px;
+	margin-right:10px;
+}
+
+.fb-ui-border-pane.panel{
+	margin-bottom:0;
+	padding:0;
+	border:none;
+}
+
+.panel-rotated-heading
+{
+    width: 42px;
+    float: left;
+    height: 100%;
+    position: absolute !important;
+}
+
+.panel-rotated-title
+{
+    margin-top: 0;
+    margin-bottom: 0;
+    margin-left: 15px;
+    -webkit-transform: rotate(90deg);
+    -webkit-transform-origin: left top;
+    -moz-transform: rotate(90deg);
+    -moz-transform-origin: left top;
+    -ms-transform: rotate(90deg);
+    -ms-transform-origin: left top;
+    -o-transform: rotate(90deg);
+    -o-transform-origin: left top;
+    transform: rotate(90deg);
+    transform-origin: left top;
+    position: absolute;
+    white-space: nowrap;
+}
+
+.fb-ui-border-pane.fb-ui-pane-position-left.fb-ui-is-collapsed{
+	margin-right:4px;
+}
+
+.fb-ui-border-pane.fb-ui-pane-position-left.fb-ui-pane-collapsible.fb-ui-transition,
+.fb-ui-border-pane.fb-ui-pane-position-right.fb-ui-pane-collapsible.fb-ui-transition {
+    overflow:hidden;
+    -webkit-transition: width 0.6s ease-in-out, min-width 0.6s ease-in-out;
+    -moz-transition: width 0.6s ease-in-out, min-width 0.6s ease-in-out;
+    -o-transition: width 0.6s ease-in-out, min-width 0.6s ease-in-out;
+    transition: width 0.6s ease-in-out, min-width 0.6s ease-in-out;
+    width: 0px;
+    min-width:0px;
+}
+
+
+.fb-ui-border-pane.fb-ui-pane-position-top.fb-ui-pane-collapsible.fb-ui-transition, 
+.fb-ui-border-pane.fb-ui-pane-position-bottom.fb-ui-pane-collapsible.fb-ui-transition {
+    overflow:hidden;
+    -webkit-transition: height 0.6s ease-in-out, min-height 0.6s ease-in-out;
+    -moz-transition: height 0.6s ease-in-out, min-height 0.6s ease-in-out;
+    -o-transition: height 0.6s ease-in-out, min-height 0.6s ease-in-out;
+    transition: height 0.6s ease-in-out, min-height 0.6s ease-in-out;
+}
+
+.fb-ui-border-pane .panel-rotated-heading .fb-ui-title-link .panel-title{
+	margin-top:25px;
+}
+
+.panel-heading{
+	position:relative;
+}
+
+.fb-ui-collapse-icon-present{
+	margin-right:15px;
+}
+
+.fb-ui-collapse-icon.fb-ui-header-items-present{
+	top:11px !important;
+}
+
+.fb-ui-border-pane .panel-rotated-heading .fb-ui-collapse-icon{
+	position:relative;
+}
+
+.panel-heading .fb-ui-collapse-icon{
+	position:absolute;
+	right:10px;
+	top:8px;
+}
+
+.fb-ui-border-pane.fb-ui-pane-position-left .panel-heading .fb-ui-collapse-icon:before{
+	content: "\e079"; /* "<" */
+}
+
+.fb-ui-border-pane.fb-ui-pane-position-right .panel-heading .fb-ui-collapse-icon:before{
+	content: "\e080"; /* ">" */
+}
+
+.panel-primary .panel-heading .fb-ui-collapse-icon:before{
+	color: #fff;
+}
+
+.panel-heading .fb-ui-collapse-icon:before {
+    content: "\e114";	/* "v" */
+    font-family: 'Glyphicons Halflings';
+    float: right;
+    color: grey;
+}
+
+.fb-ui-border-pane.fb-ui-pane-position-left.fb-ui-is-collapsed .panel-heading .fb-ui-collapse-icon:before{
+    content: "\e080"; /* ">" */
+}
+
+.fb-ui-border-pane.fb-ui-pane-position-right.fb-ui-is-collapsed .panel-heading .fb-ui-collapse-icon:before{
+    content: "\e079"; /* "<" */
+}
+
+.fb-ui-is-collapsed .panel-heading .fb-ui-collapse-icon:before {
+    content: "\e080"; /* ">" */
+}
+
+.fb-ui-splitbar{
+	width:5px;
+	min-width:5px;
+	background:#3e3e3e;
+}
+
+.fb-ui-splitbar-horizontal{
+	cursor: row-resize;
+}
+
+.fb-ui-splitbar-vertical{
+	cursor: col-resize;
+}
+
+.fb-ui-splitbar.fb-ui-splitbar-bottom{
+	width:100%;
+	height:4px;
+	min-height:4px;
+}
+
+.fb-ui-border-pane.panel{
+	display:flex;
+	display: -ms-flexbox;
+	flex-direction: column;
+	-ms-flex-direction: column;
+}
+
+.fb-ui-border-pane.panel > .fb-ui-panel-body-container{
+	flex:1;
+	overflow:auto;
+}
+
+.fb-ui-borderlayout{
+	border:1px solid;
+	position:relative;
+	display: -ms-flexbox;
+	display: flex;
+	flex-direction: column;
+	-ms-flex-direction: column;
+	overflow:hidden;
+}
+
+
+.fb-ui-borderlayout .row-eq-height{
+	flex:1;
+	-ms-flex:1;
+}
+
+.row-eq-height {  
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+}
+
+/*-- /Border layout --*/
 
 

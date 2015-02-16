@@ -17,9 +17,9 @@ define(["text!./Pane.html", "../Base", "bootstrap.plugins/tab"], function(tpl){
 		/**
 		 * @property uiName
 		 * @type {String}
-		 * @default "fb-ui-tabpane"
+		 * @default "fb-ui-tab.pane"
 		 */
-		uiName:"fb-ui-tabpane",
+		uiName:"fb-ui-tab.pane",
 		/**
 		 * @property active
 		 * @type {Boolean}

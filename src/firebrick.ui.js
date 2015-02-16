@@ -41,7 +41,7 @@
 			 * @private
 			 * @type {String}
 			 */
-			version: "0.11.9",
+			version: "0.12.0",
 			
 			/**
 			 * used to cache pointers to classes when searching by "uiName"
@@ -203,7 +203,6 @@
 				}
 				
 				if(component.build){
-					//view that is no a component
 					component.html = component.build();	
 				}
 				
@@ -444,6 +443,14 @@
 					}
 					
 					return "javascript:void(0)";
+				},
+				
+				
+				callFunction: function(classId, functionName, args){
+					var clazz = Firebrick.getById(classId);
+					if(clazz && functionName){
+						clazz[functionName].apply(clazz, args);
+					}
 				}
 				
 			},
@@ -509,6 +516,14 @@
 				if($.isArray(me.items)){
 					for(var i = 0, l = me.items.length; i<l; i++){
 						me.items[i].fireEvent("rendered");
+					}
+				}
+			},
+			htmlRendered: function(){
+				var me = this;
+				if($.isArray(me.items)){
+					for(var i = 0, l = me.items.length; i<l; i++){
+						me.items[i].fireEvent("htmlRendered");
 					}
 				}
 			}

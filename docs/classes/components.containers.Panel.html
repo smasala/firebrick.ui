@@ -19,7 +19,7 @@
             
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 0.11.9</em>
+            <em>API Docs for: 0.12.0</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -57,6 +57,8 @@
             
                 <li><a href="../classes/components.common.mixins.Badges.html">components.common.mixins.Badges</a></li>
             
+                <li><a href="../classes/components.common.mixins.Column.html">components.common.mixins.Column</a></li>
+            
                 <li><a href="../classes/components.common.mixins.Items.html">components.common.mixins.Items</a></li>
             
                 <li><a href="../classes/components.common.mixins.Toolbars.html">components.common.mixins.Toolbars</a></li>
@@ -65,15 +67,19 @@
             
                 <li><a href="../classes/components.containers.Base.html">components.containers.Base</a></li>
             
+                <li><a href="../classes/components.containers.border.Pane.html">components.containers.border.Pane</a></li>
+            
+                <li><a href="../classes/components.containers.BorderLayout.html">components.containers.BorderLayout</a></li>
+            
                 <li><a href="../classes/components.containers.Box.html">components.containers.Box</a></li>
             
                 <li><a href="../classes/components.containers.Form.html">components.containers.Form</a></li>
             
                 <li><a href="../classes/components.containers.FormPanel.html">components.containers.FormPanel</a></li>
             
-                <li><a href="../classes/components.containers.Grid.html">components.containers.Grid</a></li>
-            
                 <li><a href="../classes/components.containers.GridColumn.html">components.containers.GridColumn</a></li>
+            
+                <li><a href="../classes/components.containers.GridRow.html">components.containers.GridRow</a></li>
             
                 <li><a href="../classes/components.containers.Modal.html">components.containers.Modal</a></li>
             
@@ -136,6 +142,8 @@
                 <li><a href="../classes/components.table.TreeTable.html">components.table.TreeTable</a></li>
             
                 <li><a href="../classes/helper.html">helper</a></li>
+            
+                <li><a href="../classes/plugins.Draggable.html">plugins.Draggable</a></li>
             
                 <li><a href="../classes/plugins.RadioList.html">plugins.RadioList</a></li>
             
@@ -237,6 +245,8 @@
         
         
         
+            <li class="api-class-tab events"><a href="#events">Events</a></li>
+        
     </ul>
 
     <div>
@@ -321,6 +331,20 @@
                         
                             <li class="index-item method inherited">
                                 <a href="#method_cleanString">cleanString</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method private">
+                                <a href="#method_collapseIconClick">collapseIconClick</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
+                                <a href="#method_collapsibleIconBindings">collapsibleIconBindings</a>
 
                                 
                                 
@@ -462,6 +486,13 @@
                                 
                             </li>
                         
+                            <li class="index-item property private">
+                                <a href="#property__collapsedClass">_collapsedClass</a>
+
+                                
+                                
+                            </li>
+                        
                             <li class="index-item property inherited">
                                 <a href="#property__element">_element</a>
 
@@ -560,15 +591,15 @@
                                 
                             </li>
                         
-                            <li class="index-item property inherited">
-                                <a href="#property_items">items</a>
+                            <li class="index-item property">
+                                <a href="#property_"></a>
 
                                 
                                 
                             </li>
                         
-                            <li class="index-item property">
-                                <a href="#property_"></a>
+                            <li class="index-item property inherited">
+                                <a href="#property_items">items</a>
 
                                 
                                 
@@ -652,7 +683,7 @@
                             </li>
                         
                             <li class="index-item property">
-                                <a href="#property_showPanelHeader">showPanelHeader</a>
+                                <a href="#property_showCollapseIcon">showCollapseIcon</a>
 
                                 
                                 
@@ -720,6 +751,21 @@
 
             
 
+            
+                <div class="index-section events">
+                    <h3>Events</h3>
+
+                    <ul class="index-list events extends">
+                        
+                            <li class="index-item event">
+                                <a href="#event_&quot;fb-ui-panel-state-change&quot; on panel element">&quot;fb-ui-panel-state-change&quot; on panel element</a>
+
+                                
+                                
+                            </li>
+                        
+                    </ul>
+                </div>
             
         </div>
 
@@ -842,7 +888,7 @@
             
         
         
-        <a href="../files/src_components_common_mixins_Items.js.html#l82"><code>src\components\common\mixins\Items.js:82</code></a>
+        <a href="../files/src_components_common_mixins_Items.js.html#l96"><code>src\components\common\mixins\Items.js:96</code></a>
         
         </p>
 
@@ -951,7 +997,7 @@
             
         
         
-        <a href="../files/src_components_common_mixins_Items.js.html#l68"><code>src\components\common\mixins\Items.js:68</code></a>
+        <a href="../files/src_components_common_mixins_Items.js.html#l82"><code>src\components\common\mixins\Items.js:82</code></a>
         
         </p>
 
@@ -1513,7 +1559,7 @@ iterate up the inheritance tree looking for a classname that differs from the cu
             
         
         
-        <a href="../files/src_components_containers_Panel.js.html#l115"><code>src\components\containers\Panel.js:115</code></a>
+        <a href="../files/src_components_containers_Panel.js.html#l138"><code>src\components\containers\Panel.js:138</code></a>
         
         </p>
 
@@ -1720,6 +1766,188 @@ iterate up the inheritance tree looking for a classname that differs from the cu
 </div>
 
                 
+                    <div id="method_collapseIconClick" class="method item private">
+    <h3 class="name"><code>collapseIconClick</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>obj</code>
+                    
+                </li>
+            
+                <li class="arg">
+                    
+                        <code>event</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+
+    
+
+    
+        <span class="flag private">private</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/src_components_containers_Panel.js.html#l274"><code>src\components\containers\Panel.js:274</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>simulate a click on the icon and delegate it to the title</p>
+
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">obj</code>
+                        <span class="type">Object</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                         
+                    </div>
+
+                    
+                </li>
+            
+                <li class="param">
+                    
+                        <code class="param-name">event</code>
+                        <span class="type">Object</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>jquery event</p>
+
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method_collapsibleIconBindings" class="method item">
+    <h3 class="name"><code>collapsibleIconBindings</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+        <span class="returns-inline">
+            <span class="type">Object</span>
+        </span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/src_components_containers_Panel.js.html#l255"><code>src\components\containers\Panel.js:255</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        
+    </div>
+
+    
+
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                        <span class="type">Object</span>:
+                    
+                
+            </div>
+        </div>
+    
+
+    
+</div>
+
+                
                     <div id="method_collapsibleLinkBindings" class="method item">
     <h3 class="name"><code>collapsibleLinkBindings</code></h3>
 
@@ -1756,7 +1984,7 @@ iterate up the inheritance tree looking for a classname that differs from the cu
             
         
         
-        <a href="../files/src_components_containers_Panel.js.html#l190"><code>src\components\containers\Panel.js:190</code></a>
+        <a href="../files/src_components_containers_Panel.js.html#l218"><code>src\components\containers\Panel.js:218</code></a>
         
         </p>
 
@@ -2065,7 +2293,7 @@ iterate up the inheritance tree looking for a classname that differs from the cu
             
         
         
-        <a href="../files/src_components_common_mixins_Items.js.html#l55"><code>src\components\common\mixins\Items.js:55</code></a>
+        <a href="../files/src_components_common_mixins_Items.js.html#l69"><code>src\components\common\mixins\Items.js:69</code></a>
         
         </p>
 
@@ -2342,7 +2570,7 @@ iterate up the inheritance tree looking for a classname that differs from the cu
             
         
         
-        <a href="../files/src_components_containers_Panel.js.html#l171"><code>src\components\containers\Panel.js:171</code></a>
+        <a href="../files/src_components_containers_Panel.js.html#l195"><code>src\components\containers\Panel.js:195</code></a>
         
         </p>
 
@@ -2376,13 +2604,17 @@ iterate up the inheritance tree looking for a classname that differs from the cu
 </div>
 
                 
-                    <div id="method_init" class="method item inherited">
+                    <div id="method_init" class="method item">
     <h3 class="name"><code>init</code></h3>
 
     
         <span class="paren">()</span>
     
 
+    
+        <span class="returns-inline">
+            <span class="type">Object</span>
+        </span>
     
 
     
@@ -2399,13 +2631,16 @@ iterate up the inheritance tree looking for a classname that differs from the cu
 
     <div class="meta">
         
+            <p>Inherited from
+            <a href="../classes/components.common.Base.html#method_init">
+                components.common.Base
+            </a>
             
-                <p>Inherited from
-                <a href="../classes/components.common.Base.html#method_init">components.common.Base</a>:
+            but overwritten in
             
         
         
-        <a href="../files/src_components_common_Base.js.html#l261"><code>src\components\common\Base.js:261</code></a>
+        <a href="../files/src_components_containers_Panel.js.html#l122"><code>src\components\containers\Panel.js:122</code></a>
         
         </p>
 
@@ -2416,12 +2651,23 @@ iterate up the inheritance tree looking for a classname that differs from the cu
     </div>
 
     <div class="description">
-        <p>when overriding this or any other method, this.callParent(arguments) calls the method in the super class</p>
-
+        
     </div>
 
     
 
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                        <span class="type">Object</span>:
+                    
+                
+            </div>
+        </div>
     
 
     
@@ -2464,7 +2710,7 @@ iterate up the inheritance tree looking for a classname that differs from the cu
             
         
         
-        <a href="../files/src_components_containers_Panel.js.html#l225"><code>src\components\containers\Panel.js:225</code></a>
+        <a href="../files/src_components_containers_Panel.js.html#l307"><code>src\components\containers\Panel.js:307</code></a>
         
         </p>
 
@@ -2534,7 +2780,7 @@ iterate up the inheritance tree looking for a classname that differs from the cu
             
         
         
-        <a href="../files/src_components_containers_Panel.js.html#l153"><code>src\components\containers\Panel.js:153</code></a>
+        <a href="../files/src_components_containers_Panel.js.html#l177"><code>src\components\containers\Panel.js:177</code></a>
         
         </p>
 
@@ -2604,7 +2850,7 @@ iterate up the inheritance tree looking for a classname that differs from the cu
             
         
         
-        <a href="../files/src_components_containers_Panel.js.html#l206"><code>src\components\containers\Panel.js:206</code></a>
+        <a href="../files/src_components_containers_Panel.js.html#l288"><code>src\components\containers\Panel.js:288</code></a>
         
         </p>
 
@@ -2777,7 +3023,7 @@ iterate up the inheritance tree looking for a classname that differs from the cu
             
         
         
-        <a href="../files/src_components_containers_Panel.js.html#l132"><code>src\components\containers\Panel.js:132</code></a>
+        <a href="../files/src_components_containers_Panel.js.html#l155"><code>src\components\containers\Panel.js:155</code></a>
         
         </p>
 
@@ -3102,6 +3348,54 @@ iterate up the inheritance tree looking for a classname that differs from the cu
 </div>
 
                 
+                    <div id="property__collapsedClass" class="property item private">
+    <h3 class="name"><code>_collapsedClass</code></h3>
+    <span class="type">String</span>
+
+    
+
+    
+        <span class="flag private">private</span>
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/src_components_containers_Panel.js.html#l115"><code>src\components\containers\Panel.js:115</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        
+    </div>
+
+    
+        <p><strong>Default:</strong> &quot;fb-ui-is-collapsed&quot;</p>
+    
+
+    
+
+    
+</div>
+
+                
                     <div id="property__element" class="property item inherited">
     <h3 class="name"><code>_element</code></h3>
     <span class="type">Null | JQuery Object</span>
@@ -3347,7 +3641,7 @@ iterate up the inheritance tree looking for a classname that differs from the cu
             
         
         
-        <a href="../files/src_components_containers_Panel.js.html#l91"><code>src\components\containers\Panel.js:91</code></a>
+        <a href="../files/src_components_containers_Panel.js.html#l85"><code>src\components\containers\Panel.js:85</code></a>
         
         </p>
 
@@ -3393,7 +3687,7 @@ iterate up the inheritance tree looking for a classname that differs from the cu
             
         
         
-        <a href="../files/src_components_containers_Panel.js.html#l77"><code>src\components\containers\Panel.js:77</code></a>
+        <a href="../files/src_components_containers_Panel.js.html#l71"><code>src\components\containers\Panel.js:71</code></a>
         
         </p>
 
@@ -3440,7 +3734,7 @@ iterate up the inheritance tree looking for a classname that differs from the cu
             
         
         
-        <a href="../files/src_components_containers_Panel.js.html#l84"><code>src\components\containers\Panel.js:84</code></a>
+        <a href="../files/src_components_containers_Panel.js.html#l78"><code>src\components\containers\Panel.js:78</code></a>
         
         </p>
 
@@ -3734,49 +4028,6 @@ iterate up the inheritance tree looking for a classname that differs from the cu
 </div>
 
                 
-                    <div id="property_items" class="property item inherited">
-    <h3 class="name"><code>items</code></h3>
-    <span class="type">String | Object | Array of Object</span>
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                <p>Inherited from
-                <a href="../classes/components.common.mixins.Items.html#property_items">components.common.mixins.Items</a>:
-            
-        
-        
-        <a href="../files/src_components_common_mixins_Items.js.html#l28"><code>src\components\common\mixins\Items.js:28</code></a>
-        
-        </p>
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        
-    </div>
-
-    
-        <p><strong>Default:</strong> null</p>
-    
-
-    
-
-    
-</div>
-
-                
                     <div id="property_" class="property item">
     <h3 class="name"><code></code></h3>
     <span class="type">Boolean</span>
@@ -3816,6 +4067,49 @@ iterate up the inheritance tree looking for a classname that differs from the cu
 
     
         <p><strong>Default:</strong> true</p>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="property_items" class="property item inherited">
+    <h3 class="name"><code>items</code></h3>
+    <span class="type">String | Object | Array of Object</span>
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                <p>Inherited from
+                <a href="../classes/components.common.mixins.Items.html#property_items">components.common.mixins.Items</a>:
+            
+        
+        
+        <a href="../files/src_components_common_mixins_Items.js.html#l28"><code>src\components\common\mixins\Items.js:28</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        
+    </div>
+
+    
+        <p><strong>Default:</strong> null</p>
     
 
     
@@ -4311,8 +4605,8 @@ iterate up the inheritance tree looking for a classname that differs from the cu
 </div>
 
                 
-                    <div id="property_showPanelHeader" class="property item">
-    <h3 class="name"><code>showPanelHeader</code></h3>
+                    <div id="property_showCollapseIcon" class="property item">
+    <h3 class="name"><code>showCollapseIcon</code></h3>
     <span class="type">Boolean</span>
 
     
@@ -4334,7 +4628,7 @@ iterate up the inheritance tree looking for a classname that differs from the cu
             
         
         
-        <a href="../files/src_components_containers_Panel.js.html#l71"><code>src\components\containers\Panel.js:71</code></a>
+        <a href="../files/src_components_containers_Panel.js.html#l91"><code>src\components\containers\Panel.js:91</code></a>
         
         </p>
 
@@ -4715,6 +5009,95 @@ iterate up the inheritance tree looking for a classname that differs from the cu
 
         
 
+        
+            <div id="events" class="api-class-tabpanel">
+                <h2 class="off-left">Events</h2>
+
+                
+                    <div id="event_&quot;fb-ui-panel-state-change&quot; on panel element" class="events item">
+    <h3 class="name"><code>&quot;fb-ui-panel-state-change&quot; on panel element</code></h3>
+    <span class="type"></span>
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/src_components_containers_Panel.js.html#l239"><code>src\components\containers\Panel.js:239</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>registered collapsibleLinkBindings with the KO &quot;click&quot; attribute</p>
+
+    </div>
+
+    
+        <div class="params">
+            <h4>Event Payload:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">obj</code>
+                        <span class="type">Object</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                         
+                    </div>
+
+                    
+                </li>
+            
+                <li class="param">
+                    
+                        <code class="param-name">event</code>
+                        <span class="type">Object</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>jquery event</p>
+
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+
+    
+</div>
+
+                
+            </div>
         
     </div>
 </div>

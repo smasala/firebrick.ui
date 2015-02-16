@@ -10,7 +10,7 @@
  * @namespace components.fields
  * @class Display
  */
-define(["./Input"], function(){
+define(["text!./Display.html", "./Input"], function(subTpl){
 	"use strict";
 	return Firebrick.define("Firebrick.ui.fields.Display", {
 		extend:"Firebrick.ui.fields.Input",
@@ -21,18 +21,36 @@ define(["./Input"], function(){
 		 */
 		uiName: "fb-ui-display",
 		/**
-		 * @property readOnly
-		 * @type {Boolean}
-		 * @default true
-		 */
-		readOnly: true,
-		/**
 		 * overwrite input formControlClass
 		 * @property formControlClass
 		 * @type {String}
 		 * @default "formControlClass fb-ui-field-display"
 		 */
-		formControlClass: "form-control-static fb-ui-field-display",
-		
+		formControlClass: "form-control-static",
+		/**
+		 * @property subTpl
+		 * @type {html}
+		 * @default Display.html
+		 */
+		subTpl: subTpl,
+		/**
+		 * @method bindings
+		 * @return {Object}
+		 */
+		bindings: function(){
+			var me = this,
+				obj = me.callParent(),
+				text = obj.value;
+			
+			delete obj.attr.readonly;
+			delete obj.attr.disabled;
+			delete obj.attr.type;
+			delete obj.attr.placeholder;
+			delete obj.value;
+			
+			obj.text = text;
+			
+			return obj;
+		}
 	});
 });

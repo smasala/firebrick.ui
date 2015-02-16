@@ -6,17 +6,17 @@
  * @module Firebrick.ui.components
  * @extends components.containers.Base
  * @namespace components.containers
- * @class Grid
+ * @class GridRow
  */
-define(["text!./Grid.html", "jquery", "./Base", "./GridColumn"], function(tpl, $){
+define(["text!./GridRow.html", "jquery", "./Base", "./GridColumn"], function(tpl, $){
 	"use strict";
-	return Firebrick.define("Firebrick.ui.containers.Grid", {
+	return Firebrick.define("Firebrick.ui.containers.GridRow", {
 		extend:"Firebrick.ui.containers.Base",
 		/**
 		 * @property uiName
 		 * @type {String}
 		 */
-		uiName:"fb-ui-grid",
+		uiName:"fb-ui-gridrow",
 		/**
 		 * @property tpl
 		 * @type {String} html

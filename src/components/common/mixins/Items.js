@@ -50,6 +50,20 @@ define(["jquery"], function($){
 						}
 					}
 				}
+			},
+			htmlRendered: function(){
+				var me = this,
+				items = me.items,
+				args = arguments;
+				if($.isArray(items)){
+					var cmp;
+					for(var i = 0, l = items.length; i<l; i++){
+						cmp = items[i];
+						if(cmp.passEvent){
+							cmp.passEvent(args);
+						}
+					}
+				}
 			}
 		},
 		/**

@@ -60,11 +60,11 @@ define(["text!./Base.html", "text!./Input.html", "../common/Base", "x-editable",
 		 */
 		formControlClass: "form-control",
 		/**
-		 * @property colLabelSize
+		 * @property labelWidth
 		 * @type {Int}
 		 * @default 3
 		 */
-		colLabelSize: 3,
+		labelWidth: 3,
 		/**
 		 * use grid system value
 		 * @property inputWidth
@@ -499,7 +499,7 @@ define(["text!./Base.html", "text!./Input.html", "../common/Base", "x-editable",
 					}
 				};
 			if(me.horizontal){
-				obj.css[ me.parseBind("col-" + me.deviceSize + "-" + me.colLabelSize )] = me.horizontal;
+				obj.css[ me.parseBind("col-" + me.deviceSize + "-" + me.labelWidth )] = me.horizontal;
 			}
 			return obj;
 		},

@@ -19,7 +19,7 @@
             
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 0.11.9</em>
+            <em>API Docs for: 0.12.0</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -57,6 +57,8 @@
             
                 <li><a href="../classes/components.common.mixins.Badges.html">components.common.mixins.Badges</a></li>
             
+                <li><a href="../classes/components.common.mixins.Column.html">components.common.mixins.Column</a></li>
+            
                 <li><a href="../classes/components.common.mixins.Items.html">components.common.mixins.Items</a></li>
             
                 <li><a href="../classes/components.common.mixins.Toolbars.html">components.common.mixins.Toolbars</a></li>
@@ -65,15 +67,19 @@
             
                 <li><a href="../classes/components.containers.Base.html">components.containers.Base</a></li>
             
+                <li><a href="../classes/components.containers.border.Pane.html">components.containers.border.Pane</a></li>
+            
+                <li><a href="../classes/components.containers.BorderLayout.html">components.containers.BorderLayout</a></li>
+            
                 <li><a href="../classes/components.containers.Box.html">components.containers.Box</a></li>
             
                 <li><a href="../classes/components.containers.Form.html">components.containers.Form</a></li>
             
                 <li><a href="../classes/components.containers.FormPanel.html">components.containers.FormPanel</a></li>
             
-                <li><a href="../classes/components.containers.Grid.html">components.containers.Grid</a></li>
-            
                 <li><a href="../classes/components.containers.GridColumn.html">components.containers.GridColumn</a></li>
+            
+                <li><a href="../classes/components.containers.GridRow.html">components.containers.GridRow</a></li>
             
                 <li><a href="../classes/components.containers.Modal.html">components.containers.Modal</a></li>
             
@@ -136,6 +142,8 @@
                 <li><a href="../classes/components.table.TreeTable.html">components.table.TreeTable</a></li>
             
                 <li><a href="../classes/helper.html">helper</a></li>
+            
+                <li><a href="../classes/plugins.Draggable.html">plugins.Draggable</a></li>
             
                 <li><a href="../classes/plugins.RadioList.html">plugins.RadioList</a></li>
             
@@ -248,13 +256,6 @@
                     <h3>Methods</h3>
 
                     <ul class="index-list methods extends">
-                        
-                            <li class="index-item method private">
-                                <a href="#method__getColumnWidth">_getColumnWidth</a>
-
-                                
-                                
-                            </li>
                         
                             <li class="index-item method private inherited">
                                 <a href="#method__getCSSClasses">_getCSSClasses</a>
@@ -455,27 +456,6 @@
                                 
                             </li>
                         
-                            <li class="index-item property">
-                                <a href="#property_columnOffset">columnOffset</a>
-
-                                
-                                
-                            </li>
-                        
-                            <li class="index-item property">
-                                <a href="#property_columnOrder">columnOrder</a>
-
-                                
-                                
-                            </li>
-                        
-                            <li class="index-item property">
-                                <a href="#property_columnWidth">columnWidth</a>
-
-                                
-                                
-                            </li>
-                        
                             <li class="index-item property inherited">
                                 <a href="#property_css">css</a>
 
@@ -485,13 +465,6 @@
                         
                             <li class="index-item property inherited">
                                 <a href="#property_defaults">defaults</a>
-
-                                
-                                
-                            </li>
-                        
-                            <li class="index-item property">
-                                <a href="#property_deviceSize">deviceSize</a>
 
                                 
                                 
@@ -623,81 +596,6 @@
                 <h2 class="off-left">Methods</h2>
 
                 
-                    <div id="method__getColumnWidth" class="method item private">
-    <h3 class="name"><code>_getColumnWidth</code></h3>
-
-    
-        <span class="paren">()</span>
-    
-
-    
-        <span class="returns-inline">
-            <span class="type">Int</span>
-        </span>
-    
-
-    
-
-    
-        <span class="flag private">private</span>
-    
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/src_components_containers_GridColumn.js.html#l58"><code>src\components\containers\GridColumn.js:58</code></a>
-        
-        </p>
-
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>when property columnWidth is set to &quot;auto&quot;, this function will attempt to calculate the correct size for each column.
-Note: this function will round down to the nearest whole number - 5 columns will result in size 2 for each column
-the number of columns are divided by 12 (BS3 grid)</p>
-
-    </div>
-
-    
-
-    
-        <div class="returns">
-            <h4>Returns:</h4>
-
-            <div class="returns-description">
-                
-                    
-                        <span class="type">Int</span>:
-                    
-                
-            </div>
-        </div>
-    
-
-    
-</div>
-
-                
                     <div id="method__getCSSClasses" class="method item private inherited">
     <h3 class="name"><code>_getCSSClasses</code></h3>
 
@@ -812,7 +710,7 @@ the number of columns are divided by 12 (BS3 grid)</p>
             
         
         
-        <a href="../files/src_components_common_mixins_Items.js.html#l82"><code>src\components\common\mixins\Items.js:82</code></a>
+        <a href="../files/src_components_common_mixins_Items.js.html#l96"><code>src\components\common\mixins\Items.js:96</code></a>
         
         </p>
 
@@ -842,7 +740,7 @@ the number of columns are divided by 12 (BS3 grid)</p>
                     
 
                     <div class="param-description">
-                        
+                         
                     </div>
 
                     
@@ -921,7 +819,7 @@ the number of columns are divided by 12 (BS3 grid)</p>
             
         
         
-        <a href="../files/src_components_common_mixins_Items.js.html#l68"><code>src\components\common\mixins\Items.js:68</code></a>
+        <a href="../files/src_components_common_mixins_Items.js.html#l82"><code>src\components\common\mixins\Items.js:82</code></a>
         
         </p>
 
@@ -1213,7 +1111,7 @@ iterate up the inheritance tree looking for a classname that differs from the cu
                     
 
                     <div class="param-description">
-                         
+                        
                     </div>
 
                     
@@ -1316,7 +1214,7 @@ iterate up the inheritance tree looking for a classname that differs from the cu
                     
 
                     <div class="param-description">
-                         
+                        
                     </div>
 
                     
@@ -1419,7 +1317,7 @@ iterate up the inheritance tree looking for a classname that differs from the cu
                     
 
                     <div class="param-description">
-                         
+                        
                     </div>
 
                     
@@ -1483,7 +1381,7 @@ iterate up the inheritance tree looking for a classname that differs from the cu
             
         
         
-        <a href="../files/src_components_containers_GridColumn.js.html#l75"><code>src\components\containers\GridColumn.js:75</code></a>
+        <a href="../files/src_components_containers_GridColumn.js.html#l26"><code>src\components\containers\GridColumn.js:26</code></a>
         
         </p>
 
@@ -1494,8 +1392,7 @@ iterate up the inheritance tree looking for a classname that differs from the cu
     </div>
 
     <div class="description">
-        <p>Bindings</p>
-
+        
     </div>
 
     
@@ -1835,7 +1732,7 @@ iterate up the inheritance tree looking for a classname that differs from the cu
                     
 
                     <div class="param-description">
-                         
+                        
                     </div>
 
                     
@@ -1965,7 +1862,7 @@ iterate up the inheritance tree looking for a classname that differs from the cu
             
         
         
-        <a href="../files/src_components_common_mixins_Items.js.html#l55"><code>src\components\common\mixins\Items.js:55</code></a>
+        <a href="../files/src_components_common_mixins_Items.js.html#l69"><code>src\components\common\mixins\Items.js:69</code></a>
         
         </p>
 
@@ -2331,7 +2228,7 @@ iterate up the inheritance tree looking for a classname that differs from the cu
                     
 
                     <div class="param-description">
-                         
+                        
                     </div>
 
                     
@@ -2560,7 +2457,7 @@ iterate up the inheritance tree looking for a classname that differs from the cu
                     
 
                     <div class="param-description">
-                         
+                        
                     </div>
 
                     
@@ -2828,159 +2725,6 @@ iterate up the inheritance tree looking for a classname that differs from the cu
 </div>
 
                 
-                    <div id="property_columnOffset" class="property item">
-    <h3 class="name"><code>columnOffset</code></h3>
-    <span class="type">Integer | Null 1 to 12</span>
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/src_components_containers_GridColumn.js.html#l38"><code>src\components\containers\GridColumn.js:38</code></a>
-        
-        </p>
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>use this to offset the column by x columns
-<a href="http://getbootstrap.com/css/#grid-offsetting">http://getbootstrap.com/css/#grid-offsetting</a></p>
-
-    </div>
-
-    
-        <p><strong>Default:</strong> null</p>
-    
-
-    
-
-    
-</div>
-
-                
-                    <div id="property_columnOrder" class="property item">
-    <h3 class="name"><code>columnOrder</code></h3>
-    <span class="type">String | Null "push-x" or "pull-x" - x = 1 to 12</span>
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/src_components_containers_GridColumn.js.html#l46"><code>src\components\containers\GridColumn.js:46</code></a>
-        
-        </p>
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>use this to offset the column by x columns
-<a href="http://getbootstrap.com/css/#grid-column-ordering">http://getbootstrap.com/css/#grid-column-ordering</a></p>
-
-    </div>
-
-    
-        <p><strong>Default:</strong> null</p>
-    
-
-    
-        <div class="example">
-            <h4>Example:</h4>
-
-            <div class="example-content">
-                <pre class="code prettyprint"><code>    pull-3</code></pre>
-<pre class="code prettyprint"><code>    push-4</code></pre>
-
-            </div>
-        </div>
-    
-
-    
-</div>
-
-                
-                    <div id="property_columnWidth" class="property item">
-    <h3 class="name"><code>columnWidth</code></h3>
-    <span class="type">Integer | String number 1 to 12 or "auto"</span>
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/src_components_containers_GridColumn.js.html#l31"><code>src\components\containers\GridColumn.js:31</code></a>
-        
-        </p>
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>auto will attempt to provide the column width by dividing the number of items in the parent Grid by 12 - decimals will be rounded down</p>
-
-    </div>
-
-    
-        <p><strong>Default:</strong> &quot;auto&quot;</p>
-    
-
-    
-
-    
-</div>
-
-                
                     <div id="property_css" class="property item inherited">
     <h3 class="name"><code>css</code></h3>
     <span class="type">String</span>
@@ -3061,52 +2805,6 @@ iterate up the inheritance tree looking for a classname that differs from the cu
 
     
         <p><strong>Default:</strong> null</p>
-    
-
-    
-
-    
-</div>
-
-                
-                    <div id="property_deviceSize" class="property item">
-    <h3 class="name"><code>deviceSize</code></h3>
-    <span class="type">String</span>
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/src_components_containers_GridColumn.js.html#l25"><code>src\components\containers\GridColumn.js:25</code></a>
-        
-        </p>
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        
-    </div>
-
-    
-        <p><strong>Default:</strong> &quot;md&quot;</p>
     
 
     
@@ -3701,7 +3399,7 @@ iterate up the inheritance tree looking for a classname that differs from the cu
             
         
         
-        <a href="../files/src_components_containers_GridColumn.js.html#l20"><code>src\components\containers\GridColumn.js:20</code></a>
+        <a href="../files/src_components_containers_GridColumn.js.html#l21"><code>src\components\containers\GridColumn.js:21</code></a>
         
         </p>
 
@@ -3789,7 +3487,7 @@ iterate up the inheritance tree looking for a classname that differs from the cu
             
         
         
-        <a href="../files/src_components_containers_GridColumn.js.html#l15"><code>src\components\containers\GridColumn.js:15</code></a>
+        <a href="../files/src_components_containers_GridColumn.js.html#l16"><code>src\components\containers\GridColumn.js:16</code></a>
         
         </p>
 

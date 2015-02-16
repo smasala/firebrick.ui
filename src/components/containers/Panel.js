@@ -69,12 +69,6 @@ define(["text!./Panel.html", "./Base", "../nav/Toolbar", "../common/mixins/Toolb
 		 */
 		panelTitleClass: true,
 		/**
-		 * @property showPanelHeader
-		 * @type {Boolean}
-		 * @default true
-		 */
-		showPanelHeader:true,
-		/**
 		 * fill the panel body (can be html too) - use in conjunction with contentHTML property
 		 * @property content
 		 * @type {String}
@@ -95,6 +89,12 @@ define(["text!./Panel.html", "./Base", "../nav/Toolbar", "../common/mixins/Toolb
 		 */
 		collapsible:false,
 		/**
+		 * @property showCollapseIcon
+		 * @type {Boolean}
+		 * @default true
+		 */
+		showCollapseIcon: true,
+		/**
 		 * @property collapsed
 		 * @type {Boolean|String}
 		 * @default false
@@ -112,6 +112,29 @@ define(["text!./Panel.html", "./Base", "../nav/Toolbar", "../common/mixins/Toolb
 		 * @default "pull-right"
 		 */
 		headerItemsPosition: "pull-right",
+		/**
+		 * @private
+		 * @property _collapsedClass
+		 * @type {String}
+		 * @default "fb-ui-is-collapsed"
+		 */
+		_collapsedClass: "fb-ui-is-collapsed",
+		/**
+		 * @method init
+		 * @return {Object}
+		 */
+		init: function(){
+			var me = this;
+			
+			me.on("rendered", function(){
+				var panel = me.getElement();
+				if(me.collapsed){
+					panel.addClass( me._collapsedClass );
+				}
+			});
+			
+			return me.callParent(arguments);
+		},
 		/**
 		 * Data bindings
 		 * @method bindings
@@ -148,6 +171,7 @@ define(["text!./Panel.html", "./Base", "../nav/Toolbar", "../common/mixins/Toolb
 					obj.css["in"] = true;
 				}
 			}
+			obj.css["'fb-ui-panel-body-container'"] = true;
 			return obj;
 		},
 		/**
@@ -183,6 +207,10 @@ define(["text!./Panel.html", "./Base", "../nav/Toolbar", "../common/mixins/Toolb
 			if(me.headerItemsPosition){
 				obj.css[me.parseBind(me.headerItemsPosition)] = true;
 			}
+			
+			if(me.collapsible && me.showCollapseIcon){
+				obj.css["'fb-ui-collapse-icon-present'"] = true;
+			}
 				
 			return obj;
 			
@@ -195,13 +223,67 @@ define(["text!./Panel.html", "./Base", "../nav/Toolbar", "../common/mixins/Toolb
 			var me = this,
 				id = "fb-ui-collapse-" + me.getId();
 			return {
+				css:{
+					"'fb-ui-title-link'": true
+				},
 				attr:{
 					"'data-toggle'":  "'collapse'",
 					"href":  me.parseBind("#" + id ),
 					"'aria-expanded'": typeof me.collapsed === "boolean" ? me.collapsed : true,
 					"'aria-controls'":  me.parseBind( id ),
-				}
+				},
+				click: "function(){ return Firebrick.ui.helper.callFunction('"+me.getId()+"', '_collapseTitleClick', arguments); }"
 			};
+		},
+		
+		/**
+		 * registered collapsibleLinkBindings with the KO "click" attribute 
+		 * @method _collapseTitleClick
+		 * @event "fb-ui-panel-state-change" on panel element
+		 * @param obj
+		 * @param event {Object} jquery event
+		 */
+		_collapseTitleClick: function(obj, event){
+			var me = this,
+				title = $(event.target),
+				panel = title.closest(".panel");
+			
+			panel.toggleClass( me._collapsedClass );
+			panel.trigger("fb-ui-panel-state-change");
+		},
+		
+		/**
+		 * @method collapsibleIconBindings
+		 * @return {Object}
+		 */
+		collapsibleIconBindings: function(){
+			var me = this,
+				obj = {css:{}, attr:{}};
+			
+			obj.css["'fb-ui-collapse-icon'"] = true;
+			
+			if(me.headerItems){
+				obj.css["'fb-ui-header-items-present'"] = true;
+			}
+			
+			obj.click = "function(){ return Firebrick.ui.helper.callFunction('"+me.getId()+"', '_collapseIconClick', arguments)}";
+			
+			return obj;
+		},
+		
+		/**
+		 * simulate a click on the icon and delegate it to the title
+		 * @method collapseIconClick
+		 * @private
+		 * @param obj
+		 * @param event {Object} jquery event
+		 */
+		_collapseIconClick: function(obj, event){
+			var icon = $(event.target),
+				collapse = icon.siblings(".fb-ui-title-link");
+			
+			//simulate click on the link
+			collapse[0].click();
 		},
 		/**
 		 * @method panelHeaderTextBindings

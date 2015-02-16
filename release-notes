@@ -1,3 +1,11 @@
+v0.12.0
+----------------------------
+* change Grid to GridRow
+* new component, border layout
+* input property "colLabelSize" renamed to "labelWidth"
+* set labelStyle on span component to convert to the BS label component - http://getbootstrap.com/components/#labels 
+* change display from readonly input to <p> field - http://getbootstrap.com/css/#forms-controls-static
+
 v0.11.9
 ----------------------------
 * css bug fix toolbar form-group
