@@ -1,3 +1,7 @@
+v0.12.1
+----------------------------
+* border layout fix for IE - simplification from gridrow to div
+
 v0.12.0
 ----------------------------
 * change Grid to GridRow

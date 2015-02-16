@@ -8,10 +8,11 @@
  * @namespace components.containers
  * @class BorderLayout
  */
-define(["./Base", "./border/Pane", "./GridRow"], function(){
+define(["text!./BorderLayout.html", "./Base", "./Box", "./border/Pane"], function(tpl){
 	"use strict";
 	return Firebrick.define("Firebrick.ui.containers.BorderLayout", {
-		extend:"Firebrick.ui.containers.GridRow",
+		extend:"Firebrick.ui.containers.Base",
+		tpl: tpl,
 		/**
 		 * @property uiName
 		 * @type {String}
@@ -65,11 +66,10 @@ define(["./Base", "./border/Pane", "./GridRow"], function(){
 		 * }
 		 */
 		defaultSizes:{
-			top: 12,
-			right: 3,
-			bottom: 12,
-			left: 3,
-			center: 12 //force 100%
+			top: "100%",
+			right: "33%",
+			bottom: "100%",
+			left: "33%"
 		},
 		/**
 		 * @property height
@@ -111,9 +111,9 @@ define(["./Base", "./border/Pane", "./GridRow"], function(){
 				position,
 				length,
 				centerGrid = {
-					uiName: fb.ui.cmp.gridrow,
+					uiName: fb.ui.cmp.box,
 					defaults: me.defaults,
-					css:'row-eq-height',
+					css:'row-eq-height fb-ui-center-row',
 					items:[]
 				},
 				entered = false;
@@ -139,7 +139,6 @@ define(["./Base", "./border/Pane", "./GridRow"], function(){
 						//check if the item was defined
 						if(item){
 							//get the correct dimensions
-							item = me._setColDimensions(item, map);
 							if(ii>0 && ii<4){
 								//center pieces
 								// 1|2|3
@@ -150,11 +149,7 @@ define(["./Base", "./border/Pane", "./GridRow"], function(){
 									reorderedItems.push(centerGrid);
 								}
 								//place the item in the correct order
-								reorderedItems.push({
-									uiName: fb.ui.cmp.gridrow,
-									defaults: me.defaults,
-									items:[item]
-								});
+								reorderedItems.push(item);
 							}
 							
 						}
@@ -194,116 +189,6 @@ define(["./Base", "./border/Pane", "./GridRow"], function(){
 			}
 			
 			return pos;
-		},
-		
-		/**
-		 * sets column width offset and other initial properties
-		 * @method _setColDimensions
-		 * @param item {Object}
-		 * @param map {Object of items}
-		 * @return item {Object}
-		 */
-		_setColDimensions: function(item, map){
-			var me = this,
-				position = item.position;
-			if(position){
-
-				if(position === "left"){
-					item.columnWidth = item.columnWidth || me.defaultSizes.left;
-				}else if(position === "center"){
-					item = me._calcCenterPos(item, map);
-				}else if(position === "right"){
-					item = me._calcRightPos(item, map);
-				}else{
-					item.columnWidth = item.columnWidth || 12;
-				}
-			}
-			
-			return item;
-		},
-		
-		/**
-		 * sets column width offset and other initial properties for the right column (number 3)
-		 * @method _calcRightPos
-		 * @param item {Object}
-		 * @param map {Object of items}
-		 * @return item {Object}
-		 */
-		_calcRightPos: function(item, map){
-			var me = this,
-				offset = 0;
-			
-			// ---------------- 0 ----------------
-			// 1 (left) | 2 (center) | 3 (right) |
-			// ---------------- 4 ----------------
-			
-			//offset not set - so calculate it
-			if(!item.columnOffset){
-				//twelve is max, (bootstrap grid
-				//offset is needed if the left/center columns are missing
-				//offset pushes the column to the right side
-				offset = me._maxGridCols - (item.columnWidth || me.defaultSizes.right);
-				
-				//left column exist
-				if(map[1]){
-					offset -= map[1].columnWidth || me.defaultSizes.left;
-					offset -= map[1].columnOffset || 0;
-				}
-				
-				//center column exist
-				if(map[2]){
-					offset -= map[2].columnWidth || me.defaultSizes.center;
-					offset -= map[2].columnOffset || 0;
-				}
-				
-				item.columnOffset = offset >= 0 ? offset : 0;
-			}
-
-			//width not set - set default size
-			if(!item.columnWidth){
-				item.columnWidth = me.defaultSizes.right;
-			}
-				
-			return item;
-		},
-		
-		/**
-		 * force center pane to be 100% - regardless of properties
-		 * @method _calcCenterPos
-		 * @param item {Object}
-		 * @param map {Object of items}
-		 * @return item {Object}
-		 */
-		_calcCenterPos: function(item/*, map*/){
-			var me = this;
-			
-			item.columnWidth = me.defaultSizes.center;
-			item.columnOffset = null;	//delete columnOffset
-			
-			return item;
-			
-//			var me = this,
-//				width = 0;
-//			
-//			// ---------------- 0 ----------------
-//			// 1 (left) | 2 (center) | 3 (right) |
-//			// ---------------- 4 ----------------
-//			
-//			if(!item.columnWidth){
-//				//left column exist
-//				if(map[1]){
-//					width += map[1].columnWidth || me.defaultSizes.left;
-//				}
-//				//right column exist
-//				if(map[3]){
-//					width += map[3].columnWidth || me.defaultSizes.right;
-//				}
-//				
-//				width = me._maxGridCols - width;
-//				item.columnWidth = width;
-//			}
-//			
-//			return item;
 		},
 		
 		/**

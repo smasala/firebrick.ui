@@ -86,6 +86,13 @@ define(["text!./SplitBar.html", "jquery", "../../common/mixins/Column", "./Dragg
 		 */
 		height: "auto",
 		/**
+		 * only used for left and right panes
+		 * @property width
+		 * @type {Integer|String}
+		 * @default "33%"
+		 */
+		width: "33%",
+		/**
 		 * @method init
 		 * @return {Object}
 		 */
@@ -151,7 +158,7 @@ define(["text!./SplitBar.html", "jquery", "../../common/mixins/Column", "./Dragg
 				}
 			}
 			
-			if(me.width){
+			if(position === "left" || position === "right"){
 				el.css("width", width);
 				el.css("min-width", width);
 			}
@@ -211,7 +218,7 @@ define(["text!./SplitBar.html", "jquery", "../../common/mixins/Column", "./Dragg
 				pane = me.getElement(),
 				paneHeader = $("> .panel-heading", pane),
 				vertical = position === "top" || position === "bottom" ? true : false,
-				splitbar = vertical || position === "right" ? pane.prev(".fb-ui-splitbar") : pane.next(".fb-ui-splitbar");
+				splitbar = position === "top" || position === "left" ? pane.next(".fb-ui-splitbar") : pane.prev(".fb-ui-splitbar");
 				
 			if(splitbar.length){
 				if(vertical){
@@ -439,7 +446,7 @@ define(["text!./SplitBar.html", "jquery", "../../common/mixins/Column", "./Dragg
 				obj.css["'fb-ui-pane-collapsible'"] = true;
 			}
 			
-			return me.calColumn(obj);
+			return obj;
 		},
 		
 		/**
@@ -455,8 +462,8 @@ define(["text!./SplitBar.html", "jquery", "../../common/mixins/Column", "./Dragg
 			obj.css[me.parseBind("fb-ui-splitbar-" + me.position )] = true;
 			
 			if(me.position === "top" || me.position === "bottom"){
-				obj.css.col = true;
-				obj.css[me.parseBind("col-" + me.deviceSize + "-12")] = true;
+//				obj.css.col = true;
+//				obj.css[me.parseBind("col-" + me.deviceSize + "-12")] = true;
 				obj.css["'fb-ui-splitbar-horizontal'"] = true;
 			}else{
 				obj.css["'fb-ui-splitbar-vertical'"] = true;

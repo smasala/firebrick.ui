@@ -193,6 +193,7 @@ progress[value]::-webkit-progress-value{
 .fb-ui-toolbar {
 	position:absolute;
 	box-shadow:none;
+	z-index:5 !important;
 }
 
 .fb-ui-toolbar-container.fb-ui-toolbar-top {
@@ -351,10 +352,53 @@ a:hover{
 
 
 /** Border Layout **/
-.fb-ui-borderlayout.row > .row{
-	margin-left:10px;
-	margin-right:10px;
+.fb-ui-borderlayout{
+	border:1px solid;
+	display: -ms-flexbox;
+	display: flex;
+	flex-direction: column;
+	-ms-flex-direction: column;
+	overflow:hidden;
 }
+
+.fb-ui-borderlayout .fb-ui-pane-position-center{
+	flex: 1;	
+	-ms-flex:1
+}
+
+.fb-ui-borderlayout .fb-ui-center-row{
+	flex:1 1 auto;
+	-ms-flex:1 1 auto;
+	flex-direction: row;
+	-ms-flex-direction: row;
+	overflow:hidden;
+}
+
+.fb-ui-borderlayout .fb-ui-pane-position-top{
+	width:100%;
+	display:table !important;	/* stop overlapping (top) when making the bottom region bigger */
+}
+
+.fb-ui-borderlayout .fb-ui-border-pane{
+	display:flex;
+	display:-ms-flexbox;
+	flex-direction:column;
+	-ms-flex-direction: column;
+}
+
+.fb-ui-borderlayout .fb-ui-panel-body-container{
+    overflow: auto;	
+    flex: 1 1 auto; /*IE 10 scroll*/
+}
+
+.row-eq-height {  
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+}
+
 
 .fb-ui-border-pane.panel{
 	margin-bottom:0;
@@ -485,46 +529,10 @@ a:hover{
 	cursor: col-resize;
 }
 
-.fb-ui-splitbar.fb-ui-splitbar-bottom{
+.fb-ui-splitbar.fb-ui-splitbar-bottom, .fb-ui-splitbar.fb-ui-splitbar-top{
 	width:100%;
 	height:4px;
 	min-height:4px;
-}
-
-.fb-ui-border-pane.panel{
-	display:flex;
-	display: -ms-flexbox;
-	flex-direction: column;
-	-ms-flex-direction: column;
-}
-
-.fb-ui-border-pane.panel > .fb-ui-panel-body-container{
-	flex:1;
-	overflow:auto;
-}
-
-.fb-ui-borderlayout{
-	border:1px solid;
-	position:relative;
-	display: -ms-flexbox;
-	display: flex;
-	flex-direction: column;
-	-ms-flex-direction: column;
-	overflow:hidden;
-}
-
-
-.fb-ui-borderlayout .row-eq-height{
-	flex:1;
-	-ms-flex:1;
-}
-
-.row-eq-height {  
-    display: -webkit-box;
-    display: -moz-box;
-    display: -ms-flexbox;
-    display: -webkit-flex;
-    display: flex;
 }
 
 /*-- /Border layout --*/
