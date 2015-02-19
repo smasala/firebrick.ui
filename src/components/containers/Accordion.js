@@ -8,7 +8,7 @@
  * @namespace components.containers
  * @class Accordion
  */
-define(["text!./Accordion.html", "./Base", "./Panel", "bootstrap.plugins/Collapse"], function(tpl){
+define(["text!./Accordion.html", "./Base", "./Panel", "bootstrap.plugins/collapse"], function(tpl){
 	"use strict";
 	return Firebrick.define("Firebrick.ui.containers.Accordion", {
 		extend:"Firebrick.ui.containers.Base",
