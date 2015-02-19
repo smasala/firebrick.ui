@@ -39,11 +39,11 @@ define(["text!./SplitBar.html", "jquery", "../../common/mixins/Column", "./Dragg
 		 */
 		collapseDirection: "left",
 		/**
-		 * @property splitbarIdPrefix
+		 * @property splitBarIdPrefix
 		 * @type {String}
-		 * @default "fb-ui-bar"
+		 * @default "fb-ui-splitbar-r"
 		 */
-		splitbarIdPrefix: "fb-ui-splitbar-",
+		splitBarIdPrefix: "fb-ui-splitbar-",
 		/**
 		 * @private
 		 * @property splitBarTpl
@@ -119,18 +119,18 @@ define(["text!./SplitBar.html", "jquery", "../../common/mixins/Column", "./Dragg
 		 */
 		_htmlRendered: function(){
 			var me = this,
-				el, splitbarHtml,
+				el, splitBarHtml,
 				position = me.position;
 			
-			if(me.resizable && position !== "center"){
+			if(position !== "center"){
 				el = me.getElement();
 				if(el){
 					me.template("splitBarTpl");
-					splitbarHtml = me.build("splitBarTpl");
+					splitBarHtml = me.build("splitBarTpl");
 					if(position !== "right" && position !== "bottom"){
-						el.after(splitbarHtml);	
+						el.after(splitBarHtml);	
 					}else{
-						el.before(splitbarHtml);	
+						el.before(splitBarHtml);	
 					}
 					
 				}
@@ -164,22 +164,43 @@ define(["text!./SplitBar.html", "jquery", "../../common/mixins/Column", "./Dragg
 			}
 			
 		},
-		
+
 		/**
 		 * listener for the event rendered
 		 * @private
 		 * @method _rendered
 		 */
 		_rendered: function(){
-			var me = this;
+			var me = this,
+				pane = me.getElement(),
+				position = me.position,
+				direction = position === "top" || position === "bottom" ? "vertical" : "horizontal",
+				lookMethod = position === "top" || position === "left" ? "next" : "prev",
+				splitBar = pane[lookMethod](".fb-ui-splitbar");
 			
+			pane.prop("fb-direction", direction);
+			pane.prop("fb-splitbar", splitBar);
 			if (me.collapsible){
+				splitBar.on("click", "> .fb-ui-collapse-icon", function(){
+					me.toggleCollapse.call(me);
+				});
 				me.setCollapsibleActions();
 			}
 			
 			if(me.resizable){
 				me.setResizableActions();
 			}	
+			
+			if(me.resizable || me.collapsible){
+				pane.on("fb-ui-panel-state-change", function(){
+					//disable resize if the pane is collapsed
+					if(pane.hasClass( me._collapsedClass )){
+						me.onCollapsed();
+					}else{
+						me.onExpanded();
+					}
+				});
+			}
 		},
 		
 		/**
@@ -217,26 +238,17 @@ define(["text!./SplitBar.html", "jquery", "../../common/mixins/Column", "./Dragg
 				position = me.position,
 				pane = me.getElement(),
 				paneHeader = $("> .panel-heading", pane),
-				vertical = position === "top" || position === "bottom" ? true : false,
-				splitbar = position === "top" || position === "left" ? pane.next(".fb-ui-splitbar") : pane.prev(".fb-ui-splitbar");
+				direction = pane.prop("fb-direction"),
+				splitbar = pane.prop("fb-splitbar");
 				
 			if(splitbar.length){
-				if(vertical){
+				if(direction === "vertical"){
 					//top bottom panes
 
 					//if the class if NOT collapsed from the start, then enable resizing
 					if(!pane.hasClass( me._collapsedClass )){
-						me.enableDrags(splitbar, "vertical");
+						me.onExpanded();
 					}
-					
-					pane.on("fb-ui-panel-state-change", function(){
-						//disable resize if the pane is collapsed
-						if(pane.hasClass( me._collapsedClass )){
-							me.disableDrags(splitbar);
-						}else{
-							me.enableDrags(splitbar, "vertical");
-						}
-					});
 					
 					//when the splitbar has been dragged, if the panel a new height
 					splitbar.on("dragged", function(event, top/*, left*/){
@@ -265,17 +277,8 @@ define(["text!./SplitBar.html", "jquery", "../../common/mixins/Column", "./Dragg
 					
 					//if the pane is NOT collapsed from the start, enable resize functionality
 					if(!pane.hasClass( me._collapsedClass )){
-						me.enableDrags(splitbar, "horizontal");
+						me.onExpanded();
 					}
-					
-					pane.on("fb-ui-panel-state-change", function(){
-						//disable resize if the panel is collapsed
-						if(pane.hasClass( me._collapsedClass )){
-							me.disableDrags(splitbar);
-						}else{
-							me.enableDrags(splitbar, "horizontal");
-						}
-					});
 					
 					//when the splitbar has been moved, calculate the new width of the pane
 					splitbar.on("dragged", function(event, top, left){
@@ -391,8 +394,7 @@ define(["text!./SplitBar.html", "jquery", "../../common/mixins/Column", "./Dragg
 				pane = me.getElement(), 
 				paneHeader = $("> .panel-heading", pane),
 				paneTitle = $(".panel-title", paneHeader),
-				paneHeaderHeight = paneHeader.outerHeight();
-			
+				paneHeaderHeight = paneHeader.outerHeight() || 0;
 			
 			//start transition
 			pane.addClass( me._transitionClass );
@@ -416,18 +418,35 @@ define(["text!./SplitBar.html", "jquery", "../../common/mixins/Column", "./Dragg
 		
 		/**
 		 * enable drags function on element
-		 * @method enableDrags
+		 * @method onExpanded
 		 */
-		enableDrags: function(pane, direction){
-			pane.prop("dragDisabled", false);
-			pane.drags(direction);
+		onExpanded: function(){
+			var me = this,
+				pane = me.getElement(),
+				direction = pane.prop("fb-direction"),
+				splitBar = pane.prop("fb-splitbar");
+			
+			if(splitBar.length && me.resizable){
+				splitBar.prop("dragDisabled", false);
+				splitBar.drags(direction);	
+			}
+			
+			splitBar.removeClass("fb-ui-is-collapsed");
 		},
 		/**
 		 * disable drags function on element
-		 * @method disableDrags
+		 * @method onCollapsed
 		 */
-		disableDrags: function(pane){
-			pane.prop("dragDisabled", true);
+		onCollapsed: function(){
+			var me = this,
+				pane = me.getElement(),
+				splitBar = pane.prop("fb-splitbar");
+			
+			if(splitBar.length && me.resizable){
+				splitBar.prop("dragDisabled", true);
+			}
+			
+			splitBar.addClass("fb-ui-is-collapsed");
 		},
 		/**
 		 * @method bindings
@@ -450,35 +469,73 @@ define(["text!./SplitBar.html", "jquery", "../../common/mixins/Column", "./Dragg
 		},
 		
 		/**
-		 * @method barBindings
+		 * @method splitBarBindings
 		 * @return {Object}
 		 */
-		splitbarBindings: function(){
+		splitBarBindings: function(){
 			var me = this,
-				obj = {css:{
-					"'fb-ui-splitbar'": true
-				}, attr:{}};
+				obj = {
+					css:{
+						"'fb-ui-splitbar'": true
+					},
+					attr:{}
+				};
 
-			obj.css[me.parseBind("fb-ui-splitbar-" + me.position )] = true;
+			obj.css[me.parseBind("fb-ui-splitbar-" + me.position)] = true;
 			
-			if(me.position === "top" || me.position === "bottom"){
-//				obj.css.col = true;
-//				obj.css[me.parseBind("col-" + me.deviceSize + "-12")] = true;
-				obj.css["'fb-ui-splitbar-horizontal'"] = true;
-			}else{
-				obj.css["'fb-ui-splitbar-vertical'"] = true;
+			if(me.resizable){
+				if(me.position === "top" || me.position === "bottom"){
+//					obj.css.col = true;
+//					obj.css[me.parseBind("col-" + me.deviceSize + "-12")] = true;
+					obj.css["'fb-ui-splitbar-horizontal'"] = true;
+				}else{
+					obj.css["'fb-ui-splitbar-vertical'"] = true;
+				}
+			}
+			
+			if(me.collapsible){
+
+				obj.css["'fb-ui-collapsebar'"] = true;
+				
 			}
 			
 			return obj;
 		},
 		
 		/**
-		 * @method getBarId
+		 * @method getSplitBarId
 		 * @return {String}
 		 */
-		getSplitbarId: function(){
+		getSplitBarId: function(){
 			var me = this;
-			return me.splitbarIdPrefix + me.getId();
+			return me.splitBarIdPrefix + me.getId();
+		},
+		
+		/**
+		 * @method  splitBarCollapseBindings
+		 * @return {Object}
+		 */
+		splitBarCollapseBindings: function(){
+			var me = this,
+				obj = {
+					css:{}
+			};
+			
+			obj.css.glyphicon = true;
+			obj.css["'fb-ui-collapse-icon'"] = true;
+			
+			if(me.position === "left"){
+				obj.css["'glyphicon-chevron-left'"] = true;	
+			}else if(me.position === "right"){
+				obj.css["'glyphicon-chevron-right'"] = true;
+			}else if(me.position === "top"){
+				obj.css["'glyphicon-chevron-up'"] = true;
+			}else if(me.position === "bottom"){
+				obj.css["'glyphicon-chevron-down'"] = true;
+			}
+			
+			return obj;
 		}
+		
 	});
 });

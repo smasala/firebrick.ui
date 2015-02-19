@@ -19,7 +19,7 @@
             
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 0.12.1</em>
+            <em>API Docs for: 0.12.11</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -64,6 +64,8 @@
                 <li><a href="../classes/components.common.mixins.Toolbars.html">components.common.mixins.Toolbars</a></li>
             
                 <li><a href="../classes/components.common.MultiplesBase.html">components.common.MultiplesBase</a></li>
+            
+                <li><a href="../classes/components.containers.Accordion.html">components.containers.Accordion</a></li>
             
                 <li><a href="../classes/components.containers.Base.html">components.containers.Base</a></li>
             
@@ -239,13 +241,6 @@ define([&quot;text!./Pane.html&quot;, &quot;../Base&quot;, &quot;bootstrap.plugi
 		 */
 		content:&quot;&quot;,
 		/**
-		 * whether the content is html content
-		 * @property contentHTML
-		 * @type {Boolean}
-		 * @default false
-		 */
-		contentHTML: false,
-		/**
 		 * returns the Tab component, not the TabPane!
 		 * @method getTabId
 		 * @return {String}
@@ -285,7 +280,7 @@ define([&quot;text!./Pane.html&quot;, &quot;../Base&quot;, &quot;bootstrap.plugi
 			obj.attr.id = &quot;Firebrick.getById(&#x27;&quot;+me.getId()+&quot;&#x27;).getPaneId()&quot;;
 
 			if(!me.items &amp;&amp; me.content){
-				obj.html = me.contentHTML ? me.content : me.textBind(me.content);
+				obj.html =  &quot;Firebrick.getById(&#x27;&quot;+me.getId()+&quot;&#x27;).content&quot;;
 			}
 			
 			return obj;

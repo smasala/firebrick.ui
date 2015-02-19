@@ -33,13 +33,6 @@ define(["text!./Pane.html", "../Base", "bootstrap.plugins/tab"], function(tpl){
 		 */
 		content:"",
 		/**
-		 * whether the content is html content
-		 * @property contentHTML
-		 * @type {Boolean}
-		 * @default false
-		 */
-		contentHTML: false,
-		/**
 		 * returns the Tab component, not the TabPane!
 		 * @method getTabId
 		 * @return {String}
@@ -79,7 +72,7 @@ define(["text!./Pane.html", "../Base", "bootstrap.plugins/tab"], function(tpl){
 			obj.attr.id = "Firebrick.getById('"+me.getId()+"').getPaneId()";
 
 			if(!me.items && me.content){
-				obj.html = me.contentHTML ? me.content : me.textBind(me.content);
+				obj.html =  "Firebrick.getById('"+me.getId()+"').content";
 			}
 			
 			return obj;

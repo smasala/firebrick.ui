@@ -41,7 +41,7 @@
 			 * @private
 			 * @type {String}
 			 */
-			version: "0.12.1",
+			version: "0.12.11",
 			
 			/**
 			 * used to cache pointers to classes when searching by "uiName"
@@ -146,7 +146,7 @@
 				
 				for(var i = 0, l = items.length; i<l; i++){
 					component = me._buildComponent(items[i], parent);
-					html += component.html;
+					html += component._html;
 					//cache component pointer so it can be found by id
 					if(!component.getId){
 						console.error("something went wrong", items[i], "is it defined correctly? Check the item name and dependency include");
@@ -203,7 +203,7 @@
 				}
 				
 				if(component.build){
-					component.html = component.build();	
+					component._html = component.build();	
 				}
 				
 				
@@ -506,28 +506,61 @@
 	 * @class view.Base
 	 */
 	Firebrick.classes.overwrite("Firebrick.view.Base", {
+		
 		/**
-		 * @property listeners
+		 * @property passDownEvents
 		 * @type {Object}
+		 * @default {
+				rendered: 1,
+				htmlRendered: 1,
+				unbound: 1
+			}
 		 */
-		listeners:{
-			rendered: function(){
-				var me = this;
-				if($.isArray(me.items)){
-					for(var i = 0, l = me.items.length; i<l; i++){
-						me.items[i].fireEvent("rendered");
+		passDownEvents:{
+			rendered: 1,
+			htmlRendered: 1,
+			unbound: 1
+		},
+
+		listeners: {
+			preReady: function(){
+				var me = this,
+					k;
+				if(me.passDownEvents){
+					
+					Firebrick.utils.merge("passDownEvents", me);
+					for(k in me.passDownEvents){
+						if(me.passDownEvents.hasOwnProperty(k)){
+							me.on(k, me._createPassEvent());
+						}
 					}
-				}
-			},
-			htmlRendered: function(){
-				var me = this;
-				if($.isArray(me.items)){
-					for(var i = 0, l = me.items.length; i<l; i++){
-						me.items[i].fireEvent("htmlRendered");
-					}
+					
 				}
 			}
 		},
+		
+		/**
+		 * @method _createPassEvent
+		 * @private
+		 * @return {Function}
+		 */
+		_createPassEvent: function(){
+			return function(){
+				var me = this,
+				items = me.items,
+				args = arguments;
+				if($.isArray(items)){
+					var cmp;
+					for(var i = 0, l = items.length; i<l; i++){
+						cmp = items[i];
+						if(cmp.passEvent){
+							cmp.passEvent(args);
+						}
+					}
+				}
+			};
+		},
+		
 		/**
 	 	 * @property items
 		 * @type {Array|Function}

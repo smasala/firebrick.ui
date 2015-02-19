@@ -15,11 +15,11 @@ define(["text!./Box.html", "./Base"], function(tpl){
 		tpl: tpl,
 		uiName:"fb-ui-box",
 		/**
-		 * set as string to fill the div/box with html content
-		 * @property htmlContent
+		 * set as string to fill the div/box with text content
+		 * @property html
 		 * @type {String|false}
 		 * @default false
 		 */
-		htmlContent: false
+		html: false
 	});
 });

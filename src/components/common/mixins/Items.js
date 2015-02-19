@@ -32,41 +32,6 @@ define(["jquery"], function($){
 		 */
 		items:null,
 		/**
-		 * @property listeners
-		 * @type {Object}
-		 * @private
-		 */
-		listeners:{
-			rendered: function(){
-				var me = this,
-					items = me.items,
-					args = arguments;
-				if($.isArray(items)){
-					var cmp;
-					for(var i = 0, l = items.length; i<l; i++){
-						cmp = items[i];
-						if(cmp.passEvent){
-							cmp.passEvent(args);
-						}
-					}
-				}
-			},
-			htmlRendered: function(){
-				var me = this,
-				items = me.items,
-				args = arguments;
-				if($.isArray(items)){
-					var cmp;
-					for(var i = 0, l = items.length; i<l; i++){
-						cmp = items[i];
-						if(cmp.passEvent){
-							cmp.passEvent(args);
-						}
-					}
-				}
-			}
-		},
-		/**
 		 * inject sub items
 		 * @method getItems
 		 * @return {String} html

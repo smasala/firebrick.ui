@@ -71,13 +71,15 @@ define(["jquery"], function($){
 	        			$drag.offset({
 		                    top: top,
 		                    left: left
-		                }).on("mouseup", function() {
-		                	$drag.removeClass('draggable').css('z-index', zIdx);
-		                	//remove handler
-		                    $("html").off("mousemove", "body", mouseMove);
 		                });
 	        		};
 	        	
+        		$drag.on("mouseup", function() {
+                	$drag.removeClass('draggable').css('z-index', zIdx);
+                	//remove handler
+                    $("html").off("mousemove", "body", mouseMove);
+                });
+	        		
 	    		if($drag.prop("dragDisabled") === true){
 	    			$("html").off("mousemove", "body", mouseMove);
 	    		}else{

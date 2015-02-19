@@ -1,1 +1,7 @@
-<div id="{{=it.getSplitbarId()}}" data-bind="{{=it.dataBind('splitbarBindings')}}"></div>
+{{?it.resizable || it.collapsible}}
+<div id="{{=it.getSplitBarId()}}" data-bind="{{=it.dataBind('splitBarBindings')}}">
+	{{?it.collapsible}}
+		<span data-bind="{{=it.dataBind('splitBarCollapseBindings')}}"></span>
+	{{?}}
+</div>
+{{?}}

@@ -12,6 +12,11 @@ define(["text!./BorderLayout.html", "./Base", "./Box", "./border/Pane"], functio
 	"use strict";
 	return Firebrick.define("Firebrick.ui.containers.BorderLayout", {
 		extend:"Firebrick.ui.containers.Base",
+		/**
+		 * @property tpl
+		 * @type {String} html
+		 * @default BorderLayout.html
+		 */
 		tpl: tpl,
 		/**
 		 * @property uiName
@@ -143,11 +148,11 @@ define(["text!./BorderLayout.html", "./Base", "./Box", "./border/Pane"], functio
 								//center pieces
 								// 1|2|3
 								centerGrid.items.push(item);
-							}else{
 								if(centerGrid.items.length && !entered){
 									entered = true;
 									reorderedItems.push(centerGrid);
 								}
+							}else{
 								//place the item in the correct order
 								reorderedItems.push(item);
 							}

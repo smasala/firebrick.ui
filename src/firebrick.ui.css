@@ -1,3 +1,4 @@
+
 /**
 * Firebrick MVC Loading Animate
 */
@@ -353,7 +354,6 @@ a:hover{
 
 /** Border Layout **/
 .fb-ui-borderlayout{
-	border:1px solid;
 	display: -ms-flexbox;
 	display: flex;
 	flex-direction: column;
@@ -384,9 +384,10 @@ a:hover{
 	display:-ms-flexbox;
 	flex-direction:column;
 	-ms-flex-direction: column;
+	overflow:auto;
 }
 
-.fb-ui-borderlayout .fb-ui-panel-body-container{
+.fb-ui-borderlayout .fb-ui-panel-body-container {
     overflow: auto;	
     flex: 1 1 auto; /*IE 10 scroll*/
 }
@@ -400,22 +401,20 @@ a:hover{
 }
 
 
-.fb-ui-border-pane.panel{
+.fb-ui-border-pane.panel {
 	margin-bottom:0;
 	padding:0;
 	border:none;
 }
 
-.panel-rotated-heading
-{
+.panel-rotated-heading {
     width: 42px;
     float: left;
     height: 100%;
     position: absolute !important;
 }
 
-.panel-rotated-title
-{
+.panel-rotated-title {
     margin-top: 0;
     margin-bottom: 0;
     margin-left: 15px;
@@ -433,13 +432,10 @@ a:hover{
     white-space: nowrap;
 }
 
-.fb-ui-border-pane.fb-ui-pane-position-left.fb-ui-is-collapsed{
-	margin-right:4px;
-}
-
 .fb-ui-border-pane.fb-ui-pane-position-left.fb-ui-pane-collapsible.fb-ui-transition,
 .fb-ui-border-pane.fb-ui-pane-position-right.fb-ui-pane-collapsible.fb-ui-transition {
     overflow:hidden;
+    white-space: nowrap;
     -webkit-transition: width 0.6s ease-in-out, min-width 0.6s ease-in-out;
     -moz-transition: width 0.6s ease-in-out, min-width 0.6s ease-in-out;
     -o-transition: width 0.6s ease-in-out, min-width 0.6s ease-in-out;
@@ -452,6 +448,7 @@ a:hover{
 .fb-ui-border-pane.fb-ui-pane-position-top.fb-ui-pane-collapsible.fb-ui-transition, 
 .fb-ui-border-pane.fb-ui-pane-position-bottom.fb-ui-pane-collapsible.fb-ui-transition {
     overflow:hidden;
+    white-space: nowrap;
     -webkit-transition: height 0.6s ease-in-out, min-height 0.6s ease-in-out;
     -moz-transition: height 0.6s ease-in-out, min-height 0.6s ease-in-out;
     -o-transition: height 0.6s ease-in-out, min-height 0.6s ease-in-out;
@@ -462,7 +459,7 @@ a:hover{
 	margin-top:25px;
 }
 
-.panel-heading{
+.fb-ui-border-pane{
 	position:relative;
 }
 
@@ -474,13 +471,13 @@ a:hover{
 	top:11px !important;
 }
 
-.fb-ui-border-pane .panel-rotated-heading .fb-ui-collapse-icon{
+.panel-heading{
 	position:relative;
 }
 
 .panel-heading .fb-ui-collapse-icon{
 	position:absolute;
-	right:10px;
+	right:14px;
 	top:8px;
 }
 
@@ -515,10 +512,20 @@ a:hover{
     content: "\e080"; /* ">" */
 }
 
+.fb-ui-border-pane.fb-ui-is-collapsed{
+	overflow:hidden;
+}
+
 .fb-ui-splitbar{
 	width:5px;
 	min-width:5px;
-	background:#3e3e3e;
+	background:#f4f4f4;
+	position:relative;
+}
+
+.fb-ui-splitbar.fb-ui-splitbar-left.fb-ui-collapsebar,
+.fb-ui-splitbar.fb-ui-splitbar-right.fb-ui-collapsebar {
+	width:15px;
 }
 
 .fb-ui-splitbar-horizontal{
@@ -533,6 +540,42 @@ a:hover{
 	width:100%;
 	height:4px;
 	min-height:4px;
+}
+
+.fb-ui-splitbar.fb-ui-collapsebar .fb-ui-collapse-icon {
+	position:absolute;
+	cursor:pointer;
+}
+
+.fb-ui-splitbar.fb-ui-splitbar-left.fb-ui-collapsebar .fb-ui-collapse-icon,
+.fb-ui-splitbar.fb-ui-splitbar-right.fb-ui-collapsebar .fb-ui-collapse-icon {
+	top:50%;
+	left:0;	
+}
+
+.fb-ui-splitbar.fb-ui-splitbar-bottom.fb-ui-collapsebar .fb-ui-collapse-icon,
+.fb-ui-splitbar.fb-ui-splitbar-top.fb-ui-collapsebar .fb-ui-collapse-icon {
+	left:50%;
+	top:0;	
+}
+
+.fb-ui-splitbar.fb-ui-splitbar-bottom.fb-ui-collapsebar,
+.fb-ui-splitbar.fb-ui-splitbar-top.fb-ui-collapsebar {
+	height:15px;
+	min-height:15px;
+}
+
+.fb-ui-splitbar.fb-ui-splitbar-left.fb-ui-collapsebar.fb-ui-is-collapsed .fb-ui-collapse-icon:before{
+	content:"\e080"; /* > */
+}
+.fb-ui-splitbar.fb-ui-splitbar-right.fb-ui-collapsebar.fb-ui-is-collapsed .fb-ui-collapse-icon:before {
+	content:"\e079"; /* < */
+}
+.fb-ui-splitbar.fb-ui-splitbar-bottom.fb-ui-collapsebar.fb-ui-is-collapsed .fb-ui-collapse-icon:before {
+	content:"\e113"; /* ^ */
+}
+.fb-ui-splitbar.fb-ui-splitbar-top.fb-ui-collapsebar.fb-ui-is-collapsed .fb-ui-collapse-icon:before {
+	content:"\e114"; /* v */
 }
 
 /*-- /Border layout --*/

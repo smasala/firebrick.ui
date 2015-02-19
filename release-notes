@@ -1,3 +1,12 @@
+v0.12.11
+----------------------------
+* BorderLayout bug fixes - including making the regions collapsible/expandable by clicking the arrow in the split bar
+* new Component Accordion
+* panel properties changed to "content" (data bind or string using '') and "html" - this is to stop the raw html being inserted into the DOM
+* box property change from "htmlContent" to "html"
+* panel component now has methods toggleCollapse, collapse and expand
+* new components property "passDownEvents" - add properties to this map to pass events from a component down to its children
+
 v0.12.1
 ----------------------------
 * border layout fix for IE - simplification from gridrow to div

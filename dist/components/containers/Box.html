@@ -1,6 +1,6 @@
 <div id="{{=it.getId()}}" data-bind="{{=it.dataBind()}}">
-	{{? it.htmlContent }}
-		{{=it.htmlContent}}
+	{{? it.html }}
+		{{=it.html}}
 	{{?? true}}
 		{{=it.getItems()}}
 	{{?}}

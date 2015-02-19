@@ -8,7 +8,7 @@
  * @namespace components.containers
  * @class Panel
  */
-define(["text!./Panel.html", "./Base", "../nav/Toolbar", "../common/mixins/Toolbars"], function(tpl){
+define(["text!./Panel.html", "jquery", "./Base", "../nav/Toolbar", "../common/mixins/Toolbars"], function(tpl, $){
 	"use strict";
 	return Firebrick.define("Firebrick.ui.containers.Panel", {
 		extend:"Firebrick.ui.containers.Base",
@@ -23,6 +23,18 @@ define(["text!./Panel.html", "./Base", "../nav/Toolbar", "../common/mixins/Toolb
 		 * @type {String} html
 		 */
 		tpl:tpl,
+		/**
+		 * @property role
+		 * @type {String}
+		 * @default ""
+		 */
+		role: "",
+		/**
+		 * @property collapseRole
+		 * @type {String}
+		 * @default ""
+		 */
+		collapseRole: "",
 		/**
 		 * @property title
 		 * @type {String|false} set to false to hide the title
@@ -69,19 +81,19 @@ define(["text!./Panel.html", "./Base", "../nav/Toolbar", "../common/mixins/Toolb
 		 */
 		panelTitleClass: true,
 		/**
-		 * fill the panel body (can be html too) - use in conjunction with contentHTML property
+		 * fill the panel body (can be html too)
 		 * @property content
 		 * @type {String}
 		 * @default ""
 		 */
 		content: "",
 		/**
-		 * whether the content is html content
-		 * @property contentHTML
-		 * @type {Boolean}
-		 * @default false
+		 * fill the panel body with html
+		 * @property html
+		 * @type {String}
+		 * @default ""
 		 */
-		contentHTML: false,
+		html: "",
 		/**
 		 * @property collapsible
 		 * @type {Boolean|String}
@@ -100,6 +112,13 @@ define(["text!./Panel.html", "./Base", "../nav/Toolbar", "../common/mixins/Toolb
 		 * @default false
 		 */
 		collapsed:false,
+		/**
+		 * @private
+		 * @property _collapsedState
+		 * @type {Boolean}
+		 * @default false
+		 */
+		_collapsedState: false,
 		/**
 		 * @property headerItems
 		 * @type {Boolean|Array of Objects} boolean = false, if object use the same way as the "items" property
@@ -120,21 +139,102 @@ define(["text!./Panel.html", "./Base", "../nav/Toolbar", "../common/mixins/Toolb
 		 */
 		_collapsedClass: "fb-ui-is-collapsed",
 		/**
+		 * only needed when panel is inside accordion
+		 * @property dataParentId
+		 * @type {String}
+		 * @default ""
+		 */
+		dataParentId: "",
+		/**
+		 * only needed when panel is inside accordion
+		 * @property active
+		 * @type {Boolean}
+		 * @default false
+		 */
+		active: false,
+		/**
 		 * @method init
 		 * @return {Object}
 		 */
 		init: function(){
 			var me = this;
 			
+			me._collapsedState = me.collapsed;
+			
 			me.on("rendered", function(){
-				var panel = me.getElement();
+				var panel = me.getElement(),
+					eventFunction;
+
 				if(me.collapsed){
 					panel.addClass( me._collapsedClass );
 				}
+				
+				eventFunction = function () {
+					panel.toggleClass( me._collapsedClass );
+					panel.trigger("fb-ui-panel-state-change");
+					me._collapsedState = !me._collapsedState;	//toggle value
+				};
+				
+				//this is important for the collapse icon
+				panel.on("show.bs.collapse hide.bs.collapse", eventFunction);
+				
+				me.on("unbound", function(){
+					panel.off("show.bs.collapse hide.bs.collapse", eventFunction);
+				});
+				
 			});
 			
 			return me.callParent(arguments);
 		},
+		
+		/**
+		 * programmatically make toggleCollapse action - useful if the header isn't available
+		 * @method toggleCollapse
+		 * @return self
+		 */
+		toggleCollapse: function(){
+			var me = this;
+				
+			if(me._collapsedState){
+				me.expand();
+			}else{
+				me.collapse();
+			}
+			
+			return me;
+		},
+		
+		/**
+		 * programmatically make a collapse action - useful if the header isn't available
+		 * @method collapse
+		 * @return self
+		 */
+		collapse: function(){
+			var me = this,
+				panel = me.getElement(),
+				collapsiblePart = $("> .panel-collapse", panel);
+		
+			collapsiblePart.collapse("hide");
+			
+			return me;
+		},
+		
+		/**
+		 * programmatically make an expand action - useful if the header isn't available
+		 * @method expand
+		 * @return self
+		 */
+		expand: function(){
+			var me = this,
+				panel = me.getElement(),
+				collapsiblePart = $("> .panel-collapse", panel);
+	
+			collapsiblePart.collapse("show");
+			
+			return me;
+		},
+		
+		
 		/**
 		 * Data bindings
 		 * @method bindings
@@ -171,6 +271,11 @@ define(["text!./Panel.html", "./Base", "../nav/Toolbar", "../common/mixins/Toolb
 					obj.css["in"] = true;
 				}
 			}
+			
+			if(me.collapseRole){
+				obj.attr.role = me.parseBind(me.collapseRole);
+			}
+			
 			obj.css["'fb-ui-panel-body-container'"] = true;
 			return obj;
 		},
@@ -183,11 +288,16 @@ define(["text!./Panel.html", "./Base", "../nav/Toolbar", "../common/mixins/Toolb
 				obj = {
 					css:{
 						"'panel-heading'": me.panelHeaderClass
-					}
+					},
+					attr:{}
 			};
 			
 			if(me.headerItems){
 				obj.css.clearfix = true;
+			}
+			
+			if(me.role){
+				obj.attr.role = me.parseBind(me.role);
 			}
 			
 			return obj;
@@ -221,35 +331,24 @@ define(["text!./Panel.html", "./Base", "../nav/Toolbar", "../common/mixins/Toolb
 		 */
 		collapsibleLinkBindings: function(){
 			var me = this,
-				id = "fb-ui-collapse-" + me.getId();
-			return {
-				css:{
-					"'fb-ui-title-link'": true
-				},
-				attr:{
-					"'data-toggle'":  "'collapse'",
-					"href":  me.parseBind("#" + id ),
-					"'aria-expanded'": typeof me.collapsed === "boolean" ? me.collapsed : true,
-					"'aria-controls'":  me.parseBind( id ),
-				},
-				click: "function(){ return Firebrick.ui.helper.callFunction('"+me.getId()+"', '_collapseTitleClick', arguments); }"
-			};
-		},
-		
-		/**
-		 * registered collapsibleLinkBindings with the KO "click" attribute 
-		 * @method _collapseTitleClick
-		 * @event "fb-ui-panel-state-change" on panel element
-		 * @param obj
-		 * @param event {Object} jquery event
-		 */
-		_collapseTitleClick: function(obj, event){
-			var me = this,
-				title = $(event.target),
-				panel = title.closest(".panel");
+				id = "fb-ui-collapse-" + me.getId(),
+				obj = {
+					css:{
+						"'fb-ui-title-link'": true
+					},
+					attr:{
+						"'data-toggle'":  "'collapse'",
+						"href":  me.parseBind("#" + id ),
+						"'aria-expanded'": typeof me.collapsed === "boolean" ? me.collapsed : true,
+						"'aria-controls'":  me.parseBind( id ),
+					}
+				};
 			
-			panel.toggleClass( me._collapsedClass );
-			panel.trigger("fb-ui-panel-state-change");
+			if(me.dataParentId){
+				obj.attr["'data-parent'"] = me.dataParentId;
+			}
+			
+			return obj;
 		},
 		
 		/**
@@ -316,13 +415,13 @@ define(["text!./Panel.html", "./Base", "../nav/Toolbar", "../common/mixins/Toolb
 					}
 				};
 			
-			if(!me.items && me.content){
-				obj.html = me.contentHTML ? me.content : me.textBind(me.content);
+			if(!me.items && (me.content || me.html)){
+				obj.html = me.html ? "Firebrick.getById('"+me.getId()+"').html" : me.content;
 			}
 			
 			me.toolbarContainer(obj);
 			
 			return obj;
-		},
+		}
 	});
 });
