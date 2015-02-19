@@ -19,7 +19,7 @@
             
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 0.12.1</em>
+            <em>API Docs for: 0.12.11</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -64,6 +64,8 @@
                 <li><a href="../classes/components.common.mixins.Toolbars.html">components.common.mixins.Toolbars</a></li>
             
                 <li><a href="../classes/components.common.MultiplesBase.html">components.common.MultiplesBase</a></li>
+            
+                <li><a href="../classes/components.containers.Accordion.html">components.containers.Accordion</a></li>
             
                 <li><a href="../classes/components.containers.Base.html">components.containers.Base</a></li>
             
@@ -218,6 +220,11 @@ define([&quot;text!./BorderLayout.html&quot;, &quot;./Base&quot;, &quot;./Box&qu
 	&quot;use strict&quot;;
 	return Firebrick.define(&quot;Firebrick.ui.containers.BorderLayout&quot;, {
 		extend:&quot;Firebrick.ui.containers.Base&quot;,
+		/**
+		 * @property tpl
+		 * @type {String} html
+		 * @default BorderLayout.html
+		 */
 		tpl: tpl,
 		/**
 		 * @property uiName
@@ -349,11 +356,11 @@ define([&quot;text!./BorderLayout.html&quot;, &quot;./Base&quot;, &quot;./Box&qu
 								//center pieces
 								// 1|2|3
 								centerGrid.items.push(item);
-							}else{
 								if(centerGrid.items.length &amp;&amp; !entered){
 									entered = true;
 									reorderedItems.push(centerGrid);
 								}
+							}else{
 								//place the item in the correct order
 								reorderedItems.push(item);
 							}

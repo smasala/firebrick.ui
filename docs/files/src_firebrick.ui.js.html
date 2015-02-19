@@ -19,7 +19,7 @@
             
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 0.12.1</em>
+            <em>API Docs for: 0.12.11</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -64,6 +64,8 @@
                 <li><a href="../classes/components.common.mixins.Toolbars.html">components.common.mixins.Toolbars</a></li>
             
                 <li><a href="../classes/components.common.MultiplesBase.html">components.common.MultiplesBase</a></li>
+            
+                <li><a href="../classes/components.containers.Accordion.html">components.containers.Accordion</a></li>
             
                 <li><a href="../classes/components.containers.Base.html">components.containers.Base</a></li>
             
@@ -247,7 +249,7 @@
 			 * @private
 			 * @type {String}
 			 */
-			version: &quot;0.12.1&quot;,
+			version: &quot;0.12.11&quot;,
 			
 			/**
 			 * used to cache pointers to classes when searching by &quot;uiName&quot;
@@ -352,7 +354,7 @@
 				
 				for(var i = 0, l = items.length; i&lt;l; i++){
 					component = me._buildComponent(items[i], parent);
-					html += component.html;
+					html += component._html;
 					//cache component pointer so it can be found by id
 					if(!component.getId){
 						console.error(&quot;something went wrong&quot;, items[i], &quot;is it defined correctly? Check the item name and dependency include&quot;);
@@ -409,7 +411,7 @@
 				}
 				
 				if(component.build){
-					component.html = component.build();	
+					component._html = component.build();	
 				}
 				
 				
@@ -712,28 +714,61 @@
 	 * @class view.Base
 	 */
 	Firebrick.classes.overwrite(&quot;Firebrick.view.Base&quot;, {
+		
 		/**
-		 * @property listeners
+		 * @property passDownEvents
 		 * @type {Object}
+		 * @default {
+				rendered: 1,
+				htmlRendered: 1,
+				unbound: 1
+			}
 		 */
-		listeners:{
-			rendered: function(){
-				var me = this;
-				if($.isArray(me.items)){
-					for(var i = 0, l = me.items.length; i&lt;l; i++){
-						me.items[i].fireEvent(&quot;rendered&quot;);
+		passDownEvents:{
+			rendered: 1,
+			htmlRendered: 1,
+			unbound: 1
+		},
+
+		listeners: {
+			preReady: function(){
+				var me = this,
+					k;
+				if(me.passDownEvents){
+					
+					Firebrick.utils.merge(&quot;passDownEvents&quot;, me);
+					for(k in me.passDownEvents){
+						if(me.passDownEvents.hasOwnProperty(k)){
+							me.on(k, me._createPassEvent());
+						}
 					}
-				}
-			},
-			htmlRendered: function(){
-				var me = this;
-				if($.isArray(me.items)){
-					for(var i = 0, l = me.items.length; i&lt;l; i++){
-						me.items[i].fireEvent(&quot;htmlRendered&quot;);
-					}
+					
 				}
 			}
 		},
+		
+		/**
+		 * @method _createPassEvent
+		 * @private
+		 * @return {Function}
+		 */
+		_createPassEvent: function(){
+			return function(){
+				var me = this,
+				items = me.items,
+				args = arguments;
+				if($.isArray(items)){
+					var cmp;
+					for(var i = 0, l = items.length; i&lt;l; i++){
+						cmp = items[i];
+						if(cmp.passEvent){
+							cmp.passEvent(args);
+						}
+					}
+				}
+			};
+		},
+		
 		/**
 	 	 * @property items
 		 * @type {Array|Function}

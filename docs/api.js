@@ -13,6 +13,7 @@ YUI.add("yuidoc-meta", function(Y) {
         "components.common.mixins.Column",
         "components.common.mixins.Items",
         "components.common.mixins.Toolbars",
+        "components.containers.Accordion",
         "components.containers.Base",
         "components.containers.BorderLayout",
         "components.containers.Box",

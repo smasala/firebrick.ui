@@ -19,7 +19,7 @@
             
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 0.12.1</em>
+            <em>API Docs for: 0.12.11</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -64,6 +64,8 @@
                 <li><a href="../classes/components.common.mixins.Toolbars.html">components.common.mixins.Toolbars</a></li>
             
                 <li><a href="../classes/components.common.MultiplesBase.html">components.common.MultiplesBase</a></li>
+            
+                <li><a href="../classes/components.containers.Accordion.html">components.containers.Accordion</a></li>
             
                 <li><a href="../classes/components.containers.Base.html">components.containers.Base</a></li>
             
@@ -214,7 +216,7 @@
  * @namespace components.containers
  * @class Panel
  */
-define([&quot;text!./Panel.html&quot;, &quot;./Base&quot;, &quot;../nav/Toolbar&quot;, &quot;../common/mixins/Toolbars&quot;], function(tpl){
+define([&quot;text!./Panel.html&quot;, &quot;jquery&quot;, &quot;./Base&quot;, &quot;../nav/Toolbar&quot;, &quot;../common/mixins/Toolbars&quot;], function(tpl, $){
 	&quot;use strict&quot;;
 	return Firebrick.define(&quot;Firebrick.ui.containers.Panel&quot;, {
 		extend:&quot;Firebrick.ui.containers.Base&quot;,
@@ -229,6 +231,18 @@ define([&quot;text!./Panel.html&quot;, &quot;./Base&quot;, &quot;../nav/Toolbar&
 		 * @type {String} html
 		 */
 		tpl:tpl,
+		/**
+		 * @property role
+		 * @type {String}
+		 * @default &quot;&quot;
+		 */
+		role: &quot;&quot;,
+		/**
+		 * @property collapseRole
+		 * @type {String}
+		 * @default &quot;&quot;
+		 */
+		collapseRole: &quot;&quot;,
 		/**
 		 * @property title
 		 * @type {String|false} set to false to hide the title
@@ -275,19 +289,19 @@ define([&quot;text!./Panel.html&quot;, &quot;./Base&quot;, &quot;../nav/Toolbar&
 		 */
 		panelTitleClass: true,
 		/**
-		 * fill the panel body (can be html too) - use in conjunction with contentHTML property
+		 * fill the panel body (can be html too)
 		 * @property content
 		 * @type {String}
 		 * @default &quot;&quot;
 		 */
 		content: &quot;&quot;,
 		/**
-		 * whether the content is html content
-		 * @property contentHTML
-		 * @type {Boolean}
-		 * @default false
+		 * fill the panel body with html
+		 * @property html
+		 * @type {String}
+		 * @default &quot;&quot;
 		 */
-		contentHTML: false,
+		html: &quot;&quot;,
 		/**
 		 * @property collapsible
 		 * @type {Boolean|String}
@@ -306,6 +320,13 @@ define([&quot;text!./Panel.html&quot;, &quot;./Base&quot;, &quot;../nav/Toolbar&
 		 * @default false
 		 */
 		collapsed:false,
+		/**
+		 * @private
+		 * @property _collapsedState
+		 * @type {Boolean}
+		 * @default false
+		 */
+		_collapsedState: false,
 		/**
 		 * @property headerItems
 		 * @type {Boolean|Array of Objects} boolean = false, if object use the same way as the &quot;items&quot; property
@@ -326,21 +347,102 @@ define([&quot;text!./Panel.html&quot;, &quot;./Base&quot;, &quot;../nav/Toolbar&
 		 */
 		_collapsedClass: &quot;fb-ui-is-collapsed&quot;,
 		/**
+		 * only needed when panel is inside accordion
+		 * @property dataParentId
+		 * @type {String}
+		 * @default &quot;&quot;
+		 */
+		dataParentId: &quot;&quot;,
+		/**
+		 * only needed when panel is inside accordion
+		 * @property active
+		 * @type {Boolean}
+		 * @default false
+		 */
+		active: false,
+		/**
 		 * @method init
 		 * @return {Object}
 		 */
 		init: function(){
 			var me = this;
 			
+			me._collapsedState = me.collapsed;
+			
 			me.on(&quot;rendered&quot;, function(){
-				var panel = me.getElement();
+				var panel = me.getElement(),
+					eventFunction;
+
 				if(me.collapsed){
 					panel.addClass( me._collapsedClass );
 				}
+				
+				eventFunction = function () {
+					panel.toggleClass( me._collapsedClass );
+					panel.trigger(&quot;fb-ui-panel-state-change&quot;);
+					me._collapsedState = !me._collapsedState;	//toggle value
+				};
+				
+				//this is important for the collapse icon
+				panel.on(&quot;show.bs.collapse hide.bs.collapse&quot;, eventFunction);
+				
+				me.on(&quot;unbound&quot;, function(){
+					panel.off(&quot;show.bs.collapse hide.bs.collapse&quot;, eventFunction);
+				});
+				
 			});
 			
 			return me.callParent(arguments);
 		},
+		
+		/**
+		 * programmatically make toggleCollapse action - useful if the header isn&#x27;t available
+		 * @method toggleCollapse
+		 * @return self
+		 */
+		toggleCollapse: function(){
+			var me = this;
+				
+			if(me._collapsedState){
+				me.expand();
+			}else{
+				me.collapse();
+			}
+			
+			return me;
+		},
+		
+		/**
+		 * programmatically make a collapse action - useful if the header isn&#x27;t available
+		 * @method collapse
+		 * @return self
+		 */
+		collapse: function(){
+			var me = this,
+				panel = me.getElement(),
+				collapsiblePart = $(&quot;&gt; .panel-collapse&quot;, panel);
+		
+			collapsiblePart.collapse(&quot;hide&quot;);
+			
+			return me;
+		},
+		
+		/**
+		 * programmatically make an expand action - useful if the header isn&#x27;t available
+		 * @method expand
+		 * @return self
+		 */
+		expand: function(){
+			var me = this,
+				panel = me.getElement(),
+				collapsiblePart = $(&quot;&gt; .panel-collapse&quot;, panel);
+	
+			collapsiblePart.collapse(&quot;show&quot;);
+			
+			return me;
+		},
+		
+		
 		/**
 		 * Data bindings
 		 * @method bindings
@@ -377,6 +479,11 @@ define([&quot;text!./Panel.html&quot;, &quot;./Base&quot;, &quot;../nav/Toolbar&
 					obj.css[&quot;in&quot;] = true;
 				}
 			}
+			
+			if(me.collapseRole){
+				obj.attr.role = me.parseBind(me.collapseRole);
+			}
+			
 			obj.css[&quot;&#x27;fb-ui-panel-body-container&#x27;&quot;] = true;
 			return obj;
 		},
@@ -389,11 +496,16 @@ define([&quot;text!./Panel.html&quot;, &quot;./Base&quot;, &quot;../nav/Toolbar&
 				obj = {
 					css:{
 						&quot;&#x27;panel-heading&#x27;&quot;: me.panelHeaderClass
-					}
+					},
+					attr:{}
 			};
 			
 			if(me.headerItems){
 				obj.css.clearfix = true;
+			}
+			
+			if(me.role){
+				obj.attr.role = me.parseBind(me.role);
 			}
 			
 			return obj;
@@ -427,35 +539,24 @@ define([&quot;text!./Panel.html&quot;, &quot;./Base&quot;, &quot;../nav/Toolbar&
 		 */
 		collapsibleLinkBindings: function(){
 			var me = this,
-				id = &quot;fb-ui-collapse-&quot; + me.getId();
-			return {
-				css:{
-					&quot;&#x27;fb-ui-title-link&#x27;&quot;: true
-				},
-				attr:{
-					&quot;&#x27;data-toggle&#x27;&quot;:  &quot;&#x27;collapse&#x27;&quot;,
-					&quot;href&quot;:  me.parseBind(&quot;#&quot; + id ),
-					&quot;&#x27;aria-expanded&#x27;&quot;: typeof me.collapsed === &quot;boolean&quot; ? me.collapsed : true,
-					&quot;&#x27;aria-controls&#x27;&quot;:  me.parseBind( id ),
-				},
-				click: &quot;function(){ return Firebrick.ui.helper.callFunction(&#x27;&quot;+me.getId()+&quot;&#x27;, &#x27;_collapseTitleClick&#x27;, arguments); }&quot;
-			};
-		},
-		
-		/**
-		 * registered collapsibleLinkBindings with the KO &quot;click&quot; attribute 
-		 * @method _collapseTitleClick
-		 * @event &quot;fb-ui-panel-state-change&quot; on panel element
-		 * @param obj
-		 * @param event {Object} jquery event
-		 */
-		_collapseTitleClick: function(obj, event){
-			var me = this,
-				title = $(event.target),
-				panel = title.closest(&quot;.panel&quot;);
+				id = &quot;fb-ui-collapse-&quot; + me.getId(),
+				obj = {
+					css:{
+						&quot;&#x27;fb-ui-title-link&#x27;&quot;: true
+					},
+					attr:{
+						&quot;&#x27;data-toggle&#x27;&quot;:  &quot;&#x27;collapse&#x27;&quot;,
+						&quot;href&quot;:  me.parseBind(&quot;#&quot; + id ),
+						&quot;&#x27;aria-expanded&#x27;&quot;: typeof me.collapsed === &quot;boolean&quot; ? me.collapsed : true,
+						&quot;&#x27;aria-controls&#x27;&quot;:  me.parseBind( id ),
+					}
+				};
 			
-			panel.toggleClass( me._collapsedClass );
-			panel.trigger(&quot;fb-ui-panel-state-change&quot;);
+			if(me.dataParentId){
+				obj.attr[&quot;&#x27;data-parent&#x27;&quot;] = me.dataParentId;
+			}
+			
+			return obj;
 		},
 		
 		/**
@@ -522,14 +623,14 @@ define([&quot;text!./Panel.html&quot;, &quot;./Base&quot;, &quot;../nav/Toolbar&
 					}
 				};
 			
-			if(!me.items &amp;&amp; me.content){
-				obj.html = me.contentHTML ? me.content : me.textBind(me.content);
+			if(!me.items &amp;&amp; (me.content || me.html)){
+				obj.html = me.html ? &quot;Firebrick.getById(&#x27;&quot;+me.getId()+&quot;&#x27;).html&quot; : me.content;
 			}
 			
 			me.toolbarContainer(obj);
 			
 			return obj;
-		},
+		}
 	});
 });
     </pre>

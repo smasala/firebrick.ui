@@ -2,7 +2,7 @@
     "project": {
         "name": "Firebrick UI API",
         "description": "Firebrick UI API: a component library for Firebrick MVC, Knockout JS, jQuery and Bootstrap",
-        "version": "0.12.1",
+        "version": "0.12.11",
         "url": "https://github.com/smasala",
         "logo": "fbui_small.png"
     },
@@ -170,6 +170,17 @@
             "fors": {},
             "namespaces": {
                 "components.containers.tab": 1
+            }
+        },
+        "src\\components\\containers\\Accordion.js": {
+            "name": "src\\components\\containers\\Accordion.js",
+            "modules": {},
+            "classes": {
+                "components.containers.Accordion": 1
+            },
+            "fors": {},
+            "namespaces": {
+                "components.containers": 1
             }
         },
         "src\\components\\containers\\Base.js": {
@@ -620,6 +631,7 @@
                 "components.common.MultiplesBase": 1,
                 "components.containers.border.Pane": 1,
                 "components.containers.tab.Pane": 1,
+                "components.containers.Accordion": 1,
                 "components.containers.Base": 1,
                 "components.containers.BorderLayout": 1,
                 "components.containers.Box": 1,
@@ -934,6 +946,20 @@
             "module": "Firebrick.ui.components",
             "namespace": "components.containers.tab",
             "file": "src\\components\\containers\\tab\\Pane.js",
+            "line": 5,
+            "extends": "components.containers.Base"
+        },
+        "components.containers.Accordion": {
+            "name": "components.containers.Accordion",
+            "shortname": "components.containers.Accordion",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "Firebrick.ui.components",
+            "namespace": "components.containers",
+            "file": "src\\components\\containers\\Accordion.js",
             "line": 5,
             "extends": "components.containers.Base"
         },
@@ -2349,18 +2375,6 @@
         {
             "file": "src\\components\\common\\mixins\\Items.js",
             "line": 34,
-            "itemtype": "property",
-            "name": "listeners",
-            "type": "{Object}",
-            "access": "private",
-            "tagname": "",
-            "class": "components.common.mixins.Items",
-            "module": "Firebrick.ui.components",
-            "namespace": "components.common.mixins"
-        },
-        {
-            "file": "src\\components\\common\\mixins\\Items.js",
-            "line": 69,
             "description": "inject sub items",
             "itemtype": "method",
             "name": "getItems",
@@ -2374,7 +2388,7 @@
         },
         {
             "file": "src\\components\\common\\mixins\\Items.js",
-            "line": 82,
+            "line": 47,
             "description": "if you are calling _getItems from a nested scope or you want items from a different property other than .items - then use this function",
             "itemtype": "method",
             "name": "_getItemsScoped",
@@ -2401,7 +2415,7 @@
         },
         {
             "file": "src\\components\\common\\mixins\\Items.js",
-            "line": 96,
+            "line": 61,
             "description": "use getItems",
             "access": "private",
             "tagname": "",
@@ -3143,9 +3157,9 @@
             "file": "src\\components\\containers\\border\\Pane.js",
             "line": 41,
             "itemtype": "property",
-            "name": "splitbarIdPrefix",
+            "name": "splitBarIdPrefix",
             "type": "{String}",
-            "default": "\"fb-ui-bar\"",
+            "default": "\"fb-ui-splitbar-r\"",
             "class": "components.containers.border.Pane",
             "module": "Firebrick.ui.components",
             "namespace": "components.containers.border"
@@ -3289,7 +3303,7 @@
         },
         {
             "file": "src\\components\\containers\\border\\Pane.js",
-            "line": 185,
+            "line": 206,
             "itemtype": "method",
             "name": "setCollapsibleActions",
             "class": "components.containers.border.Pane",
@@ -3298,7 +3312,7 @@
         },
         {
             "file": "src\\components\\containers\\border\\Pane.js",
-            "line": 212,
+            "line": 233,
             "itemtype": "method",
             "name": "setResizableActions",
             "class": "components.containers.border.Pane",
@@ -3307,7 +3321,7 @@
         },
         {
             "file": "src\\components\\containers\\border\\Pane.js",
-            "line": 297,
+            "line": 300,
             "description": "event callback (jQuery)\ntop and bottom pane",
             "access": "private",
             "tagname": "",
@@ -3331,7 +3345,7 @@
         },
         {
             "file": "src\\components\\containers\\border\\Pane.js",
-            "line": 329,
+            "line": 332,
             "description": "event callback (jQuery)\ntop and bottom pane",
             "access": "private",
             "tagname": "",
@@ -3355,7 +3369,7 @@
         },
         {
             "file": "src\\components\\containers\\border\\Pane.js",
-            "line": 352,
+            "line": 355,
             "description": "right and left pane\nevent callback (jQuery)",
             "access": "private",
             "tagname": "",
@@ -3374,7 +3388,7 @@
         },
         {
             "file": "src\\components\\containers\\border\\Pane.js",
-            "line": 382,
+            "line": 385,
             "description": "right and left pane\nevent callback (jQuery)",
             "access": "private",
             "tagname": "",
@@ -3393,27 +3407,27 @@
         },
         {
             "file": "src\\components\\containers\\border\\Pane.js",
-            "line": 417,
+            "line": 419,
             "description": "enable drags function on element",
             "itemtype": "method",
-            "name": "enableDrags",
+            "name": "onExpanded",
             "class": "components.containers.border.Pane",
             "module": "Firebrick.ui.components",
             "namespace": "components.containers.border"
         },
         {
             "file": "src\\components\\containers\\border\\Pane.js",
-            "line": 425,
+            "line": 436,
             "description": "disable drags function on element",
             "itemtype": "method",
-            "name": "disableDrags",
+            "name": "onCollapsed",
             "class": "components.containers.border.Pane",
             "module": "Firebrick.ui.components",
             "namespace": "components.containers.border"
         },
         {
             "file": "src\\components\\containers\\border\\Pane.js",
-            "line": 432,
+            "line": 451,
             "itemtype": "method",
             "name": "bindings",
             "return": {
@@ -3426,9 +3440,9 @@
         },
         {
             "file": "src\\components\\containers\\border\\Pane.js",
-            "line": 452,
+            "line": 471,
             "itemtype": "method",
-            "name": "barBindings",
+            "name": "splitBarBindings",
             "return": {
                 "description": "",
                 "type": "Object"
@@ -3439,12 +3453,25 @@
         },
         {
             "file": "src\\components\\containers\\border\\Pane.js",
-            "line": 475,
+            "line": 505,
             "itemtype": "method",
-            "name": "getBarId",
+            "name": "getSplitBarId",
             "return": {
                 "description": "",
                 "type": "String"
+            },
+            "class": "components.containers.border.Pane",
+            "module": "Firebrick.ui.components",
+            "namespace": "components.containers.border"
+        },
+        {
+            "file": "src\\components\\containers\\border\\Pane.js",
+            "line": 514,
+            "itemtype": "method",
+            "name": "splitBarCollapseBindings",
+            "return": {
+                "description": "",
+                "type": "Object"
             },
             "class": "components.containers.border.Pane",
             "module": "Firebrick.ui.components",
@@ -3486,18 +3513,6 @@
         {
             "file": "src\\components\\containers\\tab\\Pane.js",
             "line": 35,
-            "description": "whether the content is html content",
-            "itemtype": "property",
-            "name": "contentHTML",
-            "type": "{Boolean}",
-            "default": "false",
-            "class": "components.containers.tab.Pane",
-            "module": "Firebrick.ui.components",
-            "namespace": "components.containers.tab"
-        },
-        {
-            "file": "src\\components\\containers\\tab\\Pane.js",
-            "line": 42,
             "description": "returns the Tab component, not the TabPane!",
             "itemtype": "method",
             "name": "getTabId",
@@ -3511,7 +3526,7 @@
         },
         {
             "file": "src\\components\\containers\\tab\\Pane.js",
-            "line": 50,
+            "line": 43,
             "description": "set by tab",
             "itemtype": "property",
             "name": "paneIndex",
@@ -3523,7 +3538,7 @@
         },
         {
             "file": "src\\components\\containers\\tab\\Pane.js",
-            "line": 57,
+            "line": 50,
             "itemtype": "method",
             "name": "getPaneId",
             "return": {
@@ -3536,7 +3551,7 @@
         },
         {
             "file": "src\\components\\containers\\tab\\Pane.js",
-            "line": 67,
+            "line": 60,
             "itemtype": "method",
             "name": "bindings",
             "return": {
@@ -3548,8 +3563,97 @@
             "namespace": "components.containers.tab"
         },
         {
+            "file": "src\\components\\containers\\Accordion.js",
+            "line": 15,
+            "itemtype": "property",
+            "name": "tpl",
+            "type": "{String} html",
+            "default": "Accordion.html",
+            "class": "components.containers.Accordion",
+            "module": "Firebrick.ui.components",
+            "namespace": "components.containers"
+        },
+        {
+            "file": "src\\components\\containers\\Accordion.js",
+            "line": 21,
+            "itemtype": "property",
+            "name": "uiName",
+            "type": "{String}",
+            "class": "components.containers.Accordion",
+            "module": "Firebrick.ui.components",
+            "namespace": "components.containers"
+        },
+        {
+            "file": "src\\components\\containers\\Accordion.js",
+            "line": 27,
+            "itemtype": "property",
+            "name": "defaults",
+            "type": "{Object}",
+            "default": "{\n\t\tuiName: fb.ui.cmp.borderpane\n}",
+            "class": "components.containers.Accordion",
+            "module": "Firebrick.ui.components",
+            "namespace": "components.containers"
+        },
+        {
+            "file": "src\\components\\containers\\Accordion.js",
+            "line": 40,
+            "itemtype": "property",
+            "name": "role",
+            "type": "{String}",
+            "default": "\"tablist\"",
+            "class": "components.containers.Accordion",
+            "module": "Firebrick.ui.components",
+            "namespace": "components.containers"
+        },
+        {
+            "file": "src\\components\\containers\\Accordion.js",
+            "line": 46,
+            "itemtype": "property",
+            "name": "ariaMultiselectable",
+            "type": "{Boolean}",
+            "default": "true",
+            "class": "components.containers.Accordion",
+            "module": "Firebrick.ui.components",
+            "namespace": "components.containers"
+        },
+        {
+            "file": "src\\components\\containers\\Accordion.js",
+            "line": 52,
+            "itemtype": "property",
+            "name": "panelGroupClass",
+            "type": "{String|false}",
+            "default": "\"panel-group\"",
+            "class": "components.containers.Accordion",
+            "module": "Firebrick.ui.components",
+            "namespace": "components.containers"
+        },
+        {
+            "file": "src\\components\\containers\\Accordion.js",
+            "line": 58,
+            "itemtype": "method",
+            "name": "bindings",
+            "return": {
+                "description": "",
+                "type": "Object"
+            },
+            "class": "components.containers.Accordion",
+            "module": "Firebrick.ui.components",
+            "namespace": "components.containers"
+        },
+        {
             "file": "src\\components\\containers\\BorderLayout.js",
-            "line": 16,
+            "line": 15,
+            "itemtype": "property",
+            "name": "tpl",
+            "type": "{String} html",
+            "default": "BorderLayout.html",
+            "class": "components.containers.BorderLayout",
+            "module": "Firebrick.ui.components",
+            "namespace": "components.containers"
+        },
+        {
+            "file": "src\\components\\containers\\BorderLayout.js",
+            "line": 21,
             "itemtype": "property",
             "name": "uiName",
             "type": "{String}",
@@ -3559,7 +3663,7 @@
         },
         {
             "file": "src\\components\\containers\\BorderLayout.js",
-            "line": 22,
+            "line": 27,
             "itemtype": "property",
             "name": "defaults",
             "type": "{Object}",
@@ -3570,7 +3674,7 @@
         },
         {
             "file": "src\\components\\containers\\BorderLayout.js",
-            "line": 33,
+            "line": 38,
             "example": [
                 "\n\t\titems:[{\n\t\t\tposition: \"top\",\t//top, right, bottom, left, center\n\t\t\t//GridCol properties...\n\t\t\titems:[{\n\t\t\t\t...\n\t\t\t}];\n\t\t}]"
             ],
@@ -3584,7 +3688,7 @@
         },
         {
             "file": "src\\components\\containers\\BorderLayout.js",
-            "line": 48,
+            "line": 53,
             "description": "number of cols in Bootstraps grid system\ndo no alter this unless BS changes it",
             "access": "private",
             "tagname": "",
@@ -3598,7 +3702,7 @@
         },
         {
             "file": "src\\components\\containers\\BorderLayout.js",
-            "line": 57,
+            "line": 62,
             "itemtype": "property",
             "name": "defaultSizes",
             "type": "{Object}",
@@ -3609,7 +3713,7 @@
         },
         {
             "file": "src\\components\\containers\\BorderLayout.js",
-            "line": 74,
+            "line": 79,
             "itemtype": "property",
             "name": "height",
             "type": "{Integer|String} px value | auto",
@@ -3620,7 +3724,7 @@
         },
         {
             "file": "src\\components\\containers\\BorderLayout.js",
-            "line": 80,
+            "line": 85,
             "itemtype": "method",
             "name": "init",
             "return": {
@@ -3633,7 +3737,7 @@
         },
         {
             "file": "src\\components\\containers\\BorderLayout.js",
-            "line": 101,
+            "line": 106,
             "description": "overriding base method build",
             "access": "private",
             "tagname": "",
@@ -3645,7 +3749,7 @@
         },
         {
             "file": "src\\components\\containers\\BorderLayout.js",
-            "line": 165,
+            "line": 170,
             "description": "get item border position \n\n---- 0 ----\n1 | 2 | 3 |\n---- 4 ----",
             "itemtype": "method",
             "name": "_itemArrayPosition",
@@ -3666,7 +3770,7 @@
         },
         {
             "file": "src\\components\\containers\\BorderLayout.js",
-            "line": 194,
+            "line": 199,
             "itemtype": "method",
             "name": "bindings",
             "return": {
@@ -3680,9 +3784,9 @@
         {
             "file": "src\\components\\containers\\Box.js",
             "line": 17,
-            "description": "set as string to fill the div/box with html content",
+            "description": "set as string to fill the div/box with text content",
             "itemtype": "property",
-            "name": "htmlContent",
+            "name": "html",
             "type": "{String|false}",
             "default": "false",
             "class": "components.containers.Box",
@@ -4442,6 +4546,28 @@
             "file": "src\\components\\containers\\Panel.js",
             "line": 26,
             "itemtype": "property",
+            "name": "role",
+            "type": "{String}",
+            "default": "\"\"",
+            "class": "components.containers.Panel",
+            "module": "Firebrick.ui.components",
+            "namespace": "components.containers"
+        },
+        {
+            "file": "src\\components\\containers\\Panel.js",
+            "line": 32,
+            "itemtype": "property",
+            "name": "collapseRole",
+            "type": "{String}",
+            "default": "\"\"",
+            "class": "components.containers.Panel",
+            "module": "Firebrick.ui.components",
+            "namespace": "components.containers"
+        },
+        {
+            "file": "src\\components\\containers\\Panel.js",
+            "line": 38,
+            "itemtype": "property",
             "name": "title",
             "type": "{String|false} set to false to hide the title",
             "default": "\"\"",
@@ -4451,7 +4577,7 @@
         },
         {
             "file": "src\\components\\containers\\Panel.js",
-            "line": 32,
+            "line": 44,
             "description": "use to determine whether h1, h2, h3 etc - default = 3",
             "itemtype": "property",
             "name": "headerSize",
@@ -4463,7 +4589,7 @@
         },
         {
             "file": "src\\components\\containers\\Panel.js",
-            "line": 39,
+            "line": 51,
             "itemtype": "property",
             "name": "panelClass",
             "type": "{Boolean|String}",
@@ -4474,7 +4600,7 @@
         },
         {
             "file": "src\\components\\containers\\Panel.js",
-            "line": 45,
+            "line": 57,
             "description": "string = (default, primary, success, info, warning, danger)",
             "itemtype": "property",
             "name": "panelTypeClass",
@@ -4486,7 +4612,7 @@
         },
         {
             "file": "src\\components\\containers\\Panel.js",
-            "line": 52,
+            "line": 64,
             "itemtype": "property",
             "name": "panelHeaderClass",
             "type": "{Boolean|String}",
@@ -4497,7 +4623,7 @@
         },
         {
             "file": "src\\components\\containers\\Panel.js",
-            "line": 58,
+            "line": 70,
             "itemtype": "property",
             "name": "panelBodyClass",
             "type": "{Boolean|String}",
@@ -4508,7 +4634,7 @@
         },
         {
             "file": "src\\components\\containers\\Panel.js",
-            "line": 64,
+            "line": 76,
             "description": "determines whether \"panel-title\" class is used",
             "itemtype": "property",
             "name": "",
@@ -4520,8 +4646,8 @@
         },
         {
             "file": "src\\components\\containers\\Panel.js",
-            "line": 71,
-            "description": "fill the panel body (can be html too) - use in conjunction with contentHTML property",
+            "line": 83,
+            "description": "fill the panel body (can be html too)",
             "itemtype": "property",
             "name": "content",
             "type": "{String}",
@@ -4532,19 +4658,19 @@
         },
         {
             "file": "src\\components\\containers\\Panel.js",
-            "line": 78,
-            "description": "whether the content is html content",
+            "line": 90,
+            "description": "fill the panel body with html",
             "itemtype": "property",
-            "name": "contentHTML",
-            "type": "{Boolean}",
-            "default": "false",
+            "name": "html",
+            "type": "{String}",
+            "default": "\"\"",
             "class": "components.containers.Panel",
             "module": "Firebrick.ui.components",
             "namespace": "components.containers"
         },
         {
             "file": "src\\components\\containers\\Panel.js",
-            "line": 85,
+            "line": 97,
             "itemtype": "property",
             "name": "collapsible",
             "type": "{Boolean|String}",
@@ -4555,7 +4681,7 @@
         },
         {
             "file": "src\\components\\containers\\Panel.js",
-            "line": 91,
+            "line": 103,
             "itemtype": "property",
             "name": "showCollapseIcon",
             "type": "{Boolean}",
@@ -4566,7 +4692,7 @@
         },
         {
             "file": "src\\components\\containers\\Panel.js",
-            "line": 97,
+            "line": 109,
             "itemtype": "property",
             "name": "collapsed",
             "type": "{Boolean|String}",
@@ -4577,7 +4703,20 @@
         },
         {
             "file": "src\\components\\containers\\Panel.js",
-            "line": 103,
+            "line": 115,
+            "access": "private",
+            "tagname": "",
+            "itemtype": "property",
+            "name": "_collapsedState",
+            "type": "{Boolean}",
+            "default": "false",
+            "class": "components.containers.Panel",
+            "module": "Firebrick.ui.components",
+            "namespace": "components.containers"
+        },
+        {
+            "file": "src\\components\\containers\\Panel.js",
+            "line": 122,
             "itemtype": "property",
             "name": "headerItems",
             "type": "{Boolean|Array of Objects} boolean = false, if object use the same way as the \"items\" property",
@@ -4588,7 +4727,7 @@
         },
         {
             "file": "src\\components\\containers\\Panel.js",
-            "line": 109,
+            "line": 128,
             "itemtype": "property",
             "name": "headerIconsPosition",
             "type": "{String|false} css class \"pull-right\", \"pull-left\" etc",
@@ -4599,7 +4738,7 @@
         },
         {
             "file": "src\\components\\containers\\Panel.js",
-            "line": 115,
+            "line": 134,
             "access": "private",
             "tagname": "",
             "itemtype": "property",
@@ -4612,7 +4751,31 @@
         },
         {
             "file": "src\\components\\containers\\Panel.js",
-            "line": 122,
+            "line": 141,
+            "description": "only needed when panel is inside accordion",
+            "itemtype": "property",
+            "name": "dataParentId",
+            "type": "{String}",
+            "default": "\"\"",
+            "class": "components.containers.Panel",
+            "module": "Firebrick.ui.components",
+            "namespace": "components.containers"
+        },
+        {
+            "file": "src\\components\\containers\\Panel.js",
+            "line": 148,
+            "description": "only needed when panel is inside accordion",
+            "itemtype": "property",
+            "name": "active",
+            "type": "{Boolean}",
+            "default": "false",
+            "class": "components.containers.Panel",
+            "module": "Firebrick.ui.components",
+            "namespace": "components.containers"
+        },
+        {
+            "file": "src\\components\\containers\\Panel.js",
+            "line": 155,
             "itemtype": "method",
             "name": "init",
             "return": {
@@ -4625,7 +4788,46 @@
         },
         {
             "file": "src\\components\\containers\\Panel.js",
-            "line": 138,
+            "line": 190,
+            "description": "programmatically make toggleCollapse action - useful if the header isn't available",
+            "itemtype": "method",
+            "name": "toggleCollapse",
+            "return": {
+                "description": "self"
+            },
+            "class": "components.containers.Panel",
+            "module": "Firebrick.ui.components",
+            "namespace": "components.containers"
+        },
+        {
+            "file": "src\\components\\containers\\Panel.js",
+            "line": 207,
+            "description": "programmatically make a collapse action - useful if the header isn't available",
+            "itemtype": "method",
+            "name": "collapse",
+            "return": {
+                "description": "self"
+            },
+            "class": "components.containers.Panel",
+            "module": "Firebrick.ui.components",
+            "namespace": "components.containers"
+        },
+        {
+            "file": "src\\components\\containers\\Panel.js",
+            "line": 222,
+            "description": "programmatically make an expand action - useful if the header isn't available",
+            "itemtype": "method",
+            "name": "expand",
+            "return": {
+                "description": "self"
+            },
+            "class": "components.containers.Panel",
+            "module": "Firebrick.ui.components",
+            "namespace": "components.containers"
+        },
+        {
+            "file": "src\\components\\containers\\Panel.js",
+            "line": 238,
             "description": "Data bindings",
             "itemtype": "method",
             "name": "bindings",
@@ -4639,7 +4841,7 @@
         },
         {
             "file": "src\\components\\containers\\Panel.js",
-            "line": 155,
+            "line": 255,
             "itemtype": "method",
             "name": "tabBindings",
             "return": {
@@ -4652,7 +4854,7 @@
         },
         {
             "file": "src\\components\\containers\\Panel.js",
-            "line": 177,
+            "line": 282,
             "itemtype": "method",
             "name": "panelHeaderBindings",
             "return": {
@@ -4665,7 +4867,7 @@
         },
         {
             "file": "src\\components\\containers\\Panel.js",
-            "line": 195,
+            "line": 305,
             "itemtype": "method",
             "name": "headerItemsBindings",
             "return": {
@@ -4678,7 +4880,7 @@
         },
         {
             "file": "src\\components\\containers\\Panel.js",
-            "line": 218,
+            "line": 328,
             "itemtype": "method",
             "name": "collapsibleLinkBindings",
             "return": {
@@ -4691,28 +4893,7 @@
         },
         {
             "file": "src\\components\\containers\\Panel.js",
-            "line": 239,
-            "description": "registered collapsibleLinkBindings with the KO \"click\" attribute",
-            "itemtype": "event",
-            "name": "\"fb-ui-panel-state-change\" on panel element",
-            "params": [
-                {
-                    "name": "obj",
-                    "description": ""
-                },
-                {
-                    "name": "event",
-                    "description": "jquery event",
-                    "type": "Object"
-                }
-            ],
-            "class": "components.containers.Panel",
-            "module": "Firebrick.ui.components",
-            "namespace": "components.containers"
-        },
-        {
-            "file": "src\\components\\containers\\Panel.js",
-            "line": 255,
+            "line": 354,
             "itemtype": "method",
             "name": "collapsibleIconBindings",
             "return": {
@@ -4725,7 +4906,7 @@
         },
         {
             "file": "src\\components\\containers\\Panel.js",
-            "line": 274,
+            "line": 373,
             "description": "simulate a click on the icon and delegate it to the title",
             "itemtype": "method",
             "name": "collapseIconClick",
@@ -4748,7 +4929,7 @@
         },
         {
             "file": "src\\components\\containers\\Panel.js",
-            "line": 288,
+            "line": 387,
             "itemtype": "method",
             "name": "panelHeaderTextBindings",
             "return": {
@@ -4761,7 +4942,7 @@
         },
         {
             "file": "src\\components\\containers\\Panel.js",
-            "line": 307,
+            "line": 406,
             "itemtype": "method",
             "name": "panelBodyBindings",
             "return": {
@@ -8266,16 +8447,31 @@
         },
         {
             "file": "src\\firebrick.ui.js",
-            "line": 509,
+            "line": 510,
             "itemtype": "property",
-            "name": "listeners",
+            "name": "passDownEvents",
             "type": "{Object}",
+            "default": "{\n\t\t\t\trendered: 1,\n\t\t\t\thtmlRendered: 1,\n\t\t\t\tunbound: 1\n\t\t\t}",
             "class": "view.Base",
             "module": "Firebrick.ui"
         },
         {
             "file": "src\\firebrick.ui.js",
-            "line": 531,
+            "line": 542,
+            "itemtype": "method",
+            "name": "_createPassEvent",
+            "access": "private",
+            "tagname": "",
+            "return": {
+                "description": "",
+                "type": "Function"
+            },
+            "class": "view.Base",
+            "module": "Firebrick.ui"
+        },
+        {
+            "file": "src\\firebrick.ui.js",
+            "line": 564,
             "itemtype": "property",
             "name": "items",
             "type": "{Array|Function}",
@@ -8285,7 +8481,7 @@
         },
         {
             "file": "src\\firebrick.ui.js",
-            "line": 537,
+            "line": 570,
             "itemtype": "property",
             "name": "tpl",
             "type": "{Function}",
