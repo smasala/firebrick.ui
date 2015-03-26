@@ -2,7 +2,7 @@
     "project": {
         "name": "Firebrick UI API",
         "description": "Firebrick UI API: a component library for Firebrick MVC, Knockout JS, jQuery and Bootstrap",
-        "version": "0.12.11",
+        "version": "0.13.0",
         "url": "https://github.com/smasala",
         "logo": "fbui_small.png"
     },
@@ -725,7 +725,7 @@
             "namespaces": {},
             "tag": "module",
             "file": "src\\firebrick.ui.js",
-            "line": 503,
+            "line": 504,
             "description": "Firebrick component library for Firebrick JS MVC"
         }
     },
@@ -1516,7 +1516,7 @@
             "module": "Firebrick.ui",
             "namespace": "",
             "file": "src\\firebrick.ui.js",
-            "line": 287,
+            "line": 288,
             "description": "util methods"
         },
         "helper": {
@@ -1530,7 +1530,7 @@
             "module": "Firebrick.ui",
             "namespace": "",
             "file": "src\\firebrick.ui.js",
-            "line": 387,
+            "line": 388,
             "description": "similar to utils, but are component related"
         },
         "renderer": {
@@ -1544,7 +1544,7 @@
             "module": "Firebrick.ui",
             "namespace": "",
             "file": "src\\firebrick.ui.js",
-            "line": 458,
+            "line": 459,
             "description": "renderer methods"
         },
         "view.Base": {
@@ -1558,7 +1558,7 @@
             "module": "Firebrick.ui",
             "namespace": "",
             "file": "src\\firebrick.ui.js",
-            "line": 503,
+            "line": 504,
             "description": "Overwrites \"Firebrick.view.Base\"",
             "extends": "class.Base"
         }
@@ -3291,7 +3291,7 @@
         },
         {
             "file": "src\\components\\containers\\border\\Pane.js",
-            "line": 168,
+            "line": 169,
             "description": "listener for the event rendered",
             "access": "private",
             "tagname": "",
@@ -3303,7 +3303,7 @@
         },
         {
             "file": "src\\components\\containers\\border\\Pane.js",
-            "line": 206,
+            "line": 207,
             "itemtype": "method",
             "name": "setCollapsibleActions",
             "class": "components.containers.border.Pane",
@@ -3312,7 +3312,7 @@
         },
         {
             "file": "src\\components\\containers\\border\\Pane.js",
-            "line": 233,
+            "line": 234,
             "itemtype": "method",
             "name": "setResizableActions",
             "class": "components.containers.border.Pane",
@@ -3321,7 +3321,7 @@
         },
         {
             "file": "src\\components\\containers\\border\\Pane.js",
-            "line": 300,
+            "line": 301,
             "description": "event callback (jQuery)\ntop and bottom pane",
             "access": "private",
             "tagname": "",
@@ -3345,7 +3345,7 @@
         },
         {
             "file": "src\\components\\containers\\border\\Pane.js",
-            "line": 332,
+            "line": 333,
             "description": "event callback (jQuery)\ntop and bottom pane",
             "access": "private",
             "tagname": "",
@@ -3369,7 +3369,7 @@
         },
         {
             "file": "src\\components\\containers\\border\\Pane.js",
-            "line": 355,
+            "line": 356,
             "description": "right and left pane\nevent callback (jQuery)",
             "access": "private",
             "tagname": "",
@@ -3388,7 +3388,7 @@
         },
         {
             "file": "src\\components\\containers\\border\\Pane.js",
-            "line": 385,
+            "line": 386,
             "description": "right and left pane\nevent callback (jQuery)",
             "access": "private",
             "tagname": "",
@@ -3407,7 +3407,7 @@
         },
         {
             "file": "src\\components\\containers\\border\\Pane.js",
-            "line": 419,
+            "line": 420,
             "description": "enable drags function on element",
             "itemtype": "method",
             "name": "onExpanded",
@@ -3417,7 +3417,7 @@
         },
         {
             "file": "src\\components\\containers\\border\\Pane.js",
-            "line": 436,
+            "line": 437,
             "description": "disable drags function on element",
             "itemtype": "method",
             "name": "onCollapsed",
@@ -3427,7 +3427,7 @@
         },
         {
             "file": "src\\components\\containers\\border\\Pane.js",
-            "line": 451,
+            "line": 452,
             "itemtype": "method",
             "name": "bindings",
             "return": {
@@ -3440,7 +3440,7 @@
         },
         {
             "file": "src\\components\\containers\\border\\Pane.js",
-            "line": 471,
+            "line": 472,
             "itemtype": "method",
             "name": "splitBarBindings",
             "return": {
@@ -3453,7 +3453,7 @@
         },
         {
             "file": "src\\components\\containers\\border\\Pane.js",
-            "line": 505,
+            "line": 506,
             "itemtype": "method",
             "name": "getSplitBarId",
             "return": {
@@ -3466,7 +3466,7 @@
         },
         {
             "file": "src\\components\\containers\\border\\Pane.js",
-            "line": 514,
+            "line": 515,
             "itemtype": "method",
             "name": "splitBarCollapseBindings",
             "return": {
@@ -8104,6 +8104,8 @@
             "description": "components uiNames are populated into this map for variable access\nfb.ui.cmp.input",
             "itemtype": "property",
             "name": "cmp",
+            "access": "private",
+            "tagname": "not to be modified",
             "type": "{Object}",
             "default": "{}",
             "class": "ui",
@@ -8111,7 +8113,7 @@
         },
         {
             "file": "src\\firebrick.ui.js",
-            "line": 101,
+            "line": 102,
             "description": "this function is called when defining a component.",
             "itemtype": "method",
             "name": "addUIName",
@@ -8127,7 +8129,7 @@
         },
         {
             "file": "src\\firebrick.ui.js",
-            "line": 130,
+            "line": 131,
             "description": "recursive function\ncreate components and html from an array of items",
             "access": "private",
             "tagname": "",
@@ -8142,7 +8144,7 @@
         },
         {
             "file": "src\\firebrick.ui.js",
-            "line": 160,
+            "line": 161,
             "description": "method used by _populate",
             "access": "private",
             "tagname": "",
@@ -8169,7 +8171,7 @@
         },
         {
             "file": "src\\firebrick.ui.js",
-            "line": 213,
+            "line": 214,
             "description": "this method converts shorthand component definitions",
             "example": [
                 "\n\t\t//component definition    \"|\"\n\t\t//converts to the component <hr>  -  fb.ui.cmp.hr"
@@ -8194,7 +8196,7 @@
         },
         {
             "file": "src\\firebrick.ui.js",
-            "line": 237,
+            "line": 238,
             "description": "get a component class by its shortname... uiName",
             "itemtype": "method",
             "name": "getByShortName",
@@ -8214,7 +8216,7 @@
         },
         {
             "file": "src\\firebrick.ui.js",
-            "line": 267,
+            "line": 268,
             "itemtype": "method",
             "name": "getCmp",
             "params": [
@@ -8233,7 +8235,7 @@
         },
         {
             "file": "src\\firebrick.ui.js",
-            "line": 276,
+            "line": 277,
             "description": "alias for Firebrick.get",
             "itemtype": "method",
             "name": "get",
@@ -8253,7 +8255,7 @@
         },
         {
             "file": "src\\firebrick.ui.js",
-            "line": 294,
+            "line": 295,
             "access": "private",
             "tagname": "",
             "itemtype": "method",
@@ -8287,7 +8289,7 @@
         },
         {
             "file": "src\\firebrick.ui.js",
-            "line": 337,
+            "line": 338,
             "description": "if you are unsure of the parameters type - use this function to get the raw value. I.e. if its a function it will be called and returned, otherwise it will just return it.\nuseful when working with Knockout objects",
             "itemtype": "method",
             "name": "getValue",
@@ -8307,7 +8309,7 @@
         },
         {
             "file": "src\\firebrick.ui.js",
-            "line": 351,
+            "line": 352,
             "description": "convert a JS Object into a simple \"json\" type string, this is mainly used for the data-bind attribute in Knockout",
             "itemtype": "method",
             "name": "stringify",
@@ -8327,7 +8329,7 @@
         },
         {
             "file": "src\\firebrick.ui.js",
-            "line": 394,
+            "line": 395,
             "description": "builds the items string used for functions such as \"foreach\"",
             "itemtype": "method",
             "name": "tabBuilder",
@@ -8347,7 +8349,7 @@
         },
         {
             "file": "src\\firebrick.ui.js",
-            "line": 413,
+            "line": 414,
             "description": "builds the options string used for functions such as \"foreach\"",
             "itemtype": "method",
             "name": "optionString",
@@ -8367,7 +8369,7 @@
         },
         {
             "file": "src\\firebrick.ui.js",
-            "line": 431,
+            "line": 432,
             "description": "builds links, if value then return the value overwise return javascript:void(0)",
             "itemtype": "method",
             "name": "linkBuilder",
@@ -8394,7 +8396,7 @@
         },
         {
             "file": "src\\firebrick.ui.js",
-            "line": 464,
+            "line": 465,
             "itemtype": "property",
             "name": "_registry",
             "type": "{Object}",
@@ -8405,7 +8407,7 @@
         },
         {
             "file": "src\\firebrick.ui.js",
-            "line": 471,
+            "line": 472,
             "itemtype": "method",
             "name": "add",
             "params": [
@@ -8428,7 +8430,7 @@
         },
         {
             "file": "src\\firebrick.ui.js",
-            "line": 485,
+            "line": 486,
             "itemtype": "method",
             "name": "get",
             "params": [
@@ -8447,7 +8449,7 @@
         },
         {
             "file": "src\\firebrick.ui.js",
-            "line": 510,
+            "line": 511,
             "itemtype": "property",
             "name": "passDownEvents",
             "type": "{Object}",
@@ -8457,7 +8459,7 @@
         },
         {
             "file": "src\\firebrick.ui.js",
-            "line": 542,
+            "line": 543,
             "itemtype": "method",
             "name": "_createPassEvent",
             "access": "private",
@@ -8471,7 +8473,7 @@
         },
         {
             "file": "src\\firebrick.ui.js",
-            "line": 564,
+            "line": 565,
             "itemtype": "property",
             "name": "items",
             "type": "{Array|Function}",
@@ -8481,7 +8483,7 @@
         },
         {
             "file": "src\\firebrick.ui.js",
-            "line": 570,
+            "line": 571,
             "itemtype": "property",
             "name": "tpl",
             "type": "{Function}",

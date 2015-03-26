@@ -19,7 +19,7 @@
             
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 0.12.11</em>
+            <em>API Docs for: 0.13.0</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -362,7 +362,8 @@ define([&quot;text!./SplitBar.html&quot;, &quot;jquery&quot;, &quot;../../common
 
 			if(position === &quot;top&quot; || position === &quot;bottom&quot;){
 				if(height !== &quot;auto&quot;){
-					el.css(&quot;height&quot;, height);	
+					el.css(&quot;height&quot;, height);
+					el.css(&quot;min-height&quot;, height);
 				}
 			}
 			
@@ -389,7 +390,7 @@ define([&quot;text!./SplitBar.html&quot;, &quot;jquery&quot;, &quot;../../common
 			pane.prop(&quot;fb-direction&quot;, direction);
 			pane.prop(&quot;fb-splitbar&quot;, splitBar);
 			if (me.collapsible){
-				splitBar.on(&quot;click&quot;, &quot;&gt; .fb-ui-collapse-icon&quot;, function(){
+				splitBar.on(&quot;click touchstart&quot;, &quot;&gt; .fb-ui-collapse-icon&quot;, function(){
 					me.toggleCollapse.call(me);
 				});
 				me.setCollapsibleActions();
