@@ -154,7 +154,8 @@ define(["text!./SplitBar.html", "jquery", "../../common/mixins/Column", "./Dragg
 
 			if(position === "top" || position === "bottom"){
 				if(height !== "auto"){
-					el.css("height", height);	
+					el.css("height", height);
+					el.css("min-height", height);
 				}
 			}
 			
@@ -181,7 +182,7 @@ define(["text!./SplitBar.html", "jquery", "../../common/mixins/Column", "./Dragg
 			pane.prop("fb-direction", direction);
 			pane.prop("fb-splitbar", splitBar);
 			if (me.collapsible){
-				splitBar.on("click", "> .fb-ui-collapse-icon", function(){
+				splitBar.on("click touchstart", "> .fb-ui-collapse-icon", function(){
 					me.toggleCollapse.call(me);
 				});
 				me.setCollapsibleActions();

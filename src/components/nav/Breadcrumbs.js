@@ -10,7 +10,7 @@
  */
 define(["../display/List"], function(){
 	"use strict";
-	return Firebrick.define("Firebrick.ui.display.Breadcrumbs", {
+	return Firebrick.define("Firebrick.ui.nav.Breadcrumbs", {
 		extend:"Firebrick.ui.display.List",
 		uiName:"fb-ui-breadcrumbs",
 		listType: "ol",

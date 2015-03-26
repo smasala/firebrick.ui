@@ -19,7 +19,7 @@
             
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 0.12.11</em>
+            <em>API Docs for: 0.13.0</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -217,15 +217,15 @@
   &quot;use strict&quot;;
   
   if (typeof define === &quot;function&quot; &amp;&amp; define.amd) {
-    define([&quot;jquery&quot;, &quot;firebrick&quot;, &quot;knockout&quot;, &quot;knockout-mapping&quot;, &quot;text&quot;], function($, fb, ko, kom, text, hb) {
+    define([&quot;jquery&quot;, &quot;firebrick&quot;, &quot;knockout&quot;,  &quot;devicejs&quot;, &quot;knockout-mapping&quot;, &quot;text&quot;], function($, fb, ko, dev, kom, text) {
     	ko.mapping = kom;
-    	return factory($, fb, ko, hb);
+    	return factory($, fb, ko, dev);
     });
   } else {
 	  return factory(root.jQuery, root.Firebrick, root.ko);
   }
 
-})(this, function($, Firebrick, ko) {
+})(this, function($, Firebrick, ko, device) {
 	
 	&quot;use strict&quot;;
 
@@ -249,7 +249,7 @@
 			 * @private
 			 * @type {String}
 			 */
-			version: &quot;0.12.11&quot;,
+			version: &quot;0.13.0&quot;,
 			
 			/**
 			 * used to cache pointers to classes when searching by &quot;uiName&quot;
@@ -301,6 +301,7 @@
 			 * components uiNames are populated into this map for variable access
 			 * fb.ui.cmp.input
 			 * @property cmp
+			 * @private not to be modified
 			 * @type {Object}
 			 * @default {}
 			 */
@@ -454,9 +455,9 @@
 					item = me._searchCache[name];
 				if(!item){
 					var k, v;
-					for(k in Firebrick.classes.classRegistry){
-						if(Firebrick.classes.classRegistry.hasOwnProperty(k)){
-							v = Firebrick.classes.classRegistry[k];
+					for(k in Firebrick.classes._classRegistry){
+						if(Firebrick.classes._classRegistry.hasOwnProperty(k)){
+							v = Firebrick.classes._classRegistry[k];
 							if(v.uiComponent &amp;&amp; v.uiName === name){
 								item = v;
 								me._searchCache[name] = v;

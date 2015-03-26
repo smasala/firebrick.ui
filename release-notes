@@ -1,3 +1,12 @@
+v0.13.0
+----------------------------
+* Border layout fixes for safari and touch capabilities
+* change the bower location by setting require.config({config:{configuration: {bowerPath: "..." }}});
+* fix css align with non-collapsible toolbars in panels
+* breadcrumbs namespace fix
+* Pagination namespace fix
+
+
 v0.12.11
 ----------------------------
 * BorderLayout bug fixes - including making the regions collapsible/expandable by clicking the arrow in the split bar

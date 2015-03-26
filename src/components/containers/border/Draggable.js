@@ -27,7 +27,18 @@ define(["jquery"], function($){
     		origPageX,
     		origPageY,
     		top,
-    		left;
+    		left,
+    		correctPageCoord = function(event, axis){
+	    		axis = axis.toUpperCase();
+    		
+	    		//get the correct page(X|Y) coord depending on whether it is a touch device
+	    		if(event.type.indexOf("touch") >= 0){
+	    			return event.originalEvent.targetTouches[0]["page" + axis];
+	    		}else{
+	    			return event["page" + axis];
+	    		}
+    		
+    		};
     	
     	direction = direction.toLowerCase();
         opt = $.extend({handle:""}, opt);
@@ -53,45 +64,45 @@ define(["jquery"], function($){
         		}else{
         			$drag.css("cursor", "");
         		}
-	        }).on("mousedown", function(e) {
+	        }).on("mousedown touchstart", function(e) {
 	        	var $drag = !opt.handle ? $(this).addClass('draggable') : $(this).addClass('active-handle').parent().addClass('draggable'),
 	        		zIdx = $drag.css('z-index'),
 	                drgH = $drag.outerHeight(),
 	                drgW = $drag.outerWidth(),
-	                posY = $drag.offset().top + drgH - e.pageY,
-	                posX = $drag.offset().left + drgW - e.pageX,
+	                posY = $drag.offset().top + drgH - correctPageCoord(e, "y"),
+	                posX = $drag.offset().left + drgW - correctPageCoord(e, "x"),
 	                mouseMove;
 	        	
-	                origPageY = e.pageY;
-	                origPageX = e.pageX;
+	                origPageY = correctPageCoord(e, "y");
+	                origPageX = correctPageCoord(e, "x");
 	                
 	                mouseMove = function(e){
-	            		top = (direction === "horizontal" ? origPageY : e.pageY) + posY - drgH;
-	        			left = (direction === "vertical" ? origPageX : e.pageX) + posX - drgW;
+	            		top = (direction === "horizontal" ? origPageY : correctPageCoord(e, "y")) + posY - drgH;
+	        			left = (direction === "vertical" ? origPageX : correctPageCoord(e, "x")) + posX - drgW;
 	        			$drag.offset({
 		                    top: top,
 		                    left: left
 		                });
 	        		};
 	        	
-        		$drag.on("mouseup", function() {
+        		$drag.on("mouseup touchend", function() {
                 	$drag.removeClass('draggable').css('z-index', zIdx);
                 	//remove handler
-                    $("html").off("mousemove", "body", mouseMove);
+                    $("html").off("mousemove touchmove", "body", mouseMove);
                 });
 	        		
 	    		if($drag.prop("dragDisabled") === true){
-	    			$("html").off("mousemove", "body", mouseMove);
+	    			$("html").off("mousemove touchmove", "body", mouseMove);
 	    		}else{
 	    			$drag.css('z-index', 1000);
 	            	//add handler
-	            	$("html").on("mousemove", "body", mouseMove);
+	            	$("html").on("mousemove touchmove", "body", mouseMove);
 	    		}
 	        	
 	            
 	            e.preventDefault(); // disable selection
 	            
-	        }).on("mouseup", function() {
+	        }).on("mouseup touchend", function() {
 	        	var $this = $(this);
 	        	if($this.prop("dragDisabled") !== true){
 	        		if(opt.handle === "") {

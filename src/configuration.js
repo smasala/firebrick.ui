@@ -3,9 +3,9 @@
  * @author Steven Masala [me@smasala.com]
 **/
 
-define(function(){
+define(function(_require, _exports, _module){
 	"use strict";
-	var bowerPath = window._fbBowerPath || "../bower_components";
+	var bowerPath = _module.config().bowerPath || "bower_components";
 	return require.config({
 		paths:{
 			"jquery": bowerPath + "/jquery/dist/jquery",
@@ -23,7 +23,8 @@ define(function(){
 			"knockout-x-editable": bowerPath + "/knockout-x-editable/knockout.x-editable",
 			"Firebrick.ui": bowerPath + "/firebrick.ui/src/components",
 			"responsive-images": bowerPath + "/responsive-images/src/responsiveimages",
-			"responsive-tables-js": bowerPath + "/responsive-tables-js/src/responsivetables" 
+			"responsive-tables-js": bowerPath + "/responsive-tables-js/src/responsivetables",
+			"devicejs": bowerPath + "/devicejs/lib/device"
 		},
 		shim:{
 			"knockout-mapping": ["knockout"],

@@ -10,7 +10,7 @@
  */
 define(["../display/List"], function(){
 	"use strict";
-	return Firebrick.define("Firebrick.ui.display.Pagination", {
+	return Firebrick.define("Firebrick.ui.nav.Pagination", {
 		extend:"Firebrick.ui.display.List",
 		uiName:"fb-ui-pagination",
 		/**

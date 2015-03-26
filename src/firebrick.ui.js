@@ -9,15 +9,15 @@
   "use strict";
   
   if (typeof define === "function" && define.amd) {
-    define(["jquery", "firebrick", "knockout", "knockout-mapping", "text"], function($, fb, ko, kom, text, hb) {
+    define(["jquery", "firebrick", "knockout",  "devicejs", "knockout-mapping", "text"], function($, fb, ko, dev, kom, text) {
     	ko.mapping = kom;
-    	return factory($, fb, ko, hb);
+    	return factory($, fb, ko, dev);
     });
   } else {
 	  return factory(root.jQuery, root.Firebrick, root.ko);
   }
 
-})(this, function($, Firebrick, ko) {
+})(this, function($, Firebrick, ko, device) {
 	
 	"use strict";
 
@@ -41,7 +41,7 @@
 			 * @private
 			 * @type {String}
 			 */
-			version: "0.12.11",
+			version: "0.13.0",
 			
 			/**
 			 * used to cache pointers to classes when searching by "uiName"
@@ -93,6 +93,7 @@
 			 * components uiNames are populated into this map for variable access
 			 * fb.ui.cmp.input
 			 * @property cmp
+			 * @private not to be modified
 			 * @type {Object}
 			 * @default {}
 			 */
@@ -246,9 +247,9 @@
 					item = me._searchCache[name];
 				if(!item){
 					var k, v;
-					for(k in Firebrick.classes.classRegistry){
-						if(Firebrick.classes.classRegistry.hasOwnProperty(k)){
-							v = Firebrick.classes.classRegistry[k];
+					for(k in Firebrick.classes._classRegistry){
+						if(Firebrick.classes._classRegistry.hasOwnProperty(k)){
+							v = Firebrick.classes._classRegistry[k];
 							if(v.uiComponent && v.uiName === name){
 								item = v;
 								me._searchCache[name] = v;
