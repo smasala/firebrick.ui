@@ -137,7 +137,11 @@ define(["text!./Radio.html", "../common/MultiplesBase", "./plugins/Radio"], func
 				obj.attr.id =  me.parseBind(me.getId());
 			}
 			obj.attr.name = me.parseBind( me.cleanString(me.type)+"-group-"+Firebrick.utils.uniqId() );
-			obj.checked = value + " !== null ? " + value + " : ($data.value || $data)";
+			if(value !== null){
+				obj.checked = value;
+			}else{
+				obj.checked = "($data && $data.checked)";
+			}
 			return obj;
 		}
 	});

@@ -351,7 +351,11 @@ define([&quot;text!./Radio.html&quot;, &quot;../common/MultiplesBase&quot;, &quo
 				obj.attr.id =  me.parseBind(me.getId());
 			}
 			obj.attr.name = me.parseBind( me.cleanString(me.type)+&quot;-group-&quot;+Firebrick.utils.uniqId() );
-			obj.checked = value + &quot; !== null ? &quot; + value + &quot; : ($data.value || $data)&quot;;
+			if(value !== null){
+				obj.checked = value;
+			}else{
+				obj.checked = &quot;($data &amp;&amp; $data.checked)&quot;;
+			}
 			return obj;
 		}
 	});

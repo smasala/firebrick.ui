@@ -407,7 +407,6 @@
 			var me = this,
 				//holder - this populates the fields that are shown in the edit mask ".items"
 				editFields = me.editFields($tr, clazz, clazz.columns);
-			
 			if(editFields.items.length){
 				me.buildModal(clazz, editFields, $tr);
 			}
@@ -564,7 +563,7 @@
 				me2.on("rendered", function(){
 					var el = me2.getElement(),
 						children,
-						f, f1;
+						f;
 					
 					me._defaultRenderAction(me2, $td.attr(me.indexAttr));
 					

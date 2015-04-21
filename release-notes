@@ -1,3 +1,9 @@
+v0.14.xxxx
+----------------------------
+* modal fix - doesn't show on create
+* items as a function fix
+* fix radio and checkbox selections (default values)
+
 v0.14.0
 ----------------------------
 * change content/html properties to just "html" for Modal, Panel, TabPanel, Alert - to use a KO object from the store, use property "storeProp"

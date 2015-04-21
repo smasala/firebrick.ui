@@ -761,7 +761,7 @@
             "namespaces": {},
             "tag": "module",
             "file": "src\\firebrick.ui.js",
-            "line": 565,
+            "line": 582,
             "description": "Firebrick component library for Firebrick JS MVC"
         }
     },
@@ -1592,7 +1592,7 @@
             "module": "Firebrick.ui",
             "namespace": "",
             "file": "src\\firebrick.ui.js",
-            "line": 210,
+            "line": 227,
             "description": "util methods"
         },
         "helper": {
@@ -1606,7 +1606,7 @@
             "module": "Firebrick.ui",
             "namespace": "",
             "file": "src\\firebrick.ui.js",
-            "line": 310,
+            "line": 327,
             "description": "similar to utils, but are component related"
         },
         "renderer": {
@@ -1620,7 +1620,7 @@
             "module": "Firebrick.ui",
             "namespace": "",
             "file": "src\\firebrick.ui.js",
-            "line": 381,
+            "line": 398,
             "description": "renderer methods"
         },
         "view.Base": {
@@ -1634,7 +1634,7 @@
             "module": "Firebrick.ui",
             "namespace": "",
             "file": "src\\firebrick.ui.js",
-            "line": 565,
+            "line": 582,
             "description": "Overwrites \"Firebrick.view.Base\"",
             "extends": "class.Base"
         }
@@ -2439,7 +2439,7 @@
         },
         {
             "file": "src\\components\\common\\mixins\\Items.js",
-            "line": 47,
+            "line": 45,
             "description": "if you are calling _getItems from a nested scope or you want items from a different property other than .items - then use this function",
             "itemtype": "method",
             "name": "_getItemsScoped",
@@ -8318,7 +8318,7 @@
         },
         {
             "file": "src\\components\\table\\plugins\\EditableTable.js",
-            "line": 416,
+            "line": 415,
             "itemtype": "method",
             "name": "initEditingTD",
             "params": [
@@ -8344,7 +8344,7 @@
         },
         {
             "file": "src\\components\\table\\plugins\\EditableTable.js",
-            "line": 494,
+            "line": 493,
             "description": "override InputContainerBindings function to add more properties",
             "itemtype": "method",
             "name": "cellEditInputContainerBindings",
@@ -8358,7 +8358,7 @@
         },
         {
             "file": "src\\components\\table\\plugins\\EditableTable.js",
-            "line": 511,
+            "line": 510,
             "itemtype": "method",
             "name": "_defaultRenderAction",
             "access": "private",
@@ -8381,7 +8381,7 @@
         },
         {
             "file": "src\\components\\table\\plugins\\EditableTable.js",
-            "line": 532,
+            "line": 531,
             "description": "create a new init function with a rendered listener for the edit field\nwhen an edit field is rendered, add the column number as a property to the field me.dataProp",
             "itemtype": "method",
             "name": "_initFunction",
@@ -8402,7 +8402,7 @@
         },
         {
             "file": "src\\components\\table\\plugins\\EditableTable.js",
-            "line": 552,
+            "line": 551,
             "description": "override edit field init - cell edit only",
             "itemtype": "method",
             "name": "_cellEditInit",
@@ -9007,7 +9007,7 @@
         },
         {
             "file": "src\\firebrick.ui.js",
-            "line": 113,
+            "line": 130,
             "description": "method used by _populate",
             "access": "private",
             "tagname": "",
@@ -9034,7 +9034,7 @@
         },
         {
             "file": "src\\firebrick.ui.js",
-            "line": 166,
+            "line": 183,
             "description": "this method converts shorthand component definitions",
             "example": [
                 "\n\t\t//component definition    \"|\"\n\t\t//converts to the component <hr> "
@@ -9059,7 +9059,7 @@
         },
         {
             "file": "src\\firebrick.ui.js",
-            "line": 190,
+            "line": 207,
             "itemtype": "method",
             "name": "getCmp",
             "params": [
@@ -9078,7 +9078,7 @@
         },
         {
             "file": "src\\firebrick.ui.js",
-            "line": 199,
+            "line": 216,
             "description": "alias for Firebrick.get",
             "itemtype": "method",
             "name": "get",
@@ -9098,7 +9098,7 @@
         },
         {
             "file": "src\\firebrick.ui.js",
-            "line": 217,
+            "line": 234,
             "access": "private",
             "tagname": "",
             "itemtype": "method",
@@ -9132,7 +9132,7 @@
         },
         {
             "file": "src\\firebrick.ui.js",
-            "line": 260,
+            "line": 277,
             "description": "if you are unsure of the parameters type - use this function to get the raw value. I.e. if its a function it will be called and returned, otherwise it will just return it.\nuseful when working with Knockout objects",
             "itemtype": "method",
             "name": "getValue",
@@ -9152,7 +9152,7 @@
         },
         {
             "file": "src\\firebrick.ui.js",
-            "line": 274,
+            "line": 291,
             "description": "convert a JS Object into a simple \"json\" type string, this is mainly used for the data-bind attribute in Knockout",
             "itemtype": "method",
             "name": "stringify",
@@ -9172,7 +9172,7 @@
         },
         {
             "file": "src\\firebrick.ui.js",
-            "line": 317,
+            "line": 334,
             "description": "builds the items string used for functions such as \"foreach\"",
             "itemtype": "method",
             "name": "tabBuilder",
@@ -9192,7 +9192,7 @@
         },
         {
             "file": "src\\firebrick.ui.js",
-            "line": 336,
+            "line": 353,
             "description": "builds the options string used for functions such as \"foreach\"",
             "itemtype": "method",
             "name": "optionString",
@@ -9212,7 +9212,7 @@
         },
         {
             "file": "src\\firebrick.ui.js",
-            "line": 354,
+            "line": 371,
             "description": "builds links, if value then return the value overwise return javascript:void(0)",
             "itemtype": "method",
             "name": "linkBuilder",
@@ -9239,7 +9239,7 @@
         },
         {
             "file": "src\\firebrick.ui.js",
-            "line": 387,
+            "line": 404,
             "itemtype": "property",
             "name": "_registry",
             "type": "{Object}",
@@ -9250,7 +9250,7 @@
         },
         {
             "file": "src\\firebrick.ui.js",
-            "line": 394,
+            "line": 411,
             "itemtype": "method",
             "name": "add",
             "params": [
@@ -9273,7 +9273,7 @@
         },
         {
             "file": "src\\firebrick.ui.js",
-            "line": 408,
+            "line": 425,
             "itemtype": "method",
             "name": "get",
             "params": [
@@ -9292,7 +9292,7 @@
         },
         {
             "file": "src\\firebrick.ui.js",
-            "line": 423,
+            "line": 440,
             "itemtype": "property",
             "name": "_sNames",
             "access": "private",
@@ -9303,7 +9303,7 @@
         },
         {
             "file": "src\\firebrick.ui.js",
-            "line": 572,
+            "line": 589,
             "itemtype": "property",
             "name": "passDownEvents",
             "type": "{Object}",
@@ -9313,7 +9313,7 @@
         },
         {
             "file": "src\\firebrick.ui.js",
-            "line": 587,
+            "line": 604,
             "description": "used with passDownEvents",
             "itemtype": "property",
             "name": "passToProperties",
@@ -9324,7 +9324,7 @@
         },
         {
             "file": "src\\firebrick.ui.js",
-            "line": 619,
+            "line": 636,
             "itemtype": "method",
             "name": "_createPassEvent",
             "access": "private",
@@ -9338,7 +9338,7 @@
         },
         {
             "file": "src\\firebrick.ui.js",
-            "line": 650,
+            "line": 667,
             "itemtype": "property",
             "name": "items",
             "type": "{Array|Function}",
@@ -9348,7 +9348,7 @@
         },
         {
             "file": "src\\firebrick.ui.js",
-            "line": 656,
+            "line": 673,
             "itemtype": "property",
             "name": "tpl",
             "type": "{Function}",

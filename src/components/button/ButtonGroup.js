@@ -24,7 +24,7 @@ define(["text!./ButtonGroup.html", "./Base", "./Button"], function(tpl){
 		sName: "button.buttongroup",
 		tpl:tpl,
 		defaults:{
-			sName:"fb-ui-button",
+			sName:"button.button",
 			dropdownContainerClass:"btn-group" //needed for dropdown
 		},
 		/**

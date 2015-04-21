@@ -39,10 +39,8 @@ define(["jquery"], function($){
 		getItems: function(){
 			var me = this,
 				r = me._getItems(me.items);
-			if($.isPlainObject(r)){
 				me.items = r.items;
-			}
-			return r ? r.html || r : "";
+			return r.html;
 		},
 		/**
 		 * if you are calling _getItems from a nested scope or you want items from a different property other than .items - then use this function
@@ -53,15 +51,17 @@ define(["jquery"], function($){
 		 */
 		getItemsProp: function(itemsName){
 			var me = this, 
-				r;
+				r,
+				html = "";
 			if(itemsName){
 				r = me._getItems(me[itemsName]);
 				me[itemsName] = r.items;
+				html = r.html;
 			}else{
 				console.error("invalid function call getItemsProp():", itemsName);
 			}
 			
-			return r ? r.html || r : "";
+			return html;
 		},
 		/**
 		 * use getItems
@@ -71,29 +71,7 @@ define(["jquery"], function($){
 		 * @return {Object, Null} object - {html:"", items:[]}
 		 */
 		_getItems: function(items){
-			var me = this;
-			if(items){
-				if(!$.isArray(items) && !$.isFunction(items)){
-					items = [items];
-				}
-				
-				if(!items.length){
-					//nothing
-					return null;
-				}
-
-				if(me.defaults){
-					//get all defaults down the prototype tree
-					Firebrick.utils.merge("defaults", me);
-					//add the defaults to direct items
-					for(var i = 0, l = items.length; i<l; i++){
-						items[i] = Firebrick.utils.copyover(items[i], me.defaults);
-					}
-				}
-				
-				return Firebrick.ui._populate(items, me);
-			}
-			return null;
+			return Firebrick.ui._populate(items, this);
 		}
 	});
 });

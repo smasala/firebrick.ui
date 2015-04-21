@@ -40,8 +40,8 @@ define(["text!./Modal.html", "./Base"], function(tpl){
 		 */
 		showMe: function(){
 			var me = this,
-				modal = me.getElement();
-			if(modal){
+				modal = $("> .modal", me.getElement());
+			if(modal.length){
 				modal.modal();
 			}
 		},
