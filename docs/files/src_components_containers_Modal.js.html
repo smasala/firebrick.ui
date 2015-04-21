@@ -19,7 +19,7 @@
             
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 0.13.0</em>
+            <em>API Docs for: 0.14.0</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -74,6 +74,8 @@
                 <li><a href="../classes/components.containers.BorderLayout.html">components.containers.BorderLayout</a></li>
             
                 <li><a href="../classes/components.containers.Box.html">components.containers.Box</a></li>
+            
+                <li><a href="../classes/components.containers.Fieldset.html">components.containers.Fieldset</a></li>
             
                 <li><a href="../classes/components.containers.Form.html">components.containers.Form</a></li>
             
@@ -145,7 +147,11 @@
             
                 <li><a href="../classes/helper.html">helper</a></li>
             
+                <li><a href="../classes/plugins.ContextMenu.html">plugins.ContextMenu</a></li>
+            
                 <li><a href="../classes/plugins.Draggable.html">plugins.Draggable</a></li>
+            
+                <li><a href="../classes/plugins.EditableTable.html">plugins.EditableTable</a></li>
             
                 <li><a href="../classes/plugins.RadioList.html">plugins.RadioList</a></li>
             
@@ -217,7 +223,6 @@
  * @class Modal
  */
 define([&quot;text!./Modal.html&quot;, &quot;./Base&quot;], function(tpl){
-	
 	&quot;use strict&quot;;
 	
 	return Firebrick.define(&quot;Firebrick.ui.containers.Modal&quot;, {
@@ -225,17 +230,23 @@ define([&quot;text!./Modal.html&quot;, &quot;./Base&quot;], function(tpl){
 		tpl: tpl,
 		target:&quot;body&quot;,
 		appendTarget: true,
-		uiName:&quot;fb-ui-modal&quot;,
+		sName:&quot;containers.modal&quot;,
 		init: function(){
 			var me = this;
 			me.on(&quot;rendered&quot;, function(){
 				if(me.showOnCreate){
-					return me.showMe();	
+					me.showMe();	
 				}
+				me.getElement().on(&quot;hidden.bs.modal&quot;, function(){
+					me.destroy();
+				});
 			});
 			return me.callParent(arguments);
 		},
 		enclosedBind:true,
+		passToProperties:{
+			footerItems:1
+		},
 		/**
 		 * show the modal
 		 * @method showMe
@@ -268,11 +279,19 @@ define([&quot;text!./Modal.html&quot;, &quot;./Base&quot;], function(tpl){
 		 */
 		title:&quot;&quot;,
 		/**
-		 * @property content
+		 * store property key
+		 * @property storeProp
 		 * @type {String}
 		 * @default &quot;&quot;
 		 */
-		content:&quot;&quot;,
+		storeProp: &quot;&quot;,
+		/**
+		 * fill the panel body with html
+		 * @property html
+		 * @type {String}
+		 * @default &quot;&quot;
+		 */
+		html: &quot;&quot;,
 		/**
 		 * @property titleClass
 		 * @type {Boolean}
@@ -452,14 +471,21 @@ define([&quot;text!./Modal.html&quot;, &quot;./Base&quot;], function(tpl){
 		 * @return {Object}
 		 */
 		bodyBindings: function(){
-			var me = this , obj ={
+			var me = this, 
+				obj ={
 					css:{
 						&quot;&#x27;modal-body&#x27;&quot;: me.bodyClass
 					}
 				};
-			if(me.content){
-				obj.text=me.textBind(me.content);
+			
+			if(!me.items){
+				if(me.storeProp){
+					obj.html = me.storeProp;
+				}else{
+					obj.html = &quot;Firebrick.getById(&#x27;&quot;+me.getId()+&quot;&#x27;).html&quot;;
+				}
 			}
+			
 			return obj;
 		},
 		/**

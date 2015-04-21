@@ -19,7 +19,7 @@
             
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 0.13.0</em>
+            <em>API Docs for: 0.14.0</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -74,6 +74,8 @@
                 <li><a href="../classes/components.containers.BorderLayout.html">components.containers.BorderLayout</a></li>
             
                 <li><a href="../classes/components.containers.Box.html">components.containers.Box</a></li>
+            
+                <li><a href="../classes/components.containers.Fieldset.html">components.containers.Fieldset</a></li>
             
                 <li><a href="../classes/components.containers.Form.html">components.containers.Form</a></li>
             
@@ -145,7 +147,11 @@
             
                 <li><a href="../classes/helper.html">helper</a></li>
             
+                <li><a href="../classes/plugins.ContextMenu.html">plugins.ContextMenu</a></li>
+            
                 <li><a href="../classes/plugins.Draggable.html">plugins.Draggable</a></li>
+            
+                <li><a href="../classes/plugins.EditableTable.html">plugins.EditableTable</a></li>
             
                 <li><a href="../classes/plugins.RadioList.html">plugins.RadioList</a></li>
             
@@ -240,6 +246,19 @@ define([&quot;doT&quot;, &quot;firebrick&quot;, &quot;jquery&quot;], function(tp
 		 */
 		uiComponent: true,
 		/**
+		 * if handler property is set, it is automatically attached to this event
+		 * @property handlerEvent
+		 * @type {String}
+		 * @default &quot;click&quot;
+		 */
+		handlerEvent: &quot;click&quot;,
+		/**
+		 * @property handler
+		 * @type {Function}
+		 * @default null
+		 */
+		handler: null,
+		/**
 		 * @property glyphiconClass
 		 * @type {String}
 		 * @default &quot;glyphicon&quot;
@@ -283,16 +302,16 @@ define([&quot;doT&quot;, &quot;firebrick&quot;, &quot;jquery&quot;], function(tp
 		 */
 		css: null,
 		/**
-		 * variable shortcuts are created using the uiName. by default the string after the last &quot;-&quot; is used
+		 * variable shortcuts are created using the sName. by default the string after the last &quot;-&quot; is used
 		 * @example
-		 * 		uiName:&quot;fb-ui-input&quot;
+		 * 		sName:&quot;fb-ui-input&quot;
 		 * 		//becomes accessible via: {Firebrick|fb}.ui.cmp.input
 		 * 		//defining another component e.g &quot;myapp-field-input&quot; would overwrite the default input as &quot;input&quot; is found after the last &quot;-&quot;
-		 * @property uiName
+		 * @property sName
 		 * @type {String}
 		 * @default null
 		 */
-		uiName:null,
+		sName:null,
 		/**
 		 * @property _element
 		 * @type {Null|jQuery Object}
@@ -358,6 +377,12 @@ define([&quot;doT&quot;, &quot;firebrick&quot;, &quot;jquery&quot;], function(tp
 		 */
 		align:null,
 		/**
+		 * @property contextMenu
+		 * @type {Array of Objects}
+		 * @default null
+		 */
+		contextMenu: null,
+		/**
 		 * pass a binding Object and this method will add the tooltip/popover relevant properties
 		 * @method addTooltipPopoverBind
 		 * @param bindObj {Object}
@@ -409,9 +434,10 @@ define([&quot;doT&quot;, &quot;firebrick&quot;, &quot;jquery&quot;], function(tp
 		 * @return {Object} jquery element object
 		 */
 		getElement: function(){
-			var me = this;
+			var me = this,
+				id = me.enclosedBind ? me.getEnclosedBindId() : me.getId();
 			if(!me._element){
-				me._element = $(&quot;#&quot; + me.getId());
+				me._element = $(&quot;#&quot; + id);
 				if(!me._element.length){
 					//set to null if jquery object returned empty []
 					me._element = null;
@@ -425,11 +451,8 @@ define([&quot;doT&quot;, &quot;firebrick&quot;, &quot;jquery&quot;], function(tp
 		 * @return {Any} this.callParent(arguments)
 		 */
 		constructor: function(){
-			var me = this,
-				uiName = me.uiName;
+			var me = this;
 			
-			Firebrick.ui.addUIName(me.uiName);
-
 			me.precompile();
 			
 			return me.callParent(arguments);
@@ -496,6 +519,23 @@ define([&quot;doT&quot;, &quot;firebrick&quot;, &quot;jquery&quot;], function(tp
 					}
 				});
 			}
+			
+			
+				me.on(&quot;rendered&quot;, function(){
+					var el = me.getElement();
+					
+					if(me.handler &amp;&amp; me.handlerEvent){
+						el.on(me.handlerEvent, function(){
+							me.handler.apply(me, arguments);
+						});
+					}
+					
+					if(me.contextMenu){
+						require([&quot;Firebrick.ui/common/plugins/ContextMenu&quot;], function(){
+							el.ContextMenu(me);	
+						});
+					}
+				});
 			
 			return me.callParent(arguments);
 		},

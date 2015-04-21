@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>components.containers.Panel - Firebrick UI API</title>
+    <title>components.containers.Fieldset - Firebrick UI API</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -208,7 +208,7 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-                        <h1>components.containers.Panel Class</h1>
+                        <h1>components.containers.Fieldset Class</h1>
 <div class="box meta">
     
 
@@ -220,7 +220,7 @@
 
     
         <div class="foundat">
-            Defined in: <a href="../files/src_components_containers_Panel.js.html#l5"><code>src\components\containers\Panel.js:5</code></a>
+            Defined in: <a href="../files/src_components_containers_Fieldset.js.html#l5"><code>src\components\containers\Fieldset.js:5</code></a>
         </div>
     
 
@@ -343,21 +343,14 @@
                             </li>
                         
                             <li class="index-item method">
-                                <a href="#method_collapse">collapse</a>
-
-                                
-                                
-                            </li>
-                        
-                            <li class="index-item method private">
-                                <a href="#method_collapseIconClick">collapseIconClick</a>
+                                <a href="#method_collapseClick">collapseClick</a>
 
                                 
                                 
                             </li>
                         
                             <li class="index-item method">
-                                <a href="#method_collapsibleIconBindings">collapsibleIconBindings</a>
+                                <a href="#method_collapsibleBindings">collapsibleBindings</a>
 
                                 
                                 
@@ -377,15 +370,15 @@
                                 
                             </li>
                         
-                            <li class="index-item method private inherited">
-                                <a href="#method_dataBind">dataBind</a>
+                            <li class="index-item method">
+                                <a href="#method_contentBindings">contentBindings</a>
 
                                 
                                 
                             </li>
                         
-                            <li class="index-item method">
-                                <a href="#method_expand">expand</a>
+                            <li class="index-item method private inherited">
+                                <a href="#method_dataBind">dataBind</a>
 
                                 
                                 
@@ -426,13 +419,6 @@
                                 
                             </li>
                         
-                            <li class="index-item method">
-                                <a href="#method_headerItemsBindings">headerItemsBindings</a>
-
-                                
-                                
-                            </li>
-                        
                             <li class="index-item method inherited">
                                 <a href="#method_init">init</a>
 
@@ -441,21 +427,14 @@
                             </li>
                         
                             <li class="index-item method">
-                                <a href="#method_panelBodyBindings">panelBodyBindings</a>
+                                <a href="#method_legendBindings">legendBindings</a>
 
                                 
                                 
                             </li>
                         
                             <li class="index-item method">
-                                <a href="#method_panelHeaderBindings">panelHeaderBindings</a>
-
-                                
-                                
-                            </li>
-                        
-                            <li class="index-item method">
-                                <a href="#method_panelHeaderTextBindings">panelHeaderTextBindings</a>
+                                <a href="#method_legendTextBindings">legendTextBindings</a>
 
                                 
                                 
@@ -463,13 +442,6 @@
                         
                             <li class="index-item method inherited">
                                 <a href="#method_parseBind">parseBind</a>
-
-                                
-                                
-                            </li>
-                        
-                            <li class="index-item method">
-                                <a href="#method_tabBindings">tabBindings</a>
 
                                 
                                 
@@ -489,13 +461,6 @@
                                 
                             </li>
                         
-                            <li class="index-item method">
-                                <a href="#method_toggleCollapse">toggleCollapse</a>
-
-                                
-                                
-                            </li>
-                        
                     </ul>
                 </div>
             
@@ -508,20 +473,6 @@
                         
                             <li class="index-item property private inherited">
                                 <a href="#property__build">_build</a>
-
-                                
-                                
-                            </li>
-                        
-                            <li class="index-item property private">
-                                <a href="#property__collapsedClass">_collapsedClass</a>
-
-                                
-                                
-                            </li>
-                        
-                            <li class="index-item property private">
-                                <a href="#property__collapsedState">_collapsedState</a>
 
                                 
                                 
@@ -548,15 +499,15 @@
                                 
                             </li>
                         
-                            <li class="index-item property">
-                                <a href="#property_active">active</a>
+                            <li class="index-item property inherited">
+                                <a href="#property_align">align</a>
 
                                 
                                 
                             </li>
                         
-                            <li class="index-item property inherited">
-                                <a href="#property_align">align</a>
+                            <li class="index-item property">
+                                <a href="#property_animated">animated</a>
 
                                 
                                 
@@ -570,7 +521,14 @@
                             </li>
                         
                             <li class="index-item property">
-                                <a href="#property_collapseRole">collapseRole</a>
+                                <a href="#property_collapsedClass">collapsedClass</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item property">
+                                <a href="#property_collapseIconClass">collapseIconClass</a>
 
                                 
                                 
@@ -597,22 +555,22 @@
                                 
                             </li>
                         
-                            <li class="index-item property">
-                                <a href="#property_dataParentId">dataParentId</a>
-
-                                
-                                
-                            </li>
-                        
-                            <li class="index-item property">
-                                <a href="#property_"></a>
-
-                                
-                                
-                            </li>
-                        
                             <li class="index-item property inherited">
                                 <a href="#property_defaults">defaults</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item property">
+                                <a href="#property_expandIconClass">expandIconClass</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item property">
+                                <a href="#property_fieldsetBodyClass">fieldsetBodyClass</a>
 
                                 
                                 
@@ -639,34 +597,6 @@
                                 
                             </li>
                         
-                            <li class="index-item property">
-                                <a href="#property_headerIconsPosition">headerIconsPosition</a>
-
-                                
-                                
-                            </li>
-                        
-                            <li class="index-item property">
-                                <a href="#property_headerItems">headerItems</a>
-
-                                
-                                
-                            </li>
-                        
-                            <li class="index-item property">
-                                <a href="#property_headerSize">headerSize</a>
-
-                                
-                                
-                            </li>
-                        
-                            <li class="index-item property">
-                                <a href="#property_html">html</a>
-
-                                
-                                
-                            </li>
-                        
                             <li class="index-item property inherited">
                                 <a href="#property_items">items</a>
 
@@ -676,34 +606,6 @@
                         
                             <li class="index-item property inherited">
                                 <a href="#property_itemsAlign">itemsAlign</a>
-
-                                
-                                
-                            </li>
-                        
-                            <li class="index-item property">
-                                <a href="#property_panelBodyClass">panelBodyClass</a>
-
-                                
-                                
-                            </li>
-                        
-                            <li class="index-item property">
-                                <a href="#property_panelClass">panelClass</a>
-
-                                
-                                
-                            </li>
-                        
-                            <li class="index-item property">
-                                <a href="#property_panelHeaderClass">panelHeaderClass</a>
-
-                                
-                                
-                            </li>
-                        
-                            <li class="index-item property">
-                                <a href="#property_panelTypeClass">panelTypeClass</a>
 
                                 
                                 
@@ -745,14 +647,7 @@
                             </li>
                         
                             <li class="index-item property">
-                                <a href="#property_role">role</a>
-
-                                
-                                
-                            </li>
-                        
-                            <li class="index-item property">
-                                <a href="#property_showCollapseIcon">showCollapseIcon</a>
+                                <a href="#property_showLegend">showLegend</a>
 
                                 
                                 
@@ -760,13 +655,6 @@
                         
                             <li class="index-item property inherited">
                                 <a href="#property_sName">sName</a>
-
-                                
-                                
-                            </li>
-                        
-                            <li class="index-item property">
-                                <a href="#property_storeProp">storeProp</a>
 
                                 
                                 
@@ -1584,7 +1472,7 @@ iterate up the inheritance tree looking for a classname that differs from the cu
 </div>
 
                 
-                    <div id="method_bindings" class="method item">
+                    <div id="method_bindings" class="method item inherited">
     <h3 class="name"><code>bindings</code></h3>
 
     
@@ -1611,16 +1499,13 @@ iterate up the inheritance tree looking for a classname that differs from the cu
 
     <div class="meta">
         
-            <p>Inherited from
-            <a href="../classes/components.common.Base.html#method_bindings">
-                components.common.Base
-            </a>
             
-            but overwritten in
+                <p>Inherited from
+                <a href="../classes/components.common.Base.html#method_bindings">components.common.Base</a>:
             
         
         
-        <a href="../files/src_components_containers_Panel.js.html#l238"><code>src\components\containers\Panel.js:238</code></a>
+        <a href="../files/src_components_common_Base.js.html#l349"><code>src\components\common\Base.js:349</code></a>
         
         </p>
 
@@ -1631,7 +1516,7 @@ iterate up the inheritance tree looking for a classname that differs from the cu
     </div>
 
     <div class="description">
-        <p>Data bindings</p>
+        <p>mother of all basic bindings</p>
 
     </div>
 
@@ -1646,6 +1531,8 @@ iterate up the inheritance tree looking for a classname that differs from the cu
                     
                         <span class="type">Object</span>:
                     
+                    <p>{attr:{}, css:{}}</p>
+
                 
             </div>
         </div>
@@ -1827,79 +1714,8 @@ iterate up the inheritance tree looking for a classname that differs from the cu
 </div>
 
                 
-                    <div id="method_collapse" class="method item">
-    <h3 class="name"><code>collapse</code></h3>
-
-    
-        <span class="paren">()</span>
-    
-
-    
-        <span class="returns-inline">
-            <span class="type"></span>
-        </span>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/src_components_containers_Panel.js.html#l207"><code>src\components\containers\Panel.js:207</code></a>
-        
-        </p>
-
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>programmatically make a collapse action - useful if the header isn&#39;t available</p>
-
-    </div>
-
-    
-
-    
-        <div class="returns">
-            <h4>Returns:</h4>
-
-            <div class="returns-description">
-                
-                    
-                    <p>self</p>
-
-                
-            </div>
-        </div>
-    
-
-    
-</div>
-
-                
-                    <div id="method_collapseIconClick" class="method item private">
-    <h3 class="name"><code>collapseIconClick</code></h3>
+                    <div id="method_collapseClick" class="method item">
+    <h3 class="name"><code>collapseClick</code></h3>
 
     
         <div class="args">
@@ -1907,13 +1723,7 @@ iterate up the inheritance tree looking for a classname that differs from the cu
             
                 <li class="arg">
                     
-                        <code>obj</code>
-                    
-                </li>
-            
-                <li class="arg">
-                    
-                        <code>event</code>
+                        <code>jQuery</code>
                     
                 </li>
             
@@ -1926,8 +1736,6 @@ iterate up the inheritance tree looking for a classname that differs from the cu
     
 
     
-        <span class="flag private">private</span>
-    
 
     
 
@@ -1948,7 +1756,7 @@ iterate up the inheritance tree looking for a classname that differs from the cu
             
         
         
-        <a href="../files/src_components_containers_Panel.js.html#l373"><code>src\components\containers\Panel.js:373</code></a>
+        <a href="../files/src_components_containers_Fieldset.js.html#l103"><code>src\components\containers\Fieldset.js:103</code></a>
         
         </p>
 
@@ -1959,7 +1767,7 @@ iterate up the inheritance tree looking for a classname that differs from the cu
     </div>
 
     <div class="description">
-        <p>simulate a click on the icon and delegate it to the title</p>
+        <p>called when the legend is clicked on</p>
 
     </div>
 
@@ -1971,29 +1779,14 @@ iterate up the inheritance tree looking for a classname that differs from the cu
             
                 <li class="param">
                     
-                        <code class="param-name">obj</code>
-                        <span class="type">Object</span>
+                        <code class="param-name">jQuery</code>
+                        <span class="type">Any</span>
                     
 
                     
 
                     <div class="param-description">
-                         
-                    </div>
-
-                    
-                </li>
-            
-                <li class="param">
-                    
-                        <code class="param-name">event</code>
-                        <span class="type">Object</span>
-                    
-
-                    
-
-                    <div class="param-description">
-                        <p>jquery event</p>
+                        <p>&quot;click&quot; event arguments</p>
 
                     </div>
 
@@ -2010,8 +1803,8 @@ iterate up the inheritance tree looking for a classname that differs from the cu
 </div>
 
                 
-                    <div id="method_collapsibleIconBindings" class="method item">
-    <h3 class="name"><code>collapsibleIconBindings</code></h3>
+                    <div id="method_collapsibleBindings" class="method item">
+    <h3 class="name"><code>collapsibleBindings</code></h3>
 
     
         <span class="paren">()</span>
@@ -2046,7 +1839,7 @@ iterate up the inheritance tree looking for a classname that differs from the cu
             
         
         
-        <a href="../files/src_components_containers_Panel.js.html#l354"><code>src\components\containers\Panel.js:354</code></a>
+        <a href="../files/src_components_containers_Fieldset.js.html#l155"><code>src\components\containers\Fieldset.js:155</code></a>
         
         </p>
 
@@ -2116,7 +1909,7 @@ iterate up the inheritance tree looking for a classname that differs from the cu
             
         
         
-        <a href="../files/src_components_containers_Panel.js.html#l328"><code>src\components\containers\Panel.js:328</code></a>
+        <a href="../files/src_components_containers_Fieldset.js.html#l176"><code>src\components\containers\Fieldset.js:176</code></a>
         
         </p>
 
@@ -2220,6 +2013,76 @@ iterate up the inheritance tree looking for a classname that differs from the cu
 </div>
 
                 
+                    <div id="method_contentBindings" class="method item">
+    <h3 class="name"><code>contentBindings</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+        <span class="returns-inline">
+            <span class="type">Object</span>
+        </span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/src_components_containers_Fieldset.js.html#l189"><code>src\components\containers\Fieldset.js:189</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        
+    </div>
+
+    
+
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                        <span class="type">Object</span>:
+                    
+                
+            </div>
+        </div>
+    
+
+    
+</div>
+
+                
                     <div id="method_dataBind" class="method item private inherited">
     <h3 class="name"><code>dataBind</code></h3>
 
@@ -2314,77 +2177,6 @@ iterate up the inheritance tree looking for a classname that differs from the cu
                     
                         <span class="type">String</span>:
                     
-                
-            </div>
-        </div>
-    
-
-    
-</div>
-
-                
-                    <div id="method_expand" class="method item">
-    <h3 class="name"><code>expand</code></h3>
-
-    
-        <span class="paren">()</span>
-    
-
-    
-        <span class="returns-inline">
-            <span class="type"></span>
-        </span>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/src_components_containers_Panel.js.html#l222"><code>src\components\containers\Panel.js:222</code></a>
-        
-        </p>
-
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>programmatically make an expand action - useful if the header isn&#39;t available</p>
-
-    </div>
-
-    
-
-    
-        <div class="returns">
-            <h4>Returns:</h4>
-
-            <div class="returns-description">
-                
-                    
-                    <p>self</p>
-
                 
             </div>
         </div>
@@ -2737,76 +2529,6 @@ iterate up the inheritance tree looking for a classname that differs from the cu
 </div>
 
                 
-                    <div id="method_headerItemsBindings" class="method item">
-    <h3 class="name"><code>headerItemsBindings</code></h3>
-
-    
-        <span class="paren">()</span>
-    
-
-    
-        <span class="returns-inline">
-            <span class="type">Object</span>
-        </span>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/src_components_containers_Panel.js.html#l305"><code>src\components\containers\Panel.js:305</code></a>
-        
-        </p>
-
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        
-    </div>
-
-    
-
-    
-        <div class="returns">
-            <h4>Returns:</h4>
-
-            <div class="returns-description">
-                
-                    
-                        <span class="type">Object</span>:
-                    
-                
-            </div>
-        </div>
-    
-
-    
-</div>
-
-                
                     <div id="method_init" class="method item">
     <h3 class="name"><code>init</code></h3>
 
@@ -2843,7 +2565,7 @@ iterate up the inheritance tree looking for a classname that differs from the cu
             
         
         
-        <a href="../files/src_components_containers_Panel.js.html#l155"><code>src\components\containers\Panel.js:155</code></a>
+        <a href="../files/src_components_containers_Fieldset.js.html#l83"><code>src\components\containers\Fieldset.js:83</code></a>
         
         </p>
 
@@ -2877,8 +2599,8 @@ iterate up the inheritance tree looking for a classname that differs from the cu
 </div>
 
                 
-                    <div id="method_panelBodyBindings" class="method item">
-    <h3 class="name"><code>panelBodyBindings</code></h3>
+                    <div id="method_legendBindings" class="method item">
+    <h3 class="name"><code>legendBindings</code></h3>
 
     
         <span class="paren">()</span>
@@ -2913,7 +2635,7 @@ iterate up the inheritance tree looking for a classname that differs from the cu
             
         
         
-        <a href="../files/src_components_containers_Panel.js.html#l406"><code>src\components\containers\Panel.js:406</code></a>
+        <a href="../files/src_components_containers_Fieldset.js.html#l135"><code>src\components\containers\Fieldset.js:135</code></a>
         
         </p>
 
@@ -2947,8 +2669,8 @@ iterate up the inheritance tree looking for a classname that differs from the cu
 </div>
 
                 
-                    <div id="method_panelHeaderBindings" class="method item">
-    <h3 class="name"><code>panelHeaderBindings</code></h3>
+                    <div id="method_legendTextBindings" class="method item">
+    <h3 class="name"><code>legendTextBindings</code></h3>
 
     
         <span class="paren">()</span>
@@ -2983,77 +2705,7 @@ iterate up the inheritance tree looking for a classname that differs from the cu
             
         
         
-        <a href="../files/src_components_containers_Panel.js.html#l282"><code>src\components\containers\Panel.js:282</code></a>
-        
-        </p>
-
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        
-    </div>
-
-    
-
-    
-        <div class="returns">
-            <h4>Returns:</h4>
-
-            <div class="returns-description">
-                
-                    
-                        <span class="type">Object</span>:
-                    
-                
-            </div>
-        </div>
-    
-
-    
-</div>
-
-                
-                    <div id="method_panelHeaderTextBindings" class="method item">
-    <h3 class="name"><code>panelHeaderTextBindings</code></h3>
-
-    
-        <span class="paren">()</span>
-    
-
-    
-        <span class="returns-inline">
-            <span class="type">Object</span>
-        </span>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/src_components_containers_Panel.js.html#l387"><code>src\components\containers\Panel.js:387</code></a>
+        <a href="../files/src_components_containers_Fieldset.js.html#l142"><code>src\components\containers\Fieldset.js:142</code></a>
         
         </p>
 
@@ -3181,76 +2833,6 @@ iterate up the inheritance tree looking for a classname that differs from the cu
                     
                     <p>&quot;&#39;&quot; + str + &quot;&#39;&quot;</p>
 
-                
-            </div>
-        </div>
-    
-
-    
-</div>
-
-                
-                    <div id="method_tabBindings" class="method item">
-    <h3 class="name"><code>tabBindings</code></h3>
-
-    
-        <span class="paren">()</span>
-    
-
-    
-        <span class="returns-inline">
-            <span class="type">Object</span>
-        </span>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/src_components_containers_Panel.js.html#l255"><code>src\components\containers\Panel.js:255</code></a>
-        
-        </p>
-
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        
-    </div>
-
-    
-
-    
-        <div class="returns">
-            <h4>Returns:</h4>
-
-            <div class="returns-description">
-                
-                    
-                        <span class="type">Object</span>:
-                    
                 
             </div>
         </div>
@@ -3497,77 +3079,6 @@ iterate up the inheritance tree looking for a classname that differs from the cu
 </div>
 
                 
-                    <div id="method_toggleCollapse" class="method item">
-    <h3 class="name"><code>toggleCollapse</code></h3>
-
-    
-        <span class="paren">()</span>
-    
-
-    
-        <span class="returns-inline">
-            <span class="type"></span>
-        </span>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/src_components_containers_Panel.js.html#l190"><code>src\components\containers\Panel.js:190</code></a>
-        
-        </p>
-
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>programmatically make toggleCollapse action - useful if the header isn&#39;t available</p>
-
-    </div>
-
-    
-
-    
-        <div class="returns">
-            <h4>Returns:</h4>
-
-            <div class="returns-description">
-                
-                    
-                    <p>self</p>
-
-                
-            </div>
-        </div>
-    
-
-    
-</div>
-
-                
             </div>
         
 
@@ -3614,102 +3125,6 @@ iterate up the inheritance tree looking for a classname that differs from the cu
 
     
         <p><strong>Default:</strong> null</p>
-    
-
-    
-
-    
-</div>
-
-                
-                    <div id="property__collapsedClass" class="property item private">
-    <h3 class="name"><code>_collapsedClass</code></h3>
-    <span class="type">String</span>
-
-    
-
-    
-        <span class="flag private">private</span>
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/src_components_containers_Panel.js.html#l134"><code>src\components\containers\Panel.js:134</code></a>
-        
-        </p>
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        
-    </div>
-
-    
-        <p><strong>Default:</strong> &quot;fb-ui-is-collapsed&quot;</p>
-    
-
-    
-
-    
-</div>
-
-                
-                    <div id="property__collapsedState" class="property item private">
-    <h3 class="name"><code>_collapsedState</code></h3>
-    <span class="type">Boolean</span>
-
-    
-
-    
-        <span class="flag private">private</span>
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/src_components_containers_Panel.js.html#l115"><code>src\components\containers\Panel.js:115</code></a>
-        
-        </p>
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        
-    </div>
-
-    
-        <p><strong>Default:</strong> false</p>
     
 
     
@@ -3851,53 +3266,6 @@ iterate up the inheritance tree looking for a classname that differs from the cu
 </div>
 
                 
-                    <div id="property_active" class="property item">
-    <h3 class="name"><code>active</code></h3>
-    <span class="type">Boolean</span>
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/src_components_containers_Panel.js.html#l148"><code>src\components\containers\Panel.js:148</code></a>
-        
-        </p>
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>only needed when panel is inside accordion</p>
-
-    </div>
-
-    
-        <p><strong>Default:</strong> false</p>
-    
-
-    
-
-    
-</div>
-
-                
                     <div id="property_align" class="property item inherited">
     <h3 class="name"><code>align</code></h3>
     <span class="type">String | Null right, left</span>
@@ -3941,9 +3309,9 @@ iterate up the inheritance tree looking for a classname that differs from the cu
 </div>
 
                 
-                    <div id="property_collapsed" class="property item">
-    <h3 class="name"><code>collapsed</code></h3>
-    <span class="type">Boolean | String</span>
+                    <div id="property_animated" class="property item">
+    <h3 class="name"><code>animated</code></h3>
+    <span class="type">Boolean</span>
 
     
 
@@ -3964,7 +3332,54 @@ iterate up the inheritance tree looking for a classname that differs from the cu
             
         
         
-        <a href="../files/src_components_containers_Panel.js.html#l109"><code>src\components\containers\Panel.js:109</code></a>
+        <a href="../files/src_components_containers_Fieldset.js.html#l62"><code>src\components\containers\Fieldset.js:62</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>css is animated or not</p>
+
+    </div>
+
+    
+        <p><strong>Default:</strong> true</p>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="property_collapsed" class="property item">
+    <h3 class="name"><code>collapsed</code></h3>
+    <span class="type">Boolean</span>
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/src_components_containers_Fieldset.js.html#l37"><code>src\components\containers\Fieldset.js:37</code></a>
         
         </p>
 
@@ -3987,8 +3402,8 @@ iterate up the inheritance tree looking for a classname that differs from the cu
 </div>
 
                 
-                    <div id="property_collapseRole" class="property item">
-    <h3 class="name"><code>collapseRole</code></h3>
+                    <div id="property_collapsedClass" class="property item">
+    <h3 class="name"><code>collapsedClass</code></h3>
     <span class="type">String</span>
 
     
@@ -4010,7 +3425,7 @@ iterate up the inheritance tree looking for a classname that differs from the cu
             
         
         
-        <a href="../files/src_components_containers_Panel.js.html#l32"><code>src\components\containers\Panel.js:32</code></a>
+        <a href="../files/src_components_containers_Fieldset.js.html#l55"><code>src\components\containers\Fieldset.js:55</code></a>
         
         </p>
 
@@ -4020,11 +3435,12 @@ iterate up the inheritance tree looking for a classname that differs from the cu
     </div>
 
     <div class="description">
-        
+        <p>on the entire fieldset. See: collapseIconClass/expandIconClass for legend icon</p>
+
     </div>
 
     
-        <p><strong>Default:</strong> &quot;&quot;</p>
+        <p><strong>Default:</strong> &quot;collapsed&quot;</p>
     
 
     
@@ -4033,9 +3449,9 @@ iterate up the inheritance tree looking for a classname that differs from the cu
 </div>
 
                 
-                    <div id="property_collapsible" class="property item">
-    <h3 class="name"><code>collapsible</code></h3>
-    <span class="type">Boolean | String</span>
+                    <div id="property_collapseIconClass" class="property item">
+    <h3 class="name"><code>collapseIconClass</code></h3>
+    <span class="type">String | False</span>
 
     
 
@@ -4056,7 +3472,54 @@ iterate up the inheritance tree looking for a classname that differs from the cu
             
         
         
-        <a href="../files/src_components_containers_Panel.js.html#l97"><code>src\components\containers\Panel.js:97</code></a>
+        <a href="../files/src_components_containers_Fieldset.js.html#l76"><code>src\components\containers\Fieldset.js:76</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>css class for icon to collapse when expanded</p>
+
+    </div>
+
+    
+        <p><strong>Default:</strong> &quot;glyphicon-chevron-down&quot;</p>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="property_collapsible" class="property item">
+    <h3 class="name"><code>collapsible</code></h3>
+    <span class="type">Boolean</span>
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/src_components_containers_Fieldset.js.html#l31"><code>src\components\containers\Fieldset.js:31</code></a>
         
         </p>
 
@@ -4166,100 +3629,6 @@ iterate up the inheritance tree looking for a classname that differs from the cu
 </div>
 
                 
-                    <div id="property_dataParentId" class="property item">
-    <h3 class="name"><code>dataParentId</code></h3>
-    <span class="type">String</span>
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/src_components_containers_Panel.js.html#l141"><code>src\components\containers\Panel.js:141</code></a>
-        
-        </p>
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>only needed when panel is inside accordion</p>
-
-    </div>
-
-    
-        <p><strong>Default:</strong> &quot;&quot;</p>
-    
-
-    
-
-    
-</div>
-
-                
-                    <div id="property_" class="property item">
-    <h3 class="name"><code></code></h3>
-    <span class="type">Boolean</span>
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/src_components_containers_Panel.js.html#l76"><code>src\components\containers\Panel.js:76</code></a>
-        
-        </p>
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>determines whether &quot;panel-title&quot; class is used</p>
-
-    </div>
-
-    
-        <p><strong>Default:</strong> true</p>
-    
-
-    
-
-    
-</div>
-
-                
                     <div id="property_defaults" class="property item inherited">
     <h3 class="name"><code>defaults</code></h3>
     <span class="type">Object</span>
@@ -4296,6 +3665,99 @@ iterate up the inheritance tree looking for a classname that differs from the cu
 
     
         <p><strong>Default:</strong> null</p>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="property_expandIconClass" class="property item">
+    <h3 class="name"><code>expandIconClass</code></h3>
+    <span class="type">String | False</span>
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/src_components_containers_Fieldset.js.html#l69"><code>src\components\containers\Fieldset.js:69</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>css class for icon to expand when collapsed</p>
+
+    </div>
+
+    
+        <p><strong>Default:</strong> &quot;glyphicon-chevron-up&quot;</p>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="property_fieldsetBodyClass" class="property item">
+    <h3 class="name"><code>fieldsetBodyClass</code></h3>
+    <span class="type">String</span>
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/src_components_containers_Fieldset.js.html#l43"><code>src\components\containers\Fieldset.js:43</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        
+    </div>
+
+    
+        <p><strong>Default:</strong> &quot;fb-ui-fieldset-body&quot;</p>
     
 
     
@@ -4434,192 +3896,6 @@ iterate up the inheritance tree looking for a classname that differs from the cu
 </div>
 
                 
-                    <div id="property_headerIconsPosition" class="property item">
-    <h3 class="name"><code>headerIconsPosition</code></h3>
-    <span class="type">String | False css class "pull-right", "pull-left" etc</span>
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/src_components_containers_Panel.js.html#l128"><code>src\components\containers\Panel.js:128</code></a>
-        
-        </p>
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        
-    </div>
-
-    
-        <p><strong>Default:</strong> &quot;pull-right&quot;</p>
-    
-
-    
-
-    
-</div>
-
-                
-                    <div id="property_headerItems" class="property item">
-    <h3 class="name"><code>headerItems</code></h3>
-    <span class="type">Boolean | Array of Objects boolean = false, if object use the same way as the "items" property</span>
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/src_components_containers_Panel.js.html#l122"><code>src\components\containers\Panel.js:122</code></a>
-        
-        </p>
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        
-    </div>
-
-    
-        <p><strong>Default:</strong> false</p>
-    
-
-    
-
-    
-</div>
-
-                
-                    <div id="property_headerSize" class="property item">
-    <h3 class="name"><code>headerSize</code></h3>
-    <span class="type">Int</span>
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/src_components_containers_Panel.js.html#l44"><code>src\components\containers\Panel.js:44</code></a>
-        
-        </p>
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>use to determine whether h1, h2, h3 etc - default = 3</p>
-
-    </div>
-
-    
-        <p><strong>Default:</strong> 3</p>
-    
-
-    
-
-    
-</div>
-
-                
-                    <div id="property_html" class="property item">
-    <h3 class="name"><code>html</code></h3>
-    <span class="type">String</span>
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/src_components_containers_Panel.js.html#l90"><code>src\components\containers\Panel.js:90</code></a>
-        
-        </p>
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>fill the panel body with html</p>
-
-    </div>
-
-    
-        <p><strong>Default:</strong> &quot;&quot;</p>
-    
-
-    
-
-    
-</div>
-
-                
                     <div id="property_items" class="property item inherited">
     <h3 class="name"><code>items</code></h3>
     <span class="type">String | Object | Array of Object</span>
@@ -4697,191 +3973,6 @@ iterate up the inheritance tree looking for a classname that differs from the cu
 
     </div>
 
-    
-
-    
-
-    
-</div>
-
-                
-                    <div id="property_panelBodyClass" class="property item">
-    <h3 class="name"><code>panelBodyClass</code></h3>
-    <span class="type">Boolean | String</span>
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/src_components_containers_Panel.js.html#l70"><code>src\components\containers\Panel.js:70</code></a>
-        
-        </p>
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        
-    </div>
-
-    
-        <p><strong>Default:</strong> true</p>
-    
-
-    
-
-    
-</div>
-
-                
-                    <div id="property_panelClass" class="property item">
-    <h3 class="name"><code>panelClass</code></h3>
-    <span class="type">Boolean | String</span>
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/src_components_containers_Panel.js.html#l51"><code>src\components\containers\Panel.js:51</code></a>
-        
-        </p>
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        
-    </div>
-
-    
-        <p><strong>Default:</strong> true</p>
-    
-
-    
-
-    
-</div>
-
-                
-                    <div id="property_panelHeaderClass" class="property item">
-    <h3 class="name"><code>panelHeaderClass</code></h3>
-    <span class="type">Boolean | String</span>
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/src_components_containers_Panel.js.html#l64"><code>src\components\containers\Panel.js:64</code></a>
-        
-        </p>
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        
-    </div>
-
-    
-        <p><strong>Default:</strong> true</p>
-    
-
-    
-
-    
-</div>
-
-                
-                    <div id="property_panelTypeClass" class="property item">
-    <h3 class="name"><code>panelTypeClass</code></h3>
-    <span class="type">Boolean | String</span>
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/src_components_containers_Panel.js.html#l57"><code>src\components\containers\Panel.js:57</code></a>
-        
-        </p>
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>string = (default, primary, success, info, warning, danger)</p>
-
-    </div>
-
-    
-        <p><strong>Default:</strong> &quot;default&quot;</p>
     
 
     
@@ -5107,54 +4198,8 @@ iterate up the inheritance tree looking for a classname that differs from the cu
 </div>
 
                 
-                    <div id="property_role" class="property item">
-    <h3 class="name"><code>role</code></h3>
-    <span class="type">String</span>
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/src_components_containers_Panel.js.html#l26"><code>src\components\containers\Panel.js:26</code></a>
-        
-        </p>
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        
-    </div>
-
-    
-        <p><strong>Default:</strong> &quot;&quot;</p>
-    
-
-    
-
-    
-</div>
-
-                
-                    <div id="property_showCollapseIcon" class="property item">
-    <h3 class="name"><code>showCollapseIcon</code></h3>
+                    <div id="property_showLegend" class="property item">
+    <h3 class="name"><code>showLegend</code></h3>
     <span class="type">Boolean</span>
 
     
@@ -5176,7 +4221,7 @@ iterate up the inheritance tree looking for a classname that differs from the cu
             
         
         
-        <a href="../files/src_components_containers_Panel.js.html#l103"><code>src\components\containers\Panel.js:103</code></a>
+        <a href="../files/src_components_containers_Fieldset.js.html#l49"><code>src\components\containers\Fieldset.js:49</code></a>
         
         </p>
 
@@ -5222,7 +4267,7 @@ iterate up the inheritance tree looking for a classname that differs from the cu
             
         
         
-        <a href="../files/src_components_containers_Panel.js.html#l16"><code>src\components\containers\Panel.js:16</code></a>
+        <a href="../files/src_components_containers_Fieldset.js.html#l15"><code>src\components\containers\Fieldset.js:15</code></a>
         
         </p>
 
@@ -5235,53 +4280,6 @@ iterate up the inheritance tree looking for a classname that differs from the cu
         
     </div>
 
-    
-
-    
-
-    
-</div>
-
-                
-                    <div id="property_storeProp" class="property item">
-    <h3 class="name"><code>storeProp</code></h3>
-    <span class="type">String</span>
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/src_components_containers_Panel.js.html#l83"><code>src\components\containers\Panel.js:83</code></a>
-        
-        </p>
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>store property key</p>
-
-    </div>
-
-    
-        <p><strong>Default:</strong> &quot;&quot;</p>
     
 
     
@@ -5336,7 +4334,7 @@ iterate up the inheritance tree looking for a classname that differs from the cu
                 
                     <div id="property_title" class="property item">
     <h3 class="name"><code>title</code></h3>
-    <span class="type">String | False set to false to hide the title</span>
+    <span class="type">String</span>
 
     
 
@@ -5357,7 +4355,7 @@ iterate up the inheritance tree looking for a classname that differs from the cu
             
         
         
-        <a href="../files/src_components_containers_Panel.js.html#l38"><code>src\components\containers\Panel.js:38</code></a>
+        <a href="../files/src_components_containers_Fieldset.js.html#l25"><code>src\components\containers\Fieldset.js:25</code></a>
         
         </p>
 
@@ -5534,7 +4532,7 @@ iterate up the inheritance tree looking for a classname that differs from the cu
             
         
         
-        <a href="../files/src_components_containers_Panel.js.html#l21"><code>src\components\containers\Panel.js:21</code></a>
+        <a href="../files/src_components_containers_Fieldset.js.html#l20"><code>src\components\containers\Fieldset.js:20</code></a>
         
         </p>
 

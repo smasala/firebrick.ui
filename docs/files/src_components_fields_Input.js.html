@@ -19,7 +19,7 @@
             
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 0.13.0</em>
+            <em>API Docs for: 0.14.0</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -74,6 +74,8 @@
                 <li><a href="../classes/components.containers.BorderLayout.html">components.containers.BorderLayout</a></li>
             
                 <li><a href="../classes/components.containers.Box.html">components.containers.Box</a></li>
+            
+                <li><a href="../classes/components.containers.Fieldset.html">components.containers.Fieldset</a></li>
             
                 <li><a href="../classes/components.containers.Form.html">components.containers.Form</a></li>
             
@@ -145,7 +147,11 @@
             
                 <li><a href="../classes/helper.html">helper</a></li>
             
+                <li><a href="../classes/plugins.ContextMenu.html">plugins.ContextMenu</a></li>
+            
                 <li><a href="../classes/plugins.Draggable.html">plugins.Draggable</a></li>
+            
+                <li><a href="../classes/plugins.EditableTable.html">plugins.EditableTable</a></li>
             
                 <li><a href="../classes/plugins.RadioList.html">plugins.RadioList</a></li>
             
@@ -222,10 +228,10 @@ define([&quot;text!./Base.html&quot;, &quot;text!./Input.html&quot;, &quot;../co
 		extend:&quot;Firebrick.ui.common.Base&quot;,
 		mixins:[&quot;Firebrick.ui.common.mixins.Items&quot;],
 		/**
-		 * @property uiName
+		 * @property sName
 		 * @type {String}
 		 */
-		uiName: &quot;fb-ui-input&quot;,
+		sName: &quot;fields.input&quot;,
 		/**
 		 * @property subTpl
 		 * @type {String} html
@@ -287,11 +293,12 @@ define([&quot;text!./Base.html&quot;, &quot;text!./Input.html&quot;, &quot;../co
 		 */
 		deviceSize: &quot;sm&quot;,
 		/**
-		 * @property hideLabel
+		 * screen reader only
+		 * @property srOnly
 		 * @type {Boolean}
 		 * @default false
 		 */
-		hideLabel: false,
+		srOnly: false,
 		/**
 		 * @property readOnly
 		 * @type {Boolean}
@@ -533,7 +540,7 @@ define([&quot;text!./Base.html&quot;, &quot;text!./Input.html&quot;, &quot;../co
 						&quot;&#x27;has-warning&#x27;&quot;: me.feedbackWarning,
 						&quot;&#x27;has-error&#x27;&quot;: me.feedbackError,
 						&quot;&#x27;has-feedback&#x27;&quot;: me.feedbackSuccess || me.feedbackWarning || me.feedbackError,
-						&quot;&#x27;sr-only&#x27;&quot;: me.hideLabel
+						&quot;&#x27;sr-only&#x27;&quot;: me.srOnly
 					}
 				};
 			
@@ -634,14 +641,12 @@ define([&quot;text!./Base.html&quot;, &quot;text!./Input.html&quot;, &quot;../co
 				if($.isPlainObject(me.inputAddon)){
 					
 					//button has been loaded
-					if(fb.ui.cmp.button){
-						if(me.inputAddon.uiName === fb.ui.cmp.button){
-							//the addon is a button
-							//remove if exists
-							me.inputAddonClass = me.inputAddonClass.replace(&quot;input-group-addon&quot;, &quot;&quot;);
-							//add the correct class
-							me.inputAddonClass += &quot; input-group-btn&quot;;
-						}
+					if(me.inputAddon.sName === &quot;button.button&quot;){
+						//the addon is a button
+						//remove if exists
+						me.inputAddonClass = me.inputAddonClass.replace(&quot;input-group-addon&quot;, &quot;&quot;);
+						//add the correct class
+						me.inputAddonClass += &quot; input-group-btn&quot;;
 					}
 				}
 				obj.css[me.parseBind(me.inputAddonClass)] = true;

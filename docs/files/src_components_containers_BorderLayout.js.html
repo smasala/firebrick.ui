@@ -19,7 +19,7 @@
             
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 0.13.0</em>
+            <em>API Docs for: 0.14.0</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -74,6 +74,8 @@
                 <li><a href="../classes/components.containers.BorderLayout.html">components.containers.BorderLayout</a></li>
             
                 <li><a href="../classes/components.containers.Box.html">components.containers.Box</a></li>
+            
+                <li><a href="../classes/components.containers.Fieldset.html">components.containers.Fieldset</a></li>
             
                 <li><a href="../classes/components.containers.Form.html">components.containers.Form</a></li>
             
@@ -145,7 +147,11 @@
             
                 <li><a href="../classes/helper.html">helper</a></li>
             
+                <li><a href="../classes/plugins.ContextMenu.html">plugins.ContextMenu</a></li>
+            
                 <li><a href="../classes/plugins.Draggable.html">plugins.Draggable</a></li>
+            
+                <li><a href="../classes/plugins.EditableTable.html">plugins.EditableTable</a></li>
             
                 <li><a href="../classes/plugins.RadioList.html">plugins.RadioList</a></li>
             
@@ -227,20 +233,20 @@ define([&quot;text!./BorderLayout.html&quot;, &quot;./Base&quot;, &quot;./Box&qu
 		 */
 		tpl: tpl,
 		/**
-		 * @property uiName
+		 * @property sName
 		 * @type {String}
 		 */
-		uiName:&quot;fb-ui-borderlayout&quot;,
+		sName:&quot;containers.borderlayout&quot;,
 		
 		/**
 		 * @property defaults
 		 * @type {Object}
 		 * @default {
-		 * 		uiName: fb.ui.cmp.borderpane
+		 * 		sName: &quot;containers.border.pane&quot;
 		 * }
 		 */
 		defaults: {
-			uiName: fb.ui.cmp.borderpane
+			sName: &quot;containers.border.pane&quot;
 		},
 		
 		/**
@@ -324,7 +330,7 @@ define([&quot;text!./BorderLayout.html&quot;, &quot;./Base&quot;, &quot;./Box&qu
 				position,
 				length,
 				centerGrid = {
-					uiName: fb.ui.cmp.box,
+					sName: &quot;containers.box&quot;,
 					defaults: me.defaults,
 					css:&#x27;row-eq-height fb-ui-center-row&#x27;,
 					items:[]

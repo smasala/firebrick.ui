@@ -1,0 +1,886 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>src\components\table\plugins\EditableTable.js - Firebrick UI API</title>
+    <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
+    <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
+    <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
+    <link rel="shortcut icon" type="image/png" href="../assets/favicon.png">
+    <script src="http://yui.yahooapis.com/combo?3.9.1/build/yui/yui-min.js"></script>
+</head>
+<body class="yui3-skin-sam">
+
+<div id="doc">
+    <div id="hd" class="yui3-g header">
+        <div class="yui3-u-3-4">
+            
+                <h1><img src="..\fbui_small.png" title="Firebrick UI API"></h1>
+            
+        </div>
+        <div class="yui3-u-1-4 version">
+            <em>API Docs for: 0.14.0</em>
+        </div>
+    </div>
+    <div id="bd" class="yui3-g">
+
+        <div class="yui3-u-1-4">
+            <div id="docs-sidebar" class="sidebar apidocs">
+                <div id="api-list">
+    <h2 class="off-left">APIs</h2>
+    <div id="api-tabview" class="tabview">
+        <ul class="tabs">
+            <li><a href="#api-classes">Classes</a></li>
+            <li><a href="#api-modules">Modules</a></li>
+        </ul>
+
+        <div id="api-tabview-filter">
+            <input type="search" id="api-filter" placeholder="Type to filter APIs">
+        </div>
+
+        <div id="api-tabview-panel">
+            <ul id="api-classes" class="apis classes">
+            
+                <li><a href="../classes/components.button.Button.html">components.button.Button</a></li>
+            
+                <li><a href="../classes/components.button.ButtonGroup.html">components.button.ButtonGroup</a></li>
+            
+                <li><a href="../classes/components.button.ButtonGroupBase.html">components.button.ButtonGroupBase</a></li>
+            
+                <li><a href="../classes/components.button.dropdown.List.html">components.button.dropdown.List</a></li>
+            
+                <li><a href="../classes/components.button.Icon.html">components.button.Icon</a></li>
+            
+                <li><a href="../classes/components.button.ToggleButton.html">components.button.ToggleButton</a></li>
+            
+                <li><a href="../classes/components.common.Base.html">components.common.Base</a></li>
+            
+                <li><a href="../classes/components.common.mixins.Badges.html">components.common.mixins.Badges</a></li>
+            
+                <li><a href="../classes/components.common.mixins.Column.html">components.common.mixins.Column</a></li>
+            
+                <li><a href="../classes/components.common.mixins.Items.html">components.common.mixins.Items</a></li>
+            
+                <li><a href="../classes/components.common.mixins.Toolbars.html">components.common.mixins.Toolbars</a></li>
+            
+                <li><a href="../classes/components.common.MultiplesBase.html">components.common.MultiplesBase</a></li>
+            
+                <li><a href="../classes/components.containers.Accordion.html">components.containers.Accordion</a></li>
+            
+                <li><a href="../classes/components.containers.Base.html">components.containers.Base</a></li>
+            
+                <li><a href="../classes/components.containers.border.Pane.html">components.containers.border.Pane</a></li>
+            
+                <li><a href="../classes/components.containers.BorderLayout.html">components.containers.BorderLayout</a></li>
+            
+                <li><a href="../classes/components.containers.Box.html">components.containers.Box</a></li>
+            
+                <li><a href="../classes/components.containers.Fieldset.html">components.containers.Fieldset</a></li>
+            
+                <li><a href="../classes/components.containers.Form.html">components.containers.Form</a></li>
+            
+                <li><a href="../classes/components.containers.FormPanel.html">components.containers.FormPanel</a></li>
+            
+                <li><a href="../classes/components.containers.GridColumn.html">components.containers.GridColumn</a></li>
+            
+                <li><a href="../classes/components.containers.GridRow.html">components.containers.GridRow</a></li>
+            
+                <li><a href="../classes/components.containers.Modal.html">components.containers.Modal</a></li>
+            
+                <li><a href="../classes/components.containers.Panel.html">components.containers.Panel</a></li>
+            
+                <li><a href="../classes/components.containers.tab.Pane.html">components.containers.tab.Pane</a></li>
+            
+                <li><a href="../classes/components.containers.TabPanel.html">components.containers.TabPanel</a></li>
+            
+                <li><a href="../classes/components.display.Alert.html">components.display.Alert</a></li>
+            
+                <li><a href="../classes/components.display.Divider.html">components.display.Divider</a></li>
+            
+                <li><a href="../classes/components.display.Header.html">components.display.Header</a></li>
+            
+                <li><a href="../classes/components.display.Image.html">components.display.Image</a></li>
+            
+                <li><a href="../classes/components.display.List.html">components.display.List</a></li>
+            
+                <li><a href="../classes/components.display.Progress.html">components.display.Progress</a></li>
+            
+                <li><a href="../classes/components.display.Span.html">components.display.Span</a></li>
+            
+                <li><a href="../classes/components.display.Text.html">components.display.Text</a></li>
+            
+                <li><a href="../classes/components.fields.Checkbox.html">components.fields.Checkbox</a></li>
+            
+                <li><a href="../classes/components.fields.Datepicker.html">components.fields.Datepicker</a></li>
+            
+                <li><a href="../classes/components.fields.Display.html">components.fields.Display</a></li>
+            
+                <li><a href="../classes/components.fields.Email.html">components.fields.Email</a></li>
+            
+                <li><a href="../classes/components.fields.File.html">components.fields.File</a></li>
+            
+                <li><a href="../classes/components.fields.Input.html">components.fields.Input</a></li>
+            
+                <li><a href="../classes/components.fields.Password.html">components.fields.Password</a></li>
+            
+                <li><a href="../classes/components.fields.Radio.html">components.fields.Radio</a></li>
+            
+                <li><a href="../classes/components.fields.SelectBox.html">components.fields.SelectBox</a></li>
+            
+                <li><a href="../classes/components.fields.TextArea.html">components.fields.TextArea</a></li>
+            
+                <li><a href="../classes/components.nav.Base.html">components.nav.Base</a></li>
+            
+                <li><a href="../classes/components.nav.Breadcrumbs.html">components.nav.Breadcrumbs</a></li>
+            
+                <li><a href="../classes/components.nav.List.html">components.nav.List</a></li>
+            
+                <li><a href="../classes/components.nav.Navbar.html">components.nav.Navbar</a></li>
+            
+                <li><a href="../classes/components.nav.Pagination.html">components.nav.Pagination</a></li>
+            
+                <li><a href="../classes/components.nav.Toolbar.html">components.nav.Toolbar</a></li>
+            
+                <li><a href="../classes/components.table.Table.html">components.table.Table</a></li>
+            
+                <li><a href="../classes/components.table.TreeTable.html">components.table.TreeTable</a></li>
+            
+                <li><a href="../classes/helper.html">helper</a></li>
+            
+                <li><a href="../classes/plugins.ContextMenu.html">plugins.ContextMenu</a></li>
+            
+                <li><a href="../classes/plugins.Draggable.html">plugins.Draggable</a></li>
+            
+                <li><a href="../classes/plugins.EditableTable.html">plugins.EditableTable</a></li>
+            
+                <li><a href="../classes/plugins.RadioList.html">plugins.RadioList</a></li>
+            
+                <li><a href="../classes/renderer.html">renderer</a></li>
+            
+                <li><a href="../classes/ui.html">ui</a></li>
+            
+                <li><a href="../classes/utils.html">utils</a></li>
+            
+                <li><a href="../classes/view.Base.html">view.Base</a></li>
+            
+            </ul>
+
+            <ul id="api-modules" class="apis modules">
+            
+                <li><a href="../modules/Firebrick.ui.html">Firebrick.ui</a></li>
+            
+                <li><a href="../modules/Firebrick.ui.components.html">Firebrick.ui.components</a></li>
+            
+                <li><a href="../modules/plugins.html">plugins</a></li>
+            
+            </ul>
+        </div>
+    </div>
+</div>
+
+            </div>
+        </div>
+        <div class="yui3-u-3-4">
+                <div id="api-options">
+        Show:
+        <label for="api-show-inherited">
+            <input type="checkbox" id="api-show-inherited" checked>
+            Inherited
+        </label>
+
+        <label for="api-show-protected">
+            <input type="checkbox" id="api-show-protected">
+            Protected
+        </label>
+
+        <label for="api-show-private">
+            <input type="checkbox" id="api-show-private">
+            Private
+        </label>
+        <label for="api-show-deprecated">
+            <input type="checkbox" id="api-show-deprecated">
+            Deprecated
+        </label>
+
+    </div>
+
+
+            <div class="apidocs">
+                <div id="docs-main">
+                    <div class="content">
+                        <h1 class="file-heading">File: src\components\table\plugins\EditableTable.js</h1>
+
+<div class="file">
+    <pre class="code prettyprint linenums">
+/*!
+ * @author Steven Masala [me@smasala.com]
+ */
+
+/**
+ * @module plugins
+ * @namespace plugins
+ * @class EditableTable
+ */
+(function(factory) {
+	&quot;use strict&quot;;
+    if (typeof define === &quot;function&quot; &amp;&amp; define.amd) {
+        // AMD anonymous module
+        define([&quot;jquery&quot;], factory);
+    } else {
+        // No module loader (plain &lt;script&gt; tag) - put directly in global namespace
+        factory(window.jQuery);
+    }
+})(function($) {
+	&quot;use strict&quot;;
+	
+	Firebrick.define(&quot;Firebrick.ui.table.plugins.EditableTable&quot;, {
+		indexAttr: &quot;data-tt-id&quot;,	//when TR - row number, when TD column number
+		rowAttr: &quot;fb-ui-row-id&quot;,	//for TD to determine which row number
+		dataProp: &quot;data-edit-item&quot;,	//property name ( $.prop() )  when adding the colNumber to the element for later reference
+		editMarker: &quot;fb-ui-cell-editing&quot;,	//added to the TD when it cell edit is active
+		currentEdit: null,	//holder for which item is current being edited - cell editting only
+		hideCellClass: &quot;fb-ui-hide-me&quot;,
+		rowLoadClass: &quot;fb-ui-edit-loading&quot;,
+		/**
+		 * Returns map with the fields (components) needed to edit the selection and their dependencies
+		 * @method editFields
+		 * @param editElement {jQuery Object} TR or TD which is being edited
+		 * @param clazz {Object} table component class
+		 * @param columns {Array of Objects} which columns are being edited
+		 * @return {Object} {deps:[], fields:[]}
+		 */
+		editFields: function(editElement, clazz, columns){
+			var me = this,
+				//holder to populate with all the edit fields needed
+				editFields = [],
+				//dependencies that need loading for each edit field
+				deps = [],
+				//map of all the already added dependencies - stop duplicates
+				addedPaths = {},
+				//boolean
+				isRow = editElement.is(&quot;tr&quot;),
+				//holder for iteration
+				colNumber,
+				col,
+				rowNumber = isRow ? editElement.attr(me.indexAttr) : editElement.attr(me.rowAttr);
+			
+			if(columns){
+				for(var i = 0, l = columns.length; i&lt;l; i++){
+					colNumber = isRow ? i : editElement.attr(me.indexAttr);
+					col = columns[i];
+					if(col.editable !== false){
+						editFields.push( me.getFieldConfiguration(clazz, rowNumber, col, colNumber, deps, addedPaths) );	
+					}
+				}
+			}
+			return {deps: deps, items: editFields};
+		},
+		
+		/**
+		 * @method getFieldConfiguration 
+		 * @param clazz {Object} table component class
+		 * @param rowNumber {Integer}
+		 * @param col {Object} current column for field
+		 * @param colNumber {Integer}
+		 * @param deps {Array}	to populate with what dependencies are needed - variable pointers
+		 * @param addedPaths {Object} to populate which which dependencies have already been added to deps - variable pointers
+		 * @return {Object} field config {sName:&quot;fields.input&quot;, value:&quot;abc&quot;, ...}
+		 */
+		getFieldConfiguration: function(clazz, rowNumber, col, colNumber, deps, addedPaths){
+			var me = this,
+				fieldConfig,
+				path,
+				data;
+			
+			fieldConfig = col.editField || {};
+			if(fieldConfig.sName){
+				//get the correct dependency path for the field type - i.e. &quot;fields.input&quot; =&gt; &quot;Firebrick.ui/fields/Input&quot;
+				path = Firebrick.classes.getSNameConfig(fieldConfig.sName).path;
+			}else{
+				//default to input field if non given
+				fieldConfig.sName = &quot;fields.input&quot;;
+				path = Firebrick.classes.getSNameConfig(fieldConfig.sName).path;
+			}
+			
+			if(!addedPaths[path]){
+				addedPaths[path] = true;
+				deps.push(path);
+			}
+			
+			//get just the text not any other child elements and their texts
+			if(clazz.treetable){
+				data = clazz.getData()()[rowNumber].children()[colNumber];
+			}else{
+				data = clazz.getData()()[rowNumber][colNumber];	
+			}
+			
+
+			fieldConfig.label = fieldConfig.label || (col.text ? col.text : col);
+			fieldConfig.init = me._initFunction(colNumber);
+			fieldConfig.value = data.value ? data.value()  : data;
+			
+			if(typeof fieldConfig.value === &quot;string&quot;){
+				fieldConfig.value = &quot;&#x27;&quot; + fieldConfig.value + &quot;&#x27;&quot;;
+			}
+			
+			return fieldConfig;
+		},
+		
+		/**
+		 * cell editing
+		 * remove the editMarker and reset any &quot;globals&quot;
+		 * @method removeCurrent
+		 * @private
+		 */
+		removeCurrent: function(editElement){
+			var me = this;
+			editElement.removeClass(me.editMarker);
+			me.currentEdit = null;
+		},
+		
+		/**
+		 * only for inline edit
+		 * cancels any changes made and replaces the HTML with the pre-edit state
+		 * @method cancelChanges
+		 * @param tableClass {Object} table component class
+		 * @param editElement {jQuery Object} TD
+		 */
+		cancelChanges: function(tableClass, editElement){
+			var me = this;
+			
+			//reset html
+			me.resetCell(tableClass, editElement);
+		},
+		
+		/**
+		 * @method resetCell
+		 * @param value {Any} optional - if set, once the cell is reset to its original state, the value will be set
+		 */
+		resetCell: function(tableClass, editElement, value){
+			var me = this,
+				tdSpanClass = tableClass.tdSpanClass,
+				el = $(&quot;&gt; [fb-view-bind]&quot;, editElement);	//find the inline edit field
+			
+			me.removeCurrent(editElement);
+			
+			if(el.length){
+				//remove the edit field
+				el.remove();
+			}
+			
+			//reset html
+			editElement.children().removeClass( me.hideCellClass );
+			
+			if(value){
+				$(&quot;&gt; span.&quot; + tdSpanClass, editElement).html(value);
+			}
+		},
+		
+		/**
+		 * takes a value from the edit field and parses it accordingly - for example if the value of radio options should be numbers
+		 * @method parseValue
+		 * @param type {String} number, float etc
+		 * @param value {Any}
+		 * @return value {Any} parsed
+		 */
+		parseValue: function(type, value){
+			if(type === &quot;number&quot;){
+				return parseInt(value);
+			}else if(type === &quot;float&quot;){
+				return parseFloat(value);
+			}
+			return value;
+		},
+		
+		/**
+		 * @method makeChanges
+		 * @param tableClass {Object} table component class
+		 * @param editElement {jQuery Object} TR | TD
+		 * @event beforeChanges(tableClass, editElement)	- event fired on tableClass
+		 * @event afterChanges(tableClass, editElement)	- event fired on tableClass
+		 */
+		makeChanges: function(tableClass, editElement){
+				var me = this,
+					columns = tableClass.columns,
+					isTreeTable = tableClass.treetable,
+					inputs = editElement.find(&quot;input&quot;),
+					input,
+					value, //holder
+					model,
+					oldValue,
+					tdSpanClass = tableClass.tdSpanClass,	//needed for manual table alterations
+					editType = tableClass.editType,
+					isRow = editElement.is(&quot;tr&quot;),
+					rowNumber = isRow ? editElement.attr(me.indexAttr) : editElement.attr(me.rowAttr),
+					colNumber;	
+				
+				tableClass.fireEvent(&quot;beforeChanges&quot;, arguments);
+				
+				if(inputs.length){
+					for(var i = 0, l = inputs.length; i&lt;l; i++){
+						input = $(inputs[i]);
+						//filter out (continue) non checked (selected) checkboxes or radio buttons
+						if((input.attr(&quot;type&quot;) === &quot;radio&quot; || input.attr(&quot;type&quot;) === &quot;checkbox&quot;) &amp;&amp; !input.is(&quot;:checked&quot;)){
+							continue;
+						}
+						
+						colNumber = input.prop(me.dataProp);
+						//example tableClass.getData()() =&gt; 
+						//		[ 
+						//			[ [], [], [] ],	//row 0 with 3 column values (cells)
+						//			[ [], [], [] ], //row 1 with 3 column values
+						//			[ [], [], [] ]	//row 2 with 3 column values
+						//		]
+						if(isTreeTable){
+							model = tableClass.getData()()[rowNumber].children()[colNumber];
+						}else{
+							model = tableClass.getData()()[rowNumber][colNumber];
+						}
+						
+						oldValue = model.value ? model.value() : model;
+						
+						if(model){
+								value = input.val();
+								value = me.parseValue(columns[colNumber].type, value);
+								if(editType === &quot;cell&quot; &amp;&amp; value === oldValue){
+									return me.cancelChanges(tableClass, editElement);
+								}else{
+									if(model.value){
+										model.value(value);
+										//cell edit
+										if(!isRow){
+											me.resetCell(tableClass, editElement);	
+										}
+									}else{
+										if(value !== oldValue){
+											if(isTreeTable){
+												//the store data architecture for a treetable is slightly different, hence this &quot;if&quot; statement 
+												tableClass.getData()()[rowNumber].children()[colNumber] = value;
+											}else{
+												tableClass.getData()()[rowNumber][colNumber] = value;
+											}
+											//not an observable so make changes in table manually
+											if(isRow){
+												$(&quot;td[&quot;+me.rowAttr+&quot;=&quot;+rowNumber+&quot;][&quot;+me.indexAttr+&quot;=&quot;+colNumber+&quot;] span.&quot; + tdSpanClass).html(value);
+											}else{
+												//cell edit
+												me.resetCell(tableClass, editElement, value);
+											}
+										}
+									}
+								}
+							
+						}
+						
+					}
+				}
+				
+				tableClass.fireEvent(&quot;afterChanges&quot;, arguments);
+		},
+		
+		/**
+		 * @method buildModal
+		 * @param clazz {Object} component
+		 * @param editFields {Object}
+		 * @param editFields.deps {Array of Strings requirejs dependencies}
+		 * @param editFields.items {Array of Object} items configuration for the body of the modal
+		 * @param $tr {jQuery Object} tr that is to be edited
+		 */
+		buildModal: function(clazz, editFields, $tr){
+			var me = this,
+				customConfig = clazz.editModalConfig || {},
+				
+				defaultConfig = {
+					title: customConfig.modalTitle || &quot;Edit&quot;,
+					target: $tr,
+					items:[{
+						sName: &quot;containers.form&quot;,
+						preSubmit: function(){
+							var me2 = this;
+							
+							//make changes to table
+							me.makeChanges(clazz, $tr);
+							//hide the modal
+							$(me2._parent.getElement()).modal(&quot;hide&quot;);
+							
+							//prevent default form submission
+							return false;
+						},
+						items: editFields.items
+					}]
+				};
+				
+			if(customConfig._showEditButtons !== false){
+				defaultConfig.footerItems = [{
+					sName: &quot;button.button&quot;,
+					closeModal:true,	//hide modal
+					text: customConfig.buttonUpdateText || &quot;Update&quot;,
+					handler: function(){
+						me.makeChanges(clazz, $tr);
+					}
+				}];
+			}
+				
+			customConfig = Firebrick.utils.overwrite(defaultConfig, customConfig);
+			
+			//add standard dependencies
+			editFields.deps.push( Firebrick.classes.getSNameConfig(&quot;containers.modal&quot;).path );
+			editFields.deps.push( Firebrick.classes.getSNameConfig(&quot;containers.form&quot;).path ); 
+			editFields.deps.push( Firebrick.classes.getSNameConfig(&quot;button.button&quot;).path );
+			
+			me.tableLoadMask(clazz.getElement());
+			require(editFields.deps, function(){
+				Firebrick.create(&quot;Firebrick.ui.containers.Modal&quot;, customConfig);
+				me.removeTableLoadMask(clazz.getElement());
+			});
+		},
+		
+		/**
+		 * @method tableLoadMask
+		 * @param $table {jquery Object} table
+		 */
+		tableLoadMask: function($table){
+			var me = this,
+				tbody = $(&quot;tbody&quot;, $table),
+				div = $(&quot;&lt;div class=&#x27;fb-ui-load-mask&#x27;&gt;&lt;/div&gt;&quot;);
+			tbody.addClass(me.rowLoadClass);
+			me.appendLoadIcon(div);
+			tbody.append(div);
+			
+		},
+		
+		/**
+		 * @method removeTableLoadMask
+		 * @param $table {jquery Object} table 
+		 */
+		removeTableLoadMask: function($table){
+			var me = this,
+				tbody = $(&quot;tbody&quot;, $table);
+			tbody.removeClass(me.rowLoadClass);
+			$(&quot;&gt; div.fb-ui-load-mask&quot;, tbody).remove();
+		},
+		
+		/**
+		 * @method appendLoadIcon
+		 * @param $context {jquery Object} to append icon too
+		 */
+		appendLoadIcon: function($context){
+			$context.append(&quot;&lt;span class=&#x27;fb-ui-load-block glyphicon glyphicon-refresh glyphicon-refresh-animate&#x27;&gt;&lt;/span&gt;&quot;);
+		},
+		
+		/**
+		 * @method appendLoadIcon
+		 * @param $context {jquery Object} to remove icon from
+		 */
+		removeLoadIcon: function($context){
+			$(&quot;&gt; .fb-ui-load-block&quot;, $context).remove();
+		},
+		
+		/**
+		 * @method buildCellEditor
+		 * @param clazz {Object} component
+		 * @param editFields {Object}
+		 * @param editFields.deps {Array of Strings requirejs dependencies}
+		 * @param editFields.items {Array of Object} items configuration for the body of the modal
+		 * @param $td {jQuery Object} td that is to be edited
+		 */
+		buildCellEditor: function(clazz, editFields, $td){
+			var me = this;
+			editFields.deps.push(Firebrick.classes.getSNameConfig(&quot;containers.box&quot;).path);
+			
+			me.appendLoadIcon($td);
+			require(editFields.deps, function(){
+				var field = editFields.items[0];
+				
+				$td.children().addClass( me.hideCellClass );
+				
+				field.label = false;
+				field.inputWidth = 12;
+				field.inputContainerBindings = me.cellEditInputContainerBindings();
+
+				field.init = me._cellEditInit(clazz, $td);
+				//build edit field
+				Firebrick.create(&quot;containers.box&quot;, {
+					target: $td,
+					appendTarget: true,
+					enclosedBind: true,
+					items: [field]
+				});	
+				
+				me.removeLoadIcon($td);
+			});
+		},
+		
+		/**
+		 * @method initEditingTR
+		 * @param clazz {Object} component class Firebrick.getById($table.attr(&quot;id&quot;))
+		 * @param $table {jQuery Object} table element
+		 * @param $tr {jQuery Object} tr that was double clicked
+		 */
+		initEditingTR: function(clazz, $table, $tr){
+			var me = this,
+				//holder - this populates the fields that are shown in the edit mask &quot;.items&quot;
+				editFields = me.editFields($tr, clazz, clazz.columns);
+			
+			if(editFields.items.length){
+				me.buildModal(clazz, editFields, $tr);
+			}
+		},
+		
+		/**
+		 * @method initEditingTD
+		 * @param clazz {Object} component class Firebrick.getById($table.attr(&quot;id&quot;))
+		 * @param $table {jQuery Object} table element
+		 * @param $tr {jQuery Object} td that was double clicked
+		 */
+		initEditingTD: function(clazz, $table, $td){
+			var me = this,
+				currentEdit = me.currentEdit,
+				index = $td.attr(me.indexAttr),
+				//holder - this populates the fields that are shown in the edit mask &quot;.items&quot;
+				editFields, 
+				globalClick;
+			
+			if(me.currentEdit){
+				if(me.currentEdit.is($td)){
+					//same cell that is already open
+					return;
+				}else{
+					//different cell, close the open one
+					me.makeChanges(clazz, currentEdit);
+				}
+			}
+			
+			//register current edit
+			me.currentEdit = $td;
+			
+			/*
+			 * listener for clicking outside the edit cell
+			 */
+			globalClick = function(event){
+				var $target = $(event.target),
+					current = me.currentEdit;
+				//different cell, close the open one
+				if(current){
+					//is the clicked target the edit element and not anything inside it
+					if(!current.is($target) &amp;&amp; !current.has($target).length){
+						//make changes (i.e. act like a &quot;blur&quot; event) and remove this click listener
+						me.makeChanges(clazz, current);
+						$(document).off(&quot;click&quot;, globalClick);					
+					}
+				}else{
+					//makeChanges has been called before this already
+					//ie. the currentEdit item has been closed elsewhere, so just delete the click event
+					$(document).off(&quot;click&quot;, globalClick);
+				}
+				
+			};
+			$(document).on(&quot;click&quot;, globalClick);
+			/* --- **/
+			
+			//check if this cell isn&#x27;t open for editing already
+			if(!$td.hasClass(me.editMarker)){
+				
+				//get the field to display for editing
+				editFields = me.editFields($td, clazz, [ clazz.columns[index] ]);
+				
+				if(editFields.items.length){
+					//add the css to mark as open for editing and show the field
+					$td.addClass(me.editMarker);
+					me.buildCellEditor(clazz, editFields, $td);
+				}
+			}
+		},
+		
+		
+		/*
+		 * 
+		 * 
+		 * 
+		 * 
+		 * Component method overrides
+		 * 
+		 * 
+		 * 
+		 * 
+		 * 
+		 */
+		/**
+		 * override InputContainerBindings function to add more properties 
+		 * @method cellEditInputContainerBindings
+		 * @return {Function}
+		 */
+		cellEditInputContainerBindings: function(){
+			return function(){
+				var me2 = this,
+					obj = me2.callParent(arguments);
+				
+				obj.css[&quot;&#x27;col-md-10&#x27;&quot;] = true;
+				obj.css[&quot;&#x27;col-lg-8&#x27;&quot;] = true;
+				
+				return obj;
+			};
+		},
+		
+		/**
+		 * @method _defaultRenderAction
+		 * @private
+		 * @param clazz {Object} component class
+		 * @param colNum {Integer}
+		 */
+		_defaultRenderAction: function(clazz, colNum){
+			var me = this,
+				el = clazz.getElement(),
+				type = clazz.type; 
+			if(el){
+				if(type === &quot;radio&quot; || type === &quot;checkbox&quot;){
+					//add to all inputs
+					//which input corresponds to which column number
+					$(&quot;input&quot;, el).prop(me.dataProp, colNum);
+				}else{
+					el.prop(me.dataProp, colNum);	
+				}
+			}
+		},
+		
+		/**
+		 * create a new init function with a rendered listener for the edit field
+		 * when an edit field is rendered, add the column number as a property to the field me.dataProp
+		 * @method _initFunction
+		 * @param colNum {Integer}
+		 * @return {Function}
+		 */
+		_initFunction: function(colNum){
+			var me = this;
+			return function(){
+				var me2 = this;
+				
+				me2.on(&quot;rendered&quot;, function(){
+					me._defaultRenderAction(me2, colNum);
+				});
+				
+				return me2.callParent(arguments);
+			};
+		},
+		
+		/**
+		 * override edit field init - cell edit only
+		 * @method _cellEditInit
+		 * @param clazz {Object} component clazz - edit field
+		 * @param $td {jQuery Object}
+		 */
+		_cellEditInit: function(clazz, $td){
+			var me = this;
+			return function(){
+				var me2 = this,
+					sName = me2.sName;
+				
+				me2.on(&quot;rendered&quot;, function(){
+					var el = me2.getElement(),
+						children,
+						f, f1;
+					
+					me._defaultRenderAction(me2, $td.attr(me.indexAttr));
+					
+					el.on(&quot;keydown&quot;, function(event){
+						var k = event.which;
+						if(k === 13){
+							me.makeChanges(clazz, $td);
+						}else if(k === 27){
+							me.cancelChanges(clazz, $td);
+						}
+					});
+					
+					if(sName !== &quot;fields.input&quot;){
+						children = el.is(&quot;input&quot;) ? el : el.find(&quot;input&quot;);
+						f = function(){
+							me.makeChanges(clazz, $td);
+							children.off(&quot;change&quot;, f);
+						};
+						children.on(&quot;change&quot;, f);
+					}else{
+						el.focus();
+					}
+					
+					
+				});
+				
+				return me2.callParent(arguments);
+			};
+		}
+		
+	});
+	
+	//jquery plugin to init editable table
+	$.fn.EditableTable = function(){
+		var $table = $(this),
+			elements,
+			plugin = Firebrick.create(&quot;Firebrick.ui.table.plugins.EditableTable&quot;),	//create Plugin Class instance
+			clazz = Firebrick.getById($table.attr(&quot;id&quot;)),
+			editType = clazz.editType,
+			eventCallback,
+			ths, $th;
+		
+		$table.addClass(&quot;fb-ui-editabletable&quot;);	
+		
+		if(editType === &quot;row&quot;){
+			$table.addClass(&quot;fb-ui-row-editing&quot;);
+			//for OPERA - http://stackoverflow.com/questions/7018324/how-do-i-stop-highlighting-of-a-div-element-when-double-clicking-on
+			$table.attr(&quot;unselectable&quot;, &quot;on&quot;);
+			elements = $(&quot;tr&quot;, $table);
+			eventCallback = function(){
+				var $this = $(this);
+				//stop the double click of taking event when a child element of TR is dblclicked
+				if($this.is(&quot;tr&quot;)){
+					plugin.initEditingTR(clazz, $table, $this);
+				}
+			};
+			
+		}else if (editType === &quot;cell&quot;){
+			/*
+			 * workaround to stop col width shifting from inline edit
+			 * datatable plugin stops this from happening
+			 */
+			if(!clazz.datatable){ //if not active
+				ths = $(&quot;&gt; thead th&quot;, $table);
+				for(var i = 0, l = ths.length; i&lt;l; i++){
+					$th = $(ths[i]);
+					$th.css(&quot;width&quot;, $th.width());
+				}
+			}
+			
+			//get the cells for the table
+			elements = $(&quot;tbody td&quot;, $table);
+			//create the correct event function
+			eventCallback = function(){
+				var $this = $(this);
+				if($this.is(&quot;td&quot;)){
+					plugin.initEditingTD(clazz, $table, $this);	
+				}
+			};
+		}
+		
+		//register event with callback
+		elements.on(&quot;dblclick&quot;, eventCallback);
+	};
+	
+});
+    </pre>
+</div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="../assets/vendor/prettify/prettify-min.js"></script>
+<script>prettyPrint();</script>
+<script src="../assets/js/yui-prettify.js"></script>
+<script src="../assets/../api.js"></script>
+<script src="../assets/js/api-filter.js"></script>
+<script src="../assets/js/api-list.js"></script>
+<script src="../assets/js/api-search.js"></script>
+<script src="../assets/js/apidocs.js"></script>
+</body>
+</html>

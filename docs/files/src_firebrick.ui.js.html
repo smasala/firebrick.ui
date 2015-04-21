@@ -19,7 +19,7 @@
             
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 0.13.0</em>
+            <em>API Docs for: 0.14.0</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -74,6 +74,8 @@
                 <li><a href="../classes/components.containers.BorderLayout.html">components.containers.BorderLayout</a></li>
             
                 <li><a href="../classes/components.containers.Box.html">components.containers.Box</a></li>
+            
+                <li><a href="../classes/components.containers.Fieldset.html">components.containers.Fieldset</a></li>
             
                 <li><a href="../classes/components.containers.Form.html">components.containers.Form</a></li>
             
@@ -145,7 +147,11 @@
             
                 <li><a href="../classes/helper.html">helper</a></li>
             
+                <li><a href="../classes/plugins.ContextMenu.html">plugins.ContextMenu</a></li>
+            
                 <li><a href="../classes/plugins.Draggable.html">plugins.Draggable</a></li>
+            
+                <li><a href="../classes/plugins.EditableTable.html">plugins.EditableTable</a></li>
             
                 <li><a href="../classes/plugins.RadioList.html">plugins.RadioList</a></li>
             
@@ -249,16 +255,7 @@
 			 * @private
 			 * @type {String}
 			 */
-			version: &quot;0.13.0&quot;,
-			
-			/**
-			 * used to cache pointers to classes when searching by &quot;uiName&quot;
-			 * 
-			 * @private
-			 * @property _searchCache
-			 * @type {Object}
-			 */
-			_searchCache:{},
+			version: &quot;0.14.0&quot;,
 			
 			/**
 			 * populate a target with fields and data
@@ -266,7 +263,7 @@
 			 * @method build
 			 * @param {Object} config
 			 * @param {Object} config.target selector string, jquery object (optional) if none passed, html is returned
-			 * @param {Object} config.items array of strings or objects [&quot;fb-ui-input&quot;, {uiName:&quot;fb-ui-textarea&quot;}]
+			 * @param {Object} config.items array of strings or objects [&quot;fb-ui-input&quot;, {sName:&quot;fb-ui-textarea&quot;}]
 			 * @param {Object} config.view Firebrick view class (optional), must be defined for rendered event to be fired
 			 * @return {String} html
 			 */
@@ -295,45 +292,6 @@
 				}
 				
 				return html;
-			},
-			
-			/**
-			 * components uiNames are populated into this map for variable access
-			 * fb.ui.cmp.input
-			 * @property cmp
-			 * @private not to be modified
-			 * @type {Object}
-			 * @default {}
-			 */
-			cmp:{},
-			
-			/**
-			 * this function is called when defining a component.
-			 * @method addUIName
-			 * @param uiName {String}
-			 */
-			addUIName: function(uiName){
-				var name,
-					dot,
-					bits;
-				
-				if(uiName){
-					name = uiName.substr(uiName.lastIndexOf(&quot;-&quot;)+1);
-					dot = name.indexOf(&quot;.&quot;);
-					if(dot === 0){
-						console.error(&quot;illegal uiName. The name cannot begin with a &#x27;.&#x27; &quot;, uiName);
-					}else if(dot &gt;= 1){
-						bits = name.split(&quot;.&quot;);
-						name = bits.shift(); //get and remove first item
-						//get the first item &#x27;a&#x27;
-						Firebrick.ui.cmp[ name ] = Firebrick.ui.utils._buildDotObj(bits, uiName);
-					}else{
-						//no dot annotation
-						//create variable
-						Firebrick.ui.cmp[name] = uiName;
-					}
-					
-				}
 			},
 			
 			/**
@@ -394,12 +352,12 @@
 					
 					if(!v.uiComponent){
 						//v can be string or object
-						tmp = me.getByShortName(v.uiName || v);
+						tmp = Firebrick.get(v.sName || v);
 						if(!tmp){
-							console.error(&quot;Has&quot;, (v.uiName || v), &quot;been added as a dependency?&quot;);
+							console.error(&quot;Has&quot;, (v.sName || v), &quot;been added as a dependency?&quot;);
 						}
 						//Object.getPrototypeOf(object.create) to make a new copy of the properties and not a pointer to v
-						component = Firebrick.create(tmp._classname, (v.uiName ? Object.getPrototypeOf(Object.create(v)) : null));
+						component = Firebrick.create(tmp._classname, (v.sName ? Object.getPrototypeOf(Object.create(v)) : null));
 					}else{
 						//v is already a field class
 						component = v;
@@ -423,7 +381,7 @@
 			 * this method converts shorthand component definitions
 			 * @example
 			 * 		//component definition    &quot;|&quot;
-			 * 		//converts to the component &lt;hr&gt;  -  fb.ui.cmp.hr
+			 * 		//converts to the component &lt;hr&gt; 
 			 * @method _componentFilter
 			 * @private
 			 * @param v {String}
@@ -435,42 +393,12 @@
 				if(typeof name === &quot;string&quot;){
 					switch(name){
 						case &quot;|&quot;:
-							name = &quot;fb-ui-divider&quot;;
+							name = &quot;display.divider&quot;;
 							break;
 					}
 				}
 				
 				return name;
-			},
-			
-			/**
-			 * get a component class by its shortname... uiName
-			 * 
-			 * @method getByShortName
-			 * @param {String} name (uiName)
-			 * @return {Object}
-			 */
-			getByShortName: function(name){
-				var me = this,
-					item = me._searchCache[name];
-				if(!item){
-					var k, v;
-					for(k in Firebrick.classes._classRegistry){
-						if(Firebrick.classes._classRegistry.hasOwnProperty(k)){
-							v = Firebrick.classes._classRegistry[k];
-							if(v.uiComponent &amp;&amp; v.uiName === name){
-								item = v;
-								me._searchCache[name] = v;
-								break;
-							}
-						}
-					}
-				}
-				
-				if(!item){
-					console.error(&quot;ui component&quot;, name, &quot;not found&quot;);
-				}
-				return item;
 			},
 			
 			/**
@@ -509,16 +437,16 @@
 				 *			a:{ 
 				 *				b:{ 
 				 *					c:{ 
-				 *						d:uiName 
+				 *						d:sName 
 				 *					} 
 				 *				} 
 				 *			}
 				 * @param arr {Array of Strings}
-				 * @param uiName {String} the original uiName
+				 * @param sName {String} the original sName
 				 * @param prev {Object} optional, used by recursion
 				 * @return {Object}
 				 */
-				_buildDotObj: function(arr, uiName, prev){
+				_buildDotObj: function(arr, sName, prev){
 					var me = this,
 						prop = arr.shift(); //remove the first item use it as property name
 					
@@ -531,13 +459,13 @@
 					if(arr.length){
 						if(arr[0] !== &quot;&quot;){
 							//call self recursively
-							me._buildDotObj(arr, uiName, prev[ prop ]);
+							me._buildDotObj(arr, sName, prev[ prop ]);
 						}else{
-							console.error(&quot;error building uiName, found empty string&quot;, arr, prop, uiName);
+							console.error(&quot;error building sName, found empty string&quot;, arr, prop, sName);
 						}
 						
 					}else{
-						prev[ prop ] = uiName;
+						prev[ prop ] = sName;
 					}
 					
 					return prev;
@@ -704,10 +632,149 @@
 					}
 					return me._registry[name];
 				}
+			},
+			
+			/**
+			 * @property _sNames
+			 * @private
+			 * @type {Object}
+			 */
+			_sNames: {
+					&quot;button.dropdown.list&quot;:{
+						path:&quot;Firebrick.ui/button/dropdown/List&quot;
+					},
+					&quot;button.button&quot;:{
+						path:&quot;Firebrick.ui/button/Button&quot;
+					},
+					&quot;button.buttongroup&quot;:{
+						path:&quot;Firebrick.ui/button/ButtonGroup&quot;
+					},
+					&quot;button.icon&quot;:{
+						path:&quot;Firebrick.ui/button/Icon&quot;
+					},
+					&quot;button.togglebutton&quot;:{
+						path:&quot;Firebrick.ui/button/ToggleButton&quot;
+					},
+					&quot;containers.border.pane&quot;:{
+						path:&quot;Firebrick.ui/containers/border/Pane&quot;
+					},
+					&quot;containers.tab.pane&quot;:{
+						path:&quot;Firebrick.ui/containers/tab/Pane&quot;
+					},
+					&quot;containers.accordion&quot;:{
+						path:&quot;Firebrick.ui/containers/Accordion&quot;
+					},
+					&quot;containers.borderlayout&quot;:{
+						path:&quot;Firebrick.ui/containers/BorderLayout&quot;
+					},
+					&quot;containers.box&quot;:{
+						path:&quot;Firebrick.ui/containers/Box&quot;
+					},
+					&quot;containers.form&quot;:{
+						path:&quot;Firebrick.ui/containers/Form&quot;
+					},
+					&quot;containers.formpanel&quot;:{
+						path:&quot;Firebrick.ui/containers/FormPanel&quot;
+					},
+					&quot;containers.gridcolumn&quot;:{
+						path:&quot;Firebrick.ui/containers/GridColumn&quot;
+					},
+					&quot;containers.gridrow&quot;:{
+						path:&quot;Firebrick.ui/containers/GridRow&quot;
+					},
+					&quot;containers.modal&quot;:{
+						path:&quot;Firebrick.ui/containers/Modal&quot;
+					},
+					&quot;containers.fieldset&quot;: {
+						path:&quot;Firebrick.ui/containers/Fieldset&quot;
+					},
+					&quot;containers.panel&quot;:{
+						path:&quot;Firebrick.ui/containers/Panel&quot;
+					},
+					&quot;containers.tabpanel&quot;:{
+						path:&quot;Firebrick.ui/containers/TabPanel&quot;
+					},
+					&quot;display.alert&quot;:{
+						path:&quot;Firebrick.ui/display/Alert&quot;
+					},
+					&quot;display.divider&quot;:{
+						path:&quot;Firebrick.ui/display/Divider&quot;
+					},
+					&quot;display.header&quot;:{
+						path:&quot;Firebrick.ui/display/Header&quot;
+					},
+					&quot;display.image&quot;:{
+						path:&quot;Firebrick.ui/display/Image&quot;
+					},
+					&quot;display.list&quot;:{
+						path:&quot;Firebrick.ui/display/List&quot;
+					},
+					&quot;display.progress&quot;:{
+						path:&quot;Firebrick.ui/display/Progress&quot;
+					},
+					&quot;display.span&quot;:{
+						path:&quot;Firebrick.ui/display/Span&quot;
+					},
+					&quot;display.text&quot;:{
+						path:&quot;Firebrick.ui/display/Text&quot;
+					},
+					&quot;fields.checkbox&quot;:{
+						path:&quot;Firebrick.ui/fields/Checkbox&quot;
+					},
+					&quot;fields.datepicker&quot;:{
+						path:&quot;Firebrick.ui/fields/DatePicker&quot;
+					},
+					&quot;fields.display&quot;:{
+						path:&quot;Firebrick.ui/fields/Display&quot;
+					},
+					&quot;fields.email&quot;:{
+						path:&quot;Firebrick.ui/fields/Email&quot;
+					},
+					&quot;fields.file&quot;:{
+						path:&quot;Firebrick.ui/fields/File&quot;
+					},
+					&quot;fields.input&quot;:{
+						path:&quot;Firebrick.ui/fields/Input&quot;
+					},
+					&quot;fields.password&quot;:{
+						path:&quot;Firebrick.ui/fields/Password&quot;
+					},
+					&quot;fields.radio&quot;:{
+						path:&quot;Firebrick.ui/fields/Radio&quot;
+					},
+					&quot;fields.selectbox&quot;:{
+						path:&quot;Firebrick.ui/fields/SelectBox&quot;
+					},
+					&quot;fields.textarea&quot;:{
+						path:&quot;Firebrick.ui/fields/TextArea&quot;
+					},
+					&quot;nav.breadcrumbs&quot;:{
+						path:&quot;Firebrick.ui/nav/Breadcrumbs&quot;	
+					},
+					&quot;nav.list&quot;:{
+						path:&quot;Firebrick.ui/nav/List&quot;
+					},
+					&quot;nav.navbar&quot;:{
+						path:&quot;Firebrick.ui/nav/Navbar&quot;
+					},
+					&quot;nav.pagination&quot;:{
+						path:&quot;Firebrick.ui/nav/Pagination&quot;
+					},
+					&quot;nav.toolbar&quot;:{
+						path:&quot;Firebrick.ui/nav/Toolbar&quot;	
+					},
+					&quot;table.table&quot;:{
+						path:&quot;Firebrick.ui/table/Table&quot;
+					},
+					&quot;table.treetable&quot;:{
+						path:&quot;Firebrick.ui/table/TreeTable&quot;
+					}
 			}
 			
-			
 	};
+	
+	Firebrick.classes.addSNames(Firebrick.ui._sNames);
+	
 	
 	/**
 	 * Overwrites &quot;Firebrick.view.Base&quot; 
@@ -730,7 +797,20 @@
 			htmlRendered: 1,
 			unbound: 1
 		},
-
+		
+		/**
+		 * used with passDownEvents
+		 * @property passToProperties
+		 * @type {Object}
+		 * @default {
+		 * 	items: 1
+		 * }
+		 */
+		passToProperties:{
+			items: 1,
+			inputAddon: 1
+		},
+		
 		listeners: {
 			preReady: function(){
 				var me = this,
@@ -738,6 +818,8 @@
 				if(me.passDownEvents){
 					
 					Firebrick.utils.merge(&quot;passDownEvents&quot;, me);
+					Firebrick.utils.merge(&quot;passToProperties&quot;, me);
+					
 					for(k in me.passDownEvents){
 						if(me.passDownEvents.hasOwnProperty(k)){
 							me.on(k, me._createPassEvent());
@@ -756,17 +838,26 @@
 		_createPassEvent: function(){
 			return function(){
 				var me = this,
-				items = me.items,
-				args = arguments;
-				if($.isArray(items)){
-					var cmp;
-					for(var i = 0, l = items.length; i&lt;l; i++){
-						cmp = items[i];
-						if(cmp.passEvent){
-							cmp.passEvent(args);
+				items,
+				args = arguments,
+				key,
+				cmp,
+				properties = me.passToProperties;
+				
+				for(key in properties){
+					items = me[key];
+					if(items){
+						if($.isArray(items)){
+							for(var i = 0, l = items.length; i&lt;l; i++){
+								cmp = items[i];
+								if(cmp.passEvent){
+									cmp.passEvent(args);
+								}
+							}
 						}
 					}
 				}
+				
 			};
 		},
 		
@@ -810,6 +901,16 @@
 	 
 	        // Also tell KO *not* to bind the descendants itself, otherwise they will be bound twice
 	        return { controlsDescendantBindings: true };
+	    }
+	};
+	
+	/*
+	 * use debug to simply console out any given arguments
+	 * http://www.knockmeout.net/2013/06/knockout-debugging-strategies-plugin.html
+	 */
+	ko.bindingHandlers.debug = {
+	    init: function(element, valueAccessor, allBindings, viewModel, bindingContext) {
+	       console.warn(&quot;Debug:&quot;, element, valueAccessor(), allBindings(), viewModel, bindingContext);
 	    }
 	};
 	

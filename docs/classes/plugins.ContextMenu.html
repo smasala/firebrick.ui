@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>src\components\display\Image.js - Firebrick UI API</title>
+    <title>plugins.ContextMenu - Firebrick UI API</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -208,105 +208,66 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-                        <h1 class="file-heading">File: src\components\display\Image.js</h1>
+                        <h1>plugins.ContextMenu Class</h1>
+<div class="box meta">
+    
 
-<div class="file">
-    <pre class="code prettyprint linenums">
-/*!
-* @author Steven Masala [me@smasala.com]
-*/
+    
 
-/**
- * @module Firebrick.ui.components
- * @extends components.common.Base
- * @namespace components.display
- * @class Image
- */
-define([&quot;text!./Image.html&quot;, &quot;../common/Base&quot;, &quot;responsive-images&quot;], function(tpl){
-	&quot;use strict&quot;;
-	return Firebrick.define(&quot;Firebrick.ui.display.Image&quot;, {
-		extend:&quot;Firebrick.ui.common.Base&quot;,
-		sName:&quot;display.image&quot;,
-		tpl: tpl,
-		/**
-		 * @method init
-		 */
-		init: function(){
-			var me = this;
-			me.on(&quot;rendered&quot;, function(){
-				if(window.responsiveImages){
-					window.responsiveImages.update(me.getId());
-				}
-			});
-			this.callParent(arguments);
-		},
-		/**
-		 * @property src
-		 * @type {String}
-		 * @default &quot;&quot;
-		 */
-		src: &quot;&quot;,
-		/**
-		 * use this property for responsive images. Define in order of sizes with the largest first!
-		 * @example &quot;xl, l, m, s, xs&quot;
-		 * @property sizes
-		 * @type {String} predefined sizes or media queries
-		 * @default &quot;&quot;
-		 */
-		sizes: &quot;&quot;,
-		/**
-		 * use this property in conjunction with &quot;sizes&quot; - mirror the image sizes with that of the &quot;sizes&quot; order
-		 * @example &quot;dogXL.jpg, dogL.jpg, dogM.jpg, dogS.jpg, dogXS.jpg&quot;
-		 * @property srcset
-		 * @type {String} url(s)
-		 * @default &quot;&quot;
-		 */
-		srcset: &quot;&quot;,
-		/**
-		 * sets &quot;img-responsive&quot; to the image
-		 * @property responsiveClass
-		 * @type {Boolean}
-		 * @default true
-		 */
-		responsiveClass: true,
-		/**
-		 * &quot;rounded, &quot;circle&quot;, &quot;thumbnail&quot;
-		 * @property imgType
-		 * @type {String|Boolean}
-		 * @default &quot;rounded&quot;
-		 */
-		imgType: &quot;rounded&quot;,
-		/**
-		 * @method bindings
-		 * @return {Object}
-		 */
-		bindings: function(){
-			var me = this,
-				obj = me.callParent(arguments);
-			
-			obj.css[&quot;&#x27;img-responsive&#x27;&quot;] = me.responsiveClass;
+    
+        <div class="foundat">
+            Defined in: <a href="../files/src_components_common_plugins_ContextMenu.js.html#l5"><code>src\components\common\plugins\ContextMenu.js:5</code></a>
+        </div>
+    
 
-			if(me.imgType){
-				obj.css[ me.parseBind( &quot;img-&quot;+me.imgType ) ] = true;
-			}
-			
-			if(me.sizes){
-				obj.attr[&quot;&#x27;data-sizes&#x27;&quot;] = me.sizes;
-			}
-			
-			if(me.srcset){
-				obj.attr[&quot;&#x27;data-srcset&#x27;&quot;] = me.srcset;
-			}
-			
-			if(me.src){
-				obj.attr.src = me.src;
-			}
-			
-			return obj;
-		}
-	});
-});
-    </pre>
+    
+        
+            Module: <a href="../modules/plugins.html">plugins</a>
+        
+    
+
+    
+</div>
+
+
+
+<div class="box intro">
+    
+</div>
+
+
+
+<div id="classdocs" class="tabview">
+    <ul class="api-class-tabs">
+        <li class="api-class-tab index"><a href="#index">Index</a></li>
+
+        
+        
+        
+        
+    </ul>
+
+    <div>
+        <div id="index" class="api-class-tabpanel index">
+            <h2 class="off-left">Item Index</h2>
+
+            
+
+            
+
+            
+
+            
+        </div>
+
+        
+
+        
+
+        
+
+        
+    </div>
 </div>
 
                     </div>
