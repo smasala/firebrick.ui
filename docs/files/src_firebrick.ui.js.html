@@ -310,15 +310,32 @@
 				if($.isFunction(items)){
 					items = items();
 				}
+
+				if(!$.isArray(items) &amp;&amp; items){
+					items = [items];
+				}
 				
-				for(var i = 0, l = items.length; i&lt;l; i++){
-					component = me._buildComponent(items[i], parent);
-					html += component._html;
-					//cache component pointer so it can be found by id
-					if(!component.getId){
-						console.error(&quot;something went wrong&quot;, items[i], &quot;is it defined correctly? Check the item name and dependency include&quot;);
+				if($.isArray(items) &amp;&amp; items.length){
+					
+					if(parent.defaults){
+						//get all defaults down the prototype tree
+						Firebrick.utils.merge(&quot;defaults&quot;, parent);
+						//add the defaults to direct items
+						//TODO: if items is a function?
+						for(var i = 0, l = items.length; i&lt;l; i++){
+							items[i] = Firebrick.utils.copyover(items[i], parent.defaults);
+						}
 					}
-					_items.push(component);
+					
+					for(var i = 0, l = items.length; i&lt;l; i++){
+						component = me._buildComponent(items[i], parent);
+						html += component._html;
+						//cache component pointer so it can be found by id
+						if(!component.getId){
+							console.error(&quot;something went wrong&quot;, items[i], &quot;is it defined correctly? Check the item name and dependency include&quot;);
+						}
+						_items.push(component);
+					}
 				}
 				
 				return {html: html, items: _items};

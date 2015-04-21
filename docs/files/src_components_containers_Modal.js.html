@@ -254,8 +254,8 @@ define([&quot;text!./Modal.html&quot;, &quot;./Base&quot;], function(tpl){
 		 */
 		showMe: function(){
 			var me = this,
-				modal = me.getElement();
-			if(modal){
+				modal = $(&quot;&gt; .modal&quot;, me.getElement());
+			if(modal.length){
 				modal.modal();
 			}
 		},
