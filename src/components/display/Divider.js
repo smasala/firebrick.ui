@@ -13,10 +13,10 @@ define(["text!./Divider.html", "../common/Base"], function(tpl){
 	return Firebrick.define("Firebrick.ui.display.Divider", {
 		extend:"Firebrick.ui.common.Base",
 		/**
-		 * @property uiName
+		 * @property sName
 		 * @type {String}
 		 */
-		uiName:"fb-ui-divider",
+		sName:"display.divider",
 		/**
 		 * @property tpl
 		 * @type {html}

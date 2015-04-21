@@ -12,7 +12,7 @@ define(["./Navbar"], function(){
 	"use strict";
 	return Firebrick.define("Firebrick.ui.nav.Toolbar", {
 		extend:"Firebrick.ui.nav.Navbar",
-		uiName:"fb-ui-toolbar",
+		sName:"nav.toolbar",
 		showBranding:false,
 		/**
 		 * possible positions: top, bottom

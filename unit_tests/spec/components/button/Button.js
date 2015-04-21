@@ -7,15 +7,14 @@ define(["firebrick-ui", "Firebrick.ui/button/Button"], function(){
 	
 	describe("Button.Button:", function(){
 		
-		var name = "fb-ui-button",
+		var name = "button.button",
 			cmp = Firebrick.create("ButtonTest", {
 					extend:"Firebrick.ui.button.Button"
 			});
 		
 		it("Defined", function(){
 			expect(cmp).toBeDefined();
-			expect(cmp.uiName).toBe(name);
-			expect(fb.ui.cmp.button).toBe(name);
+			expect(cmp.sName).toBe(name);
 		});
 		
 	});

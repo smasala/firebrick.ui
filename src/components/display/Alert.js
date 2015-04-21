@@ -15,7 +15,7 @@ define(["text!./Alert.html", "../common/Base", "../common/mixins/Items"], functi
 		extend: "Firebrick.ui.common.Base",
 		mixins:"Firebrick.ui.common.mixins.Items",
 		tpl: tpl,
-		uiName:"fb-ui-alert",
+		sName:"display.alert",
 		/**
 		 * whether the alert is dismissible - also controls whether the X button is shown or not
 		 * @property dismissible
@@ -44,12 +44,19 @@ define(["text!./Alert.html", "../common/Base", "../common/mixins/Items"], functi
 		 */
 		title:"",
 		/**
-		 * if set, .items will be ignored
-		 * @property content
+		 * store property key
+		 * @property storeProp
 		 * @type {String}
 		 * @default ""
 		 */
-		content:"",
+		storeProp: "",
+		/**
+		 * fill the panel body with html
+		 * @property html
+		 * @type {String}
+		 * @default ""
+		 */
+		html: "",
 		/**
 		 * @method bindings
 		 * @return {Object}
@@ -68,6 +75,23 @@ define(["text!./Alert.html", "../common/Base", "../common/mixins/Items"], functi
 			
 			return obj;
 		},
+		/**
+		 * @method paragraphBindings
+		 * @return {Object}
+		 */
+		paragraphBindings: function(){
+			var me = this,
+				obj = {};
+			
+			if(me.storeProp){
+				obj.html = me.storeProp;
+			}else{
+				obj.html = "Firebrick.getById('"+me.getId()+"').html";
+			}
+			
+			return obj;
+		},
+		
 		/**
 		 * screen reader text
 		 * @property srCloseText

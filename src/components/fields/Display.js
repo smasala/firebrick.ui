@@ -15,11 +15,11 @@ define(["text!./Display.html", "./Input"], function(subTpl){
 	return Firebrick.define("Firebrick.ui.fields.Display", {
 		extend:"Firebrick.ui.fields.Input",
 		/**
-		 * @property uiName
+		 * @property sName
 		 * @type {String}
 		 * @default "fb-ui-display"
 		 */
-		uiName: "fb-ui-display",
+		sName: "fields.display",
 		/**
 		 * overwrite input formControlClass
 		 * @property formControlClass

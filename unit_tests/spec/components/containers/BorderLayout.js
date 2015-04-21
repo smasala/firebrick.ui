@@ -7,15 +7,14 @@ define(["firebrick-ui", "Firebrick.ui/containers/BorderLayout"], function(){
 	
 	describe("containers.BorderLayout:", function(){
 		
-		var name = "fb-ui-borderlayout",
+		var name = "containers.borderlayout",
 			cmp = Firebrick.create("BorderLayoutTest", {
 					extend:"Firebrick.ui.containers.BorderLayout"
 			});
 		
 		it("Defined", function(){
 			expect(cmp).toBeDefined();
-			expect(cmp.uiName).toBe(name);
-			expect(fb.ui.cmp.borderlayout).toBe(name);
+			expect(cmp.sName).toBe(name);
 		});
 		
 	});

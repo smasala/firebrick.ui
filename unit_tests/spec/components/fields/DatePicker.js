@@ -7,15 +7,14 @@ define(["firebrick-ui", "Firebrick.ui/fields/DatePicker"], function(){
 	
 	describe("Fields.DatePicker:", function(){
 		
-		var name = "fb-ui-datepicker",
+		var name = "fields.datepicker",
 			cmp = Firebrick.create("DatePickerTest", {
 					extend:"Firebrick.ui.fields.DatePicker"
 			});
 		
 		it("Defined", function(){
 			expect(cmp).toBeDefined();
-			expect(cmp.uiName).toBe(name);
-			expect(fb.ui.cmp.datepicker).toBe(name);
+			expect(cmp.sName).toBe(name);
 		});
 		
 	});

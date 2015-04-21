@@ -14,10 +14,10 @@ define(["text!./Panel.html", "jquery", "./Base", "../nav/Toolbar", "../common/mi
 		extend:"Firebrick.ui.containers.Base",
 		mixins:"Firebrick.ui.common.mixins.Toolbars",
 		/**
-		 * @property uiName
+		 * @property sName
 		 * @type {String}
 		 */
-		uiName: "fb-ui-panel",
+		sName: "containers.panel",
 		/**
 		 * @property tpl
 		 * @type {String} html
@@ -81,12 +81,12 @@ define(["text!./Panel.html", "jquery", "./Base", "../nav/Toolbar", "../common/mi
 		 */
 		panelTitleClass: true,
 		/**
-		 * fill the panel body (can be html too)
-		 * @property content
+		 * store property key
+		 * @property storeProp
 		 * @type {String}
 		 * @default ""
 		 */
-		content: "",
+		storeProp: "",
 		/**
 		 * fill the panel body with html
 		 * @property html
@@ -415,8 +415,13 @@ define(["text!./Panel.html", "jquery", "./Base", "../nav/Toolbar", "../common/mi
 					}
 				};
 			
-			if(!me.items && (me.content || me.html)){
-				obj.html = me.html ? "Firebrick.getById('"+me.getId()+"').html" : me.content;
+			
+			if(!me.items){
+				if(me.storeProp){
+					obj.html = me.storeProp;
+				}else{
+					obj.html = "Firebrick.getById('"+me.getId()+"').html";
+				}
 			}
 			
 			me.toolbarContainer(obj);

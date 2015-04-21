@@ -13,10 +13,10 @@ define(["./Input"], function(){
 	return Firebrick.define("Firebrick.ui.fields.Email", {
 		extend:"Firebrick.ui.fields.Input",
 		/**
-		 * @property uiName
+		 * @property sName
 		 * @type {String}
 		 */
-		uiName: "fb-ui-email",
+		sName: "fields.email",
 		/**
 		 * @property type
 		 * @type {String}

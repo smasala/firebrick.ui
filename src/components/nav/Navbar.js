@@ -13,7 +13,7 @@ define(["text!./Navbar.html", "./Base", "./List"], function(tpl){
 	return Firebrick.define("Firebrick.ui.nav.Navbar", {
 		extend:"Firebrick.ui.nav.Base",
 		tpl:tpl,
-		uiName:"fb-ui-navbar",
+		sName:"nav.navbar",
 		/**
 		 * passed on to the toolbar items (direct children only)
 		 * @property toolbarDefaults

@@ -8,16 +8,16 @@
  * @namespace components.table
  * @class Table
  */
-define(["jquery", "text!./Table.html", "../common/Base", "datatables", "responsive-tables-js"], function($, tpl){
+define(["knockout-mapping", "jquery", "text!./Table.html", "../common/Base", "datatables", "responsive-tables-js", "./plugins/EditableTable"], function(kom, $, tpl){
 	"use strict";
 	return Firebrick.define("Firebrick.ui.table.Table", {
 		extend:"Firebrick.ui.common.Base",
 		/**
-		 * @property uiName
+		 * @property sName
 		 * @type {String}
 		 * @default "fb-ui-table"
 		 */
-		uiName: "fb-ui-table",
+		sName: "table.table",
 		/**
 		 * @property tpl
 		 * @type {String} html
@@ -38,15 +38,23 @@ define(["jquery", "text!./Table.html", "../common/Base", "datatables", "responsi
 		 */
 		responsive:true,
 		/**
-		 * {
-		 * 	cols:[{}]
-		 * 	rows:[{}]
-		 * }
-		 * @property data
-		 * @type {Object|String}
-		 * @default false
+		 * @property editType
+		 * @type {String} row|cell
+		 * @default "row"
 		 */
-		data:false,
+		editType:"row",
+		/**
+		 * @property columns
+		 * @type {Array of Objects}
+		 * @default null
+		 */
+		columns:null,
+		/**
+		 * @property tdSpanClass
+		 * @type {String}
+		 * @default "fb-ui-tablecell-data"
+		 */
+		tdSpanClass: "fb-ui-tablecell-data",
 		/**
 		 * @property tableStriped
 		 * @type {Boolean|String}
@@ -56,9 +64,9 @@ define(["jquery", "text!./Table.html", "../common/Base", "datatables", "responsi
 		/**
 		 * @property tableHover
 		 * @type {Boolean|String}
-		 * @default false
+		 * @default true
 		 */
-		tableHover:false,
+		tableHover:true,
 		/**
 		 * @property tableCondensed
 		 * @type {Boolean|String}
@@ -97,6 +105,13 @@ define(["jquery", "text!./Table.html", "../common/Base", "datatables", "responsi
 		 * @default false
 		 */
 		treetable:false,
+		/**
+		 * activate the editable table plugin
+		 * @property editabletable
+		 * @type {Boolean}
+		 * @default false
+		 */
+		editabletable:false,
 		/**
 		 * return js object to pass to the DataTable function for configuring the table on rendered
 		 * @property dataTableConfig
@@ -161,6 +176,20 @@ define(["jquery", "text!./Table.html", "../common/Base", "datatables", "responsi
 		 */
 		showOptions: true,
 		/**
+		 * this is the very config that is used to configure the modal that is shown for editing a record - use the properties of Firebrick.ui.containers.Modal
+		 * @example
+		 * 		{
+		 * 			_showEditButtons: true|false //controls whether the footer buttons are shown [default=true]
+		 * 			_editOkText: "OK" // [default="OK"] only if _showEditButtons === true
+		 * 			_editCancelText: "Cancel" // [default="Cancel"] only if _showEditButtons === true
+		 * 		}
+		 * @event beforeChanges, afterChanges
+		 * @property editModalConfig
+		 * @type {Object}
+		 * @default null
+		 */
+		editModalConfig: null,
+		/**
 		 * return js object to pass to the Treetable function for configuring the table on rendered
 		 * @property treeTableConfig
 		 * @type {Function}
@@ -179,11 +208,16 @@ define(["jquery", "text!./Table.html", "../common/Base", "datatables", "responsi
 		init:function(){
 			var me = this;
 			
+			me.data = kom.fromJS(me.data); 
+			
 			me.on("rendered", function(){
 				var id = me.getId(),
 					table = me.getElement();
 				if(me.datatable){
 					table.DataTable(me.dataTableConfig());
+				}
+				if(me.editabletable){
+					table.EditableTable();
 				}
 				if(me.treetable){
 					if(me.showOptions){
@@ -217,10 +251,10 @@ define(["jquery", "text!./Table.html", "../common/Base", "datatables", "responsi
 		 */
 		_getData: function(){
 			var me = this;
-			if($.isPlainObject(me.data)){
-				return "Firebrick.ui.getCmp('" + me.getId() + "').data";
+			if(me.store && me.store.isStore){
+				return "Firebrick.ui.getCmp('" + me.getId() + "').getData()";
 			}
-			return me.data;
+			return {};
 		},
 		/**
 		 * @method bindings
@@ -245,9 +279,16 @@ define(["jquery", "text!./Table.html", "../common/Base", "datatables", "responsi
 		 * @return {Object}
 		 */
 		theadBindings: function(){
-			return {
-				"if": "cols" 
-			};
+			var me = this,
+				obj = {
+					"if": false
+				};
+			
+			if(me.columns){
+				obj["if"] = true;
+			}
+			
+			return obj;
 		},
 		/**
 		 * @method theadTRBindings
@@ -255,7 +296,7 @@ define(["jquery", "text!./Table.html", "../common/Base", "datatables", "responsi
 		 */
 		theadTRBindings:function(){
 			return {
-				"foreach": "cols"
+				"foreach": "Firebrick.getById('" + this.getId() + "').columns"
 			};
 		},
 		/**
@@ -273,7 +314,7 @@ define(["jquery", "text!./Table.html", "../common/Base", "datatables", "responsi
 		 */
 		tbodyBindings:function(){
 			return {
-				"foreach": "rows"
+				"foreach": "$data"
 			};
 		},
 		/**
@@ -282,9 +323,9 @@ define(["jquery", "text!./Table.html", "../common/Base", "datatables", "responsi
 		 */
 		tbodyTRBindings:function(){
 			return {
-				"foreach": "$data.cols ? $data.cols : $data",
+				"foreach": "$data.children ? $data.children : $data",
 				"attr":{
-					"'data-tt-id'": "$data.id ? $data.id : false",
+					"'data-tt-id'": "$data.id ? $data.id : $index",
 					"'data-tt-parent-id'": "$data.parentId ? $data.parentId : false"
 				}
 			};
@@ -295,8 +336,26 @@ define(["jquery", "text!./Table.html", "../common/Base", "datatables", "responsi
 		 */
 		tbodyTRTDBindings:function(){
 			return {
-				"html": "$data.renderer ? fb.ui.renderer.get($data.renderer)($data, $context, $parent, $root) : ($data.text ? $data.text : $data)"
+				"attr":{
+					"'data-tt-id'": "$data.id ? $data.id : $index",
+					"'fb-ui-row-id'": "$data.rowId ? $data.rowId : $parentContext.$index"
+				}
 			};
+		},
+		/**
+		 * @method tbodyTRTDSpanBindings
+		 * @return {Object}
+		 */
+		tbodyTRTDSpanBindings: function(){
+			var me = this,
+				obj = {
+					css: {},
+					html: "$data.renderer ? fb.ui.renderer.get($data.renderer)($data, $context, $parent, $root) : ($data.value ? $data.value : $data)"
+				};
+			
+			obj.css[me.parseBind( me.tdSpanClass )] = true;
+			
+			return obj;
 		},
 		/**
 		 * @method captionBindings

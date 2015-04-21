@@ -7,15 +7,14 @@ define(["firebrick-ui", "Firebrick.ui/fields/Display"], function(){
 	
 	describe("Fields.Display:", function(){
 		
-		var name = "fb-ui-display",
+		var name = "fields.display",
 			cmp = Firebrick.create("DisplayTest", {
 					extend:"Firebrick.ui.fields.Display"
 			});
 		
 		it("Defined", function(){
 			expect(cmp).toBeDefined();
-			expect(cmp.uiName).toBe(name);
-			expect(fb.ui.cmp.display).toBe(name);
+			expect(cmp.sName).toBe(name);
 		});
 		
 	});

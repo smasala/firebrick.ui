@@ -12,7 +12,7 @@ define(["../display/List"], function(){
 	"use strict";
 	return Firebrick.define("Firebrick.ui.nav.List", {
 		extend: "Firebrick.ui.display.List", 
-		uiName:"fb-ui-navlist",
+		sName:"nav.list",
 		unstyled:true,
 		linkedList: true,
 		/**

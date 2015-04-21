@@ -13,7 +13,7 @@ define(["text!./Button.html", "./Base", "../common/mixins/Badges", "./dropdown/L
 	return Firebrick.define("Firebrick.ui.button.Button", {
 		extend:"Firebrick.ui.button.Base",
 		mixins:["Firebrick.ui.common.mixins.Badges"],
-		uiName: "fb-ui-button",
+		sName: "button.button",
 		tpl:tpl,
 		/**
 		 * @property text
@@ -81,25 +81,11 @@ define(["text!./Button.html", "./Base", "../common/mixins/Badges", "./dropdown/L
 		 */
 		loadingText: false,
 		/**
-		 * add data to turn button into a dropdown button
-		 * @property data
-		 * @type {String} ko data object
-		 * @default null
-		 */
-		data: null,
-		/**
 		 * @property dropdownConfig
 		 * @type {Object}
 		 * @default null
 		 */
 		dropdownConfig: null,
-		/**
-		 * if defined, this callback method will be applied to the click event of this particular button
-		 * @method callback
-		 * @type {Function}
-		 * @default null
-		 */
-		callback: null,
 		/**
 		 * @property srOnlyText
 		 * @type {String}
@@ -107,25 +93,12 @@ define(["text!./Button.html", "./Base", "../common/mixins/Badges", "./dropdown/L
 		 */
 		srOnlyText: "Toggle Dropdown",
 		/**
-		 * @method init
-		 * @return {Object} self
+		 * only works if this button is used in a modal
+		 * @property closeModal
+		 * @type {Boolean}
+		 * @default false
 		 */
-		init: function(){
-			var me = this;
-			
-			if(me.callback){
-				me.on("rendered", function(){
-					var el = me.getElement();
-					if(el){
-						el.on("click", function(){
-							me.callback.apply(me, arguments);
-						});
-					}
-				});
-			}
-			
-			return me.callParent(arguments);
-		},
+		closeModal: false,
 		/**
 		 * default bindings called by data-bind={{data-bind}}
 		 * @method bindings
@@ -140,7 +113,8 @@ define(["text!./Button.html", "./Base", "../common/mixins/Badges", "./dropdown/L
 			
 			//firefox bug fix
 			obj.attr.autocomplete = "'off'";
-			
+			//--//
+						
 			if(me.btnStyle){
 				obj.css[ me.parseBind("btn-"+me.btnStyle)] = true;
 			}
@@ -148,7 +122,7 @@ define(["text!./Button.html", "./Base", "../common/mixins/Badges", "./dropdown/L
 				obj.css[ me.parseBind("btn-" + me.btnSize)] = true;
 			}
 			
-			if(me.data && !me.splitButton){
+			if(me.items && !me.splitButton){
 				obj.css["'dropdown-toggle'"] = true;
 				obj.attr["'data-toggle'"] = "'dropdown'";
 			}
@@ -159,6 +133,10 @@ define(["text!./Button.html", "./Base", "../common/mixins/Badges", "./dropdown/L
 			
 			if(me.loadingText){
 				obj.attr["'data-loading-text'"] = me.textBind( me.loadingText );
+			}
+			
+			if(me.closeModal){
+				obj.attr["'data-dismiss'"] = "'modal'";
 			}
 			
 			return obj;
@@ -213,8 +191,8 @@ define(["text!./Button.html", "./Base", "../common/mixins/Badges", "./dropdown/L
 		getDropdown: function(){
 			var me = this,
 				obj = {
-					uiName: fb.ui.cmp.dropdownlist,
-					data: $.isArray(me.data) ? "Firebrick.ui.getCmp('" + me.getId() + "').data" : me.data
+					sName: "button.dropdown.list",
+					items: $.isArray(me.items) ? "Firebrick.ui.getCmp('" + me.getId() + "').items" : me.items
 				};
 			
 			obj = Firebrick.utils.copyover(obj, me.dropdownConfig);
@@ -238,7 +216,7 @@ define(["text!./Button.html", "./Base", "../common/mixins/Badges", "./dropdown/L
 			if(me.btnSize){
 				obj.css[ me.parseBind("btn-" + me.btnSize)] = true;
 			}
-			if(me.data){
+			if(me.items){
 				obj.css["'dropdown-toggle'"] = true;
 				obj.attr["'data-toggle'"] = "'dropdown'";
 			}

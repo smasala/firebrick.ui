@@ -19,20 +19,20 @@ define(["text!./BorderLayout.html", "./Base", "./Box", "./border/Pane"], functio
 		 */
 		tpl: tpl,
 		/**
-		 * @property uiName
+		 * @property sName
 		 * @type {String}
 		 */
-		uiName:"fb-ui-borderlayout",
+		sName:"containers.borderlayout",
 		
 		/**
 		 * @property defaults
 		 * @type {Object}
 		 * @default {
-		 * 		uiName: fb.ui.cmp.borderpane
+		 * 		sName: "containers.border.pane"
 		 * }
 		 */
 		defaults: {
-			uiName: fb.ui.cmp.borderpane
+			sName: "containers.border.pane"
 		},
 		
 		/**
@@ -116,7 +116,7 @@ define(["text!./BorderLayout.html", "./Base", "./Box", "./border/Pane"], functio
 				position,
 				length,
 				centerGrid = {
-					uiName: fb.ui.cmp.box,
+					sName: "containers.box",
 					defaults: me.defaults,
 					css:'row-eq-height fb-ui-center-row',
 					items:[]

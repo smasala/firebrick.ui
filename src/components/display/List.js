@@ -55,11 +55,11 @@ define(["text!./List.html", "knockout", "jquery", "../common/Base",  "../common/
 		extend:"Firebrick.ui.common.Base",
 		mixins:["Firebrick.ui.common.mixins.Items", "Firebrick.ui.common.mixins.Badges"],
 		/**
-		 * @property uiName
+		 * @property sName
 		 * @type {String}
 		 * @default "fb-ui-list"
 		 */
-		uiName:"fb-ui-list",
+		sName:"display.list",
 		/**
 		 * @property tpl
 		 * @type {String} html
@@ -144,7 +144,7 @@ define(["text!./List.html", "knockout", "jquery", "../common/Base",  "../common/
 			if(me.unstyled){
 				obj.css["'list-unstyled'"] = me.unstyled;
 			}
-			if(me.data){
+			if(me.items){
 				obj.foreach = "$data";
 			}
 			return obj;
@@ -187,7 +187,7 @@ define(["text!./List.html", "knockout", "jquery", "../common/Base",  "../common/
 			return {
 				template: {
 					name:  me.parseBind(me._getTplId()),
-					data: $.isArray(me.data) ? "Firebrick.ui.getCmp('" + me.getId() + "').data" : me.data,
+					data: $.isArray(me.items) ? "Firebrick.ui.getCmp('" + me.getId() + "').items" : me.items,
 				},
 				listRenderer: me.parseBind(me.getId())
 			};

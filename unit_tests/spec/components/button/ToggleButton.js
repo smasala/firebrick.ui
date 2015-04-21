@@ -7,15 +7,14 @@ define(["firebrick-ui", "Firebrick.ui/button/ToggleButton"], function(){
 	
 	describe("Button.ToggleButton:", function(){
 		
-		var name = "fb-ui-togglebutton",
+		var name = "button.togglebutton",
 			cmp = Firebrick.create("ToggleButtonTest", {
 					extend:"Firebrick.ui.button.ToggleButton"
 			});
 		
 		it("Defined", function(){
 			expect(cmp).toBeDefined();
-			expect(cmp.uiName).toBe(name);
-			expect(fb.ui.cmp.togglebutton).toBe(name);
+			expect(cmp.sName).toBe(name);
 		});
 		
 	});

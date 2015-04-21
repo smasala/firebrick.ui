@@ -19,7 +19,7 @@
             
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 0.13.0</em>
+            <em>API Docs for: 0.14.0</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -74,6 +74,8 @@
                 <li><a href="../classes/components.containers.BorderLayout.html">components.containers.BorderLayout</a></li>
             
                 <li><a href="../classes/components.containers.Box.html">components.containers.Box</a></li>
+            
+                <li><a href="../classes/components.containers.Fieldset.html">components.containers.Fieldset</a></li>
             
                 <li><a href="../classes/components.containers.Form.html">components.containers.Form</a></li>
             
@@ -145,7 +147,11 @@
             
                 <li><a href="../classes/helper.html">helper</a></li>
             
+                <li><a href="../classes/plugins.ContextMenu.html">plugins.ContextMenu</a></li>
+            
                 <li><a href="../classes/plugins.Draggable.html">plugins.Draggable</a></li>
+            
+                <li><a href="../classes/plugins.EditableTable.html">plugins.EditableTable</a></li>
             
                 <li><a href="../classes/plugins.RadioList.html">plugins.RadioList</a></li>
             
@@ -428,6 +434,13 @@
                             </li>
                         
                             <li class="index-item method">
+                                <a href="#method_preSubmit">preSubmit</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
                                 <a href="#method_submit">submit</a>
 
                                 
@@ -472,13 +485,6 @@
                                 
                             </li>
                         
-                            <li class="index-item property">
-                                <a href="#property__form">_form</a>
-
-                                
-                                
-                            </li>
-                        
                             <li class="index-item property private inherited">
                                 <a href="#property__idPrefix">_idPrefix</a>
 
@@ -508,7 +514,21 @@
                             </li>
                         
                             <li class="index-item property">
+                                <a href="#property_catchProgress">catchProgress</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item property">
                                 <a href="#property_complete">complete</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item property inherited">
+                                <a href="#property_contextMenu">contextMenu</a>
 
                                 
                                 
@@ -536,7 +556,7 @@
                             </li>
                         
                             <li class="index-item property">
-                                <a href="#property_failure">failure</a>
+                                <a href="#property_error">error</a>
 
                                 
                                 
@@ -551,6 +571,20 @@
                         
                             <li class="index-item property inherited">
                                 <a href="#property_glyphiconClass">glyphiconClass</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item property inherited">
+                                <a href="#property_handler">handler</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item property inherited">
+                                <a href="#property_handlerEvent">handlerEvent</a>
 
                                 
                                 
@@ -626,6 +660,13 @@
                                 
                             </li>
                         
+                            <li class="index-item property inherited">
+                                <a href="#property_sName">sName</a>
+
+                                
+                                
+                            </li>
+                        
                             <li class="index-item property">
                                 <a href="#property_submitType">submitType</a>
 
@@ -677,13 +718,6 @@
                         
                             <li class="index-item property inherited">
                                 <a href="#property_uiComponent">uiComponent</a>
-
-                                
-                                
-                            </li>
-                        
-                            <li class="index-item property inherited">
-                                <a href="#property_uiName">uiName</a>
 
                                 
                                 
@@ -752,7 +786,7 @@
             
         
         
-        <a href="../files/src_components_common_Base.js.html#l294"><code>src\components\common\Base.js:294</code></a>
+        <a href="../files/src_components_common_Base.js.html#l328"><code>src\components\common\Base.js:328</code></a>
         
         </p>
 
@@ -831,7 +865,7 @@
             
         
         
-        <a href="../files/src_components_common_mixins_Items.js.html#l61"><code>src\components\common\mixins\Items.js:61</code></a>
+        <a href="../files/src_components_common_mixins_Items.js.html#l66"><code>src\components\common\mixins\Items.js:66</code></a>
         
         </p>
 
@@ -855,13 +889,13 @@
                 <li class="param">
                     
                         <code class="param-name">items</code>
-                        <span class="type">Object</span>
+                        <span class="type">Object | Array of Objects</span>
                     
 
                     
 
                     <div class="param-description">
-                        
+                         
                     </div>
 
                     
@@ -1053,7 +1087,7 @@
             
         
         
-        <a href="../files/src_components_common_Base.js.html#l378"><code>src\components\common\Base.js:378</code></a>
+        <a href="../files/src_components_common_Base.js.html#l412"><code>src\components\common\Base.js:412</code></a>
         
         </p>
 
@@ -1122,7 +1156,7 @@ iterate up the inheritance tree looking for a classname that differs from the cu
             
         
         
-        <a href="../files/src_components_common_Base.js.html#l229"><code>src\components\common\Base.js:229</code></a>
+        <a href="../files/src_components_common_Base.js.html#l246"><code>src\components\common\Base.js:246</code></a>
         
         </p>
 
@@ -1202,7 +1236,7 @@ iterate up the inheritance tree looking for a classname that differs from the cu
             
         
         
-        <a href="../files/src_components_common_Base.js.html#l181"><code>src\components\common\Base.js:181</code></a>
+        <a href="../files/src_components_common_Base.js.html#l200"><code>src\components\common\Base.js:200</code></a>
         
         </p>
 
@@ -1232,7 +1266,7 @@ iterate up the inheritance tree looking for a classname that differs from the cu
                     
 
                     <div class="param-description">
-                         
+                        
                     </div>
 
                     
@@ -1305,7 +1339,7 @@ iterate up the inheritance tree looking for a classname that differs from the cu
             
         
         
-        <a href="../files/src_components_common_Base.js.html#l152"><code>src\components\common\Base.js:152</code></a>
+        <a href="../files/src_components_common_Base.js.html#l171"><code>src\components\common\Base.js:171</code></a>
         
         </p>
 
@@ -1335,7 +1369,7 @@ iterate up the inheritance tree looking for a classname that differs from the cu
                     
 
                     <div class="param-description">
-                         
+                        
                     </div>
 
                     
@@ -1407,7 +1441,7 @@ iterate up the inheritance tree looking for a classname that differs from the cu
             
         
         
-        <a href="../files/src_components_containers_Form.js.html#l137"><code>src\components\containers\Form.js:137</code></a>
+        <a href="../files/src_components_containers_Form.js.html#l152"><code>src\components\containers\Form.js:152</code></a>
         
         </p>
 
@@ -1497,7 +1531,7 @@ iterate up the inheritance tree looking for a classname that differs from the cu
             
         
         
-        <a href="../files/src_components_common_Base.js.html#l252"><code>src\components\common\Base.js:252</code></a>
+        <a href="../files/src_components_common_Base.js.html#l269"><code>src\components\common\Base.js:269</code></a>
         
         </p>
 
@@ -1527,7 +1561,7 @@ iterate up the inheritance tree looking for a classname that differs from the cu
                     
 
                     <div class="param-description">
-                         
+                        
                     </div>
 
                     
@@ -1597,7 +1631,7 @@ iterate up the inheritance tree looking for a classname that differs from the cu
             
         
         
-        <a href="../files/src_components_containers_Form.js.html#l143"><code>src\components\containers\Form.js:143</code></a>
+        <a href="../files/src_components_containers_Form.js.html#l158"><code>src\components\containers\Form.js:158</code></a>
         
         </p>
 
@@ -1677,7 +1711,7 @@ iterate up the inheritance tree looking for a classname that differs from the cu
             
         
         
-        <a href="../files/src_components_common_Base.js.html#l315"><code>src\components\common\Base.js:315</code></a>
+        <a href="../files/src_components_common_Base.js.html#l349"><code>src\components\common\Base.js:349</code></a>
         
         </p>
 
@@ -1757,7 +1791,7 @@ iterate up the inheritance tree looking for a classname that differs from the cu
             
         
         
-        <a href="../files/src_components_common_Base.js.html#l344"><code>src\components\common\Base.js:344</code></a>
+        <a href="../files/src_components_common_Base.js.html#l378"><code>src\components\common\Base.js:378</code></a>
         
         </p>
 
@@ -1851,7 +1885,7 @@ iterate up the inheritance tree looking for a classname that differs from the cu
             
         
         
-        <a href="../files/src_components_common_Base.js.html#l414"><code>src\components\common\Base.js:414</code></a>
+        <a href="../files/src_components_common_Base.js.html#l448"><code>src\components\common\Base.js:448</code></a>
         
         </p>
 
@@ -1919,7 +1953,7 @@ iterate up the inheritance tree looking for a classname that differs from the cu
             
         
         
-        <a href="../files/src_components_common_Base.js.html#l214"><code>src\components\common\Base.js:214</code></a>
+        <a href="../files/src_components_common_Base.js.html#l234"><code>src\components\common\Base.js:234</code></a>
         
         </p>
 
@@ -2001,7 +2035,7 @@ iterate up the inheritance tree looking for a classname that differs from the cu
             
         
         
-        <a href="../files/src_components_common_Base.js.html#l356"><code>src\components\common\Base.js:356</code></a>
+        <a href="../files/src_components_common_Base.js.html#l390"><code>src\components\common\Base.js:390</code></a>
         
         </p>
 
@@ -2031,7 +2065,7 @@ iterate up the inheritance tree looking for a classname that differs from the cu
                     
 
                     <div class="param-description">
-                         
+                        
                     </div>
 
                     
@@ -2095,7 +2129,7 @@ iterate up the inheritance tree looking for a classname that differs from the cu
             
         
         
-        <a href="../files/src_components_containers_Form.js.html#l204"><code>src\components\containers\Form.js:204</code></a>
+        <a href="../files/src_components_containers_Form.js.html#l229"><code>src\components\containers\Form.js:229</code></a>
         
         </p>
 
@@ -2162,7 +2196,7 @@ iterate up the inheritance tree looking for a classname that differs from the cu
             
         
         
-        <a href="../files/src_components_common_Base.js.html#l199"><code>src\components\common\Base.js:199</code></a>
+        <a href="../files/src_components_common_Base.js.html#l218"><code>src\components\common\Base.js:218</code></a>
         
         </p>
 
@@ -2234,7 +2268,7 @@ iterate up the inheritance tree looking for a classname that differs from the cu
             
         
         
-        <a href="../files/src_components_containers_Form.js.html#l149"><code>src\components\containers\Form.js:149</code></a>
+        <a href="../files/src_components_containers_Form.js.html#l164"><code>src\components\containers\Form.js:164</code></a>
         
         </p>
 
@@ -2372,7 +2406,7 @@ iterate up the inheritance tree looking for a classname that differs from the cu
             
         
         
-        <a href="../files/src_components_common_Base.js.html#l405"><code>src\components\common\Base.js:405</code></a>
+        <a href="../files/src_components_common_Base.js.html#l439"><code>src\components\common\Base.js:439</code></a>
         
         </p>
 
@@ -2440,7 +2474,7 @@ iterate up the inheritance tree looking for a classname that differs from the cu
             
         
         
-        <a href="../files/src_components_common_Base.js.html#l396"><code>src\components\common\Base.js:396</code></a>
+        <a href="../files/src_components_common_Base.js.html#l430"><code>src\components\common\Base.js:430</code></a>
         
         </p>
 
@@ -2508,7 +2542,7 @@ iterate up the inheritance tree looking for a classname that differs from the cu
             
         
         
-        <a href="../files/src_components_common_Base.js.html#l370"><code>src\components\common\Base.js:370</code></a>
+        <a href="../files/src_components_common_Base.js.html#l404"><code>src\components\common\Base.js:404</code></a>
         
         </p>
 
@@ -2575,7 +2609,7 @@ iterate up the inheritance tree looking for a classname that differs from the cu
             
         
         
-        <a href="../files/src_components_containers_Form.js.html#l158"><code>src\components\containers\Form.js:158</code></a>
+        <a href="../files/src_components_containers_Form.js.html#l173"><code>src\components\containers\Form.js:173</code></a>
         
         </p>
 
@@ -2640,7 +2674,7 @@ iterate up the inheritance tree looking for a classname that differs from the cu
             
         
         
-        <a href="../files/src_components_common_Base.js.html#l422"><code>src\components\common\Base.js:422</code></a>
+        <a href="../files/src_components_common_Base.js.html#l456"><code>src\components\common\Base.js:456</code></a>
         
         </p>
 
@@ -2670,7 +2704,7 @@ iterate up the inheritance tree looking for a classname that differs from the cu
                     
 
                     <div class="param-description">
-                         
+                        
                     </div>
 
                     
@@ -2694,6 +2728,96 @@ iterate up the inheritance tree looking for a classname that differs from the cu
                 
             </div>
         </div>
+    
+
+    
+</div>
+
+                
+                    <div id="method_preSubmit" class="method item">
+    <h3 class="name"><code>preSubmit</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>jquery</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/src_components_containers_Form.js.html#l86"><code>src\components\containers\Form.js:86</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>this is called before the form is submitted, use this
+return false to stop the submit function being called;</p>
+
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">jquery</code>
+                        <span class="type">Object</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>&quot;submit&quot; event arguments</p>
+
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
     
 
     
@@ -2732,7 +2856,7 @@ iterate up the inheritance tree looking for a classname that differs from the cu
             
         
         
-        <a href="../files/src_components_containers_Form.js.html#l170"><code>src\components\containers\Form.js:170</code></a>
+        <a href="../files/src_components_containers_Form.js.html#l193"><code>src\components\containers\Form.js:193</code></a>
         
         </p>
 
@@ -2804,7 +2928,7 @@ iterate up the inheritance tree looking for a classname that differs from the cu
             
         
         
-        <a href="../files/src_components_common_Base.js.html#l329"><code>src\components\common\Base.js:329</code></a>
+        <a href="../files/src_components_common_Base.js.html#l363"><code>src\components\common\Base.js:363</code></a>
         
         </p>
 
@@ -2924,7 +3048,7 @@ iterate up the inheritance tree looking for a classname that differs from the cu
             
         
         
-        <a href="../files/src_components_common_Base.js.html#l431"><code>src\components\common\Base.js:431</code></a>
+        <a href="../files/src_components_common_Base.js.html#l465"><code>src\components\common\Base.js:465</code></a>
         
         </p>
 
@@ -2954,7 +3078,7 @@ iterate up the inheritance tree looking for a classname that differs from the cu
                     
 
                     <div class="param-description">
-                         
+                        
                     </div>
 
                     
@@ -3022,7 +3146,7 @@ iterate up the inheritance tree looking for a classname that differs from the cu
             
         
         
-        <a href="../files/src_components_common_Base.js.html#l40"><code>src\components\common\Base.js:40</code></a>
+        <a href="../files/src_components_common_Base.js.html#l53"><code>src\components\common\Base.js:53</code></a>
         
         </p>
 
@@ -3066,7 +3190,7 @@ iterate up the inheritance tree looking for a classname that differs from the cu
             
         
         
-        <a href="../files/src_components_common_Base.js.html#l88"><code>src\components\common\Base.js:88</code></a>
+        <a href="../files/src_components_common_Base.js.html#l101"><code>src\components\common\Base.js:101</code></a>
         
         </p>
 
@@ -3081,51 +3205,6 @@ iterate up the inheritance tree looking for a classname that differs from the cu
 
     
         <p><strong>Default:</strong> null</p>
-    
-
-    
-
-    
-</div>
-
-                
-                    <div id="property__form" class="property item">
-    <h3 class="name"><code>_form</code></h3>
-    <span class="type">JQuery Object <form></form></span>
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/src_components_containers_Form.js.html#l106"><code>src\components\containers\Form.js:106</code></a>
-        
-        </p>
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>stores the current form item</p>
-
-    </div>
-
     
 
     
@@ -3200,7 +3279,7 @@ iterate up the inheritance tree looking for a classname that differs from the cu
             
         
         
-        <a href="../files/src_components_common_Base.js.html#l48"><code>src\components\common\Base.js:48</code></a>
+        <a href="../files/src_components_common_Base.js.html#l61"><code>src\components\common\Base.js:61</code></a>
         
         </p>
 
@@ -3291,7 +3370,7 @@ iterate up the inheritance tree looking for a classname that differs from the cu
             
         
         
-        <a href="../files/src_components_common_Base.js.html#l146"><code>src\components\common\Base.js:146</code></a>
+        <a href="../files/src_components_common_Base.js.html#l159"><code>src\components\common\Base.js:159</code></a>
         
         </p>
 
@@ -3306,6 +3385,54 @@ iterate up the inheritance tree looking for a classname that differs from the cu
 
     
         <p><strong>Default:</strong> null</p>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="property_catchProgress" class="property item">
+    <h3 class="name"><code>catchProgress</code></h3>
+    <span class="type">Boolean</span>
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/src_components_containers_Form.js.html#l78"><code>src\components\containers\Form.js:78</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>set to true is you want the progress the upload/download progress to be caught
+when true, use myForm.addListener(&quot;progressChanged&quot;, function(percentComplete){}); to catch the value</p>
+
+    </div>
+
+    
+        <p><strong>Default:</strong> false</p>
     
 
     
@@ -3337,7 +3464,7 @@ iterate up the inheritance tree looking for a classname that differs from the cu
             
         
         
-        <a href="../files/src_components_containers_Form.js.html#l130"><code>src\components\containers\Form.js:130</code></a>
+        <a href="../files/src_components_containers_Form.js.html#l145"><code>src\components\containers\Form.js:145</code></a>
         
         </p>
 
@@ -3353,6 +3480,49 @@ iterate up the inheritance tree looking for a classname that differs from the cu
 
     
         <p><strong>Default:</strong> function(){}</p>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="property_contextMenu" class="property item inherited">
+    <h3 class="name"><code>contextMenu</code></h3>
+    <span class="type">Array of Objects</span>
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                <p>Inherited from
+                <a href="../classes/components.common.Base.html#property_contextMenu">components.common.Base</a>:
+            
+        
+        
+        <a href="../files/src_components_common_Base.js.html#l165"><code>src\components\common\Base.js:165</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        
+    </div>
+
+    
+        <p><strong>Default:</strong> null</p>
     
 
     
@@ -3381,7 +3551,7 @@ iterate up the inheritance tree looking for a classname that differs from the cu
             
         
         
-        <a href="../files/src_components_common_Base.js.html#l70"><code>src\components\common\Base.js:70</code></a>
+        <a href="../files/src_components_common_Base.js.html#l83"><code>src\components\common\Base.js:83</code></a>
         
         </p>
 
@@ -3495,8 +3665,8 @@ iterate up the inheritance tree looking for a classname that differs from the cu
 </div>
 
                 
-                    <div id="property_failure" class="property item">
-    <h3 class="name"><code>failure</code></h3>
+                    <div id="property_error" class="property item">
+    <h3 class="name"><code>error</code></h3>
     <span class="type">Function</span>
 
     
@@ -3518,7 +3688,7 @@ iterate up the inheritance tree looking for a classname that differs from the cu
             
         
         
-        <a href="../files/src_components_containers_Form.js.html#l121"><code>src\components\containers\Form.js:121</code></a>
+        <a href="../files/src_components_containers_Form.js.html#l136"><code>src\components\containers\Form.js:136</code></a>
         
         </p>
 
@@ -3606,7 +3776,7 @@ iterate up the inheritance tree looking for a classname that differs from the cu
             
         
         
-        <a href="../files/src_components_common_Base.js.html#l34"><code>src\components\common\Base.js:34</code></a>
+        <a href="../files/src_components_common_Base.js.html#l47"><code>src\components\common\Base.js:47</code></a>
         
         </p>
 
@@ -3621,6 +3791,93 @@ iterate up the inheritance tree looking for a classname that differs from the cu
 
     
         <p><strong>Default:</strong> &quot;glyphicon&quot;</p>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="property_handler" class="property item inherited">
+    <h3 class="name"><code>handler</code></h3>
+    <span class="type">Function</span>
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                <p>Inherited from
+                <a href="../classes/components.common.Base.html#property_handler">components.common.Base</a>:
+            
+        
+        
+        <a href="../files/src_components_common_Base.js.html#l41"><code>src\components\common\Base.js:41</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        
+    </div>
+
+    
+        <p><strong>Default:</strong> null</p>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="property_handlerEvent" class="property item inherited">
+    <h3 class="name"><code>handlerEvent</code></h3>
+    <span class="type">String</span>
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                <p>Inherited from
+                <a href="../classes/components.common.Base.html#property_handlerEvent">components.common.Base</a>:
+            
+        
+        
+        <a href="../files/src_components_common_Base.js.html#l34"><code>src\components\common\Base.js:34</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>if handler property is set, it is automatically attached to this event</p>
+
+    </div>
+
+    
+        <p><strong>Default:</strong> &quot;click&quot;</p>
     
 
     
@@ -3828,7 +4085,7 @@ iterate up the inheritance tree looking for a classname that differs from the cu
             
         
         
-        <a href="../files/src_components_common_Base.js.html#l114"><code>src\components\common\Base.js:114</code></a>
+        <a href="../files/src_components_common_Base.js.html#l127"><code>src\components\common\Base.js:127</code></a>
         
         </p>
 
@@ -3871,7 +4128,7 @@ iterate up the inheritance tree looking for a classname that differs from the cu
             
         
         
-        <a href="../files/src_components_common_Base.js.html#l140"><code>src\components\common\Base.js:140</code></a>
+        <a href="../files/src_components_common_Base.js.html#l153"><code>src\components\common\Base.js:153</code></a>
         
         </p>
 
@@ -3914,7 +4171,7 @@ iterate up the inheritance tree looking for a classname that differs from the cu
             
         
         
-        <a href="../files/src_components_common_Base.js.html#l126"><code>src\components\common\Base.js:126</code></a>
+        <a href="../files/src_components_common_Base.js.html#l139"><code>src\components\common\Base.js:139</code></a>
         
         </p>
 
@@ -3958,7 +4215,7 @@ iterate up the inheritance tree looking for a classname that differs from the cu
             
         
         
-        <a href="../files/src_components_common_Base.js.html#l133"><code>src\components\common\Base.js:133</code></a>
+        <a href="../files/src_components_common_Base.js.html#l146"><code>src\components\common\Base.js:146</code></a>
         
         </p>
 
@@ -4002,7 +4259,7 @@ iterate up the inheritance tree looking for a classname that differs from the cu
             
         
         
-        <a href="../files/src_components_common_Base.js.html#l120"><code>src\components\common\Base.js:120</code></a>
+        <a href="../files/src_components_common_Base.js.html#l133"><code>src\components\common\Base.js:133</code></a>
         
         </p>
 
@@ -4064,6 +4321,50 @@ iterate up the inheritance tree looking for a classname that differs from the cu
 
     
         <p><strong>Default:</strong> true</p>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="property_sName" class="property item">
+    <h3 class="name"><code>sName</code></h3>
+    <span class="type">String</span>
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            <p>Inherited from
+            <a href="../classes/components.common.Base.html#property_sName">
+                components.common.Base
+            </a>
+            
+            but overwritten in
+            
+        
+        
+        <a href="../files/src_components_containers_Form.js.html#l15"><code>src\components\containers\Form.js:15</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        
+    </div>
+
     
 
     
@@ -4138,7 +4439,7 @@ iterate up the inheritance tree looking for a classname that differs from the cu
             
         
         
-        <a href="../files/src_components_common_Base.js.html#l63"><code>src\components\common\Base.js:63</code></a>
+        <a href="../files/src_components_common_Base.js.html#l76"><code>src\components\common\Base.js:76</code></a>
         
         </p>
 
@@ -4185,7 +4486,7 @@ iterate up the inheritance tree looking for a classname that differs from the cu
             
         
         
-        <a href="../files/src_components_containers_Form.js.html#l112"><code>src\components\containers\Form.js:112</code></a>
+        <a href="../files/src_components_containers_Form.js.html#l127"><code>src\components\containers\Form.js:127</code></a>
         
         </p>
 
@@ -4227,7 +4528,7 @@ iterate up the inheritance tree looking for a classname that differs from the cu
             
         
         
-        <a href="../files/src_components_common_Base.js.html#l94"><code>src\components\common\Base.js:94</code></a>
+        <a href="../files/src_components_common_Base.js.html#l107"><code>src\components\common\Base.js:107</code></a>
         
         </p>
 
@@ -4270,7 +4571,7 @@ iterate up the inheritance tree looking for a classname that differs from the cu
             
         
         
-        <a href="../files/src_components_common_Base.js.html#l100"><code>src\components\common\Base.js:100</code></a>
+        <a href="../files/src_components_common_Base.js.html#l113"><code>src\components\common\Base.js:113</code></a>
         
         </p>
 
@@ -4314,7 +4615,7 @@ iterate up the inheritance tree looking for a classname that differs from the cu
             
         
         
-        <a href="../files/src_components_common_Base.js.html#l107"><code>src\components\common\Base.js:107</code></a>
+        <a href="../files/src_components_common_Base.js.html#l120"><code>src\components\common\Base.js:120</code></a>
         
         </p>
 
@@ -4426,50 +4727,6 @@ iterate up the inheritance tree looking for a classname that differs from the cu
 </div>
 
                 
-                    <div id="property_uiName" class="property item">
-    <h3 class="name"><code>uiName</code></h3>
-    <span class="type">String</span>
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            <p>Inherited from
-            <a href="../classes/components.common.Base.html#property_uiName">
-                components.common.Base
-            </a>
-            
-            but overwritten in
-            
-        
-        
-        <a href="../files/src_components_containers_Form.js.html#l15"><code>src\components\containers\Form.js:15</code></a>
-        
-        </p>
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        
-    </div>
-
-    
-
-    
-
-    
-</div>
-
-                
                     <div id="property_url" class="property item">
     <h3 class="name"><code>url</code></h3>
     <span class="type">String</span>
@@ -4540,7 +4797,7 @@ iterate up the inheritance tree looking for a classname that differs from the cu
             
         
         
-        <a href="../files/src_components_containers_Form.js.html#l78"><code>src\components\containers\Form.js:78</code></a>
+        <a href="../files/src_components_containers_Form.js.html#l93"><code>src\components\containers\Form.js:93</code></a>
         
         </p>
 

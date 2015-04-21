@@ -13,10 +13,10 @@ define(["text!./Text.html", "../common/Base"], function(tpl){
 	return Firebrick.define("Firebrick.ui.display.Text", {
 		extend: "Firebrick.ui.common.Base",
 		/**
-		 * @property uiName
+		 * @property sName
 		 * @type {String}
 		 */
-		uiName:"fb-ui-text",
+		sName:"display.text",
 		/**
 		 * @property tpl
 		 * @type {String}

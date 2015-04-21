@@ -7,15 +7,14 @@ define(["firebrick-ui", "Firebrick.ui/display/Alert"], function(){
 	
 	describe("display.Alert:", function(){
 		
-		var name = "fb-ui-alert",
+		var name = "display.alert",
 			cmp = Firebrick.create("AlertTest", {
 					extend:"Firebrick.ui.display.Alert"
 			});
 		
 		it("Defined", function(){
 			expect(cmp).toBeDefined();
-			expect(cmp.uiName).toBe(name);
-			expect(fb.ui.cmp.alert).toBe(name);
+			expect(cmp.sName).toBe(name);
 		});
 		
 	});

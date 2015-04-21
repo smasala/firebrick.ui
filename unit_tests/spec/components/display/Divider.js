@@ -7,15 +7,14 @@ define(["firebrick-ui", "Firebrick.ui/display/Divider"], function(){
 	
 	describe("display.Divider:", function(){
 		
-		var name = "fb-ui-divider",
+		var name = "display.divider",
 			cmp = Firebrick.create("DividerTest", {
 					extend:"Firebrick.ui.display.Divider"
 			});
 		
 		it("Defined", function(){
 			expect(cmp).toBeDefined();
-			expect(cmp.uiName).toBe(name);
-			expect(fb.ui.cmp.divider).toBe(name);
+			expect(cmp.sName).toBe(name);
 		});
 		
 	});

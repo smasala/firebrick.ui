@@ -82,7 +82,7 @@ define(["jquery", "./Items", "Firebrick.ui/nav/Toolbar"], function($){
 						tbItem = toolbars[i];
 						if(tbItem.items){
 							//wrap the items inside a toolbar component
-							tbItem.uiName = fb.ui.cmp.toolbar;
+							tbItem.sName = "nav.toolbar";
 							tbItem.defaults = Firebrick.utils.overwrite(me.toolbarDefaults, (tbItem.defaults || {}));
 							//load the html for the template compiler
 							html += me._getItems(tbItem).html;

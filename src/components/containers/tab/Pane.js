@@ -15,11 +15,11 @@ define(["text!./Pane.html", "../Base", "bootstrap.plugins/tab"], function(tpl){
 		extend:"Firebrick.ui.containers.Base",
 		tpl: tpl,
 		/**
-		 * @property uiName
+		 * @property sName
 		 * @type {String}
 		 * @default "fb-ui-tab.pane"
 		 */
-		uiName:"fb-ui-tab.pane",
+		sName:"containers.tab.pane",
 		/**
 		 * @property active
 		 * @type {Boolean}
@@ -27,11 +27,19 @@ define(["text!./Pane.html", "../Base", "bootstrap.plugins/tab"], function(tpl){
 		 */
 		active: false,
 		/**
-		 * @property content
+		 * store property key
+		 * @property storeProp
 		 * @type {String}
 		 * @default ""
 		 */
-		content:"",
+		storeProp: "",
+		/**
+		 * fill the panel body with html
+		 * @property html
+		 * @type {String}
+		 * @default ""
+		 */
+		html: "",
 		/**
 		 * returns the Tab component, not the TabPane!
 		 * @method getTabId
@@ -71,8 +79,12 @@ define(["text!./Pane.html", "../Base", "bootstrap.plugins/tab"], function(tpl){
 			
 			obj.attr.id = "Firebrick.getById('"+me.getId()+"').getPaneId()";
 
-			if(!me.items && me.content){
-				obj.html =  "Firebrick.getById('"+me.getId()+"').content";
+			if(!me.items){
+				if(me.storeProp){
+					obj.html = me.storeProp;
+				}else{
+					obj.html = "Firebrick.getById('"+me.getId()+"').html";
+				}
 			}
 			
 			return obj;

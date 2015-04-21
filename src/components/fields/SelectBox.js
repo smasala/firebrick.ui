@@ -13,10 +13,10 @@ define(["text!./SelectBox.html", "jquery", "./Input"], function(subTpl, $){
 	return Firebrick.define("Firebrick.ui.fields.SelectBox", {
 		extend:'Firebrick.ui.fields.Input',
 		/**
-		 * @property uiName
+		 * @property sName
 		 * @type {String}
 		 */
-		uiName:"fb-ui-selectbox",
+		sName:"fields.selectbox",
 		/**
 		 * @property multiSelect
 		 * @type {Boolean}

@@ -7,15 +7,14 @@ define(["firebrick-ui", "Firebrick.ui/nav/Toolbar"], function(){
 	
 	describe("nav.Toolbar:", function(){
 		
-		var name = "fb-ui-toolbar",
+		var name = "nav.toolbar",
 			cmp = Firebrick.create("ToolbarTest", {
 					extend:"Firebrick.ui.nav.Toolbar"
 			});
 		
 		it("Defined", function(){
 			expect(cmp).toBeDefined();
-			expect(cmp.uiName).toBe(name);
-			expect(fb.ui.cmp.toolbar).toBe(name);
+			expect(cmp.sName).toBe(name);
 		});
 		
 	});

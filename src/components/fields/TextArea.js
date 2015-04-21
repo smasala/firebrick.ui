@@ -13,10 +13,10 @@ define(["text!./TextArea.html", "./Input"], function(subTpl){
 	return Firebrick.define("Firebrick.ui.fields.TextArea", {
 		extend:"Firebrick.ui.fields.Input",
 		/**
-		 * @property uiName
+		 * @property sName
 		 * @type {String}
 		 */
-		uiName: "fb-ui-textarea",
+		sName: "fields.textarea",
 		/**
 		 * number of rows high
 		 * @property rows

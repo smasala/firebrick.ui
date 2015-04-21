@@ -14,10 +14,10 @@ define(["text!./GridColumn.html", "./Base", "../common/mixins/Column"], function
 		extend:"Firebrick.ui.containers.Base",
 		mixins:"Firebrick.ui.common.mixins.Column",
 		/**
-		 * @property uiName
+		 * @property sName
 		 * @type {String}
 		 */
-		uiName:"fb-ui-gridcol",
+		sName:"containers.gridcolumn",
 		/**
 		 * @property tpl
 		 * @type {String} html

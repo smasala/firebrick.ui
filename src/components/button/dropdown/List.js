@@ -14,7 +14,7 @@ define(["jquery", "../../nav/List"], function($){
 	"use strict";
 	return Firebrick.define("Firebrick.ui.button.dropdown.List", {
 		extend: "Firebrick.ui.nav.List",
-		uiName:"fb-ui-dropdownlist",
+		sName:"button.dropdown.list",
 		/**
 		 * @property ariaLabelledBy
 		 * @type {String}

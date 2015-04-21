@@ -7,15 +7,14 @@ define(["firebrick-ui", "Firebrick.ui/display/Text"], function(){
 	
 	describe("display.Text:", function(){
 		
-		var name = "fb-ui-text",
+		var name = "display.text",
 			cmp = Firebrick.create("TextTest", {
 					extend:"Firebrick.ui.display.Text"
 			});
 		
 		it("Defined", function(){
 			expect(cmp).toBeDefined();
-			expect(cmp.uiName).toBe(name);
-			expect(fb.ui.cmp.text).toBe(name);
+			expect(cmp.sName).toBe(name);
 		});
 		
 	});

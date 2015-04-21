@@ -7,15 +7,14 @@ define(["firebrick-ui", "Firebrick.ui/display/Progress"], function(){
 	
 	describe("display.Progress:", function(){
 		
-		var name = "fb-ui-progress",
+		var name = "display.progress",
 			cmp = Firebrick.create("ProgressTest", {
 					extend:"Firebrick.ui.display.Progress"
 			});
 		
 		it("Defined", function(){
 			expect(cmp).toBeDefined();
-			expect(cmp.uiName).toBe(name);
-			expect(fb.ui.cmp.progress).toBe(name);
+			expect(cmp.sName).toBe(name);
 		});
 		
 	});

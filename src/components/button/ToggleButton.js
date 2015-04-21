@@ -51,10 +51,10 @@ define(["text!./ToggleButton.html", "knockout", "jquery", "../common/MultiplesBa
 		extend:"Firebrick.ui.common.MultiplesBase",
 		/**
 		 * component alias
-		 * @property uiName
+		 * @property sName
 		 * @type {String}
 		 */
-		uiName: "fb-ui-togglebutton",
+		sName: "button.togglebutton",
 		/**
 		 * @property subTpl
 		 * @type {String} html

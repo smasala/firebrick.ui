@@ -19,7 +19,7 @@
             
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 0.13.0</em>
+            <em>API Docs for: 0.14.0</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -74,6 +74,8 @@
                 <li><a href="../classes/components.containers.BorderLayout.html">components.containers.BorderLayout</a></li>
             
                 <li><a href="../classes/components.containers.Box.html">components.containers.Box</a></li>
+            
+                <li><a href="../classes/components.containers.Fieldset.html">components.containers.Fieldset</a></li>
             
                 <li><a href="../classes/components.containers.Form.html">components.containers.Form</a></li>
             
@@ -145,7 +147,11 @@
             
                 <li><a href="../classes/helper.html">helper</a></li>
             
+                <li><a href="../classes/plugins.ContextMenu.html">plugins.ContextMenu</a></li>
+            
                 <li><a href="../classes/plugins.Draggable.html">plugins.Draggable</a></li>
+            
+                <li><a href="../classes/plugins.EditableTable.html">plugins.EditableTable</a></li>
             
                 <li><a href="../classes/plugins.RadioList.html">plugins.RadioList</a></li>
             
@@ -221,7 +227,7 @@ define([&quot;text!./Button.html&quot;, &quot;./Base&quot;, &quot;../common/mixi
 	return Firebrick.define(&quot;Firebrick.ui.button.Button&quot;, {
 		extend:&quot;Firebrick.ui.button.Base&quot;,
 		mixins:[&quot;Firebrick.ui.common.mixins.Badges&quot;],
-		uiName: &quot;fb-ui-button&quot;,
+		sName: &quot;button.button&quot;,
 		tpl:tpl,
 		/**
 		 * @property text
@@ -289,25 +295,11 @@ define([&quot;text!./Button.html&quot;, &quot;./Base&quot;, &quot;../common/mixi
 		 */
 		loadingText: false,
 		/**
-		 * add data to turn button into a dropdown button
-		 * @property data
-		 * @type {String} ko data object
-		 * @default null
-		 */
-		data: null,
-		/**
 		 * @property dropdownConfig
 		 * @type {Object}
 		 * @default null
 		 */
 		dropdownConfig: null,
-		/**
-		 * if defined, this callback method will be applied to the click event of this particular button
-		 * @method callback
-		 * @type {Function}
-		 * @default null
-		 */
-		callback: null,
 		/**
 		 * @property srOnlyText
 		 * @type {String}
@@ -315,25 +307,12 @@ define([&quot;text!./Button.html&quot;, &quot;./Base&quot;, &quot;../common/mixi
 		 */
 		srOnlyText: &quot;Toggle Dropdown&quot;,
 		/**
-		 * @method init
-		 * @return {Object} self
+		 * only works if this button is used in a modal
+		 * @property closeModal
+		 * @type {Boolean}
+		 * @default false
 		 */
-		init: function(){
-			var me = this;
-			
-			if(me.callback){
-				me.on(&quot;rendered&quot;, function(){
-					var el = me.getElement();
-					if(el){
-						el.on(&quot;click&quot;, function(){
-							me.callback.apply(me, arguments);
-						});
-					}
-				});
-			}
-			
-			return me.callParent(arguments);
-		},
+		closeModal: false,
 		/**
 		 * default bindings called by data-bind={{data-bind}}
 		 * @method bindings
@@ -348,7 +327,8 @@ define([&quot;text!./Button.html&quot;, &quot;./Base&quot;, &quot;../common/mixi
 			
 			//firefox bug fix
 			obj.attr.autocomplete = &quot;&#x27;off&#x27;&quot;;
-			
+			//--//
+						
 			if(me.btnStyle){
 				obj.css[ me.parseBind(&quot;btn-&quot;+me.btnStyle)] = true;
 			}
@@ -356,7 +336,7 @@ define([&quot;text!./Button.html&quot;, &quot;./Base&quot;, &quot;../common/mixi
 				obj.css[ me.parseBind(&quot;btn-&quot; + me.btnSize)] = true;
 			}
 			
-			if(me.data &amp;&amp; !me.splitButton){
+			if(me.items &amp;&amp; !me.splitButton){
 				obj.css[&quot;&#x27;dropdown-toggle&#x27;&quot;] = true;
 				obj.attr[&quot;&#x27;data-toggle&#x27;&quot;] = &quot;&#x27;dropdown&#x27;&quot;;
 			}
@@ -367,6 +347,10 @@ define([&quot;text!./Button.html&quot;, &quot;./Base&quot;, &quot;../common/mixi
 			
 			if(me.loadingText){
 				obj.attr[&quot;&#x27;data-loading-text&#x27;&quot;] = me.textBind( me.loadingText );
+			}
+			
+			if(me.closeModal){
+				obj.attr[&quot;&#x27;data-dismiss&#x27;&quot;] = &quot;&#x27;modal&#x27;&quot;;
 			}
 			
 			return obj;
@@ -421,8 +405,8 @@ define([&quot;text!./Button.html&quot;, &quot;./Base&quot;, &quot;../common/mixi
 		getDropdown: function(){
 			var me = this,
 				obj = {
-					uiName: fb.ui.cmp.dropdownlist,
-					data: $.isArray(me.data) ? &quot;Firebrick.ui.getCmp(&#x27;&quot; + me.getId() + &quot;&#x27;).data&quot; : me.data
+					sName: &quot;button.dropdown.list&quot;,
+					items: $.isArray(me.items) ? &quot;Firebrick.ui.getCmp(&#x27;&quot; + me.getId() + &quot;&#x27;).items&quot; : me.items
 				};
 			
 			obj = Firebrick.utils.copyover(obj, me.dropdownConfig);
@@ -446,7 +430,7 @@ define([&quot;text!./Button.html&quot;, &quot;./Base&quot;, &quot;../common/mixi
 			if(me.btnSize){
 				obj.css[ me.parseBind(&quot;btn-&quot; + me.btnSize)] = true;
 			}
-			if(me.data){
+			if(me.items){
 				obj.css[&quot;&#x27;dropdown-toggle&#x27;&quot;] = true;
 				obj.attr[&quot;&#x27;data-toggle&#x27;&quot;] = &quot;&#x27;dropdown&#x27;&quot;;
 			}

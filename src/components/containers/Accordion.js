@@ -19,20 +19,20 @@ define(["text!./Accordion.html", "./Base", "./Panel", "bootstrap.plugins/collaps
 		 */
 		tpl: tpl,
 		/**
-		 * @property uiName
+		 * @property sName
 		 * @type {String}
 		 */
-		uiName:"fb-ui-accordion",
+		sName:"containers.accordion",
 		
 		/**
 		 * @property defaults
 		 * @type {Object}
 		 * @default {
-		 * 		uiName: fb.ui.cmp.borderpane
+		 * 		sName: "containers.panel"
 		 * }
 		 */
 		defaults: {
-			uiName: fb.ui.cmp.panel,
+			sName: "containers.panel",
 			collapsible:true,
 			role: "tab",
 			collapseRole: "tabpanel"

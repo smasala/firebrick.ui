@@ -12,7 +12,7 @@ define(["text!./Image.html", "../common/Base", "responsive-images"], function(tp
 	"use strict";
 	return Firebrick.define("Firebrick.ui.display.Image", {
 		extend:"Firebrick.ui.common.Base",
-		uiName:"fb-ui-image",
+		sName:"display.image",
 		tpl: tpl,
 		/**
 		 * @method init

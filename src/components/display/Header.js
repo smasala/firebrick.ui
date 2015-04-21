@@ -13,10 +13,10 @@ define(["text!./Header.html", "../common/Base"], function(tpl){
 	return Firebrick.define("Firebrick.ui.display.Header", {
 		extend:"Firebrick.ui.common.Base",
 		/**
-		 * @property uiName
+		 * @property sName
 		 * @type {String}
 		 */
-		uiName:"fb-ui-header",
+		sName:"display.header",
 		/**
 		 * @property tpl
 		 * @type {String}

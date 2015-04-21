@@ -7,15 +7,14 @@ define(["firebrick-ui", "Firebrick.ui/containers/FormPanel"], function(){
 	
 	describe("containers.FormPanel:", function(){
 		
-		var name = "fb-ui-formpanel",
+		var name = "containers.formpanel",
 			cmp = Firebrick.create("FormPanelTest", {
 					extend:"Firebrick.ui.containers.FormPanel"
 			});
 		
 		it("Defined", function(){
 			expect(cmp).toBeDefined();
-			expect(cmp.uiName).toBe(name);
-			expect(fb.ui.cmp.formpanel).toBe(name);
+			expect(cmp.sName).toBe(name);
 		});
 		
 	});

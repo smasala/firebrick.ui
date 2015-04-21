@@ -15,11 +15,11 @@ define(["text!./SplitBar.html", "jquery", "../../common/mixins/Column", "./Dragg
 		extend:"Firebrick.ui.containers.Panel",
 		mixins:"Firebrick.ui.common.mixins.Column",
 		/**
-		 * @property uiName
+		 * @property sName
 		 * @type {String}
-		 * @default "fb-ui-border.pane"
+		 * @default "containers.border.pane"
 		 */
-		uiName:"fb-ui-borderpane",
+		sName:"containers.border.pane",
 		/**
 		 * @property resizable
 		 * @type {Boolean}

@@ -7,15 +7,14 @@ define(["firebrick-ui", "Firebrick.ui/display/Image"], function(){
 	
 	describe("display.Image:", function(){
 		
-		var name = "fb-ui-image",
+		var name = "display.image",
 			cmp = Firebrick.create("ImageTest", {
 					extend:"Firebrick.ui.display.Image"
 			});
 		
 		it("Defined", function(){
 			expect(cmp).toBeDefined();
-			expect(cmp.uiName).toBe(name);
-			expect(fb.ui.cmp.image).toBe(name);
+			expect(cmp.sName).toBe(name);
 		});
 		
 	});

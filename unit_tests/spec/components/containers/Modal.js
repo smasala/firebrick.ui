@@ -7,7 +7,7 @@ define(["firebrick-ui", "Firebrick.ui/containers/Modal"], function(){
 	
 	describe("containers.Modal:", function(){
 		
-		var name = "fb-ui-modal",
+		var name = "containers.modal",
 			cmp = Firebrick.create("ModalTest", {
 					extend:"Firebrick.ui.containers.Modal",
 					autoRender:false,
@@ -16,8 +16,7 @@ define(["firebrick-ui", "Firebrick.ui/containers/Modal"], function(){
 		
 		it("Defined", function(){
 			expect(cmp).toBeDefined();
-			expect(cmp.uiName).toBe(name);
-			expect(fb.ui.cmp.modal).toBe(name);
+			expect(cmp.sName).toBe(name);
 		});
 		
 	});

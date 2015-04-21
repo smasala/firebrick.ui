@@ -19,7 +19,7 @@
             
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 0.13.0</em>
+            <em>API Docs for: 0.14.0</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -74,6 +74,8 @@
                 <li><a href="../classes/components.containers.BorderLayout.html">components.containers.BorderLayout</a></li>
             
                 <li><a href="../classes/components.containers.Box.html">components.containers.Box</a></li>
+            
+                <li><a href="../classes/components.containers.Fieldset.html">components.containers.Fieldset</a></li>
             
                 <li><a href="../classes/components.containers.Form.html">components.containers.Form</a></li>
             
@@ -145,7 +147,11 @@
             
                 <li><a href="../classes/helper.html">helper</a></li>
             
+                <li><a href="../classes/plugins.ContextMenu.html">plugins.ContextMenu</a></li>
+            
                 <li><a href="../classes/plugins.Draggable.html">plugins.Draggable</a></li>
+            
+                <li><a href="../classes/plugins.EditableTable.html">plugins.EditableTable</a></li>
             
                 <li><a href="../classes/plugins.RadioList.html">plugins.RadioList</a></li>
             
@@ -223,7 +229,7 @@ define([&quot;text!./Alert.html&quot;, &quot;../common/Base&quot;, &quot;../comm
 		extend: &quot;Firebrick.ui.common.Base&quot;,
 		mixins:&quot;Firebrick.ui.common.mixins.Items&quot;,
 		tpl: tpl,
-		uiName:&quot;fb-ui-alert&quot;,
+		sName:&quot;display.alert&quot;,
 		/**
 		 * whether the alert is dismissible - also controls whether the X button is shown or not
 		 * @property dismissible
@@ -252,12 +258,19 @@ define([&quot;text!./Alert.html&quot;, &quot;../common/Base&quot;, &quot;../comm
 		 */
 		title:&quot;&quot;,
 		/**
-		 * if set, .items will be ignored
-		 * @property content
+		 * store property key
+		 * @property storeProp
 		 * @type {String}
 		 * @default &quot;&quot;
 		 */
-		content:&quot;&quot;,
+		storeProp: &quot;&quot;,
+		/**
+		 * fill the panel body with html
+		 * @property html
+		 * @type {String}
+		 * @default &quot;&quot;
+		 */
+		html: &quot;&quot;,
 		/**
 		 * @method bindings
 		 * @return {Object}
@@ -276,6 +289,23 @@ define([&quot;text!./Alert.html&quot;, &quot;../common/Base&quot;, &quot;../comm
 			
 			return obj;
 		},
+		/**
+		 * @method paragraphBindings
+		 * @return {Object}
+		 */
+		paragraphBindings: function(){
+			var me = this,
+				obj = {};
+			
+			if(me.storeProp){
+				obj.html = me.storeProp;
+			}else{
+				obj.html = &quot;Firebrick.getById(&#x27;&quot;+me.getId()+&quot;&#x27;).html&quot;;
+			}
+			
+			return obj;
+		},
+		
 		/**
 		 * screen reader text
 		 * @property srCloseText

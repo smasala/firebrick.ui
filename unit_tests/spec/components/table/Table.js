@@ -7,15 +7,14 @@ define(["firebrick-ui", "Firebrick.ui/table/Table"], function(){
 	
 	describe("table.Table:", function(){
 		
-		var name = "fb-ui-table",
+		var name = "table.table",
 			cmp = Firebrick.create("TableTest", {
 					extend:"Firebrick.ui.table.Table"
 			});
 		
 		it("Defined", function(){
 			expect(cmp).toBeDefined();
-			expect(cmp.uiName).toBe(name);
-			expect(fb.ui.cmp.table).toBe(name);
+			expect(cmp.sName).toBe(name);
 		});
 		
 	});

@@ -7,15 +7,14 @@ define(["firebrick-ui", "Firebrick.ui/fields/TextArea"], function(){
 	
 	describe("Fields.TextArea:", function(){
 		
-		var name = "fb-ui-textarea",
+		var name = "fields.textarea",
 			cmp = Firebrick.create("TextAreaTest", {
 					extend:"Firebrick.ui.fields.TextArea"
 			});
 		
 		it("Defined", function(){
 			expect(cmp).toBeDefined();
-			expect(cmp.uiName).toBe(name);
-			expect(fb.ui.cmp.textarea).toBe(name);
+			expect(cmp.sName).toBe(name);
 		});
 		
 	});

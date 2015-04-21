@@ -13,10 +13,10 @@ define(["text!./Radio.html", "../common/MultiplesBase", "./plugins/Radio"], func
 	return Firebrick.define("Firebrick.ui.fields.Radio", {
 		extend:"Firebrick.ui.common.MultiplesBase",
 		/**
-		 * @property uiName
+		 * @property sName
 		 * @type {String}
 		 */
-		uiName:"fb-ui-radio",
+		sName:"fields.radio",
 		/**
 		 * @property type
 		 * @type {String}
@@ -72,6 +72,7 @@ define(["text!./Radio.html", "../common/MultiplesBase", "./plugins/Radio"], func
 			}
 			return {};
 		},
+		
 		/**
 		 * @method optionLabelContainerBindings
 		 * @return {Object}
@@ -96,6 +97,9 @@ define(["text!./Radio.html", "../common/MultiplesBase", "./plugins/Radio"], func
 				obj.foreach = Firebrick.ui.helper.optionString(me);
 			}
 			
+			obj.attr = obj.attr || {};
+			obj.attr.id = me.parseBind(me.getId());
+			
 			return obj;
 		},
 		/**
@@ -104,7 +108,16 @@ define(["text!./Radio.html", "../common/MultiplesBase", "./plugins/Radio"], func
 		 */
 		bindings:function(){
 			var me = this,
-				obj = me.callParent(arguments);
+				obj = me.callParent(arguments),
+				value = me.value || null;
+			
+			if($.isPlainObject(value) && value.value){
+				if($.isFunction(value.value)){
+					value = value.value();
+				}else{
+					value = value.value;
+				}
+			}
 			
 			if(me.inplaceEdit){
 				obj.editable = me.selectedOptions || false;
@@ -124,7 +137,7 @@ define(["text!./Radio.html", "../common/MultiplesBase", "./plugins/Radio"], func
 				obj.attr.id =  me.parseBind(me.getId());
 			}
 			obj.attr.name = me.parseBind( me.cleanString(me.type)+"-group-"+Firebrick.utils.uniqId() );
-			obj.checked = me.value + " !== null ? " + me.value + " === ($data.value || $data) : $data.checked ? $data.checked : false";
+			obj.checked = value + " !== null ? " + value + " : ($data.value || $data)";
 			return obj;
 		}
 	});

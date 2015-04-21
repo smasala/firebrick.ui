@@ -7,15 +7,14 @@ define(["firebrick-ui", "Firebrick.ui/fields/Email"], function(){
 	
 	describe("Fields.Email:", function(){
 		
-		var name = "fb-ui-email",
+		var name = "fields.email",
 			cmp = Firebrick.create("EmailTest", {
 					extend:"Firebrick.ui.fields.Email"
 			});
 		
 		it("Defined", function(){
 			expect(cmp).toBeDefined();
-			expect(cmp.uiName).toBe(name);
-			expect(fb.ui.cmp.email).toBe(name);
+			expect(cmp.sName).toBe(name);
 		});
 		
 	});

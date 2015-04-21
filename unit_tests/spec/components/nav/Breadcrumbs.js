@@ -7,15 +7,14 @@ define(["firebrick-ui", "Firebrick.ui/nav/Breadcrumbs"], function(){
 	
 	describe("nav.BreadCrumbs:", function(){
 		
-		var name = "fb-ui-breadcrumbs",
+		var name = "nav.breadcrumbs",
 			cmp = Firebrick.create("BreadcrumbsTest", {
 					extend:"Firebrick.ui.nav.Breadcrumbs"
 			});
 		
 		it("Defined", function(){
 			expect(cmp).toBeDefined();
-			expect(cmp.uiName).toBe(name);
-			expect(fb.ui.cmp.breadcrumbs).toBe(name);
+			expect(cmp.sName).toBe(name);
 		});
 		
 	});

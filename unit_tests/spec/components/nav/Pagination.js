@@ -7,15 +7,14 @@ define(["firebrick-ui", "Firebrick.ui/nav/Pagination"], function(){
 	
 	describe("nav.Pagination:", function(){
 		
-		var name = "fb-ui-pagination",
+		var name = "nav.pagination",
 			cmp = Firebrick.create("PaginationTest", {
 					extend:"Firebrick.ui.nav.Pagination"
 			});
 		
 		it("Defined", function(){
 			expect(cmp).toBeDefined();
-			expect(cmp.uiName).toBe(name);
-			expect(fb.ui.cmp.pagination).toBe(name);
+			expect(cmp.sName).toBe(name);
 		});
 		
 	});

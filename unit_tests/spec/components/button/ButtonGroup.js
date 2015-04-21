@@ -7,15 +7,14 @@ define(["firebrick-ui", "Firebrick.ui/button/ButtonGroup"], function(){
 	
 	describe("Button.ButtonGroup:", function(){
 		
-		var name = "fb-ui-buttongroup",
+		var name = "button.buttongroup",
 			cmp = Firebrick.create("ButtonGroupTest", {
 					extend:"Firebrick.ui.button.ButtonGroup"
 			});
 		
 		it("Defined", function(){
 			expect(cmp).toBeDefined();
-			expect(cmp.uiName).toBe(name);
-			expect(fb.ui.cmp.buttongroup).toBe(name);
+			expect(cmp.sName).toBe(name);
 		});
 		
 	});

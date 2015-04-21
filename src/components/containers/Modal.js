@@ -9,7 +9,6 @@
  * @class Modal
  */
 define(["text!./Modal.html", "./Base"], function(tpl){
-	
 	"use strict";
 	
 	return Firebrick.define("Firebrick.ui.containers.Modal", {
@@ -17,17 +16,23 @@ define(["text!./Modal.html", "./Base"], function(tpl){
 		tpl: tpl,
 		target:"body",
 		appendTarget: true,
-		uiName:"fb-ui-modal",
+		sName:"containers.modal",
 		init: function(){
 			var me = this;
 			me.on("rendered", function(){
 				if(me.showOnCreate){
-					return me.showMe();	
+					me.showMe();	
 				}
+				me.getElement().on("hidden.bs.modal", function(){
+					me.destroy();
+				});
 			});
 			return me.callParent(arguments);
 		},
 		enclosedBind:true,
+		passToProperties:{
+			footerItems:1
+		},
 		/**
 		 * show the modal
 		 * @method showMe
@@ -60,11 +65,19 @@ define(["text!./Modal.html", "./Base"], function(tpl){
 		 */
 		title:"",
 		/**
-		 * @property content
+		 * store property key
+		 * @property storeProp
 		 * @type {String}
 		 * @default ""
 		 */
-		content:"",
+		storeProp: "",
+		/**
+		 * fill the panel body with html
+		 * @property html
+		 * @type {String}
+		 * @default ""
+		 */
+		html: "",
 		/**
 		 * @property titleClass
 		 * @type {Boolean}
@@ -244,14 +257,21 @@ define(["text!./Modal.html", "./Base"], function(tpl){
 		 * @return {Object}
 		 */
 		bodyBindings: function(){
-			var me = this , obj ={
+			var me = this, 
+				obj ={
 					css:{
 						"'modal-body'": me.bodyClass
 					}
 				};
-			if(me.content){
-				obj.text=me.textBind(me.content);
+			
+			if(!me.items){
+				if(me.storeProp){
+					obj.html = me.storeProp;
+				}else{
+					obj.html = "Firebrick.getById('"+me.getId()+"').html";
+				}
 			}
+			
 			return obj;
 		},
 		/**

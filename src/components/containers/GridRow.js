@@ -13,10 +13,10 @@ define(["text!./GridRow.html", "jquery", "./Base", "./GridColumn"], function(tpl
 	return Firebrick.define("Firebrick.ui.containers.GridRow", {
 		extend:"Firebrick.ui.containers.Base",
 		/**
-		 * @property uiName
+		 * @property sName
 		 * @type {String}
 		 */
-		uiName:"fb-ui-gridrow",
+		sName:"containers.gridrow",
 		/**
 		 * @property tpl
 		 * @type {String} html
@@ -31,10 +31,10 @@ define(["text!./GridRow.html", "jquery", "./Base", "./GridColumn"], function(tpl
 		/**
 		 * @property defaults
 		 * @type {Object}
-		 * @default {uiName: fb.ui.cmp.gridcol}
+		 * @default {sName: "containers.gridcolum"}
 		 */
 		defaults:{
-			uiName: fb.ui.cmp.gridcol
+			sName: "containers.gridcolumn"
 		},
 		/**
 		 * @method bindings

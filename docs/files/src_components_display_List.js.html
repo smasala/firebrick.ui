@@ -19,7 +19,7 @@
             
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 0.13.0</em>
+            <em>API Docs for: 0.14.0</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -74,6 +74,8 @@
                 <li><a href="../classes/components.containers.BorderLayout.html">components.containers.BorderLayout</a></li>
             
                 <li><a href="../classes/components.containers.Box.html">components.containers.Box</a></li>
+            
+                <li><a href="../classes/components.containers.Fieldset.html">components.containers.Fieldset</a></li>
             
                 <li><a href="../classes/components.containers.Form.html">components.containers.Form</a></li>
             
@@ -145,7 +147,11 @@
             
                 <li><a href="../classes/helper.html">helper</a></li>
             
+                <li><a href="../classes/plugins.ContextMenu.html">plugins.ContextMenu</a></li>
+            
                 <li><a href="../classes/plugins.Draggable.html">plugins.Draggable</a></li>
+            
+                <li><a href="../classes/plugins.EditableTable.html">plugins.EditableTable</a></li>
             
                 <li><a href="../classes/plugins.RadioList.html">plugins.RadioList</a></li>
             
@@ -263,11 +269,11 @@ define([&quot;text!./List.html&quot;, &quot;knockout&quot;, &quot;jquery&quot;, 
 		extend:&quot;Firebrick.ui.common.Base&quot;,
 		mixins:[&quot;Firebrick.ui.common.mixins.Items&quot;, &quot;Firebrick.ui.common.mixins.Badges&quot;],
 		/**
-		 * @property uiName
+		 * @property sName
 		 * @type {String}
 		 * @default &quot;fb-ui-list&quot;
 		 */
-		uiName:&quot;fb-ui-list&quot;,
+		sName:&quot;display.list&quot;,
 		/**
 		 * @property tpl
 		 * @type {String} html
@@ -352,7 +358,7 @@ define([&quot;text!./List.html&quot;, &quot;knockout&quot;, &quot;jquery&quot;, 
 			if(me.unstyled){
 				obj.css[&quot;&#x27;list-unstyled&#x27;&quot;] = me.unstyled;
 			}
-			if(me.data){
+			if(me.items){
 				obj.foreach = &quot;$data&quot;;
 			}
 			return obj;
@@ -395,7 +401,7 @@ define([&quot;text!./List.html&quot;, &quot;knockout&quot;, &quot;jquery&quot;, 
 			return {
 				template: {
 					name:  me.parseBind(me._getTplId()),
-					data: $.isArray(me.data) ? &quot;Firebrick.ui.getCmp(&#x27;&quot; + me.getId() + &quot;&#x27;).data&quot; : me.data,
+					data: $.isArray(me.items) ? &quot;Firebrick.ui.getCmp(&#x27;&quot; + me.getId() + &quot;&#x27;).items&quot; : me.items,
 				},
 				listRenderer: me.parseBind(me.getId())
 			};

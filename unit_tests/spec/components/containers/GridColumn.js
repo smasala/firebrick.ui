@@ -7,15 +7,14 @@ define(["firebrick-ui", "Firebrick.ui/containers/GridColumn"], function(){
 	
 	describe("containers.GridColumn:", function(){
 		
-		var name = "fb-ui-gridcol",
+		var name = "containers.gridcolumn",
 			cmp = Firebrick.create("GridColumnTest", {
 					extend:"Firebrick.ui.containers.GridColumn"
 			});
 		
 		it("Defined", function(){
 			expect(cmp).toBeDefined();
-			expect(cmp.uiName).toBe(name);
-			expect(fb.ui.cmp.gridcol).toBe(name);
+			expect(cmp.sName).toBe(name);
 		});
 		
 	});

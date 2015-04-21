@@ -14,11 +14,11 @@ define(["text!./TabPanel.html", "./Base", "bootstrap.plugins/tab", "./tab/Pane"]
 		extend:"Firebrick.ui.containers.Base",
 		tpl: tpl,
 		/**
-		* @property uiName
+		* @property sName
 		* @type {String}
 		* @default "fb-ui-tabpanel"
 		*/
-		uiName: "fb-ui-tabpanel",
+		sName: "containers.tabpanel",
 		/**
 		 * @private
 		 * @method _getListTplId
@@ -46,11 +46,11 @@ define(["text!./TabPanel.html", "./Base", "bootstrap.plugins/tab", "./tab/Pane"]
 		 * @property defaults
 		 * @type {Object}
 		 * @default {
-				uiName:fb.ui.cmp.tabpane
+				sName: "containers.tab.pane"
 			}
 		 */
 		defaults:{
-			uiName:fb.ui.cmp.tab.pane
+			sName: "containers.tab.pane"
 		},
 		/**
 		 * @method bindings

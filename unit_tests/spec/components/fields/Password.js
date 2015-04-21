@@ -7,15 +7,14 @@ define(["firebrick-ui", "Firebrick.ui/fields/Password"], function(){
 	
 	describe("Fields.Password:", function(){
 		
-		var name = "fb-ui-password",
+		var name = "fields.password",
 			cmp = Firebrick.create("PasswordTest", {
 					extend:"Firebrick.ui.fields.Password"
 			});
 		
 		it("Defined", function(){
 			expect(cmp).toBeDefined();
-			expect(cmp.uiName).toBe(name);
-			expect(fb.ui.cmp.password).toBe(name);
+			expect(cmp.sName).toBe(name);
 		});
 		
 	});

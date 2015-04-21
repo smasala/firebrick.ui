@@ -16,7 +16,9 @@
     {{?it.showRows}}
 	    <tbody data-bind="{{=it.dataBind('tbodyBindings')}}">
 	      <tr data-bind="{{=it.dataBind('tbodyTRBindings')}}">
-	        <td data-bind="{{=it.dataBind('tbodyTRTDBindings')}}"></td>
+	        <td data-bind="{{=it.dataBind('tbodyTRTDBindings')}}">
+	        	<span data-bind="{{=it.dataBind('tbodyTRTDSpanBindings')}}"></span>
+	        </td>
 	      </tr>
 	    </tbody>
     {{?}}

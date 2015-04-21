@@ -7,15 +7,14 @@ define(["firebrick-ui", "Firebrick.ui/display/List"], function(){
 	
 	describe("display.List:", function(){
 		
-		var name = "fb-ui-list",
+		var name = "display.list",
 			cmp = Firebrick.create("ListTest", {
 					extend:"Firebrick.ui.display.List"
 			});
 		
 		it("Defined", function(){
 			expect(cmp).toBeDefined();
-			expect(cmp.uiName).toBe(name);
-			expect(fb.ui.cmp.list).toBe(name);
+			expect(cmp.sName).toBe(name);
 		});
 		
 	});

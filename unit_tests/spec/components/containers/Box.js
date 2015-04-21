@@ -7,15 +7,14 @@ define(["firebrick-ui", "Firebrick.ui/containers/Box"], function(){
 	
 	describe("containers.Box:", function(){
 		
-		var name = "fb-ui-box",
+		var name = "containers.box",
 			cmp = Firebrick.create("BoxTest", {
 					extend:"Firebrick.ui.containers.Box"
 			});
 		
 		it("Defined", function(){
 			expect(cmp).toBeDefined();
-			expect(cmp.uiName).toBe(name);
-			expect(fb.ui.cmp.box).toBe(name);
+			expect(cmp.sName).toBe(name);
 		});
 		
 	});

@@ -4,7 +4,7 @@
 
 /**
  * 
- * the items property does not need to have each object defined with its uiName, that is down automatically
+ * the items property does not need to have each object defined with its sName, that is down automatically
  * 
  * @module Firebrick.ui.components
  * @extends components.common.Base
@@ -17,14 +17,14 @@ define(["text!./ButtonGroup.html", "./Base", "./Button"], function(tpl){
 	return Firebrick.define("Firebrick.ui.button.ButtonGroup", {
 		extend:"Firebrick.ui.button.Base",
 		/**
-		 * @property uiName
+		 * @property sName
 		 * @type {String}
 		 * @default "fb-ui-buttongroup"
 		 */
-		uiName: "fb-ui-buttongroup",
+		sName: "button.buttongroup",
 		tpl:tpl,
 		defaults:{
-			uiName:"fb-ui-button",
+			sName:"fb-ui-button",
 			dropdownContainerClass:"btn-group" //needed for dropdown
 		},
 		/**

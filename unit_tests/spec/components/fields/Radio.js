@@ -7,15 +7,14 @@ define(["firebrick-ui", "Firebrick.ui/fields/Radio"], function(){
 	
 	describe("Fields.Radio:", function(){
 		
-		var name = "fb-ui-radio",
+		var name = "fields.radio",
 			cmp = Firebrick.create("RadioTest", {
 					extend:"Firebrick.ui.fields.Radio"
 			});
 		
 		it("Defined", function(){
 			expect(cmp).toBeDefined();
-			expect(cmp.uiName).toBe(name);
-			expect(fb.ui.cmp.radio).toBe(name);
+			expect(cmp.sName).toBe(name);
 		});
 		
 	});

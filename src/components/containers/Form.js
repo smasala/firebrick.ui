@@ -13,10 +13,10 @@ define(["text!./Form.html", "jquery", "./Base"], function(tpl, $){
 	return Firebrick.define("Firebrick.ui.containers.Form", {
 		extend:"Firebrick.ui.containers.Base",
 		/**
-		 * @property uiName
+		 * @property sName
 		 * @type {String}
 		 */
-		uiName: "fb-ui-form",
+		sName: "containers.form",
 		/**
 		 * @property tpl
 		 * @type {String} html
@@ -76,19 +76,38 @@ define(["text!./Form.html", "jquery", "./Base"], function(tpl, $){
 		 */
 		submitType: "post",
 		/**
+		 * set to true is you want the progress the upload/download progress to be caught
+		 * when true, use myForm.addListener("progressChanged", function(percentComplete){}); to catch the value
+		 * @property catchProgress
+		 * @type {Boolean}
+		 * @default false
+		 */
+		catchProgress: false,
+		/**
+		 * this is called before the form is submitted, use this
+		 * return false to stop the submit function being called; 
+		 * @method preSubmit
+		 * @param jquery "submit" event arguments
+		 */
+		preSubmit: function(){},
+		/**
 		 * upload and download progress
+		 * @event progressChanged
 		 * @property xhr
 		 * @type {Function}
 		 */
 		xhr: function(){
-			var xhr = new window.XMLHttpRequest();
+			var me = this,
+				xhr = new window.XMLHttpRequest();
 
 			//Upload progress
 		    xhr.upload.addEventListener("progress", function(evt){
 		    	if (evt.lengthComputable) {
 		    		var percentComplete = evt.loaded / evt.total;
-		    		//Do something with upload progress
-		    		console.log(percentComplete);
+		    		if(me.catchProgress){
+		    			//fire the percentCompleted
+		    			me.fireEvent("progressChanged", percentComplete);
+		    		}
 		    	}
 		    }, false);
 		    
@@ -96,19 +115,15 @@ define(["text!./Form.html", "jquery", "./Base"], function(tpl, $){
 		    xhr.addEventListener("progress", function(evt){
 		    	if (evt.lengthComputable) {
 		    		var percentComplete = evt.loaded / evt.total;
-		    		//Do something with download progress
-		    		console.log(percentComplete);
+		    		if(me.catchProgress){
+		    			//fire the percentCompleted
+		    			me.fireEvent("progressChanged", percentComplete);
+		    		}
 		    	}
 		    }, false);
 		    
 		    return xhr;
 		},
-		/**
-		 * stores the current form item
-		 * @property _form
-		 * @type {jQuery Object} <form></form>
-		 */
-		_form: null,
 		/**
 		 * method called on submit ajax
 		 * @property success
@@ -116,16 +131,16 @@ define(["text!./Form.html", "jquery", "./Base"], function(tpl, $){
 		 * @default 
 		 */
 		success: function(){
-			console.info("success");
+			console.info("success", arguments);
 		},
 		/**
 		 * method called on submit ajax
-		 * @property failure
+		 * @property error
 		 * @type {Function}
 		 * @default 
 		 */
-		failure: function(){
-			console.info("failure");
+		error: function(){
+			console.warn("error", arguments);
 		},
 		/**
 		 * method called on submit ajax
@@ -162,7 +177,15 @@ define(["text!./Form.html", "jquery", "./Base"], function(tpl, $){
 			var me = this;
 				
 			me.on("rendered", function(){
-				me._form = me.getElement();
+				var el = me.getElement();
+				if(el){
+					el.on("submit", function(event){
+						event.preventDefault();
+						if(me.preSubmit.apply(me, arguments) !== false){
+							me.submit();	
+						}
+					});
+				}
 			});
 			
 			return me.callParent(arguments);
@@ -172,30 +195,32 @@ define(["text!./Form.html", "jquery", "./Base"], function(tpl, $){
 		 * @method submit
 		 */
 		submit: function(){
-			var me = this;
+			var me = this,
+				form = me.getElement();
 
 			if(!me.url || typeof me.url !== "string"){
 				console.error("unable to submit form. No url is set or is set incorrectly", me.url, me);
 				return;
 			}
 			
-			if(!me._form){
+			if(!form){
 				console.error("unable to submit form. Form not found for id", me.getId());
+				return;
 			}
-			
+
 			if(window.FormData){
 				//HTML 5 - IE10+ 
 				$.ajax({
 					xhr: me.xhr,
 					url: me.url, 
 					type: me.submitType, 
-					data: new window.FormData(me._form[0]), 
+					data: new window.FormData(form[0]), 
 					processData: me.ajaxProcessData, 
 					contentType: me.enctype,
 					beforeSend: me.beforeSend.bind(me),
 					complete: me.complete.bind(me), //regardless of success of failure
 					success: me.success.bind(me),
-					failure: me.failure.bind(me)
+					error: me.error.bind(me)
 				}).always(me.always.bind(me));
 			}else{
 				console.error("FormData is not supported by your browser");

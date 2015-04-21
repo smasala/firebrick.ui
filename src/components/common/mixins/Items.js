@@ -53,16 +53,21 @@ define(["jquery"], function($){
 		 */
 		getItemsProp: function(itemsName){
 			var me = this, 
-				items;
-			itemsName = typeof itemsName === "string" ? me[itemsName] : me.items;
-			items = me._getItems(itemsName);
-			return items ? items.html || items : "";
+				r;
+			if(itemsName){
+				r = me._getItems(me[itemsName]);
+				me[itemsName] = r.items;
+			}else{
+				console.error("invalid function call getItemsProp():", itemsName);
+			}
+			
+			return r ? r.html || r : "";
 		},
 		/**
 		 * use getItems
 		 * @private
 		 * @method _getItems
-		 * @param {Object} items
+		 * @param {Object|Array of Objects} items
 		 * @return {Object, Null} object - {html:"", items:[]}
 		 */
 		_getItems: function(items){
@@ -70,6 +75,11 @@ define(["jquery"], function($){
 			if(items){
 				if(!$.isArray(items) && !$.isFunction(items)){
 					items = [items];
+				}
+				
+				if(!items.length){
+					//nothing
+					return null;
 				}
 
 				if(me.defaults){

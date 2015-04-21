@@ -13,10 +13,10 @@ define(["./Radio"], function(){
 	return Firebrick.define("Firebrick.ui.fields.Checkbox", {
 		extend:"Firebrick.ui.fields.Radio",
 		/**
-		 * @property uiName
+		 * @property sName
 		 * @type {String}
 		 */
-		uiName:"fb-ui-checkbox",
+		sName:"fields.checkbox",
 		/**
 		 * @property type
 		 * @type {String}

@@ -13,16 +13,16 @@ define(["./Table", "jquery-treetable"], function(){
 	return Firebrick.define("Firebrick.ui.table.TreeTable", {
 		extend:"Firebrick.ui.table.Table",
 		/**
-		 * @property uiName
+		 * @property sName
 		 * @type {String}
 		 */
-		uiName: "fb-ui-treetable",
+		sName: "table.treetable",
 		/**
 		 * @property data
 		 * @type {Object|String}
 		 * @default "''"
 		 */
-		data:false,
+		store:false,
 		/**
 		 * @property treetable
 		 * @type {Boolean}

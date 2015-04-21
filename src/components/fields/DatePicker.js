@@ -14,6 +14,17 @@ define(["./Input"], function(){
 	return Firebrick.define("Firebrick.ui.fields.DatePicker", {
 		extend:"Firebrick.ui.fields.Input",
 		/**
+		 * @property sName
+		 * @type {String}
+		 * @default "fields.datepicker"
+		 */
+		sName: "fields.datepicker",
+		/**
+		 * @property inputAddon
+		 * @default true
+		 */
+		inputAddon: true,
+		/**
 		 * @property dateFormat
 		 * @type {String}
 		 * @default "yyyy/mm/dd"
@@ -27,11 +38,17 @@ define(["./Input"], function(){
 		 */
 		weekStart: 1,
 		/**
-		 * @property datePickerOptions
-		 * @type {Object|null}
-		 * @default null
+		 * @method datePickerOptions
+		 * @return {Object}
 		 */
-		datePickerOptions: null,
+		datePickerOptions: function(){
+			var me = this;
+			return {
+				autoclose: true,
+				weekStart: me.weekStart,
+				format: me.dateFormat
+			};
+		},
 		/**
 		 * glyphicon to so in the inputAddon box
 		 * @property iconClass
@@ -39,6 +56,13 @@ define(["./Input"], function(){
 		 * @default "glyphicon-calendar"
 		 */
 		iconClass: "glyphicon-calendar",
+		/**
+		 * whether the calendar inputaddon icon is clickable or not
+		 * @property clickableIcon
+		 * @type {Boolean}
+		 * @default true
+		 */
+		clickableIcon: true,
 		/**
 		 * @method init
 		 * @return parent
@@ -48,29 +72,40 @@ define(["./Input"], function(){
 			
 			me.on("rendered", function(){
 				var el = me.getElement(),
-					opts = me.datePickerOptions;
-				
-				if(!$.isPlainObject(opts)){
-					opts = {};
-				}
-				
-				opts.weekStart = me.weekStart;
-				opts.format = me.dateFormat;
+					inputAddon,
+					icon;
 				
 				if(el.length){
-					el.datepicker(opts);
+					el.datepicker(me.datePickerOptions());
+				}
+				
+				if(me.inputAddon && me.clickableIcon){
+					inputAddon = el.siblings("." + me.inputAddonClass);
+					if(inputAddon.length){
+						icon = inputAddon.find("." + me.iconClass);
+						if(icon.length){
+							icon.css("cursor", "pointer");
+							icon.on("click", function(){
+								var prop = "fb-date-open";
+								if(el.prop(prop) === true){
+									el.datepicker("hide");
+									el.prop(prop, false);
+								} else {
+									el.prop(prop, true);
+									//when the icon is clicked focus is given to the input field to open the datepicker
+									el.focus();
+								}
+							});
+						}
+					}
 				}
 			});
 			
 			return me.callParent(arguments);
 		},
+		
 		/**
-		 * @property uiName
-		 * @type {String}
-		 */
-		uiName: "fb-ui-datepicker",
-		inputAddon: true,
-		/**
+		 * Immediately invoked function
 		 * @property value
 		 * @type {String}
 		 * @default current day

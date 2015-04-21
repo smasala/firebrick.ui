@@ -7,15 +7,14 @@ define(["firebrick-ui", "Firebrick.ui/table/TreeTable"], function(){
 	
 	describe("table.TreeTable:", function(){
 		
-		var name = "fb-ui-treetable",
+		var name = "table.treetable",
 			cmp = Firebrick.create("TreeTableTest", {
 					extend:"Firebrick.ui.table.TreeTable"
 			});
 		
 		it("Defined", function(){
 			expect(cmp).toBeDefined();
-			expect(cmp.uiName).toBe(name);
-			expect(fb.ui.cmp.treetable).toBe(name);
+			expect(cmp.sName).toBe(name);
 		});
 		
 	});

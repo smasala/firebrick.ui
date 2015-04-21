@@ -13,11 +13,11 @@ define(["./Input"], function(){
 	return Firebrick.define("Firebrick.ui.fields.Password", {
 		extend:"Firebrick.ui.fields.Input",
 		/**
-		 * @property uiName
+		 * @property sName
 		 * @type {String}
 		 * @default "fb-ui-password"
 		 */
-		uiName:"fb-ui-password",
+		sName:"fields.password",
 		/**
 		 * @property type
 		 * @type {String}

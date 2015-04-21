@@ -1,3 +1,20 @@
+v0.14.0
+----------------------------
+* change content/html properties to just "html" for Modal, Panel, TabPanel, Alert - to use a KO object from the store, use property "storeProp"
+* change table data property to store
+* fix getItemsProp function
+* add closeModal boolean property to button, when used inside a modal, set to true and it will close the modal when clicked
+* uiName to sName conversion Firebrick.ui._sNames for predefined possibilities
+* datepicker icon (calendar) clickable to open close the datepicker
+* simplified table data and enable table editing: row (modal popup) or cell editing
+* data: property of data array of object arrays [ [Object, Object, Object] //row1, [Object, Object, Object] //row2, [Object, Object, Object] //row3 ] ( object = {value:"my cell value"} )
+* columns property for table component. Array of Objects columns: [ {text: "Column 1"}, {text: "Column 2"}]
+* form "failure" function, changed to error
+* remove callback function from button and changed to "handler" property
+* all components have the "handler" property - the handler function is attached to the handlerEvent property 
+* change list and nav.list "data" property to "items"
+* change button (dropdown) "data" property to "items"
+
 v0.13.0
 ----------------------------
 * Border layout fixes for safari and touch capabilities

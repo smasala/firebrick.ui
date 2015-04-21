@@ -1,0 +1,21 @@
+<fieldset id="{{=it.getId()}}" data-bind="{{=it.dataBind()}}">
+	{{?it.showLegend}}
+		{{?it.collapsible}}
+			<a data-bind="{{=it.dataBind('collapsibleLinkBindings')}}">
+		{{?}}
+			<legend data-bind="{{=it.dataBind('legendBindings')}}">
+				{{?it.collapsible}}
+					<span data-bind="{{=it.dataBind('collapsibleBindings')}}"></span>
+				{{?}}
+				<span data-bind="{{=it.dataBind('legendTextBindings')}}"></span>
+			</legend>
+		{{?it.collapsible}}
+			</a>
+		{{?}}
+	{{?}}
+
+	<div data-bind="{{=it.dataBind('contentBindings')}}">
+		{{=it.getItems()}}
+	</div>
+
+</fieldset>

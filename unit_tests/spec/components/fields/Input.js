@@ -7,15 +7,14 @@ define(["firebrick-ui", "Firebrick.ui/fields/Input"], function(){
 	
 	describe("Fields.Input:", function(){
 		
-		var name = "fb-ui-input",
+		var name = "fields.input",
 			cmp = Firebrick.create("InputTest", {
 					extend:"Firebrick.ui.fields.Input"
 			});
 		
 		it("Defined", function(){
 			expect(cmp).toBeDefined();
-			expect(cmp.uiName).toBe(name);
-			expect(fb.ui.cmp.input).toBe(name);
+			expect(cmp.sName).toBe(name);
 		});
 		
 	});

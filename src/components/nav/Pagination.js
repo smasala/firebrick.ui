@@ -12,7 +12,7 @@ define(["../display/List"], function(){
 	"use strict";
 	return Firebrick.define("Firebrick.ui.nav.Pagination", {
 		extend:"Firebrick.ui.display.List",
-		uiName:"fb-ui-pagination",
+		sName:"nav.pagination",
 		/**
 		 * "lg", "sm"
 		 * @property paginationSize

@@ -49,7 +49,7 @@ define(["knockout-mapping", "../fields/Input"], function(kom){
 		 */
 		_valueChecker: function($default, $data){
 			var me = this;
-			
+			console.info($default, $data);
 			
 			if(kom.isMapped($data)){
 				$data = kom.toJS($data);
@@ -58,7 +58,9 @@ define(["knockout-mapping", "../fields/Input"], function(kom){
 			if($.isPlainObject($data)){
 				if($data.active){
 					//active property wins
-					return $data.active;
+					return $.isFunction($data.active) ? $data.active() : $data.active;
+				}else if($data.checked){
+					return $.isFunction($data.checked) ? $data.checked() : $data.checked;
 				}else if($data.value){
 					//get the value prop
 					$data = $data.value;

@@ -19,7 +19,7 @@
             
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 0.13.0</em>
+            <em>API Docs for: 0.14.0</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -74,6 +74,8 @@
                 <li><a href="../classes/components.containers.BorderLayout.html">components.containers.BorderLayout</a></li>
             
                 <li><a href="../classes/components.containers.Box.html">components.containers.Box</a></li>
+            
+                <li><a href="../classes/components.containers.Fieldset.html">components.containers.Fieldset</a></li>
             
                 <li><a href="../classes/components.containers.Form.html">components.containers.Form</a></li>
             
@@ -145,7 +147,11 @@
             
                 <li><a href="../classes/helper.html">helper</a></li>
             
+                <li><a href="../classes/plugins.ContextMenu.html">plugins.ContextMenu</a></li>
+            
                 <li><a href="../classes/plugins.Draggable.html">plugins.Draggable</a></li>
+            
+                <li><a href="../classes/plugins.EditableTable.html">plugins.EditableTable</a></li>
             
                 <li><a href="../classes/plugins.RadioList.html">plugins.RadioList</a></li>
             
@@ -278,13 +284,6 @@
                             </li>
                         
                             <li class="index-item method">
-                                <a href="#method_addUIName">addUIName</a>
-
-                                
-                                
-                            </li>
-                        
-                            <li class="index-item method">
                                 <a href="#method_build">build</a>
 
                                 
@@ -293,13 +292,6 @@
                         
                             <li class="index-item method">
                                 <a href="#method_get">get</a>
-
-                                
-                                
-                            </li>
-                        
-                            <li class="index-item method">
-                                <a href="#method_getByShortName">getByShortName</a>
 
                                 
                                 
@@ -321,20 +313,6 @@
                     <h3>Properties</h3>
 
                     <ul class="index-list properties">
-                        
-                            <li class="index-item property private">
-                                <a href="#property__searchCache">_searchCache</a>
-
-                                
-                                
-                            </li>
-                        
-                            <li class="index-item property private">
-                                <a href="#property_cmp">cmp</a>
-
-                                
-                                
-                            </li>
                         
                             <li class="index-item property private">
                                 <a href="#property_version">version</a>
@@ -411,7 +389,7 @@
             
         
         
-        <a href="../files/src_firebrick.ui.js.html#l161"><code>src\firebrick.ui.js:161</code></a>
+        <a href="../files/src_firebrick.ui.js.html#l113"><code>src\firebrick.ui.js:113</code></a>
         
         </p>
 
@@ -536,7 +514,7 @@
             
         
         
-        <a href="../files/src_firebrick.ui.js.html#l214"><code>src\firebrick.ui.js:214</code></a>
+        <a href="../files/src_firebrick.ui.js.html#l166"><code>src\firebrick.ui.js:166</code></a>
         
         </p>
 
@@ -596,7 +574,7 @@
 
             <div class="example-content">
                 <pre class="code prettyprint"><code>    //component definition    &quot;|&quot;
-    //converts to the component &lt;hr&gt;  -  fb.ui.cmp.hr</code></pre>
+    //converts to the component &lt;hr&gt; </code></pre>
 
             </div>
         </div>
@@ -642,7 +620,7 @@
             
         
         
-        <a href="../files/src_firebrick.ui.js.html#l131"><code>src\firebrick.ui.js:131</code></a>
+        <a href="../files/src_firebrick.ui.js.html#l83"><code>src\firebrick.ui.js:83</code></a>
         
         </p>
 
@@ -674,94 +652,6 @@ create components and html from an array of items</p>
                 
             </div>
         </div>
-    
-
-    
-</div>
-
-                
-                    <div id="method_addUIName" class="method item">
-    <h3 class="name"><code>addUIName</code></h3>
-
-    
-        <div class="args">
-            <span class="paren">(</span><ul class="args-list inline commas">
-            
-                <li class="arg">
-                    
-                        <code>uiName</code>
-                    
-                </li>
-            
-            </ul><span class="paren">)</span>
-        </div>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/src_firebrick.ui.js.html#l102"><code>src\firebrick.ui.js:102</code></a>
-        
-        </p>
-
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>this function is called when defining a component.</p>
-
-    </div>
-
-    
-        <div class="params">
-            <h4>Parameters:</h4>
-
-            <ul class="params-list">
-            
-                <li class="param">
-                    
-                        <code class="param-name">uiName</code>
-                        <span class="type">String</span>
-                    
-
-                    
-
-                    <div class="param-description">
-                         
-                    </div>
-
-                    
-                </li>
-            
-            </ul>
-        </div>
-    
-
     
 
     
@@ -814,7 +704,7 @@ create components and html from an array of items</p>
             
         
         
-        <a href="../files/src_firebrick.ui.js.html#l55"><code>src\firebrick.ui.js:55</code></a>
+        <a href="../files/src_firebrick.ui.js.html#l46"><code>src\firebrick.ui.js:46</code></a>
         
         </p>
 
@@ -871,7 +761,7 @@ create components and html from an array of items</p>
                                 
 
                                 <div class="param-description">
-                                    <p>array of strings or objects [&quot;fb-ui-input&quot;, {uiName:&quot;fb-ui-textarea&quot;}]</p>
+                                    <p>array of strings or objects [&quot;fb-ui-input&quot;, {sName:&quot;fb-ui-textarea&quot;}]</p>
 
                                 </div>
 
@@ -966,7 +856,7 @@ create components and html from an array of items</p>
             
         
         
-        <a href="../files/src_firebrick.ui.js.html#l277"><code>src\firebrick.ui.js:277</code></a>
+        <a href="../files/src_firebrick.ui.js.html#l199"><code>src\firebrick.ui.js:199</code></a>
         
         </p>
 
@@ -997,111 +887,6 @@ create components and html from an array of items</p>
 
                     <div class="param-description">
                          
-                    </div>
-
-                    
-                </li>
-            
-            </ul>
-        </div>
-    
-
-    
-        <div class="returns">
-            <h4>Returns:</h4>
-
-            <div class="returns-description">
-                
-                    
-                        <span class="type">Object</span>:
-                    
-                
-            </div>
-        </div>
-    
-
-    
-</div>
-
-                
-                    <div id="method_getByShortName" class="method item">
-    <h3 class="name"><code>getByShortName</code></h3>
-
-    
-        <div class="args">
-            <span class="paren">(</span><ul class="args-list inline commas">
-            
-                <li class="arg">
-                    
-                        <code>name</code>
-                    
-                </li>
-            
-            </ul><span class="paren">)</span>
-        </div>
-    
-
-    
-        <span class="returns-inline">
-            <span class="type">Object</span>
-        </span>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/src_firebrick.ui.js.html#l238"><code>src\firebrick.ui.js:238</code></a>
-        
-        </p>
-
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>get a component class by its shortname... uiName</p>
-
-    </div>
-
-    
-        <div class="params">
-            <h4>Parameters:</h4>
-
-            <ul class="params-list">
-            
-                <li class="param">
-                    
-                        <code class="param-name">name</code>
-                        <span class="type">String</span>
-                    
-
-                    
-
-                    <div class="param-description">
-                        <p>(uiName)</p>
-
                     </div>
 
                     
@@ -1175,7 +960,7 @@ create components and html from an array of items</p>
             
         
         
-        <a href="../files/src_firebrick.ui.js.html#l268"><code>src\firebrick.ui.js:268</code></a>
+        <a href="../files/src_firebrick.ui.js.html#l190"><code>src\firebrick.ui.js:190</code></a>
         
         </p>
 
@@ -1238,103 +1023,6 @@ create components and html from an array of items</p>
         
             <div id="properties" class="api-class-tabpanel">
                 <h2 class="off-left">Properties</h2>
-
-                
-                    <div id="property__searchCache" class="property item private">
-    <h3 class="name"><code>_searchCache</code></h3>
-    <span class="type">Object</span>
-
-    
-
-    
-        <span class="flag private">private</span>
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/src_firebrick.ui.js.html#l46"><code>src\firebrick.ui.js:46</code></a>
-        
-        </p>
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>used to cache pointers to classes when searching by &quot;uiName&quot;</p>
-
-    </div>
-
-    
-
-    
-
-    
-</div>
-
-                
-                    <div id="property_cmp" class="property item private">
-    <h3 class="name"><code>cmp</code></h3>
-    <span class="type">Object</span>
-
-    
-
-    
-        <span class="flag private">private</span>
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/src_firebrick.ui.js.html#l92"><code>src\firebrick.ui.js:92</code></a>
-        
-        </p>
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>components uiNames are populated into this map for variable access
-fb.ui.cmp.input</p>
-
-    </div>
-
-    
-        <p><strong>Default:</strong> {}</p>
-    
-
-    
-
-    
-</div>
 
                 
                     <div id="property_version" class="property item private">

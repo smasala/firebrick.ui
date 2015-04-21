@@ -13,7 +13,7 @@ define(["text!./Box.html", "./Base"], function(tpl){
 	return Firebrick.define("Firebrick.ui.containers.Box", {
 		extend:"Firebrick.ui.containers.Base",
 		tpl: tpl,
-		uiName:"fb-ui-box",
+		sName:"containers.box",
 		/**
 		 * set as string to fill the div/box with text content
 		 * @property html

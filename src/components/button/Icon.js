@@ -12,7 +12,7 @@ define(["./Button"], function(){
 	"use strict";
 	return Firebrick.define("Firebrick.ui.button.Icon", {
 		extend: "Firebrick.ui.button.Button",
-		uiName:"fb-ui-icon",
+		sName:"button.icon",
 		/**
 		 * @property buttonSize
 		 * @type {Boolean|String} boolean = false

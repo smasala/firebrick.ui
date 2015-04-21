@@ -7,15 +7,14 @@ define(["firebrick-ui", "Firebrick.ui/containers/Accordion"], function(){
 	
 	describe("containers.Accordion:", function(){
 		
-		var name = "fb-ui-accordion",
+		var name = "containers.accordion",
 			cmp = Firebrick.create("AccordionTest", {
 					extend:"Firebrick.ui.containers.Accordion"
 			});
 		
 		it("Defined", function(){
 			expect(cmp).toBeDefined();
-			expect(cmp.uiName).toBe(name);
-			expect(fb.ui.cmp.accordion).toBe(name);
+			expect(cmp.sName).toBe(name);
 		});
 		
 	});

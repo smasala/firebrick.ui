@@ -14,10 +14,10 @@ define(["text!./Base.html", "text!./Input.html", "../common/Base", "x-editable",
 		extend:"Firebrick.ui.common.Base",
 		mixins:["Firebrick.ui.common.mixins.Items"],
 		/**
-		 * @property uiName
+		 * @property sName
 		 * @type {String}
 		 */
-		uiName: "fb-ui-input",
+		sName: "fields.input",
 		/**
 		 * @property subTpl
 		 * @type {String} html
@@ -79,11 +79,12 @@ define(["text!./Base.html", "text!./Input.html", "../common/Base", "x-editable",
 		 */
 		deviceSize: "sm",
 		/**
-		 * @property hideLabel
+		 * screen reader only
+		 * @property srOnly
 		 * @type {Boolean}
 		 * @default false
 		 */
-		hideLabel: false,
+		srOnly: false,
 		/**
 		 * @property readOnly
 		 * @type {Boolean}
@@ -325,7 +326,7 @@ define(["text!./Base.html", "text!./Input.html", "../common/Base", "x-editable",
 						"'has-warning'": me.feedbackWarning,
 						"'has-error'": me.feedbackError,
 						"'has-feedback'": me.feedbackSuccess || me.feedbackWarning || me.feedbackError,
-						"'sr-only'": me.hideLabel
+						"'sr-only'": me.srOnly
 					}
 				};
 			
@@ -426,14 +427,12 @@ define(["text!./Base.html", "text!./Input.html", "../common/Base", "x-editable",
 				if($.isPlainObject(me.inputAddon)){
 					
 					//button has been loaded
-					if(fb.ui.cmp.button){
-						if(me.inputAddon.uiName === fb.ui.cmp.button){
-							//the addon is a button
-							//remove if exists
-							me.inputAddonClass = me.inputAddonClass.replace("input-group-addon", "");
-							//add the correct class
-							me.inputAddonClass += " input-group-btn";
-						}
+					if(me.inputAddon.sName === "button.button"){
+						//the addon is a button
+						//remove if exists
+						me.inputAddonClass = me.inputAddonClass.replace("input-group-addon", "");
+						//add the correct class
+						me.inputAddonClass += " input-group-btn";
 					}
 				}
 				obj.css[me.parseBind(me.inputAddonClass)] = true;

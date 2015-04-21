@@ -32,6 +32,19 @@ define(["doT", "firebrick", "jquery"], function(tplEngine, fb, $){
 		 */
 		uiComponent: true,
 		/**
+		 * if handler property is set, it is automatically attached to this event
+		 * @property handlerEvent
+		 * @type {String}
+		 * @default "click"
+		 */
+		handlerEvent: "click",
+		/**
+		 * @property handler
+		 * @type {Function}
+		 * @default null
+		 */
+		handler: null,
+		/**
 		 * @property glyphiconClass
 		 * @type {String}
 		 * @default "glyphicon"
@@ -75,16 +88,16 @@ define(["doT", "firebrick", "jquery"], function(tplEngine, fb, $){
 		 */
 		css: null,
 		/**
-		 * variable shortcuts are created using the uiName. by default the string after the last "-" is used
+		 * variable shortcuts are created using the sName. by default the string after the last "-" is used
 		 * @example
-		 * 		uiName:"fb-ui-input"
+		 * 		sName:"fb-ui-input"
 		 * 		//becomes accessible via: {Firebrick|fb}.ui.cmp.input
 		 * 		//defining another component e.g "myapp-field-input" would overwrite the default input as "input" is found after the last "-"
-		 * @property uiName
+		 * @property sName
 		 * @type {String}
 		 * @default null
 		 */
-		uiName:null,
+		sName:null,
 		/**
 		 * @property _element
 		 * @type {Null|jQuery Object}
@@ -150,6 +163,12 @@ define(["doT", "firebrick", "jquery"], function(tplEngine, fb, $){
 		 */
 		align:null,
 		/**
+		 * @property contextMenu
+		 * @type {Array of Objects}
+		 * @default null
+		 */
+		contextMenu: null,
+		/**
 		 * pass a binding Object and this method will add the tooltip/popover relevant properties
 		 * @method addTooltipPopoverBind
 		 * @param bindObj {Object}
@@ -201,9 +220,10 @@ define(["doT", "firebrick", "jquery"], function(tplEngine, fb, $){
 		 * @return {Object} jquery element object
 		 */
 		getElement: function(){
-			var me = this;
+			var me = this,
+				id = me.enclosedBind ? me.getEnclosedBindId() : me.getId();
 			if(!me._element){
-				me._element = $("#" + me.getId());
+				me._element = $("#" + id);
 				if(!me._element.length){
 					//set to null if jquery object returned empty []
 					me._element = null;
@@ -217,11 +237,8 @@ define(["doT", "firebrick", "jquery"], function(tplEngine, fb, $){
 		 * @return {Any} this.callParent(arguments)
 		 */
 		constructor: function(){
-			var me = this,
-				uiName = me.uiName;
+			var me = this;
 			
-			Firebrick.ui.addUIName(me.uiName);
-
 			me.precompile();
 			
 			return me.callParent(arguments);
@@ -288,6 +305,23 @@ define(["doT", "firebrick", "jquery"], function(tplEngine, fb, $){
 					}
 				});
 			}
+			
+			
+				me.on("rendered", function(){
+					var el = me.getElement();
+					
+					if(me.handler && me.handlerEvent){
+						el.on(me.handlerEvent, function(){
+							me.handler.apply(me, arguments);
+						});
+					}
+					
+					if(me.contextMenu){
+						require(["Firebrick.ui/common/plugins/ContextMenu"], function(){
+							el.ContextMenu(me);	
+						});
+					}
+				});
 			
 			return me.callParent(arguments);
 		},

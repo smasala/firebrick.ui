@@ -7,15 +7,14 @@ define(["firebrick-ui", "Firebrick.ui/fields/File"], function(){
 	
 	describe("Fields.File:", function(){
 		
-		var name = "fb-ui-file",
+		var name = "fields.file",
 			cmp = Firebrick.create("FileTest", {
 					extend:"Firebrick.ui.fields.File"
 			});
 		
 		it("Defined", function(){
 			expect(cmp).toBeDefined();
-			expect(cmp.uiName).toBe(name);
-			expect(fb.ui.cmp.file).toBe(name);
+			expect(cmp.sName).toBe(name);
 		});
 		
 	});

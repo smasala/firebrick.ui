@@ -7,15 +7,14 @@ define(["firebrick-ui", "Firebrick.ui/display/Span"], function(){
 	
 	describe("display.Span:", function(){
 		
-		var name = "fb-ui-span",
+		var name = "display.span",
 			cmp = Firebrick.create("SpanTest", {
 					extend:"Firebrick.ui.display.Span"
 			});
 		
 		it("Defined", function(){
 			expect(cmp).toBeDefined();
-			expect(cmp.uiName).toBe(name);
-			expect(fb.ui.cmp.span).toBe(name);
+			expect(cmp.sName).toBe(name);
 		});
 		
 	});

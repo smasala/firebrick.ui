@@ -7,15 +7,14 @@ define(["firebrick-ui", "Firebrick.ui/fields/SelectBox"], function(){
 	
 	describe("Fields.SelectBox:", function(){
 		
-		var name = "fb-ui-selectbox",
+		var name = "fields.selectbox",
 			cmp = Firebrick.create("SelectBoxTest", {
 					extend:"Firebrick.ui.fields.SelectBox"
 			});
 		
 		it("Defined", function(){
 			expect(cmp).toBeDefined();
-			expect(cmp.uiName).toBe(name);
-			expect(fb.ui.cmp.selectbox).toBe(name);
+			expect(cmp.sName).toBe(name);
 		});
 		
 	});

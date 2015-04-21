@@ -7,15 +7,14 @@ define(["firebrick-ui", "Firebrick.ui/containers/TabPanel"], function(){
 	
 	describe("containers.TabPanel:", function(){
 		
-		var name = "fb-ui-tabpanel",
+		var name = "containers.tabpanel",
 			cmp = Firebrick.create("TabPanelTest", {
 					extend:"Firebrick.ui.containers.TabPanel"
 			});
 		
 		it("Defined", function(){
 			expect(cmp).toBeDefined();
-			expect(cmp.uiName).toBe(name);
-			expect(fb.ui.cmp.tabpanel).toBe(name);
+			expect(cmp.sName).toBe(name);
 		});
 		
 	});

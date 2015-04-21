@@ -19,7 +19,7 @@
             
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 0.13.0</em>
+            <em>API Docs for: 0.14.0</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -74,6 +74,8 @@
                 <li><a href="../classes/components.containers.BorderLayout.html">components.containers.BorderLayout</a></li>
             
                 <li><a href="../classes/components.containers.Box.html">components.containers.Box</a></li>
+            
+                <li><a href="../classes/components.containers.Fieldset.html">components.containers.Fieldset</a></li>
             
                 <li><a href="../classes/components.containers.Form.html">components.containers.Form</a></li>
             
@@ -145,7 +147,11 @@
             
                 <li><a href="../classes/helper.html">helper</a></li>
             
+                <li><a href="../classes/plugins.ContextMenu.html">plugins.ContextMenu</a></li>
+            
                 <li><a href="../classes/plugins.Draggable.html">plugins.Draggable</a></li>
+            
+                <li><a href="../classes/plugins.EditableTable.html">plugins.EditableTable</a></li>
             
                 <li><a href="../classes/plugins.RadioList.html">plugins.RadioList</a></li>
             
@@ -222,6 +228,17 @@ define([&quot;./Input&quot;], function(){
 	return Firebrick.define(&quot;Firebrick.ui.fields.DatePicker&quot;, {
 		extend:&quot;Firebrick.ui.fields.Input&quot;,
 		/**
+		 * @property sName
+		 * @type {String}
+		 * @default &quot;fields.datepicker&quot;
+		 */
+		sName: &quot;fields.datepicker&quot;,
+		/**
+		 * @property inputAddon
+		 * @default true
+		 */
+		inputAddon: true,
+		/**
 		 * @property dateFormat
 		 * @type {String}
 		 * @default &quot;yyyy/mm/dd&quot;
@@ -235,11 +252,17 @@ define([&quot;./Input&quot;], function(){
 		 */
 		weekStart: 1,
 		/**
-		 * @property datePickerOptions
-		 * @type {Object|null}
-		 * @default null
+		 * @method datePickerOptions
+		 * @return {Object}
 		 */
-		datePickerOptions: null,
+		datePickerOptions: function(){
+			var me = this;
+			return {
+				autoclose: true,
+				weekStart: me.weekStart,
+				format: me.dateFormat
+			};
+		},
 		/**
 		 * glyphicon to so in the inputAddon box
 		 * @property iconClass
@@ -247,6 +270,13 @@ define([&quot;./Input&quot;], function(){
 		 * @default &quot;glyphicon-calendar&quot;
 		 */
 		iconClass: &quot;glyphicon-calendar&quot;,
+		/**
+		 * whether the calendar inputaddon icon is clickable or not
+		 * @property clickableIcon
+		 * @type {Boolean}
+		 * @default true
+		 */
+		clickableIcon: true,
 		/**
 		 * @method init
 		 * @return parent
@@ -256,29 +286,40 @@ define([&quot;./Input&quot;], function(){
 			
 			me.on(&quot;rendered&quot;, function(){
 				var el = me.getElement(),
-					opts = me.datePickerOptions;
-				
-				if(!$.isPlainObject(opts)){
-					opts = {};
-				}
-				
-				opts.weekStart = me.weekStart;
-				opts.format = me.dateFormat;
+					inputAddon,
+					icon;
 				
 				if(el.length){
-					el.datepicker(opts);
+					el.datepicker(me.datePickerOptions());
+				}
+				
+				if(me.inputAddon &amp;&amp; me.clickableIcon){
+					inputAddon = el.siblings(&quot;.&quot; + me.inputAddonClass);
+					if(inputAddon.length){
+						icon = inputAddon.find(&quot;.&quot; + me.iconClass);
+						if(icon.length){
+							icon.css(&quot;cursor&quot;, &quot;pointer&quot;);
+							icon.on(&quot;click&quot;, function(){
+								var prop = &quot;fb-date-open&quot;;
+								if(el.prop(prop) === true){
+									el.datepicker(&quot;hide&quot;);
+									el.prop(prop, false);
+								} else {
+									el.prop(prop, true);
+									//when the icon is clicked focus is given to the input field to open the datepicker
+									el.focus();
+								}
+							});
+						}
+					}
 				}
 			});
 			
 			return me.callParent(arguments);
 		},
+		
 		/**
-		 * @property uiName
-		 * @type {String}
-		 */
-		uiName: &quot;fb-ui-datepicker&quot;,
-		inputAddon: true,
-		/**
+		 * Immediately invoked function
 		 * @property value
 		 * @type {String}
 		 * @default current day

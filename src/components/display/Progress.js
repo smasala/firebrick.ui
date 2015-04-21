@@ -12,7 +12,7 @@ define(["text!./Progress.html", "../common/Base"], function(tpl){
 	"use strict";
 	return Firebrick.define("Firebrick.ui.display.Progress", {
 		extend: "Firebrick.ui.common.Base",
-		uiName:"fb-ui-progress",
+		sName:"display.progress",
 		tpl: tpl,
 		/**
 		 * progress html5 element max attribute
