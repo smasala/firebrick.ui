@@ -1,8 +1,10 @@
-v0.14.xxxx
+v0.14.5
 ----------------------------
 * modal fix - doesn't show on create
 * items as a function fix
 * fix radio and checkbox selections (default values)
+* change property for list "link"(s) to "href"
+* add property externalLink to list and header for use in conjunction with the History API (Firebrick JS)
 
 v0.14.0
 ----------------------------

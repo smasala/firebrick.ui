@@ -129,7 +129,13 @@ define(["text!./List.html", "knockout", "jquery", "../common/Base",  "../common/
 		virtualContainerBindings: function(){
 			return {"if": "$data && $data.length"};
 		},
-		
+		/**
+		 * set to true to add attribute [fb-ignore-router=true] to all links - these links are then ignored by the history api (Firebrick.router.history)
+		 * @property externalLink
+		 * @type {Boolean}
+		 * @default false
+		 */
+		externalLink: false,
 		/**
 		 * @method bindings
 		 * @return {Object}
@@ -221,12 +227,14 @@ define(["text!./List.html", "knockout", "jquery", "../common/Base",  "../common/
 		 * @return {Object}
 		 */
 		listLinkBindings: function(){
-			var obj = {
+			var me = this,
+				obj = {
 					attr:{
-						href: "typeof $data.link === 'string' ? $data.link : 'javascript:void(0);'"
+						href: "typeof $data.href === 'string' ? $data.href : 'javascript:void(0);'"
 					}
 			};
 			obj.attr["'data-target'"] = "$data.dataTarget ? $data.dataTarget : false";
+			obj.attr["'fb-ignore-router'"] = "'externalLink' in $data ? $data.externalLink : " + me.externalLink;
 			return obj;
 		}
 	});

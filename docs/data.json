@@ -2,7 +2,7 @@
     "project": {
         "name": "Firebrick UI API",
         "description": "Firebrick UI API: a component library for Firebrick MVC, Knockout JS, jQuery and Bootstrap",
-        "version": "0.14.0",
+        "version": "0.14.5",
         "url": "https://github.com/smasala",
         "logo": "fbui_small.png"
     },
@@ -5798,6 +5798,18 @@
         {
             "file": "src\\components\\display\\Header.js",
             "line": 64,
+            "description": "set to true to add attribute [fb-ignore-router=true] to all links - these links are then ignored by the history api (Firebrick.router.history)",
+            "itemtype": "property",
+            "name": "externalLink",
+            "type": "{Boolean}",
+            "default": "true",
+            "class": "components.display.Header",
+            "module": "Firebrick.ui.components",
+            "namespace": "components.display"
+        },
+        {
+            "file": "src\\components\\display\\Header.js",
+            "line": 71,
             "itemtype": "method",
             "name": "textBindings",
             "return": {
@@ -5809,7 +5821,7 @@
         },
         {
             "file": "src\\components\\display\\Header.js",
-            "line": 76,
+            "line": 83,
             "itemtype": "method",
             "name": "secondaryTextBindings",
             "return": {
@@ -5821,7 +5833,7 @@
         },
         {
             "file": "src\\components\\display\\Header.js",
-            "line": 92,
+            "line": 99,
             "itemtype": "method",
             "name": "labelBindings",
             "return": {
@@ -5833,7 +5845,7 @@
         },
         {
             "file": "src\\components\\display\\Header.js",
-            "line": 117,
+            "line": 124,
             "itemtype": "method",
             "name": "hrefBindings",
             "return": {
@@ -6064,7 +6076,19 @@
         },
         {
             "file": "src\\components\\display\\List.js",
-            "line": 133,
+            "line": 132,
+            "description": "set to true to add attribute [fb-ignore-router=true] to all links - these links are then ignored by the history api (Firebrick.router.history)",
+            "itemtype": "property",
+            "name": "externalLink",
+            "type": "{Boolean}",
+            "default": "false",
+            "class": "components.display.List",
+            "module": "Firebrick.ui.components",
+            "namespace": "components.display"
+        },
+        {
+            "file": "src\\components\\display\\List.js",
+            "line": 139,
             "itemtype": "method",
             "name": "bindings",
             "return": {
@@ -6077,7 +6101,7 @@
         },
         {
             "file": "src\\components\\display\\List.js",
-            "line": 152,
+            "line": 158,
             "itemtype": "method",
             "name": "listItemBindings",
             "return": {
@@ -6090,7 +6114,7 @@
         },
         {
             "file": "src\\components\\display\\List.js",
-            "line": 170,
+            "line": 176,
             "itemtype": "method",
             "name": "listItemTextBindings",
             "return": {
@@ -6103,7 +6127,7 @@
         },
         {
             "file": "src\\components\\display\\List.js",
-            "line": 181,
+            "line": 187,
             "itemtype": "method",
             "name": "listTemplateBindings",
             "return": {
@@ -6116,7 +6140,7 @@
         },
         {
             "file": "src\\components\\display\\List.js",
-            "line": 196,
+            "line": 202,
             "access": "private",
             "tagname": "",
             "itemtype": "method",
@@ -6131,7 +6155,7 @@
         },
         {
             "file": "src\\components\\display\\List.js",
-            "line": 205,
+            "line": 211,
             "itemtype": "method",
             "name": "childrenBindings",
             "return": {
@@ -6144,7 +6168,7 @@
         },
         {
             "file": "src\\components\\display\\List.js",
-            "line": 219,
+            "line": 225,
             "itemtype": "method",
             "name": "listLinkBindings",
             "return": {
