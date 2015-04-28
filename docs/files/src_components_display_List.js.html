@@ -19,7 +19,7 @@
             
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 0.14.0</em>
+            <em>API Docs for: 0.14.5</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -343,7 +343,13 @@ define([&quot;text!./List.html&quot;, &quot;knockout&quot;, &quot;jquery&quot;, 
 		virtualContainerBindings: function(){
 			return {&quot;if&quot;: &quot;$data &amp;&amp; $data.length&quot;};
 		},
-		
+		/**
+		 * set to true to add attribute [fb-ignore-router=true] to all links - these links are then ignored by the history api (Firebrick.router.history)
+		 * @property externalLink
+		 * @type {Boolean}
+		 * @default false
+		 */
+		externalLink: false,
 		/**
 		 * @method bindings
 		 * @return {Object}
@@ -435,12 +441,14 @@ define([&quot;text!./List.html&quot;, &quot;knockout&quot;, &quot;jquery&quot;, 
 		 * @return {Object}
 		 */
 		listLinkBindings: function(){
-			var obj = {
+			var me = this,
+				obj = {
 					attr:{
-						href: &quot;typeof $data.link === &#x27;string&#x27; ? $data.link : &#x27;javascript:void(0);&#x27;&quot;
+						href: &quot;typeof $data.href === &#x27;string&#x27; ? $data.href : &#x27;javascript:void(0);&#x27;&quot;
 					}
 			};
 			obj.attr[&quot;&#x27;data-target&#x27;&quot;] = &quot;$data.dataTarget ? $data.dataTarget : false&quot;;
+			obj.attr[&quot;&#x27;fb-ignore-router&#x27;&quot;] = &quot;&#x27;externalLink&#x27; in $data ? $data.externalLink : &quot; + me.externalLink;
 			return obj;
 		}
 	});
