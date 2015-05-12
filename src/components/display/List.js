@@ -131,11 +131,11 @@ define(["text!./List.html", "knockout", "jquery", "../common/Base",  "../common/
 		},
 		/**
 		 * set to true to add attribute [fb-ignore-router=true] to all links - these links are then ignored by the history api (Firebrick.router.history)
-		 * @property externalLink
+		 * @property ignoreRouter
 		 * @type {Boolean}
 		 * @default false
 		 */
-		externalLink: false,
+		ignoreRouter: false,
 		/**
 		 * @method bindings
 		 * @return {Object}
@@ -234,7 +234,7 @@ define(["text!./List.html", "knockout", "jquery", "../common/Base",  "../common/
 					}
 			};
 			obj.attr["'data-target'"] = "$data.dataTarget ? $data.dataTarget : false";
-			obj.attr["'fb-ignore-router'"] = "'externalLink' in $data ? $data.externalLink : " + me.externalLink;
+			obj.attr["'fb-ignore-router'"] = "$data.hasOwnProperty( 'ignoreRouter' ) ? $data.ignoreRouter : " + me.ignoreRouter;
 			return obj;
 		}
 	});

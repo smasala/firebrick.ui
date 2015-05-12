@@ -2,7 +2,7 @@
     "project": {
         "name": "Firebrick UI API",
         "description": "Firebrick UI API: a component library for Firebrick MVC, Knockout JS, jQuery and Bootstrap",
-        "version": "0.14.5",
+        "version": "0.14.6",
         "url": "https://github.com/smasala",
         "logo": "fbui_small.png"
     },
@@ -5800,7 +5800,7 @@
             "line": 64,
             "description": "set to true to add attribute [fb-ignore-router=true] to all links - these links are then ignored by the history api (Firebrick.router.history)",
             "itemtype": "property",
-            "name": "externalLink",
+            "name": "ignoreRouter",
             "type": "{Boolean}",
             "default": "true",
             "class": "components.display.Header",
@@ -6079,7 +6079,7 @@
             "line": 132,
             "description": "set to true to add attribute [fb-ignore-router=true] to all links - these links are then ignored by the history api (Firebrick.router.history)",
             "itemtype": "property",
-            "name": "externalLink",
+            "name": "ignoreRouter",
             "type": "{Boolean}",
             "default": "false",
             "class": "components.display.List",

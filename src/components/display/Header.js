@@ -63,11 +63,11 @@ define(["text!./Header.html", "../common/Base"], function(tpl){
 		href: null,
 		/**
 		 * set to true to add attribute [fb-ignore-router=true] to all links - these links are then ignored by the history api (Firebrick.router.history)
-		 * @property externalLink
+		 * @property ignoreRouter
 		 * @type {Boolean}
 		 * @default true
 		 */
-		externalLink: true,
+		ignoreRouter: true,
 		/**
 		 * @method textBindings
 		 * @return Object
@@ -128,7 +128,7 @@ define(["text!./Header.html", "../common/Base"], function(tpl){
 		hrefBindings: function(){
 			var me = this,
 				obj = {attr:{}};
-			obj.attr["'fb-ignore-router'"] = "'externalLink' in $data ? $data.externalLink : " + me.externalLink;
+			obj.attr["'fb-ignore-router'"] = "$data.hasOwnProperty( 'ignoreRouter' ) ? $data.ignoreRouter : " + me.ignoreRouter;
 			return obj;
 		}
 		

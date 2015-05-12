@@ -1,3 +1,7 @@
+v0.14.6
+----------------------------
+* fix dropdown, breadcrumb and header when ignoreRouter property is not present and $data is not an object - TypeError: invalid 'in' operand ""
+
 v0.14.5
 ----------------------------
 * modal fix - doesn't show on create

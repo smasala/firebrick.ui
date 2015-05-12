@@ -19,7 +19,7 @@
             
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 0.14.5</em>
+            <em>API Docs for: 0.14.6</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -345,11 +345,11 @@ define([&quot;text!./List.html&quot;, &quot;knockout&quot;, &quot;jquery&quot;, 
 		},
 		/**
 		 * set to true to add attribute [fb-ignore-router=true] to all links - these links are then ignored by the history api (Firebrick.router.history)
-		 * @property externalLink
+		 * @property ignoreRouter
 		 * @type {Boolean}
 		 * @default false
 		 */
-		externalLink: false,
+		ignoreRouter: false,
 		/**
 		 * @method bindings
 		 * @return {Object}
@@ -448,7 +448,7 @@ define([&quot;text!./List.html&quot;, &quot;knockout&quot;, &quot;jquery&quot;, 
 					}
 			};
 			obj.attr[&quot;&#x27;data-target&#x27;&quot;] = &quot;$data.dataTarget ? $data.dataTarget : false&quot;;
-			obj.attr[&quot;&#x27;fb-ignore-router&#x27;&quot;] = &quot;&#x27;externalLink&#x27; in $data ? $data.externalLink : &quot; + me.externalLink;
+			obj.attr[&quot;&#x27;fb-ignore-router&#x27;&quot;] = &quot;$data.hasOwnProperty( &#x27;ignoreRouter&#x27; ) ? $data.ignoreRouter : &quot; + me.ignoreRouter;
 			return obj;
 		}
 	});
