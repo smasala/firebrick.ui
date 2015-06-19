@@ -41,7 +41,7 @@
 			 * @private
 			 * @type {String}
 			 */
-			version: "0.14.6",
+			version: "0.15.0",
 			
 			/**
 			 * populate a target with fields and data
@@ -120,6 +120,7 @@
 						if(!component.getId){
 							console.error("something went wrong", items[i], "is it defined correctly? Check the item name and dependency include");
 						}
+						component.fireEvent("uiBuilt");
 						_items.push(component);
 					}
 				}
@@ -272,6 +273,46 @@
 					}
 					
 					return prev;
+				},
+				
+				/**
+				 * @method isVisible
+				 * @param $element {jQuery Object}
+				 * @param $container {jQuery Object}
+				 * @return {Boolean} 
+				 */
+				isVisible: function($element, $container){
+					var cont = {
+							offset: $container.offset(),
+							height: $container.height(),
+							width: $container.width()
+						},
+						el = {
+							offset: $element.offset(),
+							height: $element.height(),
+							width: $element.width()
+						},
+						check = function(coord){
+							if(coord > cont.offset.top && coord < cont.offset.left){
+								if(coord < cont.bottom){
+									return true;
+								}
+							}
+							return false;
+						};
+					
+					cont.bottom = cont.offset.top + cont.height;
+					el.bottom = el.offset.top + el.height;
+					
+					if( check(el.offset.top) || 
+						check(el.offset.top + el.width) ||  
+						check(el.bottom) ||
+						check(el.bottom + el.width) ){
+						return true; 
+					}
+					
+					
+					return false;
 				},
 				
 				/**
@@ -521,6 +562,9 @@
 					"display.text":{
 						path:"Firebrick.ui/display/Text"
 					},
+					"display.loader": {
+						path:"Firebrick.ui/display/Loader"
+					},
 					"fields.checkbox":{
 						path:"Firebrick.ui/fields/Checkbox"
 					},
@@ -529,6 +573,9 @@
 					},
 					"fields.display":{
 						path:"Firebrick.ui/fields/Display"
+					},
+					"fields.combobox":{
+						path:"Firebrick.ui/fields/ComboBox"
 					},
 					"fields.email":{
 						path:"Firebrick.ui/fields/Email"
@@ -585,7 +632,7 @@
 	 * @class view.Base
 	 */
 	Firebrick.classes.overwrite("Firebrick.view.Base", {
-		
+		_ko:null,
 		/**
 		 * @property passDownEvents
 		 * @type {Object}
@@ -598,69 +645,54 @@
 		passDownEvents:{
 			rendered: 1,
 			htmlRendered: 1,
-			unbound: 1
-		},
-		
-		/**
-		 * used with passDownEvents
-		 * @property passToProperties
-		 * @type {Object}
-		 * @default {
-		 * 	items: 1
-		 * }
-		 */
-		passToProperties:{
-			items: 1,
-			inputAddon: 1
+			unbound: 1,
+			destroy: 1
 		},
 		
 		listeners: {
-			preReady: function(){
+			uiBuilt: function(){
 				var me = this,
 					k;
 				if(me.passDownEvents){
 					
 					Firebrick.utils.merge("passDownEvents", me);
-					Firebrick.utils.merge("passToProperties", me);
 					
 					for(k in me.passDownEvents){
 						if(me.passDownEvents.hasOwnProperty(k)){
-							me.on(k, me._createPassEvent());
+							if(me._parent){
+								me._initPassDownEvent(k);
+							}
 						}
 					}
 					
 				}
 			}
 		},
-		
+		/**
+		 * @method _initPassDownEvent
+		 */
+		_initPassDownEvent: function(eventName){
+			var me = this,
+				f = me._createPassEvent(me);
+			
+			me._parent.on(eventName, f);
+			me.on("destroy", function(){
+				f.__isDestroyed = true;
+				//TODO: fixed this
+				//me._parent.off(eventName, f);
+			});
+		},
 		/**
 		 * @method _createPassEvent
 		 * @private
 		 * @return {Function}
 		 */
-		_createPassEvent: function(){
+		_createPassEvent: function(scope){
 			return function(){
 				var me = this,
-				items,
-				args = arguments,
-				key,
-				cmp,
-				properties = me.passToProperties;
-				
-				for(key in properties){
-					items = me[key];
-					if(items){
-						if($.isArray(items)){
-							for(var i = 0, l = items.length; i<l; i++){
-								cmp = items[i];
-								if(cmp.passEvent){
-									cmp.passEvent(args);
-								}
-							}
-						}
-					}
-				}
-				
+					args = Array.prototype.slice.call(arguments);
+				args = [me.event.eventName].concat(args);
+				scope.fireEvent.apply(scope, args);	
 			};
 		},
 		
@@ -717,4 +749,34 @@
 	    }
 	};
 	
+	var oldInit = ko.bindingHandlers.value.init;
+	ko.bindingHandlers.value.init = function(element, valueAccessor, allBindings, viewModel, bindingContext){
+		var clazz = Firebrick.getById(element.getAttribute("id"));
+		if(clazz){
+			clazz._ko = clazz._ko || {};
+			clazz._ko.value = {
+				element: element,
+				valueAccessor: valueAccessor,
+				allBindings: allBindings,
+				viewModel: viewModel,
+				bindingContext: bindingContext
+			};
+		}
+		return oldInit.apply(this, arguments);
+	};
+	var oldInit1 = ko.bindingHandlers.selectedOptions.init;
+	ko.bindingHandlers.selectedOptions.init = function(element, valueAccessor, allBindings, viewModel, bindingContext){
+		var clazz = Firebrick.getById(element.getAttribute("id"));
+		if(clazz){
+			clazz._ko = clazz._ko || {};
+			clazz._ko.selectedOptions = {
+				element: element,
+				valueAccessor: valueAccessor,
+				allBindings: allBindings,
+				viewModel: viewModel,
+				bindingContext: bindingContext
+			};
+		}
+		return oldInit1.apply(this, arguments);
+	};
 });

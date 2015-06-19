@@ -28,7 +28,7 @@ define(["./Navbar"], function(){
 			
 			return me.callParent(arguments);
 		},
-		navBindings: function(){
+		bindings: function(){
 			var me = this,
 				obj = me.callParent(arguments);
 			

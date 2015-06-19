@@ -1,6 +1,5 @@
 {{?it.inplaceEdit}}
-	<a data-bind="{{=it.dataBind()}}"></a>
+	<a id="{{=it.getId()}}" data-bind="{{=it.dataBind()}}"></a>
 {{?? true }}
-	<select data-bind="{{=it.dataBind()}}">
-	</select>
+	<select id="{{=it.getId()}}" data-bind="{{=it.dataBind()}}"></select>
 {{?}}

@@ -1,6 +1,7 @@
 YUI.add("yuidoc-meta", function(Y) {
    Y.YUIDoc = { meta: {
     "classes": [
+        "Suggest",
         "components.button.Button",
         "components.button.ButtonGroup",
         "components.button.ButtonGroupBase",
@@ -12,6 +13,7 @@ YUI.add("yuidoc-meta", function(Y) {
         "components.common.mixins.Badges",
         "components.common.mixins.Column",
         "components.common.mixins.Items",
+        "components.common.mixins.Label",
         "components.common.mixins.Toolbars",
         "components.containers.Accordion",
         "components.containers.Base",
@@ -32,10 +34,13 @@ YUI.add("yuidoc-meta", function(Y) {
         "components.display.Header",
         "components.display.Image",
         "components.display.List",
+        "components.display.Loader",
         "components.display.Progress",
         "components.display.Span",
         "components.display.Text",
+        "components.fields.Base",
         "components.fields.Checkbox",
+        "components.fields.ComboBox",
         "components.fields.Datepicker",
         "components.fields.Display",
         "components.fields.Email",
@@ -57,18 +62,24 @@ YUI.add("yuidoc-meta", function(Y) {
         "plugins.ContextMenu",
         "plugins.Draggable",
         "plugins.EditableTable",
-        "plugins.RadioList",
+        "plugins.InplaceEdit",
         "renderer",
         "ui",
         "utils",
         "view.Base"
     ],
     "modules": [
+        "Firebrick.engine",
         "Firebrick.ui",
         "Firebrick.ui.components",
         "plugins"
     ],
     "allModules": [
+        {
+            "displayName": "Firebrick.engine",
+            "name": "Firebrick.engine",
+            "description": "Firebrick suggestions engine"
+        },
         {
             "displayName": "Firebrick.ui",
             "name": "Firebrick.ui",

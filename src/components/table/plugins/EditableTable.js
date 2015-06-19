@@ -22,7 +22,6 @@
 	Firebrick.define("Firebrick.ui.table.plugins.EditableTable", {
 		indexAttr: "data-tt-id",	//when TR - row number, when TD column number
 		rowAttr: "fb-ui-row-id",	//for TD to determine which row number
-		dataProp: "data-edit-item",	//property name ( $.prop() )  when adding the colNumber to the element for later reference
 		editMarker: "fb-ui-cell-editing",	//added to the TD when it cell edit is active
 		currentEdit: null,	//holder for which item is current being edited - cell editting only
 		hideCellClass: "fb-ui-hide-me",
@@ -95,7 +94,7 @@
 			
 			//get just the text not any other child elements and their texts
 			if(clazz.treetable){
-				data = clazz.getData()()[rowNumber].children()[colNumber];
+				data = clazz.getData()()[rowNumber].row()[colNumber];
 			}else{
 				data = clazz.getData()()[rowNumber][colNumber];	
 			}
@@ -206,11 +205,18 @@
 					for(var i = 0, l = inputs.length; i<l; i++){
 						input = $(inputs[i]);
 						//filter out (continue) non checked (selected) checkboxes or radio buttons
-						if((input.attr("type") === "radio" || input.attr("type") === "checkbox") && !input.is(":checked")){
-							continue;
+						if(input.attr("type") === "radio" || input.attr("type") === "checkbox"){
+							if(!input.is(":checked")){
+								continue;
+							}else{
+								colNumber = Firebrick.getById( input.attr("data-cmp-id") )._prop;
+							}
+						}else{
+							colNumber = Firebrick.getById( input.attr("id") )._prop;
 						}
 						
-						colNumber = input.prop(me.dataProp);
+						
+						
 						//example tableClass.getData()() => 
 						//		[ 
 						//			[ [], [], [] ],	//row 0 with 3 column values (cells)
@@ -218,7 +224,7 @@
 						//			[ [], [], [] ]	//row 2 with 3 column values
 						//		]
 						if(isTreeTable){
-							model = tableClass.getData()()[rowNumber].children()[colNumber];
+							model = tableClass.getData()()[rowNumber].row()[colNumber];
 						}else{
 							model = tableClass.getData()()[rowNumber][colNumber];
 						}
@@ -241,7 +247,7 @@
 										if(value !== oldValue){
 											if(isTreeTable){
 												//the store data architecture for a treetable is slightly different, hence this "if" statement 
-												tableClass.getData()()[rowNumber].children()[colNumber] = value;
+												tableClass.getData()()[rowNumber].row()[colNumber] = value;
 											}else{
 												tableClass.getData()()[rowNumber][colNumber] = value;
 											}
@@ -514,23 +520,12 @@
 		 * @param colNum {Integer}
 		 */
 		_defaultRenderAction: function(clazz, colNum){
-			var me = this,
-				el = clazz.getElement(),
-				type = clazz.type; 
-			if(el){
-				if(type === "radio" || type === "checkbox"){
-					//add to all inputs
-					//which input corresponds to which column number
-					$("input", el).prop(me.dataProp, colNum);
-				}else{
-					el.prop(me.dataProp, colNum);	
-				}
-			}
+			clazz._prop = colNum;
 		},
 		
 		/**
 		 * create a new init function with a rendered listener for the edit field
-		 * when an edit field is rendered, add the column number as a property to the field me.dataProp
+		 * when an edit field is rendered, add the column number as a property (_prop) to the class
 		 * @method _initFunction
 		 * @param colNum {Integer}
 		 * @return {Function}

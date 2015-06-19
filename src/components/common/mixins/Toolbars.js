@@ -13,13 +13,14 @@ define(["jquery", "./Items", "Firebrick.ui/nav/Toolbar"], function($){
 	return Firebrick.define("Firebrick.ui.common.mixins.Toolbars", {
 		/**
 		 * passed on to the toolbar items (direct children only)
-		 * @property toolbarDefaults
+		 * @property _toolbarDefaults
+		 * @private
 		 * @type {Object}
 		 * @default {Object} {
 		 * 		navbarItem: true
 		 * }
 		 */
-		toolbarDefaults:{
+		_toolbarDefaults:{
 			navbarItem: true
 		},
 		/**
@@ -37,11 +38,11 @@ define(["jquery", "./Items", "Firebrick.ui/nav/Toolbar"], function($){
 		 * 		position: "bottom",
 		 * 		items: [{...}]
 		 * 	}]
-		 * @property toolbar
+		 * @property toolbars
 		 * @type {Array of Objects}
 		 * @default null
 		 */
-		toolbar:null,
+		toolbars:null,
 		/**
 		 * add css classes and other configuration to the container
 		 * @method toolbarContainer
@@ -74,7 +75,8 @@ define(["jquery", "./Items", "Firebrick.ui/nav/Toolbar"], function($){
 			var me = this,
 				toolbars = me.toolbars,
 				tbItem,
-				html = "";
+				html = "",
+				items;
 			
 			if(toolbars){
 				if($.isArray(toolbars)){
@@ -83,9 +85,11 @@ define(["jquery", "./Items", "Firebrick.ui/nav/Toolbar"], function($){
 						if(tbItem.items){
 							//wrap the items inside a toolbar component
 							tbItem.sName = "nav.toolbar";
-							tbItem.defaults = Firebrick.utils.overwrite(me.toolbarDefaults, (tbItem.defaults || {}));
+							tbItem.defaults = Firebrick.utils.overwrite(me._toolbarDefaults, (tbItem.defaults || {}));
+							items = me._getItems(tbItem);
 							//load the html for the template compiler
-							html += me._getItems(tbItem).html;
+							html += items.html;
+							me.toolbars[i] = items.items[0];
 						}else{
 							console.warn("a toolbar was found without the items property and didn't render");
 						}

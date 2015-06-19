@@ -8,6 +8,7 @@
 					<span data-bind="{{=it.dataBind('collapsibleBindings')}}"></span>
 				{{?}}
 				<span data-bind="{{=it.dataBind('legendTextBindings')}}"></span>
+				{{=it.getLabelTpl()}}
 			</legend>
 		{{?it.collapsible}}
 			</a>

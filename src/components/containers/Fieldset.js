@@ -8,10 +8,11 @@
  * @namespace components.containers
  * @class Fieldset
  */
-define(["text!./Fieldset.html", "jquery"], function(tpl, $){
+define(["text!./Fieldset.html", "jquery", "../common/mixins/Label"], function(tpl, $){
 	"use strict";
 	return Firebrick.define("Firebrick.ui.containers.Fieldset", {
 		extend:"Firebrick.ui.containers.Base",
+		mixins:"Firebrick.ui.common.mixins.Label",
 		/**
 		 * @property sName
 		 * @type {String}
@@ -60,6 +61,13 @@ define(["text!./Fieldset.html", "jquery"], function(tpl, $){
 		 */
 		collapsedClass: "collapsed",
 		/**
+		 * adds class form-horizontal to fieldset
+		 * @property formHorizontalClass
+		 * @type {Boolean}
+		 * @default true
+		 */
+		formHorizontalClass: true,
+		/**
 		 * css is animated or not
 		 * @property animated
 		 * @type {Boolean}
@@ -97,6 +105,17 @@ define(["text!./Fieldset.html", "jquery"], function(tpl, $){
 				});
 				
 			});
+			
+			return obj;
+		},
+		/**
+		 * @method bindings
+		 */
+		bindings: function(){
+			var me = this,
+				obj = me.callParent( arguments );
+			
+			obj.css["'form-horizontal'"] = me.formHorizontalClass;
 			
 			return obj;
 		},

@@ -6,6 +6,7 @@
 				<a data-bind="{{=it.dataBind('collapsibleLinkBindings')}}">
 			{{?}}
 				<h{{=it.headerSize}} data-bind="{{=it.dataBind('panelHeaderTextBindings')}}"></h{{=it.headerSize}}>	
+				{{=it.getLabelTpl()}}
 			{{?it.collapsible}}
 				</a>
 			{{?}}

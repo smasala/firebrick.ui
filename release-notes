@@ -1,3 +1,25 @@
+v0.15.0
+----------------------------
+* add missing events for headerItems, footerItems, toolbar.items
+* fix handler function to include element as last argument - same as this.app.on in controllers
+* glyIcon property for standard buttons
+* value binding adds all bindings arguments to the object _ko for easy access "myInputField._ko.value" for example
+* deviceSize replaced with columnSize for fields
+* disabled properties for buttons
+* improve & simplify functionality for passing bubble events to child components
+* fix navbar alignment issues
+* fix navbar brandlink deactivation with false
+* add property containerCSS to fields - use the same way as "css" property
+* convert "navBindings" method to "bindings" for navbar and toolbar components
+* fix margin bug when placing a dropdown button in a toolbar/nav
+* css classes added via the css (or similar) property are no longer comma separated but whitespace separated
+* moved BS labels from the header component into it's own mixin
+* add close function to modal component
+* expand the fireEvent method for components, now when fireEvent is called from a component, this.app.on() can catch the event by placing "fb.ui." in front of the event name.  
+* mask loader component Firebrick.create("Firebrick.ui.display.Loader")
+* ComboBox component with suggestion engine
+* internal improvements of FormPanel and bug fix: too much recursion
+
 v0.14.6
 ----------------------------
 * fix dropdown, breadcrumb and header when ignoreRouter property is not present and $data is not an object - TypeError: invalid 'in' operand ""

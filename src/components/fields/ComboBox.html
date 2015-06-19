@@ -1,0 +1,9 @@
+<div id="{{=it.getId()}}" data-bind="{{=it.dataBind()}}">
+	<div data-bind="{{=it.dataBind('valueBindings')}}"></div>
+	<input type="text" data-bind="{{=it.dataBind('inputBindings')}}" />
+	{{?it.showCaret}}
+		<span data-bind="{{=it.dataBind('singleSelectBindings')}}"></span>
+	{{?}}
+	<span data-bind="{{=it.dataBind('clearIconBindings')}}"></span>
+</div>
+<div data-for="{{=it.getId()}}" data-bind="{{=it.dataBind('resultBindings')}}"></div>

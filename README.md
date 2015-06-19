@@ -1,4 +1,4 @@
-#Firebrick UI version: 0.14.6
+#Firebrick UI version: 0.15.0
 
 UI extendable component library built for:
 
@@ -12,3 +12,6 @@ UI extendable component library built for:
 ```
 bower install "firebrick.ui"
 ```
+
+## More Info
+[Firebrickjs.com](http://www.firebrickjs.com)

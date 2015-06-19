@@ -4,7 +4,7 @@
 	{{?}}
 	<span data-bind="{{=it.dataBind('textBindings')}}"></span>
 	<small data-bind="{{=it.dataBind('secondaryTextBindings')}}"></small>
-	<span data-bind="{{=it.dataBind('labelBindings')}}"></span>
+	{{=it.getLabelTpl()}}
 	{{?it.href}}
 		</a>
 	{{?}}

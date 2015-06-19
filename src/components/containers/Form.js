@@ -239,6 +239,14 @@ define(["text!./Form.html", "jquery", "./Base"], function(tpl, $){
 			obj.css["'form-horizontal'"] =  me.horizontal;
 			obj.css["'form-inline'"] =  me.inline;
 			
+			if(!me.items){
+				if(me.storeProp){
+					obj.html = me.storeProp;
+				}else{
+					obj.html = "Firebrick.getById('"+me.getId()+"').html";
+				}
+			}
+			
 			return obj;
 		}
 	});

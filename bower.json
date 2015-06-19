@@ -15,17 +15,16 @@
 		"library",
 		"bootstrap"
 	],
-	"version": "0.14.6",
+	"version": "0.15.0",
 	"dependencies": {
 		"firebrick": "latest",
 		"bootstrap": "3.x",
 		"doT": "1.x",
 		"datatables": "1.x",
-		"x-editable": "1.x",
-		"knockout-x-editable": "0.x",
 		"jquery-treetable": "3.x",
 		"responsive-images": "latest",
 		"responsive-tables-js": "latest",
-		"devicejs": "latest"
+		"devicejs": "latest",
+		"bootstrap-datepicker": "latest"
 	}
 }

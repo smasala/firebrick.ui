@@ -19,12 +19,12 @@ define(function(_require, _exports, _module){
 			"doT": bowerPath + "/doT/doT.min",
 			"datatables": bowerPath + "/datatables/media/js/jquery.dataTables",
 			"jquery-treetable": bowerPath + "/jquery-treetable/jquery.treetable",
-			"x-editable": bowerPath + "/x-editable/dist/bootstrap3-editable/js/bootstrap-editable",
-			"knockout-x-editable": bowerPath + "/knockout-x-editable/knockout.x-editable",
 			"Firebrick.ui": bowerPath + "/firebrick.ui/dist/components",
 			"responsive-images": bowerPath + "/responsive-images/dist/responsiveimages",
 			"responsive-tables-js": bowerPath + "/responsive-tables-js/dist/responsivetables",
-			"devicejs": bowerPath + "/devicejs/lib/device.min"
+			"devicejs": bowerPath + "/devicejs/lib/device.min",
+			"Firebrick.ui.engines": bowerPath + "/firebrick.ui/dist/engines",
+			"bootstrap-datepicker": bowerPath + "/bootstrap-datepicker/dist/bootstrap-datepicker"
 		},
 		shim:{
 			"knockout-mapping": ["knockout"],

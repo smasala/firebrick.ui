@@ -8,10 +8,10 @@
  * @namespace components.fields
  * @class Input
  */
-define(["text!./Base.html", "text!./Input.html", "../common/Base", "x-editable", "knockout-x-editable", "../common/mixins/Items"], function(tpl, subTpl){
+define(["knockout", "text!./Base.html", "text!./Input.html", "./Base", "../common/mixins/Items", "./plugins/InplaceEdit"], function(ko, tpl, subTpl){
 	"use strict";
 	return Firebrick.define("Firebrick.ui.fields.Input", {
-		extend:"Firebrick.ui.common.Base",
+		extend:"Firebrick.ui.fields.Base",
 		mixins:["Firebrick.ui.common.mixins.Items"],
 		/**
 		 * @property sName
@@ -35,6 +35,12 @@ define(["text!./Base.html", "text!./Input.html", "../common/Base", "x-editable",
 		 * @default ""
 		 */
 		label: "",
+		/**
+		 * @property containerCSS
+		 * @type {String}
+		 * @default ""
+		 */
+		containerCSS: "",
 		/**
 		 * @property value
 		 * @type {String}
@@ -73,12 +79,6 @@ define(["text!./Base.html", "text!./Input.html", "../common/Base", "x-editable",
 		 */
 		inputWidth: 9,
 		/**
-		 * @property deviceSize
-		 * @type {String}
-		 * @default "sm"
-		 */
-		deviceSize: "sm",
-		/**
 		 * screen reader only
 		 * @property srOnly
 		 * @type {Boolean}
@@ -98,11 +98,18 @@ define(["text!./Base.html", "text!./Input.html", "../common/Base", "x-editable",
 		 */
 		disabled:false,
 		/**
+		 * type of column size -md, sm, lg etc
+		 * @property columnSize
+		 * @type {Boolean|String} string (sm || lg)
+		 * @default "sm"
+		 */
+		columnSize: "md",
+		/**
 		 * @property inputSize
 		 * @type {Boolean|String} string (sm || lg)
-		 * @default false
+		 * @default "sm"
 		 */
-		inputSize:false,
+		inputSize: "md",
 		/**
 		 * @property controlLabel
 		 * @type {Boolean}
@@ -194,8 +201,9 @@ define(["text!./Base.html", "text!./Input.html", "../common/Base", "x-editable",
 		 */
 		multiplesInline:false,
 		/**
+		 * set as true to activate or object to activate and configure
 		 * @property inplaceEdit
-		 * @type {Boolean}
+		 * @type {Boolean|Object}
 		 * @default false
 		 */
 		inplaceEdit:false,
@@ -240,17 +248,47 @@ define(["text!./Base.html", "text!./Input.html", "../common/Base", "x-editable",
 		 */
 		iconClass: false,
 		/**
+		 * @property _lastValue
+		 * @private
+		 * @type {String}
+		 * @default null
+		 */
+		_lastValue: null,
+		/**
+		 * if true - att "navbar-item" class to the button
+		 * @property navbarItem
+		 * @type {Boolean}
+		 * @default false
+		 */
+		navbarItem: false,
+		/**
 		 * @method init
 		 * @return .callParent(arguments)
 		 */
 		init: function(){
 			var me = this;
-			
-			if(me.required){
+
 				me.on("rendered", function(){
-					me.onChange();
+					var inplaceConf;
+					
+					if(me.inplaceEdit){
+						inplaceConf = {
+								fieldItem: me,
+								showInplaceTitle: true
+						};
+						
+						if( $.isPlainObject( me.inplaceEdit ) ){
+							inplaceConf = Firebrick.utils.overwrite(inplaceConf, me.inplaceEdit);
+						}
+						
+						Firebrick.create("Firebrick.ui.fields.plugins.InplaceEdit", inplaceConf);	
+					}
+					
+					if(me.required){
+						me.onChange();
+					}
 				});				
-			}
+			
 			
 			return me.callParent(arguments);
 		},
@@ -330,13 +368,22 @@ define(["text!./Base.html", "text!./Input.html", "../common/Base", "x-editable",
 					}
 				};
 			
+			if( me.containerCSS ){
+				obj.css[ me.parseBind( me.containerCSS ) ] = true;
+			}
+			
 			if(me.align){
 				obj.css[me.parseBind("pull-" + me.align)] = true;
 			}
 			
-			if(this.inputSize){
+			if(me.inputSize){
 				obj.css[me.parseBind("form-group-" + me.inputSize)] = me.inputSize ? true : false;	
 			}
+			
+			if(me.navbarItem){
+				obj.css["'fb-ui-navbar-field'"] = true; 
+			}
+			
 			return obj;
 		},
 		/**
@@ -390,17 +437,13 @@ define(["text!./Base.html", "text!./Input.html", "../common/Base", "x-editable",
 			obj.attr.type = type;
 			obj.attr.name = me.name ?  me.parseBind( me.name ) : type;
 			
-			if(obj.value !== null){
-				obj.value = me.value;	
-			}			
+			obj.value = me.value;
 			
 			if(me.inplaceEdit){
-				obj.editableOptions = {};
-				obj.attr["'data-type'"] = me.dataType ?  me.parseBind( me.dataType ) : type;
-				obj.editable = me.value;
-				if(me.showInplaceTitle || $.fn.editable.defaults.mode !== "inline"){
-					obj.attr["'data-title'"] = me.textBind( me.dataTitle || me.label );	
-				}
+				
+				obj.css["'fb-ui-inplaceedit'"] = true;
+				obj.text = me.value;
+				
 			}else{
 				if(me.formControlClass){
 					obj.css[me.parseBind(me.formControlClass)] = true;
@@ -410,6 +453,10 @@ define(["text!./Base.html", "text!./Input.html", "../common/Base", "x-editable",
 			
 			if(me.required){
 				obj.attr.required = true;
+			}
+			
+			if(me.inputSize){
+				obj.css[ me.parseBind("input-" + me.inputSize) ] = true;
 			}
 			
 			return obj;
@@ -498,7 +545,7 @@ define(["text!./Base.html", "text!./Input.html", "../common/Base", "x-editable",
 					}
 				};
 			if(me.horizontal){
-				obj.css[ me.parseBind("col-" + me.deviceSize + "-" + me.labelWidth )] = me.horizontal;
+				obj.css[ me.parseBind("col-" + me.columnSize + "-" + me.labelWidth )] = me.horizontal;
 			}
 			return obj;
 		},
@@ -512,8 +559,9 @@ define(["text!./Base.html", "text!./Input.html", "../common/Base", "x-editable",
 					css:{}
 				};
 			if(me.horizontal){
-				obj.css[ me.parseBind( "col-" + me.deviceSize + "-" + me.inputWidth ) ] = me.horizontal;
+				obj.css[ me.parseBind( "col-" + me.columnSize + "-" + me.inputWidth ) ] = me.horizontal;
 			}
+
 			return obj;
 		},
 		/**
@@ -533,6 +581,73 @@ define(["text!./Base.html", "text!./Input.html", "../common/Base", "x-editable",
 			}
 			
 			return obj;
+		},
+		
+		/**
+		 * @method getValue
+		 * @return {Any}
+		 */
+		getValue: function(){
+			var me = this;
+			return ko.utils.unwrapObservable( me._ko.value.valueAccessor() );
+		},
+		/**
+		 * @method setValue
+		 * @event changed
+		 * @return self
+		 */
+		setValue: function(value){
+			var me = this,
+				oldValue = me.getValue(),
+				newValue;
+
+			me._lastValue = oldValue;
+			me._setValue(value);
+			
+			newValue = me.getValue();
+			
+			me._checkChange(newValue, oldValue);
+			
+			return me;
+		},
+		/**
+		 * @event changed( newValue, oldValue )
+		 * @method _checkChange
+		 * @private
+		 * @param newVal {Any}
+		 * @param oldVal {Any}
+		 * @param silent {Boolean} default=false
+		 * @return {Boolean}
+		 */
+		_checkChange: function(newVal, oldVal, silent){
+			var me = this;
+			
+			if( me._hasChange(newVal, oldVal) ){
+				if(!silent){
+					me.fireEvent("changed", newVal, oldVal);
+				}
+				return true;
+			}
+			
+			return false;
+		},
+		/**
+		 * @method _hasChange
+		 * @private
+		 * @param newVal {Any}
+		 * @param oldVal {Any}
+		 */
+		_hasChange: function(newVal, oldVal){
+			return newVal !== oldVal;
+		},
+		/**
+		 * @method _setValue
+		 * @private
+		 */
+		_setValue: function(value){
+			var me = this;
+			me._ko.value.valueAccessor()( value );
+			return me;
 		}
 	});
 });

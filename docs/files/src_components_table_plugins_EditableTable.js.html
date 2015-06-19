@@ -19,7 +19,7 @@
             
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 0.14.6</em>
+            <em>API Docs for: 0.15.0</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -60,6 +60,8 @@
                 <li><a href="../classes/components.common.mixins.Column.html">components.common.mixins.Column</a></li>
             
                 <li><a href="../classes/components.common.mixins.Items.html">components.common.mixins.Items</a></li>
+            
+                <li><a href="../classes/components.common.mixins.Label.html">components.common.mixins.Label</a></li>
             
                 <li><a href="../classes/components.common.mixins.Toolbars.html">components.common.mixins.Toolbars</a></li>
             
@@ -103,13 +105,19 @@
             
                 <li><a href="../classes/components.display.List.html">components.display.List</a></li>
             
+                <li><a href="../classes/components.display.Loader.html">components.display.Loader</a></li>
+            
                 <li><a href="../classes/components.display.Progress.html">components.display.Progress</a></li>
             
                 <li><a href="../classes/components.display.Span.html">components.display.Span</a></li>
             
                 <li><a href="../classes/components.display.Text.html">components.display.Text</a></li>
             
+                <li><a href="../classes/components.fields.Base.html">components.fields.Base</a></li>
+            
                 <li><a href="../classes/components.fields.Checkbox.html">components.fields.Checkbox</a></li>
+            
+                <li><a href="../classes/components.fields.ComboBox.html">components.fields.ComboBox</a></li>
             
                 <li><a href="../classes/components.fields.Datepicker.html">components.fields.Datepicker</a></li>
             
@@ -153,9 +161,11 @@
             
                 <li><a href="../classes/plugins.EditableTable.html">plugins.EditableTable</a></li>
             
-                <li><a href="../classes/plugins.RadioList.html">plugins.RadioList</a></li>
+                <li><a href="../classes/plugins.InplaceEdit.html">plugins.InplaceEdit</a></li>
             
                 <li><a href="../classes/renderer.html">renderer</a></li>
+            
+                <li><a href="../classes/Suggest.html">Suggest</a></li>
             
                 <li><a href="../classes/ui.html">ui</a></li>
             
@@ -166,6 +176,8 @@
             </ul>
 
             <ul id="api-modules" class="apis modules">
+            
+                <li><a href="../modules/Firebrick.engine.html">Firebrick.engine</a></li>
             
                 <li><a href="../modules/Firebrick.ui.html">Firebrick.ui</a></li>
             
@@ -236,7 +248,6 @@
 	Firebrick.define(&quot;Firebrick.ui.table.plugins.EditableTable&quot;, {
 		indexAttr: &quot;data-tt-id&quot;,	//when TR - row number, when TD column number
 		rowAttr: &quot;fb-ui-row-id&quot;,	//for TD to determine which row number
-		dataProp: &quot;data-edit-item&quot;,	//property name ( $.prop() )  when adding the colNumber to the element for later reference
 		editMarker: &quot;fb-ui-cell-editing&quot;,	//added to the TD when it cell edit is active
 		currentEdit: null,	//holder for which item is current being edited - cell editting only
 		hideCellClass: &quot;fb-ui-hide-me&quot;,
@@ -309,7 +320,7 @@
 			
 			//get just the text not any other child elements and their texts
 			if(clazz.treetable){
-				data = clazz.getData()()[rowNumber].children()[colNumber];
+				data = clazz.getData()()[rowNumber].row()[colNumber];
 			}else{
 				data = clazz.getData()()[rowNumber][colNumber];	
 			}
@@ -420,11 +431,18 @@
 					for(var i = 0, l = inputs.length; i&lt;l; i++){
 						input = $(inputs[i]);
 						//filter out (continue) non checked (selected) checkboxes or radio buttons
-						if((input.attr(&quot;type&quot;) === &quot;radio&quot; || input.attr(&quot;type&quot;) === &quot;checkbox&quot;) &amp;&amp; !input.is(&quot;:checked&quot;)){
-							continue;
+						if(input.attr(&quot;type&quot;) === &quot;radio&quot; || input.attr(&quot;type&quot;) === &quot;checkbox&quot;){
+							if(!input.is(&quot;:checked&quot;)){
+								continue;
+							}else{
+								colNumber = Firebrick.getById( input.attr(&quot;data-cmp-id&quot;) )._prop;
+							}
+						}else{
+							colNumber = Firebrick.getById( input.attr(&quot;id&quot;) )._prop;
 						}
 						
-						colNumber = input.prop(me.dataProp);
+						
+						
 						//example tableClass.getData()() =&gt; 
 						//		[ 
 						//			[ [], [], [] ],	//row 0 with 3 column values (cells)
@@ -432,7 +450,7 @@
 						//			[ [], [], [] ]	//row 2 with 3 column values
 						//		]
 						if(isTreeTable){
-							model = tableClass.getData()()[rowNumber].children()[colNumber];
+							model = tableClass.getData()()[rowNumber].row()[colNumber];
 						}else{
 							model = tableClass.getData()()[rowNumber][colNumber];
 						}
@@ -455,7 +473,7 @@
 										if(value !== oldValue){
 											if(isTreeTable){
 												//the store data architecture for a treetable is slightly different, hence this &quot;if&quot; statement 
-												tableClass.getData()()[rowNumber].children()[colNumber] = value;
+												tableClass.getData()()[rowNumber].row()[colNumber] = value;
 											}else{
 												tableClass.getData()()[rowNumber][colNumber] = value;
 											}
@@ -728,23 +746,12 @@
 		 * @param colNum {Integer}
 		 */
 		_defaultRenderAction: function(clazz, colNum){
-			var me = this,
-				el = clazz.getElement(),
-				type = clazz.type; 
-			if(el){
-				if(type === &quot;radio&quot; || type === &quot;checkbox&quot;){
-					//add to all inputs
-					//which input corresponds to which column number
-					$(&quot;input&quot;, el).prop(me.dataProp, colNum);
-				}else{
-					el.prop(me.dataProp, colNum);	
-				}
-			}
+			clazz._prop = colNum;
 		},
 		
 		/**
 		 * create a new init function with a rendered listener for the edit field
-		 * when an edit field is rendered, add the column number as a property to the field me.dataProp
+		 * when an edit field is rendered, add the column number as a property (_prop) to the class
 		 * @method _initFunction
 		 * @param colNum {Integer}
 		 * @return {Function}

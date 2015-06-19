@@ -19,7 +19,7 @@
             
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 0.14.6</em>
+            <em>API Docs for: 0.15.0</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -60,6 +60,8 @@
                 <li><a href="../classes/components.common.mixins.Column.html">components.common.mixins.Column</a></li>
             
                 <li><a href="../classes/components.common.mixins.Items.html">components.common.mixins.Items</a></li>
+            
+                <li><a href="../classes/components.common.mixins.Label.html">components.common.mixins.Label</a></li>
             
                 <li><a href="../classes/components.common.mixins.Toolbars.html">components.common.mixins.Toolbars</a></li>
             
@@ -103,13 +105,19 @@
             
                 <li><a href="../classes/components.display.List.html">components.display.List</a></li>
             
+                <li><a href="../classes/components.display.Loader.html">components.display.Loader</a></li>
+            
                 <li><a href="../classes/components.display.Progress.html">components.display.Progress</a></li>
             
                 <li><a href="../classes/components.display.Span.html">components.display.Span</a></li>
             
                 <li><a href="../classes/components.display.Text.html">components.display.Text</a></li>
             
+                <li><a href="../classes/components.fields.Base.html">components.fields.Base</a></li>
+            
                 <li><a href="../classes/components.fields.Checkbox.html">components.fields.Checkbox</a></li>
+            
+                <li><a href="../classes/components.fields.ComboBox.html">components.fields.ComboBox</a></li>
             
                 <li><a href="../classes/components.fields.Datepicker.html">components.fields.Datepicker</a></li>
             
@@ -153,9 +161,11 @@
             
                 <li><a href="../classes/plugins.EditableTable.html">plugins.EditableTable</a></li>
             
-                <li><a href="../classes/plugins.RadioList.html">plugins.RadioList</a></li>
+                <li><a href="../classes/plugins.InplaceEdit.html">plugins.InplaceEdit</a></li>
             
                 <li><a href="../classes/renderer.html">renderer</a></li>
+            
+                <li><a href="../classes/Suggest.html">Suggest</a></li>
             
                 <li><a href="../classes/ui.html">ui</a></li>
             
@@ -166,6 +176,8 @@
             </ul>
 
             <ul id="api-modules" class="apis modules">
+            
+                <li><a href="../modules/Firebrick.engine.html">Firebrick.engine</a></li>
             
                 <li><a href="../modules/Firebrick.ui.html">Firebrick.ui</a></li>
             
@@ -278,19 +290,46 @@ define([&quot;jquery&quot;, &quot;../../nav/List&quot;], function($){
 			//no children
 			return false;
 		},
-		
+		/**
+		 * @method getItemId
+		 * @param $data {Object} knockout object
+		 * @return {String}
+		 */
+		getItemId: function( $data ){
+			$data.id = $data &amp;&amp; $data.id ? $data.id : &quot;fb-ui-item-&quot; + Firebrick.utils.uniqId();
+			return $data.id;
+		},
+		/**
+		 * called on each item iteration
+		 * @method fbItem
+		 * @param $data {Object} knockout object
+		 * @param $context {Object} knockout object
+		 */
+		fbItem: function($data){
+			var me = this,
+				$el;
+			if($data){
+				if($data.id){
+					me._registerHandler(&quot;#&quot; + $data.id, $data.handler, $data.handlerEvent);	
+				}
+			}
+			return true;
+		},
 		/**
 		 * @method listItemBindings
 		 * @return {Object}
 		 */
 		listItemBindings: function(){
 			var me = this,
+				clazz = &quot;Firebrick.ui.getCmp(&#x27;&quot; + me.getId() + &quot;&#x27;)&quot;,
 				obj = me.callParent(arguments);
 			
 			obj.attr = obj.attr || {}; 
 			
 			obj.attr.role = &quot;&#x27;presentation&#x27;&quot;;
-			obj.css[&quot;&#x27;dropdown-submenu&#x27;&quot;] = &quot;Firebrick.ui.getCmp(&#x27;&quot; + me.getId() + &quot;&#x27;)._hasChildren($data)&quot;;
+			obj.css[&quot;&#x27;dropdown-submenu&#x27;&quot;] = clazz + &quot;._hasChildren($data)&quot;;
+			obj.attr.id = clazz + &quot;.getItemId( $data )&quot;;
+			obj.attr._fbItem = clazz + &quot;.fbItem($data, $context)&quot;
 			
 			return obj;
 		},

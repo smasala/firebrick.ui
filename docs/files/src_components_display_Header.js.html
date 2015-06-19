@@ -19,7 +19,7 @@
             
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 0.14.6</em>
+            <em>API Docs for: 0.15.0</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -60,6 +60,8 @@
                 <li><a href="../classes/components.common.mixins.Column.html">components.common.mixins.Column</a></li>
             
                 <li><a href="../classes/components.common.mixins.Items.html">components.common.mixins.Items</a></li>
+            
+                <li><a href="../classes/components.common.mixins.Label.html">components.common.mixins.Label</a></li>
             
                 <li><a href="../classes/components.common.mixins.Toolbars.html">components.common.mixins.Toolbars</a></li>
             
@@ -103,13 +105,19 @@
             
                 <li><a href="../classes/components.display.List.html">components.display.List</a></li>
             
+                <li><a href="../classes/components.display.Loader.html">components.display.Loader</a></li>
+            
                 <li><a href="../classes/components.display.Progress.html">components.display.Progress</a></li>
             
                 <li><a href="../classes/components.display.Span.html">components.display.Span</a></li>
             
                 <li><a href="../classes/components.display.Text.html">components.display.Text</a></li>
             
+                <li><a href="../classes/components.fields.Base.html">components.fields.Base</a></li>
+            
                 <li><a href="../classes/components.fields.Checkbox.html">components.fields.Checkbox</a></li>
+            
+                <li><a href="../classes/components.fields.ComboBox.html">components.fields.ComboBox</a></li>
             
                 <li><a href="../classes/components.fields.Datepicker.html">components.fields.Datepicker</a></li>
             
@@ -153,9 +161,11 @@
             
                 <li><a href="../classes/plugins.EditableTable.html">plugins.EditableTable</a></li>
             
-                <li><a href="../classes/plugins.RadioList.html">plugins.RadioList</a></li>
+                <li><a href="../classes/plugins.InplaceEdit.html">plugins.InplaceEdit</a></li>
             
                 <li><a href="../classes/renderer.html">renderer</a></li>
+            
+                <li><a href="../classes/Suggest.html">Suggest</a></li>
             
                 <li><a href="../classes/ui.html">ui</a></li>
             
@@ -166,6 +176,8 @@
             </ul>
 
             <ul id="api-modules" class="apis modules">
+            
+                <li><a href="../modules/Firebrick.engine.html">Firebrick.engine</a></li>
             
                 <li><a href="../modules/Firebrick.ui.html">Firebrick.ui</a></li>
             
@@ -222,10 +234,11 @@
  * @namespace components.display
  * @class Header
  */
-define([&quot;text!./Header.html&quot;, &quot;../common/Base&quot;], function(tpl){
+define([&quot;text!./Header.html&quot;, &quot;../common/Base&quot;, &quot;../common/mixins/Label&quot;], function(tpl){
 	&quot;use strict&quot;;
 	return Firebrick.define(&quot;Firebrick.ui.display.Header&quot;, {
 		extend:&quot;Firebrick.ui.common.Base&quot;,
+		mixins: &quot;Firebrick.ui.common.mixins.Label&quot;,
 		/**
 		 * @property sName
 		 * @type {String}
@@ -255,19 +268,6 @@ define([&quot;text!./Header.html&quot;, &quot;../common/Base&quot;], function(tp
 		 * @default &quot;&quot;
 		 */
 		secondaryText:&quot;&quot;,
-		/**
-		 * @property labelText
-		 * @type {String}
-		 * @default &quot;&quot;
-		 */
-		labelText:&quot;&quot;,
-		/**
-		 * string = &quot;default&quot;, &quot;primary&quot;, &quot;success&quot; &quot;info&quot;, &quot;warning&quot;, &quot;danger&quot;  
-		 * @property labelStyle
-		 * @type {Boolean|String}
-		 * @default &quot;default&quot;
-		 */
-		labelStyle: &quot;default&quot;,
 		/**
 		 * change to a url if you wish to convert the header into a link
 		 * @property href
@@ -310,31 +310,6 @@ define([&quot;text!./Header.html&quot;, &quot;../common/Base&quot;], function(tp
 				};
 			}
 		},
-		/**
-		 * @method labelBindings
-		 * @return Object
-		 */
-		labelBindings: function(){
-			var me = this, 
-				obj;
-			if(me.labelText){
-				obj = {
-						text: me.textBind(me.labelText),
-						css:{
-							label: true
-						}
-					};
-				if(me.labelStyle){
-					obj.css[ me.parseBind( &quot;label-&quot;+me.labelStyle ) ] = true;
-				}
-				return obj;
-			}else{
-				return {
-					visible:false
-				};
-			}
-		},
-		
 		/**
 		 * @method hrefBindings
 		 * @return {Object}

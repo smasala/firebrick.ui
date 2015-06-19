@@ -8,10 +8,11 @@
  * @namespace components.display
  * @class Header
  */
-define(["text!./Header.html", "../common/Base"], function(tpl){
+define(["text!./Header.html", "../common/Base", "../common/mixins/Label"], function(tpl){
 	"use strict";
 	return Firebrick.define("Firebrick.ui.display.Header", {
 		extend:"Firebrick.ui.common.Base",
+		mixins: "Firebrick.ui.common.mixins.Label",
 		/**
 		 * @property sName
 		 * @type {String}
@@ -41,19 +42,6 @@ define(["text!./Header.html", "../common/Base"], function(tpl){
 		 * @default ""
 		 */
 		secondaryText:"",
-		/**
-		 * @property labelText
-		 * @type {String}
-		 * @default ""
-		 */
-		labelText:"",
-		/**
-		 * string = "default", "primary", "success" "info", "warning", "danger"  
-		 * @property labelStyle
-		 * @type {Boolean|String}
-		 * @default "default"
-		 */
-		labelStyle: "default",
 		/**
 		 * change to a url if you wish to convert the header into a link
 		 * @property href
@@ -96,31 +84,6 @@ define(["text!./Header.html", "../common/Base"], function(tpl){
 				};
 			}
 		},
-		/**
-		 * @method labelBindings
-		 * @return Object
-		 */
-		labelBindings: function(){
-			var me = this, 
-				obj;
-			if(me.labelText){
-				obj = {
-						text: me.textBind(me.labelText),
-						css:{
-							label: true
-						}
-					};
-				if(me.labelStyle){
-					obj.css[ me.parseBind( "label-"+me.labelStyle ) ] = true;
-				}
-				return obj;
-			}else{
-				return {
-					visible:false
-				};
-			}
-		},
-		
 		/**
 		 * @method hrefBindings
 		 * @return {Object}

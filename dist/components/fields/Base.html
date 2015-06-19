@@ -1,4 +1,4 @@
-<div class="{{=it.formGroupClass}}" data-bind="{{=it.dataBind('containerBindings')}}">
+<div data-cmp-id="{{=it.getId()}}" class="{{=it.formGroupClass}}" data-bind="{{=it.dataBind('containerBindings')}}">
 	{{?it.label !== false }}
 		<label for="{{=it.getId()}}" data-bind="{{=it.dataBind('labelBindings')}}"></label> 
 	{{?}}

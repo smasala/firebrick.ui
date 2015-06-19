@@ -9,7 +9,7 @@
  * @namespace components.fields
  * @class Datepicker
  */
-define(["./Input"], function(){
+define(["./Input", "bootstrap-datepicker"], function(){
 	"use strict";
 	return Firebrick.define("Firebrick.ui.fields.DatePicker", {
 		extend:"Firebrick.ui.fields.Input",

@@ -35,11 +35,11 @@ define(["text!./SelectBox.html", "jquery", "./Input"], function(subTpl, $){
 		 */
 		options:false,
 		/**
-		 * @property dataType
+		 * @property type
 		 * @type {String}
-		 * @default "'select'2
+		 * @default "select"
 		 */
-		dataType:"select",
+		type:"select",
 		/**
 		 * @property selectedOptions
 		 * @type {String}
@@ -66,22 +66,14 @@ define(["text!./SelectBox.html", "jquery", "./Input"], function(subTpl, $){
 			var me = this,
 				obj = me.callParent(arguments);
 			
-			obj.attr.multiple = me.multiSelect;
-			
 			if(!me.inplaceEdit){
 				obj.options = Firebrick.ui.helper.optionString(me);
 				obj.selectedOptions = me.selectedOptions;
 				obj.optionsText = me.optionsText;
 				obj.optionsValue = me.optionsValue;
-			}else{
-				obj.editable = me.selectedOptions;
-				obj.editableOptions = {
-						optionsValue:me.optionsValue,
-						optionsText:me.optionsText,
-						options:Firebrick.ui.helper.optionString(me),
-						type: me.parseBind( me.dataType )
-				};
+				obj.attr.multiple = me.multiSelect;
 			}
+			
 			return obj;
 		}
 	});

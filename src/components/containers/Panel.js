@@ -8,11 +8,12 @@
  * @namespace components.containers
  * @class Panel
  */
-define(["text!./Panel.html", "jquery", "./Base", "../nav/Toolbar", "../common/mixins/Toolbars"], function(tpl, $){
+define(["text!./Panel.html", "jquery", "./Base", "../nav/Toolbar", "../common/mixins/Toolbars", "../common/mixins/Label"], function(tpl, $){
 	"use strict";
 	return Firebrick.define("Firebrick.ui.containers.Panel", {
 		extend:"Firebrick.ui.containers.Base",
-		mixins:"Firebrick.ui.common.mixins.Toolbars",
+		mixins: ["Firebrick.ui.common.mixins.Toolbars",
+		         "Firebrick.ui.common.mixins.Label"],
 		/**
 		 * @property sName
 		 * @type {String}
@@ -401,6 +402,10 @@ define(["text!./Panel.html", "jquery", "./Base", "../nav/Toolbar", "../common/mi
 				obj.css["'pull-left'"] = true;
 			}
 			
+			if( me.labelText ){
+				obj.css["'fb-ui-has-label'"] = true;
+			}
+			
 			return obj;
 		},
 		/**
@@ -414,7 +419,6 @@ define(["text!./Panel.html", "jquery", "./Base", "../nav/Toolbar", "../common/mi
 						"'panel-body'": me.panelBodyClass
 					}
 				};
-			
 			
 			if(!me.items){
 				if(me.storeProp){

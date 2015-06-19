@@ -49,7 +49,6 @@ define(["knockout-mapping", "../fields/Input"], function(kom){
 		 */
 		_valueChecker: function($default, $data){
 			var me = this;
-			console.info($default, $data);
 			
 			if(kom.isMapped($data)){
 				$data = kom.toJS($data);

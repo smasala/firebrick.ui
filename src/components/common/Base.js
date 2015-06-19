@@ -81,12 +81,20 @@ define(["doT", "firebrick", "jquery"], function(tplEngine, fb, $){
 		 */
 		subTpl: null,
 		/**
-		 * all css classes (comma separated) are added to the standard bindings function
+		 * all css classes (space separated) are added to the standard bindings function
 		 * @property css
 		 * @type {String}
 		 * @default null
 		 */
 		css: null,
+		/**
+		 * add inline css styles
+		 * http://knockoutjs.com/documentation/style-binding.html
+		 * @property style
+		 * @type {Object}
+		 * @default null
+		 */
+		style:null,
 		/**
 		 * variable shortcuts are created using the sName. by default the string after the last "-" is used
 		 * @example
@@ -216,14 +224,23 @@ define(["doT", "firebrick", "jquery"], function(tplEngine, fb, $){
 			return bindObj;
 		},
 		/**
+		 * @method _getElementSelector
+		 * @private
+		 * @return {String} jquery element selector string
+		 */
+		_getElementSelector: function(){
+			var me = this,
+				id = me.enclosedBind ? me.getEnclosedBindId() : me.getId();
+			return "#" + id;
+		},
+		/**
 		 * @method getElement
 		 * @return {Object} jquery element object
 		 */
 		getElement: function(){
-			var me = this,
-				id = me.enclosedBind ? me.getEnclosedBindId() : me.getId();
+			var me = this;
 			if(!me._element){
-				me._element = $("#" + id);
+				me._element = $( me._getElementSelector() );
 				if(!me._element.length){
 					//set to null if jquery object returned empty []
 					me._element = null;
@@ -306,45 +323,45 @@ define(["doT", "firebrick", "jquery"], function(tplEngine, fb, $){
 				});
 			}
 			
-			
+			me._registerHandler();
+					
+			if(me.contextMenu && !me.contextMenu._classname){
 				me.on("rendered", function(){
 					var el = me.getElement();
-					
-					if(me.handler && me.handlerEvent){
-						el.on(me.handlerEvent, function(){
-							me.handler.apply(me, arguments);
+					require(["Firebrick.ui/common/plugins/ContextMenu"], function(){
+						el.on("contextmenu", function(event){
+							var conf = {
+								_parent: me,
+								contextMenuEvent: event
+							}
+							event.preventDefault();
+							
+							me._contextMenu = Firebrick.create("Firebrick.ui.common.plugins.ContextMenu", Firebrick.utils.overwrite(conf, me.contextMenu));
 						});
-					}
-					
-					if(me.contextMenu){
-						require(["Firebrick.ui/common/plugins/ContextMenu"], function(){
-							el.ContextMenu(me);	
-						});
-					}
+					});
 				});
-			
+			}
+				
 			return me.callParent(arguments);
 		},
 		/**
-		 * @method _getCSSClasses
-		 * @private
-		 * @return {Object}
+		 * @method _registerHandler
+		 * @param elementSelector {String} optional jquery selector
+		 * @param handler {Function} optional
+		 * @param handlerEvent {String} optional
 		 */
-		_getCSSClasses: function(){
-			var me = this,
-				obj = {},
-				classes;
-			
-			if(me.css){
-				classes = me.css.split(",");
-				if(classes.length){
-					for(var i = 0, l = classes.length; i<l; i++){
-						obj[me.parseBind(classes[i])] = true;
-					}
-				}
+		_registerHandler: function(elementSelector, handler, handlerEvent){
+			var me = this;
+			handler = handler || me.handler;
+			handlerEvent = handlerEvent || me.handlerEvent;
+			elementSelector = elementSelector || me._getElementSelector();
+			if(handler && handlerEvent){
+				$(document).on(handlerEvent, me._getElementSelector(), function(){
+					var args = Array.prototype.slice.call(arguments);
+					args.push(this);
+					handler.apply(me, args);
+				});
 			}
-			
-			return obj;
 		},
 		/**
 		 * mother of all basic bindings
@@ -355,8 +372,16 @@ define(["doT", "firebrick", "jquery"], function(tplEngine, fb, $){
 			var me = this,
 				obj = {
 					attr:{},
-					css:me._getCSSClasses()
+					css: {}
 				};
+			
+			if( me.css ){
+				obj.css[ me.parseBind( me.css ) ] = true;	
+			}
+			
+			if(me.style){
+				obj.style = me.style;
+			}
 			
 			return me.addTooltipPopoverBind(obj);
 		},

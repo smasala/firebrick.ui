@@ -205,6 +205,11 @@ define(["text!./SplitBar.html", "jquery", "../../common/mixins/Column", "./Dragg
 		},
 		
 		/**
+		 * @method collapse
+		 */
+		
+		
+		/**
 		 * @method setCollapsibleActions
 		 */
 		setCollapsibleActions: function(){

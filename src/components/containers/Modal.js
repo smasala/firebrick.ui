@@ -30,8 +30,23 @@ define(["text!./Modal.html", "./Base"], function(tpl){
 			return me.callParent(arguments);
 		},
 		enclosedBind:true,
-		passToProperties:{
-			footerItems:1
+		/**
+		 * @property _modalEl
+		 * @private
+		 * @type {jQuery Object}
+		 * @default null
+		 */
+		_modalEl: null,
+		/**
+		 * @method getModalEl
+		 * @return {jQuery Object}
+		 */
+		getModalEl: function(){
+			var me = this;
+			if(!me._modalEl){
+				me._modalEl = $("> .modal", me.getElement());
+			}
+			return me._modalEl;
 		},
 		/**
 		 * show the modal
@@ -39,11 +54,8 @@ define(["text!./Modal.html", "./Base"], function(tpl){
 		 * @return {Object} self
 		 */
 		showMe: function(){
-			var me = this,
-				modal = $("> .modal", me.getElement());
-			if(modal.length){
-				modal.modal();
-			}
+			var me = this;
+			me.getModalEl().modal();
 		},
 		/**
 		 * @property ariaDescribedBy
@@ -126,6 +138,12 @@ define(["text!./Modal.html", "./Base"], function(tpl){
 		 * @default true
 		 */
 		footerClass: true,
+		/**
+		 * @property footerItems
+		 * @type {Array of Objects}
+		 * @default null
+		 */
+		footerItems: null,
 		/**
 		 * used to created the <h{int}></h{int}> tags in the header
 		 * @property titleSize
@@ -285,6 +303,14 @@ define(["text!./Modal.html", "./Base"], function(tpl){
 					"'modal-footer'": me.footerClass
 				}
 			};
+		},
+		/**
+		 * close modal
+		 * @method close
+		 */
+		close: function(){
+			var me = this;
+			me.getModalEl().modal("hide");
 		}
 	});
 	

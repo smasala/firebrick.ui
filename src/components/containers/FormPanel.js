@@ -15,9 +15,9 @@ define(["./Panel", "./Form"], function(){
 		/**
 		 * @property sName
 		 * @type {String}
-		 * @default "fb-ui-formpanel"
+		 * @default "containers.formpanel"
 		 */
-		sName:"containers.formpanel",
+		sName: "containers.formpanel",
 		/**
 		 * configuration to pass to the form section of the Panel
 		 * @property formConfig
@@ -29,15 +29,20 @@ define(["./Panel", "./Form"], function(){
 		 * @method build
 		 * @private
 		 */
-		build: function(){
+		init: function(){
 			var me = this,
-			formItem = me.formConfig || {};
+				formItem = me.formConfig || {};
 				
 			formItem.sName = "containers.form";	
+
+			if(me.items){
+				formItem.items = me.items;
+			}else{
+				formItem.html = me.html;
+			}
 			
-			formItem.items = me.items;
 			me.items = formItem;
-			
+			 
 			return me.callParent(arguments);
 		}
 	});

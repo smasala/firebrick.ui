@@ -8,7 +8,7 @@
  * @namespace components.fields
  * @class Radio
  */
-define(["text!./Radio.html", "../common/MultiplesBase", "./plugins/Radio"], function(subTpl){
+define(["text!./Radio.html", "../common/MultiplesBase"], function(subTpl){
 	"use strict";
 	return Firebrick.define("Firebrick.ui.fields.Radio", {
 		extend:"Firebrick.ui.common.MultiplesBase",
@@ -142,6 +142,9 @@ define(["text!./Radio.html", "../common/MultiplesBase", "./plugins/Radio"], func
 			}else{
 				obj.checked = "($data && $data.checked)";
 			}
+			
+			obj.attr["'data-cmp-id'"] = me.parseBind(me.getId());
+			
 			return obj;
 		}
 	});

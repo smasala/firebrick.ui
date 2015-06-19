@@ -133,23 +133,21 @@ define(["text!./Navbar.html", "./Base", "./List"], function(tpl){
 		 */
 		showBranding: true,
 		/**
-		 * @method navBindings
+		 * @method bindings
 		 * @return {Object}
 		 */
-		navBindings: function(){
+		bindings: function(){
 			var me = this,
-				obj = {
-					attr:{
-						role: "'navigation'"
-					},
-					css:{
-						"'navbar-default'": me.navbarDefaultClass,
-						"navbar": me.navbarClass
-					}
-			};
+				obj = me.callParent(arguments);
+		
+			obj.attr.role = "'navigation'";
+			obj.css["'navbar-default'"] = me.navbarDefaultClass;
+			obj.css.navbar = me.navbarClass;
+			
 			if(me.navTypeClass){
-				obj.css[me.parseBind(me.navTypeClass)] = true;
+				obj.css[ me.parseBind(me.navTypeClass) ] = true;
 			}
+			
 			return obj;
 		},
 		/**
@@ -160,27 +158,19 @@ define(["text!./Navbar.html", "./Base", "./List"], function(tpl){
 			var me = this,
 				obj = {
 					css:{},
-					attr:{
-						href: me.parseBind(me.brandLink)
-					}
+					attr:{}
 				};
+			
+			if(me.brandLink !== false){
+				obj.attr.href =  me.parseBind( me.brandLink );
+			}
+			
 			if(me.brandClass){
 				obj.css["'navbar-brand'"] = me.brandClass;
 			}
 			if(me.brandText && !me.brandTpl){
 				obj.text = me.parseBind(me.brandText);
 			}
-			return obj;
-		},
-		/**
-		 * overriding parent
-		 * @method bindings
-		 * @return {Object}
-		 */
-		bindings: function(){
-			var me = this,
-				obj = me.callParent(arguments);
-			obj.text = "$data.text ? $data.text : ''";
 			return obj;
 		},
 		/**

@@ -4,7 +4,7 @@
 
 /**
  * @module Firebrick.ui.components
- * @extends components.common.Base
+ * @extends components.button.Base
  * @namespace components.button
  * @class Button
  */
@@ -54,6 +54,12 @@ define(["text!./Button.html", "./Base", "../common/mixins/Badges", "./dropdown/L
 		 */
 		btnSize:false,
 		/**
+		 * @property disabled
+		 * @type {Boolean}
+		 * @default false
+		 */
+		disabled: false,
+		/**
 		 * @property btnStyle
 		 * @type {Boolean|String} false | (default, primary, success, info, warning, danger, link)
 		 * @default "default"
@@ -66,6 +72,13 @@ define(["text!./Button.html", "./Base", "../common/mixins/Badges", "./dropdown/L
 		 * @default ""
 		 */
 		beforeText: "",
+		/**
+		 * bootstrap glyphicon class
+		 * @property glyIcon
+		 * @type {String}
+		 * @default null
+		 */
+		glyIcon: null,
 		/**
 		 * used to inject something after the text <span>
 		 * @property afterText
@@ -139,6 +152,10 @@ define(["text!./Button.html", "./Base", "../common/mixins/Badges", "./dropdown/L
 				obj.attr["'data-dismiss'"] = "'modal'";
 			}
 			
+			if(me.disabled){
+				obj.attr.disabled = "'disabled'";
+			}
+			
 			return obj;
 		},
 		/**
@@ -146,10 +163,18 @@ define(["text!./Button.html", "./Base", "../common/mixins/Badges", "./dropdown/L
 		 * @return {Object}
 		 */
 		buttonTextBindings: function(){
-			var me = this;
-			return {
-				text: me.textBind(me.text)
-			};
+			var me = this,
+				obj = {
+						css: {},
+						text: me.textBind(me.text),
+				};
+			
+			if(me.glyIcon){
+				obj.css.glyphicon = true;
+				obj.css[me.parseBind("glyphicon-" + me.glyIcon)] = true;
+			}
+			
+			return obj;
 		},
 		/**
 		 * @method caretBindings
@@ -237,6 +262,23 @@ define(["text!./Button.html", "./Base", "../common/mixins/Badges", "./dropdown/L
 			obj.text = me.textBind(me.srOnlyText);
 			
 			return obj;
+		},
+		/**
+		 * @method setEnabled
+		 * @event enabled
+		 * @event disabled
+		 * @param enable {Boolean}
+		 */
+		setEnabled: function( enable ){
+			var me = this,
+				$el = me.getElement();
+			if(enable){
+				$el.removeAttr("disabled");
+				me.fireEvent("enabled");
+			}else{
+				$el.attr("disabled", "disabled");
+				me.fireEvent("disabled");
+			}
 		}
 	});
 });

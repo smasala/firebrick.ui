@@ -19,7 +19,7 @@
             
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 0.14.6</em>
+            <em>API Docs for: 0.15.0</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -60,6 +60,8 @@
                 <li><a href="../classes/components.common.mixins.Column.html">components.common.mixins.Column</a></li>
             
                 <li><a href="../classes/components.common.mixins.Items.html">components.common.mixins.Items</a></li>
+            
+                <li><a href="../classes/components.common.mixins.Label.html">components.common.mixins.Label</a></li>
             
                 <li><a href="../classes/components.common.mixins.Toolbars.html">components.common.mixins.Toolbars</a></li>
             
@@ -103,13 +105,19 @@
             
                 <li><a href="../classes/components.display.List.html">components.display.List</a></li>
             
+                <li><a href="../classes/components.display.Loader.html">components.display.Loader</a></li>
+            
                 <li><a href="../classes/components.display.Progress.html">components.display.Progress</a></li>
             
                 <li><a href="../classes/components.display.Span.html">components.display.Span</a></li>
             
                 <li><a href="../classes/components.display.Text.html">components.display.Text</a></li>
             
+                <li><a href="../classes/components.fields.Base.html">components.fields.Base</a></li>
+            
                 <li><a href="../classes/components.fields.Checkbox.html">components.fields.Checkbox</a></li>
+            
+                <li><a href="../classes/components.fields.ComboBox.html">components.fields.ComboBox</a></li>
             
                 <li><a href="../classes/components.fields.Datepicker.html">components.fields.Datepicker</a></li>
             
@@ -153,9 +161,11 @@
             
                 <li><a href="../classes/plugins.EditableTable.html">plugins.EditableTable</a></li>
             
-                <li><a href="../classes/plugins.RadioList.html">plugins.RadioList</a></li>
+                <li><a href="../classes/plugins.InplaceEdit.html">plugins.InplaceEdit</a></li>
             
                 <li><a href="../classes/renderer.html">renderer</a></li>
+            
+                <li><a href="../classes/Suggest.html">Suggest</a></li>
             
                 <li><a href="../classes/ui.html">ui</a></li>
             
@@ -166,6 +176,8 @@
             </ul>
 
             <ul id="api-modules" class="apis modules">
+            
+                <li><a href="../modules/Firebrick.engine.html">Firebrick.engine</a></li>
             
                 <li><a href="../modules/Firebrick.ui.html">Firebrick.ui</a></li>
             
@@ -285,15 +297,15 @@
 
                     <ul class="index-list properties">
                         
-                            <li class="index-item property">
-                                <a href="#property_toolbar">toolbar</a>
+                            <li class="index-item property private">
+                                <a href="#property__toolbarDefaults">_toolbarDefaults</a>
 
                                 
                                 
                             </li>
                         
                             <li class="index-item property">
-                                <a href="#property_toolbarDefaults">toolbarDefaults</a>
+                                <a href="#property_toolbars">toolbars</a>
 
                                 
                                 
@@ -349,7 +361,7 @@
             
         
         
-        <a href="../files/src_components_common_mixins_Toolbars.js.html#l69"><code>src\components\common\mixins\Toolbars.js:69</code></a>
+        <a href="../files/src_components_common_mixins_Toolbars.js.html#l70"><code>src\components\common\mixins\Toolbars.js:70</code></a>
         
         </p>
 
@@ -429,7 +441,7 @@
             
         
         
-        <a href="../files/src_components_common_mixins_Toolbars.js.html#l45"><code>src\components\common\mixins\Toolbars.js:45</code></a>
+        <a href="../files/src_components_common_mixins_Toolbars.js.html#l46"><code>src\components\common\mixins\Toolbars.js:46</code></a>
         
         </p>
 
@@ -496,78 +508,14 @@
                 <h2 class="off-left">Properties</h2>
 
                 
-                    <div id="property_toolbar" class="property item">
-    <h3 class="name"><code>toolbar</code></h3>
-    <span class="type">Array of Objects</span>
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/src_components_common_mixins_Toolbars.js.html#l25"><code>src\components\common\mixins\Toolbars.js:25</code></a>
-        
-        </p>
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>use this to provide the given panel with toolbars</p>
-
-    </div>
-
-    
-        <p><strong>Default:</strong> null</p>
-    
-
-    
-        <div class="example">
-            <h4>Example:</h4>
-
-            <div class="example-content">
-                <pre class="code prettyprint"><code>toolbar:[{
-    position: &quot;top&quot;,
-    items: [{...}]
-}]</code></pre>
-<pre class="code prettyprint"><code>toolbar:[{
-    position: &quot;top&quot;,
-    items: [{...}]
-},{
-    position: &quot;bottom&quot;,
-    items: [{...}]
-}]</code></pre>
-
-            </div>
-        </div>
-    
-
-    
-</div>
-
-                
-                    <div id="property_toolbarDefaults" class="property item">
-    <h3 class="name"><code>toolbarDefaults</code></h3>
+                    <div id="property__toolbarDefaults" class="property item private">
+    <h3 class="name"><code>_toolbarDefaults</code></h3>
     <span class="type">Object</span>
 
     
 
+    
+        <span class="flag private">private</span>
     
 
     
@@ -605,6 +553,72 @@
 }</p>
     
 
+    
+
+    
+</div>
+
+                
+                    <div id="property_toolbars" class="property item">
+    <h3 class="name"><code>toolbars</code></h3>
+    <span class="type">Array of Objects</span>
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/src_components_common_mixins_Toolbars.js.html#l26"><code>src\components\common\mixins\Toolbars.js:26</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>use this to provide the given panel with toolbars</p>
+
+    </div>
+
+    
+        <p><strong>Default:</strong> null</p>
+    
+
+    
+        <div class="example">
+            <h4>Example:</h4>
+
+            <div class="example-content">
+                <pre class="code prettyprint"><code>toolbar:[{
+    position: &quot;top&quot;,
+    items: [{...}]
+}]</code></pre>
+<pre class="code prettyprint"><code>toolbar:[{
+    position: &quot;top&quot;,
+    items: [{...}]
+},{
+    position: &quot;bottom&quot;,
+    items: [{...}]
+}]</code></pre>
+
+            </div>
+        </div>
     
 
     

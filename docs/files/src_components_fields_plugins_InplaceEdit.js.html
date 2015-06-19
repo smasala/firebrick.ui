@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>plugins.RadioList - Firebrick UI API</title>
+    <title>src\components\fields\plugins\InplaceEdit.js - Firebrick UI API</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -19,7 +19,7 @@
             
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 0.14.6</em>
+            <em>API Docs for: 0.15.0</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -60,6 +60,8 @@
                 <li><a href="../classes/components.common.mixins.Column.html">components.common.mixins.Column</a></li>
             
                 <li><a href="../classes/components.common.mixins.Items.html">components.common.mixins.Items</a></li>
+            
+                <li><a href="../classes/components.common.mixins.Label.html">components.common.mixins.Label</a></li>
             
                 <li><a href="../classes/components.common.mixins.Toolbars.html">components.common.mixins.Toolbars</a></li>
             
@@ -103,13 +105,19 @@
             
                 <li><a href="../classes/components.display.List.html">components.display.List</a></li>
             
+                <li><a href="../classes/components.display.Loader.html">components.display.Loader</a></li>
+            
                 <li><a href="../classes/components.display.Progress.html">components.display.Progress</a></li>
             
                 <li><a href="../classes/components.display.Span.html">components.display.Span</a></li>
             
                 <li><a href="../classes/components.display.Text.html">components.display.Text</a></li>
             
+                <li><a href="../classes/components.fields.Base.html">components.fields.Base</a></li>
+            
                 <li><a href="../classes/components.fields.Checkbox.html">components.fields.Checkbox</a></li>
+            
+                <li><a href="../classes/components.fields.ComboBox.html">components.fields.ComboBox</a></li>
             
                 <li><a href="../classes/components.fields.Datepicker.html">components.fields.Datepicker</a></li>
             
@@ -153,9 +161,11 @@
             
                 <li><a href="../classes/plugins.EditableTable.html">plugins.EditableTable</a></li>
             
-                <li><a href="../classes/plugins.RadioList.html">plugins.RadioList</a></li>
+                <li><a href="../classes/plugins.InplaceEdit.html">plugins.InplaceEdit</a></li>
             
                 <li><a href="../classes/renderer.html">renderer</a></li>
+            
+                <li><a href="../classes/Suggest.html">Suggest</a></li>
             
                 <li><a href="../classes/ui.html">ui</a></li>
             
@@ -166,6 +176,8 @@
             </ul>
 
             <ul id="api-modules" class="apis modules">
+            
+                <li><a href="../modules/Firebrick.engine.html">Firebrick.engine</a></li>
             
                 <li><a href="../modules/Firebrick.ui.html">Firebrick.ui</a></li>
             
@@ -208,188 +220,295 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-                        <h1>plugins.RadioList Class</h1>
-<div class="box meta">
-    
+                        <h1 class="file-heading">File: src\components\fields\plugins\InplaceEdit.js</h1>
 
-    
+<div class="file">
+    <pre class="code prettyprint linenums">
+/*!
+ * @author Steven Masala [me@smasala.com]
+ */
 
-    
-        <div class="foundat">
-            Defined in: <a href="../files/src_components_fields_plugins_Radio.js.html#l26"><code>src\components\fields\plugins\Radio.js:26</code></a>
-        </div>
-    
+/**
+ * @module plugins
+ * @namespace plugins
+ * @class InplaceEdit
+ */
+define([&quot;jquery&quot;, &quot;knockout&quot;, &quot;Firebrick.ui/containers/GridRow&quot;, &quot;Firebrick.ui/containers/Box&quot;, &quot;Firebrick.ui/button/Icon&quot;], function($, ko){
+	&quot;use strict&quot;;
+	
+	return Firebrick.define(&quot;Firebrick.ui.fields.plugins.InplaceEdit&quot;, {
+		/**
+		 * @property fieldItem
+		 * @type {Firebrick UI Object}
+		 */
+		fieldItem: null,
+		/**
+		 * optional
+		 * @property items
+		 * @type {Array of Objects}
+		 */
+		items: null,
+		/**
+		 * @property showInplaceTitle
+		 * @type {Boolean}
+		 */
+		showInplaceTitle: true,
+		/**
+		 * @property inplaceTitle
+		 * @type {String}
+		 * @default null
+		 */
+		title: null,
+		/**
+		 * css width of the popover
+		 * @property width
+		 * @type {String}
+		 * @default &quot;250px&quot;
+		 */
+		width: &quot;250px&quot;,
+		/**
+		 * popover placement
+		 * @property placement
+		 * @type {String|Function}
+		 * @default &quot;auto&quot;
+		 */
+		placement: &quot;auto&quot;,
+		/**
+		 * set to true to place at the bottom of the popover rather than the top
+		 * @property actionButtonsFooter
+		 * @type {Boolean}
+		 * @default false
+		 */
+		actionButtonsFooter: false,
+		/**
+		 * @method _getPopoverEl
+		 * @private
+		 * @return {jQuery Object}
+		 */
+		_getPopoverEl: function(){
+			var me = this;
+			return $(&quot;+ .popover&quot;, me.fieldItem.getElement());
+		},
+		/**
+		 * @method init
+		 */
+		init: function(){
+			var me = this,
+				$el = me.fieldItem.getElement();
+			if($el){
+				$el.on(&quot;click&quot;, function(){
+					return me.onEditClick.apply(me, arguments);
+				});
+				me.fieldItem.on(&quot;changed&quot;, function(){
+					$el.addClass(&quot;fb-ui-inplaceedit-changed&quot;);
+				});
+			}else{
+				console.info(&quot;no el&quot;, me);
+			}
+		},
+		/**
+		 * @method buildItems
+		 * @return {Array of Objects}
+		 */
+		buildItems: function(){
+			var me = this,
+				items = [],
+				type = me.fieldItem.type,
+				field,
+				valStr = &quot;Firebrick.getById(&#x27;&quot; + me.fieldItem.getId() + &quot;&#x27;).getValue()&quot;,
+				tmp;
+			if(me.items){
+				items = me.items;
+			}else{
+				field = {
+					css: &quot;fb-ui-inplaceedit-field&quot;,
+	    			inputSize: &quot;sm&quot;,
+	    			label: false,
+	    			inputWidth:12,
+				};
+				if(type === &quot;text&quot;){
+					tmp = {
+		    			sName:	&quot;fields.input&quot;,
+						value: valStr
+		    		};
+				}else if(type === &quot;select&quot;){
+					tmp = {
+						sName: &quot;fields.selectbox&quot;,
+						options: me.fieldItem.options,
+						selectedOptions: valStr,
+						value: valStr
+					}
+				}
+				items.push( Firebrick.utils.overwrite(field, tmp) );
+			}
+			return items;
+		},
+		/**
+		 * @method showPopover
+		 */
+		showPopover: function(){
+			var me = this;
+			me._initBSPopover();
+			me._showBSPopover();
+			me._initPopoverContent();
+		},
+		/**
+		 * @method _initPopoverContent
+		 */
+		_initPopoverContent: function(){
+			var me = this;
+			Firebrick.create(&quot;Firebrick.ui.containers.GridRow&quot;, {
+	    		target: $(&quot;.popover-content&quot;, me._getPopoverEl()),
+	    		store: ko.dataFor( me.fieldItem.getElement()[0] ),
+	    		items:[{
+	    			columnWidth: me.actionButtonsFooter ? 12 : 7,
+	    			items: me.buildItems()
+	    		},{
+	    			columnWidth: me.actionButtonsFooter ? 12 : 5,
+	    			items: me.actionButtons()
+	    		}],
+	    		init: function(){
+	    			var me1 = this;
+	    			me1.on(&quot;rendered&quot;, function(){
+	    				me.reposition();
+	    			});
+	    			return me1.callParent(arguments);
+	    		}
+			});
+		},
+		/**
+		 * @method reposition
+		 */
+		reposition: function(){
+			var me = this;
+			
+			me._getPopoverEl().css({
+				left: 0,
+				top: me.fieldItem.getElement().height()
+			});
+		},
+		/**
+		 * initialises the bootstrap popover - doesn&#x27;t show it though
+		 * @method _initBSPopover
+		 */
+		_initBSPopover: function(){
+			var me = this,
+				title = fb.text( me.showInplaceTitle ? ( me.title || me.fieldItem.label || &quot;&quot; ) : &quot;&quot; );
+			
+			me.fieldItem.getElement().popover({ 
+			    html : true,
+			    title: title || &quot; &quot;,
+			    placement: me.placement,
+			 	trigger:&quot;manual&quot;,
+			});
+		},
+		
+		/**
+		 * shows the actually bootstrap popover
+		 * @method _showBSPopover
+		 */
+		_showBSPopover: function(){
+			var me = this,
+				$popover;
+			
+			me.fieldItem.getElement().popover(&quot;toggle&quot;);
+			
+			$popover = me._getPopoverEl();
+			if(me.width){
+				$popover.css(&quot;width&quot;, me.width);
+				$popover.css(&quot;max-width&quot;, me.width);
+			}
+			
+			me._initDismissEvent();
+		},
+		/**
+		 * dismisses the popover when clicked out side it
+		 * @method _initDismissEvent
+		 */
+		_initDismissEvent: function(){
+			var me = this;
+			//delay because otherwise it catches the &lt;a&gt; click on opening the popover
+			Firebrick.delay(function(){
+				var func = function(event){
+					var $el = $(event.target);
+					if(!$el.closest(&quot;.popover&quot;).length){
+						me.fieldItem.getElement().popover(&quot;destroy&quot;);
+						$(&quot;html&quot;).off(&quot;click&quot;, func);	
+					}
+				};
+				$(&quot;html&quot;).on(&quot;click&quot;, func);
+				me.fieldItem.getElement().on(&quot;hide.bs.popover hidden.bs.popover&quot;, function(){
+					$(&quot;html&quot;).off(&quot;click&quot;, func);
+				});
+			}, 1);
+		},
+		/**
+		 * @method okAction
+		 */
+		okAction: function(){
+			var me = this;
+			me.setValue( me.getValue() );
+			me.fieldItem.getElement().popover(&quot;toggle&quot;);
+		},
 
-    
-        
-            Module: <a href="../modules/plugins.html">plugins</a>
-        
-    
-
-    
-</div>
-
-
-
-<div class="box intro">
-    
-</div>
-
-
-
-<div id="classdocs" class="tabview">
-    <ul class="api-class-tabs">
-        <li class="api-class-tab index"><a href="#index">Index</a></li>
-
-        
-        
-            <li class="api-class-tab properties"><a href="#properties">Properties</a></li>
-        
-        
-        
-    </ul>
-
-    <div>
-        <div id="index" class="api-class-tabpanel index">
-            <h2 class="off-left">Item Index</h2>
-
-            
-
-            
-                <div class="index-section properties">
-                    <h3>Properties</h3>
-
-                    <ul class="index-list properties">
-                        
-                            <li class="index-item property">
-                                <a href="#property_inputclass, attached to the &lt;label&gt; wrapper instead of the input element">inputclass, attached to the &lt;label&gt; wrapper instead of the input element</a>
-
-                                
-                                
-                            </li>
-                        
-                            <li class="index-item property">
-                                <a href="#property_tpl">tpl</a>
-
-                                
-                                
-                            </li>
-                        
-                    </ul>
-                </div>
-            
-
-            
-
-            
-        </div>
-
-        
-
-        
-            <div id="properties" class="api-class-tabpanel">
-                <h2 class="off-left">Properties</h2>
-
-                
-                    <div id="property_inputclass, attached to the &lt;label&gt; wrapper instead of the input element" class="property item">
-    <h3 class="name"><code>inputclass, attached to the &lt;label&gt; wrapper instead of the input element</code></h3>
-    <span class="type">String</span>
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/src_components_fields_plugins_Radio.js.html#l90"><code>src\components\fields\plugins\Radio.js:90</code></a>
-        
-        </p>
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        
-    </div>
-
-    
-        <p><strong>Default:</strong> null</p>
-    
-
-    
-
-    
-</div>
-
-                
-                    <div id="property_tpl" class="property item">
-    <h3 class="name"><code>tpl</code></h3>
-    <span class="type">Unknown</span>
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/src_components_fields_plugins_Radio.js.html#l84"><code>src\components\fields\plugins\Radio.js:84</code></a>
-        
-        </p>
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        
-    </div>
-
-    
-        <p><strong>Default:</strong> &lt;div&gt;&lt;/div&gt;</p>
-    
-
-    
-
-    
-</div>
-
-                
-            </div>
-        
-
-        
-
-        
-    </div>
+		/**
+		 * @method cancelAction
+		 */
+		cancelAction: function(){
+			var me = this;
+			me.fieldItem.getElement().popover(&quot;destroy&quot;);
+		},
+		
+		/**
+		 * @method actionButtons
+		 * @return {Array of Objects}
+		 */
+		actionButtons: function(){
+			var me = this;
+			return [{
+				sName: &quot;containers.box&quot;,
+				css: me.actionButtonsFooter ? &quot;pull-right&quot; : &quot;&quot;,
+				items:[{
+					sName: &quot;button.button&quot;,
+					glyIcon:&quot;ok&quot;,
+					btnStyle: &quot;primary&quot;,
+					btnSize: &quot;sm&quot;,
+					handler: function(){
+						return me.okAction.apply(me, arguments);
+					}
+				},{
+					sName: &quot;button.button&quot;,
+					glyIcon:&quot;remove&quot;,
+					btnStyle: &quot;default&quot;,
+					btnSize: &quot;sm&quot;,
+					handler: function(){
+						return me.cancelAction.apply(me, arguments);
+					}
+				}]
+			}];
+		},
+		
+		onEditClick: function(){
+			var me = this;
+			me.showPopover();
+		},
+		
+		getValue: function(){
+			var me = this,
+				$popover = me._getPopoverEl(),
+				$el = $(&quot;.fb-ui-inplaceedit-field&quot;, $popover);
+			
+			return $el.val();
+		},
+		
+		setValue: function( value ){
+			var me = this;
+			me.fieldItem.setValue( value );
+		}
+	});
+	
+});
+    </pre>
 </div>
 
                     </div>

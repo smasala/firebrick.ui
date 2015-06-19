@@ -46,7 +46,7 @@ define(["text!./Display.html", "./Input"], function(subTpl){
 			delete obj.attr.disabled;
 			delete obj.attr.type;
 			delete obj.attr.placeholder;
-			delete obj.value;
+			//delete obj.value;
 			
 			obj.text = text;
 			

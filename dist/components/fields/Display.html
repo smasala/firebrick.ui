@@ -1,1 +1,5 @@
-<p id="{{=it.getId()}}" data-bind="{{=it.dataBind()}}"></p>
+{{?it.inplaceEdit}}
+	<a id="{{=it.getId()}}" data-bind="{{=it.dataBind()}}"></a>
+{{?? true }}
+	<p id="{{=it.getId()}}" data-bind="{{=it.dataBind()}}"></p>
+{{?}}

@@ -19,7 +19,7 @@
             
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 0.14.6</em>
+            <em>API Docs for: 0.15.0</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -60,6 +60,8 @@
                 <li><a href="../classes/components.common.mixins.Column.html">components.common.mixins.Column</a></li>
             
                 <li><a href="../classes/components.common.mixins.Items.html">components.common.mixins.Items</a></li>
+            
+                <li><a href="../classes/components.common.mixins.Label.html">components.common.mixins.Label</a></li>
             
                 <li><a href="../classes/components.common.mixins.Toolbars.html">components.common.mixins.Toolbars</a></li>
             
@@ -103,13 +105,19 @@
             
                 <li><a href="../classes/components.display.List.html">components.display.List</a></li>
             
+                <li><a href="../classes/components.display.Loader.html">components.display.Loader</a></li>
+            
                 <li><a href="../classes/components.display.Progress.html">components.display.Progress</a></li>
             
                 <li><a href="../classes/components.display.Span.html">components.display.Span</a></li>
             
                 <li><a href="../classes/components.display.Text.html">components.display.Text</a></li>
             
+                <li><a href="../classes/components.fields.Base.html">components.fields.Base</a></li>
+            
                 <li><a href="../classes/components.fields.Checkbox.html">components.fields.Checkbox</a></li>
+            
+                <li><a href="../classes/components.fields.ComboBox.html">components.fields.ComboBox</a></li>
             
                 <li><a href="../classes/components.fields.Datepicker.html">components.fields.Datepicker</a></li>
             
@@ -153,9 +161,11 @@
             
                 <li><a href="../classes/plugins.EditableTable.html">plugins.EditableTable</a></li>
             
-                <li><a href="../classes/plugins.RadioList.html">plugins.RadioList</a></li>
+                <li><a href="../classes/plugins.InplaceEdit.html">plugins.InplaceEdit</a></li>
             
                 <li><a href="../classes/renderer.html">renderer</a></li>
+            
+                <li><a href="../classes/Suggest.html">Suggest</a></li>
             
                 <li><a href="../classes/ui.html">ui</a></li>
             
@@ -166,6 +176,8 @@
             </ul>
 
             <ul id="api-modules" class="apis modules">
+            
+                <li><a href="../modules/Firebrick.engine.html">Firebrick.engine</a></li>
             
                 <li><a href="../modules/Firebrick.ui.html">Firebrick.ui</a></li>
             
@@ -255,7 +267,7 @@
 			 * @private
 			 * @type {String}
 			 */
-			version: &quot;0.14.6&quot;,
+			version: &quot;0.15.0&quot;,
 			
 			/**
 			 * populate a target with fields and data
@@ -334,6 +346,7 @@
 						if(!component.getId){
 							console.error(&quot;something went wrong&quot;, items[i], &quot;is it defined correctly? Check the item name and dependency include&quot;);
 						}
+						component.fireEvent(&quot;uiBuilt&quot;);
 						_items.push(component);
 					}
 				}
@@ -486,6 +499,46 @@
 					}
 					
 					return prev;
+				},
+				
+				/**
+				 * @method isVisible
+				 * @param $element {jQuery Object}
+				 * @param $container {jQuery Object}
+				 * @return {Boolean} 
+				 */
+				isVisible: function($element, $container){
+					var cont = {
+							offset: $container.offset(),
+							height: $container.height(),
+							width: $container.width()
+						},
+						el = {
+							offset: $element.offset(),
+							height: $element.height(),
+							width: $element.width()
+						},
+						check = function(coord){
+							if(coord &gt; cont.offset.top &amp;&amp; coord &lt; cont.offset.left){
+								if(coord &lt; cont.bottom){
+									return true;
+								}
+							}
+							return false;
+						};
+					
+					cont.bottom = cont.offset.top + cont.height;
+					el.bottom = el.offset.top + el.height;
+					
+					if( check(el.offset.top) || 
+						check(el.offset.top + el.width) ||  
+						check(el.bottom) ||
+						check(el.bottom + el.width) ){
+						return true; 
+					}
+					
+					
+					return false;
 				},
 				
 				/**
@@ -735,6 +788,9 @@
 					&quot;display.text&quot;:{
 						path:&quot;Firebrick.ui/display/Text&quot;
 					},
+					&quot;display.loader&quot;: {
+						path:&quot;Firebrick.ui/display/Loader&quot;
+					},
 					&quot;fields.checkbox&quot;:{
 						path:&quot;Firebrick.ui/fields/Checkbox&quot;
 					},
@@ -743,6 +799,9 @@
 					},
 					&quot;fields.display&quot;:{
 						path:&quot;Firebrick.ui/fields/Display&quot;
+					},
+					&quot;fields.combobox&quot;:{
+						path:&quot;Firebrick.ui/fields/ComboBox&quot;
 					},
 					&quot;fields.email&quot;:{
 						path:&quot;Firebrick.ui/fields/Email&quot;
@@ -799,7 +858,7 @@
 	 * @class view.Base
 	 */
 	Firebrick.classes.overwrite(&quot;Firebrick.view.Base&quot;, {
-		
+		_ko:null,
 		/**
 		 * @property passDownEvents
 		 * @type {Object}
@@ -812,69 +871,54 @@
 		passDownEvents:{
 			rendered: 1,
 			htmlRendered: 1,
-			unbound: 1
-		},
-		
-		/**
-		 * used with passDownEvents
-		 * @property passToProperties
-		 * @type {Object}
-		 * @default {
-		 * 	items: 1
-		 * }
-		 */
-		passToProperties:{
-			items: 1,
-			inputAddon: 1
+			unbound: 1,
+			destroy: 1
 		},
 		
 		listeners: {
-			preReady: function(){
+			uiBuilt: function(){
 				var me = this,
 					k;
 				if(me.passDownEvents){
 					
 					Firebrick.utils.merge(&quot;passDownEvents&quot;, me);
-					Firebrick.utils.merge(&quot;passToProperties&quot;, me);
 					
 					for(k in me.passDownEvents){
 						if(me.passDownEvents.hasOwnProperty(k)){
-							me.on(k, me._createPassEvent());
+							if(me._parent){
+								me._initPassDownEvent(k);
+							}
 						}
 					}
 					
 				}
 			}
 		},
-		
+		/**
+		 * @method _initPassDownEvent
+		 */
+		_initPassDownEvent: function(eventName){
+			var me = this,
+				f = me._createPassEvent(me);
+			
+			me._parent.on(eventName, f);
+			me.on(&quot;destroy&quot;, function(){
+				f.__isDestroyed = true;
+				//TODO: fixed this
+				//me._parent.off(eventName, f);
+			});
+		},
 		/**
 		 * @method _createPassEvent
 		 * @private
 		 * @return {Function}
 		 */
-		_createPassEvent: function(){
+		_createPassEvent: function(scope){
 			return function(){
 				var me = this,
-				items,
-				args = arguments,
-				key,
-				cmp,
-				properties = me.passToProperties;
-				
-				for(key in properties){
-					items = me[key];
-					if(items){
-						if($.isArray(items)){
-							for(var i = 0, l = items.length; i&lt;l; i++){
-								cmp = items[i];
-								if(cmp.passEvent){
-									cmp.passEvent(args);
-								}
-							}
-						}
-					}
-				}
-				
+					args = Array.prototype.slice.call(arguments);
+				args = [me.event.eventName].concat(args);
+				scope.fireEvent.apply(scope, args);	
 			};
 		},
 		
@@ -931,6 +975,36 @@
 	    }
 	};
 	
+	var oldInit = ko.bindingHandlers.value.init;
+	ko.bindingHandlers.value.init = function(element, valueAccessor, allBindings, viewModel, bindingContext){
+		var clazz = Firebrick.getById(element.getAttribute(&quot;id&quot;));
+		if(clazz){
+			clazz._ko = clazz._ko || {};
+			clazz._ko.value = {
+				element: element,
+				valueAccessor: valueAccessor,
+				allBindings: allBindings,
+				viewModel: viewModel,
+				bindingContext: bindingContext
+			};
+		}
+		return oldInit.apply(this, arguments);
+	};
+	var oldInit1 = ko.bindingHandlers.selectedOptions.init;
+	ko.bindingHandlers.selectedOptions.init = function(element, valueAccessor, allBindings, viewModel, bindingContext){
+		var clazz = Firebrick.getById(element.getAttribute(&quot;id&quot;));
+		if(clazz){
+			clazz._ko = clazz._ko || {};
+			clazz._ko.selectedOptions = {
+				element: element,
+				valueAccessor: valueAccessor,
+				allBindings: allBindings,
+				viewModel: viewModel,
+				bindingContext: bindingContext
+			};
+		}
+		return oldInit1.apply(this, arguments);
+	};
 });
     </pre>
 </div>

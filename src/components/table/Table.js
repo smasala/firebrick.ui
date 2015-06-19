@@ -199,7 +199,8 @@ define(["knockout-mapping", "jquery", "text!./Table.html", "../common/Base", "da
 		treeTableConfig:function(){
 			var me = this;
 			return {
-				expandable:me.expandable
+				expandable: me.expandable,
+				expanderTemplate: '<a class="glyphicon" href="javascript:void();">&nbsp;</a>'
 			};
 		},
 		/**
@@ -323,7 +324,7 @@ define(["knockout-mapping", "jquery", "text!./Table.html", "../common/Base", "da
 		 */
 		tbodyTRBindings:function(){
 			return {
-				"foreach": "$data.children ? $data.children : $data",
+				"foreach": "$data.row ? $data.row : $data",
 				"attr":{
 					"'data-tt-id'": "$data.id ? $data.id : $index",
 					"'data-tt-parent-id'": "$data.parentId ? $data.parentId : false"

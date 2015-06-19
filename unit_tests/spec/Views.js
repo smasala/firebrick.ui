@@ -15,7 +15,7 @@ define(["jquery", "firebrick-ui"], function($){
 		
 		
 		it("listeners", function(){
-			expect($.isFunction(view.listeners.preReady)).toBe(true);
+			expect($.isFunction(view.listeners.uiBuilt)).toBe(true);
 		});
 		
 		it("items property", function(){
