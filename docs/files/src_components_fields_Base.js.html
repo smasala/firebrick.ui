@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>plugins.RadioList - Firebrick UI API</title>
+    <title>src\components\fields\Base.js - Firebrick UI API</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -19,7 +19,7 @@
             
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 0.14.5</em>
+            <em>API Docs for: 0.15.0</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -60,6 +60,8 @@
                 <li><a href="../classes/components.common.mixins.Column.html">components.common.mixins.Column</a></li>
             
                 <li><a href="../classes/components.common.mixins.Items.html">components.common.mixins.Items</a></li>
+            
+                <li><a href="../classes/components.common.mixins.Label.html">components.common.mixins.Label</a></li>
             
                 <li><a href="../classes/components.common.mixins.Toolbars.html">components.common.mixins.Toolbars</a></li>
             
@@ -103,13 +105,19 @@
             
                 <li><a href="../classes/components.display.List.html">components.display.List</a></li>
             
+                <li><a href="../classes/components.display.Loader.html">components.display.Loader</a></li>
+            
                 <li><a href="../classes/components.display.Progress.html">components.display.Progress</a></li>
             
                 <li><a href="../classes/components.display.Span.html">components.display.Span</a></li>
             
                 <li><a href="../classes/components.display.Text.html">components.display.Text</a></li>
             
+                <li><a href="../classes/components.fields.Base.html">components.fields.Base</a></li>
+            
                 <li><a href="../classes/components.fields.Checkbox.html">components.fields.Checkbox</a></li>
+            
+                <li><a href="../classes/components.fields.ComboBox.html">components.fields.ComboBox</a></li>
             
                 <li><a href="../classes/components.fields.Datepicker.html">components.fields.Datepicker</a></li>
             
@@ -153,9 +161,11 @@
             
                 <li><a href="../classes/plugins.EditableTable.html">plugins.EditableTable</a></li>
             
-                <li><a href="../classes/plugins.RadioList.html">plugins.RadioList</a></li>
+                <li><a href="../classes/plugins.InplaceEdit.html">plugins.InplaceEdit</a></li>
             
                 <li><a href="../classes/renderer.html">renderer</a></li>
+            
+                <li><a href="../classes/Suggest.html">Suggest</a></li>
             
                 <li><a href="../classes/ui.html">ui</a></li>
             
@@ -166,6 +176,8 @@
             </ul>
 
             <ul id="api-modules" class="apis modules">
+            
+                <li><a href="../modules/Firebrick.engine.html">Firebrick.engine</a></li>
             
                 <li><a href="../modules/Firebrick.ui.html">Firebrick.ui</a></li>
             
@@ -208,188 +220,51 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-                        <h1>plugins.RadioList Class</h1>
-<div class="box meta">
-    
+                        <h1 class="file-heading">File: src\components\fields\Base.js</h1>
 
-    
+<div class="file">
+    <pre class="code prettyprint linenums">
+/*!
+ * @author Steven Masala [me@smasala.com]
+ */
 
-    
-        <div class="foundat">
-            Defined in: <a href="../files/src_components_fields_plugins_Radio.js.html#l26"><code>src\components\fields\plugins\Radio.js:26</code></a>
-        </div>
-    
-
-    
-        
-            Module: <a href="../modules/plugins.html">plugins</a>
-        
-    
-
-    
-</div>
-
-
-
-<div class="box intro">
-    
-</div>
-
-
-
-<div id="classdocs" class="tabview">
-    <ul class="api-class-tabs">
-        <li class="api-class-tab index"><a href="#index">Index</a></li>
-
-        
-        
-            <li class="api-class-tab properties"><a href="#properties">Properties</a></li>
-        
-        
-        
-    </ul>
-
-    <div>
-        <div id="index" class="api-class-tabpanel index">
-            <h2 class="off-left">Item Index</h2>
-
-            
-
-            
-                <div class="index-section properties">
-                    <h3>Properties</h3>
-
-                    <ul class="index-list properties">
-                        
-                            <li class="index-item property">
-                                <a href="#property_inputclass, attached to the &lt;label&gt; wrapper instead of the input element">inputclass, attached to the &lt;label&gt; wrapper instead of the input element</a>
-
-                                
-                                
-                            </li>
-                        
-                            <li class="index-item property">
-                                <a href="#property_tpl">tpl</a>
-
-                                
-                                
-                            </li>
-                        
-                    </ul>
-                </div>
-            
-
-            
-
-            
-        </div>
-
-        
-
-        
-            <div id="properties" class="api-class-tabpanel">
-                <h2 class="off-left">Properties</h2>
-
-                
-                    <div id="property_inputclass, attached to the &lt;label&gt; wrapper instead of the input element" class="property item">
-    <h3 class="name"><code>inputclass, attached to the &lt;label&gt; wrapper instead of the input element</code></h3>
-    <span class="type">String</span>
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/src_components_fields_plugins_Radio.js.html#l90"><code>src\components\fields\plugins\Radio.js:90</code></a>
-        
-        </p>
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        
-    </div>
-
-    
-        <p><strong>Default:</strong> null</p>
-    
-
-    
-
-    
-</div>
-
-                
-                    <div id="property_tpl" class="property item">
-    <h3 class="name"><code>tpl</code></h3>
-    <span class="type">Unknown</span>
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/src_components_fields_plugins_Radio.js.html#l84"><code>src\components\fields\plugins\Radio.js:84</code></a>
-        
-        </p>
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        
-    </div>
-
-    
-        <p><strong>Default:</strong> &lt;div&gt;&lt;/div&gt;</p>
-    
-
-    
-
-    
-</div>
-
-                
-            </div>
-        
-
-        
-
-        
-    </div>
+/**
+ * @module Firebrick.ui.components
+ * @extends components.common.Base
+ * @namespace components.fields
+ * @class Base
+ */
+define([&quot;../common/Base&quot;], function(){
+	&quot;use strict&quot;;
+	return Firebrick.define(&quot;Firebrick.ui.fields.Base&quot;, {
+		extend:&quot;Firebrick.ui.common.Base&quot;,
+		/**
+		 * @property sName
+		 * @type {String}
+		 */
+		sName:&quot;fields.base&quot;,
+		/**
+		 * override method to fire events on actual element - append fb.ui. to event name
+		 * @method fireEvent
+		 */
+		fireEvent: function(){
+			var me = this,
+				$el = me.getElement(),
+				args = Firebrick.utils.argsToArray( arguments ),
+				eventName = args[0];
+			
+			if($el){
+				//remove eventName from args
+				args.splice(0, 1);
+				//trigger event on the element - getElement()
+				$el.trigger(&quot;fb.ui.&quot; + eventName, args);
+			}
+			
+			return me.callParent( arguments );
+		}
+	});
+});
+    </pre>
 </div>
 
                     </div>

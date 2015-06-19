@@ -19,7 +19,7 @@
             
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 0.14.5</em>
+            <em>API Docs for: 0.15.0</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -60,6 +60,8 @@
                 <li><a href="../classes/components.common.mixins.Column.html">components.common.mixins.Column</a></li>
             
                 <li><a href="../classes/components.common.mixins.Items.html">components.common.mixins.Items</a></li>
+            
+                <li><a href="../classes/components.common.mixins.Label.html">components.common.mixins.Label</a></li>
             
                 <li><a href="../classes/components.common.mixins.Toolbars.html">components.common.mixins.Toolbars</a></li>
             
@@ -103,13 +105,19 @@
             
                 <li><a href="../classes/components.display.List.html">components.display.List</a></li>
             
+                <li><a href="../classes/components.display.Loader.html">components.display.Loader</a></li>
+            
                 <li><a href="../classes/components.display.Progress.html">components.display.Progress</a></li>
             
                 <li><a href="../classes/components.display.Span.html">components.display.Span</a></li>
             
                 <li><a href="../classes/components.display.Text.html">components.display.Text</a></li>
             
+                <li><a href="../classes/components.fields.Base.html">components.fields.Base</a></li>
+            
                 <li><a href="../classes/components.fields.Checkbox.html">components.fields.Checkbox</a></li>
+            
+                <li><a href="../classes/components.fields.ComboBox.html">components.fields.ComboBox</a></li>
             
                 <li><a href="../classes/components.fields.Datepicker.html">components.fields.Datepicker</a></li>
             
@@ -153,9 +161,11 @@
             
                 <li><a href="../classes/plugins.EditableTable.html">plugins.EditableTable</a></li>
             
-                <li><a href="../classes/plugins.RadioList.html">plugins.RadioList</a></li>
+                <li><a href="../classes/plugins.InplaceEdit.html">plugins.InplaceEdit</a></li>
             
                 <li><a href="../classes/renderer.html">renderer</a></li>
+            
+                <li><a href="../classes/Suggest.html">Suggest</a></li>
             
                 <li><a href="../classes/ui.html">ui</a></li>
             
@@ -166,6 +176,8 @@
             </ul>
 
             <ul id="api-modules" class="apis modules">
+            
+                <li><a href="../modules/Firebrick.engine.html">Firebrick.engine</a></li>
             
                 <li><a href="../modules/Firebrick.ui.html">Firebrick.ui</a></li>
             
@@ -222,10 +234,10 @@
  * @namespace components.fields
  * @class Input
  */
-define([&quot;text!./Base.html&quot;, &quot;text!./Input.html&quot;, &quot;../common/Base&quot;, &quot;x-editable&quot;, &quot;knockout-x-editable&quot;, &quot;../common/mixins/Items&quot;], function(tpl, subTpl){
+define([&quot;knockout&quot;, &quot;text!./Base.html&quot;, &quot;text!./Input.html&quot;, &quot;./Base&quot;, &quot;../common/mixins/Items&quot;, &quot;./plugins/InplaceEdit&quot;], function(ko, tpl, subTpl){
 	&quot;use strict&quot;;
 	return Firebrick.define(&quot;Firebrick.ui.fields.Input&quot;, {
-		extend:&quot;Firebrick.ui.common.Base&quot;,
+		extend:&quot;Firebrick.ui.fields.Base&quot;,
 		mixins:[&quot;Firebrick.ui.common.mixins.Items&quot;],
 		/**
 		 * @property sName
@@ -249,6 +261,12 @@ define([&quot;text!./Base.html&quot;, &quot;text!./Input.html&quot;, &quot;../co
 		 * @default &quot;&quot;
 		 */
 		label: &quot;&quot;,
+		/**
+		 * @property containerCSS
+		 * @type {String}
+		 * @default &quot;&quot;
+		 */
+		containerCSS: &quot;&quot;,
 		/**
 		 * @property value
 		 * @type {String}
@@ -287,12 +305,6 @@ define([&quot;text!./Base.html&quot;, &quot;text!./Input.html&quot;, &quot;../co
 		 */
 		inputWidth: 9,
 		/**
-		 * @property deviceSize
-		 * @type {String}
-		 * @default &quot;sm&quot;
-		 */
-		deviceSize: &quot;sm&quot;,
-		/**
 		 * screen reader only
 		 * @property srOnly
 		 * @type {Boolean}
@@ -312,11 +324,18 @@ define([&quot;text!./Base.html&quot;, &quot;text!./Input.html&quot;, &quot;../co
 		 */
 		disabled:false,
 		/**
+		 * type of column size -md, sm, lg etc
+		 * @property columnSize
+		 * @type {Boolean|String} string (sm || lg)
+		 * @default &quot;sm&quot;
+		 */
+		columnSize: &quot;md&quot;,
+		/**
 		 * @property inputSize
 		 * @type {Boolean|String} string (sm || lg)
-		 * @default false
+		 * @default &quot;sm&quot;
 		 */
-		inputSize:false,
+		inputSize: &quot;md&quot;,
 		/**
 		 * @property controlLabel
 		 * @type {Boolean}
@@ -408,8 +427,9 @@ define([&quot;text!./Base.html&quot;, &quot;text!./Input.html&quot;, &quot;../co
 		 */
 		multiplesInline:false,
 		/**
+		 * set as true to activate or object to activate and configure
 		 * @property inplaceEdit
-		 * @type {Boolean}
+		 * @type {Boolean|Object}
 		 * @default false
 		 */
 		inplaceEdit:false,
@@ -454,17 +474,47 @@ define([&quot;text!./Base.html&quot;, &quot;text!./Input.html&quot;, &quot;../co
 		 */
 		iconClass: false,
 		/**
+		 * @property _lastValue
+		 * @private
+		 * @type {String}
+		 * @default null
+		 */
+		_lastValue: null,
+		/**
+		 * if true - att &quot;navbar-item&quot; class to the button
+		 * @property navbarItem
+		 * @type {Boolean}
+		 * @default false
+		 */
+		navbarItem: false,
+		/**
 		 * @method init
 		 * @return .callParent(arguments)
 		 */
 		init: function(){
 			var me = this;
-			
-			if(me.required){
+
 				me.on(&quot;rendered&quot;, function(){
-					me.onChange();
+					var inplaceConf;
+					
+					if(me.inplaceEdit){
+						inplaceConf = {
+								fieldItem: me,
+								showInplaceTitle: true
+						};
+						
+						if( $.isPlainObject( me.inplaceEdit ) ){
+							inplaceConf = Firebrick.utils.overwrite(inplaceConf, me.inplaceEdit);
+						}
+						
+						Firebrick.create(&quot;Firebrick.ui.fields.plugins.InplaceEdit&quot;, inplaceConf);	
+					}
+					
+					if(me.required){
+						me.onChange();
+					}
 				});				
-			}
+			
 			
 			return me.callParent(arguments);
 		},
@@ -544,13 +594,22 @@ define([&quot;text!./Base.html&quot;, &quot;text!./Input.html&quot;, &quot;../co
 					}
 				};
 			
+			if( me.containerCSS ){
+				obj.css[ me.parseBind( me.containerCSS ) ] = true;
+			}
+			
 			if(me.align){
 				obj.css[me.parseBind(&quot;pull-&quot; + me.align)] = true;
 			}
 			
-			if(this.inputSize){
+			if(me.inputSize){
 				obj.css[me.parseBind(&quot;form-group-&quot; + me.inputSize)] = me.inputSize ? true : false;	
 			}
+			
+			if(me.navbarItem){
+				obj.css[&quot;&#x27;fb-ui-navbar-field&#x27;&quot;] = true; 
+			}
+			
 			return obj;
 		},
 		/**
@@ -604,17 +663,13 @@ define([&quot;text!./Base.html&quot;, &quot;text!./Input.html&quot;, &quot;../co
 			obj.attr.type = type;
 			obj.attr.name = me.name ?  me.parseBind( me.name ) : type;
 			
-			if(obj.value !== null){
-				obj.value = me.value;	
-			}			
+			obj.value = me.value;
 			
 			if(me.inplaceEdit){
-				obj.editableOptions = {};
-				obj.attr[&quot;&#x27;data-type&#x27;&quot;] = me.dataType ?  me.parseBind( me.dataType ) : type;
-				obj.editable = me.value;
-				if(me.showInplaceTitle || $.fn.editable.defaults.mode !== &quot;inline&quot;){
-					obj.attr[&quot;&#x27;data-title&#x27;&quot;] = me.textBind( me.dataTitle || me.label );	
-				}
+				
+				obj.css[&quot;&#x27;fb-ui-inplaceedit&#x27;&quot;] = true;
+				obj.text = me.value;
+				
 			}else{
 				if(me.formControlClass){
 					obj.css[me.parseBind(me.formControlClass)] = true;
@@ -624,6 +679,10 @@ define([&quot;text!./Base.html&quot;, &quot;text!./Input.html&quot;, &quot;../co
 			
 			if(me.required){
 				obj.attr.required = true;
+			}
+			
+			if(me.inputSize){
+				obj.css[ me.parseBind(&quot;input-&quot; + me.inputSize) ] = true;
 			}
 			
 			return obj;
@@ -712,7 +771,7 @@ define([&quot;text!./Base.html&quot;, &quot;text!./Input.html&quot;, &quot;../co
 					}
 				};
 			if(me.horizontal){
-				obj.css[ me.parseBind(&quot;col-&quot; + me.deviceSize + &quot;-&quot; + me.labelWidth )] = me.horizontal;
+				obj.css[ me.parseBind(&quot;col-&quot; + me.columnSize + &quot;-&quot; + me.labelWidth )] = me.horizontal;
 			}
 			return obj;
 		},
@@ -726,8 +785,9 @@ define([&quot;text!./Base.html&quot;, &quot;text!./Input.html&quot;, &quot;../co
 					css:{}
 				};
 			if(me.horizontal){
-				obj.css[ me.parseBind( &quot;col-&quot; + me.deviceSize + &quot;-&quot; + me.inputWidth ) ] = me.horizontal;
+				obj.css[ me.parseBind( &quot;col-&quot; + me.columnSize + &quot;-&quot; + me.inputWidth ) ] = me.horizontal;
 			}
+
 			return obj;
 		},
 		/**
@@ -747,6 +807,73 @@ define([&quot;text!./Base.html&quot;, &quot;text!./Input.html&quot;, &quot;../co
 			}
 			
 			return obj;
+		},
+		
+		/**
+		 * @method getValue
+		 * @return {Any}
+		 */
+		getValue: function(){
+			var me = this;
+			return ko.utils.unwrapObservable( me._ko.value.valueAccessor() );
+		},
+		/**
+		 * @method setValue
+		 * @event changed
+		 * @return self
+		 */
+		setValue: function(value){
+			var me = this,
+				oldValue = me.getValue(),
+				newValue;
+
+			me._lastValue = oldValue;
+			me._setValue(value);
+			
+			newValue = me.getValue();
+			
+			me._checkChange(newValue, oldValue);
+			
+			return me;
+		},
+		/**
+		 * @event changed( newValue, oldValue )
+		 * @method _checkChange
+		 * @private
+		 * @param newVal {Any}
+		 * @param oldVal {Any}
+		 * @param silent {Boolean} default=false
+		 * @return {Boolean}
+		 */
+		_checkChange: function(newVal, oldVal, silent){
+			var me = this;
+			
+			if( me._hasChange(newVal, oldVal) ){
+				if(!silent){
+					me.fireEvent(&quot;changed&quot;, newVal, oldVal);
+				}
+				return true;
+			}
+			
+			return false;
+		},
+		/**
+		 * @method _hasChange
+		 * @private
+		 * @param newVal {Any}
+		 * @param oldVal {Any}
+		 */
+		_hasChange: function(newVal, oldVal){
+			return newVal !== oldVal;
+		},
+		/**
+		 * @method _setValue
+		 * @private
+		 */
+		_setValue: function(value){
+			var me = this;
+			me._ko.value.valueAccessor()( value );
+			return me;
 		}
 	});
 });

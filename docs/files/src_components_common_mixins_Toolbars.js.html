@@ -19,7 +19,7 @@
             
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 0.14.5</em>
+            <em>API Docs for: 0.15.0</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -60,6 +60,8 @@
                 <li><a href="../classes/components.common.mixins.Column.html">components.common.mixins.Column</a></li>
             
                 <li><a href="../classes/components.common.mixins.Items.html">components.common.mixins.Items</a></li>
+            
+                <li><a href="../classes/components.common.mixins.Label.html">components.common.mixins.Label</a></li>
             
                 <li><a href="../classes/components.common.mixins.Toolbars.html">components.common.mixins.Toolbars</a></li>
             
@@ -103,13 +105,19 @@
             
                 <li><a href="../classes/components.display.List.html">components.display.List</a></li>
             
+                <li><a href="../classes/components.display.Loader.html">components.display.Loader</a></li>
+            
                 <li><a href="../classes/components.display.Progress.html">components.display.Progress</a></li>
             
                 <li><a href="../classes/components.display.Span.html">components.display.Span</a></li>
             
                 <li><a href="../classes/components.display.Text.html">components.display.Text</a></li>
             
+                <li><a href="../classes/components.fields.Base.html">components.fields.Base</a></li>
+            
                 <li><a href="../classes/components.fields.Checkbox.html">components.fields.Checkbox</a></li>
+            
+                <li><a href="../classes/components.fields.ComboBox.html">components.fields.ComboBox</a></li>
             
                 <li><a href="../classes/components.fields.Datepicker.html">components.fields.Datepicker</a></li>
             
@@ -153,9 +161,11 @@
             
                 <li><a href="../classes/plugins.EditableTable.html">plugins.EditableTable</a></li>
             
-                <li><a href="../classes/plugins.RadioList.html">plugins.RadioList</a></li>
+                <li><a href="../classes/plugins.InplaceEdit.html">plugins.InplaceEdit</a></li>
             
                 <li><a href="../classes/renderer.html">renderer</a></li>
+            
+                <li><a href="../classes/Suggest.html">Suggest</a></li>
             
                 <li><a href="../classes/ui.html">ui</a></li>
             
@@ -166,6 +176,8 @@
             </ul>
 
             <ul id="api-modules" class="apis modules">
+            
+                <li><a href="../modules/Firebrick.engine.html">Firebrick.engine</a></li>
             
                 <li><a href="../modules/Firebrick.ui.html">Firebrick.ui</a></li>
             
@@ -227,13 +239,14 @@ define([&quot;jquery&quot;, &quot;./Items&quot;, &quot;Firebrick.ui/nav/Toolbar&
 	return Firebrick.define(&quot;Firebrick.ui.common.mixins.Toolbars&quot;, {
 		/**
 		 * passed on to the toolbar items (direct children only)
-		 * @property toolbarDefaults
+		 * @property _toolbarDefaults
+		 * @private
 		 * @type {Object}
 		 * @default {Object} {
 		 * 		navbarItem: true
 		 * }
 		 */
-		toolbarDefaults:{
+		_toolbarDefaults:{
 			navbarItem: true
 		},
 		/**
@@ -251,11 +264,11 @@ define([&quot;jquery&quot;, &quot;./Items&quot;, &quot;Firebrick.ui/nav/Toolbar&
 		 * 		position: &quot;bottom&quot;,
 		 * 		items: [{...}]
 		 * 	}]
-		 * @property toolbar
+		 * @property toolbars
 		 * @type {Array of Objects}
 		 * @default null
 		 */
-		toolbar:null,
+		toolbars:null,
 		/**
 		 * add css classes and other configuration to the container
 		 * @method toolbarContainer
@@ -288,7 +301,8 @@ define([&quot;jquery&quot;, &quot;./Items&quot;, &quot;Firebrick.ui/nav/Toolbar&
 			var me = this,
 				toolbars = me.toolbars,
 				tbItem,
-				html = &quot;&quot;;
+				html = &quot;&quot;,
+				items;
 			
 			if(toolbars){
 				if($.isArray(toolbars)){
@@ -297,9 +311,11 @@ define([&quot;jquery&quot;, &quot;./Items&quot;, &quot;Firebrick.ui/nav/Toolbar&
 						if(tbItem.items){
 							//wrap the items inside a toolbar component
 							tbItem.sName = &quot;nav.toolbar&quot;;
-							tbItem.defaults = Firebrick.utils.overwrite(me.toolbarDefaults, (tbItem.defaults || {}));
+							tbItem.defaults = Firebrick.utils.overwrite(me._toolbarDefaults, (tbItem.defaults || {}));
+							items = me._getItems(tbItem);
 							//load the html for the template compiler
-							html += me._getItems(tbItem).html;
+							html += items.html;
+							me.toolbars[i] = items.items[0];
 						}else{
 							console.warn(&quot;a toolbar was found without the items property and didn&#x27;t render&quot;);
 						}

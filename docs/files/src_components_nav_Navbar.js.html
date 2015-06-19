@@ -19,7 +19,7 @@
             
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 0.14.5</em>
+            <em>API Docs for: 0.15.0</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -60,6 +60,8 @@
                 <li><a href="../classes/components.common.mixins.Column.html">components.common.mixins.Column</a></li>
             
                 <li><a href="../classes/components.common.mixins.Items.html">components.common.mixins.Items</a></li>
+            
+                <li><a href="../classes/components.common.mixins.Label.html">components.common.mixins.Label</a></li>
             
                 <li><a href="../classes/components.common.mixins.Toolbars.html">components.common.mixins.Toolbars</a></li>
             
@@ -103,13 +105,19 @@
             
                 <li><a href="../classes/components.display.List.html">components.display.List</a></li>
             
+                <li><a href="../classes/components.display.Loader.html">components.display.Loader</a></li>
+            
                 <li><a href="../classes/components.display.Progress.html">components.display.Progress</a></li>
             
                 <li><a href="../classes/components.display.Span.html">components.display.Span</a></li>
             
                 <li><a href="../classes/components.display.Text.html">components.display.Text</a></li>
             
+                <li><a href="../classes/components.fields.Base.html">components.fields.Base</a></li>
+            
                 <li><a href="../classes/components.fields.Checkbox.html">components.fields.Checkbox</a></li>
+            
+                <li><a href="../classes/components.fields.ComboBox.html">components.fields.ComboBox</a></li>
             
                 <li><a href="../classes/components.fields.Datepicker.html">components.fields.Datepicker</a></li>
             
@@ -153,9 +161,11 @@
             
                 <li><a href="../classes/plugins.EditableTable.html">plugins.EditableTable</a></li>
             
-                <li><a href="../classes/plugins.RadioList.html">plugins.RadioList</a></li>
+                <li><a href="../classes/plugins.InplaceEdit.html">plugins.InplaceEdit</a></li>
             
                 <li><a href="../classes/renderer.html">renderer</a></li>
+            
+                <li><a href="../classes/Suggest.html">Suggest</a></li>
             
                 <li><a href="../classes/ui.html">ui</a></li>
             
@@ -166,6 +176,8 @@
             </ul>
 
             <ul id="api-modules" class="apis modules">
+            
+                <li><a href="../modules/Firebrick.engine.html">Firebrick.engine</a></li>
             
                 <li><a href="../modules/Firebrick.ui.html">Firebrick.ui</a></li>
             
@@ -347,23 +359,21 @@ define([&quot;text!./Navbar.html&quot;, &quot;./Base&quot;, &quot;./List&quot;],
 		 */
 		showBranding: true,
 		/**
-		 * @method navBindings
+		 * @method bindings
 		 * @return {Object}
 		 */
-		navBindings: function(){
+		bindings: function(){
 			var me = this,
-				obj = {
-					attr:{
-						role: &quot;&#x27;navigation&#x27;&quot;
-					},
-					css:{
-						&quot;&#x27;navbar-default&#x27;&quot;: me.navbarDefaultClass,
-						&quot;navbar&quot;: me.navbarClass
-					}
-			};
+				obj = me.callParent(arguments);
+		
+			obj.attr.role = &quot;&#x27;navigation&#x27;&quot;;
+			obj.css[&quot;&#x27;navbar-default&#x27;&quot;] = me.navbarDefaultClass;
+			obj.css.navbar = me.navbarClass;
+			
 			if(me.navTypeClass){
-				obj.css[me.parseBind(me.navTypeClass)] = true;
+				obj.css[ me.parseBind(me.navTypeClass) ] = true;
 			}
+			
 			return obj;
 		},
 		/**
@@ -374,27 +384,19 @@ define([&quot;text!./Navbar.html&quot;, &quot;./Base&quot;, &quot;./List&quot;],
 			var me = this,
 				obj = {
 					css:{},
-					attr:{
-						href: me.parseBind(me.brandLink)
-					}
+					attr:{}
 				};
+			
+			if(me.brandLink !== false){
+				obj.attr.href =  me.parseBind( me.brandLink );
+			}
+			
 			if(me.brandClass){
 				obj.css[&quot;&#x27;navbar-brand&#x27;&quot;] = me.brandClass;
 			}
 			if(me.brandText &amp;&amp; !me.brandTpl){
 				obj.text = me.parseBind(me.brandText);
 			}
-			return obj;
-		},
-		/**
-		 * overriding parent
-		 * @method bindings
-		 * @return {Object}
-		 */
-		bindings: function(){
-			var me = this,
-				obj = me.callParent(arguments);
-			obj.text = &quot;$data.text ? $data.text : &#x27;&#x27;&quot;;
 			return obj;
 		},
 		/**

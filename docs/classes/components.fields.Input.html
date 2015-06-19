@@ -19,7 +19,7 @@
             
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 0.14.5</em>
+            <em>API Docs for: 0.15.0</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -60,6 +60,8 @@
                 <li><a href="../classes/components.common.mixins.Column.html">components.common.mixins.Column</a></li>
             
                 <li><a href="../classes/components.common.mixins.Items.html">components.common.mixins.Items</a></li>
+            
+                <li><a href="../classes/components.common.mixins.Label.html">components.common.mixins.Label</a></li>
             
                 <li><a href="../classes/components.common.mixins.Toolbars.html">components.common.mixins.Toolbars</a></li>
             
@@ -103,13 +105,19 @@
             
                 <li><a href="../classes/components.display.List.html">components.display.List</a></li>
             
+                <li><a href="../classes/components.display.Loader.html">components.display.Loader</a></li>
+            
                 <li><a href="../classes/components.display.Progress.html">components.display.Progress</a></li>
             
                 <li><a href="../classes/components.display.Span.html">components.display.Span</a></li>
             
                 <li><a href="../classes/components.display.Text.html">components.display.Text</a></li>
             
+                <li><a href="../classes/components.fields.Base.html">components.fields.Base</a></li>
+            
                 <li><a href="../classes/components.fields.Checkbox.html">components.fields.Checkbox</a></li>
+            
+                <li><a href="../classes/components.fields.ComboBox.html">components.fields.ComboBox</a></li>
             
                 <li><a href="../classes/components.fields.Datepicker.html">components.fields.Datepicker</a></li>
             
@@ -153,9 +161,11 @@
             
                 <li><a href="../classes/plugins.EditableTable.html">plugins.EditableTable</a></li>
             
-                <li><a href="../classes/plugins.RadioList.html">plugins.RadioList</a></li>
+                <li><a href="../classes/plugins.InplaceEdit.html">plugins.InplaceEdit</a></li>
             
                 <li><a href="../classes/renderer.html">renderer</a></li>
+            
+                <li><a href="../classes/Suggest.html">Suggest</a></li>
             
                 <li><a href="../classes/ui.html">ui</a></li>
             
@@ -166,6 +176,8 @@
             </ul>
 
             <ul id="api-modules" class="apis modules">
+            
+                <li><a href="../modules/Firebrick.engine.html">Firebrick.engine</a></li>
             
                 <li><a href="../modules/Firebrick.ui.html">Firebrick.ui</a></li>
             
@@ -214,7 +226,7 @@
 
     
         <div class="extends">
-            Extends components.fields.Base
+            Extends <a href="../classes/components.fields.Base.html" class="crosslink">components.fields.Base</a>
         </div>
     
 
@@ -253,6 +265,8 @@
         
         
         
+            <li class="api-class-tab events"><a href="#events">Events</a></li>
+        
     </ul>
 
     <div>
@@ -265,8 +279,99 @@
 
                     <ul class="index-list methods extends">
                         
-                            <li class="index-item method">
+                            <li class="index-item method private">
+                                <a href="#method__checkChange">_checkChange</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method private inherited">
+                                <a href="#method__getElementSelector">_getElementSelector</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method private inherited">
+                                <a href="#method__getParent">_getParent</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method private">
+                                <a href="#method__hasChange">_hasChange</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method inherited">
+                                <a href="#method__precompile">_precompile</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method inherited">
+                                <a href="#method__registerHandler">_registerHandler</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method private">
+                                <a href="#method__setValue">_setValue</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method inherited">
+                                <a href="#method_addPopoverBind">addPopoverBind</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method inherited">
+                                <a href="#method_addTooltipPopoverBind">addTooltipPopoverBind</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method inherited">
+                                <a href="#method_b">b</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method inherited">
                                 <a href="#method_bindings">bindings</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method inherited">
+                                <a href="#method_build">build</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method inherited">
+                                <a href="#method_cleanString">cleanString</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method inherited">
+                                <a href="#method_constructor">constructor</a>
 
                                 
                                 
@@ -274,6 +379,13 @@
                         
                             <li class="index-item method">
                                 <a href="#method_containerBindings">containerBindings</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method private inherited">
+                                <a href="#method_dataBind">dataBind</a>
 
                                 
                                 
@@ -293,8 +405,50 @@
                                 
                             </li>
                         
+                            <li class="index-item method inherited">
+                                <a href="#method_fireEvent">fireEvent</a>
+
+                                
+                                
+                            </li>
+                        
                             <li class="index-item method">
                                 <a href="#method_getAddonId">getAddonId</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method inherited">
+                                <a href="#method_getElement">getElement</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method inherited">
+                                <a href="#method_getParentSubTpl">getParentSubTpl</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method inherited">
+                                <a href="#method_getParentTpl">getParentTpl</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method inherited">
+                                <a href="#method_getSubTpl">getSubTpl</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
+                                <a href="#method_getValue">getValue</a>
 
                                 
                                 
@@ -307,7 +461,7 @@
                                 
                             </li>
                         
-                            <li class="index-item method">
+                            <li class="index-item method inherited">
                                 <a href="#method_init">init</a>
 
                                 
@@ -356,8 +510,29 @@
                                 
                             </li>
                         
+                            <li class="index-item method inherited">
+                                <a href="#method_parseBind">parseBind</a>
+
+                                
+                                
+                            </li>
+                        
                             <li class="index-item method">
                                 <a href="#method_setStatus">setStatus</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method inherited">
+                                <a href="#method_template">template</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method inherited">
+                                <a href="#method_textBind">textBind</a>
 
                                 
                                 
@@ -373,8 +548,71 @@
 
                     <ul class="index-list properties extends">
                         
+                            <li class="index-item property private inherited">
+                                <a href="#property__build">_build</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item property inherited">
+                                <a href="#property__element">_element</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item property private inherited">
+                                <a href="#property__idPrefix">_idPrefix</a>
+
+                                
+                                
+                            </li>
+                        
                             <li class="index-item property private">
                                 <a href="#property__inputAddonTplId">_inputAddonTplId</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item property private">
+                                <a href="#property__lastValue">_lastValue</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item property private inherited">
+                                <a href="#property__template">_template</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item property inherited">
+                                <a href="#property_align">align</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item property">
+                                <a href="#property_columnSize">columnSize</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item property">
+                                <a href="#property_containerCSS">containerCSS</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item property inherited">
+                                <a href="#property_contextMenu">contextMenu</a>
 
                                 
                                 
@@ -387,8 +625,8 @@
                                 
                             </li>
                         
-                            <li class="index-item property">
-                                <a href="#property_deviceSize">deviceSize</a>
+                            <li class="index-item property inherited">
+                                <a href="#property_css">css</a>
 
                                 
                                 
@@ -438,6 +676,27 @@
                         
                             <li class="index-item property">
                                 <a href="#property_formGroupClass">formGroupClass</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item property inherited">
+                                <a href="#property_glyphiconClass">glyphiconClass</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item property inherited">
+                                <a href="#property_handler">handler</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item property inherited">
+                                <a href="#property_handlerEvent">handlerEvent</a>
 
                                 
                                 
@@ -549,7 +808,49 @@
                             </li>
                         
                             <li class="index-item property">
+                                <a href="#property_navbarItem">navbarItem</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item property">
                                 <a href="#property_placeholder">placeholder</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item property inherited">
+                                <a href="#property_popover">popover</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item property inherited">
+                                <a href="#property_popoverDismissible">popoverDismissible</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item property inherited">
+                                <a href="#property_popoverLocation">popoverLocation</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item property inherited">
+                                <a href="#property_popoverOptions">popoverOptions</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item property inherited">
+                                <a href="#property_popoverTitle">popoverTitle</a>
 
                                 
                                 
@@ -583,7 +884,7 @@
                                 
                             </li>
                         
-                            <li class="index-item property">
+                            <li class="index-item property inherited">
                                 <a href="#property_sName">sName</a>
 
                                 
@@ -597,14 +898,42 @@
                                 
                             </li>
                         
-                            <li class="index-item property">
+                            <li class="index-item property inherited">
+                                <a href="#property_style">style</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item property inherited">
                                 <a href="#property_subTpl">subTpl</a>
 
                                 
                                 
                             </li>
                         
-                            <li class="index-item property">
+                            <li class="index-item property inherited">
+                                <a href="#property_tooltip">tooltip</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item property inherited">
+                                <a href="#property_tooltipLocation">tooltipLocation</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item property inherited">
+                                <a href="#property_tooltipOptions">tooltipOptions</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item property inherited">
                                 <a href="#property_tpl">tpl</a>
 
                                 
@@ -613,6 +942,13 @@
                         
                             <li class="index-item property">
                                 <a href="#property_type">type</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item property inherited">
+                                <a href="#property_uiComponent">uiComponent</a>
 
                                 
                                 
@@ -632,11 +968,988 @@
             
 
             
+                <div class="index-section events">
+                    <h3>Events</h3>
+
+                    <ul class="index-list events extends">
+                        
+                            <li class="index-item event">
+                                <a href="#event_changed">changed</a>
+
+                                
+                                
+                            </li>
+                        
+                    </ul>
+                </div>
+            
         </div>
 
         
             <div id="methods" class="api-class-tabpanel">
                 <h2 class="off-left">Methods</h2>
+
+                
+                    <div id="method__checkChange" class="method item private">
+    <h3 class="name"><code>_checkChange</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>newVal</code>
+                    
+                </li>
+            
+                <li class="arg">
+                    
+                        <code>oldVal</code>
+                    
+                </li>
+            
+                <li class="arg">
+                    
+                        <code>silent</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+        <span class="returns-inline">
+            <span class="type">Boolean</span>
+        </span>
+    
+
+    
+
+    
+        <span class="flag private">private</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/src_components_fields_Input.js.html#l613"><code>src\components\fields\Input.js:613</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">newVal</code>
+                        <span class="type">Any</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        
+                    </div>
+
+                    
+                </li>
+            
+                <li class="param">
+                    
+                        <code class="param-name">oldVal</code>
+                        <span class="type">Any</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        
+                    </div>
+
+                    
+                </li>
+            
+                <li class="param">
+                    
+                        <code class="param-name">silent</code>
+                        <span class="type">Boolean</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>default=false</p>
+
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                        <span class="type">Boolean</span>:
+                    
+                
+            </div>
+        </div>
+    
+
+    
+</div>
+
+                
+                    <div id="method__getElementSelector" class="method item private inherited">
+    <h3 class="name"><code>_getElementSelector</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+        <span class="returns-inline">
+            <span class="type">String</span>
+        </span>
+    
+
+    
+
+    
+        <span class="flag private">private</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                <p>Inherited from
+                <a href="../classes/components.common.Base.html#method__getElementSelector">components.common.Base</a>:
+            
+        
+        
+        <a href="../files/src_components_common_Base.js.html#l226"><code>src\components\common\Base.js:226</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        
+    </div>
+
+    
+
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                        <span class="type">String</span>:
+                    
+                    <p>jquery element selector string</p>
+
+                
+            </div>
+        </div>
+    
+
+    
+</div>
+
+                
+                    <div id="method__getParent" class="method item private inherited">
+    <h3 class="name"><code>_getParent</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+        <span class="returns-inline">
+            <span class="type">Object</span>
+        </span>
+    
+
+    
+
+    
+        <span class="flag private">private</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                <p>Inherited from
+                <a href="../classes/components.common.Base.html#method__getParent">components.common.Base</a>:
+            
+        
+        
+        <a href="../files/src_components_common_Base.js.html#l437"><code>src\components\common\Base.js:437</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>find the parent of this class
+iterate up the inheritance tree looking for a classname that differs from the current and that &quot;subTpl&quot; or &quot;tpl&quot; don&#39;t match either</p>
+
+    </div>
+
+    
+
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                        <span class="type">Object</span>:
+                    
+                
+            </div>
+        </div>
+    
+
+    
+</div>
+
+                
+                    <div id="method__hasChange" class="method item private">
+    <h3 class="name"><code>_hasChange</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>newVal</code>
+                    
+                </li>
+            
+                <li class="arg">
+                    
+                        <code>oldVal</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+
+    
+
+    
+        <span class="flag private">private</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/src_components_fields_Input.js.html#l634"><code>src\components\fields\Input.js:634</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">newVal</code>
+                        <span class="type">Any</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        
+                    </div>
+
+                    
+                </li>
+            
+                <li class="param">
+                    
+                        <code class="param-name">oldVal</code>
+                        <span class="type">Any</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method__precompile" class="method item inherited">
+    <h3 class="name"><code>_precompile</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+        <span class="returns-inline">
+            <span class="type">Object</span>
+        </span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                <p>Inherited from
+                <a href="../classes/components.common.Base.html#method__precompile">components.common.Base</a>:
+            
+        
+        
+        <a href="../files/src_components_common_Base.js.html#l263"><code>src\components\common\Base.js:263</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>compile and cache template</p>
+
+    </div>
+
+    
+
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                        <span class="type">Object</span>:
+                    
+                    <p>self</p>
+
+                
+            </div>
+        </div>
+    
+
+    
+</div>
+
+                
+                    <div id="method__registerHandler" class="method item inherited">
+    <h3 class="name"><code>_registerHandler</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>elementSelector</code>
+                    
+                </li>
+            
+                <li class="arg">
+                    
+                        <code>handler</code>
+                    
+                </li>
+            
+                <li class="arg">
+                    
+                        <code>handlerEvent</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                <p>Inherited from
+                <a href="../classes/components.common.Base.html#method__registerHandler">components.common.Base</a>:
+            
+        
+        
+        <a href="../files/src_components_common_Base.js.html#l347"><code>src\components\common\Base.js:347</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">elementSelector</code>
+                        <span class="type">String</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>optional jquery selector</p>
+
+                    </div>
+
+                    
+                </li>
+            
+                <li class="param">
+                    
+                        <code class="param-name">handler</code>
+                        <span class="type">Function</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>optional</p>
+
+                    </div>
+
+                    
+                </li>
+            
+                <li class="param">
+                    
+                        <code class="param-name">handlerEvent</code>
+                        <span class="type">String</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>optional</p>
+
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method__setValue" class="method item private">
+    <h3 class="name"><code>_setValue</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+
+    
+
+    
+        <span class="flag private">private</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/src_components_fields_Input.js.html#l643"><code>src\components\fields\Input.js:643</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method_addPopoverBind" class="method item inherited">
+    <h3 class="name"><code>addPopoverBind</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>bindObj</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+        <span class="returns-inline">
+            <span class="type">Object</span>
+        </span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                <p>Inherited from
+                <a href="../classes/components.common.Base.html#method_addPopoverBind">components.common.Base</a>:
+            
+        
+        
+        <a href="../files/src_components_common_Base.js.html#l208"><code>src\components\common\Base.js:208</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>pass a binding Object and this method will add the popover relevant properties</p>
+
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">bindObj</code>
+                        <span class="type">Object</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                         
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                        <span class="type">Object</span>:
+                    
+                    <p>new Object</p>
+
+                
+            </div>
+        </div>
+    
+
+    
+</div>
+
+                
+                    <div id="method_addTooltipPopoverBind" class="method item inherited">
+    <h3 class="name"><code>addTooltipPopoverBind</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>bindObj</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+        <span class="returns-inline">
+            <span class="type">Object</span>
+        </span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                <p>Inherited from
+                <a href="../classes/components.common.Base.html#method_addTooltipPopoverBind">components.common.Base</a>:
+            
+        
+        
+        <a href="../files/src_components_common_Base.js.html#l179"><code>src\components\common\Base.js:179</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>pass a binding Object and this method will add the tooltip/popover relevant properties</p>
+
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">bindObj</code>
+                        <span class="type">Object</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                         
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                        <span class="type">Object</span>:
+                    
+                    <p>new Object</p>
+
+                
+            </div>
+        </div>
+    
+
+    
+</div>
+
+                
+                    <div id="method_b" class="method item inherited">
+    <h3 class="name"><code>b</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>value</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+        <span class="returns-inline">
+            <span class="type">String</span>
+        </span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                <p>Inherited from
+                <a href="../classes/components.common.Base.html#method_b">components.common.Base</a>:
+            
+        
+        
+        <a href="../files/src_components_common_Base.js.html#l286"><code>src\components\common\Base.js:286</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>use this as a wrapper in a template if the property you wish to call COULD be either a primitive or a function</p>
+
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">value</code>
+                        <span class="type">String | Function</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                         
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                        <span class="type">String</span>:
+                    
+                
+            </div>
+        </div>
+    
+
+    
+</div>
 
                 
                     <div id="method_bindings" class="method item">
@@ -666,16 +1979,16 @@
 
     <div class="meta">
         
+            <p>Inherited from
+            <a href="../classes/components.common.Base.html#method_bindings">
+                components.common.Base
+            </a>
             
-                
-                <p>
-                
-                Defined in
-                
+            but overwritten in
             
         
         
-        <a href="../files/src_components_fields_Input.js.html#l379"><code>src\components\fields\Input.js:379</code></a>
+        <a href="../files/src_components_fields_Input.js.html#l426"><code>src\components\fields\Input.js:426</code></a>
         
         </p>
 
@@ -700,6 +2013,248 @@
                     
                         <span class="type">Object</span>:
                     
+                
+            </div>
+        </div>
+    
+
+    
+</div>
+
+                
+                    <div id="method_build" class="method item inherited">
+    <h3 class="name"><code>build</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>prop</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+        <span class="returns-inline">
+            <span class="type">String</span>
+        </span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                <p>Inherited from
+                <a href="../classes/components.common.Base.html#method_build">components.common.Base</a>:
+            
+        
+        
+        <a href="../files/src_components_common_Base.js.html#l403"><code>src\components\common\Base.js:403</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>build the compiled template</p>
+
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">prop</code>
+                        <span class="type">String</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>[prop=&quot;tpl&quot;] optional - name of property to build</p>
+
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                        <span class="type">String</span>:
+                    
+                    <p>html</p>
+
+                
+            </div>
+        </div>
+    
+
+    
+</div>
+
+                
+                    <div id="method_cleanString" class="method item inherited">
+    <h3 class="name"><code>cleanString</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+        <span class="returns-inline">
+            <span class="type">String</span>
+        </span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                <p>Inherited from
+                <a href="../classes/components.common.Base.html#method_cleanString">components.common.Base</a>:
+            
+        
+        
+        <a href="../files/src_components_common_Base.js.html#l473"><code>src\components\common\Base.js:473</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>clean string - i.e. remove all &#39; from string</p>
+
+    </div>
+
+    
+
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                        <span class="type">String</span>:
+                    
+                
+            </div>
+        </div>
+    
+
+    
+</div>
+
+                
+                    <div id="method_constructor" class="method item inherited">
+    <h3 class="name"><code>constructor</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+        <span class="returns-inline">
+            <span class="type">Any</span>
+        </span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                <p>Inherited from
+                <a href="../classes/components.common.Base.html#method_constructor">components.common.Base</a>:
+            
+        
+        
+        <a href="../files/src_components_common_Base.js.html#l251"><code>src\components\common\Base.js:251</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>called when defining the class</p>
+
+    </div>
+
+    
+
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                        <span class="type">Any</span>:
+                    
+                    <p>this.callParent(arguments)</p>
+
                 
             </div>
         </div>
@@ -745,7 +2300,7 @@
             
         
         
-        <a href="../files/src_components_fields_Input.js.html#l317"><code>src\components\fields\Input.js:317</code></a>
+        <a href="../files/src_components_fields_Input.js.html#l355"><code>src\components\fields\Input.js:355</code></a>
         
         </p>
 
@@ -769,6 +2324,109 @@
                 
                     
                         <span class="type">Object</span>:
+                    
+                
+            </div>
+        </div>
+    
+
+    
+</div>
+
+                
+                    <div id="method_dataBind" class="method item private inherited">
+    <h3 class="name"><code>dataBind</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code class="optional">[property=this.bindings]</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+        <span class="returns-inline">
+            <span class="type">String</span>
+        </span>
+    
+
+    
+
+    
+        <span class="flag private">private</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                <p>Inherited from
+                <a href="../classes/components.common.Base.html#method_dataBind">components.common.Base</a>:
+            
+        
+        
+        <a href="../files/src_components_common_Base.js.html#l415"><code>src\components\common\Base.js:415</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name optional">[property=this.bindings]</code>
+                        <span class="type">String</span>
+                        <span class="flag optional" title="This parameter is optional.">optional</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                         
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                        <span class="type">String</span>:
                     
                 
             </div>
@@ -815,7 +2473,7 @@
             
         
         
-        <a href="../files/src_components_fields_Input.js.html#l352"><code>src\components\fields\Input.js:352</code></a>
+        <a href="../files/src_components_fields_Input.js.html#l399"><code>src\components\fields\Input.js:399</code></a>
         
         </p>
 
@@ -885,7 +2543,7 @@
             
         
         
-        <a href="../files/src_components_fields_Input.js.html#l519"><code>src\components\fields\Input.js:519</code></a>
+        <a href="../files/src_components_fields_Input.js.html#l567"><code>src\components\fields\Input.js:567</code></a>
         
         </p>
 
@@ -913,6 +2571,58 @@
                 
             </div>
         </div>
+    
+
+    
+</div>
+
+                
+                    <div id="method_fireEvent" class="method item inherited">
+    <h3 class="name"><code>fireEvent</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                <p>Inherited from
+                <a href="../classes/components.fields.Base.html#method_fireEvent">components.fields.Base</a>:
+            
+        
+        
+        <a href="../files/src_components_fields_Base.js.html#l20"><code>src\components\fields\Base.js:20</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>override method to fire events on actual element - append fb.ui. to event name</p>
+
+    </div>
+
+    
+
     
 
     
@@ -955,7 +2665,7 @@
             
         
         
-        <a href="../files/src_components_fields_Input.js.html#l474"><code>src\components\fields\Input.js:474</code></a>
+        <a href="../files/src_components_fields_Input.js.html#l521"><code>src\components\fields\Input.js:521</code></a>
         
         </p>
 
@@ -982,6 +2692,349 @@
                     
                     <p>unique id</p>
 
+                
+            </div>
+        </div>
+    
+
+    
+</div>
+
+                
+                    <div id="method_getElement" class="method item inherited">
+    <h3 class="name"><code>getElement</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+        <span class="returns-inline">
+            <span class="type">Object</span>
+        </span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                <p>Inherited from
+                <a href="../classes/components.common.Base.html#method_getElement">components.common.Base</a>:
+            
+        
+        
+        <a href="../files/src_components_common_Base.js.html#l236"><code>src\components\common\Base.js:236</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        
+    </div>
+
+    
+
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                        <span class="type">Object</span>:
+                    
+                    <p>jquery element object</p>
+
+                
+            </div>
+        </div>
+    
+
+    
+</div>
+
+                
+                    <div id="method_getParentSubTpl" class="method item inherited">
+    <h3 class="name"><code>getParentSubTpl</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+        <span class="returns-inline">
+            <span class="type">String</span>
+        </span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                <p>Inherited from
+                <a href="../classes/components.common.Base.html#method_getParentSubTpl">components.common.Base</a>:
+            
+        
+        
+        <a href="../files/src_components_common_Base.js.html#l464"><code>src\components\common\Base.js:464</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>called when calling {{{getParentSubTpl}}} in component template</p>
+
+    </div>
+
+    
+
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                        <span class="type">String</span>:
+                    
+                
+            </div>
+        </div>
+    
+
+    
+</div>
+
+                
+                    <div id="method_getParentTpl" class="method item inherited">
+    <h3 class="name"><code>getParentTpl</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+        <span class="returns-inline">
+            <span class="type">String</span>
+        </span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                <p>Inherited from
+                <a href="../classes/components.common.Base.html#method_getParentTpl">components.common.Base</a>:
+            
+        
+        
+        <a href="../files/src_components_common_Base.js.html#l455"><code>src\components\common\Base.js:455</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>called when calling {{{getParentTpl}}} in component template</p>
+
+    </div>
+
+    
+
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                        <span class="type">String</span>:
+                    
+                
+            </div>
+        </div>
+    
+
+    
+</div>
+
+                
+                    <div id="method_getSubTpl" class="method item inherited">
+    <h3 class="name"><code>getSubTpl</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+        <span class="returns-inline">
+            <span class="type">String</span>
+        </span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                <p>Inherited from
+                <a href="../classes/components.common.Base.html#method_getSubTpl">components.common.Base</a>:
+            
+        
+        
+        <a href="../files/src_components_common_Base.js.html#l429"><code>src\components\common\Base.js:429</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>called when calling {{{getSubTpl}}} in component template</p>
+
+    </div>
+
+    
+
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                        <span class="type">String</span>:
+                    
+                
+            </div>
+        </div>
+    
+
+    
+</div>
+
+                
+                    <div id="method_getValue" class="method item">
+    <h3 class="name"><code>getValue</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+        <span class="returns-inline">
+            <span class="type">Any</span>
+        </span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/src_components_fields_Input.js.html#l586"><code>src\components\fields\Input.js:586</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        
+    </div>
+
+    
+
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                        <span class="type">Any</span>:
+                    
                 
             </div>
         </div>
@@ -1027,7 +3080,7 @@
             
         
         
-        <a href="../files/src_components_fields_Input.js.html#l342"><code>src\components\fields\Input.js:342</code></a>
+        <a href="../files/src_components_fields_Input.js.html#l389"><code>src\components\fields\Input.js:389</code></a>
         
         </p>
 
@@ -1088,16 +3141,16 @@
 
     <div class="meta">
         
+            <p>Inherited from
+            <a href="../classes/components.common.Base.html#method_init">
+                components.common.Base
+            </a>
             
-                
-                <p>
-                
-                Defined in
-                
+            but overwritten in
             
         
         
-        <a href="../files/src_components_fields_Input.js.html#l242"><code>src\components\fields\Input.js:242</code></a>
+        <a href="../files/src_components_fields_Input.js.html#l264"><code>src\components\fields\Input.js:264</code></a>
         
         </p>
 
@@ -1167,7 +3220,7 @@
             
         
         
-        <a href="../files/src_components_fields_Input.js.html#l417"><code>src\components\fields\Input.js:417</code></a>
+        <a href="../files/src_components_fields_Input.js.html#l464"><code>src\components\fields\Input.js:464</code></a>
         
         </p>
 
@@ -1237,7 +3290,7 @@
             
         
         
-        <a href="../files/src_components_fields_Input.js.html#l442"><code>src\components\fields\Input.js:442</code></a>
+        <a href="../files/src_components_fields_Input.js.html#l489"><code>src\components\fields\Input.js:489</code></a>
         
         </p>
 
@@ -1307,7 +3360,7 @@
             
         
         
-        <a href="../files/src_components_fields_Input.js.html#l462"><code>src\components\fields\Input.js:462</code></a>
+        <a href="../files/src_components_fields_Input.js.html#l509"><code>src\components\fields\Input.js:509</code></a>
         
         </p>
 
@@ -1377,7 +3430,7 @@
             
         
         
-        <a href="../files/src_components_fields_Input.js.html#l505"><code>src\components\fields\Input.js:505</code></a>
+        <a href="../files/src_components_fields_Input.js.html#l552"><code>src\components\fields\Input.js:552</code></a>
         
         </p>
 
@@ -1447,7 +3500,7 @@
             
         
         
-        <a href="../files/src_components_fields_Input.js.html#l488"><code>src\components\fields\Input.js:488</code></a>
+        <a href="../files/src_components_fields_Input.js.html#l535"><code>src\components\fields\Input.js:535</code></a>
         
         </p>
 
@@ -1513,7 +3566,7 @@
             
         
         
-        <a href="../files/src_components_fields_Input.js.html#l258"><code>src\components\fields\Input.js:258</code></a>
+        <a href="../files/src_components_fields_Input.js.html#l296"><code>src\components\fields\Input.js:296</code></a>
         
         </p>
 
@@ -1530,6 +3583,109 @@
 
     
 
+    
+
+    
+</div>
+
+                
+                    <div id="method_parseBind" class="method item inherited">
+    <h3 class="name"><code>parseBind</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>str</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+        <span class="returns-inline">
+            <span class="type">String</span>
+        </span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                <p>Inherited from
+                <a href="../classes/components.common.Base.html#method_parseBind">components.common.Base</a>:
+            
+        
+        
+        <a href="../files/src_components_common_Base.js.html#l481"><code>src\components\common\Base.js:481</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>attach &#39; to the start and end of the string for KO binds</p>
+
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">str</code>
+                        <span class="type">String</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                         
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                        <span class="type">String</span>:
+                    
+                    <p>&quot;&#39;&quot; + str + &quot;&#39;&quot;</p>
+
+                
+            </div>
+        </div>
     
 
     
@@ -1588,7 +3744,7 @@
             
         
         
-        <a href="../files/src_components_fields_Input.js.html#l287"><code>src\components\fields\Input.js:287</code></a>
+        <a href="../files/src_components_fields_Input.js.html#l325"><code>src\components\fields\Input.js:325</code></a>
         
         </p>
 
@@ -1665,12 +3821,382 @@
 </div>
 
                 
+                    <div id="method_template" class="method item inherited">
+    <h3 class="name"><code>template</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>prop</code>
+                    
+                </li>
+            
+                <li class="arg">
+                    
+                        <code>force</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+        <span class="returns-inline">
+            <span class="type">Function</span>
+        </span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                <p>Inherited from
+                <a href="../classes/components.common.Base.html#method_template">components.common.Base</a>:
+            
+        
+        
+        <a href="../files/src_components_common_Base.js.html#l388"><code>src\components\common\Base.js:388</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>compile the template</p>
+
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">prop</code>
+                        <span class="type">String</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>[prop=tpl] optional - name of property to template</p>
+
+                    </div>
+
+                    
+                </li>
+            
+                <li class="param">
+                    
+                        <code class="param-name">force</code>
+                        <span class="type">Boolean</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>[force=false] optional - set to true to force a retemplate</p>
+
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                        <span class="type">Function</span>:
+                    
+                    <p>template function</p>
+
+                
+            </div>
+        </div>
+    
+
+    
+</div>
+
+                
+                    <div id="method_textBind" class="method item inherited">
+    <h3 class="name"><code>textBind</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>key</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+        <span class="returns-inline">
+            <span class="type">String</span>
+        </span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                <p>Inherited from
+                <a href="../classes/components.common.Base.html#method_textBind">components.common.Base</a>:
+            
+        
+        
+        <a href="../files/src_components_common_Base.js.html#l490"><code>src\components\common\Base.js:490</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>takes a string and prepares it for Firebrick text call</p>
+
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">key</code>
+                        <span class="type">String</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                         
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                        <span class="type">String</span>:
+                    
+                
+            </div>
+        </div>
+    
+
+    
+        <div class="example">
+            <h4>Example:</h4>
+
+            <div class="example-content">
+                <pre class="code prettyprint"><code>textBind(&quot;mystring.abc.key&quot;)
+// returns = fb.text(&#39;mystring.abc.key&#39;)</code></pre>
+
+            </div>
+        </div>
+    
+</div>
+
+                
             </div>
         
 
         
             <div id="properties" class="api-class-tabpanel">
                 <h2 class="off-left">Properties</h2>
+
+                
+                    <div id="property__build" class="property item private inherited">
+    <h3 class="name"><code>_build</code></h3>
+    <span class="type">Object map of all builds</span>
+
+    
+
+    
+        <span class="flag private">private</span>
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                <p>Inherited from
+                <a href="../classes/components.common.Base.html#property__build">components.common.Base</a>:
+            
+        
+        
+        <a href="../files/src_components_common_Base.js.html#l53"><code>src\components\common\Base.js:53</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>cache</p>
+
+    </div>
+
+    
+        <p><strong>Default:</strong> null</p>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="property__element" class="property item inherited">
+    <h3 class="name"><code>_element</code></h3>
+    <span class="type">Null | JQuery Object</span>
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                <p>Inherited from
+                <a href="../classes/components.common.Base.html#property__element">components.common.Base</a>:
+            
+        
+        
+        <a href="../files/src_components_common_Base.js.html#l109"><code>src\components\common\Base.js:109</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        
+    </div>
+
+    
+        <p><strong>Default:</strong> null</p>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="property__idPrefix" class="property item private inherited">
+    <h3 class="name"><code>_idPrefix</code></h3>
+    <span class="type">String</span>
+
+    
+
+    
+        <span class="flag private">private</span>
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                <p>Inherited from
+                <a href="../classes/components.common.Base.html#property__idPrefix">components.common.Base</a>:
+            
+        
+        
+        <a href="../files/src_components_common_Base.js.html#l20"><code>src\components\common\Base.js:20</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Override class id</p>
+
+    </div>
+
+    
+
+    
+
+    
+</div>
 
                 
                     <div id="property__inputAddonTplId" class="property item private">
@@ -1698,7 +4224,280 @@
             
         
         
-        <a href="../files/src_components_fields_Input.js.html#l228"><code>src\components\fields\Input.js:228</code></a>
+        <a href="../files/src_components_fields_Input.js.html#l236"><code>src\components\fields\Input.js:236</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        
+    </div>
+
+    
+        <p><strong>Default:</strong> null</p>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="property__lastValue" class="property item private">
+    <h3 class="name"><code>_lastValue</code></h3>
+    <span class="type">String</span>
+
+    
+
+    
+        <span class="flag private">private</span>
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/src_components_fields_Input.js.html#l250"><code>src\components\fields\Input.js:250</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        
+    </div>
+
+    
+        <p><strong>Default:</strong> null</p>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="property__template" class="property item private inherited">
+    <h3 class="name"><code>_template</code></h3>
+    <span class="type">Object map of all templates</span>
+
+    
+
+    
+        <span class="flag private">private</span>
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                <p>Inherited from
+                <a href="../classes/components.common.Base.html#property__template">components.common.Base</a>:
+            
+        
+        
+        <a href="../files/src_components_common_Base.js.html#l61"><code>src\components\common\Base.js:61</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>compiled template map</p>
+
+    </div>
+
+    
+        <p><strong>Default:</strong> null</p>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="property_align" class="property item inherited">
+    <h3 class="name"><code>align</code></h3>
+    <span class="type">String | Null right, left</span>
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                <p>Inherited from
+                <a href="../classes/components.common.Base.html#property_align">components.common.Base</a>:
+            
+        
+        
+        <a href="../files/src_components_common_Base.js.html#l167"><code>src\components\common\Base.js:167</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        
+    </div>
+
+    
+        <p><strong>Default:</strong> null</p>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="property_columnSize" class="property item">
+    <h3 class="name"><code>columnSize</code></h3>
+    <span class="type">Boolean | String string (sm |  | lg)</span>
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/src_components_fields_Input.js.html#l100"><code>src\components\fields\Input.js:100</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>type of column size -md, sm, lg etc</p>
+
+    </div>
+
+    
+        <p><strong>Default:</strong> &quot;sm&quot;</p>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="property_containerCSS" class="property item">
+    <h3 class="name"><code>containerCSS</code></h3>
+    <span class="type">String</span>
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/src_components_fields_Input.js.html#l38"><code>src\components\fields\Input.js:38</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        
+    </div>
+
+    
+        <p><strong>Default:</strong> &quot;&quot;</p>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="property_contextMenu" class="property item inherited">
+    <h3 class="name"><code>contextMenu</code></h3>
+    <span class="type">Array of Objects</span>
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                <p>Inherited from
+                <a href="../classes/components.common.Base.html#property_contextMenu">components.common.Base</a>:
+            
+        
+        
+        <a href="../files/src_components_common_Base.js.html#l173"><code>src\components\common\Base.js:173</code></a>
         
         </p>
 
@@ -1744,7 +4543,7 @@
             
         
         
-        <a href="../files/src_components_fields_Input.js.html#l106"><code>src\components\fields\Input.js:106</code></a>
+        <a href="../files/src_components_fields_Input.js.html#l113"><code>src\components\fields\Input.js:113</code></a>
         
         </p>
 
@@ -1767,8 +4566,8 @@
 </div>
 
                 
-                    <div id="property_deviceSize" class="property item">
-    <h3 class="name"><code>deviceSize</code></h3>
+                    <div id="property_css" class="property item inherited">
+    <h3 class="name"><code>css</code></h3>
     <span class="type">String</span>
 
     
@@ -1782,15 +4581,12 @@
     <div class="meta">
         
             
-                
-                <p>
-                
-                Defined in
-                
+                <p>Inherited from
+                <a href="../classes/components.common.Base.html#property_css">components.common.Base</a>:
             
         
         
-        <a href="../files/src_components_fields_Input.js.html#l75"><code>src\components\fields\Input.js:75</code></a>
+        <a href="../files/src_components_common_Base.js.html#l83"><code>src\components\common\Base.js:83</code></a>
         
         </p>
 
@@ -1800,11 +4596,12 @@
     </div>
 
     <div class="description">
-        
+        <p>all css classes (space separated) are added to the standard bindings function</p>
+
     </div>
 
     
-        <p><strong>Default:</strong> &quot;sm&quot;</p>
+        <p><strong>Default:</strong> null</p>
     
 
     
@@ -1882,7 +4679,7 @@
             
         
         
-        <a href="../files/src_components_fields_Input.js.html#l183"><code>src\components\fields\Input.js:183</code></a>
+        <a href="../files/src_components_fields_Input.js.html#l190"><code>src\components\fields\Input.js:190</code></a>
         
         </p>
 
@@ -1929,7 +4726,7 @@
             
         
         
-        <a href="../files/src_components_fields_Input.js.html#l169"><code>src\components\fields\Input.js:169</code></a>
+        <a href="../files/src_components_fields_Input.js.html#l176"><code>src\components\fields\Input.js:176</code></a>
         
         </p>
 
@@ -1976,7 +4773,7 @@
             
         
         
-        <a href="../files/src_components_fields_Input.js.html#l176"><code>src\components\fields\Input.js:176</code></a>
+        <a href="../files/src_components_fields_Input.js.html#l183"><code>src\components\fields\Input.js:183</code></a>
         
         </p>
 
@@ -2023,7 +4820,7 @@
             
         
         
-        <a href="../files/src_components_fields_Input.js.html#l55"><code>src\components\fields\Input.js:55</code></a>
+        <a href="../files/src_components_fields_Input.js.html#l61"><code>src\components\fields\Input.js:61</code></a>
         
         </p>
 
@@ -2070,7 +4867,7 @@
             
         
         
-        <a href="../files/src_components_fields_Input.js.html#l138"><code>src\components\fields\Input.js:138</code></a>
+        <a href="../files/src_components_fields_Input.js.html#l145"><code>src\components\fields\Input.js:145</code></a>
         
         </p>
 
@@ -2116,7 +4913,7 @@
             
         
         
-        <a href="../files/src_components_fields_Input.js.html#l49"><code>src\components\fields\Input.js:49</code></a>
+        <a href="../files/src_components_fields_Input.js.html#l55"><code>src\components\fields\Input.js:55</code></a>
         
         </p>
 
@@ -2131,6 +4928,136 @@
 
     
         <p><strong>Default:</strong> &quot;form-group&quot;</p>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="property_glyphiconClass" class="property item inherited">
+    <h3 class="name"><code>glyphiconClass</code></h3>
+    <span class="type">String</span>
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                <p>Inherited from
+                <a href="../classes/components.common.Base.html#property_glyphiconClass">components.common.Base</a>:
+            
+        
+        
+        <a href="../files/src_components_common_Base.js.html#l47"><code>src\components\common\Base.js:47</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        
+    </div>
+
+    
+        <p><strong>Default:</strong> &quot;glyphicon&quot;</p>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="property_handler" class="property item inherited">
+    <h3 class="name"><code>handler</code></h3>
+    <span class="type">Function</span>
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                <p>Inherited from
+                <a href="../classes/components.common.Base.html#property_handler">components.common.Base</a>:
+            
+        
+        
+        <a href="../files/src_components_common_Base.js.html#l41"><code>src\components\common\Base.js:41</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        
+    </div>
+
+    
+        <p><strong>Default:</strong> null</p>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="property_handlerEvent" class="property item inherited">
+    <h3 class="name"><code>handlerEvent</code></h3>
+    <span class="type">String</span>
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                <p>Inherited from
+                <a href="../classes/components.common.Base.html#property_handlerEvent">components.common.Base</a>:
+            
+        
+        
+        <a href="../files/src_components_common_Base.js.html#l34"><code>src\components\common\Base.js:34</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>if handler property is set, it is automatically attached to this event</p>
+
+    </div>
+
+    
+        <p><strong>Default:</strong> &quot;click&quot;</p>
     
 
     
@@ -2162,7 +5089,7 @@
             
         
         
-        <a href="../files/src_components_fields_Input.js.html#l119"><code>src\components\fields\Input.js:119</code></a>
+        <a href="../files/src_components_fields_Input.js.html#l126"><code>src\components\fields\Input.js:126</code></a>
         
         </p>
 
@@ -2209,7 +5136,7 @@
             
         
         
-        <a href="../files/src_components_fields_Input.js.html#l112"><code>src\components\fields\Input.js:112</code></a>
+        <a href="../files/src_components_fields_Input.js.html#l119"><code>src\components\fields\Input.js:119</code></a>
         
         </p>
 
@@ -2256,7 +5183,7 @@
             
         
         
-        <a href="../files/src_components_fields_Input.js.html#l163"><code>src\components\fields\Input.js:163</code></a>
+        <a href="../files/src_components_fields_Input.js.html#l170"><code>src\components\fields\Input.js:170</code></a>
         
         </p>
 
@@ -2302,7 +5229,7 @@
             
         
         
-        <a href="../files/src_components_fields_Input.js.html#l235"><code>src\components\fields\Input.js:235</code></a>
+        <a href="../files/src_components_fields_Input.js.html#l243"><code>src\components\fields\Input.js:243</code></a>
         
         </p>
 
@@ -2328,7 +5255,7 @@
                 
                     <div id="property_inplaceEdit" class="property item">
     <h3 class="name"><code>inplaceEdit</code></h3>
-    <span class="type">Boolean</span>
+    <span class="type">Boolean | Object</span>
 
     
 
@@ -2349,7 +5276,7 @@
             
         
         
-        <a href="../files/src_components_fields_Input.js.html#l196"><code>src\components\fields\Input.js:196</code></a>
+        <a href="../files/src_components_fields_Input.js.html#l203"><code>src\components\fields\Input.js:203</code></a>
         
         </p>
 
@@ -2359,7 +5286,8 @@
     </div>
 
     <div class="description">
-        
+        <p>set as true to activate or object to activate and configure</p>
+
     </div>
 
     
@@ -2395,7 +5323,7 @@
             
         
         
-        <a href="../files/src_components_fields_Input.js.html#l144"><code>src\components\fields\Input.js:144</code></a>
+        <a href="../files/src_components_fields_Input.js.html#l151"><code>src\components\fields\Input.js:151</code></a>
         
         </p>
 
@@ -2442,7 +5370,7 @@
             
         
         
-        <a href="../files/src_components_fields_Input.js.html#l151"><code>src\components\fields\Input.js:151</code></a>
+        <a href="../files/src_components_fields_Input.js.html#l158"><code>src\components\fields\Input.js:158</code></a>
         
         </p>
 
@@ -2488,7 +5416,7 @@
             
         
         
-        <a href="../files/src_components_fields_Input.js.html#l222"><code>src\components\fields\Input.js:222</code></a>
+        <a href="../files/src_components_fields_Input.js.html#l230"><code>src\components\fields\Input.js:230</code></a>
         
         </p>
 
@@ -2534,7 +5462,7 @@
             
         
         
-        <a href="../files/src_components_fields_Input.js.html#l157"><code>src\components\fields\Input.js:157</code></a>
+        <a href="../files/src_components_fields_Input.js.html#l164"><code>src\components\fields\Input.js:164</code></a>
         
         </p>
 
@@ -2580,7 +5508,7 @@
             
         
         
-        <a href="../files/src_components_fields_Input.js.html#l100"><code>src\components\fields\Input.js:100</code></a>
+        <a href="../files/src_components_fields_Input.js.html#l107"><code>src\components\fields\Input.js:107</code></a>
         
         </p>
 
@@ -2594,7 +5522,7 @@
     </div>
 
     
-        <p><strong>Default:</strong> false</p>
+        <p><strong>Default:</strong> &quot;sm&quot;</p>
     
 
     
@@ -2626,7 +5554,7 @@
             
         
         
-        <a href="../files/src_components_fields_Input.js.html#l68"><code>src\components\fields\Input.js:68</code></a>
+        <a href="../files/src_components_fields_Input.js.html#l74"><code>src\components\fields\Input.js:74</code></a>
         
         </p>
 
@@ -2719,7 +5647,7 @@
             
         
         
-        <a href="../files/src_components_fields_Input.js.html#l62"><code>src\components\fields\Input.js:62</code></a>
+        <a href="../files/src_components_fields_Input.js.html#l68"><code>src\components\fields\Input.js:68</code></a>
         
         </p>
 
@@ -2765,7 +5693,7 @@
             
         
         
-        <a href="../files/src_components_fields_Input.js.html#l190"><code>src\components\fields\Input.js:190</code></a>
+        <a href="../files/src_components_fields_Input.js.html#l197"><code>src\components\fields\Input.js:197</code></a>
         
         </p>
 
@@ -2811,7 +5739,7 @@
             
         
         
-        <a href="../files/src_components_fields_Input.js.html#l215"><code>src\components\fields\Input.js:215</code></a>
+        <a href="../files/src_components_fields_Input.js.html#l223"><code>src\components\fields\Input.js:223</code></a>
         
         </p>
 
@@ -2827,6 +5755,53 @@
 
     
         <p><strong>Default:</strong> &quot;&quot;</p>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="property_navbarItem" class="property item">
+    <h3 class="name"><code>navbarItem</code></h3>
+    <span class="type">Boolean</span>
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/src_components_fields_Input.js.html#l257"><code>src\components\fields\Input.js:257</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>if true - att &quot;navbar-item&quot; class to the button</p>
+
+    </div>
+
+    
+        <p><strong>Default:</strong> false</p>
     
 
     
@@ -2858,7 +5833,7 @@
             
         
         
-        <a href="../files/src_components_fields_Input.js.html#l126"><code>src\components\fields\Input.js:126</code></a>
+        <a href="../files/src_components_fields_Input.js.html#l133"><code>src\components\fields\Input.js:133</code></a>
         
         </p>
 
@@ -2873,6 +5848,223 @@
 
     
         <p><strong>Default:</strong> &quot;&quot;</p>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="property_popover" class="property item inherited">
+    <h3 class="name"><code>popover</code></h3>
+    <span class="type">Boolean | String set to false to deactivate, string to set the text</span>
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                <p>Inherited from
+                <a href="../classes/components.common.Base.html#property_popover">components.common.Base</a>:
+            
+        
+        
+        <a href="../files/src_components_common_Base.js.html#l135"><code>src\components\common\Base.js:135</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        
+    </div>
+
+    
+        <p><strong>Default:</strong> false</p>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="property_popoverDismissible" class="property item inherited">
+    <h3 class="name"><code>popoverDismissible</code></h3>
+    <span class="type">Boolean</span>
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                <p>Inherited from
+                <a href="../classes/components.common.Base.html#property_popoverDismissible">components.common.Base</a>:
+            
+        
+        
+        <a href="../files/src_components_common_Base.js.html#l161"><code>src\components\common\Base.js:161</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        
+    </div>
+
+    
+        <p><strong>Default:</strong> true</p>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="property_popoverLocation" class="property item inherited">
+    <h3 class="name"><code>popoverLocation</code></h3>
+    <span class="type">String</span>
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                <p>Inherited from
+                <a href="../classes/components.common.Base.html#property_popoverLocation">components.common.Base</a>:
+            
+        
+        
+        <a href="../files/src_components_common_Base.js.html#l147"><code>src\components\common\Base.js:147</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>where the popover should appear: &quot;top&quot;, &quot;left&quot;, &quot;right&quot;, &quot;bottom&quot;</p>
+
+    </div>
+
+    
+        <p><strong>Default:</strong> &quot;top&quot;</p>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="property_popoverOptions" class="property item inherited">
+    <h3 class="name"><code>popoverOptions</code></h3>
+    <span class="type">Object</span>
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                <p>Inherited from
+                <a href="../classes/components.common.Base.html#property_popoverOptions">components.common.Base</a>:
+            
+        
+        
+        <a href="../files/src_components_common_Base.js.html#l154"><code>src\components\common\Base.js:154</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>options defined by bootstrap</p>
+
+    </div>
+
+    
+        <p><strong>Default:</strong> null</p>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="property_popoverTitle" class="property item inherited">
+    <h3 class="name"><code>popoverTitle</code></h3>
+    <span class="type">Boolean | String optional - set to false to deactivate, string to set the title</span>
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                <p>Inherited from
+                <a href="../classes/components.common.Base.html#property_popoverTitle">components.common.Base</a>:
+            
+        
+        
+        <a href="../files/src_components_common_Base.js.html#l141"><code>src\components\common\Base.js:141</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        
+    </div>
+
+    
+        <p><strong>Default:</strong> false</p>
     
 
     
@@ -2950,7 +6142,7 @@
             
         
         
-        <a href="../files/src_components_fields_Input.js.html#l208"><code>src\components\fields\Input.js:208</code></a>
+        <a href="../files/src_components_fields_Input.js.html#l216"><code>src\components\fields\Input.js:216</code></a>
         
         </p>
 
@@ -2997,7 +6189,7 @@
             
         
         
-        <a href="../files/src_components_fields_Input.js.html#l202"><code>src\components\fields\Input.js:202</code></a>
+        <a href="../files/src_components_fields_Input.js.html#l210"><code>src\components\fields\Input.js:210</code></a>
         
         </p>
 
@@ -3043,7 +6235,7 @@
             
         
         
-        <a href="../files/src_components_fields_Input.js.html#l132"><code>src\components\fields\Input.js:132</code></a>
+        <a href="../files/src_components_fields_Input.js.html#l139"><code>src\components\fields\Input.js:139</code></a>
         
         </p>
 
@@ -3080,12 +6272,12 @@
 
     <div class="meta">
         
+            <p>Inherited from
+            <a href="../classes/components.common.Base.html#property_sName">
+                components.common.Base
+            </a>
             
-                
-                <p>
-                
-                Defined in
-                
+            but overwritten in
             
         
         
@@ -3157,6 +6349,51 @@
 </div>
 
                 
+                    <div id="property_style" class="property item inherited">
+    <h3 class="name"><code>style</code></h3>
+    <span class="type">Object</span>
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                <p>Inherited from
+                <a href="../classes/components.common.Base.html#property_style">components.common.Base</a>:
+            
+        
+        
+        <a href="../files/src_components_common_Base.js.html#l90"><code>src\components\common\Base.js:90</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>add inline css styles
+<a href="http://knockoutjs.com/documentation/style-binding.html"><a href="http://knockoutjs.com/documentation/style-binding.html">http://knockoutjs.com/documentation/style-binding.html</a></a></p>
+
+    </div>
+
+    
+        <p><strong>Default:</strong> null</p>
+    
+
+    
+
+    
+</div>
+
+                
                     <div id="property_subTpl" class="property item">
     <h3 class="name"><code>subTpl</code></h3>
     <span class="type">String html</span>
@@ -3171,12 +6408,12 @@
 
     <div class="meta">
         
+            <p>Inherited from
+            <a href="../classes/components.common.Base.html#property_subTpl">
+                components.common.Base
+            </a>
             
-                
-                <p>
-                
-                Defined in
-                
+            but overwritten in
             
         
         
@@ -3201,6 +6438,137 @@
 </div>
 
                 
+                    <div id="property_tooltip" class="property item inherited">
+    <h3 class="name"><code>tooltip</code></h3>
+    <span class="type">Boolean | String set to false to deactivate, string to set the text</span>
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                <p>Inherited from
+                <a href="../classes/components.common.Base.html#property_tooltip">components.common.Base</a>:
+            
+        
+        
+        <a href="../files/src_components_common_Base.js.html#l115"><code>src\components\common\Base.js:115</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        
+    </div>
+
+    
+        <p><strong>Default:</strong> false</p>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="property_tooltipLocation" class="property item inherited">
+    <h3 class="name"><code>tooltipLocation</code></h3>
+    <span class="type">String</span>
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                <p>Inherited from
+                <a href="../classes/components.common.Base.html#property_tooltipLocation">components.common.Base</a>:
+            
+        
+        
+        <a href="../files/src_components_common_Base.js.html#l121"><code>src\components\common\Base.js:121</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>where the tooltip should appear: &quot;top&quot;, &quot;left&quot;, &quot;right&quot;, &quot;bottom&quot;</p>
+
+    </div>
+
+    
+        <p><strong>Default:</strong> &quot;top&quot;</p>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="property_tooltipOptions" class="property item inherited">
+    <h3 class="name"><code>tooltipOptions</code></h3>
+    <span class="type">Object</span>
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                <p>Inherited from
+                <a href="../classes/components.common.Base.html#property_tooltipOptions">components.common.Base</a>:
+            
+        
+        
+        <a href="../files/src_components_common_Base.js.html#l128"><code>src\components\common\Base.js:128</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>options defined by bootstrap</p>
+
+    </div>
+
+    
+        <p><strong>Default:</strong> null</p>
+    
+
+    
+
+    
+</div>
+
+                
                     <div id="property_tpl" class="property item">
     <h3 class="name"><code>tpl</code></h3>
     <span class="type">String html</span>
@@ -3215,16 +6583,16 @@
 
     <div class="meta">
         
+            <p>Inherited from
+            <a href="../classes/components.common.Base.html#property_tpl">
+                components.common.Base
+            </a>
             
-                
-                <p>
-                
-                Defined in
-                
+            but overwritten in
             
         
         
-        <a href="../files/src_components_fields_Input.js.html#l44"><code>src\components\fields\Input.js:44</code></a>
+        <a href="../files/src_components_fields_Input.js.html#l50"><code>src\components\fields\Input.js:50</code></a>
         
         </p>
 
@@ -3291,6 +6659,50 @@
 </div>
 
                 
+                    <div id="property_uiComponent" class="property item inherited">
+    <h3 class="name"><code>uiComponent</code></h3>
+    <span class="type">Boolean</span>
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                <p>Inherited from
+                <a href="../classes/components.common.Base.html#property_uiComponent">components.common.Base</a>:
+            
+        
+        
+        <a href="../files/src_components_common_Base.js.html#l27"><code>src\components\common\Base.js:27</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>used when filtering component classes when searching</p>
+
+    </div>
+
+    
+        <p><strong>Default:</strong> true</p>
+    
+
+    
+
+    
+</div>
+
+                
                     <div id="property_value" class="property item">
     <h3 class="name"><code>value</code></h3>
     <span class="type">String</span>
@@ -3314,7 +6726,7 @@
             
         
         
-        <a href="../files/src_components_fields_Input.js.html#l38"><code>src\components\fields\Input.js:38</code></a>
+        <a href="../files/src_components_fields_Input.js.html#l44"><code>src\components\fields\Input.js:44</code></a>
         
         </p>
 
@@ -3342,6 +6754,55 @@
 
         
 
+        
+            <div id="events" class="api-class-tabpanel">
+                <h2 class="off-left">Events</h2>
+
+                
+                    <div id="event_changed" class="events item">
+    <h3 class="name"><code>changed</code></h3>
+    <span class="type"></span>
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/src_components_fields_Input.js.html#l594"><code>src\components\fields\Input.js:594</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        
+    </div>
+
+    
+
+
+    
+</div>
+
+                
+            </div>
         
     </div>
 </div>
