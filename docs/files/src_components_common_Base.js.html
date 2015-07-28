@@ -19,7 +19,7 @@
             
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 0.15.0</em>
+            <em>API Docs for: 0.20.0</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -46,8 +46,6 @@
                 <li><a href="../classes/components.button.ButtonGroup.html">components.button.ButtonGroup</a></li>
             
                 <li><a href="../classes/components.button.ButtonGroupBase.html">components.button.ButtonGroupBase</a></li>
-            
-                <li><a href="../classes/components.button.dropdown.List.html">components.button.dropdown.List</a></li>
             
                 <li><a href="../classes/components.button.Icon.html">components.button.Icon</a></li>
             
@@ -127,6 +125,10 @@
             
                 <li><a href="../classes/components.fields.File.html">components.fields.File</a></li>
             
+                <li><a href="../classes/components.fields.Hidden.html">components.fields.Hidden</a></li>
+            
+                <li><a href="../classes/components.fields.HtmlEditor.html">components.fields.HtmlEditor</a></li>
+            
                 <li><a href="../classes/components.fields.Input.html">components.fields.Input</a></li>
             
                 <li><a href="../classes/components.fields.Password.html">components.fields.Password</a></li>
@@ -136,6 +138,12 @@
                 <li><a href="../classes/components.fields.SelectBox.html">components.fields.SelectBox</a></li>
             
                 <li><a href="../classes/components.fields.TextArea.html">components.fields.TextArea</a></li>
+            
+                <li><a href="../classes/components.menu.ContextMenu.html">components.menu.ContextMenu</a></li>
+            
+                <li><a href="../classes/components.menu.Item.html">components.menu.Item</a></li>
+            
+                <li><a href="../classes/components.menu.Menu.html">components.menu.Menu</a></li>
             
                 <li><a href="../classes/components.nav.Base.html">components.nav.Base</a></li>
             
@@ -155,7 +163,7 @@
             
                 <li><a href="../classes/helper.html">helper</a></li>
             
-                <li><a href="../classes/plugins.ContextMenu.html">plugins.ContextMenu</a></li>
+                <li><a href="../classes/KeyEvents.html">KeyEvents</a></li>
             
                 <li><a href="../classes/plugins.Draggable.html">plugins.Draggable</a></li>
             
@@ -270,6 +278,13 @@ define([&quot;doT&quot;, &quot;firebrick&quot;, &quot;jquery&quot;], function(tp
 		 * @default null
 		 */
 		handler: null,
+		/**
+		 * set to true to set the focus on the element after render
+		 * @property autoFocus
+		 * @type {Boolean}
+		 * @default false
+		 */
+		autoFocus: false,
 		/**
 		 * @property glyphiconClass
 		 * @type {String}
@@ -403,6 +418,18 @@ define([&quot;doT&quot;, &quot;firebrick&quot;, &quot;jquery&quot;], function(tp
 		 */
 		contextMenu: null,
 		/**
+		 * @property beforeSubTpl
+		 * @type {String | HTML}
+		 * @default null
+		 */
+		beforeSubTpl: null,
+		/**
+		 * @property afterSubTpl
+		 * @type {String | HTML}
+		 * @default null
+		 */
+		afterSubTpl: null,
+		/**
 		 * pass a binding Object and this method will add the tooltip/popover relevant properties
 		 * @method addTooltipPopoverBind
 		 * @param bindObj {Object}
@@ -482,7 +509,7 @@ define([&quot;doT&quot;, &quot;firebrick&quot;, &quot;jquery&quot;], function(tp
 		constructor: function(){
 			var me = this;
 			
-			me.precompile();
+			me._precompile();
 			
 			return me.callParent(arguments);
 		},
@@ -490,10 +517,13 @@ define([&quot;doT&quot;, &quot;firebrick&quot;, &quot;jquery&quot;], function(tp
 		 * compile and cache template
 		 * 
 		 * @method _precompile
+		 * @private
 		 * @return {Object} self
 		 */
-		precompile: function(){
-			var me = this;
+		_precompile: function(){
+			var me = this,
+				it,
+				tpls = [&quot;tpl&quot;, &quot;beforeSubTpl&quot;, &quot;subTpl&quot;, &quot;afterSubTpl&quot;];
 			
 			//init objects so each class is unqiue
 			me._template = {};
@@ -501,11 +531,11 @@ define([&quot;doT&quot;, &quot;firebrick&quot;, &quot;jquery&quot;], function(tp
 			
 			//precompile the template as soon as possible - performance
 			//http://jsperf.com/dot-vs-handlebars/2
-			if(me.tpl){
-				me.template();	
-			}
-			if(me.subTpl){
-				me.template(&quot;subTpl&quot;);	
+			for(var i = 0, l = tpls.length; i&lt;l; i++){
+				it = tpls[i];
+				if( me[it] ){
+					me.template( it );
+				}
 			}
 			return me;
 		},
@@ -551,24 +581,37 @@ define([&quot;doT&quot;, &quot;firebrick&quot;, &quot;jquery&quot;], function(tp
 			
 			me._registerHandler();
 					
-			if(me.contextMenu &amp;&amp; !me.contextMenu._classname){
+			
 				me.on(&quot;rendered&quot;, function(){
 					var el = me.getElement();
-					require([&quot;Firebrick.ui/common/plugins/ContextMenu&quot;], function(){
-						el.on(&quot;contextmenu&quot;, function(event){
-							var conf = {
-								_parent: me,
-								contextMenuEvent: event
-							}
-							event.preventDefault();
-							
-							me._contextMenu = Firebrick.create(&quot;Firebrick.ui.common.plugins.ContextMenu&quot;, Firebrick.utils.overwrite(conf, me.contextMenu));
+					
+					if(me.contextMenu &amp;&amp; !me.contextMenu._classname){
+						require([&quot;Firebrick.ui/menu/ContextMenu&quot;], function(){
+							el.on(&quot;contextmenu&quot;, function(event){
+								var conf = {
+									_parent: me,
+									contextMenuEvent: event
+								};
+								event.preventDefault();
+
+								me._contextMenu = Firebrick.create(&quot;Firebrick.ui.menu.ContextMenu&quot;, Firebrick.utils.overwrite(conf, me.contextMenu));
+							});
 						});
-					});
+					}
+					
+					if(me.autoFocus){
+						me.focus();
+					}
 				});
-			}
 				
 			return me.callParent(arguments);
+		},
+		/**
+		 * set focus on element
+		 * @method focus
+		 */
+		focus: function(){
+			this.getElement().focus();
 		},
 		/**
 		 * @method _registerHandler
@@ -582,7 +625,7 @@ define([&quot;doT&quot;, &quot;firebrick&quot;, &quot;jquery&quot;], function(tp
 			handlerEvent = handlerEvent || me.handlerEvent;
 			elementSelector = elementSelector || me._getElementSelector();
 			if(handler &amp;&amp; handlerEvent){
-				$(document).on(handlerEvent, me._getElementSelector(), function(){
+				$(document).on(handlerEvent, elementSelector, function(){
 					var args = Array.prototype.slice.call(arguments);
 					args.push(this);
 					handler.apply(me, args);
@@ -640,17 +683,30 @@ define([&quot;doT&quot;, &quot;firebrick&quot;, &quot;jquery&quot;], function(tp
 		},
 		/**
 		 * @method dataBind
-		 * @param {String} [property=this.bindings]
+		 * @param property {String} [property=this.bindings]
+		 * @param ...
 		 * @private
 		 * @return {String}
 		 */
-		dataBind: function(property){
+		dataBind: function(){
 			var me = this,
-				prop = property ? me[property] : me.bindings;
-			if($.isFunction(prop)){
-				prop = prop.call(me);
+				args = Firebrick.utils.argsToArray( arguments ),
+				prop,
+				obj;
+			
+			if(args &amp;&amp; args.length){
+				prop = args.splice(0, 1);
+			}else{
+				prop = &quot;bindings&quot;;
 			}
-			return Firebrick.ui.utils.stringify( prop );
+			
+			obj = me[prop];
+				
+			if($.isFunction(obj)){
+				obj = obj.apply(me, args);
+			}
+			
+			return Firebrick.ui.utils.stringify( obj );
 		},
 		/**
 		 * called when calling {{{getSubTpl}}} in component template
@@ -658,7 +714,17 @@ define([&quot;doT&quot;, &quot;firebrick&quot;, &quot;jquery&quot;], function(tp
 		 * @return {String}
 		 */
 		getSubTpl: function(){
-			return this.build(&quot;subTpl&quot;);
+			var me = this,
+				tpl = me.build(&quot;subTpl&quot;);
+			
+			if(me.beforeSubTpl){
+				tpl = me.build(&quot;beforeSubTpl&quot;) + tpl;
+			}
+			if(me.afterSubTpl){
+				tpl = tpl + me.build(&quot;afterSubTpl&quot;);
+			}
+			
+			return tpl;
 		},
 		/**
 		 * find the parent of this class

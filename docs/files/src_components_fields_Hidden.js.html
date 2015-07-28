@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>src\components\display\Header.js - Firebrick UI API</title>
+    <title>src\components\fields\Hidden.js - Firebrick UI API</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -228,7 +228,7 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-                        <h1 class="file-heading">File: src\components\display\Header.js</h1>
+                        <h1 class="file-heading">File: src\components\fields\Hidden.js</h1>
 
 <div class="file">
     <pre class="code prettyprint linenums">
@@ -238,98 +238,35 @@
 
 /**
  * @module Firebrick.ui.components
- * @extends components.common.Base
- * @namespace components.display
- * @class Header
+ * @extends components.fields.Base
+ * @namespace components.fields
+ * @class Hidden
  */
-define([&quot;text!./Header.html&quot;, &quot;../common/Base&quot;, &quot;../common/mixins/Label&quot;], function(tpl){
+define([&quot;./Input&quot;], function(){
 	&quot;use strict&quot;;
-	return Firebrick.define(&quot;Firebrick.ui.display.Header&quot;, {
-		extend:&quot;Firebrick.ui.common.Base&quot;,
-		mixins: &quot;Firebrick.ui.common.mixins.Label&quot;,
+	
+	return Firebrick.define(&quot;Firebrick.ui.fields.Hidden&quot;, {
+		extend: &quot;fields.input&quot;,
 		/**
 		 * @property sName
 		 * @type {String}
+		 * @default &quot;fields.hidden&quot;
 		 */
-		sName:&quot;display.header&quot;,
+		sName: &quot;fields.hidden&quot;,
 		/**
-		 * @property tpl
-		 * @type {String}
-		 */
-		tpl:tpl,
-		/**
-		 * use to determine whether h1, h2, h3 etc - default = 1
-		 * @property headerSize
-		 * @type {Int}
-		 * @default 1
-		 */
-		headerSize:1,
-		/**
-		 * @property text
-		 * @type {String}
-		 * @default &quot;&quot;
-		 */
-		text:&quot;&quot;,
-		/**
-		 * @property secondaryText
-		 * @type {String}
-		 * @default &quot;&quot;
-		 */
-		secondaryText:&quot;&quot;,
-		/**
-		 * change to a url if you wish to convert the header into a link
-		 * @property href
-		 * @type {String}
-		 * @default null
-		 */
-		href: null,
-		/**
-		 * set to true to add attribute [fb-ignore-router=true] to all links - these links are then ignored by the history api (Firebrick.router.history)
-		 * @property ignoreRouter
-		 * @type {Boolean}
-		 * @default true
-		 */
-		ignoreRouter: true,
-		/**
-		 * @method textBindings
-		 * @return Object
-		 */
-		textBindings: function(){
-			var me = this,
-				obj = {};
-			
-			obj.text = me.textBind(me.text);
-			
-			return obj;
-		},
-		/**
-		 * @method secondaryTextBindings
-		 * @return Object
-		 */
-		secondaryTextBindings: function(){
-			var me = this;
-			if(me.secondaryText){
-				return {
-					text: me.textBind(me.secondaryText)
-				};
-			}else{
-				return {
-					visible:false
-				};
-			}
-		},
-		/**
-		 * @method hrefBindings
+		 * @method containerBindings
 		 * @return {Object}
 		 */
-		hrefBindings: function(){
+		containerBindings: function(){
 			var me = this,
-				obj = {attr:{}};
-			obj.attr[&quot;&#x27;fb-ignore-router&#x27;&quot;] = &quot;$data.hasOwnProperty( &#x27;ignoreRouter&#x27; ) ? $data.ignoreRouter : &quot; + me.ignoreRouter;
+				obj = me.callParent( arguments );
+			
+			obj.css[&quot;&#x27;fb-ui-hidden-field&#x27;&quot;] = true;
+			
 			return obj;
 		}
-		
 	});
+	
 });
     </pre>
 </div>

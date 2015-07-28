@@ -19,7 +19,7 @@
             
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 0.15.0</em>
+            <em>API Docs for: 0.20.0</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -46,8 +46,6 @@
                 <li><a href="../classes/components.button.ButtonGroup.html">components.button.ButtonGroup</a></li>
             
                 <li><a href="../classes/components.button.ButtonGroupBase.html">components.button.ButtonGroupBase</a></li>
-            
-                <li><a href="../classes/components.button.dropdown.List.html">components.button.dropdown.List</a></li>
             
                 <li><a href="../classes/components.button.Icon.html">components.button.Icon</a></li>
             
@@ -127,6 +125,10 @@
             
                 <li><a href="../classes/components.fields.File.html">components.fields.File</a></li>
             
+                <li><a href="../classes/components.fields.Hidden.html">components.fields.Hidden</a></li>
+            
+                <li><a href="../classes/components.fields.HtmlEditor.html">components.fields.HtmlEditor</a></li>
+            
                 <li><a href="../classes/components.fields.Input.html">components.fields.Input</a></li>
             
                 <li><a href="../classes/components.fields.Password.html">components.fields.Password</a></li>
@@ -136,6 +138,12 @@
                 <li><a href="../classes/components.fields.SelectBox.html">components.fields.SelectBox</a></li>
             
                 <li><a href="../classes/components.fields.TextArea.html">components.fields.TextArea</a></li>
+            
+                <li><a href="../classes/components.menu.ContextMenu.html">components.menu.ContextMenu</a></li>
+            
+                <li><a href="../classes/components.menu.Item.html">components.menu.Item</a></li>
+            
+                <li><a href="../classes/components.menu.Menu.html">components.menu.Menu</a></li>
             
                 <li><a href="../classes/components.nav.Base.html">components.nav.Base</a></li>
             
@@ -155,7 +163,7 @@
             
                 <li><a href="../classes/helper.html">helper</a></li>
             
-                <li><a href="../classes/plugins.ContextMenu.html">plugins.ContextMenu</a></li>
+                <li><a href="../classes/KeyEvents.html">KeyEvents</a></li>
             
                 <li><a href="../classes/plugins.Draggable.html">plugins.Draggable</a></li>
             
@@ -234,7 +242,7 @@
  * @namespace components.containers
  * @class Panel
  */
-define([&quot;text!./Panel.html&quot;, &quot;jquery&quot;, &quot;./Base&quot;, &quot;../nav/Toolbar&quot;, &quot;../common/mixins/Toolbars&quot;, &quot;../common/mixins/Label&quot;], function(tpl, $){
+define([&quot;text!./Panel.html&quot;, &quot;text!./panel/Icon.html&quot;, &quot;jquery&quot;, &quot;doT&quot;, &quot;./Base&quot;, &quot;../nav/Toolbar&quot;, &quot;../common/mixins/Toolbars&quot;, &quot;../common/mixins/Label&quot;], function(tpl, iconTpl, $, doT){
 	&quot;use strict&quot;;
 	return Firebrick.define(&quot;Firebrick.ui.containers.Panel&quot;, {
 		extend:&quot;Firebrick.ui.containers.Base&quot;,
@@ -250,6 +258,12 @@ define([&quot;text!./Panel.html&quot;, &quot;jquery&quot;, &quot;./Base&quot;, &
 		 * @type {String} html
 		 */
 		tpl:tpl,
+		/**
+		 * used to the default header icons
+		 * @property iconTpl
+		 * @type {String} html
+		 */
+		iconTpl: iconTpl,
 		/**
 		 * @property role
 		 * @type {String}
@@ -380,6 +394,20 @@ define([&quot;text!./Panel.html&quot;, &quot;jquery&quot;, &quot;./Base&quot;, &
 		 */
 		active: false,
 		/**
+		 * @property maximizable
+		 * @type {Boolean}
+		 * @default false
+		 */
+		maximizable: false,
+		/**
+		 * array of icon posibilites after headerItems (custom), like collapse icon, maximize icon etc
+		 * @property _defaultPanelIcons
+		 * @private
+		 * @type {Array of Strings}
+		 * @default [&quot;maximizable&quot;, &quot;collapsible&quot;]
+		 */
+		_defaultPanelIcons: [&quot;collapsible&quot;, &quot;maximizable&quot;],
+		/**
 		 * @method init
 		 * @return {Object}
 		 */
@@ -430,7 +458,34 @@ define([&quot;text!./Panel.html&quot;, &quot;jquery&quot;, &quot;./Base&quot;, &
 			
 			return me;
 		},
-		
+		/**
+		 * used within the Panel.html template
+		 * iterates through the _defaultPanelIcons array and builds for each value a 
+		 * template from panel/Icon (this.iconTpl) together for each property
+		 * @private
+		 * @method defaultPanelIcons
+		 * @return {String} html
+		 */
+		getDefaultIcons: function(){
+			var me = this,
+				it,
+				icons = me._defaultPanelIcons,
+				html = &quot;&quot;,
+				conf;
+			
+			for(var i = 0, l = icons.length; i&lt;l; i++){
+				it = icons[i];
+				conf = {
+					property: icons[i],
+					showProperty: &quot;show&quot; + Firebrick.utils.firstToUpper( it ),
+					bindingMethod: it + &quot;IconBindings&quot;,
+					scope: me
+				};
+				html += doT.template( me.iconTpl )(conf);
+			}
+			
+			return html;
+		},
 		/**
 		 * programmatically make a collapse action - useful if the header isn&#x27;t available
 		 * @method collapse
@@ -545,10 +600,6 @@ define([&quot;text!./Panel.html&quot;, &quot;jquery&quot;, &quot;./Base&quot;, &
 				obj.css[me.parseBind(me.headerItemsPosition)] = true;
 			}
 			
-			if(me.collapsible &amp;&amp; me.showCollapseIcon){
-				obj.css[&quot;&#x27;fb-ui-collapse-icon-present&#x27;&quot;] = true;
-			}
-				
 			return obj;
 			
 		},
@@ -565,7 +616,7 @@ define([&quot;text!./Panel.html&quot;, &quot;jquery&quot;, &quot;./Base&quot;, &
 					},
 					attr:{
 						&quot;&#x27;data-toggle&#x27;&quot;:  &quot;&#x27;collapse&#x27;&quot;,
-						&quot;href&quot;:  me.parseBind(&quot;#&quot; + id ),
+						&quot;&#x27;data-target&#x27;&quot;:  me.parseBind(&quot;#&quot; + id ),
 						&quot;&#x27;aria-expanded&#x27;&quot;: typeof me.collapsed === &quot;boolean&quot; ? me.collapsed : true,
 						&quot;&#x27;aria-controls&#x27;&quot;:  me.parseBind( id ),
 					}
@@ -584,9 +635,13 @@ define([&quot;text!./Panel.html&quot;, &quot;jquery&quot;, &quot;./Base&quot;, &
 		 */
 		collapsibleIconBindings: function(){
 			var me = this,
-				obj = {css:{}, attr:{}};
-			
-			obj.css[&quot;&#x27;fb-ui-collapse-icon&#x27;&quot;] = true;
+				obj = {
+					css:{
+						&quot;&#x27;fb-ui-panel-icon&#x27;&quot;: true,
+						&quot;&#x27;fb-ui-collapse-icon&#x27;&quot;: true
+					}, 
+					attr:{}
+				};
 			
 			if(me.headerItems){
 				obj.css[&quot;&#x27;fb-ui-header-items-present&#x27;&quot;] = true;
@@ -596,7 +651,6 @@ define([&quot;text!./Panel.html&quot;, &quot;jquery&quot;, &quot;./Base&quot;, &
 			
 			return obj;
 		},
-		
 		/**
 		 * simulate a click on the icon and delegate it to the title
 		 * @method collapseIconClick
@@ -612,17 +666,36 @@ define([&quot;text!./Panel.html&quot;, &quot;jquery&quot;, &quot;./Base&quot;, &
 			collapse[0].click();
 		},
 		/**
+		 * @method maximizableIconBindings
+		 * @return {Object}
+		 */
+		maximizableIconBindings: function(){
+			var me = this,
+				obj = {
+					css:{
+						&quot;&#x27;fb-ui-panel-icon&#x27;&quot;: true,
+						&quot;glyphicon&quot;: true,
+						&quot;&#x27;glyphicon-fullscreen&#x27;&quot;: true
+					}
+				};
+			
+			return obj;
+		},
+		/**
 		 * @method panelHeaderTextBindings
 		 * @return {Object}
 		 */
 		panelHeaderTextBindings: function(){
 			var me = this,
 				obj = {
-						text: me.textBind(me.title),
 						css:{
 							&quot;&#x27;panel-title&#x27;&quot;: me.panelTitleClass
 						}
 					};
+			
+			if(typeof me.title !== &quot;boolean&quot;){
+				obj.text = me.textBind(me.title)
+			}
 			
 			if(me.headerItems){
 				obj.css[&quot;&#x27;pull-left&#x27;&quot;] = true;
@@ -645,16 +718,27 @@ define([&quot;text!./Panel.html&quot;, &quot;jquery&quot;, &quot;./Base&quot;, &
 						&quot;&#x27;panel-body&#x27;&quot;: me.panelBodyClass
 					}
 				};
+
+			me.toolbarContainer(obj);
 			
-			if(!me.items){
+			return obj;
+		},
+		/**
+		 * @method panelItemBindings
+		 * @return {Object}
+		 */
+		panelItemBindings: function(){
+			var me = this,
+				obj = {};
+
+			//no items are defined or it is an empty array
+			if( !me.items || (me.items &amp;&amp; !me.items.length) ){
 				if(me.storeProp){
 					obj.html = me.storeProp;
 				}else{
 					obj.html = &quot;Firebrick.getById(&#x27;&quot;+me.getId()+&quot;&#x27;).html&quot;;
 				}
 			}
-			
-			me.toolbarContainer(obj);
 			
 			return obj;
 		}

@@ -1,13 +1,13 @@
 YUI.add("yuidoc-meta", function(Y) {
    Y.YUIDoc = { meta: {
     "classes": [
+        "KeyEvents",
         "Suggest",
         "components.button.Button",
         "components.button.ButtonGroup",
         "components.button.ButtonGroupBase",
         "components.button.Icon",
         "components.button.ToggleButton",
-        "components.button.dropdown.List",
         "components.common.Base",
         "components.common.MultiplesBase",
         "components.common.mixins.Badges",
@@ -45,11 +45,16 @@ YUI.add("yuidoc-meta", function(Y) {
         "components.fields.Display",
         "components.fields.Email",
         "components.fields.File",
+        "components.fields.Hidden",
+        "components.fields.HtmlEditor",
         "components.fields.Input",
         "components.fields.Password",
         "components.fields.Radio",
         "components.fields.SelectBox",
         "components.fields.TextArea",
+        "components.menu.ContextMenu",
+        "components.menu.Item",
+        "components.menu.Menu",
         "components.nav.Base",
         "components.nav.Breadcrumbs",
         "components.nav.List",
@@ -59,7 +64,6 @@ YUI.add("yuidoc-meta", function(Y) {
         "components.table.Table",
         "components.table.TreeTable",
         "helper",
-        "plugins.ContextMenu",
         "plugins.Draggable",
         "plugins.EditableTable",
         "plugins.InplaceEdit",
@@ -91,7 +95,8 @@ YUI.add("yuidoc-meta", function(Y) {
         },
         {
             "displayName": "plugins",
-            "name": "plugins"
+            "name": "plugins",
+            "description": "properties: {\n\t\tparentsEditable: {Boolean} [default=true]\n\t\tfield: {\n\t\t\tsName: \"fields.email\"\n\t\t\t// all other class config properties\n\t\t}\n}"
         }
     ]
 } };

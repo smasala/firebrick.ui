@@ -19,7 +19,7 @@
             
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 0.15.0</em>
+            <em>API Docs for: 0.20.0</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -46,8 +46,6 @@
                 <li><a href="../classes/components.button.ButtonGroup.html">components.button.ButtonGroup</a></li>
             
                 <li><a href="../classes/components.button.ButtonGroupBase.html">components.button.ButtonGroupBase</a></li>
-            
-                <li><a href="../classes/components.button.dropdown.List.html">components.button.dropdown.List</a></li>
             
                 <li><a href="../classes/components.button.Icon.html">components.button.Icon</a></li>
             
@@ -127,6 +125,10 @@
             
                 <li><a href="../classes/components.fields.File.html">components.fields.File</a></li>
             
+                <li><a href="../classes/components.fields.Hidden.html">components.fields.Hidden</a></li>
+            
+                <li><a href="../classes/components.fields.HtmlEditor.html">components.fields.HtmlEditor</a></li>
+            
                 <li><a href="../classes/components.fields.Input.html">components.fields.Input</a></li>
             
                 <li><a href="../classes/components.fields.Password.html">components.fields.Password</a></li>
@@ -136,6 +138,12 @@
                 <li><a href="../classes/components.fields.SelectBox.html">components.fields.SelectBox</a></li>
             
                 <li><a href="../classes/components.fields.TextArea.html">components.fields.TextArea</a></li>
+            
+                <li><a href="../classes/components.menu.ContextMenu.html">components.menu.ContextMenu</a></li>
+            
+                <li><a href="../classes/components.menu.Item.html">components.menu.Item</a></li>
+            
+                <li><a href="../classes/components.menu.Menu.html">components.menu.Menu</a></li>
             
                 <li><a href="../classes/components.nav.Base.html">components.nav.Base</a></li>
             
@@ -155,7 +163,7 @@
             
                 <li><a href="../classes/helper.html">helper</a></li>
             
-                <li><a href="../classes/plugins.ContextMenu.html">plugins.ContextMenu</a></li>
+                <li><a href="../classes/KeyEvents.html">KeyEvents</a></li>
             
                 <li><a href="../classes/plugins.Draggable.html">plugins.Draggable</a></li>
             
@@ -267,7 +275,7 @@
 			 * @private
 			 * @type {String}
 			 */
-			version: &quot;0.15.0&quot;,
+			version: &quot;0.20.0&quot;,
 			
 			/**
 			 * populate a target with fields and data
@@ -283,14 +291,6 @@
 				var me = this,
 					target = Firebrick.views.getTarget(config.target),
 					r, html;
-				
-//				if(config.view){
-//					config.view.on(&quot;ready&quot;, function(){
-//						for(var i = 0, l = r.items.length; i&lt;l; i++){
-//							r.items[i].fireEvent(&quot;rendered&quot;);	
-//						}
-//					});
-//				}
 				
 				r = me._populate(config.items, config.view);
 				html = r.html;
@@ -328,7 +328,6 @@
 				}
 				
 				if($.isArray(items) &amp;&amp; items.length){
-					
 					if(parent.defaults){
 						//get all defaults down the prototype tree
 						Firebrick.utils.merge(&quot;defaults&quot;, parent);
@@ -590,7 +589,128 @@
 				}
 				
 			},
-			
+			/**
+			 * cross platform as chrome doesn&#x27;t support them natively
+			 * @for ui
+			 * @class KeyEvents
+			 */
+			KeyEvents: {
+		            DOM_VK_CANCEL: 3,
+		            DOM_VK_HELP: 6,
+		            DOM_VK_BACK_SPACE: 8,
+		            DOM_VK_TAB: 9,
+		            DOM_VK_CLEAR: 12,
+		            DOM_VK_RETURN: 13,
+		            DOM_VK_ENTER: 14,
+		            DOM_VK_SHIFT: 16,
+		            DOM_VK_CONTROL: 17,
+		            DOM_VK_ALT: 18,
+		            DOM_VK_PAUSE: 19,
+		            DOM_VK_CAPS_LOCK: 20,
+		            DOM_VK_ESCAPE: 27,
+		            DOM_VK_SPACE: 32,
+		            DOM_VK_PAGE_UP: 33,
+		            DOM_VK_PAGE_DOWN: 34,
+		            DOM_VK_END: 35,
+		            DOM_VK_HOME: 36,
+		            DOM_VK_LEFT: 37,
+		            DOM_VK_UP: 38,
+		            DOM_VK_RIGHT: 39,
+		            DOM_VK_DOWN: 40,
+		            DOM_VK_PRINTSCREEN: 44,
+		            DOM_VK_INSERT: 45,
+		            DOM_VK_DELETE: 46,
+		            DOM_VK_0: 48,
+		            DOM_VK_1: 49,
+		            DOM_VK_2: 50,
+		            DOM_VK_3: 51,
+		            DOM_VK_4: 52,
+		            DOM_VK_5: 53,
+		            DOM_VK_6: 54,
+		            DOM_VK_7: 55,
+		            DOM_VK_8: 56,
+		            DOM_VK_9: 57,
+		            DOM_VK_SEMICOLON: 59,
+		            DOM_VK_EQUALS: 61,
+		            DOM_VK_A: 65,
+		            DOM_VK_B: 66,
+		            DOM_VK_C: 67,
+		            DOM_VK_D: 68,
+		            DOM_VK_E: 69,
+		            DOM_VK_F: 70,
+		            DOM_VK_G: 71,
+		            DOM_VK_H: 72,
+		            DOM_VK_I: 73,
+		            DOM_VK_J: 74,
+		            DOM_VK_K: 75,
+		            DOM_VK_L: 76,
+		            DOM_VK_M: 77,
+		            DOM_VK_N: 78,
+		            DOM_VK_O: 79,
+		            DOM_VK_P: 80,
+		            DOM_VK_Q: 81,
+		            DOM_VK_R: 82,
+		            DOM_VK_S: 83,
+		            DOM_VK_T: 84,
+		            DOM_VK_U: 85,
+		            DOM_VK_V: 86,
+		            DOM_VK_W: 87,
+		            DOM_VK_X: 88,
+		            DOM_VK_Y: 89,
+		            DOM_VK_Z: 90,
+		            DOM_VK_CONTEXT_MENU: 93,
+		            DOM_VK_NUMPAD0: 96,
+		            DOM_VK_NUMPAD1: 97,
+		            DOM_VK_NUMPAD2: 98,
+		            DOM_VK_NUMPAD3: 99,
+		            DOM_VK_NUMPAD4: 100,
+		            DOM_VK_NUMPAD5: 101,
+		            DOM_VK_NUMPAD6: 102,
+		            DOM_VK_NUMPAD7: 103,
+		            DOM_VK_NUMPAD8: 104,
+		            DOM_VK_NUMPAD9: 105,
+		            DOM_VK_MULTIPLY: 106,
+		            DOM_VK_ADD: 107,
+		            DOM_VK_SEPARATOR: 108,
+		            DOM_VK_SUBTRACT: 109,
+		            DOM_VK_DECIMAL: 110,
+		            DOM_VK_DIVIDE: 111,
+		            DOM_VK_F1: 112,
+		            DOM_VK_F2: 113,
+		            DOM_VK_F3: 114,
+		            DOM_VK_F4: 115,
+		            DOM_VK_F5: 116,
+		            DOM_VK_F6: 117,
+		            DOM_VK_F7: 118,
+		            DOM_VK_F8: 119,
+		            DOM_VK_F9: 120,
+		            DOM_VK_F10: 121,
+		            DOM_VK_F11: 122,
+		            DOM_VK_F12: 123,
+		            DOM_VK_F13: 124,
+		            DOM_VK_F14: 125,
+		            DOM_VK_F15: 126,
+		            DOM_VK_F16: 127,
+		            DOM_VK_F17: 128,
+		            DOM_VK_F18: 129,
+		            DOM_VK_F19: 130,
+		            DOM_VK_F20: 131,
+		            DOM_VK_F21: 132,
+		            DOM_VK_F22: 133,
+		            DOM_VK_F23: 134,
+		            DOM_VK_F24: 135,
+		            DOM_VK_NUM_LOCK: 144,
+		            DOM_VK_SCROLL_LOCK: 145,
+		            DOM_VK_COMMA: 188,
+		            DOM_VK_PERIOD: 190,
+		            DOM_VK_SLASH: 191,
+		            DOM_VK_BACK_QUOTE: 192,
+		            DOM_VK_OPEN_BRACKET: 219,
+		            DOM_VK_BACK_SLASH: 220,
+		            DOM_VK_CLOSE_BRACKET: 221,
+		            DOM_VK_QUOTE: 222,
+		            DOM_VK_META: 224
+			},
 			/**
 			 * similar to utils, but are component related
 			 * @for ui
@@ -636,20 +756,23 @@
 				},
 				
 				/**
-				 * builds links, if value then return the value overwise return javascript:void(0)
+				 * builds links, if value then return the value overwise return false and remove the href attribute
 				 * @method linkBuilder
 				 * @param {Object} value - optional
 				 * @param {Object} value.link
-				 * @return {String}
+				 * @return {String | false}
 				 */
 				linkBuilder: function(value){
+
 					if(value){
-						if(typeof value.link === &quot;string&quot;){
+						if( typeof value.link === &quot;string&quot; ){
 							return value.link;
+						}else if( typeof value.href === &quot;string&quot;){
+							return value.href;
 						}
 					}
 					
-					return &quot;javascript:void(0)&quot;;
+					return false;
 				},
 				
 				
@@ -946,65 +1069,90 @@
 	
 	
 	/*
-	 * use withProperties to pass extra properties down to the descendants
-	 * http://knockoutjs.com/documentation/custom-bindings-controlling-descendant-bindings.html
+	 * Knockout bindingHandler extensions
 	 */
-	ko.bindingHandlers.withProperties = {
-	    init: function(element, valueAccessor, allBindings, viewModel, bindingContext) {
-	        // Make a modified binding context, with a extra properties, and apply it to descendant elements
-	        var childBindingContext = bindingContext.createChildContext(
-	            bindingContext.$rawData,
-	            null, // Optionally, pass a string here as an alias for the data item in descendant contexts
-	            function(context) {
-	                ko.utils.extend(context, valueAccessor());
-	            });
-	        ko.applyBindingsToDescendants(childBindingContext, element);
-	 
-	        // Also tell KO *not* to bind the descendants itself, otherwise they will be bound twice
-	        return { controlsDescendantBindings: true };
-	    }
-	};
+	(function(ko){
+		
+		var oldInit = ko.bindingHandlers.value.init, 
+			oldInit1 = ko.bindingHandlers.selectedOptions.init;
+		
+		//VALUE
+		ko.bindingHandlers.value.init = function(element, valueAccessor, allBindings, viewModel, bindingContext){
+			var clazz = Firebrick.getById(element.getAttribute(&quot;id&quot;));
+			if(clazz){
+				clazz._ko = clazz._ko || {};
+				clazz._ko.value = {
+					element: element,
+					valueAccessor: valueAccessor,
+					allBindings: allBindings,
+					viewModel: viewModel,
+					bindingContext: bindingContext
+				};
+			}
+			return oldInit.apply(this, arguments);
+		};
+
+		//SELECTEDOPTIONS
+		ko.bindingHandlers.selectedOptions.init = function(element, valueAccessor, allBindings, viewModel, bindingContext){
+			var clazz = Firebrick.getById(element.getAttribute(&quot;id&quot;));
+			if(clazz){
+				clazz._ko = clazz._ko || {};
+				clazz._ko.selectedOptions = {
+					element: element,
+					valueAccessor: valueAccessor,
+					allBindings: allBindings,
+					viewModel: viewModel,
+					bindingContext: bindingContext
+				};
+			}
+			return oldInit1.apply(this, arguments);
+		};
+		
+		/*
+		 * use withProperties to pass extra properties down to the descendants
+		 * http://knockoutjs.com/documentation/custom-bindings-controlling-descendant-bindings.html
+		 */
+		ko.bindingHandlers.withProperties = {
+		    init: function(element, valueAccessor, allBindings, viewModel, bindingContext) {
+		        // Make a modified binding context, with a extra properties, and apply it to descendant elements
+		        var childBindingContext = bindingContext.createChildContext(
+		            bindingContext.$rawData,
+		            null, // Optionally, pass a string here as an alias for the data item in descendant contexts
+		            function(context) {
+		                ko.utils.extend(context, valueAccessor());
+		            });
+		        ko.applyBindingsToDescendants(childBindingContext, element);
+		 
+		        // Also tell KO *not* to bind the descendants itself, otherwise they will be bound twice
+		        return { controlsDescendantBindings: true };
+		    }
+		};
+		
+		//activate binding on any element injected with &quot;html&quot; property
+		//modified from http://stackoverflow.com/a/29605553/425226
+		ko.bindingHandlers.htmlWithBinding = {
+			  &#x27;init&#x27;: function() {
+				  return { &#x27;controlsDescendantBindings&#x27;: true };
+			  },
+			  &#x27;update&#x27;: function (element, valueAccessor, allBindings, viewModel, bindingContext) {
+				  element.innerHTML = valueAccessor();
+				  ko.applyBindingsToDescendants(bindingContext, element);
+			  }
+		};
+		
+		/*
+		 * use debug to simply console out any given arguments
+		 * http://www.knockmeout.net/2013/06/knockout-debugging-strategies-plugin.html
+		 */
+		ko.virtualElements.allowedBindings.debug = true;
+		ko.bindingHandlers.debug = {
+		    init: function(element, valueAccessor, allBindings, viewModel, bindingContext) {
+		       console.warn(&quot;Debug:&quot;, element, valueAccessor(), allBindings(), viewModel, bindingContext);
+		    }
+		};
+		
+	})(ko);
 	
-	/*
-	 * use debug to simply console out any given arguments
-	 * http://www.knockmeout.net/2013/06/knockout-debugging-strategies-plugin.html
-	 */
-	ko.bindingHandlers.debug = {
-	    init: function(element, valueAccessor, allBindings, viewModel, bindingContext) {
-	       console.warn(&quot;Debug:&quot;, element, valueAccessor(), allBindings(), viewModel, bindingContext);
-	    }
-	};
-	
-	var oldInit = ko.bindingHandlers.value.init;
-	ko.bindingHandlers.value.init = function(element, valueAccessor, allBindings, viewModel, bindingContext){
-		var clazz = Firebrick.getById(element.getAttribute(&quot;id&quot;));
-		if(clazz){
-			clazz._ko = clazz._ko || {};
-			clazz._ko.value = {
-				element: element,
-				valueAccessor: valueAccessor,
-				allBindings: allBindings,
-				viewModel: viewModel,
-				bindingContext: bindingContext
-			};
-		}
-		return oldInit.apply(this, arguments);
-	};
-	var oldInit1 = ko.bindingHandlers.selectedOptions.init;
-	ko.bindingHandlers.selectedOptions.init = function(element, valueAccessor, allBindings, viewModel, bindingContext){
-		var clazz = Firebrick.getById(element.getAttribute(&quot;id&quot;));
-		if(clazz){
-			clazz._ko = clazz._ko || {};
-			clazz._ko.selectedOptions = {
-				element: element,
-				valueAccessor: valueAccessor,
-				allBindings: allBindings,
-				viewModel: viewModel,
-				bindingContext: bindingContext
-			};
-		}
-		return oldInit1.apply(this, arguments);
-	};
 });
     </pre>
 </div>

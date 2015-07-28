@@ -19,7 +19,7 @@
             
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 0.15.0</em>
+            <em>API Docs for: 0.20.0</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -46,8 +46,6 @@
                 <li><a href="../classes/components.button.ButtonGroup.html">components.button.ButtonGroup</a></li>
             
                 <li><a href="../classes/components.button.ButtonGroupBase.html">components.button.ButtonGroupBase</a></li>
-            
-                <li><a href="../classes/components.button.dropdown.List.html">components.button.dropdown.List</a></li>
             
                 <li><a href="../classes/components.button.Icon.html">components.button.Icon</a></li>
             
@@ -127,6 +125,10 @@
             
                 <li><a href="../classes/components.fields.File.html">components.fields.File</a></li>
             
+                <li><a href="../classes/components.fields.Hidden.html">components.fields.Hidden</a></li>
+            
+                <li><a href="../classes/components.fields.HtmlEditor.html">components.fields.HtmlEditor</a></li>
+            
                 <li><a href="../classes/components.fields.Input.html">components.fields.Input</a></li>
             
                 <li><a href="../classes/components.fields.Password.html">components.fields.Password</a></li>
@@ -136,6 +138,12 @@
                 <li><a href="../classes/components.fields.SelectBox.html">components.fields.SelectBox</a></li>
             
                 <li><a href="../classes/components.fields.TextArea.html">components.fields.TextArea</a></li>
+            
+                <li><a href="../classes/components.menu.ContextMenu.html">components.menu.ContextMenu</a></li>
+            
+                <li><a href="../classes/components.menu.Item.html">components.menu.Item</a></li>
+            
+                <li><a href="../classes/components.menu.Menu.html">components.menu.Menu</a></li>
             
                 <li><a href="../classes/components.nav.Base.html">components.nav.Base</a></li>
             
@@ -155,7 +163,7 @@
             
                 <li><a href="../classes/helper.html">helper</a></li>
             
-                <li><a href="../classes/plugins.ContextMenu.html">plugins.ContextMenu</a></li>
+                <li><a href="../classes/KeyEvents.html">KeyEvents</a></li>
             
                 <li><a href="../classes/plugins.Draggable.html">plugins.Draggable</a></li>
             
@@ -244,7 +252,14 @@
 
 
 <div class="box intro">
-    
+    <p>properties: {
+        parentsEditable: {Boolean} [default=true]
+        field: {
+            sName: &quot;fields.email&quot;
+            // all other class config properties
+        }
+}</p>
+
 </div>
 
 
@@ -478,7 +493,7 @@
             
         
         
-        <a href="../files/src_components_table_plugins_EditableTable.js.html#l546"><code>src\components\table\plugins\EditableTable.js:546</code></a>
+        <a href="../files/src_components_table_plugins_EditableTable.js.html#l557"><code>src\components\table\plugins\EditableTable.js:557</code></a>
         
         </p>
 
@@ -590,7 +605,7 @@
             
         
         
-        <a href="../files/src_components_table_plugins_EditableTable.js.html#l516"><code>src\components\table\plugins\EditableTable.js:516</code></a>
+        <a href="../files/src_components_table_plugins_EditableTable.js.html#l527"><code>src\components\table\plugins\EditableTable.js:527</code></a>
         
         </p>
 
@@ -697,7 +712,7 @@
             
         
         
-        <a href="../files/src_components_table_plugins_EditableTable.js.html#l526"><code>src\components\table\plugins\EditableTable.js:526</code></a>
+        <a href="../files/src_components_table_plugins_EditableTable.js.html#l537"><code>src\components\table\plugins\EditableTable.js:537</code></a>
         
         </p>
 
@@ -798,7 +813,7 @@ when an edit field is rendered, add the column number as a property (_prop) to t
             
         
         
-        <a href="../files/src_components_table_plugins_EditableTable.js.html#l355"><code>src\components\table\plugins\EditableTable.js:355</code></a>
+        <a href="../files/src_components_table_plugins_EditableTable.js.html#l366"><code>src\components\table\plugins\EditableTable.js:366</code></a>
         
         </p>
 
@@ -886,7 +901,7 @@ when an edit field is rendered, add the column number as a property (_prop) to t
             
         
         
-        <a href="../files/src_components_table_plugins_EditableTable.js.html#l363"><code>src\components\table\plugins\EditableTable.js:363</code></a>
+        <a href="../files/src_components_table_plugins_EditableTable.js.html#l374"><code>src\components\table\plugins\EditableTable.js:374</code></a>
         
         </p>
 
@@ -986,7 +1001,7 @@ when an edit field is rendered, add the column number as a property (_prop) to t
             
         
         
-        <a href="../files/src_components_table_plugins_EditableTable.js.html#l371"><code>src\components\table\plugins\EditableTable.js:371</code></a>
+        <a href="../files/src_components_table_plugins_EditableTable.js.html#l382"><code>src\components\table\plugins\EditableTable.js:382</code></a>
         
         </p>
 
@@ -1148,7 +1163,7 @@ when an edit field is rendered, add the column number as a property (_prop) to t
             
         
         
-        <a href="../files/src_components_table_plugins_EditableTable.js.html#l273"><code>src\components\table\plugins\EditableTable.js:273</code></a>
+        <a href="../files/src_components_table_plugins_EditableTable.js.html#l284"><code>src\components\table\plugins\EditableTable.js:284</code></a>
         
         </p>
 
@@ -1304,7 +1319,7 @@ when an edit field is rendered, add the column number as a property (_prop) to t
             
         
         
-        <a href="../files/src_components_table_plugins_EditableTable.js.html#l126"><code>src\components\table\plugins\EditableTable.js:126</code></a>
+        <a href="../files/src_components_table_plugins_EditableTable.js.html#l141"><code>src\components\table\plugins\EditableTable.js:141</code></a>
         
         </p>
 
@@ -1404,7 +1419,7 @@ cancels any changes made and replaces the HTML with the pre-edit state</p>
             
         
         
-        <a href="../files/src_components_table_plugins_EditableTable.js.html#l499"><code>src\components\table\plugins\EditableTable.js:499</code></a>
+        <a href="../files/src_components_table_plugins_EditableTable.js.html#l510"><code>src\components\table\plugins\EditableTable.js:510</code></a>
         
         </p>
 
@@ -1605,7 +1620,13 @@ cancels any changes made and replaces the HTML with the pre-edit state</p>
             
                 <li class="arg">
                     
-                        <code>rowNumber</code>
+                        <code>$tr</code>
+                    
+                </li>
+            
+                <li class="arg">
+                    
+                        <code>$clickedItem</code>
                     
                 </li>
             
@@ -1639,7 +1660,7 @@ cancels any changes made and replaces the HTML with the pre-edit state</p>
 
     
         <span class="returns-inline">
-            <span class="type">Object</span>
+            <span class="type">Object | Null</span>
         </span>
     
 
@@ -1666,7 +1687,7 @@ cancels any changes made and replaces the HTML with the pre-edit state</p>
             
         
         
-        <a href="../files/src_components_table_plugins_EditableTable.js.html#l64"><code>src\components\table\plugins\EditableTable.js:64</code></a>
+        <a href="../files/src_components_table_plugins_EditableTable.js.html#l71"><code>src\components\table\plugins\EditableTable.js:71</code></a>
         
         </p>
 
@@ -1704,8 +1725,23 @@ cancels any changes made and replaces the HTML with the pre-edit state</p>
             
                 <li class="param">
                     
-                        <code class="param-name">rowNumber</code>
-                        <span class="type">Integer</span>
+                        <code class="param-name">$tr</code>
+                        <span class="type">JQuery Object TR</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                         
+                    </div>
+
+                    
+                </li>
+            
+                <li class="param">
+                    
+                        <code class="param-name">$clickedItem</code>
+                        <span class="type">JQuery Object TR | TD etc</span>
                     
 
                     
@@ -1757,7 +1793,7 @@ cancels any changes made and replaces the HTML with the pre-edit state</p>
                     
 
                     <div class="param-description">
-                        <p>to populate with what dependencies are needed - variable pointers</p>
+                        <p>to populate with what dependencies are needed - <strong>variable pointers</strong></p>
 
                     </div>
 
@@ -1773,7 +1809,7 @@ cancels any changes made and replaces the HTML with the pre-edit state</p>
                     
 
                     <div class="param-description">
-                        <p>to populate which which dependencies have already been added to deps - variable pointers</p>
+                        <p>to populate which which dependencies have already been added to deps - <strong>variable pointers</strong></p>
 
                     </div>
 
@@ -1791,7 +1827,7 @@ cancels any changes made and replaces the HTML with the pre-edit state</p>
             <div class="returns-description">
                 
                     
-                        <span class="type">Object</span>:
+                        <span class="type">Object | Null</span>:
                     
                     <p>field config {sName:&quot;fields.input&quot;, value:&quot;abc&quot;, ...}</p>
 
@@ -1858,7 +1894,7 @@ cancels any changes made and replaces the HTML with the pre-edit state</p>
             
         
         
-        <a href="../files/src_components_table_plugins_EditableTable.js.html#l421"><code>src\components\table\plugins\EditableTable.js:421</code></a>
+        <a href="../files/src_components_table_plugins_EditableTable.js.html#l432"><code>src\components\table\plugins\EditableTable.js:432</code></a>
         
         </p>
 
@@ -1990,7 +2026,7 @@ cancels any changes made and replaces the HTML with the pre-edit state</p>
             
         
         
-        <a href="../files/src_components_table_plugins_EditableTable.js.html#l406"><code>src\components\table\plugins\EditableTable.js:406</code></a>
+        <a href="../files/src_components_table_plugins_EditableTable.js.html#l417"><code>src\components\table\plugins\EditableTable.js:417</code></a>
         
         </p>
 
@@ -2120,7 +2156,7 @@ cancels any changes made and replaces the HTML with the pre-edit state</p>
             
         
         
-        <a href="../files/src_components_table_plugins_EditableTable.js.html#l164"><code>src\components\table\plugins\EditableTable.js:164</code></a>
+        <a href="../files/src_components_table_plugins_EditableTable.js.html#l179"><code>src\components\table\plugins\EditableTable.js:179</code></a>
         
         </p>
 
@@ -2230,7 +2266,7 @@ cancels any changes made and replaces the HTML with the pre-edit state</p>
             
         
         
-        <a href="../files/src_components_table_plugins_EditableTable.js.html#l114"><code>src\components\table\plugins\EditableTable.js:114</code></a>
+        <a href="../files/src_components_table_plugins_EditableTable.js.html#l129"><code>src\components\table\plugins\EditableTable.js:129</code></a>
         
         </p>
 
@@ -2296,7 +2332,7 @@ remove the editMarker and reset any &quot;globals&quot;</p>
             
         
         
-        <a href="../files/src_components_table_plugins_EditableTable.js.html#l344"><code>src\components\table\plugins\EditableTable.js:344</code></a>
+        <a href="../files/src_components_table_plugins_EditableTable.js.html#l355"><code>src\components\table\plugins\EditableTable.js:355</code></a>
         
         </p>
 
@@ -2384,7 +2420,7 @@ remove the editMarker and reset any &quot;globals&quot;</p>
             
         
         
-        <a href="../files/src_components_table_plugins_EditableTable.js.html#l140"><code>src\components\table\plugins\EditableTable.js:140</code></a>
+        <a href="../files/src_components_table_plugins_EditableTable.js.html#l155"><code>src\components\table\plugins\EditableTable.js:155</code></a>
         
         </p>
 
@@ -2472,7 +2508,7 @@ remove the editMarker and reset any &quot;globals&quot;</p>
             
         
         
-        <a href="../files/src_components_table_plugins_EditableTable.js.html#l330"><code>src\components\table\plugins\EditableTable.js:330</code></a>
+        <a href="../files/src_components_table_plugins_EditableTable.js.html#l341"><code>src\components\table\plugins\EditableTable.js:341</code></a>
         
         </p>
 
@@ -2553,7 +2589,7 @@ remove the editMarker and reset any &quot;globals&quot;</p>
             
         
         
-        <a href="../files/src_components_table_plugins_EditableTable.js.html#l180"><code>src\components\table\plugins\EditableTable.js:180</code></a>
+        <a href="../files/src_components_table_plugins_EditableTable.js.html#l195"><code>src\components\table\plugins\EditableTable.js:195</code></a>
         
         </p>
 
