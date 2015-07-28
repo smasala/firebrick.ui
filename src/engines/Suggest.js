@@ -123,6 +123,8 @@ define(["jquery", "firebrick"], function($){
 		_query: function(query, data){
 			var me = this,
 				matches = [],
+				childMatches = [],
+				tmp,
 				lookups,
 				lukup,
 				substrRegex = new RegExp(query, 'i'),
@@ -131,19 +133,32 @@ define(["jquery", "firebrick"], function($){
 			for(var i = 0, l = data.length; i<l; i++){
 		    	it = data[i];
 		    	if( me.filter(it) ){
-		    		lookups = me._getSearchStrings( it );
-		    		for(var ii = 0, ll = lookups.length; ii<ll; ii++){
-				    	//search for a match
-		    			lukup = lookups[ii];
-		    			//check for Knockout observables - maybe needed if store is defined for data
-		    			lukup = $.isFunction( lukup ) ? lukup() : lukup;
-				    	if( substrRegex.test( lukup ) ){
-				    		matches.push(it);
-				    		//break lookups loop
-				    		break;
-				    	}
+		    		if( it.exclude !== true ){	//if exclude === true then ignore this node and children
+		    			if(it.suggestable !== false){ //suggestable === false means that the current node is ignored but not their children
+		    				lookups = me._getSearchStrings( it );
+				    		for(var ii = 0, ll = lookups.length; ii<ll; ii++){
+						    	//search for a match
+				    			lukup = lookups[ii];
+				    			//check for Knockout observables - maybe needed if store is defined for data
+				    			lukup = $.isFunction( lukup ) ? lukup() : lukup;
+						    	if( substrRegex.test( lukup ) ){
+						    		matches.push(it);
+						    		//break lookups loop
+						    		break;
+						    	}
+				    		}
+		    			}
+		    			if($.isArray(it.children)){
+		    				//has child nodes
+		    				//search child nodes too
+		    				childMatches = me._query(query, it.children);
+		    				if( childMatches.length ){
+		    					tmp = Firebrick.utils.copyover({}, it);	//make a new copy of the parent node
+		    					tmp.children = childMatches;	//add the matches to it
+		    					matches.push(tmp);
+		    				}
+		    			}
 		    		}
-		    			
 		    	}
 		    }
 			

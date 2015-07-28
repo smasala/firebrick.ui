@@ -41,7 +41,7 @@ define(["./Panel", "./Form"], function(){
 				formItem.html = me.html;
 			}
 			
-			me.items = formItem;
+			me.items = [formItem];
 			 
 			return me.callParent(arguments);
 		}

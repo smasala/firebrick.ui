@@ -8,7 +8,7 @@
  * @namespace components.button
  * @class Button
  */
-define(["text!./Button.html", "./Base", "../common/mixins/Badges", "./dropdown/List"], function(tpl){
+define(["text!./Button.html", "./Base", "../common/mixins/Badges", "../menu/Menu"], function(tpl){
 	"use strict";
 	return Firebrick.define("Firebrick.ui.button.Button", {
 		extend:"Firebrick.ui.button.Base",
@@ -113,6 +113,104 @@ define(["text!./Button.html", "./Base", "../common/mixins/Badges", "./dropdown/L
 		 */
 		closeModal: false,
 		/**
+		 * use getDropdownParentEl()
+		 * @property _dropdown
+		 * @private
+		 * @type {jQuery Object}
+		 * @default null
+		 */
+		_dropdownParent: null,
+		/**
+		 * @method getDropdownParentEl
+		 * @return {jQuery Object}
+		 */
+		getDropdownParentEl: function(){
+			var me = this,
+				el;
+			
+			if(!me._dropdownParent){
+				el = me.getElement();
+				me._dropdownParent = el.parent();
+			}
+			
+			return me._dropdownParent;
+		},
+		/**
+		 * use getDropdownEl()
+		 * @property _dropdown
+		 * @private
+		 * @type {jQuery Object}
+		 * @default null
+		 */
+		_dropdown: null,
+		/**
+		 * @method getDropdownEl
+		 * @return {jQuery Object}
+		 */
+		getDropdownEl: function(){
+			var me = this,
+				el;
+			if(!me._dropdown){
+				el = me.getElement();
+				me._dropdown = el.siblings("ul.dropdown-menu");
+			}
+			
+			return me._dropdown;
+		},
+		/**
+		 * @method init
+		 */
+		init: function(){
+			var me = this;
+			
+			me._initDropdown();
+			
+			return me.callParent( arguments );
+		},
+		/**
+		 * @method _initDropdown
+		 * @private
+		 */
+		_initDropdown: function(){
+			var me = this;
+			if( me.items && me.items.length ){
+				me.on("rendered", function(){
+					var el = me.getDropdownParentEl();
+					if(el.length){
+						el.on("shown.bs.dropdown", function(){
+							me.positionDropdown();
+						});
+					}
+				});
+			}
+		},
+		/**
+		 * @method positionDropdown
+		 */
+		positionDropdown: function(){
+			var me = this,
+				el = me.getElement(),
+				drop = me.getDropdownEl(),
+				docWidth = $(document).width(),
+				elOffset = el.offset(),
+				startLeft = elOffset.left,
+				dropWidth = drop.outerWidth(),
+				elWidth = el.outerWidth(),
+				diff = dropWidth - elWidth;
+			
+			if(dropWidth > elWidth){
+				if( (elOffset.left + dropWidth) > docWidth){
+					startLeft = elOffset.left - diff;
+				}
+			}
+			
+			drop.css({
+				top: elOffset.top + el.outerHeight(),
+				left: startLeft
+			});
+			
+		},
+		/**
 		 * default bindings called by data-bind={{data-bind}}
 		 * @method bindings
 		 * @return {Object}
@@ -202,10 +300,11 @@ define(["text!./Button.html", "./Base", "../common/mixins/Badges", "./dropdown/L
 			}else{
 				//standard dropdown
 				if(me.dropdownContainerClass && !me.splitButton){
-					obj.css[me.parseBind( me.dropdownContainerClass )] = true;	
+					obj.css[me.parseBind( me.dropdownContainerClass )] = true;
 				}
 			}
-			
+
+			obj.css["'fb-ui-dropdown'"] = true;
 			
 			return obj;
 		},
@@ -216,13 +315,17 @@ define(["text!./Button.html", "./Base", "../common/mixins/Badges", "./dropdown/L
 		getDropdown: function(){
 			var me = this,
 				obj = {
-					sName: "button.dropdown.list",
-					items: $.isArray(me.items) ? "Firebrick.ui.getCmp('" + me.getId() + "').items" : me.items
+					sName: "menu.menu",
+					items: me.items
 				};
 			
-			obj = Firebrick.utils.copyover(obj, me.dropdownConfig);
+			obj = Firebrick.utils.copyover(obj, me.dropdownConfig || {});
 
-			return me._getItems(obj).html;
+			obj = me._getItems(obj);
+			
+			me.items = obj.items;
+			
+			return obj.html;
 		},
 		
 		/**

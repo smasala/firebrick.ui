@@ -36,6 +36,7 @@ define(["text!./List.html", "knockout", "jquery", "../common/Base",  "../common/
 	}
 	
 	if(!ko.bindingHandlers.listItemRenderer){
+		ko.virtualElements.allowedBindings.listItemRenderer = true;
 		ko.bindingHandlers.listItemRenderer = {
 		    init: function(element, valueAccessor, allBindings, viewModel, bindingContext) {
 				var $el = $(element);
@@ -137,6 +138,150 @@ define(["text!./List.html", "knockout", "jquery", "../common/Base",  "../common/
 		 */
 		ignoreRouter: false,
 		/**
+		 * @property collapsedCSS
+		 * @type {String}
+		 * @default "fb-ui-listitem-collapsed"
+		 */
+		collapsedCSS: "fb-ui-listitem-collapsed",
+		/**
+		 * set to false to remove node span before text
+		 * @property preNode
+		 * @type {Boolean}
+		 * @default true
+		 */
+		preNode: true,
+		/**
+		 * used by nodeRenderer()
+		 * @method nodeCSSRenderer
+		 * @param $data {ko bindings context}
+		 * @return {Object} passed to $element.addClass()
+		 */
+		nodeCSSRenderer: function( $data ){
+			var me = this,
+				obj = {},
+				children = $data.children;
+			
+			obj["fb-ui-node-action"] = true;
+			
+			if(children){
+				
+				obj.glyphicon = true;
+				
+				if(children.expandable !== false){
+					obj["fb-ui-list-expandable-node"] = true;
+				}
+				
+			}else{
+				obj["fb-ui-hidden"] = true;
+			}
+			
+			return obj;
+		},
+		/**
+		 * @method nodeRenderer 
+		 * @param $element {jQuery Object}
+		 * @param bindingContext {KO Context Object]
+		 */
+		nodeRenderer: function($element, bindingContext ){
+			var me = this,
+				$data = bindingContext.$data,
+				children = $data.children;
+			
+		},
+		/**
+		 * @method init
+		 */
+		init: function(){
+			var me = this;
+			
+			me.on("rendered", function(){
+				me._initUIEvents();
+			});
+			
+			return me.callParent( arguments );
+		},
+		/**
+		 * @method _initUIEvents
+		 * @private
+		 */
+		_initUIEvents: function(){
+			var me = this,
+				$el = me.getElement(),
+				$collapsibles = $(".fb-ui-list-expandable-node", $el),
+				func = function(){
+					return me._nodeClick( this, arguments );
+				}
+
+			if( $collapsibles.length ){
+				$collapsibles.on("click", func);
+				me.on("destroy", function(){
+					$collapsibles.off("click", func);
+				});
+			}
+		},
+		/**
+		 * @method _nodeClick
+		 * @private
+		 * used by jQuery on click event
+		 */
+		_nodeClick: function(element, clickArgs){
+			var me = this,
+				$el = $(element),
+				$node = $el.closest("li.fb-ui-listitem-parent"),
+				args = Firebrick.utils.argsToArray( clickArgs );
+			
+			args.unshift( "nodeClicked" );	//add to the begining
+			args.push( $node ); //add to end
+			
+			me.toggleCollapse( $node );
+			
+			return me.fireEvent( "nodeClicked", args);
+		},
+		/**
+		 * @method toggleCollapse
+		 * @param $node {jQuery Object} li node item
+		 */
+		toggleCollapse: function( $node ){
+			var me = this,
+				$ul = $("> ul", $node);
+			
+			if($ul.length){
+				if( $ul.is(":visible") ){
+					me.collapseNode( $node );
+				}else{
+					me.expandNode( $node );
+				}
+			}
+		},
+		/**
+		 * @method collapseNode
+		 * @param $node {jQuery Object} li node item
+		 */
+		collapseNode: function( $node ){
+			var me = this,
+				$ul = $("> ul", $node);
+			
+			if($ul.length){
+				$ul.hide();
+				me.fireEvent("nodeCollapsed", $node, $ul);
+				$node.addClass( me.collapsedCSS );
+			}
+		},
+		/**
+		 * @method expandNode
+		 * @param $node {jQuery Object} li node item
+		 */
+		expandNode: function( $node ){
+			var me = this,
+				$ul = $("> ul", $node);
+			
+			if($ul.length){
+				$ul.show();
+				me.fireEvent("nodeExpanded", $node, $ul);
+				$node.removeClass( me.collapsedCSS );
+			}
+		},
+		/**
 		 * @method bindings
 		 * @return {Object}
 		 */
@@ -148,11 +293,14 @@ define(["text!./List.html", "knockout", "jquery", "../common/Base",  "../common/
 				obj.css["'list-group'"] = me.listGroup;
 			}
 			if(me.unstyled){
-				obj.css["'list-unstyled'"] = me.unstyled;
+				obj.css["'fb-ui-list-unstyled'"] = me.unstyled;
 			}
 			if(me.items){
 				obj.foreach = "$data";
 			}
+			
+			obj.visible = "$parent.expanded === false ? false : true";
+			
 			return obj;
 		},
 		/**
@@ -161,15 +309,24 @@ define(["text!./List.html", "knockout", "jquery", "../common/Base",  "../common/
 		 */
 		listItemBindings: function(){
 			var me  = this,
-				obj = {css:{}, attr:{}};
+				obj = {
+					css:{
+						"'fb-ui-listitem-parent'": "$data.children ? true : false",
+						"'fb-ui-listitem-haschildren'": "$data.children ? true : false"
+					}, 
+					attr:{}
+				};
 			
 			if(me.listGroup && me.listItemGroupClass){
 				obj.css["'list-group-item'"] = me.listItemGroupClass;
 			}
 			
+			obj.css[ me.parseBind( me.collapsedCSS ) ] = "$data.children && $data.expandable !== false && $data.expanded === false ? true : false";
+			
 			obj.css.divider = "$data === '|' || $data.divider ? true : false";
 			obj.attr.id = "$data.id || 'fb-ui-listitem-' + Firebrick.utils.uniqId()";
 			obj.listItemRenderer = true;
+			
 			
 			return obj;
 		},
@@ -178,12 +335,15 @@ define(["text!./List.html", "knockout", "jquery", "../common/Base",  "../common/
 		 * @return {Object}
 		 */
 		listItemTextBindings:function(){
-			//var me = this;
+			var me = this;
 			return {
-				text: "$data.text ? $data.text : $data"
+				value: "$data.hasOwnProperty('value') ? $data.value : $data",
+				htmlWithBinding: "$data.renderer ? $data.renderer($data, $context) : ($data.text ? $data.text : $data)",
+				css: {
+					"'fb-ui-listitem-text'": true
+				} 
 			};
 		},
-		
 		/**
 		 * @method listTemplateBindings
 		 * @return {Object}
@@ -195,10 +355,9 @@ define(["text!./List.html", "knockout", "jquery", "../common/Base",  "../common/
 					name:  me.parseBind(me._getTplId()),
 					data: $.isArray(me.items) ? "Firebrick.ui.getCmp('" + me.getId() + "').items" : me.items,
 				},
-				listRenderer: me.parseBind(me.getId())
+				listRenderer: me.parseBind( me.getId() )
 			};
 		},
-		
 		/**
 		 * @private
 		 * @method _getTplId
@@ -207,7 +366,6 @@ define(["text!./List.html", "knockout", "jquery", "../common/Base",  "../common/
 		_getTplId: function(){
 			return "fb-ui-tpl-" + this.getId(); 
 		},
-		
 		/**
 		 * @method childrenBindings
 		 * @return {Object}
@@ -216,12 +374,11 @@ define(["text!./List.html", "knockout", "jquery", "../common/Base",  "../common/
 			var me = this;
 			return {
 				template: {
-					name:  me.parseBind(me._getTplId()),
+					name:  me.parseBind( me._getTplId() ),
 					data: "$data.children"
 				}
 			};
 		},
-		
 		/**
 		 * @method listLinkBindings
 		 * @return {Object}
@@ -230,11 +387,25 @@ define(["text!./List.html", "knockout", "jquery", "../common/Base",  "../common/
 			var me = this,
 				obj = {
 					attr:{
-						href: "typeof $data.href === 'string' ? $data.href : 'javascript:void(0);'"
-					}
+						href: "Firebrick.ui.helper.linkBuilder( $data )",
+						"'data-value'": "$data.hasOwnProperty('value') ? $data.value : $data"
+					},
+					value: "$data.hasOwnProperty('value') ? $data.value : $data",
 			};
 			obj.attr["'data-target'"] = "$data.dataTarget ? $data.dataTarget : false";
 			obj.attr["'fb-ignore-router'"] = "$data.hasOwnProperty( 'ignoreRouter' ) ? $data.ignoreRouter : " + me.ignoreRouter;
+			return obj;
+		},
+		/**
+		 * @method listItemNodeBindings
+		 * @return {Object}
+		 */
+		listItemNodeBindings: function(){
+			var me = this,
+				obj = {
+					css: "Firebrick.getById('" + me.getId() + "').nodeCSSRenderer( $data )"
+				};
+			
 			return obj;
 		}
 	});

@@ -3,18 +3,20 @@
  */
 
 /**
- * @module plugins
- * @namespace plugins
+ * @private
+ * @module Firebrick.ui.components
+ * @extends components.menu.Menu
+ * @namespace components.menu
  * @class ContextMenu
  */
-define(["jquery", "text!./ContextMenu.html", "../mixins/Items"], function($, tpl){
+define(["jquery", "./Menu", "../common/mixins/Items"], function($){
 	"use strict";
 	
-	return Firebrick.define("Firebrick.ui.common.plugins.ContextMenu", {
-		extend: "Firebrick.ui.common.Base",
+	return Firebrick.define("Firebrick.ui.menu.ContextMenu", {
+		extend: "Firebrick.ui.menu.Menu",
 		mixins:"Firebrick.ui.common.mixins.Items",
+		sName: "menu.contextmenu",
 		target: "body",
-		tpl: tpl,
 		enclosedBind: true,
 		appendTarget: true,
 		contextMenuEvent: null,
@@ -32,22 +34,12 @@ define(["jquery", "text!./ContextMenu.html", "../mixins/Items"], function($, tpl
 		
 		position: function(){
 			var me = this,
-				el = me.getElement(),
-				event = me.contextMenuEvent,
-				$t = $(event.target),
-				currentZ = $t.css("z-index"),
-				zIndex;
+				el = $("> ul", me.getElement()),
+				event = me.contextMenuEvent;
 	
-			if(typeof currentZ === "string"){
-				//currentZ is Auto
-				zIndex = 1;
-			}else{
-				zIndex = currentZ+1;
-			}
-			
 			el.css({
 				position: "absolute",
-				"z-index": zIndex,
+				"z-index": "10000",
 				top: event.clientY,
 				left: event.clientX,
 				display: "block"
@@ -59,7 +51,8 @@ define(["jquery", "text!./ContextMenu.html", "../mixins/Items"], function($, tpl
 				globalClick = function(e){
 					var $e = $(e.target),
 						$el = me.getElement();
-					if(!$el.is($e) && !$el.has($e).length){
+					
+					if(!$el.is($e) || $el.has($e).length){
 						me.destroy();
 						$(document).off("click", globalClick);	
 					}
@@ -75,11 +68,6 @@ define(["jquery", "text!./ContextMenu.html", "../mixins/Items"], function($, tpl
 				obj = me.callParent(arguments);
 			
 			obj.css["'fb-ui-contextmenu'"] = true;
-			
-			obj.style = obj.style || {};
-			obj.style.display = "'block'";
-			
-			obj.attr.role = "'menu'";
 			
 			return obj;
 		}

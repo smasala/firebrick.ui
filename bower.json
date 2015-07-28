@@ -15,7 +15,7 @@
 		"library",
 		"bootstrap"
 	],
-	"version": "0.15.0",
+	"version": "0.20.0",
 	"dependencies": {
 		"firebrick": "latest",
 		"bootstrap": "3.x",
@@ -25,6 +25,7 @@
 		"responsive-images": "latest",
 		"responsive-tables-js": "latest",
 		"devicejs": "latest",
-		"bootstrap-datepicker": "latest"
+		"bootstrap-datepicker": "latest",
+		"summernote": "latest"
 	}
 }

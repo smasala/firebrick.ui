@@ -1,5 +1,0 @@
-/*!
- * @author Steven Masala [me@smasala.com]
- */
-
-define(["jquery","text!./ContextMenu.html","../mixins/Items"],function(e,t){return Firebrick.define("Firebrick.ui.common.plugins.ContextMenu",{extend:"Firebrick.ui.common.Base",mixins:"Firebrick.ui.common.mixins.Items",target:"body",tpl:t,enclosedBind:!0,appendTarget:!0,contextMenuEvent:null,init:function(){var e=this;return e.on("rendered",function(){e._initContext(),e.position()}),e.callParent(arguments)},position:function(){var t=this,n=t.getElement(),r=t.contextMenuEvent,i=e(r.target),s=i.css("z-index"),o;typeof s=="string"?o=1:o=s+1,n.css({position:"absolute","z-index":o,top:r.clientY,left:r.clientX,display:"block"})},_initContext:function(){var t=this,n=function(r){var i=e(r.target),s=t.getElement();!s.is(i)&&!s.has(i).length&&(t.destroy(),e(document).off("click",n))};e(document).on("click",n)},bindings:function(){var e=this,t=e.callParent(arguments);return t.css["'fb-ui-contextmenu'"]=!0,t.style=t.style||{},t.style.display="'block'",t.attr.role="'menu'",t}})});

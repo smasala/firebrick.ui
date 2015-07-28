@@ -13,6 +13,8 @@ define(["../display/List"], function(){
 	return Firebrick.define("Firebrick.ui.nav.Pagination", {
 		extend:"Firebrick.ui.display.List",
 		sName:"nav.pagination",
+		preNode: false,
+		linkedList: true,
 		/**
 		 * "lg", "sm"
 		 * @property paginationSize
@@ -33,6 +35,29 @@ define(["../display/List"], function(){
 				obj.css[ me.parseBind("pagination-"+me.paginationSize) ] = true;
 			}
 			return obj;
+		},
+		/**
+		 * @method setActive
+		 * @param val {String|Integer} - correspond to the pagination link data-value attribute
+		 */
+		setActive: function( val ){
+			var me = this,
+				$el = me.getElement(),
+				$active = me.getActive(),
+				$it = $("a[data-value='" + val + "']", $el).parent("li");
+			
+			$active.removeClass("active");
+			$it.addClass("active");
+		},
+		/**
+		 * get active item
+		 * @method getActive
+		 * @return {jQuery Object} <li>
+		 */
+		getActive: function(){
+			var me = this,
+				$el = me.getElement();
+			return $("li.active", $el);
 		}
 	});
 });

@@ -77,25 +77,34 @@ define(["text!./BorderLayout.html", "./Base", "./Box", "./border/Pane"], functio
 			left: "33%"
 		},
 		/**
+		 * 
 		 * @property height
-		 * @type {Integer|String} px value | auto | fixed
+		 * @type {Integer|String} px value | auto | fit
 		 * @default "auto"
 		 */
-		height: "fixed",
+		height: "fit",
 		/**
 		 * @method init
 		 * @return {Object}
 		 */
 		init: function(){
-			var me = this;
+			var me = this,
+				resize;
 			
 			me.on("rendered", function(){
 				var el = me.getElement(),
 					height = me.height;
-				if(height === "fixed"){
+				if(height === "fit"){
 					//set a fixed height for the borderLayout so that the height
 					//of the vertical panes grow in the correct direction
-					el.css("height", el.height());
+					el.css("height", el.parent().height());
+					resize = function(){
+						el.css("height", el.parent().height());
+					};
+					$(window).on("resize", resize);
+					me.on("unbound", function(){
+						$(window).off("resize", resize);
+					});
 				}else if(height !== "auto"){
 					//not fixed and not auto
 					el.css("height", height);

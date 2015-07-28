@@ -45,6 +45,13 @@ define(["doT", "firebrick", "jquery"], function(tplEngine, fb, $){
 		 */
 		handler: null,
 		/**
+		 * set to true to set the focus on the element after render
+		 * @property autoFocus
+		 * @type {Boolean}
+		 * @default false
+		 */
+		autoFocus: false,
+		/**
 		 * @property glyphiconClass
 		 * @type {String}
 		 * @default "glyphicon"
@@ -177,6 +184,18 @@ define(["doT", "firebrick", "jquery"], function(tplEngine, fb, $){
 		 */
 		contextMenu: null,
 		/**
+		 * @property beforeSubTpl
+		 * @type {String | HTML}
+		 * @default null
+		 */
+		beforeSubTpl: null,
+		/**
+		 * @property afterSubTpl
+		 * @type {String | HTML}
+		 * @default null
+		 */
+		afterSubTpl: null,
+		/**
 		 * pass a binding Object and this method will add the tooltip/popover relevant properties
 		 * @method addTooltipPopoverBind
 		 * @param bindObj {Object}
@@ -256,7 +275,7 @@ define(["doT", "firebrick", "jquery"], function(tplEngine, fb, $){
 		constructor: function(){
 			var me = this;
 			
-			me.precompile();
+			me._precompile();
 			
 			return me.callParent(arguments);
 		},
@@ -264,10 +283,13 @@ define(["doT", "firebrick", "jquery"], function(tplEngine, fb, $){
 		 * compile and cache template
 		 * 
 		 * @method _precompile
+		 * @private
 		 * @return {Object} self
 		 */
-		precompile: function(){
-			var me = this;
+		_precompile: function(){
+			var me = this,
+				it,
+				tpls = ["tpl", "beforeSubTpl", "subTpl", "afterSubTpl"];
 			
 			//init objects so each class is unqiue
 			me._template = {};
@@ -275,11 +297,11 @@ define(["doT", "firebrick", "jquery"], function(tplEngine, fb, $){
 			
 			//precompile the template as soon as possible - performance
 			//http://jsperf.com/dot-vs-handlebars/2
-			if(me.tpl){
-				me.template();	
-			}
-			if(me.subTpl){
-				me.template("subTpl");	
+			for(var i = 0, l = tpls.length; i<l; i++){
+				it = tpls[i];
+				if( me[it] ){
+					me.template( it );
+				}
 			}
 			return me;
 		},
@@ -325,24 +347,37 @@ define(["doT", "firebrick", "jquery"], function(tplEngine, fb, $){
 			
 			me._registerHandler();
 					
-			if(me.contextMenu && !me.contextMenu._classname){
+			
 				me.on("rendered", function(){
 					var el = me.getElement();
-					require(["Firebrick.ui/common/plugins/ContextMenu"], function(){
-						el.on("contextmenu", function(event){
-							var conf = {
-								_parent: me,
-								contextMenuEvent: event
-							}
-							event.preventDefault();
-							
-							me._contextMenu = Firebrick.create("Firebrick.ui.common.plugins.ContextMenu", Firebrick.utils.overwrite(conf, me.contextMenu));
+					
+					if(me.contextMenu && !me.contextMenu._classname){
+						require(["Firebrick.ui/menu/ContextMenu"], function(){
+							el.on("contextmenu", function(event){
+								var conf = {
+									_parent: me,
+									contextMenuEvent: event
+								};
+								event.preventDefault();
+
+								me._contextMenu = Firebrick.create("Firebrick.ui.menu.ContextMenu", Firebrick.utils.overwrite(conf, me.contextMenu));
+							});
 						});
-					});
+					}
+					
+					if(me.autoFocus){
+						me.focus();
+					}
 				});
-			}
 				
 			return me.callParent(arguments);
+		},
+		/**
+		 * set focus on element
+		 * @method focus
+		 */
+		focus: function(){
+			this.getElement().focus();
 		},
 		/**
 		 * @method _registerHandler
@@ -356,7 +391,7 @@ define(["doT", "firebrick", "jquery"], function(tplEngine, fb, $){
 			handlerEvent = handlerEvent || me.handlerEvent;
 			elementSelector = elementSelector || me._getElementSelector();
 			if(handler && handlerEvent){
-				$(document).on(handlerEvent, me._getElementSelector(), function(){
+				$(document).on(handlerEvent, elementSelector, function(){
 					var args = Array.prototype.slice.call(arguments);
 					args.push(this);
 					handler.apply(me, args);
@@ -414,17 +449,30 @@ define(["doT", "firebrick", "jquery"], function(tplEngine, fb, $){
 		},
 		/**
 		 * @method dataBind
-		 * @param {String} [property=this.bindings]
+		 * @param property {String} [property=this.bindings]
+		 * @param ...
 		 * @private
 		 * @return {String}
 		 */
-		dataBind: function(property){
+		dataBind: function(){
 			var me = this,
-				prop = property ? me[property] : me.bindings;
-			if($.isFunction(prop)){
-				prop = prop.call(me);
+				args = Firebrick.utils.argsToArray( arguments ),
+				prop,
+				obj;
+			
+			if(args && args.length){
+				prop = args.splice(0, 1);
+			}else{
+				prop = "bindings";
 			}
-			return Firebrick.ui.utils.stringify( prop );
+			
+			obj = me[prop];
+				
+			if($.isFunction(obj)){
+				obj = obj.apply(me, args);
+			}
+			
+			return Firebrick.ui.utils.stringify( obj );
 		},
 		/**
 		 * called when calling {{{getSubTpl}}} in component template
@@ -432,7 +480,17 @@ define(["doT", "firebrick", "jquery"], function(tplEngine, fb, $){
 		 * @return {String}
 		 */
 		getSubTpl: function(){
-			return this.build("subTpl");
+			var me = this,
+				tpl = me.build("subTpl");
+			
+			if(me.beforeSubTpl){
+				tpl = me.build("beforeSubTpl") + tpl;
+			}
+			if(me.afterSubTpl){
+				tpl = tpl + me.build("afterSubTpl");
+			}
+			
+			return tpl;
 		},
 		/**
 		 * find the parent of this class

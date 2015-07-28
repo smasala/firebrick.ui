@@ -135,11 +135,11 @@ a.fb-ui-inplaceedit-changed{
 /*-- /inplace edit --*/
 
 table.treetable tr.collapsed span.indenter a:before{
-	content: "\e080";
+	content: "\e080"; /* > */
 }
 
 table.treetable tr.expanded span.indenter a:before{
-	content: "\e114";
+	content: "\e114"; /* v */
 }
 
 table.treetable span.file {
@@ -292,7 +292,7 @@ progress[value]::-webkit-progress-value{
 
 /** BS 3 re-enable nested dropdowns 
 * http://firdaus.grandexa.com/2013/09/twitter-bootstrap-3-multilevel-dropdown-menu/
-**/
+
 .dropdown-submenu{position:relative;}
 .dropdown-submenu>.dropdown-menu{top:0;left:100%;margin-top:-6px;margin-left:-1px;-webkit-border-radius:0 6px 6px 6px;-moz-border-radius:0 6px 6px 6px;border-radius:0 6px 6px 6px;}
 .dropdown-submenu:hover>.dropdown-menu{display:block;}
@@ -301,6 +301,9 @@ progress[value]::-webkit-progress-value{
 .dropdown-submenu.pull-left{float:none;}.dropdown-submenu.pull-left>.dropdown-menu{left:-100%;margin-left:10px;-webkit-border-radius:6px 0 6px 6px;-moz-border-radius:6px 0 6px 6px;border-radius:6px 0 6px 6px;}
 /** /BS nested dropdown **/
 
+.fb-ui-dropdown .dropdown-menu{
+	position: fixed;
+}
 
 /** Panel toolbars **/
 .fb-ui-toolbar-container {
@@ -449,6 +452,11 @@ progress[value]::-webkit-progress-value{
 
 /** MISC **/
 
+.fb-ui-hidden-field, 
+.fb-ui-hidden{
+	display: none;	
+}
+
 .btn .caret {
     margin-left: 2px;
 }
@@ -469,6 +477,49 @@ progress[value]::-webkit-progress-value{
 a:hover{
 	cursor:pointer;
 }
+
+
+/** List **/
+.fb-ui-list-unstyled{
+	list-style: none;
+}
+
+ul.fb-ui-list-unstyled.nav ul {
+    padding-left: 20px;
+}
+
+.fb-ui-list-expandable-node{
+	cursor: pointer;
+	color: #337ab7;
+}
+
+.fb-ui-node-action.fb-ui-hidden + span.fb-ui-listitem-text,
+.fb-ui-node-action.fb-ui-hidden + a{
+	margin-left: 20px;
+}
+
+.fb-ui-node-action + span.fb-ui-listitem-text,
+.fb-ui-node-action + a {
+	margin-left: 6px;
+}
+
+.fb-ui-node-action, .fb-ui-node-action + a{
+	display: inline-block !important;
+}
+
+.fb-ui-listitem-collapsed > .fb-ui-list-expandable-node:before{
+	content: "\e080"; /* > */
+}
+
+.fb-ui-list-expandable-node:before{
+	content: "\e114"; /* v */
+}
+
+.fb-ui-listitem-parent .fb-ui-listitem-haschildren {
+    padding-left: 22px;
+}
+
+/*-- /List --*/
 
 .input-group-addon .control-label{
 	display:none;
@@ -505,11 +556,11 @@ a:hover{
 }
 
 .fb-ui-borderlayout .fb-ui-center-row, .fb-ui-borderlayout .fb-ui-panel-body-container{
-	-webkit-box-flex: 1 1 auto;
-  	-moz-box-flex: 1 1 auto;
- 	-webkit-flex: 1 1 auto;
-  	-ms-flex: 1 1 auto;
-  	flex: 1 1 auto;
+	-webkit-box-flex: 1 1;
+  	-moz-box-flex: 1 1;
+ 	-webkit-flex: 1 1;
+  	-ms-flex: 1 1;
+  	flex: 1 1;
 }
 
 .fb-ui-borderlayout .fb-ui-center-row{
@@ -623,6 +674,10 @@ a:hover{
 	position:relative;
 }
 
+.panel-heading .fb-ui-title-link{
+	display:inline-block;
+}
+
 .panel-heading .panel-title.fb-ui-has-label,
 .panel-heading .label{
 	display: inline-block;
@@ -634,7 +689,6 @@ a:hover{
 }
 
 .panel-heading .fb-ui-collapse-icon{
-	position:absolute;
 	right:14px;
 	top:8px;
 }
@@ -647,14 +701,22 @@ a:hover{
 	content: "\e080"; /* ">" */
 }
 
-.panel-primary .panel-heading .fb-ui-collapse-icon:before{
+.panel-primary > .panel-heading .fb-ui-collapse-icon:before,
+.panel-primary > .panel-heading a .panel-title {
 	color: #fff;
+}
+
+.panel-primary > .panel-heading a .panel-title:hover {
+	color: #d0f4f4;	
+}
+
+.panel-heading .fb-ui-panel-icon{
+	float: right;
 }
 
 .panel-heading .fb-ui-collapse-icon:before {
     content: "\e114";	/* "v" */
     font-family: 'Glyphicons Halflings';
-    float: right;
     color: grey;
 }
 
@@ -792,6 +854,11 @@ a:hover{
     text-indent: 0;
 }
 
+.fb-ui-combo-input:focus {
+	-webkit-appearance: none;
+	outline: none;
+}
+
 .fb-ui-combo-select {
 	border-width: 5px 5px;
     cursor: pointer;
@@ -826,6 +893,17 @@ a:hover{
     position: fixed;
 }
 
+.fb-ui-combo-group-item > .fb-ui-combo-group-title{
+    border-bottom: 1px solid #f0f0f0;
+    border-top: 1px solid #f0f0f0;
+    font-weight: bold;
+    background: #f8f8f8 none repeat scroll 0 0;
+    color: #303030;
+    cursor: default;
+    display:block;
+    padding:3px;
+}
+
 .fb-ui-combo-item {
 	padding: 10px;
 	cursor: pointer;
@@ -840,3 +918,15 @@ a:hover{
 	background-color: #f1f1f1;
 }
 /*-- /ComboBox **/
+
+/** Gridable **/
+.fb-ui-gridable-footer ul.pagination{
+	margin-top: 0px;
+}
+.fb-ui-gridable-footer ul.pagination input.fb-ui-pagination-pager{
+	height: 20px;
+    width: 40px;
+    line-height: 1;
+    margin-right:5px;
+}
+/** /Gridable **/

@@ -94,10 +94,10 @@ a.fb-ui-inplaceedit-changed{
 	font-weight: bold;
 }
 table.treetable tr.collapsed span.indenter a:before{
-	content: "\e080";
+	content: "\e080"; 
 }
 table.treetable tr.expanded span.indenter a:before{
-	content: "\e114";
+	content: "\e114"; 
 }
 table.treetable span.file {
   background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAQAAAC1+jfqAAAABGdBTUEAAK/INwWK6QAAABl0RVh0U29mdHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAADoSURBVBgZBcExblNBGAbA2ceegTRBuIKOgiihSZNTcC5LUHAihNJR0kGKCDcYJY6D3/77MdOinTvzAgCw8ysThIvn/VojIyMjIyPP+bS1sUQIV2s95pBDDvmbP/mdkft83tpYguZq5Jh/OeaYh+yzy8hTHvNlaxNNczm+la9OTlar1UdA/+C2A4trRCnD3jS8BB1obq2Gk6GU6QbQAS4BUaYSQAf4bhhKKTFdAzrAOwAxEUAH+KEM01SY3gM6wBsEAQB0gJ+maZoC3gI6iPYaAIBJsiRmHU0AALOeFC3aK2cWAACUXe7+AwO0lc9eTHYTAAAAAElFTkSuQmCC);
@@ -209,12 +209,9 @@ progress[value]::-webkit-progress-value{
 														rgba(0,0,0,.2)),
      -webkit-linear-gradient( left, #09c, #f44);
 }
-.dropdown-submenu{position:relative;}
-.dropdown-submenu>.dropdown-menu{top:0;left:100%;margin-top:-6px;margin-left:-1px;-webkit-border-radius:0 6px 6px 6px;-moz-border-radius:0 6px 6px 6px;border-radius:0 6px 6px 6px;}
-.dropdown-submenu:hover>.dropdown-menu{display:block;}
-.dropdown-submenu>a:after{display:block;content:" ";float:right;width:0;height:0;border-color:transparent;border-style:solid;border-width:5px 0 5px 5px;border-left-color:#cccccc;margin-top:5px;margin-right:-10px;}
-.dropdown-submenu:hover>a:after{border-left-color:#ffffff;}
-.dropdown-submenu.pull-left{float:none;}.dropdown-submenu.pull-left>.dropdown-menu{left:-100%;margin-left:10px;-webkit-border-radius:6px 0 6px 6px;-moz-border-radius:6px 0 6px 6px;border-radius:6px 0 6px 6px;}
+.fb-ui-dropdown .dropdown-menu{
+	position: fixed;
+}
 .fb-ui-toolbar-container {
 	position:relative;
 }
@@ -331,6 +328,10 @@ progress[value]::-webkit-progress-value{
 .btn.fb-ui-danger.active:hover, .btn.fb-ui-danger.active:focus, .btn.fb-ui-danger:active {
     background-color: #c12e2a;
 }
+.fb-ui-hidden-field, 
+.fb-ui-hidden{
+	display: none;	
+}
 .btn .caret {
     margin-left: 2px;
 }
@@ -345,6 +346,36 @@ progress[value]::-webkit-progress-value{
 }
 a:hover{
 	cursor:pointer;
+}
+.fb-ui-list-unstyled{
+	list-style: none;
+}
+ul.fb-ui-list-unstyled.nav ul {
+    padding-left: 20px;
+}
+.fb-ui-list-expandable-node{
+	cursor: pointer;
+	color: #337ab7;
+}
+.fb-ui-node-action.fb-ui-hidden + span.fb-ui-listitem-text,
+.fb-ui-node-action.fb-ui-hidden + a{
+	margin-left: 20px;
+}
+.fb-ui-node-action + span.fb-ui-listitem-text,
+.fb-ui-node-action + a {
+	margin-left: 6px;
+}
+.fb-ui-node-action, .fb-ui-node-action + a{
+	display: inline-block !important;
+}
+.fb-ui-listitem-collapsed > .fb-ui-list-expandable-node:before{
+	content: "\e080"; 
+}
+.fb-ui-list-expandable-node:before{
+	content: "\e114"; 
+}
+.fb-ui-listitem-parent .fb-ui-listitem-haschildren {
+    padding-left: 22px;
 }
 .input-group-addon .control-label{
 	display:none;
@@ -371,11 +402,11 @@ a:hover{
 	-webkit-flex-direction: column;
 }
 .fb-ui-borderlayout .fb-ui-center-row, .fb-ui-borderlayout .fb-ui-panel-body-container{
-	-webkit-box-flex: 1 1 auto;
-  	-moz-box-flex: 1 1 auto;
- 	-webkit-flex: 1 1 auto;
-  	-ms-flex: 1 1 auto;
-  	flex: 1 1 auto;
+	-webkit-box-flex: 1 1;
+  	-moz-box-flex: 1 1;
+ 	-webkit-flex: 1 1;
+  	-ms-flex: 1 1;
+  	flex: 1 1;
 }
 .fb-ui-borderlayout .fb-ui-center-row{
 	flex-direction: row;
@@ -469,6 +500,9 @@ a:hover{
 .panel-heading{
 	position:relative;
 }
+.panel-heading .fb-ui-title-link{
+	display:inline-block;
+}
 .panel-heading .panel-title.fb-ui-has-label,
 .panel-heading .label{
 	display: inline-block;
@@ -478,7 +512,6 @@ a:hover{
 	margin-left: 5px;
 }
 .panel-heading .fb-ui-collapse-icon{
-	position:absolute;
 	right:14px;
 	top:8px;
 }
@@ -488,13 +521,19 @@ a:hover{
 .fb-ui-border-pane.fb-ui-pane-position-right .panel-heading .fb-ui-collapse-icon:before{
 	content: "\e080"; 
 }
-.panel-primary .panel-heading .fb-ui-collapse-icon:before{
+.panel-primary > .panel-heading .fb-ui-collapse-icon:before,
+.panel-primary > .panel-heading a .panel-title {
 	color: #fff;
+}
+.panel-primary > .panel-heading a .panel-title:hover {
+	color: #d0f4f4;	
+}
+.panel-heading .fb-ui-panel-icon{
+	float: right;
 }
 .panel-heading .fb-ui-collapse-icon:before {
     content: "\e114";	
     font-family: 'Glyphicons Halflings';
-    float: right;
     color: grey;
 }
 .fb-ui-border-pane.fb-ui-pane-position-left.fb-ui-is-collapsed .panel-heading .fb-ui-collapse-icon:before{
@@ -601,6 +640,10 @@ a:hover{
     padding: 0;
     text-indent: 0;
 }
+.fb-ui-combo-input:focus {
+	-webkit-appearance: none;
+	outline: none;
+}
 .fb-ui-combo-select {
 	border-width: 5px 5px;
     cursor: pointer;
@@ -631,6 +674,16 @@ a:hover{
     z-index: 50;
     position: fixed;
 }
+.fb-ui-combo-group-item > .fb-ui-combo-group-title{
+    border-bottom: 1px solid #f0f0f0;
+    border-top: 1px solid #f0f0f0;
+    font-weight: bold;
+    background: #f8f8f8 none repeat scroll 0 0;
+    color: #303030;
+    cursor: default;
+    display:block;
+    padding:3px;
+}
 .fb-ui-combo-item {
 	padding: 10px;
 	cursor: pointer;
@@ -641,4 +694,13 @@ a:hover{
 .fb-ui-combo-item.active{
 	color:#ff9900;
 	background-color: #f1f1f1;
+}
+.fb-ui-gridable-footer ul.pagination{
+	margin-top: 0px;
+}
+.fb-ui-gridable-footer ul.pagination input.fb-ui-pagination-pager{
+	height: 20px;
+    width: 40px;
+    line-height: 1;
+    margin-right:5px;
 }

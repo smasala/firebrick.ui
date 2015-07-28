@@ -24,7 +24,8 @@ define(function(_require, _exports, _module){
 			"responsive-tables-js": bowerPath + "/responsive-tables-js/dist/responsivetables",
 			"devicejs": bowerPath + "/devicejs/lib/device.min",
 			"Firebrick.ui.engines": bowerPath + "/firebrick.ui/dist/engines",
-			"bootstrap-datepicker": bowerPath + "/bootstrap-datepicker/dist/bootstrap-datepicker"
+			"bootstrap-datepicker": bowerPath + "/bootstrap-datepicker/dist/bootstrap-datepicker",
+			"summernote": bowerPath + "/summernote/dist/summernote.min"
 		},
 		shim:{
 			"knockout-mapping": ["knockout"],

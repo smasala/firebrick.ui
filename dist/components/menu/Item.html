@@ -1,0 +1,7 @@
+<li id="{{=it.getId()}}" data-bind="{{=it.dataBind()}}">
+	{{?it.items}}
+		{{=it.getItems()}}
+	{{?? true}}
+		<a data-bind="{{=it.dataBind('linkBindings')}}"></a>
+	{{?}}
+</li>

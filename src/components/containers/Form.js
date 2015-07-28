@@ -43,11 +43,12 @@ define(["text!./Form.html", "jquery", "./Base"], function(tpl, $){
 		 */
 		inline:false,
 		/**
+		 * multipart/form-data for files
 		 * @property enctype
 		 * @type {String}
-		 * @default "multipart/form-data"
+		 * @default "application/x-www-form-urlencoded"
 		 */
-		enctype: "multipart/form-data",
+		enctype: "application/x-www-form-urlencoded",
 		/**
 		 * whether the progress bar should be shown on form submission
 		 * @property showProgress
@@ -89,7 +90,16 @@ define(["text!./Form.html", "jquery", "./Base"], function(tpl, $){
 		 * @method preSubmit
 		 * @param jquery "submit" event arguments
 		 */
-		preSubmit: function(){},
+		preSubmit: function(event){
+			event.preventDefault();
+		},
+		/**
+		 * set the target attribute on the form
+		 * @property formTarget
+		 * @type {String}
+		 * @default null
+		 */
+		formTarget: null,
 		/**
 		 * upload and download progress
 		 * @event progressChanged
@@ -180,7 +190,6 @@ define(["text!./Form.html", "jquery", "./Base"], function(tpl, $){
 				var el = me.getElement();
 				if(el){
 					el.on("submit", function(event){
-						event.preventDefault();
 						if(me.preSubmit.apply(me, arguments) !== false){
 							me.submit();	
 						}
@@ -238,6 +247,12 @@ define(["text!./Form.html", "jquery", "./Base"], function(tpl, $){
 			obj.attr.enctype =  me.parseBind(me.enctype);
 			obj.css["'form-horizontal'"] =  me.horizontal;
 			obj.css["'form-inline'"] =  me.inline;
+			obj.attr.action = "Firebrick.getById('" + me.getId() + "').url";
+			obj.attr.method = me.parseBind( me.submitType );
+			
+			if(me.formTarget){
+				obj.attr.target = me.parseBind( me.formTarget );
+			}
 			
 			if(!me.items){
 				if(me.storeProp){

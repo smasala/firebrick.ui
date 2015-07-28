@@ -17,7 +17,7 @@ define(["jquery"], function($){
 		 * @type {Object}
 		 * @default null 
 		 */
-		defaults: null,
+		defaults: 1,
 		/**
 		 * alignment of its children components
 		 * @property itemsAlign

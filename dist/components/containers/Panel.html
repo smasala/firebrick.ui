@@ -16,16 +16,15 @@
 				{{=it.getItemsProp('headerItems')}}
 			</div>
 		{{?}}
-		{{?it.collapsible && it.showCollapseIcon}}
-			<a data-bind="{{=it.dataBind('collapsibleIconBindings')}}">
-			</a>
-		{{?}}
+		{{=it.getDefaultIcons()}}
 	</div>
 	{{?}}
 		<div data-bind="{{=it.dataBind('tabBindings')}}">
 			<div data-bind="{{=it.dataBind('panelBodyBindings')}}" >
 				{{=it.getToolbars()}}
-				{{=it.getItems()}}
+				<div data-bind="{{=it.dataBind('panelItemBindings')}}">
+					{{=it.getItems()}}
+				</div>
 			</div>
 		</div>
 </div>

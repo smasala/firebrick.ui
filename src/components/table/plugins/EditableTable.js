@@ -3,23 +3,23 @@
  */
 
 /**
+ * properties: {
+ * 		parentsEditable: {Boolean} [default=true]
+ * 		field: {
+ * 			sName: "fields.email"
+ * 			// all other class config properties
+ * 		}
+ * }
+ * 
+ * 
  * @module plugins
  * @namespace plugins
  * @class EditableTable
  */
-(function(factory) {
-	"use strict";
-    if (typeof define === "function" && define.amd) {
-        // AMD anonymous module
-        define(["jquery"], factory);
-    } else {
-        // No module loader (plain <script> tag) - put directly in global namespace
-        factory(window.jQuery);
-    }
-})(function($) {
+define(["jquery"], function($){
 	"use strict";
 	
-	Firebrick.define("Firebrick.ui.table.plugins.EditableTable", {
+	var clazz = Firebrick.define("Firebrick.ui.table.plugins.EditableTable", {
 		indexAttr: "data-tt-id",	//when TR - row number, when TD column number
 		rowAttr: "fb-ui-row-id",	//for TD to determine which row number
 		editMarker: "fb-ui-cell-editing",	//added to the TD when it cell edit is active
@@ -44,17 +44,24 @@
 				addedPaths = {},
 				//boolean
 				isRow = editElement.is("tr"),
+				//find correct parent el where the data values are stored
+				parentEl = isRow ? editElement : editElement.closest("tr"),
 				//holder for iteration
 				colNumber,
-				col,
-				rowNumber = isRow ? editElement.attr(me.indexAttr) : editElement.attr(me.rowAttr);
+				field,
+				col;
 			
 			if(columns){
+				
+				//iterate over column passed to this function
 				for(var i = 0, l = columns.length; i<l; i++){
 					colNumber = isRow ? i : editElement.attr(me.indexAttr);
 					col = columns[i];
 					if(col.editable !== false){
-						editFields.push( me.getFieldConfiguration(clazz, rowNumber, col, colNumber, deps, addedPaths) );	
+						field = me.getFieldConfiguration(clazz, parentEl, editElement, col, colNumber, deps, addedPaths);
+						if(field){
+							editFields.push( field );
+						}
 					}
 				}
 			}
@@ -64,26 +71,42 @@
 		/**
 		 * @method getFieldConfiguration 
 		 * @param clazz {Object} table component class
-		 * @param rowNumber {Integer}
+		 * @param $tr {jQuery Object TR}
+		 * @param $clickedItem {jQuery Object TR | TD etc}
 		 * @param col {Object} current column for field
 		 * @param colNumber {Integer}
-		 * @param deps {Array}	to populate with what dependencies are needed - variable pointers
-		 * @param addedPaths {Object} to populate which which dependencies have already been added to deps - variable pointers
-		 * @return {Object} field config {sName:"fields.input", value:"abc", ...}
+		 * @param deps {Array}	to populate with what dependencies are needed - **variable pointers**
+		 * @param addedPaths {Object} to populate which which dependencies have already been added to deps - **variable pointers**
+		 * @return {Object|null} field config {sName:"fields.input", value:"abc", ...}
 		 */
-		getFieldConfiguration: function(clazz, rowNumber, col, colNumber, deps, addedPaths){
+		getFieldConfiguration: function(clazz, $tr, $clickedItem, col, colNumber, deps, addedPaths){
 			var me = this,
-				fieldConfig,
+				fieldConfig = col.editConf && col.editConf.field ? col.editConf.field : {},
 				path,
-				data;
+				data = $tr.prop( clazz.propDataName ),
+				value = Firebrick.utils.getDeepProperty( col.mapping, data );
 			
-			fieldConfig = col.editField || {};
+			if(data.children){
+				if(col.editConf && col.editConf.parentsEditable === false){
+					//cancel edit field creation as this column should not be editable when a parent item
+					return;
+				}	
+			}
+
+			if(value === null || value === undefined){
+				//property not found by getDeepProperty() so we assume an edit should not be possible here
+				return;
+			}else if (col.renderer && !col.type){
+				//don't support custom renderers if no type is given
+				return;
+			}
+
 			if(fieldConfig.sName){
 				//get the correct dependency path for the field type - i.e. "fields.input" => "Firebrick.ui/fields/Input"
 				path = Firebrick.classes.getSNameConfig(fieldConfig.sName).path;
 			}else{
 				//default to input field if non given
-				fieldConfig.sName = "fields.input";
+				fieldConfig.sName = col.type === "checkbox" ? "fields.checkbox" : "fields.input";
 				path = Firebrick.classes.getSNameConfig(fieldConfig.sName).path;
 			}
 			
@@ -92,17 +115,9 @@
 				deps.push(path);
 			}
 			
-			//get just the text not any other child elements and their texts
-			if(clazz.treetable){
-				data = clazz.getData()()[rowNumber].row()[colNumber];
-			}else{
-				data = clazz.getData()()[rowNumber][colNumber];	
-			}
-			
-
 			fieldConfig.label = fieldConfig.label || (col.text ? col.text : col);
 			fieldConfig.init = me._initFunction(colNumber);
-			fieldConfig.value = data.value ? data.value()  : data;
+			fieldConfig.value = $.isFunction(value) ? value() : value;
 			
 			if(typeof fieldConfig.value === "string"){
 				fieldConfig.value = "'" + fieldConfig.value + "'";
@@ -196,6 +211,7 @@
 					tdSpanClass = tableClass.tdSpanClass,	//needed for manual table alterations
 					editType = tableClass.editType,
 					isRow = editElement.is("tr"),
+					$tr = isRow ? editElement : editElement.closest("tr"),
 					rowNumber = isRow ? editElement.attr(me.indexAttr) : editElement.attr(me.rowAttr),
 					colNumber;	
 				
@@ -215,21 +231,25 @@
 							colNumber = Firebrick.getById( input.attr("id") )._prop;
 						}
 						
-						
-						
 						//example tableClass.getData()() => 
-						//		[ 
-						//			[ [], [], [] ],	//row 0 with 3 column values (cells)
-						//			[ [], [], [] ], //row 1 with 3 column values
-						//			[ [], [], [] ]	//row 2 with 3 column values
-						//		]
-						if(isTreeTable){
-							model = tableClass.getData()()[rowNumber].row()[colNumber];
-						}else{
-							model = tableClass.getData()()[rowNumber][colNumber];
-						}
+						//						[{
+						//							name: "John",
+						//							age: 35,
+						//							job: "Carpenter",
+						//							children:[{
+						//								name: "Susan",
+						//								age: 6,
+						//								job: "pre-school"
+						//							},{
+						//								name: "James",
+						//								age: 14,
+						//								job: "annoying parents"
+						//							}]
+						//						}]
 						
-						oldValue = model.value ? model.value() : model;
+						model = Firebrick.utils.getDeepProperty( columns[colNumber].mapping, $tr.prop( tableClass.propDataName ) );
+						
+						oldValue = model();	//extract observable
 						
 						if(model){
 								value = input.val();
@@ -245,17 +265,8 @@
 										}
 									}else{
 										if(value !== oldValue){
-											if(isTreeTable){
-												//the store data architecture for a treetable is slightly different, hence this "if" statement 
-												tableClass.getData()()[rowNumber].row()[colNumber] = value;
-											}else{
-												tableClass.getData()()[rowNumber][colNumber] = value;
-											}
-											//not an observable so make changes in table manually
-											if(isRow){
-												$("td["+me.rowAttr+"="+rowNumber+"]["+me.indexAttr+"="+colNumber+"] span." + tdSpanClass).html(value);
-											}else{
-												//cell edit
+											model(value);	//set new value
+											if(!isRow){
 												me.resetCell(tableClass, editElement, value);
 											}
 										}
@@ -305,7 +316,7 @@
 			if(customConfig._showEditButtons !== false){
 				defaultConfig.footerItems = [{
 					sName: "button.button",
-					closeModal:true,	//hide modal
+					closeModal: true,	//hide modal
 					text: customConfig.buttonUpdateText || "Update",
 					handler: function(){
 						me.makeChanges(clazz, $tr);
@@ -592,7 +603,7 @@
 	});
 	
 	//jquery plugin to init editable table
-	$.fn.EditableTable = function(){
+	$.fn.EditableTable = $.fn.EditableTable || function(){
 		var $table = $(this),
 			elements,
 			plugin = Firebrick.create("Firebrick.ui.table.plugins.EditableTable"),	//create Plugin Class instance
@@ -607,7 +618,7 @@
 			$table.addClass("fb-ui-row-editing");
 			//for OPERA - http://stackoverflow.com/questions/7018324/how-do-i-stop-highlighting-of-a-div-element-when-double-clicking-on
 			$table.attr("unselectable", "on");
-			elements = $("tr", $table);
+			elements = $("tbody tr", $table);
 			eventCallback = function(){
 				var $this = $(this);
 				//stop the double click of taking event when a child element of TR is dblclicked
@@ -643,5 +654,7 @@
 		//register event with callback
 		elements.on("dblclick", eventCallback);
 	};
+	
+	return clazz;
 	
 });

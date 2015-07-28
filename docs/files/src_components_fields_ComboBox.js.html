@@ -19,7 +19,7 @@
             
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 0.15.0</em>
+            <em>API Docs for: 0.20.0</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -46,8 +46,6 @@
                 <li><a href="../classes/components.button.ButtonGroup.html">components.button.ButtonGroup</a></li>
             
                 <li><a href="../classes/components.button.ButtonGroupBase.html">components.button.ButtonGroupBase</a></li>
-            
-                <li><a href="../classes/components.button.dropdown.List.html">components.button.dropdown.List</a></li>
             
                 <li><a href="../classes/components.button.Icon.html">components.button.Icon</a></li>
             
@@ -127,6 +125,10 @@
             
                 <li><a href="../classes/components.fields.File.html">components.fields.File</a></li>
             
+                <li><a href="../classes/components.fields.Hidden.html">components.fields.Hidden</a></li>
+            
+                <li><a href="../classes/components.fields.HtmlEditor.html">components.fields.HtmlEditor</a></li>
+            
                 <li><a href="../classes/components.fields.Input.html">components.fields.Input</a></li>
             
                 <li><a href="../classes/components.fields.Password.html">components.fields.Password</a></li>
@@ -136,6 +138,12 @@
                 <li><a href="../classes/components.fields.SelectBox.html">components.fields.SelectBox</a></li>
             
                 <li><a href="../classes/components.fields.TextArea.html">components.fields.TextArea</a></li>
+            
+                <li><a href="../classes/components.menu.ContextMenu.html">components.menu.ContextMenu</a></li>
+            
+                <li><a href="../classes/components.menu.Item.html">components.menu.Item</a></li>
+            
+                <li><a href="../classes/components.menu.Menu.html">components.menu.Menu</a></li>
             
                 <li><a href="../classes/components.nav.Base.html">components.nav.Base</a></li>
             
@@ -155,7 +163,7 @@
             
                 <li><a href="../classes/helper.html">helper</a></li>
             
-                <li><a href="../classes/plugins.ContextMenu.html">plugins.ContextMenu</a></li>
+                <li><a href="../classes/KeyEvents.html">KeyEvents</a></li>
             
                 <li><a href="../classes/plugins.Draggable.html">plugins.Draggable</a></li>
             
@@ -236,13 +244,14 @@
  */
 define([&quot;text!./ComboBox.html&quot;, 
         &quot;jquery&quot;, 
-        &quot;text!./combo/Item.html&quot;, 
+        &quot;text!./combo/Item.html&quot;,
+        &quot;text!./combo/Group.html&quot;,
         &quot;text!./combo/Value.html&quot;, 
         &quot;doT&quot;, 
         &quot;knockout&quot;, 
         &quot;./Input&quot;, 
         &quot;Firebrick.ui.engines/Suggest&quot;,
-        &quot;../display/Loader&quot;], function(subTpl, $, comboItemTpl, valueItemTpl, tplEngine, ko){
+        &quot;../display/Loader&quot;], function(subTpl, $, comboItemTpl, comboGroupTpl, valueItemTpl, tplEngine, ko){
 	&quot;use strict&quot;;
 	
 	return Firebrick.define(&quot;Firebrick.ui.fields.ComboBox&quot;, {
@@ -277,18 +286,12 @@ define([&quot;text!./ComboBox.html&quot;,
 		 */
 		forceSelect: false,
 		/**
+		 * set typeahead to 0 to show result to on focus
 		 * @property typeahead
 		 * @type {Integer}
 		 * @default 1
 		 */
 		typeahead: 1,
-		/**
-		 * show all results when the input has focus
-		 * @property showOnFocus
-		 * @type {Boolean}
-		 * @default true
-		 */
-		showOnFocus: false,
 		/**
 		 * @property store
 		 * @default null
@@ -299,6 +302,11 @@ define([&quot;text!./ComboBox.html&quot;,
 		 * @type {String|Function}
 		 */
 		itemTpl: comboItemTpl,
+		/**
+		 * @property groupTpl
+		 * @type {String|Function}
+		 */
+		groupTpl: comboGroupTpl,
 		/**
 		 * @property valueTpl
 		 * @type {String|Function}
@@ -331,6 +339,13 @@ define([&quot;text!./ComboBox.html&quot;,
 		 * @default &quot;value&quot;
 		 */
 		valueKey: &quot;value&quot;,
+		/**
+		 * only set if needed different to labelKey
+		 * @property groupLabelKey
+		 * @type {String}
+		 * @default null
+		 */
+		groupLabelKey: null,
 		/**
 		 * @property _valueEl
 		 * @private
@@ -449,6 +464,13 @@ define([&quot;text!./ComboBox.html&quot;,
 				me._cleanIconEl = $(&quot;.fb-ui-combo-clear-icon&quot;, me.getElement());
 			}
 			return me._cleanIconEl;
+		},
+		/**
+		 * override base function
+		 * @method focus
+		 */
+		focus: function(){
+			this.getInputEl().focus();
 		},
 		/**
 		 * @method init
@@ -582,9 +604,7 @@ define([&quot;text!./ComboBox.html&quot;,
 		_onFocus: function(){
 			var me = this;
 			
-			if(me.showOnFocus &amp;&amp; me._engine.mode === &quot;local&quot;){
-				me.showResults();
-			}
+			me.showResults();
 			
 			if(me.getValue().length){
 				me.getClearIconEl().show();
@@ -639,9 +659,10 @@ define([&quot;text!./ComboBox.html&quot;,
 		_onKeyDown: function(event){
 			var me = this,
 				key = event.which,
+				KeyEvent = Firebrick.ui.KeyEvents,
 				$input = me.getInputEl();
 			
-			if(key === KeyboardEvent.DOM_VK_RETURN){
+			if(key === KeyEvent.DOM_VK_RETURN){
 				event.preventDefault();
 			}else if(key === KeyEvent.DOM_VK_BACK_SPACE){
 				if(!$input.val()){
@@ -660,6 +681,7 @@ define([&quot;text!./ComboBox.html&quot;,
 		_onKeyUp: function(event){
 			var me = this,
 				key = event.which,
+				KeyEvent = Firebrick.ui.KeyEvents,
 				$el = me.getElement(),
 				$input = me.getInputEl();
 			
@@ -678,10 +700,10 @@ define([&quot;text!./ComboBox.html&quot;,
 					me.hideResults();
 				}
 			}else{
-				if(key === KeyboardEvent.DOM_VK_RETURN){
+				if(key === KeyEvent.DOM_VK_RETURN){
 					event.preventDefault();
 					me.selectActive();
-				}else if( key === KeyboardEvent.DOM_VK_DOWN){
+				}else if( key === KeyEvent.DOM_VK_DOWN){
 					if(!$input.val()){
 						//show all
 						if(!me._resultsVisible){
@@ -767,10 +789,11 @@ define([&quot;text!./ComboBox.html&quot;,
 		 * @return {Boolean}
 		 */
 		actionKey: function(keyCode){
+			var KeyEvent = Firebrick.ui.KeyEvents;
 			
-			if(	keyCode === KeyboardEvent.DOM_VK_DOWN || 
-				keyCode === KeyboardEvent.DOM_VK_UP ||
-				keyCode === KeyboardEvent.DOM_VK_RETURN ) {
+			if(	keyCode === KeyEvent.DOM_VK_DOWN || 
+				keyCode === KeyEvent.DOM_VK_UP ||
+				keyCode === KeyEvent.DOM_VK_RETURN ) {
 				return true;
 			}
 			
@@ -892,8 +915,9 @@ define([&quot;text!./ComboBox.html&quot;,
 		 */
 		_arrowKey: function(keyCode){
 			var me = this,
-				keyboard = window.KeyboardEvent,
+				keyboard = Firebrick.ui.KeyEvents,
 				selector = &quot;.fb-ui-combo-item&quot;,
+				groupSelector = &quot;.fb-ui-combo-group-item&quot;,
 				$result = me.getResultEl(),
 				$active = $(selector + &quot;.active&quot;, $result),
 				$sibling;
@@ -906,16 +930,32 @@ define([&quot;text!./ComboBox.html&quot;,
 					if($active.length){
 						
 						if(keyCode === keyboard.DOM_VK_DOWN){
-							$sibling = $active.next(selector);
+							$sibling = $active.next();
+							if( !$sibling.length ){
+								$sibling = $active.closest( groupSelector ).next();
+							}
 						}else{
-							$sibling = $active.prev(selector);
+							$sibling = $active.prev();
+							if( !$sibling.length ){
+								$sibling = $active.closest( groupSelector ).prev();
+							}
+						}
+						
+						//check if sibling is another group
+						if( $sibling.is( groupSelector ) ){
+							//find appropriate sibling in group 
+							if( keyCode === keyboard.DOM_VK_DOWN ){
+								$sibling = $sibling.find( selector ).first();
+							}else{
+								$sibling = $sibling.find( selector ).last();
+							}
 						}
 						
 						me.markActive( $sibling );
 						me._scrollOnKey(keyCode, $sibling, $result);
 						
 					}else{
-						me.markActive( $(&quot;&gt; .fb-ui-combo-item:first-child&quot;, $result) );
+						me.markActive( $result.find(&quot;.fb-ui-combo-item&quot;).first() );
 					}
 					
 					return true;
@@ -946,13 +986,14 @@ define([&quot;text!./ComboBox.html&quot;,
 		_scrollOnKey: function( keycode, $target, $container ){
 			var sibTop,
 				sibBottom,
+				KeyEvent = Firebrick.ui.KeyEvents,
 				resTop = $container.offset().top,
 				resHeight = $container.height(),
 				resBottom = resTop + resHeight,
 				scrollTo = null;
 			
 			if($target.length){
-				if( keycode === window.KeyboardEvent.DOM_VK_DOWN ){
+				if( keycode === KeyEvent.DOM_VK_DOWN ){
 					sibBottom = $target.offset().top + $target.outerHeight();
 					if(sibBottom &gt; resBottom){
 						scrollTo = ($container.scrollTop() + sibBottom) - resTop - resHeight;
@@ -978,9 +1019,7 @@ define([&quot;text!./ComboBox.html&quot;,
 		search: function(query, callback){
 			var me = this;
 			
-			if(query &amp;&amp; query.length &gt;= me.typeahead){
-				me._engine.query(query, callback);
-			}
+			me._engine.query(query, callback);
 			
 			return me;
 		},
@@ -992,52 +1031,53 @@ define([&quot;text!./ComboBox.html&quot;,
 				$el = me.getElement(),
 				$input = me.getInputEl(),
 				$result = me.getResultEl(),
+				query = $input.val().trim(),
 				loader,
 				item;
 
-			$result.empty();
-			
-			$result.css({
-				top: $el.offset().top + $el.outerHeight(),
-				width: $el.outerWidth()
-			});
-			
-			$result.show();
-			
-			me._resultsVisible = true;
-			
-			if(me._engine.mode !== &quot;local&quot;){
-				loader = Firebrick.create(&quot;Firebrick.ui.display.Loader&quot;, {
-					target: $result
+			if(query.length &gt;= me.typeahead){
+				$result.empty();
+				
+				$result.css({
+					top: $el.offset().top + $el.outerHeight(),
+					width: $el.outerWidth()
 				});
-			}
+				
+				$result.show();
+				
+				me._resultsVisible = true;
+				
+				if(me._engine.mode !== &quot;local&quot;){
+					loader = Firebrick.create(&quot;Firebrick.ui.display.Loader&quot;, {
+						target: $result
+					});
+				}
 
-			//delay the search to allow the loader to be displayed
-			Firebrick.delay(function(){
-				me.search( $input.val().trim(), function(results){
-					var elements = [];
-					if(loader){
-						loader.destroy();
-					}
-					if(results){
-						for(var i = 0, l = results.length; i&lt;l; i++){
-							item = results[i];
-							item.index = i;
-							elements.push( me.renderItem( item ) );
+				//delay the search to allow the loader to be displayed
+				Firebrick.delay(function(){
+					me.search( query, function(results){
+						var elements = [];
+						if(loader){
+							loader.destroy();
 						}
+						if(results){
+							for(var i = 0, l = results.length; i&lt;l; i++){
+								item = results[i];
+								item.index = i;
+								elements.push( me.renderItem( item ) );
+							}
 
-						$result.empty(); //remove loading
-						$result.append( elements );
+							$result.empty(); //remove loading
+							$result.append( elements );
+							
+							//make sure scrolled at the top
+							$result.scrollTop(0);
 						
-						//make sure scrolled at the top
-						$result.scrollTop(0);
-					
-						me.fireEvent(&quot;expand&quot;);
-					}
-				});
-			}, 10);
-			
-			
+							me.fireEvent(&quot;expand&quot;);
+						}
+					});
+				}, 10);
+			}
 		},
 		/**
 		 * @method hideResults
@@ -1055,19 +1095,45 @@ define([&quot;text!./ComboBox.html&quot;,
 			}
 		},
 		/**
+		 * @method renderChildren
+		 * @param data {Object}
+		 * @param scope {Object} optional
+		 * @return {Array} jQuery elements
+		 */
+		renderChildren: function(data, scope){
+			var me = this,
+				items = [];
+			if( data.children ){
+				for(var i = 0, l = data.children.length; i&lt;l; i++){
+					items.push( me.renderItem( data.children[i], scope) );
+				}
+			}
+			return items;
+		},
+		/**
 		 * @method renderItem
 		 * @param data {Object}
 		 * @param scope {Object} optional
-		 * @return {String} html
+		 * @return {jQuery Object} element
 		 */
 		renderItem: function(data, scope){
-			return this._renderItem(&quot;itemTpl&quot;, data, scope);
+			var me = this,
+				prop = data.children ? &quot;groupTpl&quot; : &quot;itemTpl&quot;,
+				$el;
+			
+			$el = me._renderItem(prop, data, scope);
+			
+			if(data.children){
+				$(&quot;.fb-ui-combo-group-children&quot;, $el).html( me.renderChildren( data, scope ) );
+			}
+			
+			return $el;
 		},
 		/**
 		 * @method renderValueItem
 		 * @param data {Object}
 		 * @param scope {Object} optional
-		 * @return {String} html
+		 * @return {jQuery Object} element
 		 */
 		renderValueItem: function(data, scope){
 			return this._renderItem(&quot;valueTpl&quot;, data, scope);
@@ -1159,7 +1225,7 @@ define([&quot;text!./ComboBox.html&quot;,
 				obj = {
 					css: {
 						&quot;&#x27;fb-ui-combo-select&#x27;&quot;: true,
-						caret: me.showCaret
+						caret: me.typeahead === 0 ? me.showCaret : false
 					}
 				};
 			

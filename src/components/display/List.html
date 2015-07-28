@@ -4,6 +4,9 @@
 	<!-- ko {{=it.dataBind('virtualContainerBindings')}} -->
 		<{{=it.listType}} data-bind="{{=it.dataBind()}}">
 			<li data-bind="{{=it.dataBind('listItemBindings')}}">
+				{{?it._preNode}}
+				<span data-bind="{{=it.dataBind('listItemNodeBindings')}}"></span>
+				{{?}}
 				{{=it.b(it.preItemTpl)}}
 					{{?it.linkedList}}
 						<a data-bind="{{=it.dataBind('listLinkBindings')}}">

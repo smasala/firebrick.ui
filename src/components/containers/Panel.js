@@ -8,7 +8,7 @@
  * @namespace components.containers
  * @class Panel
  */
-define(["text!./Panel.html", "jquery", "./Base", "../nav/Toolbar", "../common/mixins/Toolbars", "../common/mixins/Label"], function(tpl, $){
+define(["text!./Panel.html", "text!./panel/Icon.html", "jquery", "doT", "./Base", "../nav/Toolbar", "../common/mixins/Toolbars", "../common/mixins/Label"], function(tpl, iconTpl, $, doT){
 	"use strict";
 	return Firebrick.define("Firebrick.ui.containers.Panel", {
 		extend:"Firebrick.ui.containers.Base",
@@ -24,6 +24,12 @@ define(["text!./Panel.html", "jquery", "./Base", "../nav/Toolbar", "../common/mi
 		 * @type {String} html
 		 */
 		tpl:tpl,
+		/**
+		 * used to the default header icons
+		 * @property iconTpl
+		 * @type {String} html
+		 */
+		iconTpl: iconTpl,
 		/**
 		 * @property role
 		 * @type {String}
@@ -154,6 +160,20 @@ define(["text!./Panel.html", "jquery", "./Base", "../nav/Toolbar", "../common/mi
 		 */
 		active: false,
 		/**
+		 * @property maximizable
+		 * @type {Boolean}
+		 * @default false
+		 */
+		maximizable: false,
+		/**
+		 * array of icon posibilites after headerItems (custom), like collapse icon, maximize icon etc
+		 * @property _defaultPanelIcons
+		 * @private
+		 * @type {Array of Strings}
+		 * @default ["maximizable", "collapsible"]
+		 */
+		_defaultPanelIcons: ["collapsible", "maximizable"],
+		/**
 		 * @method init
 		 * @return {Object}
 		 */
@@ -204,7 +224,34 @@ define(["text!./Panel.html", "jquery", "./Base", "../nav/Toolbar", "../common/mi
 			
 			return me;
 		},
-		
+		/**
+		 * used within the Panel.html template
+		 * iterates through the _defaultPanelIcons array and builds for each value a 
+		 * template from panel/Icon (this.iconTpl) together for each property
+		 * @private
+		 * @method defaultPanelIcons
+		 * @return {String} html
+		 */
+		getDefaultIcons: function(){
+			var me = this,
+				it,
+				icons = me._defaultPanelIcons,
+				html = "",
+				conf;
+			
+			for(var i = 0, l = icons.length; i<l; i++){
+				it = icons[i];
+				conf = {
+					property: icons[i],
+					showProperty: "show" + Firebrick.utils.firstToUpper( it ),
+					bindingMethod: it + "IconBindings",
+					scope: me
+				};
+				html += doT.template( me.iconTpl )(conf);
+			}
+			
+			return html;
+		},
 		/**
 		 * programmatically make a collapse action - useful if the header isn't available
 		 * @method collapse
@@ -319,10 +366,6 @@ define(["text!./Panel.html", "jquery", "./Base", "../nav/Toolbar", "../common/mi
 				obj.css[me.parseBind(me.headerItemsPosition)] = true;
 			}
 			
-			if(me.collapsible && me.showCollapseIcon){
-				obj.css["'fb-ui-collapse-icon-present'"] = true;
-			}
-				
 			return obj;
 			
 		},
@@ -339,7 +382,7 @@ define(["text!./Panel.html", "jquery", "./Base", "../nav/Toolbar", "../common/mi
 					},
 					attr:{
 						"'data-toggle'":  "'collapse'",
-						"href":  me.parseBind("#" + id ),
+						"'data-target'":  me.parseBind("#" + id ),
 						"'aria-expanded'": typeof me.collapsed === "boolean" ? me.collapsed : true,
 						"'aria-controls'":  me.parseBind( id ),
 					}
@@ -358,9 +401,13 @@ define(["text!./Panel.html", "jquery", "./Base", "../nav/Toolbar", "../common/mi
 		 */
 		collapsibleIconBindings: function(){
 			var me = this,
-				obj = {css:{}, attr:{}};
-			
-			obj.css["'fb-ui-collapse-icon'"] = true;
+				obj = {
+					css:{
+						"'fb-ui-panel-icon'": true,
+						"'fb-ui-collapse-icon'": true
+					}, 
+					attr:{}
+				};
 			
 			if(me.headerItems){
 				obj.css["'fb-ui-header-items-present'"] = true;
@@ -370,7 +417,6 @@ define(["text!./Panel.html", "jquery", "./Base", "../nav/Toolbar", "../common/mi
 			
 			return obj;
 		},
-		
 		/**
 		 * simulate a click on the icon and delegate it to the title
 		 * @method collapseIconClick
@@ -386,17 +432,36 @@ define(["text!./Panel.html", "jquery", "./Base", "../nav/Toolbar", "../common/mi
 			collapse[0].click();
 		},
 		/**
+		 * @method maximizableIconBindings
+		 * @return {Object}
+		 */
+		maximizableIconBindings: function(){
+			var me = this,
+				obj = {
+					css:{
+						"'fb-ui-panel-icon'": true,
+						"glyphicon": true,
+						"'glyphicon-fullscreen'": true
+					}
+				};
+			
+			return obj;
+		},
+		/**
 		 * @method panelHeaderTextBindings
 		 * @return {Object}
 		 */
 		panelHeaderTextBindings: function(){
 			var me = this,
 				obj = {
-						text: me.textBind(me.title),
 						css:{
 							"'panel-title'": me.panelTitleClass
 						}
 					};
+			
+			if(typeof me.title !== "boolean"){
+				obj.text = me.textBind(me.title)
+			}
 			
 			if(me.headerItems){
 				obj.css["'pull-left'"] = true;
@@ -419,16 +484,27 @@ define(["text!./Panel.html", "jquery", "./Base", "../nav/Toolbar", "../common/mi
 						"'panel-body'": me.panelBodyClass
 					}
 				};
+
+			me.toolbarContainer(obj);
 			
-			if(!me.items){
+			return obj;
+		},
+		/**
+		 * @method panelItemBindings
+		 * @return {Object}
+		 */
+		panelItemBindings: function(){
+			var me = this,
+				obj = {};
+
+			//no items are defined or it is an empty array
+			if( !me.items || (me.items && !me.items.length) ){
 				if(me.storeProp){
 					obj.html = me.storeProp;
 				}else{
 					obj.html = "Firebrick.getById('"+me.getId()+"').html";
 				}
 			}
-			
-			me.toolbarContainer(obj);
 			
 			return obj;
 		}
