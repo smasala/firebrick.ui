@@ -6,6 +6,6 @@
 @import url("/bower_components/datatables/media/css/jquery.dataTables.css");
 @import url("/bower_components/jquery-treetable/css/jquery.treetable.css");
 @import url("/bower_components/responsive-tables-js/dist/responsivetables.css");
-@import url("//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css") /** needed for summernote **/
+@import url("/bower_components/font-awesome/css/font-awesome.min.css") /** needed for summernote **/
 @import url("/bower_components/summernote/dist/summernote.css");
 @import url("/bower_components/firebrick.ui/src/firebrick.ui.css");
