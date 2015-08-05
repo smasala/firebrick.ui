@@ -88,16 +88,9 @@ define(["text!./Panel.html", "text!./panel/Icon.html", "jquery", "doT", "./Base"
 		 */
 		panelTitleClass: true,
 		/**
-		 * store property key
-		 * @property storeProp
-		 * @type {String}
-		 * @default ""
-		 */
-		storeProp: "",
-		/**
 		 * fill the panel body with html
 		 * @property html
-		 * @type {String}
+		 * @type {String|Function}
 		 * @default ""
 		 */
 		html: "",
@@ -312,12 +305,17 @@ define(["text!./Panel.html", "text!./panel/Icon.html", "jquery", "doT", "./Base"
 						id: me.parseBind( "fb-ui-collapse-" + me.getId() )
 					}
 			};
-			if(me.collapsible){
+			
+			if( me.collapsible ){
 				obj.css["'panel-collapse'"] = me.collapsible;
 				obj.css.collapse = me.collapsible;
 				if(!me.collapsed){
 					obj.css["in"] = true;
 				}
+			}else if( me.collapsed ){
+				//just collapsed
+				obj.css["'panel-collapse'"] = true;
+				obj.css.collapse = true;
 			}
 			
 			if(me.collapseRole){
@@ -409,27 +407,20 @@ define(["text!./Panel.html", "text!./panel/Icon.html", "jquery", "doT", "./Base"
 					attr:{}
 				};
 			
-			if(me.headerItems){
-				obj.css["'fb-ui-header-items-present'"] = true;
-			}
-			
 			obj.click = "function(){ return Firebrick.ui.helper.callFunction('"+me.getId()+"', '_collapseIconClick', arguments)}";
 			
 			return obj;
 		},
 		/**
 		 * simulate a click on the icon and delegate it to the title
-		 * @method collapseIconClick
+		 * @method _collapseIconClick
 		 * @private
 		 * @param obj
 		 * @param event {Object} jquery event
 		 */
 		_collapseIconClick: function(obj, event){
-			var icon = $(event.target),
-				collapse = icon.siblings(".fb-ui-title-link");
-			
-			//simulate click on the link
-			collapse[0].click();
+			var me = this;
+			me.toggleCollapse();
 		},
 		/**
 		 * @method maximizableIconBindings
@@ -499,11 +490,7 @@ define(["text!./Panel.html", "text!./panel/Icon.html", "jquery", "doT", "./Base"
 
 			//no items are defined or it is an empty array
 			if( !me.items || (me.items && !me.items.length) ){
-				if(me.storeProp){
-					obj.html = me.storeProp;
-				}else{
-					obj.html = "Firebrick.getById('"+me.getId()+"').html";
-				}
+				obj.html = "Firebrick.ui.helper.getHtml( '" + me.getId() + "', $data, $context )";
 			}
 			
 			return obj;

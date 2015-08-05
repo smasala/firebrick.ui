@@ -77,16 +77,9 @@ define(["text!./Modal.html", "./Base"], function(tpl){
 		 */
 		title:"",
 		/**
-		 * store property key
-		 * @property storeProp
-		 * @type {String}
-		 * @default ""
-		 */
-		storeProp: "",
-		/**
 		 * fill the panel body with html
 		 * @property html
-		 * @type {String}
+		 * @type {String|Function}
 		 * @default ""
 		 */
 		html: "",
@@ -283,11 +276,7 @@ define(["text!./Modal.html", "./Base"], function(tpl){
 				};
 			
 			if(!me.items){
-				if(me.storeProp){
-					obj.html = me.storeProp;
-				}else{
-					obj.html = "Firebrick.getById('"+me.getId()+"').html";
-				}
+				obj.html = "Firebrick.ui.helper.getHtml( '" + me.getId() + "', $data, $context )";
 			}
 			
 			return obj;

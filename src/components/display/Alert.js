@@ -44,13 +44,6 @@ define(["text!./Alert.html", "../common/Base", "../common/mixins/Items"], functi
 		 */
 		title:"",
 		/**
-		 * store property key
-		 * @property storeProp
-		 * @type {String}
-		 * @default ""
-		 */
-		storeProp: "",
-		/**
 		 * fill the panel body with html
 		 * @property html
 		 * @type {String}
@@ -83,11 +76,7 @@ define(["text!./Alert.html", "../common/Base", "../common/mixins/Items"], functi
 			var me = this,
 				obj = {};
 			
-			if(me.storeProp){
-				obj.html = me.storeProp;
-			}else{
-				obj.html = "Firebrick.getById('"+me.getId()+"').html";
-			}
+			obj.html = "Firebrick.getById('"+me.getId()+"').html";
 			
 			return obj;
 		},

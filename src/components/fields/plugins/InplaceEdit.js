@@ -34,6 +34,12 @@ define(["jquery", "knockout", "Firebrick.ui/containers/GridRow", "Firebrick.ui/c
 		 */
 		title: null,
 		/**
+		 * @property container
+		 * @type {String}
+		 * @default "body"
+		 */
+		container: "body",
+		/**
 		 * css width of the popover
 		 * @property width
 		 * @type {String}
@@ -46,7 +52,7 @@ define(["jquery", "knockout", "Firebrick.ui/containers/GridRow", "Firebrick.ui/c
 		 * @type {String|Function}
 		 * @default "auto"
 		 */
-		placement: "auto",
+		placement: "auto bottom",
 		/**
 		 * set to true to place at the bottom of the popover rather than the top
 		 * @property actionButtonsFooter
@@ -61,7 +67,7 @@ define(["jquery", "knockout", "Firebrick.ui/containers/GridRow", "Firebrick.ui/c
 		 */
 		_getPopoverEl: function(){
 			var me = this;
-			return $("+ .popover", me.fieldItem.getElement());
+			return me.fieldItem.getElement().data('bs.popover').$tip;
 		},
 		/**
 		 * @method init
@@ -108,9 +114,12 @@ define(["jquery", "knockout", "Firebrick.ui/containers/GridRow", "Firebrick.ui/c
 				}else if(type === "select"){
 					tmp = {
 						sName: "fields.selectbox",
-						options: me.fieldItem.options,
-						selectedOptions: valStr,
-						value: valStr
+						options: me.fieldItem.options
+					}
+					if(me.fieldItem.multiSelect){
+						tmp.selectedOptions = valStr;
+					}else{
+						tmp.value = valStr;
 					}
 				}
 				items.push( Firebrick.utils.overwrite(field, tmp) );
@@ -140,25 +149,7 @@ define(["jquery", "knockout", "Firebrick.ui/containers/GridRow", "Firebrick.ui/c
 	    		},{
 	    			columnWidth: me.actionButtonsFooter ? 12 : 5,
 	    			items: me.actionButtons()
-	    		}],
-	    		init: function(){
-	    			var me1 = this;
-	    			me1.on("rendered", function(){
-	    				me.reposition();
-	    			});
-	    			return me1.callParent(arguments);
-	    		}
-			});
-		},
-		/**
-		 * @method reposition
-		 */
-		reposition: function(){
-			var me = this;
-			
-			me._getPopoverEl().css({
-				left: 0,
-				top: me.fieldItem.getElement().height()
+	    		}]
 			});
 		},
 		/**
@@ -167,14 +158,16 @@ define(["jquery", "knockout", "Firebrick.ui/containers/GridRow", "Firebrick.ui/c
 		 */
 		_initBSPopover: function(){
 			var me = this,
-				title = fb.text( me.showInplaceTitle ? ( me.title || me.fieldItem.label || "" ) : "" );
-			
+				title = Firebrick.text( me.showInplaceTitle ? ( me.fieldItem.popoverTitle || me.fieldItem.label || "" ) : "" );	//don't use title directly here, because it is also used for popup
+
 			me.fieldItem.getElement().popover({ 
 			    html : true,
 			    title: title || " ",
+			    container: me.container,			//so it has the right z-index
 			    placement: me.placement,
-			 	trigger:"manual",
+			 	trigger: "manual",
 			});
+			
 		},
 		
 		/**
@@ -183,16 +176,18 @@ define(["jquery", "knockout", "Firebrick.ui/containers/GridRow", "Firebrick.ui/c
 		 */
 		_showBSPopover: function(){
 			var me = this,
-				$popover;
+				$popover,
+				$fieldItem = me.fieldItem.getElement();
 			
-			me.fieldItem.getElement().popover("toggle");
+			$fieldItem.popover("toggle");
 			
 			$popover = me._getPopoverEl();
 			if(me.width){
+				
 				$popover.css("width", me.width);
 				$popover.css("max-width", me.width);
 			}
-			
+
 			me._initDismissEvent();
 		},
 		/**

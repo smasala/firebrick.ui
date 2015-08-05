@@ -36,6 +36,13 @@ define(["text!./Form.html", "jquery", "./Base"], function(tpl, $){
 		 */
 		horizontal:true,
 		/**
+		 * fill the panel body with html
+		 * @property html
+		 * @type {String|Function}
+		 * @default ""
+		 */
+		html: "",
+		/**
 		 * controls the css class form-inline
 		 * @property inline
 		 * @type {Boolean|String}
@@ -255,11 +262,7 @@ define(["text!./Form.html", "jquery", "./Base"], function(tpl, $){
 			}
 			
 			if(!me.items){
-				if(me.storeProp){
-					obj.html = me.storeProp;
-				}else{
-					obj.html = "Firebrick.getById('"+me.getId()+"').html";
-				}
+				obj.html = "Firebrick.ui.helper.getHtml( '" + me.getId() + "', $data, $context )";
 			}
 			
 			return obj;

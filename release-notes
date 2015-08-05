@@ -1,3 +1,21 @@
+v0.20.12
+----------------------------
+* change table data "id" property for treetables to "_ttId"
+* Panel
+    * show header items and collapse items even when no title is present - set title === false to override this
+    * refactor and fix css for collapse icon
+* change selectbox property "selectedOptions" to "value"
+* remove incorrect ko value and selectedOptions binding overrides 
+* fix padding of inplace edit fields in form
+* display the correct text for inplace edit for selectboxes or input fields
+* fix tooltip and popover to display properly onto of other elements - i.e z-index
+* removal of property "storeProp" in panels, alerts, modal, forms etc. Now just html or items - use html to get a value from the store
+    * html property now supports function and gets arguments: $data, $context
+* added css class "fb-ui-border-pane-body" to panel-body of border layout panels for easier selector access  
+* update the require js optimizer (http://requirejs.org/docs/optimization.html)
+* remove pointless factory wrapper in main firebrick.ui.js
+* convert all global references: window.fb to window.Firebrick
+
 v0.20.0
 ----------------------------
 * fix panel collapse link
@@ -16,33 +34,33 @@ v0.20.0
 * fix border layout issue in chrome
 * new component HtmlEditor (WYSIWYG editor) powered with summernote
 * extract dropdown menu list into own component - menu.menu and menu.item
-** remove support for dropdown submenus - https://github.com/twbs/bootstrap/pull/6342
+    * remove support for dropdown submenus - https://github.com/twbs/bootstrap/pull/6342
 * improve form submit handling
-** return false on preSubmit function to allow default html form submission
+    * return false on preSubmit function to allow default html form submission
 * new component hidden field sName: "fields.hidden"
 * restructure table data
-** see http://localhost:8001/components/table/Table for example
+    * see http://localhost:8001/components/table/Table for example
 * provide new binding handler htmlWithBinding
-** works in the same way as the html binder, however, it also evaluates the html content (i.e binding for dynamic content)
+    * works in the same way as the html binder, however, it also evaluates the html content (i.e binding for dynamic content)
 * fix panel title bug where no header is shown when title is not set and collapsible true
-** fix set property title = true
+    * fix set property title = true
 * dynamically inject html elements and have there data-bind attributes evaluated by KO with the use of property: "htmlWithBinding", instead of the standard "html" property
 * fix css colour issue for panels with, panelTypeClass=primary collapsible=true and title set
 * table/treetable: renamed sub property of column, editField to editConf and added a new properties field & mapping to editConf
 * ability to pass object as list items ->  items:[{text:"Link1", value:"something"}]  -> the value is accessible via jQuery's .val() function
-** we aware than when editing html in Firebug that the val property is lost on the item
+    * we aware than when editing html in Firebug that the val property is lost on the item
 * simplify treetable and datatable configuration into a single object property
-** Treetable: {True|False|Object} - object see http://datatables.net/examples/index
-** Datatable: {True|False|Object} - object see http://ludo.cubicphuse.nl/jquery-treetable/
-** stop the use of treetable and datatable together, conflict of UX and general requirements: http://ux.stackexchange.com/a/23531
-*** remove child node in datatable mode
+    * Treetable: {True|False|Object} - object see http://datatables.net/examples/index
+    * Datatable: {True|False|Object} - object see http://ludo.cubicphuse.nl/jquery-treetable/
+    * stop the use of treetable and datatable together, conflict of UX and general requirements: http://ux.stackexchange.com/a/23531
+        * remove child node in datatable mode
 * pagination improvements
-** new methods: setActive, getActive
+    * new methods: setActive, getActive
 * list - use pass "renderer" function to data in order to add extra functionality to a list item
-** listdata = [{text:"num", value: 1}, {renderer:function($data, $context){return $data.value * 2}, value: 10}]
+    * listdata = [{text:"num", value: 1}, {renderer:function($data, $context){return $data.value * 2}, value: 10}]
 * table renderes
-** custom renders for table cells
-** checkbox renderer
+    * custom renders for table cells
+    * checkbox renderer
 * treetable new property expanded [default=false] - set to true to open all treetable nodes on init
 * configuration.css includes all the imports needed: this is for convenience and not recommended for performance
 

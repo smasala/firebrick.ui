@@ -67,7 +67,7 @@ define(["text!./Radio.html", "../common/MultiplesBase"], function(subTpl){
 			var me = this;
 			if(!me.inplaceEdit){
 				return {
-					text: "$data.text ? fb.text($data.text) : ''"
+					text: "$data.text ? Firebrick.text($data.text) : ''"
 				};
 			}
 			return {};

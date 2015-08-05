@@ -15,7 +15,7 @@
 		"library",
 		"bootstrap"
 	],
-	"version": "0.20.0",
+	"version": "0.20.12",
 	"dependencies": {
 		"firebrick": "latest",
 		"bootstrap": "3.x",

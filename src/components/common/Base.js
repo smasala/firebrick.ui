@@ -11,7 +11,7 @@
  * @namespace components.common
  * @class Base
  */
-define(["doT", "firebrick", "jquery"], function(tplEngine, fb, $){
+define(["doT", "firebrick", "jquery", "bootstrap.plugins/tooltip", "bootstrap.plugins/popover"], function(tplEngine, fb, $){
 
 	"use strict";
 	
@@ -225,24 +225,6 @@ define(["doT", "firebrick", "jquery"], function(tplEngine, fb, $){
 			return bindObj;
 		},
 		/**
-		 * pass a binding Object and this method will add the popover relevant properties
-		 * @method addPopoverBind
-		 * @param bindObj {Object}
-		 * @return {Object} new Object
-		 */
-		addPopoverBind: function(bindObj){
-			var me = this;
-			if(me.tooltip && bindObj && $.isPlainObject(bindObj)){
-				if(!bindObj.attr){
-					bindObj.attr = {};
-				}
-				bindObj.attr["'data-toggle'"] = "'popover'";
-				bindObj.attr.title = me.textBind(me.popover);
-				bindObj.attr["'data-placement'"] = me.parseBind(me.popoverLocation);
-			}
-			return bindObj;
-		},
-		/**
 		 * @method _getElementSelector
 		 * @private
 		 * @return {String} jquery element selector string
@@ -325,52 +307,58 @@ define(["doT", "firebrick", "jquery"], function(tplEngine, fb, $){
 				me.tpl = me.build();
 			}
 			
-			if(me.tooltip){
-				//require the plugin if needed
-				require(["bootstrap.plugins/tooltip"], function(){
-					var t = me.getElement();
-					if(t){
-						t.tooltip(me.tooltipOptions);
-					}
-				});
-			}
-			
-			if(me.popover){
-				//require the plugin if needed
-				require(["bootstrap.plugins/tooltip", "bootstrap.plugins/popover"], function(){
-					var t = me.getElement();
-					if(t){
-						t.popover(me.popoverOptions);
-					}
-				});
-			}
-			
 			me._registerHandler();
 					
 			
-				me.on("rendered", function(){
-					var el = me.getElement();
-					
-					if(me.contextMenu && !me.contextMenu._classname){
-						require(["Firebrick.ui/menu/ContextMenu"], function(){
-							el.on("contextmenu", function(event){
-								var conf = {
-									_parent: me,
-									contextMenuEvent: event
-								};
-								event.preventDefault();
+			me.on("rendered", function(){
+				var $el = me.getElement();
+				
+				me._prepTooltipPopover();
+				
+				if(me.contextMenu && !me.contextMenu._classname){
+					require(["Firebrick.ui/menu/ContextMenu"], function(){
+						$el.on("contextmenu", function(event){
+							var conf = {
+								_parent: me,
+								contextMenuEvent: event
+							};
+							event.preventDefault();
 
-								me._contextMenu = Firebrick.create("Firebrick.ui.menu.ContextMenu", Firebrick.utils.overwrite(conf, me.contextMenu));
-							});
+							me._contextMenu = Firebrick.create("Firebrick.ui.menu.ContextMenu", Firebrick.utils.overwrite(conf, me.contextMenu));
 						});
-					}
-					
-					if(me.autoFocus){
-						me.focus();
-					}
-				});
+					});
+				}
+				
+				if(me.autoFocus){
+					me.focus();
+				}
+			});
 				
 			return me.callParent(arguments);
+		},
+		/**
+		 * @method _prepTooltipPopover
+		 * @return self
+		 */
+		_prepTooltipPopover: function(){
+			var me = this,
+				$el,
+				offset;
+			
+			if(me.tooltip || me.popover){
+				$el = me.getElement();
+				offset = $el.offset();
+				
+				if(me.tooltip){
+					$el.tooltip( me.tooltipOptions );
+				}
+				
+				if(me.popover){
+					$el.popover( me.popoverOptions );
+				}
+			}
+			
+			return me;
 		},
 		/**
 		 * set focus on element
@@ -380,6 +368,7 @@ define(["doT", "firebrick", "jquery"], function(tplEngine, fb, $){
 			this.getElement().focus();
 		},
 		/**
+		 * register handlers for element,  handlerEvent elementSelector
 		 * @method _registerHandler
 		 * @param elementSelector {String} optional jquery selector
 		 * @param handler {Function} optional
@@ -549,13 +538,13 @@ define(["doT", "firebrick", "jquery"], function(tplEngine, fb, $){
 		 * takes a string and prepares it for Firebrick text call
 		 * @example
 		 * 	textBind("mystring.abc.key")
-		 * 	// returns = fb.text('mystring.abc.key')
+		 * 	// returns = Firebrick.text('mystring.abc.key')
 		 * @method textBind
 		 * @param key {String}
 		 * @return {String}
 		 */
 		textBind: function(key){
-			return "fb.text('" + key + "')";
+			return "Firebrick.text('" + key + "')";
 		}
 	});
 });

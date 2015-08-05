@@ -123,6 +123,12 @@ table.fb-ui-editabletable div.fb-ui-load-mask{
 /*-- /editable-plugin --*/
 
 /*-- inplace edit --*/
+.form-horizontal a.fb-ui-inplaceedit {
+	margin-bottom: 0;
+    padding-top: 7px;
+    display: inline-block;
+}
+
 a.fb-ui-inplaceedit{
 	border-bottom:1px dashed;
 }
@@ -133,6 +139,10 @@ a.fb-ui-inplaceedit-changed{
 	font-weight: bold;
 }
 /*-- /inplace edit --*/
+
+.tooltip {
+	position: fixed;
+}
 
 table.treetable tr.collapsed span.indenter a:before{
 	content: "\e080"; /* > */
@@ -678,6 +688,10 @@ ul.fb-ui-list-unstyled.nav ul {
 	display:inline-block;
 }
 
+.panel-heading > .fb-ui-collapse-icon{
+	margin-left:10px;
+}
+
 .panel-heading .panel-title.fb-ui-has-label,
 .panel-heading .label{
 	display: inline-block;
@@ -728,7 +742,7 @@ ul.fb-ui-list-unstyled.nav ul {
     content: "\e079"; /* "<" */
 }
 
-.fb-ui-is-collapsed .panel-heading .fb-ui-collapse-icon:before {
+.fb-ui-is-collapsed > .panel-heading .fb-ui-collapse-icon:before {
     content: "\e080"; /* ">" */
 }
 

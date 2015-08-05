@@ -1,0 +1,7 @@
+{
+	"name": "Optimisation",
+	"version": "0.0.0",
+	"dependencies": {
+		"text": "2.x"
+	}	
+}

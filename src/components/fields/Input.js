@@ -48,6 +48,12 @@ define(["knockout", "text!./Base.html", "text!./Input.html", "./Base", "../commo
 		 */
 		value: null,
 		/**
+		 * @property inplaceEditEmptyText
+		 * @type {String}
+		 * @default "empty"
+		 */
+		inplaceEditEmptyText: "empty",
+		/**
 		 * @property tpl
 		 * @type {String} html
 		 */
@@ -427,23 +433,25 @@ define(["knockout", "text!./Base.html", "text!./Input.html", "./Base", "../commo
 		 * @method bindings
 		 * @return {Object}
 		 */
-		bindings:function(){
+		bindings: function(){
 			var me = this,
 				type =  me.parseBind( me.type ),
 				obj = me.callParent(arguments);
 			
 			obj.attr.disabled = me.disabled;
 			obj.attr.readonly = me.readOnly; 
-			obj.attr.type = type;
+			if(!me.inplaceEdit){
+				obj.attr.type = type;	
+			}
 			obj.attr.name = me.name ?  me.parseBind( me.name ) : type;
 			
 			obj.value = me.value;
 			
 			if(me.inplaceEdit){
 				
+				obj.text = "Firebrick.getById('" + me.getId() + "')._getInplaceEditText( $data )";
 				obj.css["'fb-ui-inplaceedit'"] = true;
-				obj.text = me.value;
-				
+
 			}else{
 				if(me.formControlClass){
 					obj.css[me.parseBind(me.formControlClass)] = true;
@@ -582,14 +590,13 @@ define(["knockout", "text!./Base.html", "text!./Input.html", "./Base", "../commo
 			
 			return obj;
 		},
-		
 		/**
 		 * @method getValue
 		 * @return {Any}
 		 */
 		getValue: function(){
 			var me = this;
-			return ko.utils.unwrapObservable( me._ko.value.valueAccessor() );
+			return me.getElement().val();
 		},
 		/**
 		 * @method setValue
@@ -642,12 +649,56 @@ define(["knockout", "text!./Base.html", "text!./Input.html", "./Base", "../commo
 		},
 		/**
 		 * @method _setValue
+		 * @param value
 		 * @private
 		 */
 		_setValue: function(value){
-			var me = this;
-			me._ko.value.valueAccessor()( value );
+			var me = this,
+				$el = me.getElement();
+			
+			$el.val( value );
+			
+			if(me.inplaceEdit){
+				me._setValueInplaceEdit( value );
+			}
+			
 			return me;
+		},
+		/**
+		 * @method _setValueInplaceEdit
+		 * @param value
+		 * @private
+		 */
+		_setValueInplaceEdit: function( value ){
+			var me = this,
+				$el = me.getElement();
+			$el.text( me._getInplaceEditText( Firebrick.utils.dataFor( $el[0] ) ) );
+			$el.trigger("change");
+			return me;
+		},
+		/**
+		 * @method _getInplaceEditText
+		 * @private
+		 * @param $data {KO Object}
+		 * @return {String}
+		 */
+		_getInplaceEditText: function( $data ){
+			var me = this,
+				$el = me.getElement(),
+				value = $el ? me.getValue() : me.value,
+				text = "";
+				
+			if( value ){
+				if( $data.hasOwnProperty( value ) ){
+					text = ko.unwrap( $data[ value ] );
+				}else{
+					text = value;
+				}
+			}else{
+				text = Firebrick.text( me.inplaceEditEmptyText );
+			}
+				
+			return text;
 		}
 	});
 });
