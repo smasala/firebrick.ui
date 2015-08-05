@@ -93,6 +93,12 @@ define(["text!./SplitBar.html", "jquery", "../../common/mixins/Column", "./Dragg
 		 */
 		width: "33%",
 		/**
+		 * @property title
+		 * @type {String}
+		 * @default false
+		 */
+		title: false,
+		/**
 		 * @method init
 		 * @return {Object}
 		 */
@@ -539,6 +545,20 @@ define(["text!./SplitBar.html", "jquery", "../../common/mixins/Column", "./Dragg
 			}else if(me.position === "bottom"){
 				obj.css["'glyphicon-chevron-down'"] = true;
 			}
+			
+			return obj;
+		},
+		
+		/**
+		 * @method panelBodyBindings
+		 * @return {Object}
+		 */
+		panelBodyBindings: function(){
+			var me = this,
+				obj = me.callParent( arguments );
+			
+			obj.css = obj.css || {};
+			obj.css["'fb-ui-border-pane-body'"] = true;
 			
 			return obj;
 		}

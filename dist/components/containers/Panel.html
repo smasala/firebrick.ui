@@ -1,7 +1,7 @@
 <div id="{{=it.getId()}}" data-bind="{{=it.dataBind()}}">
-	{{?it.title}}
+	{{?it.title !== false && (it.collapsible || it.headerItems) }}
 	<div data-bind="{{=it.dataBind('panelHeaderBindings')}}">
-		{{? it.title !== false }}
+		{{?it.title}}
 			{{?it.collapsible}}
 				<a data-bind="{{=it.dataBind('collapsibleLinkBindings')}}">
 			{{?}}
@@ -11,12 +11,12 @@
 				</a>
 			{{?}}
 		{{?}}
+		{{=it.getDefaultIcons()}}
 		{{?it.headerItems}}
 			<div data-bind="{{=it.dataBind('headerItemsBindings')}}">
 				{{=it.getItemsProp('headerItems')}}
 			</div>
 		{{?}}
-		{{=it.getDefaultIcons()}}
 	</div>
 	{{?}}
 		<div data-bind="{{=it.dataBind('tabBindings')}}">

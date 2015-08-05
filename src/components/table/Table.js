@@ -437,7 +437,7 @@ define(["knockout", "knockout-mapping", "jquery", "doT", "text!./Table.html", "t
 				foreach: "Firebrick.getById('" + me.getId() + "').columns",
 				"attr":{
 					"'data-tt-id'": "Firebrick.getById('" + me.getId() + "')._getItemId( $data )",
-					"'data-tt-parent-id'": "$parent.id"
+					"'data-tt-parent-id'": "$parent._ttId"
 				},
 				css: {
 					"group": "$data.children ? true : false"
@@ -454,10 +454,10 @@ define(["knockout", "knockout-mapping", "jquery", "doT", "text!./Table.html", "t
 			var me = this;
 			
 			if( $.isPlainObject($data) ){
-				if( !$data.hasOwnProperty( "id" ) ){
-					$data.id = me._itemId++;
+				if( !$data.hasOwnProperty( "_ttId" ) ){
+					$data._ttId = me._itemId++;
 				}
-				return $data.id;
+				return $data._ttId;
 			}
 			
 			return;
@@ -470,7 +470,7 @@ define(["knockout", "knockout-mapping", "jquery", "doT", "text!./Table.html", "t
 			return {
 				attr: {
 					"'data-tt-id'": "$index",
-					"'fb-ui-row-id'": "$parentContext.$parent.id"
+					"'fb-ui-row-id'": "$parentContext.$parent._ttId"
 				}
 			};
 		},

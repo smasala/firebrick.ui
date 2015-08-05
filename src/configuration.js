@@ -16,6 +16,7 @@ define(function(_require, _exports, _module){
 			"bootstrap.plugins": bowerPath + "/bootstrap/js",
 			"text": bowerPath + "/text/text",
 			"firebrick-ui": bowerPath + "/firebrick.ui/src/firebrick.ui",
+			"firebrick-ui-all": bowerPath + "/firebrick.ui/src/firebrick.ui.all", 
 			"doT": bowerPath + "/doT/doT",
 			"datatables": bowerPath + "/datatables/media/js/jquery.dataTables",
 			"jquery-treetable": bowerPath + "/jquery-treetable/jquery.treetable",
@@ -25,7 +26,7 @@ define(function(_require, _exports, _module){
 			"devicejs": bowerPath + "/devicejs/lib/device",
 			"Firebrick.ui.engines": bowerPath + "/firebrick.ui/src/engines",
 			"bootstrap-datepicker": bowerPath + "/bootstrap-datepicker/js/bootstrap-datepicker",
-			"summernote": bowerPath + "/summernote/dist/summernote"
+			"summernote": bowerPath + "/summernote/dist/summernote"			
 		},
 		shim:{
 			"knockout-mapping": ["knockout"],

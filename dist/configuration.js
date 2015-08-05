@@ -16,6 +16,7 @@ define(function(_require, _exports, _module){
 			"bootstrap.plugins": bowerPath + "/bootstrap/js",
 			"text": bowerPath + "/text/text",
 			"firebrick-ui": bowerPath + "/firebrick.ui/dist/firebrick.ui",
+			"firebrick-ui-all": bowerPath + "/firebrick.ui/dist/firebrick.ui.all", 
 			"doT": bowerPath + "/doT/doT.min",
 			"datatables": bowerPath + "/datatables/media/js/jquery.dataTables",
 			"jquery-treetable": bowerPath + "/jquery-treetable/jquery.treetable",

@@ -27,16 +27,9 @@ define(["text!./Pane.html", "../Base", "bootstrap.plugins/tab"], function(tpl){
 		 */
 		active: false,
 		/**
-		 * store property key
-		 * @property storeProp
-		 * @type {String}
-		 * @default ""
-		 */
-		storeProp: "",
-		/**
 		 * fill the panel body with html
 		 * @property html
-		 * @type {String}
+		 * @type {String|Function}
 		 * @default ""
 		 */
 		html: "",
@@ -80,11 +73,7 @@ define(["text!./Pane.html", "../Base", "bootstrap.plugins/tab"], function(tpl){
 			obj.attr.id = "Firebrick.getById('"+me.getId()+"').getPaneId()";
 
 			if(!me.items){
-				if(me.storeProp){
-					obj.html = me.storeProp;
-				}else{
-					obj.html = "Firebrick.getById('"+me.getId()+"').html";
-				}
+				obj.html = "Firebrick.ui.helper.getHtml( '" + me.getId() + "', $data, $context )";
 			}
 			
 			return obj;

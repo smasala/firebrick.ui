@@ -53,6 +53,40 @@ define(["text!./TabPanel.html", "./Base", "bootstrap.plugins/tab", "./tab/Pane"]
 			sName: "containers.tab.pane"
 		},
 		/**
+		 * @method init
+		 * @return self
+		 */
+		init: function(){
+			var me = this;
+			this._firstTabActive();
+			return me.callParent( arguments );
+		},
+		/**
+		 * check if any tab has been set as active, if not, set the first tab active as default
+		 * @method _firstTabActive
+		 * @return self
+		 */
+		_firstTabActive: function(){
+			var me = this,
+			it, 
+			active = false,
+			length = me.items.length;
+		
+			for(var i = 0; i<length; i++){
+				it = me.items[i];
+				if(it.active){
+					active = true;
+					break;
+				}
+			}
+			
+			if(!active && length){
+				//force first tab to be active
+				me.items[0].active = true;
+			}
+			return me;
+		},
+		/**
 		 * @method bindings
 		 * @return {Object}
 		 */
@@ -104,6 +138,7 @@ define(["text!./TabPanel.html", "./Base", "bootstrap.plugins/tab", "./tab/Pane"]
 			
 			obj.attr.role = "'presentation'";
 			obj.css.active = "tab.hasOwnProperty('active') ? tab.active : false";
+			obj.css.disabled = "tab.disabled";
 			
 			return obj;
 		},
@@ -119,8 +154,7 @@ define(["text!./TabPanel.html", "./Base", "bootstrap.plugins/tab", "./tab/Pane"]
 			obj.attr["'aria-controls'"] = "tab.id";
 			obj.attr["'data-target'"] = "Firebrick.getById('"+me.getId()+"').registerTab(tab.id, $index)";
 			obj.attr.role = "'tab'";
-			obj.attr["'data-toggle'"] = "'tab'";
-			
+			obj.attr["'data-toggle'"] = "tab.disabled !== true ? 'tab' : false";
 			
 			return obj;
 		},

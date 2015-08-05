@@ -1,26 +1,16 @@
 /*!
 * Firebrick UI
 * @author Steven Masala [me@smasala.com]
+* @version 0.20.12
 * 
 * FirebrickUI, component library for Firebrick JS
 **/
-(function(root, factory) {
-	
-  "use strict";
-  
-  if (typeof define === "function" && define.amd) {
-    define(["jquery", "firebrick", "knockout",  "devicejs", "knockout-mapping", "text"], function($, fb, ko, dev, kom, text) {
-    	ko.mapping = kom;
-    	return factory($, fb, ko, dev);
-    });
-  } else {
-	  return factory(root.jQuery, root.Firebrick, root.ko);
-  }
-
-})(this, function($, Firebrick, ko, device) {
-	
+define(["jquery", "firebrick", "knockout",  "devicejs", "knockout-mapping", "text", "bootstrap"], function($, Firebrick, ko, dev, kom){	
 	"use strict";
 
+	//ko mapping
+	ko.mapping = kom;
+	
 	if(!Firebrick){
 		console.error("Firebrick has not been loaded, Firebrick-UI requires Firebrick JS to function");
 		return;
@@ -41,7 +31,7 @@
 			 * @private
 			 * @type {String}
 			 */
-			version: "0.20.0",
+			version: "0.20.12",
 			
 			/**
 			 * populate a target with fields and data
@@ -146,6 +136,9 @@
 					v = me._componentFilter(v);
 					
 					if(!v.uiComponent){
+						if(v.sName){
+							v.sName = v.sName.toLowerCase();
+						}
 						//v can be string or object
 						tmp = Firebrick.get(v.sName || v);
 						if(!tmp){
@@ -483,6 +476,29 @@
 			 * @class helper
 			 */
 			helper: {
+				
+				/**
+				 * @method getHTML
+				 * @param componentId {String}
+				 * @param $data {KO Object}
+				 * @param $$context {KO Object}
+				 * @return {String} html
+				 */
+				getHtml: function( componentId, $data, $context ){
+					var component = Firebrick.getById(componentId),
+						html = component.html;
+					
+					if( $.isFunction(html) ){
+						html = html( $data, $context );
+					}
+					
+					if(typeof html === "string"){
+						if( $data.hasOwnProperty( html ) ){
+							return $data[html];
+						}
+					}
+					return html;
+				},
 				
 				/**
 				 * builds the items string used for functions such as "foreach"
@@ -838,42 +854,6 @@
 	 * Knockout bindingHandler extensions
 	 */
 	(function(ko){
-		
-		var oldInit = ko.bindingHandlers.value.init, 
-			oldInit1 = ko.bindingHandlers.selectedOptions.init;
-		
-		//VALUE
-		ko.bindingHandlers.value.init = function(element, valueAccessor, allBindings, viewModel, bindingContext){
-			var clazz = Firebrick.getById(element.getAttribute("id"));
-			if(clazz){
-				clazz._ko = clazz._ko || {};
-				clazz._ko.value = {
-					element: element,
-					valueAccessor: valueAccessor,
-					allBindings: allBindings,
-					viewModel: viewModel,
-					bindingContext: bindingContext
-				};
-			}
-			return oldInit.apply(this, arguments);
-		};
-
-		//SELECTEDOPTIONS
-		ko.bindingHandlers.selectedOptions.init = function(element, valueAccessor, allBindings, viewModel, bindingContext){
-			var clazz = Firebrick.getById(element.getAttribute("id"));
-			if(clazz){
-				clazz._ko = clazz._ko || {};
-				clazz._ko.selectedOptions = {
-					element: element,
-					valueAccessor: valueAccessor,
-					allBindings: allBindings,
-					viewModel: viewModel,
-					bindingContext: bindingContext
-				};
-			}
-			return oldInit1.apply(this, arguments);
-		};
-		
 		/*
 		 * use withProperties to pass extra properties down to the descendants
 		 * http://knockoutjs.com/documentation/custom-bindings-controlling-descendant-bindings.html
@@ -919,4 +899,5 @@
 		
 	})(ko);
 	
+	return Firebrick;	
 });
