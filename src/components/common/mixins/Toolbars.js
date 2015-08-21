@@ -8,9 +8,9 @@
  * @class Toolbars
  * @static
  */
-define(["jquery", "./Items", "Firebrick.ui/nav/Toolbar"], function($){
+define( [ "jquery", "./Items", "Firebrick.ui/nav/Toolbar" ], function( $ ) {
 	"use strict";
-	return Firebrick.define("Firebrick.ui.common.mixins.Toolbars", {
+	return Firebrick.define( "Firebrick.ui.common.mixins.Toolbars", {
 		/**
 		 * passed on to the toolbar items (direct children only)
 		 * @property _toolbarDefaults
@@ -20,7 +20,7 @@ define(["jquery", "./Items", "Firebrick.ui/nav/Toolbar"], function($){
 		 * 		navbarItem: true
 		 * }
 		 */
-		_toolbarDefaults:{
+		_toolbarDefaults: {
 			navbarItem: true
 		},
 		/**
@@ -42,25 +42,25 @@ define(["jquery", "./Items", "Firebrick.ui/nav/Toolbar"], function($){
 		 * @type {Array of Objects}
 		 * @default null
 		 */
-		toolbars:null,
+		toolbars: null,
 		/**
 		 * add css classes and other configuration to the container
 		 * @method toolbarContainer
 		 * @param obj {Object} obj that is later pass to the binder
 		 * @return {Object}
 		 */
-		toolbarContainer: function(obj){
+		toolbarContainer: function( obj ) {
 			var me = this,
 				toolbarPosition;
 			
-			if(me.toolbars && $.isArray(me.toolbars)){
+			if ( me.toolbars && $.isArray( me.toolbars ) ) {
 				
-				obj.css["'fb-ui-toolbar-container'"] = true;
+				obj.css[ "'fb-ui-toolbar-container'" ] = true;
 				
-				for(var i = 0, l = me.toolbars.length; i<l; i++){
-					toolbarPosition = me.toolbars[i].position;
-					if(toolbarPosition){
-						obj.css[ me.parseBind("fb-ui-toolbar-" + toolbarPosition) ] = true;
+				for ( var i = 0, l = me.toolbars.length; i < l; i++ ) {
+					toolbarPosition = me.toolbars[ i ].position;
+					if ( toolbarPosition ) {
+						obj.css[ me.parseBind( "fb-ui-toolbar-" + toolbarPosition ) ] = true;
 					}
 				}
 			}
@@ -71,31 +71,31 @@ define(["jquery", "./Items", "Firebrick.ui/nav/Toolbar"], function($){
 		 * @method getToolbars
 		 * @return {html}
 		 */
-		getToolbars: function(){
+		getToolbars: function() {
 			var me = this,
 				toolbars = me.toolbars,
 				tbItem,
 				html = "",
 				items;
 			
-			if(toolbars){
-				if($.isArray(toolbars)){
-					for(var i = 0, l = toolbars.length; i<l; i++){
-						tbItem = toolbars[i];
-						if(tbItem.items){
+			if ( toolbars ) {
+				if ( $.isArray( toolbars ) ) {
+					for ( var i = 0, l = toolbars.length; i < l; i++ ) {
+						tbItem = toolbars[ i ];
+						if ( tbItem.items ) {
 							//wrap the items inside a toolbar component
 							tbItem.sName = "nav.toolbar";
-							tbItem.defaults = Firebrick.utils.overwrite(me._toolbarDefaults, (tbItem.defaults || {}));
-							items = me._getItems(tbItem);
+							tbItem.defaults = Firebrick.utils.overwrite( me._toolbarDefaults, ( tbItem.defaults || {}) );
+							items = me._getItems( tbItem );
 							//load the html for the template compiler
 							html += items.html;
-							me.toolbars[i] = items.items[0];
-						}else{
-							console.warn("a toolbar was found without the items property and didn't render");
+							me.toolbars[ i ] = items.items[ 0 ];
+						} else {
+							console.warn( "a toolbar was found without the items property and didn't render" );
 						}
 					}
-				}else{
-					console.warn("unable to load toolbars for this panel", me, "toolbars property must be an array of objects");
+				} else {
+					console.warn( "unable to load toolbars for this panel", me, "toolbars property must be an array of objects" );
 				}
 			}
 			

@@ -8,10 +8,10 @@
  * @namespace components.fields
  * @class TextArea
  */
-define(["text!./TextArea.html", "./Input"], function(subTpl){
+define( [ "text!./TextArea.html", "./Input" ], function( subTpl ) {
 	"use strict";
-	return Firebrick.define("Firebrick.ui.fields.TextArea", {
-		extend:"Firebrick.ui.fields.Input",
+	return Firebrick.define( "Firebrick.ui.fields.TextArea", {
+		extend: "Firebrick.ui.fields.Input",
 		/**
 		 * @property sName
 		 * @type {String}
@@ -23,17 +23,17 @@ define(["text!./TextArea.html", "./Input"], function(subTpl){
 		 * @type {Int}
 		 * @default 5
 		 */
-		rows:5,
+		rows: 5,
 		/**
 		 * @property subTpl
 		 * @type {String}
 		 */
-		subTpl:subTpl,
+		subTpl: subTpl,
 		/**
 		 * @property dataType
 		 * @type {String}
 		 * @default "'textarea'"
 		 */
-		dataType:"textarea"
+		dataType: "textarea"
 	});
 });

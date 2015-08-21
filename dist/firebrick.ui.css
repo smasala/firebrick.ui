@@ -343,6 +343,9 @@ progress[value]::-webkit-progress-value{
 .btn .caret {
     margin-left: 2px;
 }
+.btn-xl {
+	font-size: 19px;
+}
 .fb-ui-items-align-left{
 	text-align: left;
 }
@@ -382,7 +385,7 @@ ul.fb-ui-list-unstyled.nav ul {
 .fb-ui-list-expandable-node:before{
 	content: "\e114"; 
 }
-.fb-ui-listitem-parent .fb-ui-listitem-haschildren {
+.fb-ui-listitem-parent.fb-ui-listitem-haschildren > ul{
     padding-left: 22px;
 }
 .input-group-addon .control-label{

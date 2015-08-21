@@ -1,0 +1,7 @@
+**/node_modules/**
+**/bower_components/**
+./dist/**
+./docs/**
+./src/firebrick.ui.all.js
+./unit_tests/run-jasmine.js
+./tools/**

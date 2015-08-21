@@ -244,28 +244,28 @@
  * @namespace components.containers
  * @class Modal
  */
-define([&quot;text!./Modal.html&quot;, &quot;./Base&quot;], function(tpl){
+define( [ &quot;text!./Modal.html&quot;, &quot;./Base&quot; ], function( tpl ) {
 	&quot;use strict&quot;;
 	
-	return Firebrick.define(&quot;Firebrick.ui.containers.Modal&quot;, {
-		extend:&quot;Firebrick.ui.containers.Base&quot;,
+	return Firebrick.define( &quot;Firebrick.ui.containers.Modal&quot;, {
+		extend: &quot;Firebrick.ui.containers.Base&quot;,
 		tpl: tpl,
-		target:&quot;body&quot;,
+		target: &quot;body&quot;,
 		appendTarget: true,
-		sName:&quot;containers.modal&quot;,
-		init: function(){
+		sName: &quot;containers.modal&quot;,
+		init: function() {
 			var me = this;
-			me.on(&quot;rendered&quot;, function(){
-				if(me.showOnCreate){
-					me.showMe();	
+			me.on( &quot;rendered&quot;, function() {
+				if ( me.showOnCreate ) {
+					me.showMe();
 				}
-				me.getElement().on(&quot;hidden.bs.modal&quot;, function(){
+				me.getElement().on( &quot;hidden.bs.modal&quot;, function() {
 					me.destroy();
 				});
 			});
-			return me.callParent(arguments);
+			return me.callParent( arguments );
 		},
-		enclosedBind:true,
+		enclosedBind: true,
 		/**
 		 * @property _modalEl
 		 * @private
@@ -277,10 +277,10 @@ define([&quot;text!./Modal.html&quot;, &quot;./Base&quot;], function(tpl){
 		 * @method getModalEl
 		 * @return {jQuery Object}
 		 */
-		getModalEl: function(){
+		getModalEl: function() {
 			var me = this;
-			if(!me._modalEl){
-				me._modalEl = $(&quot;&gt; .modal&quot;, me.getElement());
+			if ( !me._modalEl ) {
+				me._modalEl = $( &quot;&gt; .modal&quot;, me.getElement() );
 			}
 			return me._modalEl;
 		},
@@ -289,7 +289,7 @@ define([&quot;text!./Modal.html&quot;, &quot;./Base&quot;], function(tpl){
 		 * @method showMe
 		 * @return {Object} self
 		 */
-		showMe: function(){
+		showMe: function() {
 			var me = this;
 			me.getModalEl().modal();
 		},
@@ -311,7 +311,7 @@ define([&quot;text!./Modal.html&quot;, &quot;./Base&quot;], function(tpl){
 		 * @type {String}
 		 * @default &quot;&quot;
 		 */
-		title:&quot;&quot;,
+		title: &quot;&quot;,
 		/**
 		 * fill the panel body with html
 		 * @property html
@@ -379,7 +379,7 @@ define([&quot;text!./Modal.html&quot;, &quot;./Base&quot;], function(tpl){
 		 * @type {Integer}
 		 * @default 4
 		 */
-		titleSize:4,
+		titleSize: 4,
 		/**
 		 * @property showCloseIcon
 		 * @type {Boolean}
@@ -397,26 +397,26 @@ define([&quot;text!./Modal.html&quot;, &quot;./Base&quot;], function(tpl){
 		 * @method srCloseIconBindings
 		 * @return {Object}
 		 */
-		srCloseIconBindings: function(){
+		srCloseIconBindings: function() {
 			var me = this;
 			return {
-				css:{
+				css: {
 					&quot;&#x27;sr-only&#x27;&quot;: true
 				},
-				text: me.parseBind(me.srCloseText)
+				text: me.parseBind( me.srCloseText )
 			};
 		},
 		/**
 		 * @method closeButtonBindings
 		 * @return {Object}
 		 */
-		closeButtonBindings: function(){
+		closeButtonBindings: function() {
 			return {
-				attr:{
+				attr: {
 					type: &quot;&#x27;button&#x27;&quot;,
 					&quot;&#x27;data-dismiss&#x27;&quot;: &quot;&#x27;modal&#x27;&quot;
 				},
-				css:{
+				css: {
 					close: true
 				}
 			};
@@ -425,27 +425,27 @@ define([&quot;text!./Modal.html&quot;, &quot;./Base&quot;], function(tpl){
 		 * @method getTitleId
 		 * @return {String}
 		 */
-		getTitleId: function(){
+		getTitleId: function() {
 			return &quot;fb-modal-title-&quot; + this.getId();
 		},
 		/**
 		 * @method bindings
 		 * @return {Object}
 		 */
-		bindings: function(){
+		bindings: function() {
 			var me = this,
 				obj = this.callParent();
 			
 			obj.css.modal = me.isModal;
 			
-			obj.attr[&quot;&#x27;aria-labelledby&#x27;&quot;] = me.parseBind(me.getTitleId());
-			obj.attr[&quot;&#x27;aria-describedby&#x27;&quot;] = me.parseBind(me.ariaDescribedBy);
+			obj.attr[ &quot;&#x27;aria-labelledby&#x27;&quot; ] = me.parseBind( me.getTitleId() );
+			obj.attr[ &quot;&#x27;aria-describedby&#x27;&quot; ] = me.parseBind( me.ariaDescribedBy );
 			obj.attr.role = &quot;&#x27;dialog&#x27;&quot;;
 			obj.attr.tabindex = -1;
-			obj.attr[&quot;&#x27;aria-hidden&#x27;&quot;] = true;
+			obj.attr[ &quot;&#x27;aria-hidden&#x27;&quot; ] = true;
 			
-			if(me.animationClass){
-				obj.css[me.animationClass] = true;
+			if ( me.animationClass ) {
+				obj.css[ me.animationClass ] = true;
 			}
 			
 			return obj;
@@ -454,7 +454,7 @@ define([&quot;text!./Modal.html&quot;, &quot;./Base&quot;], function(tpl){
 		 * @method dialogBindings
 		 * @return {Object}
 		 */
-		dialogBindings: function(){
+		dialogBindings: function() {
 			var me = this;
 			return {
 				css: {
@@ -466,7 +466,7 @@ define([&quot;text!./Modal.html&quot;, &quot;./Base&quot;], function(tpl){
 		 * @method contentBindings
 		 * @return {Object}
 		 */
-		contentBindings: function(){
+		contentBindings: function() {
 			var me = this;
 			return {
 				css: {
@@ -478,7 +478,7 @@ define([&quot;text!./Modal.html&quot;, &quot;./Base&quot;], function(tpl){
 		 * @method headerBindings
 		 * @return {Object}
 		 */
-		headerBindings: function(){
+		headerBindings: function() {
 			var me = this;
 			return {
 				css: {
@@ -490,7 +490,7 @@ define([&quot;text!./Modal.html&quot;, &quot;./Base&quot;], function(tpl){
 		 * @method titleBindings
 		 * @return {Object}
 		 */
-		titleBindings: function(){
+		titleBindings: function() {
 			var me = this;
 			return {
 				text: me.textBind( me.title ),
@@ -503,15 +503,15 @@ define([&quot;text!./Modal.html&quot;, &quot;./Base&quot;], function(tpl){
 		 * @method bodyBindings
 		 * @return {Object}
 		 */
-		bodyBindings: function(){
-			var me = this, 
-				obj ={
-					css:{
+		bodyBindings: function() {
+			var me = this,
+				obj = {
+					css: {
 						&quot;&#x27;modal-body&#x27;&quot;: me.bodyClass
 					}
 				};
 			
-			if(!me.items){
+			if ( !me.items ) {
 				obj.html = &quot;Firebrick.ui.helper.getHtml( &#x27;&quot; + me.getId() + &quot;&#x27;, $data, $context )&quot;;
 			}
 			
@@ -521,10 +521,10 @@ define([&quot;text!./Modal.html&quot;, &quot;./Base&quot;], function(tpl){
 		 * @method footerBindings
 		 * @return {Object}
 		 */
-		footerBindings: function(){
+		footerBindings: function() {
 			var me = this;
 			return {
-				css:{
+				css: {
 					&quot;&#x27;modal-footer&#x27;&quot;: me.footerClass
 				}
 			};
@@ -533,13 +533,14 @@ define([&quot;text!./Modal.html&quot;, &quot;./Base&quot;], function(tpl){
 		 * close modal
 		 * @method close
 		 */
-		close: function(){
+		close: function() {
 			var me = this;
-			me.getModalEl().modal(&quot;hide&quot;);
+			me.getModalEl().modal( &quot;hide&quot; );
 		}
 	});
 	
 });
+
     </pre>
 </div>
 

@@ -8,9 +8,9 @@
  * @class Badges
  * @static
  */
-define([], function(){
+define( [], function() {
 	"use strict";
-	return Firebrick.define("Firebrick.ui.common.mixins.Badges", {
+	return Firebrick.define( "Firebrick.ui.common.mixins.Badges", {
 		/**
 		 * false to hide badge, string to show text
 		 * @property badge
@@ -22,11 +22,11 @@ define([], function(){
 		 * @method badgeBindings
 		 * @return {Object}
 		 */
-		badgeBindings: function(){
+		badgeBindings: function() {
 			var me = this,
 				obj = {
-					attr:{},
-					css:{
+					attr: {},
+					css: {
 						badge: true
 					},
 					text: me.textBind( me.badge )

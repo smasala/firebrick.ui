@@ -5,7 +5,6 @@
 "onBuildWrite": function (moduleName, path, contents) {
 			    	if(moduleName === "firebrick-ui"){
 			    		contents = contents.replace("define('firebrick-ui',[", "define('firebrick-ui-all',[");
-			        	console.info("---->", contents.substr(0, 500))
 			        }
 			        return contents;
 			    },

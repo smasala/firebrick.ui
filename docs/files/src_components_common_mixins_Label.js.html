@@ -244,9 +244,9 @@
  * @class Label
  * @static
  */
-define([&quot;text!./tpl/Label.html&quot;], function(tpl){
+define( [ &quot;text!./tpl/Label.html&quot; ], function( tpl ) {
 	&quot;use strict&quot;;
-	return Firebrick.define(&quot;Firebrick.ui.common.mixins.Label&quot;, {
+	return Firebrick.define( &quot;Firebrick.ui.common.mixins.Label&quot;, {
 		/**
 		 * @property labelTpl
 		 * @type {String} html
@@ -265,17 +265,17 @@ define([&quot;text!./tpl/Label.html&quot;], function(tpl){
 		 * @type {String}
 		 * @default &quot;&quot;
 		 */
-		labelText:&quot;&quot;,
+		labelText: &quot;&quot;,
 		/**
 		 * @method getLabelTpl
 		 */
-		getLabelTpl: function(){
+		getLabelTpl: function() {
 			var me = this;
 			me.template( &quot;labelTpl&quot; );
 			return me.build( &quot;labelTpl&quot; );
 		},
 		/**
-		 * string = &quot;default&quot;, &quot;primary&quot;, &quot;success&quot; &quot;info&quot;, &quot;warning&quot;, &quot;danger&quot;  
+		 * string = &quot;default&quot;, &quot;primary&quot;, &quot;success&quot; &quot;info&quot;, &quot;warning&quot;, &quot;danger&quot;
 		 * @property labelStyle
 		 * @type {Boolean|String}
 		 * @default &quot;default&quot;
@@ -285,27 +285,28 @@ define([&quot;text!./tpl/Label.html&quot;], function(tpl){
 		 * @method labelBindings
 		 * @return Object
 		 */
-		labelBindings: function(){
-			var me = this, 
+		labelBindings: function() {
+			var me = this,
 				obj = {
 						text: me.textBind( me.labelText ),
-						css:{
+						css: {
 							label: true
 						}
 					};
 			
-				if(me.labelStyle){
+				if ( me.labelStyle ) {
 					obj.css[ me.parseBind( &quot;label-&quot; + me.labelStyle ) ] = true;
 				}
 				
-			if( me.labelCSS ){
+			if ( me.labelCSS ) {
 				obj.css[ me.parseBind( me.labelCSS ) ] = true;
 			}
 				
 			return obj;
-		},
+		}
 	});
 });
+
     </pre>
 </div>
 

@@ -8,12 +8,12 @@
  * @namespace components.nav
  * @class List
  */
-define(["../display/List"], function(){
+define( [ "../display/List" ], function() {
 	"use strict";
-	return Firebrick.define("Firebrick.ui.nav.List", {
-		extend: "Firebrick.ui.display.List", 
-		sName:"nav.list",
-		unstyled:true,
+	return Firebrick.define( "Firebrick.ui.nav.List", {
+		extend: "Firebrick.ui.display.List",
+		sName: "nav.list",
+		unstyled: true,
 		linkedList: true,
 		/**
 		 * whether navbar-nav class is applied to list
@@ -26,12 +26,12 @@ define(["../display/List"], function(){
 		 * @method bindings
 		 * @return {Object}
 		 */
-		bindings: function(){
+		bindings: function() {
 			var me = this,
-				obj = me.callParent(arguments);
+				obj = me.callParent( arguments );
 			
-			if(me.navbarNavClass){
-				obj.css["'navbar-nav'"] = true;
+			if ( me.navbarNavClass ) {
+				obj.css[ "'navbar-nav'" ] = true;
 			}
 
 			obj.css.nav = true;

@@ -9,13 +9,13 @@
  * @uses components.common.mixins.Items
  * @class Alert
  */
-define(["text!./Alert.html", "../common/Base", "../common/mixins/Items"], function(tpl){
+define( [ "text!./Alert.html", "../common/Base", "../common/mixins/Items" ], function( tpl ) {
 	"use strict";
-	return Firebrick.define("Firebrick.ui.display.Alert", {
+	return Firebrick.define( "Firebrick.ui.display.Alert", {
 		extend: "Firebrick.ui.common.Base",
-		mixins:"Firebrick.ui.common.mixins.Items",
+		mixins: "Firebrick.ui.common.mixins.Items",
 		tpl: tpl,
-		sName:"display.alert",
+		sName: "display.alert",
 		/**
 		 * whether the alert is dismissible - also controls whether the X button is shown or not
 		 * @property dismissible
@@ -28,12 +28,12 @@ define(["text!./Alert.html", "../common/Base", "../common/mixins/Items"], functi
 		 * @type {String|false}
 		 * @default "fade in"
 		 */
-		animationClasses:"fade in",
+		animationClasses: "fade in",
 		/**
 		 * alert type, "danger", "info", "warn" etc
 		 * @property type
 		 * @type {String}
-		 * @default "danger" 
+		 * @default "danger"
 		 */
 		type: "danger",
 		/**
@@ -42,7 +42,7 @@ define(["text!./Alert.html", "../common/Base", "../common/mixins/Items"], functi
 		 * @type {String}
 		 * @default ""
 		 */
-		title:"",
+		title: "",
 		/**
 		 * fill the panel body with html
 		 * @property html
@@ -54,17 +54,17 @@ define(["text!./Alert.html", "../common/Base", "../common/mixins/Items"], functi
 		 * @method bindings
 		 * @return {Object}
 		 */
-		bindings: function(){
+		bindings: function() {
 			var me = this,
-				obj = me.callParent(arguments);
+				obj = me.callParent( arguments );
 			
 			obj.attr.role = "'alert'";
 			obj.css.alert = true;
-			obj.css["'alert-dismissible'"] = me.dismissible;
-			if(me.animationClasses){
-				obj.css[me.parseBind(me.animationClasses)] = true;
+			obj.css[ "'alert-dismissible'" ] = me.dismissible;
+			if ( me.animationClasses ) {
+				obj.css[ me.parseBind( me.animationClasses ) ] = true;
 			}
-			obj.css[me.parseBind("alert-" + me.type)] = true;
+			obj.css[ me.parseBind( "alert-" + me.type ) ] = true;
 			
 			return obj;
 		},
@@ -72,11 +72,11 @@ define(["text!./Alert.html", "../common/Base", "../common/mixins/Items"], functi
 		 * @method paragraphBindings
 		 * @return {Object}
 		 */
-		paragraphBindings: function(){
+		paragraphBindings: function() {
 			var me = this,
 				obj = {};
 			
-			obj.html = "Firebrick.getById('"+me.getId()+"').html";
+			obj.html = "Firebrick.getById('" + me.getId() + "').html";
 			
 			return obj;
 		},
@@ -92,29 +92,29 @@ define(["text!./Alert.html", "../common/Base", "../common/mixins/Items"], functi
 		 * @method srCloseIconBindings
 		 * @return {Object}
 		 */
-		srCloseIconBindings: function(){
+		srCloseIconBindings: function() {
 			var me = this;
 			return {
-				css:{
+				css: {
 					"'sr-only'": true
 				},
-				text: me.parseBind(me.srCloseText)
+				text: me.parseBind( me.srCloseText )
 			};
 		},
 		/**
 		 * @method closeButtonBindings
 		 * @return {Object}
 		 */
-		closeButtonBindings: function(){
+		closeButtonBindings: function() {
 			return {
-				attr:{
+				attr: {
 					type: "'button'",
 					"'data-dismiss'": "'alert'"
 				},
-				css:{
+				css: {
 					close: true
 				}
 			};
-		},
+		}
 	});
 });

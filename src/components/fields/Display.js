@@ -4,16 +4,16 @@
 
 /**
  * read only input field but doesn't look like an input field
- * 
+ *
  * @module Firebrick.ui.components
  * @extends components.fields.Base
  * @namespace components.fields
  * @class Display
  */
-define(["text!./Display.html", "./Input"], function(subTpl){
+define( [ "text!./Display.html", "./Input" ], function( subTpl ) {
 	"use strict";
-	return Firebrick.define("Firebrick.ui.fields.Display", {
-		extend:"Firebrick.ui.fields.Input",
+	return Firebrick.define( "Firebrick.ui.fields.Display", {
+		extend: "Firebrick.ui.fields.Input",
 		/**
 		 * @property sName
 		 * @type {String}
@@ -37,7 +37,7 @@ define(["text!./Display.html", "./Input"], function(subTpl){
 		 * @method bindings
 		 * @return {Object}
 		 */
-		bindings: function(){
+		bindings: function() {
 			var me = this,
 				obj = me.callParent(),
 				text = obj.value;

@@ -8,10 +8,10 @@
  * @namespace components.fields
  * @class HtmlEditor
  */
-define(["./TextArea", "summernote"], function(){
+define( [ "./TextArea", "summernote" ], function() {
 	"use strict";
-	return Firebrick.define("Firebrick.ui.fields.HtmlEditor", {
-		extend:"Firebrick.ui.fields.TextArea",
+	return Firebrick.define( "Firebrick.ui.fields.HtmlEditor", {
+		extend: "Firebrick.ui.fields.TextArea",
 		/**
 		 * @property sName
 		 * @type {String}
@@ -28,38 +28,40 @@ define(["./TextArea", "summernote"], function(){
 		 * @method getEditorConfig
 		 * @return {Object}
 		 */
-		getEditorConfig: function(){
+		getEditorConfig: function() {
 			var me = this,
 				editorConf = me.editorConf || {},
 				obj = {
 					height: 200
 				};
-			return Firebrick.utils.overwrite(obj, editorConf);
+			return Firebrick.utils.overwrite( obj, editorConf );
 		},
 		/**
 		 * @method setValue
 		 */
-		_setValue: function( value ){
+		_setValue: function( value ) {
+			var me = this;
 			return me.getElement().code( value );
 		},
 		/**
 		 * @method getValue
 		 * @return {Html}
 		 */
-		getValue: function(){
+		getValue: function() {
+			var me = this;
 			return me.getElement().code();
 		},
 		/**
 		 * @method init
 		 */
-		init: function(){
+		init: function() {
 			var me = this;
 			
-			if( !me.inplaceEdit ){
-				me.on("rendered", function(){
+			if ( !me.inplaceEdit ) {
+				me.on( "rendered", function() {
 					me._initEditor();
 				});
-				me.on("destroy", function(){
+				me.on( "destroy", function() {
 					me.getElement().destroy();
 				});
 			}
@@ -70,11 +72,11 @@ define(["./TextArea", "summernote"], function(){
 		 * @method _initEditor
 		 * @private
 		 */
-		_initEditor: function(){
+		_initEditor: function() {
 			var me = this,
 				$el = me.getElement();
 				
-			$el.summernote( me.getEditorConfig() ); 
+			$el.summernote( me.getEditorConfig() );
 		}
 	});
 });

@@ -245,16 +245,16 @@
  * @namespace components.menu
  * @class Item
  */
-define([&quot;text!./Item.html&quot;, &quot;../common/Base&quot;], function(tpl){
+define( [ &quot;text!./Item.html&quot;, &quot;../common/Base&quot; ], function( tpl ) {
 	&quot;use strict&quot;;
-	return Firebrick.define(&quot;Firebrick.ui.menu.Item&quot;, {
+	return Firebrick.define( &quot;Firebrick.ui.menu.Item&quot;, {
 		extend: &quot;Firebrick.ui.common.Base&quot;,
-		mixins:&quot;Firebrick.ui.common.mixins.Items&quot;,
+		mixins: &quot;Firebrick.ui.common.mixins.Items&quot;,
 		sName: &quot;menu.item&quot;,
 		text: null,
 		value: null,
 		href: null,
-		divider:false,
+		divider: false,
 		tpl: tpl,
 		/**
 		 * @property defaults
@@ -270,11 +270,11 @@ define([&quot;text!./Item.html&quot;, &quot;../common/Base&quot;], function(tpl)
 		 * @method bindings
 		 * @return {Object}
 		 */
-		bindings: function(){
+		bindings: function() {
 			var me = this,
 				obj = me.callParent( arguments );
 			
-			if(me.divider){
+			if ( me.divider ) {
 				obj.css.divider = true;
 			}
 			
@@ -286,16 +286,16 @@ define([&quot;text!./Item.html&quot;, &quot;../common/Base&quot;], function(tpl)
 		 * @method linkBindings
 		 * @return {Object}
 		 */
-		linkBindings: function(){
+		linkBindings: function() {
 			var me = this,
 				obj = {
-					attr:{}
+					attr: {}
 				};
 			
-			if(me.href){
+			if ( me.href ) {
 				obj.href = me.href;
 			}
-			if(me.text){
+			if ( me.text ) {
 				obj.text = me.textBind( me.text );
 			}
 			
@@ -306,6 +306,7 @@ define([&quot;text!./Item.html&quot;, &quot;../common/Base&quot;], function(tpl)
 		}
 	});
 });
+
     </pre>
 </div>
 

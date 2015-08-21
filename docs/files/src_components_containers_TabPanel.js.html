@@ -244,10 +244,10 @@
  * @namespace components.containers
  * @class TabPanel
  */
-define([&quot;text!./TabPanel.html&quot;, &quot;./Base&quot;, &quot;bootstrap.plugins/tab&quot;, &quot;./tab/Pane&quot;], function(tpl){
+define( [ &quot;text!./TabPanel.html&quot;, &quot;./Base&quot;, &quot;bootstrap.plugins/tab&quot;, &quot;./tab/Pane&quot; ], function( tpl ) {
 	&quot;use strict&quot;;
-	return Firebrick.define(&quot;Firebrick.ui.containers.TabPanel&quot;, {
-		extend:&quot;Firebrick.ui.containers.Base&quot;,
+	return Firebrick.define( &quot;Firebrick.ui.containers.TabPanel&quot;, {
+		extend: &quot;Firebrick.ui.containers.Base&quot;,
 		tpl: tpl,
 		/**
 		* @property sName
@@ -260,16 +260,16 @@ define([&quot;text!./TabPanel.html&quot;, &quot;./Base&quot;, &quot;bootstrap.pl
 		 * @method _getListTplId
 		 * @return {String}
 		 */
-		_getListTplId: function(){
-			return &quot;fb-ui-tpl-list-&quot; + this.getId(); 
+		_getListTplId: function() {
+			return &quot;fb-ui-tpl-list-&quot; + this.getId();
 		},
 		/**
 		 * @private
 		 * @method _getTabPaneTplId
 		 * @return {String}
 		 */
-		_getTabPaneTplId: function(){
-			return &quot;fb-ui-tpl-tabpane-&quot; + this.getId(); 
+		_getTabPaneTplId: function() {
+			return &quot;fb-ui-tpl-tabpane-&quot; + this.getId();
 		},
 		/**
 		 * @property _tabs
@@ -285,14 +285,14 @@ define([&quot;text!./TabPanel.html&quot;, &quot;./Base&quot;, &quot;bootstrap.pl
 				sName: &quot;containers.tab.pane&quot;
 			}
 		 */
-		defaults:{
+		defaults: {
 			sName: &quot;containers.tab.pane&quot;
 		},
 		/**
 		 * @method init
 		 * @return self
 		 */
-		init: function(){
+		init: function() {
 			var me = this;
 			this._firstTabActive();
 			return me.callParent( arguments );
@@ -302,23 +302,23 @@ define([&quot;text!./TabPanel.html&quot;, &quot;./Base&quot;, &quot;bootstrap.pl
 		 * @method _firstTabActive
 		 * @return self
 		 */
-		_firstTabActive: function(){
+		_firstTabActive: function() {
 			var me = this,
-			it, 
+			it,
 			active = false,
 			length = me.items.length;
 		
-			for(var i = 0; i&lt;length; i++){
-				it = me.items[i];
-				if(it.active){
+			for ( var i = 0; i &lt; length; i++ ) {
+				it = me.items[ i ];
+				if ( it.active ) {
 					active = true;
 					break;
 				}
 			}
 			
-			if(!active &amp;&amp; length){
+			if ( !active &amp;&amp; length ) {
 				//force first tab to be active
-				me.items[0].active = true;
+				me.items[ 0 ].active = true;
 			}
 			return me;
 		},
@@ -326,7 +326,7 @@ define([&quot;text!./TabPanel.html&quot;, &quot;./Base&quot;, &quot;bootstrap.pl
 		 * @method bindings
 		 * @return {Object}
 		 */
-		bindings: function(){
+		bindings: function() {
 			var me = this,
 				obj = me.callParent();
 			
@@ -338,14 +338,14 @@ define([&quot;text!./TabPanel.html&quot;, &quot;./Base&quot;, &quot;bootstrap.pl
 		 * @method listTemplateBindings
 		 * @return {Object}
 		 */
-		listTemplateBindings: function(){
+		listTemplateBindings: function() {
 			var me = this,
 				obj = {};
 			
 			obj.template = {
 					name: me.parseBind( me._getListTplId() ),
-					foreach: Firebrick.ui.helper.tabBuilder(me.getId()),
-					as:&quot;&#x27;tab&#x27;&quot;
+					foreach: Firebrick.ui.helper.tabBuilder( me.getId() ),
+					as: &quot;&#x27;tab&#x27;&quot;
 			};
 			
 			return obj;
@@ -354,13 +354,12 @@ define([&quot;text!./TabPanel.html&quot;, &quot;./Base&quot;, &quot;bootstrap.pl
 		 * @method listBindings
 		 * @return {Object}
 		 */
-		listBindings: function(){
-			var me = this,
-				obj = {css:{}, attr:{}};
+		listBindings: function() {
+			var obj = { css: {}, attr: {} };
 			
 			obj.attr.role = &quot;&#x27;tablist&#x27;&quot;;
 			obj.css.nav = true;
-			obj.css[&quot;&#x27;nav-tabs&#x27;&quot;] = true;
+			obj.css[ &quot;&#x27;nav-tabs&#x27;&quot; ] = true;
 			
 			return obj;
 		},
@@ -368,9 +367,8 @@ define([&quot;text!./TabPanel.html&quot;, &quot;./Base&quot;, &quot;bootstrap.pl
 		 * @method listItemBindings
 		 * @return {Object}
 		 */
-		listItemBindings: function(){
-			var me = this,
-				obj = {css:{}, attr:{}};
+		listItemBindings: function() {
+			var obj = { css: {}, attr: {} };
 			
 			obj.attr.role = &quot;&#x27;presentation&#x27;&quot;;
 			obj.css.active = &quot;tab.hasOwnProperty(&#x27;active&#x27;) ? tab.active : false&quot;;
@@ -382,15 +380,15 @@ define([&quot;text!./TabPanel.html&quot;, &quot;./Base&quot;, &quot;bootstrap.pl
 		 * @method listItemLinkBindings
 		 * @return {Object}
 		 */
-		listItemLinkBindings: function(){
+		listItemLinkBindings: function() {
 			var me = this,
-				obj = {css:{}, attr:{}};
+				obj = { css: {}, attr: {} };
 			
 			obj.attr.href = &quot;Firebrick.ui.helper.linkBuilder(tab)&quot;;
-			obj.attr[&quot;&#x27;aria-controls&#x27;&quot;] = &quot;tab.id&quot;;
-			obj.attr[&quot;&#x27;data-target&#x27;&quot;] = &quot;Firebrick.getById(&#x27;&quot;+me.getId()+&quot;&#x27;).registerTab(tab.id, $index)&quot;;
+			obj.attr[ &quot;&#x27;aria-controls&#x27;&quot; ] = &quot;tab.id&quot;;
+			obj.attr[ &quot;&#x27;data-target&#x27;&quot; ] = &quot;Firebrick.getById(&#x27;&quot; + me.getId() + &quot;&#x27;).registerTab(tab.id, $index)&quot;;
 			obj.attr.role = &quot;&#x27;tab&#x27;&quot;;
-			obj.attr[&quot;&#x27;data-toggle&#x27;&quot;] = &quot;tab.disabled !== true ? &#x27;tab&#x27; : false&quot;;
+			obj.attr[ &quot;&#x27;data-toggle&#x27;&quot; ] = &quot;tab.disabled !== true ? &#x27;tab&#x27; : false&quot;;
 			
 			return obj;
 		},
@@ -398,11 +396,11 @@ define([&quot;text!./TabPanel.html&quot;, &quot;./Base&quot;, &quot;bootstrap.pl
 		 * @method listItemTextBindings
 		 * @return {Object}
 		 */
-		listItemTextBindings: function(){
+		listItemTextBindings: function() {
 			var me = this,
-				obj = {css:{}, attr:{}};
+				obj = { css: {}, attr: {} };
 			
-			obj.text = me.textBind(&quot;&#x27;+tab.title+&#x27;&quot;);
+			obj.text = me.textBind( &quot;&#x27;+tab.title+&#x27;&quot; );
 			
 			return obj;
 		},
@@ -411,11 +409,10 @@ define([&quot;text!./TabPanel.html&quot;, &quot;./Base&quot;, &quot;bootstrap.pl
 		 * @method tabContentBindings
 		 * @return {Object}
 		 */
-		tabContentBindings: function(){
-			var me = this,
-				obj = {css:{}, attr:{}};
+		tabContentBindings: function() {
+			var obj = { css: {}, attr: {} };
 			
-			obj.css[&quot;&#x27;tab-content&#x27;&quot;] = true;
+			obj.css[ &quot;&#x27;tab-content&#x27;&quot; ] = true;
 			
 			return obj;
 		},
@@ -426,17 +423,17 @@ define([&quot;text!./TabPanel.html&quot;, &quot;./Base&quot;, &quot;bootstrap.pl
 		 * @param index {Integer}
 		 * @return &quot;#{id}&quot;
 		 */
-		registerTab: function(tabId, index){
-			var me = this, 
+		registerTab: function( tabId, index ) {
+			var me = this,
 				id;
 			
-			if($.isFunction(index)){
+			if ( $.isFunction( index ) ) {
 				index = index();
 			}
 			
 			id = tabId || &quot;fb-ui-tab-&quot; + me.getId() + &quot;-&quot; + index;
 			
-			me.addTab(id);
+			me.addTab( id );
 			
 			return &quot;#&quot; + id;
 		},
@@ -446,12 +443,12 @@ define([&quot;text!./TabPanel.html&quot;, &quot;./Base&quot;, &quot;bootstrap.pl
 		 * @param id {String}
 		 * @return self
 		 */
-		addTab: function(id){
+		addTab: function( id ) {
 			var me = this;
-			if(!me._tabs){
+			if ( !me._tabs ) {
 				me._tabs = [];
 			}
-			me._tabs.push(id);
+			me._tabs.push( id );
 			return me;
 		},
 		
@@ -461,8 +458,8 @@ define([&quot;text!./TabPanel.html&quot;, &quot;./Base&quot;, &quot;bootstrap.pl
 		 * @param index {Integer}
 		 * @return {String}
 		 */
-		getTabId: function(index){
-			return this._tabs[index];
+		getTabId: function( index ) {
+			return this._tabs[ index ];
 		},
 		
 		/**
@@ -473,17 +470,17 @@ define([&quot;text!./TabPanel.html&quot;, &quot;./Base&quot;, &quot;bootstrap.pl
 		 * @param {Context} iteration context
 		 * @return {String}
 		 */
-		getTabPaneItem: function(index, item){
+		getTabPaneItem: function( index, item ) {
 			var me = this,
 				newItem;
 			
 			item.paneIndex = index;
 			
-			newItem = me._getItems(item);
+			newItem = me._getItems( item );
 			
-			if(newItem){
+			if ( newItem ) {
 				//replace items with the new object - _getItems returns an object {html:&quot;&quot;, items:[]}
-				me.items[index] = newItem.items[0];
+				me.items[ index ] = newItem.items[ 0 ];
 				
 				return newItem.html;
 			}
@@ -491,6 +488,7 @@ define([&quot;text!./TabPanel.html&quot;, &quot;./Base&quot;, &quot;bootstrap.pl
 		}
 	});
 });
+
     </pre>
 </div>
 

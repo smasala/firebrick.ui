@@ -9,32 +9,32 @@
  * @namespace components.menu
  * @class ContextMenu
  */
-define(["jquery", "./Menu", "../common/mixins/Items"], function($){
+define( [ "jquery", "./Menu", "../common/mixins/Items" ], function( $ ) {
 	"use strict";
 	
-	return Firebrick.define("Firebrick.ui.menu.ContextMenu", {
+	return Firebrick.define( "Firebrick.ui.menu.ContextMenu", {
 		extend: "Firebrick.ui.menu.Menu",
-		mixins:"Firebrick.ui.common.mixins.Items",
+		mixins: "Firebrick.ui.common.mixins.Items",
 		sName: "menu.contextmenu",
 		target: "body",
 		enclosedBind: true,
 		appendTarget: true,
 		contextMenuEvent: null,
 		
-		init: function(){
+		init: function() {
 			var me = this;
 			
-			me.on("rendered", function(){
+			me.on( "rendered", function() {
 				me._initContext();
 				me.position();
 			});
 			
-			return me.callParent(arguments);
+			return me.callParent( arguments );
 		},
 		
-		position: function(){
+		position: function() {
 			var me = this,
-				el = $("> ul", me.getElement()),
+				el = $( "> ul", me.getElement() ),
 				event = me.contextMenuEvent;
 	
 			el.css({
@@ -46,28 +46,27 @@ define(["jquery", "./Menu", "../common/mixins/Items"], function($){
 			});
 		},
 		
-		_initContext: function(){
+		_initContext: function() {
 			var me = this,
-				globalClick = function(e){
-					var $e = $(e.target),
+				globalClick = function( e ) {
+					var $e = $( e.target ),
 						$el = me.getElement();
 					
-					if(!$el.is($e) || $el.has($e).length){
+					if ( !$el.is( $e ) || $el.has( $e ).length ) {
 						me.destroy();
-						$(document).off("click", globalClick);	
+						$( document ).off( "click", globalClick );
 					}
 					
 				};
 				
-			$(document).on("click", globalClick);
+			$( document ).on( "click", globalClick );
 		},
 		
-		
-		bindings: function(){
+		bindings: function() {
 			var me = this,
-				obj = me.callParent(arguments);
+				obj = me.callParent( arguments );
 			
-			obj.css["'fb-ui-contextmenu'"] = true;
+			obj.css[ "'fb-ui-contextmenu'" ] = true;
 			
 			return obj;
 		}

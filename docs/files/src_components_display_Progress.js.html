@@ -244,11 +244,11 @@
  * @namespace components.display
  * @class Progress
  */
-define([&quot;text!./Progress.html&quot;, &quot;../common/Base&quot;], function(tpl){
+define( [ &quot;text!./Progress.html&quot;, &quot;../common/Base&quot; ], function( tpl ) {
 	&quot;use strict&quot;;
-	return Firebrick.define(&quot;Firebrick.ui.display.Progress&quot;, {
+	return Firebrick.define( &quot;Firebrick.ui.display.Progress&quot;, {
 		extend: &quot;Firebrick.ui.common.Base&quot;,
-		sName:&quot;display.progress&quot;,
+		sName: &quot;display.progress&quot;,
 		tpl: tpl,
 		/**
 		 * progress html5 element max attribute
@@ -256,14 +256,14 @@ define([&quot;text!./Progress.html&quot;, &quot;../common/Base&quot;], function(
 		 * @type {Integer|String|Function}
 		 * @default 100
 		 */
-		max:100,
+		max: 100,
 		/**
 		 * progress html5 element value attribute
 		 * @property value
-		 * @type {Integer|String|Function} use a string or function for data binding 
+		 * @type {Integer|String|Function} use a string or function for data binding
 		 * @default 0
 		 */
-		value:0,
+		value: 0,
 		/**
 		 * whether or not to show a label with the progress bar
 		 * @property showLabel
@@ -288,47 +288,48 @@ define([&quot;text!./Progress.html&quot;, &quot;../common/Base&quot;], function(
 		 * @method bindings
 		 * @return {Object}
 		 */
-		bindings: function(){
+		bindings: function() {
 			var me = this,
-				obj = me.callParent(arguments);
+				obj = me.callParent( arguments );
 			
 			obj.attr.max = me.max;
 			obj.attr.value = me.value;
-			obj.text = me.parseBind(me.value+&quot;%&quot;);
+			obj.text = me.parseBind( me.value + &quot;%&quot; );
 			
 			return obj;
 		},
 		/**
 		 * @method progressLabelBindings
 		 */
-		progressLabelBindings: function(){
+		progressLabelBindings: function() {
 			var me = this;
 			return {
 				css: {
 					&quot;&#x27;progress-label&#x27;&quot;: true
 				},
 				attr: {
-					&quot;&#x27;data-symbol&#x27;&quot;: me.parseBind(me.dataSymbol),
+					&quot;&#x27;data-symbol&#x27;&quot;: me.parseBind( me.dataSymbol ),
 					&quot;&#x27;data-value&#x27;&quot;: me.value
 				},
-				text: me.textBind(me.label),
+				text: me.textBind( me.label ),
 				style: {
-					width: me.parseBind(me.value+&quot;%&quot;)
+					width: me.parseBind( me.value + &quot;%&quot; )
 				}
 			};
 		},
 		/**
 		 * @method progressContainerBindings
 		 */
-		progressContainerBindings: function(){
+		progressContainerBindings: function() {
 			return {
-				css:{
+				css: {
 					&quot;&#x27;progress-container&#x27;&quot;: true
 				}
 			};
 		}
 	});
 });
+
     </pre>
 </div>
 

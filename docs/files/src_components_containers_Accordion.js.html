@@ -244,10 +244,10 @@
  * @namespace components.containers
  * @class Accordion
  */
-define([&quot;text!./Accordion.html&quot;, &quot;./Base&quot;, &quot;./Panel&quot;, &quot;bootstrap.plugins/collapse&quot;], function(tpl){
+define( [ &quot;text!./Accordion.html&quot;, &quot;./Base&quot;, &quot;./Panel&quot;, &quot;bootstrap.plugins/collapse&quot; ], function( tpl ) {
 	&quot;use strict&quot;;
-	return Firebrick.define(&quot;Firebrick.ui.containers.Accordion&quot;, {
-		extend:&quot;Firebrick.ui.containers.Base&quot;,
+	return Firebrick.define( &quot;Firebrick.ui.containers.Accordion&quot;, {
+		extend: &quot;Firebrick.ui.containers.Base&quot;,
 		/**
 		 * @property tpl
 		 * @type {String} html
@@ -258,7 +258,7 @@ define([&quot;text!./Accordion.html&quot;, &quot;./Base&quot;, &quot;./Panel&quo
 		 * @property sName
 		 * @type {String}
 		 */
-		sName:&quot;containers.accordion&quot;,
+		sName: &quot;containers.accordion&quot;,
 		
 		/**
 		 * @property defaults
@@ -269,7 +269,7 @@ define([&quot;text!./Accordion.html&quot;, &quot;./Base&quot;, &quot;./Panel&quo
 		 */
 		defaults: {
 			sName: &quot;containers.panel&quot;,
-			collapsible:true,
+			collapsible: true,
 			role: &quot;tab&quot;,
 			collapseRole: &quot;tabpanel&quot;
 		},
@@ -295,35 +295,36 @@ define([&quot;text!./Accordion.html&quot;, &quot;./Base&quot;, &quot;./Panel&quo
 		 * @method bindings
 		 * @return {Object}
 		 */
-		bindings: function(){
+		bindings: function() {
 			var me = this,
-				obj = me.callParent(arguments);
+				obj = me.callParent( arguments );
 			
 			//&lt;div class=&quot;panel-group&quot; id=&quot;accordion&quot; role=&quot;tablist&quot; aria-multiselectable=&quot;true&quot;&gt;
 			
-			obj.attr.role = me.parseBind(me.role);
-			obj.attr[&quot;&#x27;aria-multiselectable&#x27;&quot;] = me.ariaMultiselectable;
-			if(me.panelGroupClass){
-				obj.css[me.parseBind(me.panelGroupClass)] = true;
+			obj.attr.role = me.parseBind( me.role );
+			obj.attr[ &quot;&#x27;aria-multiselectable&#x27;&quot; ] = me.ariaMultiselectable;
+			if ( me.panelGroupClass ) {
+				obj.css[ me.parseBind( me.panelGroupClass ) ] = true;
 			}
 			
 			return obj;
 		},
 		
-		getItems: function(){
+		getItems: function() {
 			var me = this,
 				item;
 			
-			for(var i = 0, l = me.items.length; i&lt;l; i++){
-				item = me.items[i];
-				item.dataParentId = me.parseBind(&quot;#&quot; + me.getId());
+			for ( var i = 0, l = me.items.length; i &lt; l; i++ ) {
+				item = me.items[ i ];
+				item.dataParentId = me.parseBind( &quot;#&quot; + me.getId() );
 				item.collapsed = item.active ? false : true;
 			}
 			
-			return me.callParent(arguments);
+			return me.callParent( arguments );
 		}
 	});
 });
+
     </pre>
 </div>
 

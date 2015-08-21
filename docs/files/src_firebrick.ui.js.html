@@ -238,22 +238,25 @@
 * Firebrick UI
 * @author Steven Masala [me@smasala.com]
 * @version 0.20.12
-* 
+* @date
+*
 * FirebrickUI, component library for Firebrick JS
 **/
-define([&quot;jquery&quot;, &quot;firebrick&quot;, &quot;knockout&quot;,  &quot;devicejs&quot;, &quot;knockout-mapping&quot;, &quot;text&quot;, &quot;bootstrap&quot;], function($, Firebrick, ko, dev, kom){	
+define( [ &quot;jquery&quot;, &quot;firebrick&quot;, &quot;knockout&quot;,  &quot;devicejs&quot;, &quot;knockout-mapping&quot;, &quot;text&quot;, &quot;bootstrap&quot; ], function( $, Firebrick, ko, dev, kom ) {
 	&quot;use strict&quot;;
 
 	//ko mapping
 	ko.mapping = kom;
 	
-	if(!Firebrick){
-		console.error(&quot;Firebrick has not been loaded, Firebrick-UI requires Firebrick JS to function&quot;);
+	if ( !Firebrick ) {
+		console.error( &quot;Firebrick has not been loaded, Firebrick-UI requires Firebrick JS to function&quot; );
 		return;
-	}else if(Firebrick.ui){
-		console.error(&quot;Firebrick.ui namespace has already been taken!&quot;);
+	} else if ( Firebrick.ui ) {
+		console.error( &quot;Firebrick.ui namespace has already been taken!&quot; );
 		return;
 	}
+	
+	Firebrick._ns.push( &quot;Firebrick.ui&quot; );
 	
 	/**
 	 * Firebrick component library for Firebrick JS MVC
@@ -271,7 +274,7 @@ define([&quot;jquery&quot;, &quot;firebrick&quot;, &quot;knockout&quot;,  &quot;
 			
 			/**
 			 * populate a target with fields and data
-			 * 
+			 *
 			 * @method build
 			 * @param {Object} config
 			 * @param {Object} config.target selector string, jquery object (optional) if none passed, html is returned
@@ -279,20 +282,20 @@ define([&quot;jquery&quot;, &quot;firebrick&quot;, &quot;knockout&quot;,  &quot;
 			 * @param {Object} config.view Firebrick view class (optional), must be defined for rendered event to be fired
 			 * @return {String} html
 			 */
-			build: function(config){
+			build: function( config ) {
 				var me = this,
-					target = Firebrick.views.getTarget(config.target),
+					target = Firebrick.views.getTarget( config.target ),
 					r, html;
 				
-				r = me._populate(config.items, config.view);
+				r = me._populate( config.items, config.view );
 				html = r.html;
 				
-				if(config.view &amp;&amp; r.items.length){
+				if ( config.view &amp;&amp; r.items.length ) {
 					config.view.items = r.items;
 				}
 				
-				if(target){
-					target.append(html);
+				if ( target ) {
+					target.append( html );
 				}
 				
 				return html;
@@ -305,44 +308,44 @@ define([&quot;jquery&quot;, &quot;firebrick&quot;, &quot;knockout&quot;,  &quot;
 			 * @method _populate
 			 * @return {Object} :: {html: string, items: array of objects}
 			 */
-			_populate: function(items, parent){
+			_populate: function( items, parent ) {
 				var me = this,
 					_items = [],
 					html = &quot;&quot;,
 					component;
 
-				if($.isFunction(items)){
+				if ( $.isFunction( items ) ) {
 					items = items();
 				}
 
-				if(!$.isArray(items) &amp;&amp; items){
-					items = [items];
+				if ( !$.isArray( items ) &amp;&amp; items ) {
+					items = [ items ];
 				}
 				
-				if($.isArray(items) &amp;&amp; items.length){
-					if(parent.defaults){
+				if ( $.isArray( items ) &amp;&amp; items.length ) {
+					if ( parent.defaults ) {
 						//get all defaults down the prototype tree
-						Firebrick.utils.merge(&quot;defaults&quot;, parent);
+						Firebrick.utils.merge( &quot;defaults&quot;, parent );
 						//add the defaults to direct items
 						//TODO: if items is a function?
-						for(var i = 0, l = items.length; i&lt;l; i++){
-							items[i] = Firebrick.utils.copyover(items[i], parent.defaults);
+						for ( var i = 0, l = items.length; i &lt; l; i++ ) {
+							items[ i ] = Firebrick.utils.copyover( items[ i ], parent.defaults );
 						}
 					}
 					
-					for(var i = 0, l = items.length; i&lt;l; i++){
-						component = me._buildComponent(items[i], parent);
+					for ( var x = 0, y = items.length; x &lt; y; x++ ) {
+						component = me._buildComponent( items[ x ], parent );
 						html += component._html;
 						//cache component pointer so it can be found by id
-						if(!component.getId){
-							console.error(&quot;something went wrong&quot;, items[i], &quot;is it defined correctly? Check the item name and dependency include&quot;);
+						if ( !component.getId ) {
+							console.error( &quot;something went wrong&quot;, items[ x ], &quot;is it defined correctly? Check the item name and dependency include&quot; );
 						}
-						component.fireEvent(&quot;uiBuilt&quot;);
-						_items.push(component);
+						component.fireEvent( &quot;uiBuilt&quot; );
+						_items.push( component );
 					}
 				}
 				
-				return {html: html, items: _items};
+				return { html: html, items: _items };
 			},
 			
 			/**
@@ -353,50 +356,49 @@ define([&quot;jquery&quot;, &quot;firebrick&quot;, &quot;knockout&quot;,  &quot;
 			 * @param parent {Object} component parent object
 			 * @return {Object} component
 			 */
-			_buildComponent: function(v, parent){
+			_buildComponent: function( v, parent ) {
 				var me = this,
-					component, 
+					component,
 					tmp;
 				
-				if(v.isView){
-					if(v._state !== &quot;initial&quot;){
+				if ( v.isView ) {
+					if ( v._state !== &quot;initial&quot; ) {
 						component = v.init();
 					}
 					component = v;
-				}else if(v.viewName){
+				} else if ( v.viewName ) {
 					//Creates a view from a JS file
 					//Firebrick.create(&quot;MyApp.view.MyView&quot;, {})
-					component = Firebrick.create(v.viewName, v);
-				}else{
+					component = Firebrick.create( v.viewName, v );
+				} else {
 					
-					v = me._componentFilter(v);
+					v = me._componentFilter( v );
 					
-					if(!v.uiComponent){
-						if(v.sName){
+					if ( !v.uiComponent ) {
+						if ( v.sName ) {
 							v.sName = v.sName.toLowerCase();
 						}
 						//v can be string or object
-						tmp = Firebrick.get(v.sName || v);
-						if(!tmp){
-							console.error(&quot;Has&quot;, (v.sName || v), &quot;been added as a dependency?&quot;);
+						tmp = Firebrick.get( v.sName || v );
+						if ( !tmp ) {
+							console.error( &quot;Has&quot;, ( v.sName || v ), &quot;been added as a dependency?&quot; );
 						}
 						//Object.getPrototypeOf(object.create) to make a new copy of the properties and not a pointer to v
-						component = Firebrick.create(tmp._classname, (v.sName ? Object.getPrototypeOf(Object.create(v)) : null));
-					}else{
+						component = Firebrick.create( tmp._classname, ( v.sName ? Object.getPrototypeOf( Object.create( v ) ) : null ) );
+					} else {
 						//v is already a field class
 						component = v;
 					}
 				}
 				
-				if(!component._parent){
+				if ( !component._parent ) {
 					//if not set yet
 					component._parent = parent;
 				}
 				
-				if(component.build){
-					component._html = component.build();	
+				if ( component.build ) {
+					component._html = component.build();
 				}
-				
 				
 				return component;
 			},
@@ -405,17 +407,17 @@ define([&quot;jquery&quot;, &quot;firebrick&quot;, &quot;knockout&quot;,  &quot;
 			 * this method converts shorthand component definitions
 			 * @example
 			 * 		//component definition    &quot;|&quot;
-			 * 		//converts to the component &lt;hr&gt; 
+			 * 		//converts to the component &lt;hr&gt;
 			 * @method _componentFilter
 			 * @private
 			 * @param v {String}
 			 * @return {String}
 			 */
-			_componentFilter: function(name){
+			_componentFilter: function( name ) {
 				//var me = this;
 				
-				if(typeof name === &quot;string&quot;){
-					switch(name){
+				if ( typeof name === &quot;string&quot; ) {
+					switch ( name ){
 						case &quot;|&quot;:
 							name = &quot;display.divider&quot;;
 							break;
@@ -430,19 +432,19 @@ define([&quot;jquery&quot;, &quot;firebrick&quot;, &quot;knockout&quot;,  &quot;
 			 * @param id {String}
 			 * @return {Object|null}
 			 */
-			getCmp: function(id){
-				return Firebrick.getById(id);
+			getCmp: function( id ) {
+				return Firebrick.getById( id );
 			},
 			
 			/**
 			 * alias for Firebrick.get
-			 * 
+			 *
 			 * @method get
 			 * @param {String} name
 			 * @return {Object}
 			 */
-			get: function(name){
-				return Firebrick.get(name);
+			get: function( name ) {
+				return Firebrick.get( name );
 			},
 			
 			/**
@@ -450,27 +452,27 @@ define([&quot;jquery&quot;, &quot;firebrick&quot;, &quot;knockout&quot;,  &quot;
 			 * @for ui
 			 * @class utils
 			 */
-			utils:{
+			utils: {
 				
 				/**
 				 * @private
 				 * @method _buildDotObj
-				 * @example 
+				 * @example
 				 * 		//example: a.b.c.d
 				 *		//convert to:
-				 *			a:{ 
-				 *				b:{ 
-				 *					c:{ 
-				 *						d:sName 
-				 *					} 
-				 *				} 
+				 *			a:{
+				 *				b:{
+				 *					c:{
+				 *						d:sName
+				 *					}
+				 *				}
 				 *			}
 				 * @param arr {Array of Strings}
 				 * @param sName {String} the original sName
 				 * @param prev {Object} optional, used by recursion
 				 * @return {Object}
 				 */
-				_buildDotObj: function(arr, sName, prev){
+				_buildDotObj: function( arr, sName, prev ) {
 					var me = this,
 						prop = arr.shift(); //remove the first item use it as property name
 					
@@ -480,15 +482,15 @@ define([&quot;jquery&quot;, &quot;firebrick&quot;, &quot;knockout&quot;,  &quot;
 					prev[ prop ] = {};
 					
 					//more items in arr?
-					if(arr.length){
-						if(arr[0] !== &quot;&quot;){
+					if ( arr.length ) {
+						if ( arr[ 0 ] !== &quot;&quot; ) {
 							//call self recursively
-							me._buildDotObj(arr, sName, prev[ prop ]);
-						}else{
-							console.error(&quot;error building sName, found empty string&quot;, arr, prop, sName);
+							me._buildDotObj( arr, sName, prev[ prop ] );
+						} else {
+							console.error( &quot;error building sName, found empty string&quot;, arr, prop, sName );
 						}
 						
-					}else{
+					} else {
 						prev[ prop ] = sName;
 					}
 					
@@ -499,9 +501,9 @@ define([&quot;jquery&quot;, &quot;firebrick&quot;, &quot;knockout&quot;,  &quot;
 				 * @method isVisible
 				 * @param $element {jQuery Object}
 				 * @param $container {jQuery Object}
-				 * @return {Boolean} 
+				 * @return {Boolean}
 				 */
-				isVisible: function($element, $container){
+				isVisible: function( $element, $container ) {
 					var cont = {
 							offset: $container.offset(),
 							height: $container.height(),
@@ -512,9 +514,9 @@ define([&quot;jquery&quot;, &quot;firebrick&quot;, &quot;knockout&quot;,  &quot;
 							height: $element.height(),
 							width: $element.width()
 						},
-						check = function(coord){
-							if(coord &gt; cont.offset.top &amp;&amp; coord &lt; cont.offset.left){
-								if(coord &lt; cont.bottom){
+						check = function( coord ) {
+							if ( coord &gt; cont.offset.top &amp;&amp; coord &lt; cont.offset.left ) {
+								if ( coord &lt; cont.bottom ) {
 									return true;
 								}
 							}
@@ -524,13 +526,12 @@ define([&quot;jquery&quot;, &quot;firebrick&quot;, &quot;knockout&quot;,  &quot;
 					cont.bottom = cont.offset.top + cont.height;
 					el.bottom = el.offset.top + el.height;
 					
-					if( check(el.offset.top) || 
-						check(el.offset.top + el.width) ||  
-						check(el.bottom) ||
-						check(el.bottom + el.width) ){
-						return true; 
+					if ( check( el.offset.top ) ||
+						check( el.offset.top + el.width ) ||
+						check( el.bottom ) ||
+						check( el.bottom + el.width ) ) {
+						return true;
 					}
-					
 					
 					return false;
 				},
@@ -542,8 +543,8 @@ define([&quot;jquery&quot;, &quot;firebrick&quot;, &quot;knockout&quot;,  &quot;
 				 * @param {Function|Any} val
 				 * @return {Any}
 				 */
-				getValue: function(val){
-					if($.isFunction(val)){
+				getValue: function( val ) {
+					if ( $.isFunction( val ) ) {
 						return val();
 					}
 					return val;
@@ -551,34 +552,34 @@ define([&quot;jquery&quot;, &quot;firebrick&quot;, &quot;knockout&quot;,  &quot;
 				
 				/**
 				 * convert a JS Object into a simple &quot;json&quot; type string, this is mainly used for the data-bind attribute in Knockout
-				 * 
+				 *
 				 * @method stringify
 				 * @param {Object} objToConvert
 				 * @return {String}
 				 */
-				stringify:function(objToConvert){
-					if(objToConvert){
+				stringify: function( objToConvert ) {
+					if ( objToConvert ) {
 						
-						var loop = function(obj, f){
+						var loop = function( obj, f ) {
 							var p = f ? &quot;&quot; : &quot;{&quot;,
 								k,v;
-							for(k in obj){
-								if(obj.hasOwnProperty(k)){
-									v = obj[k];
-									if($.isPlainObject(v)){
-										p += k + &quot;:&quot; + loop(v);
-									}else{
+							for ( k in obj ) {
+								if ( obj.hasOwnProperty( k ) ) {
+									v = obj[ k ];
+									if ( $.isPlainObject( v ) ) {
+										p += k + &quot;:&quot; + loop( v );
+									} else {
 										p += k + &quot;: &quot; + v + &quot;,&quot;;
 									}
 								}
 							}
 							//remove last &quot;, &quot;
-							p = p.substr(-1) === &quot;,&quot; ? p.substring(0, p.length-1) : p;
+							p = p.substr( -1 ) === &quot;,&quot; ? p.substring( 0, p.length - 1 ) : p;
 							p += f ? &quot;&quot; : &quot;},&quot;;
 							return p;
 						};
 						
-						return loop(objToConvert, true);
+						return loop( objToConvert, true );
 					}
 					return &quot;&quot;;
 				}
@@ -720,17 +721,17 @@ define([&quot;jquery&quot;, &quot;firebrick&quot;, &quot;knockout&quot;,  &quot;
 				 * @param $$context {KO Object}
 				 * @return {String} html
 				 */
-				getHtml: function( componentId, $data, $context ){
-					var component = Firebrick.getById(componentId),
+				getHtml: function( componentId, $data, $context ) {
+					var component = Firebrick.getById( componentId ),
 						html = component.html;
 					
-					if( $.isFunction(html) ){
+					if ( $.isFunction( html ) ) {
 						html = html( $data, $context );
 					}
 					
-					if(typeof html === &quot;string&quot;){
-						if( $data.hasOwnProperty( html ) ){
-							return $data[html];
+					if ( typeof html === &quot;string&quot; ) {
+						if ( $data.hasOwnProperty( html ) ) {
+							return $data[ html ];
 						}
 					}
 					return html;
@@ -739,16 +740,16 @@ define([&quot;jquery&quot;, &quot;firebrick&quot;, &quot;knockout&quot;,  &quot;
 				/**
 				 * builds the items string used for functions such as &quot;foreach&quot;
 				 * @method tabBuilder
-				 * @param componentId {Objects} 
-				 * @return {String} 
+				 * @param componentId {Objects}
+				 * @return {String}
 				 */
-				tabBuilder: function(componentId){
-					var component = Firebrick.getById(componentId),
+				tabBuilder: function( componentId ) {
+					var component = Firebrick.getById( componentId ),
 						data = component.items;
 					
-					if($.isFunction(data)){
+					if ( $.isFunction( data ) ) {
 						return &quot;Firebrick.getById(&#x27;&quot; + componentId + &quot;&#x27;).items()&quot;;
-					}else if($.isArray(data)){
+					} else if ( $.isArray( data ) ) {
 						return &quot;Firebrick.getById(&#x27;&quot; + componentId + &quot;&#x27;).items&quot;;
 					}
 					
@@ -758,15 +759,15 @@ define([&quot;jquery&quot;, &quot;firebrick&quot;, &quot;knockout&quot;,  &quot;
 				/**
 				 * builds the options string used for functions such as &quot;foreach&quot;
 				 * @method optionString
-				 * @param component {Objects} 
-				 * @return {String} 
+				 * @param component {Objects}
+				 * @return {String}
 				 */
-				optionString: function(component){
+				optionString: function( component ) {
 					var data = component.options;
 					
-					if($.isFunction(data)){
+					if ( $.isFunction( data ) ) {
 						return &quot;Firebrick.ui.getCmp(&#x27;&quot; + component.getId() + &quot;&#x27;).options()&quot;;
-					}else if($.isArray(data)){
+					} else if ( $.isArray( data ) ) {
 						return &quot;Firebrick.ui.getCmp(&#x27;&quot; + component.getId() + &quot;&#x27;).options&quot;;
 					}
 					
@@ -780,12 +781,12 @@ define([&quot;jquery&quot;, &quot;firebrick&quot;, &quot;knockout&quot;,  &quot;
 				 * @param {Object} value.link
 				 * @return {String | false}
 				 */
-				linkBuilder: function(value){
+				linkBuilder: function( value ) {
 
-					if(value){
-						if( typeof value.link === &quot;string&quot; ){
+					if ( value ) {
+						if ( typeof value.link === &quot;string&quot; ) {
 							return value.link;
-						}else if( typeof value.href === &quot;string&quot;){
+						} else if ( typeof value.href === &quot;string&quot; ) {
 							return value.href;
 						}
 					}
@@ -793,11 +794,10 @@ define([&quot;jquery&quot;, &quot;firebrick&quot;, &quot;knockout&quot;,  &quot;
 					return false;
 				},
 				
-				
-				callFunction: function(classId, functionName, args){
-					var clazz = Firebrick.getById(classId);
-					if(clazz &amp;&amp; functionName){
-						clazz[functionName].apply(clazz, args);
+				callFunction: function( classId, functionName, args ) {
+					var clazz = Firebrick.getById( classId );
+					if ( clazz &amp;&amp; functionName ) {
+						clazz[ functionName ].apply( clazz, args );
 					}
 				}
 				
@@ -814,7 +814,7 @@ define([&quot;jquery&quot;, &quot;firebrick&quot;, &quot;knockout&quot;,  &quot;
 				 * @type {Object}
 				 * @private
 				 */
-				_registry:{},
+				_registry: {},
 				
 				/**
 				 * @method add
@@ -822,10 +822,10 @@ define([&quot;jquery&quot;, &quot;firebrick&quot;, &quot;knockout&quot;,  &quot;
 				 * @param func {Function} function to call when the renderer is used - parameters given to the function when called: $data, $context, $parent, $root
 				 * @return self
 				 */
-				add: function(name, func){
+				add: function( name, func ) {
 					var me = this;
 					
-					me._registry[name] = func;
+					me._registry[ name ] = func;
 					
 					return me;
 				},
@@ -835,171 +835,25 @@ define([&quot;jquery&quot;, &quot;firebrick&quot;, &quot;knockout&quot;,  &quot;
 				 * @param name {String} name of the renderer
 				 * @return {Function || null}
 				 */
-				get: function(name){
+				get: function( name ) {
 					var me = this;
-					if($.isFunction(name)){
+					if ( $.isFunction( name ) ) {
 						//catch KO function variation
 						name = name();
 					}
-					return me._registry[name];
+					return me._registry[ name ];
 				}
-			},
-			
-			/**
-			 * @property _sNames
-			 * @private
-			 * @type {Object}
-			 */
-			_sNames: {
-					&quot;button.dropdown.list&quot;:{
-						path:&quot;Firebrick.ui/button/dropdown/List&quot;
-					},
-					&quot;button.button&quot;:{
-						path:&quot;Firebrick.ui/button/Button&quot;
-					},
-					&quot;button.buttongroup&quot;:{
-						path:&quot;Firebrick.ui/button/ButtonGroup&quot;
-					},
-					&quot;button.icon&quot;:{
-						path:&quot;Firebrick.ui/button/Icon&quot;
-					},
-					&quot;button.togglebutton&quot;:{
-						path:&quot;Firebrick.ui/button/ToggleButton&quot;
-					},
-					&quot;containers.border.pane&quot;:{
-						path:&quot;Firebrick.ui/containers/border/Pane&quot;
-					},
-					&quot;containers.tab.pane&quot;:{
-						path:&quot;Firebrick.ui/containers/tab/Pane&quot;
-					},
-					&quot;containers.accordion&quot;:{
-						path:&quot;Firebrick.ui/containers/Accordion&quot;
-					},
-					&quot;containers.borderlayout&quot;:{
-						path:&quot;Firebrick.ui/containers/BorderLayout&quot;
-					},
-					&quot;containers.box&quot;:{
-						path:&quot;Firebrick.ui/containers/Box&quot;
-					},
-					&quot;containers.form&quot;:{
-						path:&quot;Firebrick.ui/containers/Form&quot;
-					},
-					&quot;containers.formpanel&quot;:{
-						path:&quot;Firebrick.ui/containers/FormPanel&quot;
-					},
-					&quot;containers.gridcolumn&quot;:{
-						path:&quot;Firebrick.ui/containers/GridColumn&quot;
-					},
-					&quot;containers.gridrow&quot;:{
-						path:&quot;Firebrick.ui/containers/GridRow&quot;
-					},
-					&quot;containers.modal&quot;:{
-						path:&quot;Firebrick.ui/containers/Modal&quot;
-					},
-					&quot;containers.fieldset&quot;: {
-						path:&quot;Firebrick.ui/containers/Fieldset&quot;
-					},
-					&quot;containers.panel&quot;:{
-						path:&quot;Firebrick.ui/containers/Panel&quot;
-					},
-					&quot;containers.tabpanel&quot;:{
-						path:&quot;Firebrick.ui/containers/TabPanel&quot;
-					},
-					&quot;display.alert&quot;:{
-						path:&quot;Firebrick.ui/display/Alert&quot;
-					},
-					&quot;display.divider&quot;:{
-						path:&quot;Firebrick.ui/display/Divider&quot;
-					},
-					&quot;display.header&quot;:{
-						path:&quot;Firebrick.ui/display/Header&quot;
-					},
-					&quot;display.image&quot;:{
-						path:&quot;Firebrick.ui/display/Image&quot;
-					},
-					&quot;display.list&quot;:{
-						path:&quot;Firebrick.ui/display/List&quot;
-					},
-					&quot;display.progress&quot;:{
-						path:&quot;Firebrick.ui/display/Progress&quot;
-					},
-					&quot;display.span&quot;:{
-						path:&quot;Firebrick.ui/display/Span&quot;
-					},
-					&quot;display.text&quot;:{
-						path:&quot;Firebrick.ui/display/Text&quot;
-					},
-					&quot;display.loader&quot;: {
-						path:&quot;Firebrick.ui/display/Loader&quot;
-					},
-					&quot;fields.checkbox&quot;:{
-						path:&quot;Firebrick.ui/fields/Checkbox&quot;
-					},
-					&quot;fields.datepicker&quot;:{
-						path:&quot;Firebrick.ui/fields/DatePicker&quot;
-					},
-					&quot;fields.display&quot;:{
-						path:&quot;Firebrick.ui/fields/Display&quot;
-					},
-					&quot;fields.combobox&quot;:{
-						path:&quot;Firebrick.ui/fields/ComboBox&quot;
-					},
-					&quot;fields.email&quot;:{
-						path:&quot;Firebrick.ui/fields/Email&quot;
-					},
-					&quot;fields.file&quot;:{
-						path:&quot;Firebrick.ui/fields/File&quot;
-					},
-					&quot;fields.input&quot;:{
-						path:&quot;Firebrick.ui/fields/Input&quot;
-					},
-					&quot;fields.password&quot;:{
-						path:&quot;Firebrick.ui/fields/Password&quot;
-					},
-					&quot;fields.radio&quot;:{
-						path:&quot;Firebrick.ui/fields/Radio&quot;
-					},
-					&quot;fields.selectbox&quot;:{
-						path:&quot;Firebrick.ui/fields/SelectBox&quot;
-					},
-					&quot;fields.textarea&quot;:{
-						path:&quot;Firebrick.ui/fields/TextArea&quot;
-					},
-					&quot;nav.breadcrumbs&quot;:{
-						path:&quot;Firebrick.ui/nav/Breadcrumbs&quot;	
-					},
-					&quot;nav.list&quot;:{
-						path:&quot;Firebrick.ui/nav/List&quot;
-					},
-					&quot;nav.navbar&quot;:{
-						path:&quot;Firebrick.ui/nav/Navbar&quot;
-					},
-					&quot;nav.pagination&quot;:{
-						path:&quot;Firebrick.ui/nav/Pagination&quot;
-					},
-					&quot;nav.toolbar&quot;:{
-						path:&quot;Firebrick.ui/nav/Toolbar&quot;	
-					},
-					&quot;table.table&quot;:{
-						path:&quot;Firebrick.ui/table/Table&quot;
-					},
-					&quot;table.treetable&quot;:{
-						path:&quot;Firebrick.ui/table/TreeTable&quot;
-					}
 			}
 			
 	};
 	
-	Firebrick.classes.addSNames(Firebrick.ui._sNames);
-	
-	
 	/**
-	 * Overwrites &quot;Firebrick.view.Base&quot; 
+	 * Overwrites &quot;Firebrick.view.Base&quot;
 	 * @extends class.Base
 	 * @class view.Base
 	 */
-	Firebrick.classes.overwrite(&quot;Firebrick.view.Base&quot;, {
-		_ko:null,
+	Firebrick.classes.overwrite( &quot;Firebrick.view.Base&quot;, {
+		_ko: null,
 		/**
 		 * @property passDownEvents
 		 * @type {Object}
@@ -1009,7 +863,7 @@ define([&quot;jquery&quot;, &quot;firebrick&quot;, &quot;knockout&quot;,  &quot;
 				unbound: 1
 			}
 		 */
-		passDownEvents:{
+		passDownEvents: {
 			rendered: 1,
 			htmlRendered: 1,
 			unbound: 1,
@@ -1017,17 +871,17 @@ define([&quot;jquery&quot;, &quot;firebrick&quot;, &quot;knockout&quot;,  &quot;
 		},
 		
 		listeners: {
-			uiBuilt: function(){
+			uiBuilt: function() {
 				var me = this,
 					k;
-				if(me.passDownEvents){
+				if ( me.passDownEvents ) {
 					
-					Firebrick.utils.merge(&quot;passDownEvents&quot;, me);
+					Firebrick.utils.merge( &quot;passDownEvents&quot;, me );
 					
-					for(k in me.passDownEvents){
-						if(me.passDownEvents.hasOwnProperty(k)){
-							if(me._parent){
-								me._initPassDownEvent(k);
+					for ( k in me.passDownEvents ) {
+						if ( me.passDownEvents.hasOwnProperty( k ) ) {
+							if ( me._parent ) {
+								me._initPassDownEvent( k );
 							}
 						}
 					}
@@ -1038,12 +892,12 @@ define([&quot;jquery&quot;, &quot;firebrick&quot;, &quot;knockout&quot;,  &quot;
 		/**
 		 * @method _initPassDownEvent
 		 */
-		_initPassDownEvent: function(eventName){
+		_initPassDownEvent: function( eventName ) {
 			var me = this,
-				f = me._createPassEvent(me);
+				f = me._createPassEvent( me );
 			
-			me._parent.on(eventName, f);
-			me.on(&quot;destroy&quot;, function(){
+			me._parent.on( eventName, f );
+			me.on( &quot;destroy&quot;, function() {
 				f.__isDestroyed = true;
 				//TODO: fixed this
 				//me._parent.off(eventName, f);
@@ -1054,12 +908,12 @@ define([&quot;jquery&quot;, &quot;firebrick&quot;, &quot;knockout&quot;,  &quot;
 		 * @private
 		 * @return {Function}
 		 */
-		_createPassEvent: function(scope){
-			return function(){
+		_createPassEvent: function( scope ) {
+			return function() {
 				var me = this,
-					args = Array.prototype.slice.call(arguments);
-				args = [me.event.eventName].concat(args);
-				scope.fireEvent.apply(scope, args);	
+					args = Array.prototype.slice.call( arguments );
+				args = [ me.event.eventName ].concat( args );
+				scope.fireEvent.apply( scope, args );
 			};
 		},
 		
@@ -1074,9 +928,9 @@ define([&quot;jquery&quot;, &quot;firebrick&quot;, &quot;knockout&quot;,  &quot;
 		 * @type {Function}
 		 * @return {String}
 		 */
-		tpl: function(){
+		tpl: function() {
 			var me = this;
-			if(me.items){
+			if ( me.items ) {
 				return Firebrick.ui.build({
 					items: me.items,
 					view: me
@@ -1085,25 +939,24 @@ define([&quot;jquery&quot;, &quot;firebrick&quot;, &quot;knockout&quot;,  &quot;
 		}
 	});
 	
-	
 	/*
 	 * Knockout bindingHandler extensions
 	 */
-	(function(ko){
+	(function( ko ) {
 		/*
 		 * use withProperties to pass extra properties down to the descendants
 		 * http://knockoutjs.com/documentation/custom-bindings-controlling-descendant-bindings.html
 		 */
 		ko.bindingHandlers.withProperties = {
-		    init: function(element, valueAccessor, allBindings, viewModel, bindingContext) {
+		    init: function( element, valueAccessor, allBindings, viewModel, bindingContext ) {
 		        // Make a modified binding context, with a extra properties, and apply it to descendant elements
 		        var childBindingContext = bindingContext.createChildContext(
 		            bindingContext.$rawData,
 		            null, // Optionally, pass a string here as an alias for the data item in descendant contexts
-		            function(context) {
-		                ko.utils.extend(context, valueAccessor());
+		            function( context ) {
+		                ko.utils.extend( context, valueAccessor() );
 		            });
-		        ko.applyBindingsToDescendants(childBindingContext, element);
+		        ko.applyBindingsToDescendants( childBindingContext, element );
 		 
 		        // Also tell KO *not* to bind the descendants itself, otherwise they will be bound twice
 		        return { controlsDescendantBindings: true };
@@ -1113,12 +966,12 @@ define([&quot;jquery&quot;, &quot;firebrick&quot;, &quot;knockout&quot;,  &quot;
 		//activate binding on any element injected with &quot;html&quot; property
 		//modified from http://stackoverflow.com/a/29605553/425226
 		ko.bindingHandlers.htmlWithBinding = {
-			  &#x27;init&#x27;: function() {
-				  return { &#x27;controlsDescendantBindings&#x27;: true };
+			  &quot;init&quot;: function() {
+				  return { &quot;controlsDescendantBindings&quot;: true };
 			  },
-			  &#x27;update&#x27;: function (element, valueAccessor, allBindings, viewModel, bindingContext) {
+			  &quot;update&quot;: function( element, valueAccessor, allBindings, viewModel, bindingContext ) {
 				  element.innerHTML = valueAccessor();
-				  ko.applyBindingsToDescendants(bindingContext, element);
+				  ko.applyBindingsToDescendants( bindingContext, element );
 			  }
 		};
 		
@@ -1128,15 +981,20 @@ define([&quot;jquery&quot;, &quot;firebrick&quot;, &quot;knockout&quot;,  &quot;
 		 */
 		ko.virtualElements.allowedBindings.debug = true;
 		ko.bindingHandlers.debug = {
-		    init: function(element, valueAccessor, allBindings, viewModel, bindingContext) {
-		       console.warn(&quot;Debug:&quot;, element, valueAccessor(), allBindings(), viewModel, bindingContext);
+		    init: function( element, valueAccessor, allBindings, viewModel, bindingContext ) {
+		       console.warn( &quot;Debug:&quot;, element, valueAccessor(), allBindings(), viewModel, bindingContext );
 		    }
 		};
 		
-	})(ko);
+	})( ko );
 	
-	return Firebrick;	
+	//{{SNAME.HOLDER}}
+ Firebrick.classes.addLookups( {} );
+//{{/SNAME.HOLDER}}
+	
+	return Firebrick;
 });
+
     </pre>
 </div>
 

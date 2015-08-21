@@ -244,31 +244,32 @@
  * @namespace components.containers
  * @class GridColumn
  */
-define([&quot;text!./GridColumn.html&quot;, &quot;./Base&quot;, &quot;../common/mixins/Column&quot;], function(tpl){
+define( [ &quot;text!./GridColumn.html&quot;, &quot;./Base&quot;, &quot;../common/mixins/Column&quot; ], function( tpl ) {
 	&quot;use strict&quot;;
-	return Firebrick.define(&quot;Firebrick.ui.containers.GridColumn&quot;, {
-		extend:&quot;Firebrick.ui.containers.Base&quot;,
-		mixins:&quot;Firebrick.ui.common.mixins.Column&quot;,
+	return Firebrick.define( &quot;Firebrick.ui.containers.GridColumn&quot;, {
+		extend: &quot;Firebrick.ui.containers.Base&quot;,
+		mixins: &quot;Firebrick.ui.common.mixins.Column&quot;,
 		/**
 		 * @property sName
 		 * @type {String}
 		 */
-		sName:&quot;containers.gridcolumn&quot;,
+		sName: &quot;containers.gridcolumn&quot;,
 		/**
 		 * @property tpl
 		 * @type {String} html
 		 */
-		tpl:tpl,
+		tpl: tpl,
 		/**
 		 * @method bindings
 		 * @return {Object}
 		 */
-		bindings: function(){
+		bindings: function() {
 			var me = this;
-			return me.calColumn(me.callParent(arguments));
+			return me.calColumn( me.callParent( arguments ) );
 		}
 	});
 });
+
     </pre>
 </div>
 

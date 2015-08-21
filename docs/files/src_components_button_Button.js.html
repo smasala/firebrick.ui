@@ -244,19 +244,19 @@
  * @namespace components.button
  * @class Button
  */
-define([&quot;text!./Button.html&quot;, &quot;./Base&quot;, &quot;../common/mixins/Badges&quot;, &quot;../menu/Menu&quot;], function(tpl){
+define( [ &quot;text!./Button.html&quot;, &quot;./Base&quot;, &quot;../common/mixins/Badges&quot;, &quot;../menu/Menu&quot; ], function( tpl ) {
 	&quot;use strict&quot;;
-	return Firebrick.define(&quot;Firebrick.ui.button.Button&quot;, {
-		extend:&quot;Firebrick.ui.button.Base&quot;,
-		mixins:[&quot;Firebrick.ui.common.mixins.Badges&quot;],
+	return Firebrick.define( &quot;Firebrick.ui.button.Button&quot;, {
+		extend: &quot;Firebrick.ui.button.Base&quot;,
+		mixins: [ &quot;Firebrick.ui.common.mixins.Badges&quot; ],
 		sName: &quot;button.button&quot;,
-		tpl:tpl,
+		tpl: tpl,
 		/**
 		 * @property text
 		 * @type {String}
 		 * @default &quot;&quot;
 		 */
-		text:&quot;&quot;,
+		text: &quot;&quot;,
 		/**
 		 * type: button, submit
 		 * @property type
@@ -288,7 +288,7 @@ define([&quot;text!./Button.html&quot;, &quot;./Base&quot;, &quot;../common/mixi
 		 * @type {Boolean|String} false |  (&quot;sm&quot;, &quot;lg&quot;, &quot;xs&quot;)
 		 * @default false
 		 */
-		btnSize:false,
+		btnSize: false,
 		/**
 		 * @property disabled
 		 * @type {Boolean}
@@ -300,7 +300,7 @@ define([&quot;text!./Button.html&quot;, &quot;./Base&quot;, &quot;../common/mixi
 		 * @type {Boolean|String} false | (default, primary, success, info, warning, danger, link)
 		 * @default &quot;default&quot;
 		 */
-		btnStyle:&quot;default&quot;,
+		btnStyle: &quot;default&quot;,
 		/**
 		 * used to inject something before the text &lt;span&gt;
 		 * @property beforeText
@@ -360,11 +360,11 @@ define([&quot;text!./Button.html&quot;, &quot;./Base&quot;, &quot;../common/mixi
 		 * @method getDropdownParentEl
 		 * @return {jQuery Object}
 		 */
-		getDropdownParentEl: function(){
+		getDropdownParentEl: function() {
 			var me = this,
 				el;
 			
-			if(!me._dropdownParent){
+			if ( !me._dropdownParent ) {
 				el = me.getElement();
 				me._dropdownParent = el.parent();
 			}
@@ -383,12 +383,12 @@ define([&quot;text!./Button.html&quot;, &quot;./Base&quot;, &quot;../common/mixi
 		 * @method getDropdownEl
 		 * @return {jQuery Object}
 		 */
-		getDropdownEl: function(){
+		getDropdownEl: function() {
 			var me = this,
 				el;
-			if(!me._dropdown){
+			if ( !me._dropdown ) {
 				el = me.getElement();
-				me._dropdown = el.siblings(&quot;ul.dropdown-menu&quot;);
+				me._dropdown = el.siblings( &quot;ul.dropdown-menu&quot; );
 			}
 			
 			return me._dropdown;
@@ -396,7 +396,7 @@ define([&quot;text!./Button.html&quot;, &quot;./Base&quot;, &quot;../common/mixi
 		/**
 		 * @method init
 		 */
-		init: function(){
+		init: function() {
 			var me = this;
 			
 			me._initDropdown();
@@ -407,13 +407,13 @@ define([&quot;text!./Button.html&quot;, &quot;./Base&quot;, &quot;../common/mixi
 		 * @method _initDropdown
 		 * @private
 		 */
-		_initDropdown: function(){
+		_initDropdown: function() {
 			var me = this;
-			if( me.items &amp;&amp; me.items.length ){
-				me.on(&quot;rendered&quot;, function(){
+			if ( me.items &amp;&amp; me.items.length ) {
+				me.on( &quot;rendered&quot;, function() {
 					var el = me.getDropdownParentEl();
-					if(el.length){
-						el.on(&quot;shown.bs.dropdown&quot;, function(){
+					if ( el.length ) {
+						el.on( &quot;shown.bs.dropdown&quot;, function() {
 							me.positionDropdown();
 						});
 					}
@@ -423,19 +423,19 @@ define([&quot;text!./Button.html&quot;, &quot;./Base&quot;, &quot;../common/mixi
 		/**
 		 * @method positionDropdown
 		 */
-		positionDropdown: function(){
+		positionDropdown: function() {
 			var me = this,
 				el = me.getElement(),
 				drop = me.getDropdownEl(),
-				docWidth = $(document).width(),
+				docWidth = $( document ).width(),
 				elOffset = el.offset(),
 				startLeft = elOffset.left,
 				dropWidth = drop.outerWidth(),
 				elWidth = el.outerWidth(),
 				diff = dropWidth - elWidth;
 			
-			if(dropWidth &gt; elWidth){
-				if( (elOffset.left + dropWidth) &gt; docWidth){
+			if ( dropWidth &gt; elWidth ) {
+				if ( ( elOffset.left + dropWidth ) &gt; docWidth ) {
 					startLeft = elOffset.left - diff;
 				}
 			}
@@ -451,42 +451,42 @@ define([&quot;text!./Button.html&quot;, &quot;./Base&quot;, &quot;../common/mixi
 		 * @method bindings
 		 * @return {Object}
 		 */
-		bindings: function(){
+		bindings: function() {
 			var me = this,
-				obj = me.callParent(arguments);
+				obj = me.callParent( arguments );
 			
-			obj.attr.type = me.parseBind(me.type);
+			obj.attr.type = me.parseBind( me.type );
 			obj.css.btn = true;
 			
 			//firefox bug fix
 			obj.attr.autocomplete = &quot;&#x27;off&#x27;&quot;;
 			//--//
 						
-			if(me.btnStyle){
-				obj.css[ me.parseBind(&quot;btn-&quot;+me.btnStyle)] = true;
+			if ( me.btnStyle ) {
+				obj.css[ me.parseBind( &quot;btn-&quot; + me.btnStyle ) ] = true;
 			}
-			if(me.btnSize){
-				obj.css[ me.parseBind(&quot;btn-&quot; + me.btnSize)] = true;
-			}
-			
-			if(me.items &amp;&amp; !me.splitButton){
-				obj.css[&quot;&#x27;dropdown-toggle&#x27;&quot;] = true;
-				obj.attr[&quot;&#x27;data-toggle&#x27;&quot;] = &quot;&#x27;dropdown&#x27;&quot;;
+			if ( me.btnSize ) {
+				obj.css[ me.parseBind( &quot;btn-&quot; + me.btnSize ) ] = true;
 			}
 			
-			if(me.navbarItem){
-				obj.css[&quot;&#x27;navbar-btn&#x27;&quot;] = true;
+			if ( me.items &amp;&amp; !me.splitButton ) {
+				obj.css[ &quot;&#x27;dropdown-toggle&#x27;&quot; ] = true;
+				obj.attr[ &quot;&#x27;data-toggle&#x27;&quot; ] = &quot;&#x27;dropdown&#x27;&quot;;
 			}
 			
-			if(me.loadingText){
-				obj.attr[&quot;&#x27;data-loading-text&#x27;&quot;] = me.textBind( me.loadingText );
+			if ( me.navbarItem ) {
+				obj.css[ &quot;&#x27;navbar-btn&#x27;&quot; ] = true;
 			}
 			
-			if(me.closeModal){
-				obj.attr[&quot;&#x27;data-dismiss&#x27;&quot;] = &quot;&#x27;modal&#x27;&quot;;
+			if ( me.loadingText ) {
+				obj.attr[ &quot;&#x27;data-loading-text&#x27;&quot; ] = me.textBind( me.loadingText );
 			}
 			
-			if(me.disabled){
+			if ( me.closeModal ) {
+				obj.attr[ &quot;&#x27;data-dismiss&#x27;&quot; ] = &quot;&#x27;modal&#x27;&quot;;
+			}
+			
+			if ( me.disabled ) {
 				obj.attr.disabled = &quot;&#x27;disabled&#x27;&quot;;
 			}
 			
@@ -496,16 +496,16 @@ define([&quot;text!./Button.html&quot;, &quot;./Base&quot;, &quot;../common/mixi
 		 * @property buttonTextBindings
 		 * @return {Object}
 		 */
-		buttonTextBindings: function(){
+		buttonTextBindings: function() {
 			var me = this,
 				obj = {
 						css: {},
-						text: me.textBind(me.text),
+						text: me.textBind( me.text )
 				};
 			
-			if(me.glyIcon){
+			if ( me.glyIcon ) {
 				obj.css.glyphicon = true;
-				obj.css[me.parseBind(&quot;glyphicon-&quot; + me.glyIcon)] = true;
+				obj.css[ me.parseBind( &quot;glyphicon-&quot; + me.glyIcon ) ] = true;
 			}
 			
 			return obj;
@@ -514,7 +514,7 @@ define([&quot;text!./Button.html&quot;, &quot;./Base&quot;, &quot;../common/mixi
 		 * @method caretBindings
 		 * @return {Object}
 		 */
-		caretBindings: function(){
+		caretBindings: function() {
 			return {
 				css: {
 					caret: true
@@ -525,22 +525,22 @@ define([&quot;text!./Button.html&quot;, &quot;./Base&quot;, &quot;../common/mixi
 		 * @method dropdownContainerBindings
 		 * @return {Object}
 		 */
-		dropdownContainerBindings: function(){
+		dropdownContainerBindings: function() {
 			var me = this,
 				obj = {
-					css:{}
+					css: {}
 				};
 			
-			if(me.splitButton){
-				obj.css[&quot;&#x27;btn-group&#x27;&quot;] = true;
-			}else{
+			if ( me.splitButton ) {
+				obj.css[ &quot;&#x27;btn-group&#x27;&quot; ] = true;
+			} else {
 				//standard dropdown
-				if(me.dropdownContainerClass &amp;&amp; !me.splitButton){
-					obj.css[me.parseBind( me.dropdownContainerClass )] = true;
+				if ( me.dropdownContainerClass &amp;&amp; !me.splitButton ) {
+					obj.css[ me.parseBind( me.dropdownContainerClass ) ] = true;
 				}
 			}
 
-			obj.css[&quot;&#x27;fb-ui-dropdown&#x27;&quot;] = true;
+			obj.css[ &quot;&#x27;fb-ui-dropdown&#x27;&quot; ] = true;
 			
 			return obj;
 		},
@@ -548,16 +548,16 @@ define([&quot;text!./Button.html&quot;, &quot;./Base&quot;, &quot;../common/mixi
 		 * @method getDropdown
 		 * @return {Object}
 		 */
-		getDropdown: function(){
+		getDropdown: function() {
 			var me = this,
 				obj = {
 					sName: &quot;menu.menu&quot;,
 					items: me.items
 				};
 			
-			obj = Firebrick.utils.copyover(obj, me.dropdownConfig || {});
+			obj = Firebrick.utils.copyover( obj, me.dropdownConfig || {});
 
-			obj = me._getItems(obj);
+			obj = me._getItems( obj );
 			
 			me.items = obj.items;
 			
@@ -568,23 +568,23 @@ define([&quot;text!./Button.html&quot;, &quot;./Base&quot;, &quot;../common/mixi
 		 * @method splitButtonBindings
 		 * @return {Object}
 		 */
-		splitButtonBindings: function(){
+		splitButtonBindings: function() {
 			var me = this,
-				obj = {css:{}, attr:{}};
+				obj = { css: {}, attr: {} };
 			
-			obj.attr.type = me.parseBind(me.type);
+			obj.attr.type = me.parseBind( me.type );
 			obj.css.btn = true;
-			if(me.btnStyle){
-				obj.css[ me.parseBind(&quot;btn-&quot;+me.btnStyle)] = true;
+			if ( me.btnStyle ) {
+				obj.css[ me.parseBind( &quot;btn-&quot; + me.btnStyle ) ] = true;
 			}
-			if(me.btnSize){
-				obj.css[ me.parseBind(&quot;btn-&quot; + me.btnSize)] = true;
+			if ( me.btnSize ) {
+				obj.css[ me.parseBind( &quot;btn-&quot; + me.btnSize ) ] = true;
 			}
-			if(me.items){
-				obj.css[&quot;&#x27;dropdown-toggle&#x27;&quot;] = true;
-				obj.attr[&quot;&#x27;data-toggle&#x27;&quot;] = &quot;&#x27;dropdown&#x27;&quot;;
+			if ( me.items ) {
+				obj.css[ &quot;&#x27;dropdown-toggle&#x27;&quot; ] = true;
+				obj.attr[ &quot;&#x27;data-toggle&#x27;&quot; ] = &quot;&#x27;dropdown&#x27;&quot;;
 			}
-			obj.attr[&quot;&#x27;aria-expanded&#x27;&quot;] = false;
+			obj.attr[ &quot;&#x27;aria-expanded&#x27;&quot; ] = false;
 			
 			return obj;
 		},
@@ -593,12 +593,12 @@ define([&quot;text!./Button.html&quot;, &quot;./Base&quot;, &quot;../common/mixi
 		 * @method splitButtonSrOnlyBinding
 		 * @return {Object}
 		 */
-		splitButtonSrOnlyBinding: function(){
+		splitButtonSrOnlyBinding: function() {
 			var me = this,
-				obj = {css:{}};
+				obj = { css: {} };
 			
-			obj.css[&quot;&#x27;sr-only&#x27;&quot;] = true;
-			obj.text = me.textBind(me.srOnlyText);
+			obj.css[ &quot;&#x27;sr-only&#x27;&quot; ] = true;
+			obj.text = me.textBind( me.srOnlyText );
 			
 			return obj;
 		},
@@ -608,19 +608,20 @@ define([&quot;text!./Button.html&quot;, &quot;./Base&quot;, &quot;../common/mixi
 		 * @event disabled
 		 * @param enable {Boolean}
 		 */
-		setEnabled: function( enable ){
+		setEnabled: function( enable ) {
 			var me = this,
 				$el = me.getElement();
-			if(enable){
-				$el.removeAttr(&quot;disabled&quot;);
-				me.fireEvent(&quot;enabled&quot;);
-			}else{
-				$el.attr(&quot;disabled&quot;, &quot;disabled&quot;);
-				me.fireEvent(&quot;disabled&quot;);
+			if ( enable ) {
+				$el.removeAttr( &quot;disabled&quot; );
+				me.fireEvent( &quot;enabled&quot; );
+			} else {
+				$el.attr( &quot;disabled&quot;, &quot;disabled&quot; );
+				me.fireEvent( &quot;disabled&quot; );
 			}
 		}
 	});
 });
+
     </pre>
 </div>
 

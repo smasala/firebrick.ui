@@ -240,123 +240,113 @@
 
 /**
  * built on the back of: http://css-tricks.com/snippets/jquery/draggable-without-jquery-ui/
- * 
+ *
  * @module plugins
  * @namespace plugins
  * @class Draggable
  */
-define([&quot;jquery&quot;], function($){
+define( [ &quot;jquery&quot; ], function( $ ) {
 	&quot;use strict&quot;;
-	
+
 	/**
 	 * @method drags
 	 * @event dragged - fired on mouseup
 	 * set property &quot;dragDisabled&quot; on element to disable dragging at anytime
-	 * @example 
+	 * @example
 	 * 		jqueryEl.prop(&quot;dragDisabled&quot;, {true|false});
 	 * @example
 	 * 		jqueryEl.drags(&quot;vertical&quot;);
 	 * 		jqueryEl.drags(&quot;horizontal&quot;);
 	 */
-    $.fn.drags = function(direction, opt) {
-    	var $el,
-    		origPageX,
-    		origPageY,
-    		top,
-    		left,
-    		correctPageCoord = function(event, axis){
-	    		axis = axis.toUpperCase();
-    		
-	    		//get the correct page(X|Y) coord depending on whether it is a touch device
-	    		if(event.type.indexOf(&quot;touch&quot;) &gt;= 0){
-	    			return event.originalEvent.targetTouches[0][&quot;page&quot; + axis];
-	    		}else{
-	    			return event[&quot;page&quot; + axis];
-	    		}
-    		
-    		};
-    	
-    	direction = direction.toLowerCase();
-        opt = $.extend({handle:&quot;&quot;}, opt);
+	$.fn.drags = function( direction, opt ) {
+		var $el, origPageX, origPageY, top, left, correctPageCoord = function( event, axis ) {
+			axis = axis.toUpperCase();
 
-        if(opt.handle === &quot;&quot;) {
-            $el = this;
-        } else {
-            $el = this.find(opt.handle);
-        }
-        
-        
-        if($el.prop(&quot;dragSet&quot;) === true){
-        	return $el;
-        }
-        
-        //set a prop on the element to ensure that the event aren&#x27;t registered more than once
-        $el.prop(&quot;dragSet&quot;, true);
-        
-        return $el.on(&quot;mouseover&quot;, function(){
-        		var $drag = $(this);
-        		if($drag.prop(&quot;dragDisabled&quot;) === true){
-        			$drag.css(&quot;cursor&quot;, &quot;auto&quot;);
-        		}else{
-        			$drag.css(&quot;cursor&quot;, &quot;&quot;);
-        		}
-	        }).on(&quot;mousedown touchstart&quot;, function(e) {
-	        	var $drag = !opt.handle ? $(this).addClass(&#x27;draggable&#x27;) : $(this).addClass(&#x27;active-handle&#x27;).parent().addClass(&#x27;draggable&#x27;),
-	        		zIdx = $drag.css(&#x27;z-index&#x27;),
-	                drgH = $drag.outerHeight(),
-	                drgW = $drag.outerWidth(),
-	                posY = $drag.offset().top + drgH - correctPageCoord(e, &quot;y&quot;),
-	                posX = $drag.offset().left + drgW - correctPageCoord(e, &quot;x&quot;),
-	                mouseMove;
-	        	
-	                origPageY = correctPageCoord(e, &quot;y&quot;);
-	                origPageX = correctPageCoord(e, &quot;x&quot;);
-	                
-	                mouseMove = function(e){
-	            		top = (direction === &quot;horizontal&quot; ? origPageY : correctPageCoord(e, &quot;y&quot;)) + posY - drgH;
-	        			left = (direction === &quot;vertical&quot; ? origPageX : correctPageCoord(e, &quot;x&quot;)) + posX - drgW;
-	        			$drag.offset({
-		                    top: top,
-		                    left: left
-		                });
-	        		};
-	        	
-        		$drag.on(&quot;mouseup touchend&quot;, function() {
-                	$drag.removeClass(&#x27;draggable&#x27;).css(&#x27;z-index&#x27;, zIdx);
-                	//remove handler
-                    $(&quot;html&quot;).off(&quot;mousemove touchmove&quot;, &quot;body&quot;, mouseMove);
-                });
-	        		
-	    		if($drag.prop(&quot;dragDisabled&quot;) === true){
-	    			$(&quot;html&quot;).off(&quot;mousemove touchmove&quot;, &quot;body&quot;, mouseMove);
-	    		}else{
-	    			$drag.css(&#x27;z-index&#x27;, 1000);
-	            	//add handler
-	            	$(&quot;html&quot;).on(&quot;mousemove touchmove&quot;, &quot;body&quot;, mouseMove);
-	    		}
-	        	
-	            
-	            e.preventDefault(); // disable selection
-	            
-	        }).on(&quot;mouseup touchend&quot;, function() {
-	        	var $this = $(this);
-	        	if($this.prop(&quot;dragDisabled&quot;) !== true){
-	        		if(opt.handle === &quot;&quot;) {
-	                	$this.removeClass(&#x27;draggable&#x27;);
-	                } else {
-	                	$this.removeClass(&#x27;active-handle&#x27;).parent().removeClass(&#x27;draggable&#x27;);
-	                }
-	                $this.trigger(&quot;dragged&quot;, [top - origPageY, left - origPageX]);
-	                $this.css({
-	            		top:0,
-	            		left:0
-	            	});
-	        	}
-	        });
+			//get the correct page(X|Y) coord depending on whether it is a touch device
+			if ( event.type.indexOf( &quot;touch&quot; ) &gt;= 0 ) {
+				return event.originalEvent.targetTouches[ 0 ][ &quot;page&quot; + axis ];
+			} else {
+				return event[ &quot;page&quot; + axis ];
+			}
 
-    };
-	
-});
+		};
+
+		direction = direction.toLowerCase();
+		opt = $.extend( {
+			handle: &quot;&quot;
+		}, opt );
+
+		if ( opt.handle === &quot;&quot; ) {
+			$el = this;
+		} else {
+			$el = this.find( opt.handle );
+		}
+
+		if ( $el.prop( &quot;dragSet&quot; ) === true ) {
+			return $el;
+		}
+
+		//set a prop on the element to ensure that the event aren&#x27;t registered more than once
+		$el.prop( &quot;dragSet&quot;, true );
+
+		return $el.on( &quot;mouseover&quot;, function() {
+			var $drag = $( this );
+			if ( $drag.prop( &quot;dragDisabled&quot; ) === true ) {
+				$drag.css( &quot;cursor&quot;, &quot;auto&quot; );
+			} else {
+				$drag.css( &quot;cursor&quot;, &quot;&quot; );
+			}
+		} ).on( &quot;mousedown touchstart&quot;, function( e ) {
+			var $drag = !opt.handle ? $( this ).addClass( &quot;draggable&quot; ) : $( this ).addClass( &quot;active-handle&quot; ).parent().addClass( &quot;draggable&quot; ), zIdx = $drag.css( &quot;z-index&quot; ), drgH = $drag.outerHeight(), drgW = $drag.outerWidth(), posY = $drag.offset().top + drgH - correctPageCoord( e, &quot;y&quot; ), posX = $drag.offset().left + drgW - correctPageCoord( e, &quot;x&quot; ), mouseMove;
+
+			origPageY = correctPageCoord( e, &quot;y&quot; );
+			origPageX = correctPageCoord( e, &quot;x&quot; );
+
+			mouseMove = function( e ) {
+				top = ( direction === &quot;horizontal&quot; ? origPageY : correctPageCoord( e, &quot;y&quot; ) ) + posY - drgH;
+				left = ( direction === &quot;vertical&quot; ? origPageX : correctPageCoord( e, &quot;x&quot; ) ) + posX - drgW;
+				$drag.offset( {
+				    top: top,
+				    left: left
+				} );
+			};
+
+			$drag.on( &quot;mouseup touchend&quot;, function() {
+				$drag.removeClass( &quot;draggable&quot; ).css( &quot;z-index&quot;, zIdx );
+				//remove handler
+				$( &quot;html&quot; ).off( &quot;mousemove touchmove&quot;, &quot;body&quot;, mouseMove );
+			} );
+
+			if ( $drag.prop( &quot;dragDisabled&quot; ) === true ) {
+				$( &quot;html&quot; ).off( &quot;mousemove touchmove&quot;, &quot;body&quot;, mouseMove );
+			} else {
+				$drag.css( &quot;z-index&quot;, 1000 );
+				//add handler
+				$( &quot;html&quot; ).on( &quot;mousemove touchmove&quot;, &quot;body&quot;, mouseMove );
+			}
+
+			e.preventDefault(); // disable selection
+
+		} ).on( &quot;mouseup touchend&quot;, function() {
+			var $this = $( this );
+			if ( $this.prop( &quot;dragDisabled&quot; ) !== true ) {
+				if ( opt.handle === &quot;&quot; ) {
+					$this.removeClass( &quot;draggable&quot; );
+				} else {
+					$this.removeClass( &quot;active-handle&quot; ).parent().removeClass( &quot;draggable&quot; );
+				}
+				$this.trigger( &quot;dragged&quot;, [ top - origPageY, left - origPageX ] );
+				$this.css( {
+				    top: 0,
+				    left: 0
+				} );
+			}
+		} );
+
+	};
+
+} );
+
     </pre>
 </div>
 

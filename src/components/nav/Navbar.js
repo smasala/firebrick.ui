@@ -8,12 +8,12 @@
  * @namespace components.nav
  * @class Navbar
  */
-define(["text!./Navbar.html", "./Base", "./List"], function(tpl){
+define( [ "text!./Navbar.html", "./Base", "./List" ], function( tpl ) {
 	"use strict";
-	return Firebrick.define("Firebrick.ui.nav.Navbar", {
-		extend:"Firebrick.ui.nav.Base",
-		tpl:tpl,
-		sName:"nav.navbar",
+	return Firebrick.define( "Firebrick.ui.nav.Navbar", {
+		extend: "Firebrick.ui.nav.Base",
+		tpl: tpl,
+		sName: "nav.navbar",
 		/**
 		 * passed on to the toolbar items (direct children only)
 		 * @property toolbarDefaults
@@ -22,7 +22,7 @@ define(["text!./Navbar.html", "./Base", "./List"], function(tpl){
 		 * 		navbarItem: true
 		 * }
 		 */
-		defaults:{
+		defaults: {
 			navbarItem: true
 		},
 		/**
@@ -45,7 +45,7 @@ define(["text!./Navbar.html", "./Base", "./List"], function(tpl){
 		 * @type {Boolean}
 		 * @default true
 		 */
-		navbarClass:true,
+		navbarClass: true,
 		/**
 		 * whether "navbar-form" css class is used
 		 * @property navbarFormClass
@@ -59,7 +59,7 @@ define(["text!./Navbar.html", "./Base", "./List"], function(tpl){
 		 * @type {Boolean}
 		 * @default true
 		 */
-		navbarHeaderClass:true, 
+		navbarHeaderClass: true,
 		/**
 		 * if false then the navigation won't collapse to the small menu button
 		 * @property toggleButton
@@ -92,27 +92,27 @@ define(["text!./Navbar.html", "./Base", "./List"], function(tpl){
 		 * @type {Boolean|String}
 		 * @default "Firebrick.ui"
 		 */
-		brandText:"Firebrick.ui",
+		brandText: "Firebrick.ui",
 		/**
 		 * false to deactivate
 		 * @property brandTpl
 		 * @type {Boolean|String}
 		 * @default false
 		 */
-		brandTpl:false,
+		brandTpl: false,
 		/**
 		 * data to populate navigation with
 		 * @property data
 		 * @type {String}
 		 * @default null
 		 */
-		data:null,
+		data: null,
 		/**
 		 * overriding parent
 		 * @property listGroupClass
 		 * @default false
 		 */
-		listGroupClass:false,
+		listGroupClass: false,
 		/**
 		 * sets nav && nav-bar css classes to the list container
 		 * @property navClass
@@ -136,16 +136,16 @@ define(["text!./Navbar.html", "./Base", "./List"], function(tpl){
 		 * @method bindings
 		 * @return {Object}
 		 */
-		bindings: function(){
+		bindings: function() {
 			var me = this,
-				obj = me.callParent(arguments);
+				obj = me.callParent( arguments );
 		
 			obj.attr.role = "'navigation'";
-			obj.css["'navbar-default'"] = me.navbarDefaultClass;
+			obj.css[ "'navbar-default'" ] = me.navbarDefaultClass;
 			obj.css.navbar = me.navbarClass;
 			
-			if(me.navTypeClass){
-				obj.css[ me.parseBind(me.navTypeClass) ] = true;
+			if ( me.navTypeClass ) {
+				obj.css[ me.parseBind( me.navTypeClass ) ] = true;
 			}
 			
 			return obj;
@@ -154,22 +154,22 @@ define(["text!./Navbar.html", "./Base", "./List"], function(tpl){
 		 * @method brandBindings
 		 * @return {Object}
 		 */
-		brandBindings: function(){
+		brandBindings: function() {
 			var me = this,
 				obj = {
-					css:{},
-					attr:{}
+					css: {},
+					attr: {}
 				};
 			
-			if(me.brandLink !== false){
+			if ( me.brandLink !== false ) {
 				obj.attr.href =  me.parseBind( me.brandLink );
 			}
 			
-			if(me.brandClass){
-				obj.css["'navbar-brand'"] = me.brandClass;
+			if ( me.brandClass ) {
+				obj.css[ "'navbar-brand'" ] = me.brandClass;
 			}
-			if(me.brandText && !me.brandTpl){
-				obj.text = me.parseBind(me.brandText);
+			if ( me.brandText && !me.brandTpl ) {
+				obj.text = me.parseBind( me.brandText );
 			}
 			return obj;
 		},
@@ -178,7 +178,7 @@ define(["text!./Navbar.html", "./Base", "./List"], function(tpl){
 		 * @method listItemBindings
 		 * @return {Object}
 		 */
-		listItemBindings: function(){
+		listItemBindings: function() {
 			return {
 					css: {
 						active: "$data.active ? $data.active : false"
@@ -189,11 +189,11 @@ define(["text!./Navbar.html", "./Base", "./List"], function(tpl){
 		 * @method navbarHeaderBindings
 		 * @return {Object}
 		 */
-		navbarHeaderBindings: function(){
+		navbarHeaderBindings: function() {
 			var me = this,
-				obj = {css:{}};
-			if(me.navbarHeaderClass){
-				obj.css["'navbar-header'"] = me.navbarHeaderClass;
+				obj = { css: {} };
+			if ( me.navbarHeaderClass ) {
+				obj.css[ "'navbar-header'" ] = me.navbarHeaderClass;
 			}
 			return obj;
 		},
@@ -201,21 +201,21 @@ define(["text!./Navbar.html", "./Base", "./List"], function(tpl){
 		 * @method navbarContainerBindings
 		 * @return {Object}
 		 */
-		navbarContainerBindings: function(){
+		navbarContainerBindings: function() {
 			var me = this,
 				obj = {
-						attr:{
+						attr: {
 							id:  me.parseBind( "fb-nav-" + me.getId() )
 						},
-						css:{}
+						css: {}
 					};
-			if(me.toggleButton){
+			if ( me.toggleButton ) {
 				obj.css.collapse = true;
-				obj.css["'navbar-collapse'"] = true;
+				obj.css[ "'navbar-collapse'" ] = true;
 			}
 			
-			if(me.navbarFormClass){
-				obj.css["'navbar-form'"] = true;
+			if ( me.navbarFormClass ) {
+				obj.css[ "'navbar-form'" ] = true;
 			}
 			
 			return obj;
@@ -224,7 +224,7 @@ define(["text!./Navbar.html", "./Base", "./List"], function(tpl){
 		 * @method toggleTextBindings
 		 * @return {Object}
 		 */
-		toggleTextBindings: function(){
+		toggleTextBindings: function() {
 			var me = this;
 			return {
 				text: me.textBind( me.toggleText )
@@ -234,18 +234,18 @@ define(["text!./Navbar.html", "./Base", "./List"], function(tpl){
 		 * @method toggleButtonBindings
 		 * @return {Object}
 		 */
-		toggleButtonBindings: function(){
+		toggleButtonBindings: function() {
 			var me = this,
 				id = "fb-nav-" + me.getId() + "'",
 				obj = {
-					attr:{
+					attr: {
 						type: "'button'",
 						"'data-toggle'": "'collapse'",
 						"'data-target'": "'#" + id,
 						"'aria-expanded'": false,
 						"'aria-controls'": "'" + id
 					},
-					css:{
+					css: {
 						collapsed: true,
 						"'navbar-toggle'": true
 					}
@@ -257,9 +257,9 @@ define(["text!./Navbar.html", "./Base", "./List"], function(tpl){
 		 * @method navbarWrapperBindings
 		 * @return {Object}
 		 */
-		navbarWrapperBindings: function(){
+		navbarWrapperBindings: function() {
 			return {
-				css:{
+				css: {
 					"container": true
 				}
 			};

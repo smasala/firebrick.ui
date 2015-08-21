@@ -244,11 +244,11 @@
  * @namespace components.fields
  * @class Input
  */
-define([&quot;knockout&quot;, &quot;text!./Base.html&quot;, &quot;text!./Input.html&quot;, &quot;./Base&quot;, &quot;../common/mixins/Items&quot;, &quot;./plugins/InplaceEdit&quot;], function(ko, tpl, subTpl){
+define( [ &quot;knockout&quot;, &quot;text!./Base.html&quot;, &quot;text!./Input.html&quot;, &quot;./Base&quot;, &quot;../common/mixins/Items&quot;, &quot;./plugins/InplaceEdit&quot; ], function( ko, tpl, subTpl ) {
 	&quot;use strict&quot;;
-	return Firebrick.define(&quot;Firebrick.ui.fields.Input&quot;, {
-		extend:&quot;Firebrick.ui.fields.Base&quot;,
-		mixins:[&quot;Firebrick.ui.common.mixins.Items&quot;],
+	return Firebrick.define( &quot;Firebrick.ui.fields.Input&quot;, {
+		extend: &quot;Firebrick.ui.fields.Base&quot;,
+		mixins: [ &quot;Firebrick.ui.common.mixins.Items&quot; ],
 		/**
 		 * @property sName
 		 * @type {String}
@@ -258,13 +258,13 @@ define([&quot;knockout&quot;, &quot;text!./Base.html&quot;, &quot;text!./Input.h
 		 * @property subTpl
 		 * @type {String} html
 		 */
-		subTpl:subTpl,
+		subTpl: subTpl,
 		/**
 		 * @property type
 		 * @type {String}
 		 * @default &quot;text&quot;
 		 */
-		type:&quot;text&quot;,
+		type: &quot;text&quot;,
 		/**
 		 * @property label
 		 * @type {String}
@@ -293,7 +293,7 @@ define([&quot;knockout&quot;, &quot;text!./Base.html&quot;, &quot;text!./Input.h
 		 * @property tpl
 		 * @type {String} html
 		 */
-		tpl:tpl,
+		tpl: tpl,
 		/**
 		 * @property formGroupClass
 		 * @type {String}
@@ -332,13 +332,13 @@ define([&quot;knockout&quot;, &quot;text!./Base.html&quot;, &quot;text!./Input.h
 		 * @type {Boolean}
 		 * @default false
 		 */
-		readOnly:false,
+		readOnly: false,
 		/**
 		 * @property disabled
 		 * @type {Boolean}
 		 * @default false
 		 */
-		disabled:false,
+		disabled: false,
 		/**
 		 * type of column size -md, sm, lg etc
 		 * @property columnSize
@@ -357,33 +357,33 @@ define([&quot;knockout&quot;, &quot;text!./Base.html&quot;, &quot;text!./Input.h
 		 * @type {Boolean}
 		 * @default true
 		 */
-		controlLabel:true,
+		controlLabel: true,
 		/**
 		 * help text
 		 * @property helpText
 		 * @type {Boolean|String}
 		 * @default false
 		 */
-		helpText:false,
+		helpText: false,
 		/**
 		 * help text
 		 * @property helpBlockClass
 		 * @type {String}
 		 * @default &quot;help-block&quot;
 		 */
-		helpBlockClass:&quot;help-block&quot;,
+		helpBlockClass: &quot;help-block&quot;,
 		/**
 		 * @property placeholder
 		 * @type {String}
 		 * @default &quot;&quot;
 		 */
-		placeholder:&quot;&quot;,
+		placeholder: &quot;&quot;,
 		/**
 		 * @property showStateIcon
 		 * @type {Boolean}
 		 * @default false
 		 */
-		showStateIcon:false,
+		showStateIcon: false,
 		/**
 		 * @property formControlFeedbackClass
 		 * @type {String}
@@ -396,13 +396,13 @@ define([&quot;knockout&quot;, &quot;text!./Base.html&quot;, &quot;text!./Input.h
 		 * @type {Boolean|String} - string for inputAddon text - false to deactive, true to simply activate without text, true if you just want an icon (property: iconClass)
 		 * @default false
 		 */
-		inputAddon:false,
+		inputAddon: false,
 		/**
 		 * @property inputAddonClass
 		 * @type {String}
 		 * @default &quot;input-group-addon&quot;
 		 */
-		inputAddonClass:&quot;input-group-addon&quot;,
+		inputAddonClass: &quot;input-group-addon&quot;,
 		/**
 		 * @property inputAddonSpanClass
 		 * @type {String}
@@ -414,21 +414,21 @@ define([&quot;knockout&quot;, &quot;text!./Base.html&quot;, &quot;text!./Input.h
 		 * @type {Boolean}
 		 * @default true
 		 */
-		horizontal:true,
+		horizontal: true,
 		/**
 		 * Feedback css bindings
 		 * @property feedback_success
 		 * @type {Boolean|String}
 		 * @default false
 		 */
-		feedbackSuccess:false,
+		feedbackSuccess: false,
 		/**
 		 * Feedback css bindings
 		 * @property feedback_warning
 		 * @type {Boolean|String}
 		 * @default false
 		 */
-		feedbackWarning:false,
+		feedbackWarning: false,
 		/**
 		 * Feedback css bindings
 		 * @property feedback_error
@@ -441,34 +441,34 @@ define([&quot;knockout&quot;, &quot;text!./Base.html&quot;, &quot;text!./Input.h
 		 * @type {Boolean|String}
 		 * @default false
 		 */
-		multiplesInline:false,
+		multiplesInline: false,
 		/**
 		 * set as true to activate or object to activate and configure
 		 * @property inplaceEdit
 		 * @type {Boolean|Object}
 		 * @default false
 		 */
-		inplaceEdit:false,
+		inplaceEdit: false,
 		/**
 		 * @property showInplaceTitle
 		 * @type {Boolean}
 		 * @default true
 		 */
-		showInplaceTitle:true,
+		showInplaceTitle: true,
 		/**
 		 * adds html5 required attribute
 		 * @property required
 		 * @type {Boolean}
 		 * @default false
 		 */
-		required:false,
+		required: false,
 		/**
 		 * if none specified then the name is set to that of this.type
 		 * @property name
 		 * @type {String}
 		 * @default &quot;&quot;
 		 */
-		name:&quot;&quot;,
+		name: &quot;&quot;,
 		/**
 		 * @property inputAddonPosition
 		 * @type {String}
@@ -507,53 +507,52 @@ define([&quot;knockout&quot;, &quot;text!./Base.html&quot;, &quot;text!./Input.h
 		 * @method init
 		 * @return .callParent(arguments)
 		 */
-		init: function(){
+		init: function() {
 			var me = this;
 
-				me.on(&quot;rendered&quot;, function(){
+				me.on( &quot;rendered&quot;, function() {
 					var inplaceConf;
 					
-					if(me.inplaceEdit){
+					if ( me.inplaceEdit ) {
 						inplaceConf = {
 								fieldItem: me,
 								showInplaceTitle: true
 						};
 						
-						if( $.isPlainObject( me.inplaceEdit ) ){
-							inplaceConf = Firebrick.utils.overwrite(inplaceConf, me.inplaceEdit);
+						if ( $.isPlainObject( me.inplaceEdit ) ) {
+							inplaceConf = Firebrick.utils.overwrite( inplaceConf, me.inplaceEdit );
 						}
 						
-						Firebrick.create(&quot;Firebrick.ui.fields.plugins.InplaceEdit&quot;, inplaceConf);	
+						Firebrick.create( &quot;Firebrick.ui.fields.plugins.InplaceEdit&quot;, inplaceConf );
 					}
 					
-					if(me.required){
+					if ( me.required ) {
 						me.onChange();
 					}
-				});				
-			
-			
-			return me.callParent(arguments);
+				});
+
+			return me.callParent( arguments );
 		},
 		
 		/**
 		 * this functions is called when the component is rendered and determines what to do when the component is changed
 		 * @method onChange
 		 */
-		onChange: function(){
+		onChange: function() {
 			var me = this,
 				el = me.getElement(),
 				container;
 
-			if(me.required){
-				if(el &amp;&amp; el.length){
-					el.change(function(){
-						container = el.closest(&quot;.form-group&quot;);
-						if(container.length){
+			if ( me.required ) {
+				if ( el &amp;&amp; el.length ) {
+					el.change(function() {
+						container = el.closest( &quot;.form-group&quot; );
+						if ( container.length ) {
 							
-							if(el.is(&quot;:invalid&quot;)){
-								me.setStatus(&quot;error&quot;, container);
-							}else{
-								me.setStatus(&quot;success&quot;, container);
+							if ( el.is( &quot;:invalid&quot; ) ) {
+								me.setStatus( &quot;error&quot;, container );
+							} else {
+								me.setStatus( &quot;success&quot;, container );
 							}
 							
 						}
@@ -568,24 +567,24 @@ define([&quot;knockout&quot;, &quot;text!./Base.html&quot;, &quot;text!./Input.h
 		 * use this to set a particular BS3 has-* status - e.g &quot;has-error&quot;
 		 * @method setStatus
 		 * @param name {String} &quot;error&quot;, &quot;warning&quot;, &quot;success&quot;
-		 * @param element {jQuery Object} [default=getElement()] - set if you wish to set the status to a different element - e.g. like the components parent 
+		 * @param element {jQuery Object} [default=getElement()] - set if you wish to set the status to a different element - e.g. like the components parent
 		 * @return self {Object}
 		 */
-		setStatus: function(status, element){
+		setStatus: function( status, element ) {
 			var me = this,
 				el = element || me.getElement();
 			
-			if(el &amp;&amp; el.length){
+			if ( el &amp;&amp; el.length ) {
 				
-				if(status){
+				if ( status ) {
 					
-					el.attr(&quot;class&quot;, function(i, str){
-						str = str.replace(/(^|\s)has-\S+/g, &#x27;&#x27;);	//replace all classes that start with &quot;has-&quot;
+					el.attr( &quot;class&quot;, function( i, str ) {
+						str = str.replace( /(^|\s)has-\S+/g, &quot;&quot; );	//replace all classes that start with &quot;has-&quot;
 						str += &quot; has-feedback&quot;;	//add the base class again (deleted by line above)
 						return str;
 					});
 					
-					el.addClass(&quot;has-&quot; + status);
+					el.addClass( &quot;has-&quot; + status );
 					
 				}
 				
@@ -598,9 +597,9 @@ define([&quot;knockout&quot;, &quot;text!./Base.html&quot;, &quot;text!./Input.h
 		 * @method containerBindings
 		 * @return {Object}
 		 */
-		containerBindings:function(){
+		containerBindings: function() {
 			var me = this,
-				obj = { 
+				obj = {
 					css: {
 						&quot;&#x27;has-success&#x27;&quot;: me.feedbackSuccess,
 						&quot;&#x27;has-warning&#x27;&quot;: me.feedbackWarning,
@@ -610,20 +609,20 @@ define([&quot;knockout&quot;, &quot;text!./Base.html&quot;, &quot;text!./Input.h
 					}
 				};
 			
-			if( me.containerCSS ){
+			if ( me.containerCSS ) {
 				obj.css[ me.parseBind( me.containerCSS ) ] = true;
 			}
 			
-			if(me.align){
-				obj.css[me.parseBind(&quot;pull-&quot; + me.align)] = true;
+			if ( me.align ) {
+				obj.css[ me.parseBind( &quot;pull-&quot; + me.align ) ] = true;
 			}
 			
-			if(me.inputSize){
-				obj.css[me.parseBind(&quot;form-group-&quot; + me.inputSize)] = me.inputSize ? true : false;	
+			if ( me.inputSize ) {
+				obj.css[ me.parseBind( &quot;form-group-&quot; + me.inputSize ) ] = me.inputSize ? true : false;
 			}
 			
-			if(me.navbarItem){
-				obj.css[&quot;&#x27;fb-ui-navbar-field&#x27;&quot;] = true; 
+			if ( me.navbarItem ) {
+				obj.css[ &quot;&#x27;fb-ui-navbar-field&#x27;&quot; ] = true;
 			}
 			
 			return obj;
@@ -632,32 +631,32 @@ define([&quot;knockout&quot;, &quot;text!./Base.html&quot;, &quot;text!./Input.h
 		 * @method helpBlockBindings
 		 * @return {Object}
 		 */
-		helpBlockBindings: function(){
+		helpBlockBindings: function() {
 			var me = this;
 			return {
-				text: me.textBind(me.helpText)
+				text: me.textBind( me.helpText )
 			};
 		},
 		/**
 		 * @method feedbackBindings
 		 * @return {Object}
 		 */
-		feedbackBindings:function(){
+		feedbackBindings: function() {
 			var me = this,
-				binds = {css:{}},
+				binds = { css: {} },
 				rootClass = &quot;&#x27;glyphicon-&quot;;
-			if(me.containerBindings &amp;&amp; me.containerBindings.css){
-				$.each(me.containerBindings.css, function(k,v){
-					if(v){
-						switch(k){
+			if ( me.containerBindings &amp;&amp; me.containerBindings.css ) {
+				$.each( me.containerBindings.css, function( k,v ) {
+					if ( v ) {
+						switch ( k ){
 							case &quot;&#x27;has-success&#x27;&quot;:
-								binds.css[rootClass + &quot;ok&#x27;&quot;] = v;
+								binds.css[ rootClass + &quot;ok&#x27;&quot; ] = v;
 								break;
 							case &quot;&#x27;has-warning&#x27;&quot;:
-								binds.css[rootClass + &quot;warning&#x27;&quot;] = v;
+								binds.css[ rootClass + &quot;warning&#x27;&quot; ] = v;
 								break;
 							case &quot;&#x27;has-error&#x27;&quot;:
-								binds.css[rootClass + &quot;remove&#x27;&quot;] = v;
+								binds.css[ rootClass + &quot;remove&#x27;&quot; ] = v;
 								break;
 						}
 					}
@@ -669,38 +668,38 @@ define([&quot;knockout&quot;, &quot;text!./Base.html&quot;, &quot;text!./Input.h
 		 * @method bindings
 		 * @return {Object}
 		 */
-		bindings: function(){
+		bindings: function() {
 			var me = this,
 				type =  me.parseBind( me.type ),
-				obj = me.callParent(arguments);
+				obj = me.callParent( arguments );
 			
 			obj.attr.disabled = me.disabled;
-			obj.attr.readonly = me.readOnly; 
-			if(!me.inplaceEdit){
-				obj.attr.type = type;	
+			obj.attr.readonly = me.readOnly;
+			if ( !me.inplaceEdit ) {
+				obj.attr.type = type;
 			}
 			obj.attr.name = me.name ?  me.parseBind( me.name ) : type;
 			
 			obj.value = me.value;
 			
-			if(me.inplaceEdit){
+			if ( me.inplaceEdit ) {
 				
 				obj.text = &quot;Firebrick.getById(&#x27;&quot; + me.getId() + &quot;&#x27;)._getInplaceEditText( $data )&quot;;
-				obj.css[&quot;&#x27;fb-ui-inplaceedit&#x27;&quot;] = true;
+				obj.css[ &quot;&#x27;fb-ui-inplaceedit&#x27;&quot; ] = true;
 
-			}else{
-				if(me.formControlClass){
-					obj.css[me.parseBind(me.formControlClass)] = true;
+			} else {
+				if ( me.formControlClass ) {
+					obj.css[ me.parseBind( me.formControlClass ) ] = true;
 				}
 				obj.attr.placeholder = me.textBind( me.placeholder );
 			}
 			
-			if(me.required){
+			if ( me.required ) {
 				obj.attr.required = true;
 			}
 			
-			if(me.inputSize){
-				obj.css[ me.parseBind(&quot;input-&quot; + me.inputSize) ] = true;
+			if ( me.inputSize ) {
+				obj.css[ me.parseBind( &quot;input-&quot; + me.inputSize ) ] = true;
 			}
 			
 			return obj;
@@ -709,24 +708,24 @@ define([&quot;knockout&quot;, &quot;text!./Base.html&quot;, &quot;text!./Input.h
 		 * @method inputAddonBindings
 		 * @return {Object}
 		 */
-		inputAddonBindings: function(){
+		inputAddonBindings: function() {
 			var me = this,
 				obj = {
-					css:{}
+					css: {}
 				};
-			if(me.inputAddon){
-				if($.isPlainObject(me.inputAddon)){
+			if ( me.inputAddon ) {
+				if ( $.isPlainObject( me.inputAddon ) ) {
 					
 					//button has been loaded
-					if(me.inputAddon.sName === &quot;button.button&quot;){
+					if ( me.inputAddon.sName === &quot;button.button&quot; ) {
 						//the addon is a button
 						//remove if exists
-						me.inputAddonClass = me.inputAddonClass.replace(&quot;input-group-addon&quot;, &quot;&quot;);
+						me.inputAddonClass = me.inputAddonClass.replace( &quot;input-group-addon&quot;, &quot;&quot; );
 						//add the correct class
 						me.inputAddonClass += &quot; input-group-btn&quot;;
 					}
 				}
-				obj.css[me.parseBind(me.inputAddonClass)] = true;
+				obj.css[ me.parseBind( me.inputAddonClass ) ] = true;
 			}
 			return obj;
 		},
@@ -734,18 +733,18 @@ define([&quot;knockout&quot;, &quot;text!./Base.html&quot;, &quot;text!./Input.h
 		 * @method inputAddonSpanBindings
 		 * @return {Object}
 		 */
-		inputAddonSpanBindings: function(){
+		inputAddonSpanBindings: function() {
 			var me = this,
-				obj = {css:{}};
+				obj = { css: {} };
 			
-			if(me.inputAddon &amp;&amp; typeof me.inputAddon === &quot;string&quot;){
-				obj.text = me.textBind(me.inputAddon);
+			if ( me.inputAddon &amp;&amp; typeof me.inputAddon === &quot;string&quot; ) {
+				obj.text = me.textBind( me.inputAddon );
 			}
 			
-			obj.css[me.parseBind(me.glyphiconClass)] = true;
+			obj.css[ me.parseBind( me.glyphiconClass ) ] = true;
 			
-			if(me.iconClass){
-				obj.css[me.parseBind(me.iconClass)] = true;	
+			if ( me.iconClass ) {
+				obj.css[ me.parseBind( me.iconClass ) ] = true;
 			}
 			
 			return obj;
@@ -754,23 +753,23 @@ define([&quot;knockout&quot;, &quot;text!./Base.html&quot;, &quot;text!./Input.h
 		 * @method inputAddonTemplateBindings
 		 * @return {Object}
 		 */
-		inputAddonTemplateBindings: function(){
+		inputAddonTemplateBindings: function() {
 			var me = this,
 				obj = {
-					template:me.parseBind(me.getAddonId()),
+					template: me.parseBind( me.getAddonId() ),
 					data: &quot;$data&quot;
 				};
 			return obj;
 		},
 		/**
-		 * 
+		 *
 		 * @method getAddonId
 		 * @return {String} unique id
 		 */
-		getAddonId: function(){
+		getAddonId: function() {
 			var me = this;
 			
-			if(!me._inputAddonTplId){
+			if ( !me._inputAddonTplId ) {
 				me._inputAddonTplId = &quot;fb-inputaddon-&quot; + Firebrick.utils.uniqId();
 			}
 			
@@ -780,16 +779,16 @@ define([&quot;knockout&quot;, &quot;text!./Base.html&quot;, &quot;text!./Input.h
 		 * @method labelBindings
 		 * @return {Object}
 		 */
-		labelBindings: function(){
+		labelBindings: function() {
 			var me = this,
 				obj = {
 					text: me.textBind( me.label ),
-					css:{
+					css: {
 						&quot;&#x27;control-label&#x27;&quot;: me.controlLabel
 					}
 				};
-			if(me.horizontal){
-				obj.css[ me.parseBind(&quot;col-&quot; + me.columnSize + &quot;-&quot; + me.labelWidth )] = me.horizontal;
+			if ( me.horizontal ) {
+				obj.css[ me.parseBind( &quot;col-&quot; + me.columnSize + &quot;-&quot; + me.labelWidth ) ] = me.horizontal;
 			}
 			return obj;
 		},
@@ -797,12 +796,12 @@ define([&quot;knockout&quot;, &quot;text!./Base.html&quot;, &quot;text!./Input.h
 		 * @method inputContainerBindings
 		 * @return {Object}
 		 */
-		inputContainerBindings: function(){
+		inputContainerBindings: function() {
 			var me = this,
 				obj = {
-					css:{}
+					css: {}
 				};
-			if(me.horizontal){
+			if ( me.horizontal ) {
 				obj.css[ me.parseBind( &quot;col-&quot; + me.columnSize + &quot;-&quot; + me.inputWidth ) ] = me.horizontal;
 			}
 
@@ -812,16 +811,16 @@ define([&quot;knockout&quot;, &quot;text!./Base.html&quot;, &quot;text!./Input.h
 		 * @method fieldBindings
 		 * @return {Object}
 		 */
-		fieldBindings: function(){
-			var me = this, 
+		fieldBindings: function() {
+			var me = this,
 				obj = {
-					css:{
+					css: {
 						&quot;&#x27;input-group&#x27;&quot;: me.inputAddon ? true : false
 					}
-			}
+				};
 			
-			if(me.align){
-				obj.css[me.parseBind(&quot;pull-&quot; + me.align)] = true;
+			if ( me.align ) {
+				obj.css[ me.parseBind( &quot;pull-&quot; + me.align ) ] = true;
 			}
 			
 			return obj;
@@ -830,7 +829,7 @@ define([&quot;knockout&quot;, &quot;text!./Base.html&quot;, &quot;text!./Input.h
 		 * @method getValue
 		 * @return {Any}
 		 */
-		getValue: function(){
+		getValue: function() {
 			var me = this;
 			return me.getElement().val();
 		},
@@ -839,17 +838,17 @@ define([&quot;knockout&quot;, &quot;text!./Base.html&quot;, &quot;text!./Input.h
 		 * @event changed
 		 * @return self
 		 */
-		setValue: function(value){
+		setValue: function( value ) {
 			var me = this,
 				oldValue = me.getValue(),
 				newValue;
 
 			me._lastValue = oldValue;
-			me._setValue(value);
+			me._setValue( value );
 			
 			newValue = me.getValue();
 			
-			me._checkChange(newValue, oldValue);
+			me._checkChange( newValue, oldValue );
 			
 			return me;
 		},
@@ -862,12 +861,12 @@ define([&quot;knockout&quot;, &quot;text!./Base.html&quot;, &quot;text!./Input.h
 		 * @param silent {Boolean} default=false
 		 * @return {Boolean}
 		 */
-		_checkChange: function(newVal, oldVal, silent){
+		_checkChange: function( newVal, oldVal, silent ) {
 			var me = this;
 			
-			if( me._hasChange(newVal, oldVal) ){
-				if(!silent){
-					me.fireEvent(&quot;changed&quot;, newVal, oldVal);
+			if ( me._hasChange( newVal, oldVal ) ) {
+				if ( !silent ) {
+					me.fireEvent( &quot;changed&quot;, newVal, oldVal );
 				}
 				return true;
 			}
@@ -880,7 +879,7 @@ define([&quot;knockout&quot;, &quot;text!./Base.html&quot;, &quot;text!./Input.h
 		 * @param newVal {Any}
 		 * @param oldVal {Any}
 		 */
-		_hasChange: function(newVal, oldVal){
+		_hasChange: function( newVal, oldVal ) {
 			return newVal !== oldVal;
 		},
 		/**
@@ -888,13 +887,13 @@ define([&quot;knockout&quot;, &quot;text!./Base.html&quot;, &quot;text!./Input.h
 		 * @param value
 		 * @private
 		 */
-		_setValue: function(value){
+		_setValue: function( value ) {
 			var me = this,
 				$el = me.getElement();
 			
 			$el.val( value );
 			
-			if(me.inplaceEdit){
+			if ( me.inplaceEdit ) {
 				me._setValueInplaceEdit( value );
 			}
 			
@@ -905,11 +904,11 @@ define([&quot;knockout&quot;, &quot;text!./Base.html&quot;, &quot;text!./Input.h
 		 * @param value
 		 * @private
 		 */
-		_setValueInplaceEdit: function( value ){
+		_setValueInplaceEdit: function() {
 			var me = this,
 				$el = me.getElement();
-			$el.text( me._getInplaceEditText( Firebrick.utils.dataFor( $el[0] ) ) );
-			$el.trigger(&quot;change&quot;);
+			$el.text( me._getInplaceEditText( Firebrick.utils.dataFor( $el[ 0 ] ) ) );
+			$el.trigger( &quot;change&quot; );
 			return me;
 		},
 		/**
@@ -918,19 +917,19 @@ define([&quot;knockout&quot;, &quot;text!./Base.html&quot;, &quot;text!./Input.h
 		 * @param $data {KO Object}
 		 * @return {String}
 		 */
-		_getInplaceEditText: function( $data ){
+		_getInplaceEditText: function( $data ) {
 			var me = this,
 				$el = me.getElement(),
 				value = $el ? me.getValue() : me.value,
 				text = &quot;&quot;;
 				
-			if( value ){
-				if( $data.hasOwnProperty( value ) ){
+			if ( value ) {
+				if ( $data.hasOwnProperty( value ) ) {
 					text = ko.unwrap( $data[ value ] );
-				}else{
+				} else {
 					text = value;
 				}
-			}else{
+			} else {
 				text = Firebrick.text( me.inplaceEditEmptyText );
 			}
 				
@@ -938,6 +937,7 @@ define([&quot;knockout&quot;, &quot;text!./Base.html&quot;, &quot;text!./Input.h
 		}
 	});
 });
+
     </pre>
 </div>
 

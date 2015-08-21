@@ -8,14 +8,14 @@
  * @class Items
  * @static
  */
-define(["jquery"], function($){
+define( [], function( ) {
 	"use strict";
-	return Firebrick.define("Firebrick.ui.common.mixins.Items", {
+	return Firebrick.define( "Firebrick.ui.common.mixins.Items", {
 		/**
 		 * default configuration for direct children - i.e. direct items
 		 * @property defaults
 		 * @type {Object}
-		 * @default null 
+		 * @default null
 		 */
 		defaults: 1,
 		/**
@@ -24,21 +24,21 @@ define(["jquery"], function($){
 		 * @type {String|null} "center"
 		 * @default
 		 */
-		itemsAlign:null,
+		itemsAlign: null,
 		/**
 		 * @property items
 		 * @type {String|Object|Array of Object}
 		 * @default null
 		 */
-		items:null,
+		items: null,
 		/**
 		 * inject sub items
 		 * @method getItems
 		 * @return {String} html
 		 */
-		getItems: function(){
+		getItems: function() {
 			var me = this,
-				r = me._getItems(me.items);
+				r = me._getItems( me.items );
 				me.items = r.items;
 			return r.html;
 		},
@@ -49,16 +49,16 @@ define(["jquery"], function($){
 		 * @param [itemsName] {String}  name of property to get items from
 		 * @return {String} html
 		 */
-		getItemsProp: function(itemsName){
-			var me = this, 
+		getItemsProp: function( itemsName ) {
+			var me = this,
 				r,
 				html = "";
-			if(itemsName){
-				r = me._getItems(me[itemsName]);
-				me[itemsName] = r.items;
+			if ( itemsName ) {
+				r = me._getItems( me[ itemsName ] );
+				me[ itemsName ] = r.items;
 				html = r.html;
-			}else{
-				console.error("invalid function call getItemsProp():", itemsName);
+			} else {
+				console.error( "invalid function call getItemsProp():", itemsName );
 			}
 			
 			return html;
@@ -70,8 +70,8 @@ define(["jquery"], function($){
 		 * @param {Object|Array of Objects} items
 		 * @return {Object, Null} object - {html:"", items:[]}
 		 */
-		_getItems: function(items){
-			return Firebrick.ui._populate(items, this);
+		_getItems: function( items ) {
+			return Firebrick.ui._populate( items, this );
 		}
 	});
 });

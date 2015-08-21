@@ -8,15 +8,15 @@
  * @namespace components.display
  * @class Divider
  */
-define(["text!./Divider.html", "../common/Base"], function(tpl){
+define( [ "text!./Divider.html", "../common/Base" ], function( tpl ) {
 	"use strict";
-	return Firebrick.define("Firebrick.ui.display.Divider", {
-		extend:"Firebrick.ui.common.Base",
+	return Firebrick.define( "Firebrick.ui.display.Divider", {
+		extend: "Firebrick.ui.common.Base",
 		/**
 		 * @property sName
 		 * @type {String}
 		 */
-		sName:"display.divider",
+		sName: "display.divider",
 		/**
 		 * @property tpl
 		 * @type {html}

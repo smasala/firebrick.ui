@@ -244,12 +244,12 @@
  * @namespace components.nav
  * @class Navbar
  */
-define([&quot;text!./Navbar.html&quot;, &quot;./Base&quot;, &quot;./List&quot;], function(tpl){
+define( [ &quot;text!./Navbar.html&quot;, &quot;./Base&quot;, &quot;./List&quot; ], function( tpl ) {
 	&quot;use strict&quot;;
-	return Firebrick.define(&quot;Firebrick.ui.nav.Navbar&quot;, {
-		extend:&quot;Firebrick.ui.nav.Base&quot;,
-		tpl:tpl,
-		sName:&quot;nav.navbar&quot;,
+	return Firebrick.define( &quot;Firebrick.ui.nav.Navbar&quot;, {
+		extend: &quot;Firebrick.ui.nav.Base&quot;,
+		tpl: tpl,
+		sName: &quot;nav.navbar&quot;,
 		/**
 		 * passed on to the toolbar items (direct children only)
 		 * @property toolbarDefaults
@@ -258,7 +258,7 @@ define([&quot;text!./Navbar.html&quot;, &quot;./Base&quot;, &quot;./List&quot;],
 		 * 		navbarItem: true
 		 * }
 		 */
-		defaults:{
+		defaults: {
 			navbarItem: true
 		},
 		/**
@@ -281,7 +281,7 @@ define([&quot;text!./Navbar.html&quot;, &quot;./Base&quot;, &quot;./List&quot;],
 		 * @type {Boolean}
 		 * @default true
 		 */
-		navbarClass:true,
+		navbarClass: true,
 		/**
 		 * whether &quot;navbar-form&quot; css class is used
 		 * @property navbarFormClass
@@ -295,7 +295,7 @@ define([&quot;text!./Navbar.html&quot;, &quot;./Base&quot;, &quot;./List&quot;],
 		 * @type {Boolean}
 		 * @default true
 		 */
-		navbarHeaderClass:true, 
+		navbarHeaderClass: true,
 		/**
 		 * if false then the navigation won&#x27;t collapse to the small menu button
 		 * @property toggleButton
@@ -328,27 +328,27 @@ define([&quot;text!./Navbar.html&quot;, &quot;./Base&quot;, &quot;./List&quot;],
 		 * @type {Boolean|String}
 		 * @default &quot;Firebrick.ui&quot;
 		 */
-		brandText:&quot;Firebrick.ui&quot;,
+		brandText: &quot;Firebrick.ui&quot;,
 		/**
 		 * false to deactivate
 		 * @property brandTpl
 		 * @type {Boolean|String}
 		 * @default false
 		 */
-		brandTpl:false,
+		brandTpl: false,
 		/**
 		 * data to populate navigation with
 		 * @property data
 		 * @type {String}
 		 * @default null
 		 */
-		data:null,
+		data: null,
 		/**
 		 * overriding parent
 		 * @property listGroupClass
 		 * @default false
 		 */
-		listGroupClass:false,
+		listGroupClass: false,
 		/**
 		 * sets nav &amp;&amp; nav-bar css classes to the list container
 		 * @property navClass
@@ -372,16 +372,16 @@ define([&quot;text!./Navbar.html&quot;, &quot;./Base&quot;, &quot;./List&quot;],
 		 * @method bindings
 		 * @return {Object}
 		 */
-		bindings: function(){
+		bindings: function() {
 			var me = this,
-				obj = me.callParent(arguments);
+				obj = me.callParent( arguments );
 		
 			obj.attr.role = &quot;&#x27;navigation&#x27;&quot;;
-			obj.css[&quot;&#x27;navbar-default&#x27;&quot;] = me.navbarDefaultClass;
+			obj.css[ &quot;&#x27;navbar-default&#x27;&quot; ] = me.navbarDefaultClass;
 			obj.css.navbar = me.navbarClass;
 			
-			if(me.navTypeClass){
-				obj.css[ me.parseBind(me.navTypeClass) ] = true;
+			if ( me.navTypeClass ) {
+				obj.css[ me.parseBind( me.navTypeClass ) ] = true;
 			}
 			
 			return obj;
@@ -390,22 +390,22 @@ define([&quot;text!./Navbar.html&quot;, &quot;./Base&quot;, &quot;./List&quot;],
 		 * @method brandBindings
 		 * @return {Object}
 		 */
-		brandBindings: function(){
+		brandBindings: function() {
 			var me = this,
 				obj = {
-					css:{},
-					attr:{}
+					css: {},
+					attr: {}
 				};
 			
-			if(me.brandLink !== false){
+			if ( me.brandLink !== false ) {
 				obj.attr.href =  me.parseBind( me.brandLink );
 			}
 			
-			if(me.brandClass){
-				obj.css[&quot;&#x27;navbar-brand&#x27;&quot;] = me.brandClass;
+			if ( me.brandClass ) {
+				obj.css[ &quot;&#x27;navbar-brand&#x27;&quot; ] = me.brandClass;
 			}
-			if(me.brandText &amp;&amp; !me.brandTpl){
-				obj.text = me.parseBind(me.brandText);
+			if ( me.brandText &amp;&amp; !me.brandTpl ) {
+				obj.text = me.parseBind( me.brandText );
 			}
 			return obj;
 		},
@@ -414,7 +414,7 @@ define([&quot;text!./Navbar.html&quot;, &quot;./Base&quot;, &quot;./List&quot;],
 		 * @method listItemBindings
 		 * @return {Object}
 		 */
-		listItemBindings: function(){
+		listItemBindings: function() {
 			return {
 					css: {
 						active: &quot;$data.active ? $data.active : false&quot;
@@ -425,11 +425,11 @@ define([&quot;text!./Navbar.html&quot;, &quot;./Base&quot;, &quot;./List&quot;],
 		 * @method navbarHeaderBindings
 		 * @return {Object}
 		 */
-		navbarHeaderBindings: function(){
+		navbarHeaderBindings: function() {
 			var me = this,
-				obj = {css:{}};
-			if(me.navbarHeaderClass){
-				obj.css[&quot;&#x27;navbar-header&#x27;&quot;] = me.navbarHeaderClass;
+				obj = { css: {} };
+			if ( me.navbarHeaderClass ) {
+				obj.css[ &quot;&#x27;navbar-header&#x27;&quot; ] = me.navbarHeaderClass;
 			}
 			return obj;
 		},
@@ -437,21 +437,21 @@ define([&quot;text!./Navbar.html&quot;, &quot;./Base&quot;, &quot;./List&quot;],
 		 * @method navbarContainerBindings
 		 * @return {Object}
 		 */
-		navbarContainerBindings: function(){
+		navbarContainerBindings: function() {
 			var me = this,
 				obj = {
-						attr:{
+						attr: {
 							id:  me.parseBind( &quot;fb-nav-&quot; + me.getId() )
 						},
-						css:{}
+						css: {}
 					};
-			if(me.toggleButton){
+			if ( me.toggleButton ) {
 				obj.css.collapse = true;
-				obj.css[&quot;&#x27;navbar-collapse&#x27;&quot;] = true;
+				obj.css[ &quot;&#x27;navbar-collapse&#x27;&quot; ] = true;
 			}
 			
-			if(me.navbarFormClass){
-				obj.css[&quot;&#x27;navbar-form&#x27;&quot;] = true;
+			if ( me.navbarFormClass ) {
+				obj.css[ &quot;&#x27;navbar-form&#x27;&quot; ] = true;
 			}
 			
 			return obj;
@@ -460,7 +460,7 @@ define([&quot;text!./Navbar.html&quot;, &quot;./Base&quot;, &quot;./List&quot;],
 		 * @method toggleTextBindings
 		 * @return {Object}
 		 */
-		toggleTextBindings: function(){
+		toggleTextBindings: function() {
 			var me = this;
 			return {
 				text: me.textBind( me.toggleText )
@@ -470,18 +470,18 @@ define([&quot;text!./Navbar.html&quot;, &quot;./Base&quot;, &quot;./List&quot;],
 		 * @method toggleButtonBindings
 		 * @return {Object}
 		 */
-		toggleButtonBindings: function(){
+		toggleButtonBindings: function() {
 			var me = this,
 				id = &quot;fb-nav-&quot; + me.getId() + &quot;&#x27;&quot;,
 				obj = {
-					attr:{
+					attr: {
 						type: &quot;&#x27;button&#x27;&quot;,
 						&quot;&#x27;data-toggle&#x27;&quot;: &quot;&#x27;collapse&#x27;&quot;,
 						&quot;&#x27;data-target&#x27;&quot;: &quot;&#x27;#&quot; + id,
 						&quot;&#x27;aria-expanded&#x27;&quot;: false,
 						&quot;&#x27;aria-controls&#x27;&quot;: &quot;&#x27;&quot; + id
 					},
-					css:{
+					css: {
 						collapsed: true,
 						&quot;&#x27;navbar-toggle&#x27;&quot;: true
 					}
@@ -493,15 +493,16 @@ define([&quot;text!./Navbar.html&quot;, &quot;./Base&quot;, &quot;./List&quot;],
 		 * @method navbarWrapperBindings
 		 * @return {Object}
 		 */
-		navbarWrapperBindings: function(){
+		navbarWrapperBindings: function() {
 			return {
-				css:{
+				css: {
 					&quot;container&quot;: true
 				}
 			};
 		}
 	});
 });
+
     </pre>
 </div>
 

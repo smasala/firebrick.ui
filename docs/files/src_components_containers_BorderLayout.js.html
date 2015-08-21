@@ -244,10 +244,10 @@
  * @namespace components.containers
  * @class BorderLayout
  */
-define([&quot;text!./BorderLayout.html&quot;, &quot;./Base&quot;, &quot;./Box&quot;, &quot;./border/Pane&quot;], function(tpl){
+define( [ &quot;text!./BorderLayout.html&quot;, &quot;./Base&quot;, &quot;./Box&quot;, &quot;./border/Pane&quot; ], function( tpl ) {
 	&quot;use strict&quot;;
-	return Firebrick.define(&quot;Firebrick.ui.containers.BorderLayout&quot;, {
-		extend:&quot;Firebrick.ui.containers.Base&quot;,
+	return Firebrick.define( &quot;Firebrick.ui.containers.BorderLayout&quot;, {
+		extend: &quot;Firebrick.ui.containers.Base&quot;,
 		/**
 		 * @property tpl
 		 * @type {String} html
@@ -258,7 +258,7 @@ define([&quot;text!./BorderLayout.html&quot;, &quot;./Base&quot;, &quot;./Box&qu
 		 * @property sName
 		 * @type {String}
 		 */
-		sName:&quot;containers.borderlayout&quot;,
+		sName: &quot;containers.borderlayout&quot;,
 		
 		/**
 		 * @property defaults
@@ -284,7 +284,7 @@ define([&quot;text!./BorderLayout.html&quot;, &quot;./Base&quot;, &quot;./Box&qu
 		 * @type {Array of Objects}
 		 * @default null
 		 */
-		items:null,
+		items: null,
 		
 		/**
 		 * number of cols in Bootstraps grid system
@@ -306,14 +306,14 @@ define([&quot;text!./BorderLayout.html&quot;, &quot;./Base&quot;, &quot;./Box&qu
 		 * 		center: 6
 		 * }
 		 */
-		defaultSizes:{
+		defaultSizes: {
 			top: &quot;100%&quot;,
 			right: &quot;33%&quot;,
 			bottom: &quot;100%&quot;,
 			left: &quot;33%&quot;
 		},
 		/**
-		 * 
+		 *
 		 * @property height
 		 * @type {Integer|String} px value | auto | fit
 		 * @default &quot;auto&quot;
@@ -323,38 +323,38 @@ define([&quot;text!./BorderLayout.html&quot;, &quot;./Base&quot;, &quot;./Box&qu
 		 * @method init
 		 * @return {Object}
 		 */
-		init: function(){
+		init: function() {
 			var me = this,
 				resize;
 			
-			me.on(&quot;rendered&quot;, function(){
+			me.on( &quot;rendered&quot;, function() {
 				var el = me.getElement(),
 					height = me.height;
-				if(height === &quot;fit&quot;){
+				if ( height === &quot;fit&quot; ) {
 					//set a fixed height for the borderLayout so that the height
 					//of the vertical panes grow in the correct direction
-					el.css(&quot;height&quot;, el.parent().height());
-					resize = function(){
-						el.css(&quot;height&quot;, el.parent().height());
+					el.css( &quot;height&quot;, el.parent().height() );
+					resize = function() {
+						el.css( &quot;height&quot;, el.parent().height() );
 					};
-					$(window).on(&quot;resize&quot;, resize);
-					me.on(&quot;unbound&quot;, function(){
-						$(window).off(&quot;resize&quot;, resize);
+					$( window ).on( &quot;resize&quot;, resize );
+					me.on( &quot;unbound&quot;, function() {
+						$( window ).off( &quot;resize&quot;, resize );
 					});
-				}else if(height !== &quot;auto&quot;){
+				} else if ( height !== &quot;auto&quot; ) {
 					//not fixed and not auto
-					el.css(&quot;height&quot;, height);
+					el.css( &quot;height&quot;, height );
 				}
 			});
 			
-			return me.callParent(arguments);
+			return me.callParent( arguments );
 		},
 		/**
 		 * overriding base method build
 		 * @private
 		 * @method build
 		 */
-		build: function(){
+		build: function() {
 			var me = this,
 				map = {},
 				reorderedItems = [],
@@ -364,43 +364,43 @@ define([&quot;text!./BorderLayout.html&quot;, &quot;./Base&quot;, &quot;./Box&qu
 				centerGrid = {
 					sName: &quot;containers.box&quot;,
 					defaults: me.defaults,
-					css:&#x27;row-eq-height fb-ui-center-row&#x27;,
-					items:[]
+					css: &quot;row-eq-height fb-ui-center-row&quot;,
+					items: []
 				},
 				entered = false;
 			
 			//if items is defined and has &gt;= 1 item
-			if(me.items){
+			if ( me.items ) {
 				
 				length = me.items.length;
 				
-				if(length){
-					for(var i = 0; i&lt;length; i++){
-						item = me.items[i];	//get current item in iteration
+				if ( length ) {
+					for ( var i = 0; i &lt; length; i++ ) {
+						item = me.items[ i ];	//get current item in iteration
 						//get the correct position where this item should be: 0 - 4
 						item.position = item.position.toLowerCase();
-						position = me._itemArrayPosition(item.position);
+						position = me._itemArrayPosition( item.position );
 						//store the position and item
-						map[position] = item;
+						map[ position ] = item;
 					}
 					
-					for(var ii = 0; ii&lt;5; ii++){
+					for ( var ii = 0; ii &lt; 5; ii++ ) {
 						//get each item from the map in the correct order
-						item = map[ii];
+						item = map[ ii ];
 						//check if the item was defined
-						if(item){
+						if ( item ) {
 							//get the correct dimensions
-							if(ii&gt;0 &amp;&amp; ii&lt;4){
+							if ( ii &gt; 0 &amp;&amp; ii &lt; 4 ) {
 								//center pieces
 								// 1|2|3
-								centerGrid.items.push(item);
-								if(centerGrid.items.length &amp;&amp; !entered){
+								centerGrid.items.push( item );
+								if ( centerGrid.items.length &amp;&amp; !entered ) {
 									entered = true;
-									reorderedItems.push(centerGrid);
+									reorderedItems.push( centerGrid );
 								}
-							}else{
+							} else {
 								//place the item in the correct order
-								reorderedItems.push(item);
+								reorderedItems.push( item );
 							}
 							
 						}
@@ -410,32 +410,32 @@ define([&quot;text!./BorderLayout.html&quot;, &quot;./Base&quot;, &quot;./Box&qu
 				}
 				
 			}
-			return me.callParent(arguments);
+			return me.callParent( arguments );
 		},
 		
 		/**
-		 * get item border position 
-		 * 
+		 * get item border position
+		 *
 		 * ---- 0 ----
 		 * 1 | 2 | 3 |
 		 * ---- 4 ----
-		 * 
+		 *
 		 * @method _itemArrayPosition
 		 * @param position {String} top, right, bottom, left, center
 		 * @return {Integer}
 		 */
-		_itemArrayPosition: function(position){
+		_itemArrayPosition: function( position ) {
 			var pos;
 			
-			if(position === &quot;top&quot;){
+			if ( position === &quot;top&quot; ) {
 				pos = 0;
-			}else if(position === &quot;left&quot;){
+			} else if ( position === &quot;left&quot; ) {
 				pos = 1;
-			}else if(position === &quot;center&quot;){
+			} else if ( position === &quot;center&quot; ) {
 				pos = 2;
-			}else if(position === &quot;right&quot;){
+			} else if ( position === &quot;right&quot; ) {
 				pos = 3;
-			}else if(position === &quot;bottom&quot;){
+			} else if ( position === &quot;bottom&quot; ) {
 				pos = 4;
 			}
 			
@@ -446,17 +446,18 @@ define([&quot;text!./BorderLayout.html&quot;, &quot;./Base&quot;, &quot;./Box&qu
 		 * @method bindings
 		 * @return {Object}
 		 */
-		bindings: function(){
+		bindings: function() {
 			var me = this,
-				obj = me.callParent(arguments);
+				obj = me.callParent( arguments );
 			
-			obj.css[&quot;&#x27;fb-ui-borderlayout&#x27;&quot;] = true;
+			obj.css[ &quot;&#x27;fb-ui-borderlayout&#x27;&quot; ] = true;
 			
 			return obj;
 		}
 		
 	});
 });
+
     </pre>
 </div>
 

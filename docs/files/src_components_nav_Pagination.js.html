@@ -244,11 +244,11 @@
  * @namespace components.nav
  * @class Pagination
  */
-define([&quot;../display/List&quot;], function(){
+define( [ &quot;../display/List&quot; ], function() {
 	&quot;use strict&quot;;
-	return Firebrick.define(&quot;Firebrick.ui.nav.Pagination&quot;, {
-		extend:&quot;Firebrick.ui.display.List&quot;,
-		sName:&quot;nav.pagination&quot;,
+	return Firebrick.define( &quot;Firebrick.ui.nav.Pagination&quot;, {
+		extend: &quot;Firebrick.ui.display.List&quot;,
+		sName: &quot;nav.pagination&quot;,
 		preNode: false,
 		linkedList: true,
 		/**
@@ -257,18 +257,18 @@ define([&quot;../display/List&quot;], function(){
 		 * @type {String}
 		 * @default null
 		 */
-		paginationSize:null,
+		paginationSize: null,
 		/**
 		 * override parent
 		 * @method bindings
 		 * @return {Object}
 		 */
-		bindings: function(){
+		bindings: function() {
 			var me = this,
-				obj = me.callParent(arguments);
+				obj = me.callParent( arguments );
 			obj.css.pagination = true;
-			if(me.paginationSize){
-				obj.css[ me.parseBind(&quot;pagination-&quot;+me.paginationSize) ] = true;
+			if ( me.paginationSize ) {
+				obj.css[ me.parseBind( &quot;pagination-&quot; + me.paginationSize ) ] = true;
 			}
 			return obj;
 		},
@@ -276,27 +276,28 @@ define([&quot;../display/List&quot;], function(){
 		 * @method setActive
 		 * @param val {String|Integer} - correspond to the pagination link data-value attribute
 		 */
-		setActive: function( val ){
+		setActive: function( val ) {
 			var me = this,
 				$el = me.getElement(),
 				$active = me.getActive(),
-				$it = $(&quot;a[data-value=&#x27;&quot; + val + &quot;&#x27;]&quot;, $el).parent(&quot;li&quot;);
+				$it = $( &quot;a[data-value=&#x27;&quot; + val + &quot;&#x27;]&quot;, $el ).parent( &quot;li&quot; );
 			
-			$active.removeClass(&quot;active&quot;);
-			$it.addClass(&quot;active&quot;);
+			$active.removeClass( &quot;active&quot; );
+			$it.addClass( &quot;active&quot; );
 		},
 		/**
 		 * get active item
 		 * @method getActive
 		 * @return {jQuery Object} &lt;li&gt;
 		 */
-		getActive: function(){
+		getActive: function() {
 			var me = this,
 				$el = me.getElement();
-			return $(&quot;li.active&quot;, $el);
+			return $( &quot;li.active&quot;, $el );
 		}
 	});
 });
+
     </pre>
 </div>
 

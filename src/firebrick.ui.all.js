@@ -2,22 +2,25 @@
 * Firebrick UI
 * @author Steven Masala [me@smasala.com]
 * @version 0.20.12
-* 
+* @date
+*
 * FirebrickUI, component library for Firebrick JS
 **/
-define('firebrick-ui-all',["jquery", "firebrick", "knockout",  "devicejs", "knockout-mapping", "text", "bootstrap"], function($, Firebrick, ko, dev, kom){	
+define( 'firebrick-ui',[ "jquery", "firebrick", "knockout",  "devicejs", "knockout-mapping", "text", "bootstrap" ], function( $, Firebrick, ko, dev, kom ) {
 	"use strict";
 
 	//ko mapping
 	ko.mapping = kom;
 	
-	if(!Firebrick){
-		console.error("Firebrick has not been loaded, Firebrick-UI requires Firebrick JS to function");
+	if ( !Firebrick ) {
+		console.error( "Firebrick has not been loaded, Firebrick-UI requires Firebrick JS to function" );
 		return;
-	}else if(Firebrick.ui){
-		console.error("Firebrick.ui namespace has already been taken!");
+	} else if ( Firebrick.ui ) {
+		console.error( "Firebrick.ui namespace has already been taken!" );
 		return;
 	}
+	
+	Firebrick._ns.push( "Firebrick.ui" );
 	
 	/**
 	 * Firebrick component library for Firebrick JS MVC
@@ -35,7 +38,7 @@ define('firebrick-ui-all',["jquery", "firebrick", "knockout",  "devicejs", "knoc
 			
 			/**
 			 * populate a target with fields and data
-			 * 
+			 *
 			 * @method build
 			 * @param {Object} config
 			 * @param {Object} config.target selector string, jquery object (optional) if none passed, html is returned
@@ -43,20 +46,20 @@ define('firebrick-ui-all',["jquery", "firebrick", "knockout",  "devicejs", "knoc
 			 * @param {Object} config.view Firebrick view class (optional), must be defined for rendered event to be fired
 			 * @return {String} html
 			 */
-			build: function(config){
+			build: function( config ) {
 				var me = this,
-					target = Firebrick.views.getTarget(config.target),
+					target = Firebrick.views.getTarget( config.target ),
 					r, html;
 				
-				r = me._populate(config.items, config.view);
+				r = me._populate( config.items, config.view );
 				html = r.html;
 				
-				if(config.view && r.items.length){
+				if ( config.view && r.items.length ) {
 					config.view.items = r.items;
 				}
 				
-				if(target){
-					target.append(html);
+				if ( target ) {
+					target.append( html );
 				}
 				
 				return html;
@@ -69,44 +72,44 @@ define('firebrick-ui-all',["jquery", "firebrick", "knockout",  "devicejs", "knoc
 			 * @method _populate
 			 * @return {Object} :: {html: string, items: array of objects}
 			 */
-			_populate: function(items, parent){
+			_populate: function( items, parent ) {
 				var me = this,
 					_items = [],
 					html = "",
 					component;
 
-				if($.isFunction(items)){
+				if ( $.isFunction( items ) ) {
 					items = items();
 				}
 
-				if(!$.isArray(items) && items){
-					items = [items];
+				if ( !$.isArray( items ) && items ) {
+					items = [ items ];
 				}
 				
-				if($.isArray(items) && items.length){
-					if(parent.defaults){
+				if ( $.isArray( items ) && items.length ) {
+					if ( parent.defaults ) {
 						//get all defaults down the prototype tree
-						Firebrick.utils.merge("defaults", parent);
+						Firebrick.utils.merge( "defaults", parent );
 						//add the defaults to direct items
 						//TODO: if items is a function?
-						for(var i = 0, l = items.length; i<l; i++){
-							items[i] = Firebrick.utils.copyover(items[i], parent.defaults);
+						for ( var i = 0, l = items.length; i < l; i++ ) {
+							items[ i ] = Firebrick.utils.copyover( items[ i ], parent.defaults );
 						}
 					}
 					
-					for(var i = 0, l = items.length; i<l; i++){
-						component = me._buildComponent(items[i], parent);
+					for ( var x = 0, y = items.length; x < y; x++ ) {
+						component = me._buildComponent( items[ x ], parent );
 						html += component._html;
 						//cache component pointer so it can be found by id
-						if(!component.getId){
-							console.error("something went wrong", items[i], "is it defined correctly? Check the item name and dependency include");
+						if ( !component.getId ) {
+							console.error( "something went wrong", items[ x ], "is it defined correctly? Check the item name and dependency include" );
 						}
-						component.fireEvent("uiBuilt");
-						_items.push(component);
+						component.fireEvent( "uiBuilt" );
+						_items.push( component );
 					}
 				}
 				
-				return {html: html, items: _items};
+				return { html: html, items: _items };
 			},
 			
 			/**
@@ -117,50 +120,49 @@ define('firebrick-ui-all',["jquery", "firebrick", "knockout",  "devicejs", "knoc
 			 * @param parent {Object} component parent object
 			 * @return {Object} component
 			 */
-			_buildComponent: function(v, parent){
+			_buildComponent: function( v, parent ) {
 				var me = this,
-					component, 
+					component,
 					tmp;
 				
-				if(v.isView){
-					if(v._state !== "initial"){
+				if ( v.isView ) {
+					if ( v._state !== "initial" ) {
 						component = v.init();
 					}
 					component = v;
-				}else if(v.viewName){
+				} else if ( v.viewName ) {
 					//Creates a view from a JS file
 					//Firebrick.create("MyApp.view.MyView", {})
-					component = Firebrick.create(v.viewName, v);
-				}else{
+					component = Firebrick.create( v.viewName, v );
+				} else {
 					
-					v = me._componentFilter(v);
+					v = me._componentFilter( v );
 					
-					if(!v.uiComponent){
-						if(v.sName){
+					if ( !v.uiComponent ) {
+						if ( v.sName ) {
 							v.sName = v.sName.toLowerCase();
 						}
 						//v can be string or object
-						tmp = Firebrick.get(v.sName || v);
-						if(!tmp){
-							console.error("Has", (v.sName || v), "been added as a dependency?");
+						tmp = Firebrick.get( v.sName || v );
+						if ( !tmp ) {
+							console.error( "Has", ( v.sName || v ), "been added as a dependency?" );
 						}
 						//Object.getPrototypeOf(object.create) to make a new copy of the properties and not a pointer to v
-						component = Firebrick.create(tmp._classname, (v.sName ? Object.getPrototypeOf(Object.create(v)) : null));
-					}else{
+						component = Firebrick.create( tmp._classname, ( v.sName ? Object.getPrototypeOf( Object.create( v ) ) : null ) );
+					} else {
 						//v is already a field class
 						component = v;
 					}
 				}
 				
-				if(!component._parent){
+				if ( !component._parent ) {
 					//if not set yet
 					component._parent = parent;
 				}
 				
-				if(component.build){
-					component._html = component.build();	
+				if ( component.build ) {
+					component._html = component.build();
 				}
-				
 				
 				return component;
 			},
@@ -169,17 +171,17 @@ define('firebrick-ui-all',["jquery", "firebrick", "knockout",  "devicejs", "knoc
 			 * this method converts shorthand component definitions
 			 * @example
 			 * 		//component definition    "|"
-			 * 		//converts to the component <hr> 
+			 * 		//converts to the component <hr>
 			 * @method _componentFilter
 			 * @private
 			 * @param v {String}
 			 * @return {String}
 			 */
-			_componentFilter: function(name){
+			_componentFilter: function( name ) {
 				//var me = this;
 				
-				if(typeof name === "string"){
-					switch(name){
+				if ( typeof name === "string" ) {
+					switch ( name ){
 						case "|":
 							name = "display.divider";
 							break;
@@ -194,19 +196,19 @@ define('firebrick-ui-all',["jquery", "firebrick", "knockout",  "devicejs", "knoc
 			 * @param id {String}
 			 * @return {Object|null}
 			 */
-			getCmp: function(id){
-				return Firebrick.getById(id);
+			getCmp: function( id ) {
+				return Firebrick.getById( id );
 			},
 			
 			/**
 			 * alias for Firebrick.get
-			 * 
+			 *
 			 * @method get
 			 * @param {String} name
 			 * @return {Object}
 			 */
-			get: function(name){
-				return Firebrick.get(name);
+			get: function( name ) {
+				return Firebrick.get( name );
 			},
 			
 			/**
@@ -214,27 +216,27 @@ define('firebrick-ui-all',["jquery", "firebrick", "knockout",  "devicejs", "knoc
 			 * @for ui
 			 * @class utils
 			 */
-			utils:{
+			utils: {
 				
 				/**
 				 * @private
 				 * @method _buildDotObj
-				 * @example 
+				 * @example
 				 * 		//example: a.b.c.d
 				 *		//convert to:
-				 *			a:{ 
-				 *				b:{ 
-				 *					c:{ 
-				 *						d:sName 
-				 *					} 
-				 *				} 
+				 *			a:{
+				 *				b:{
+				 *					c:{
+				 *						d:sName
+				 *					}
+				 *				}
 				 *			}
 				 * @param arr {Array of Strings}
 				 * @param sName {String} the original sName
 				 * @param prev {Object} optional, used by recursion
 				 * @return {Object}
 				 */
-				_buildDotObj: function(arr, sName, prev){
+				_buildDotObj: function( arr, sName, prev ) {
 					var me = this,
 						prop = arr.shift(); //remove the first item use it as property name
 					
@@ -244,15 +246,15 @@ define('firebrick-ui-all',["jquery", "firebrick", "knockout",  "devicejs", "knoc
 					prev[ prop ] = {};
 					
 					//more items in arr?
-					if(arr.length){
-						if(arr[0] !== ""){
+					if ( arr.length ) {
+						if ( arr[ 0 ] !== "" ) {
 							//call self recursively
-							me._buildDotObj(arr, sName, prev[ prop ]);
-						}else{
-							console.error("error building sName, found empty string", arr, prop, sName);
+							me._buildDotObj( arr, sName, prev[ prop ] );
+						} else {
+							console.error( "error building sName, found empty string", arr, prop, sName );
 						}
 						
-					}else{
+					} else {
 						prev[ prop ] = sName;
 					}
 					
@@ -263,9 +265,9 @@ define('firebrick-ui-all',["jquery", "firebrick", "knockout",  "devicejs", "knoc
 				 * @method isVisible
 				 * @param $element {jQuery Object}
 				 * @param $container {jQuery Object}
-				 * @return {Boolean} 
+				 * @return {Boolean}
 				 */
-				isVisible: function($element, $container){
+				isVisible: function( $element, $container ) {
 					var cont = {
 							offset: $container.offset(),
 							height: $container.height(),
@@ -276,9 +278,9 @@ define('firebrick-ui-all',["jquery", "firebrick", "knockout",  "devicejs", "knoc
 							height: $element.height(),
 							width: $element.width()
 						},
-						check = function(coord){
-							if(coord > cont.offset.top && coord < cont.offset.left){
-								if(coord < cont.bottom){
+						check = function( coord ) {
+							if ( coord > cont.offset.top && coord < cont.offset.left ) {
+								if ( coord < cont.bottom ) {
 									return true;
 								}
 							}
@@ -288,13 +290,12 @@ define('firebrick-ui-all',["jquery", "firebrick", "knockout",  "devicejs", "knoc
 					cont.bottom = cont.offset.top + cont.height;
 					el.bottom = el.offset.top + el.height;
 					
-					if( check(el.offset.top) || 
-						check(el.offset.top + el.width) ||  
-						check(el.bottom) ||
-						check(el.bottom + el.width) ){
-						return true; 
+					if ( check( el.offset.top ) ||
+						check( el.offset.top + el.width ) ||
+						check( el.bottom ) ||
+						check( el.bottom + el.width ) ) {
+						return true;
 					}
-					
 					
 					return false;
 				},
@@ -306,8 +307,8 @@ define('firebrick-ui-all',["jquery", "firebrick", "knockout",  "devicejs", "knoc
 				 * @param {Function|Any} val
 				 * @return {Any}
 				 */
-				getValue: function(val){
-					if($.isFunction(val)){
+				getValue: function( val ) {
+					if ( $.isFunction( val ) ) {
 						return val();
 					}
 					return val;
@@ -315,34 +316,34 @@ define('firebrick-ui-all',["jquery", "firebrick", "knockout",  "devicejs", "knoc
 				
 				/**
 				 * convert a JS Object into a simple "json" type string, this is mainly used for the data-bind attribute in Knockout
-				 * 
+				 *
 				 * @method stringify
 				 * @param {Object} objToConvert
 				 * @return {String}
 				 */
-				stringify:function(objToConvert){
-					if(objToConvert){
+				stringify: function( objToConvert ) {
+					if ( objToConvert ) {
 						
-						var loop = function(obj, f){
+						var loop = function( obj, f ) {
 							var p = f ? "" : "{",
 								k,v;
-							for(k in obj){
-								if(obj.hasOwnProperty(k)){
-									v = obj[k];
-									if($.isPlainObject(v)){
-										p += k + ":" + loop(v);
-									}else{
+							for ( k in obj ) {
+								if ( obj.hasOwnProperty( k ) ) {
+									v = obj[ k ];
+									if ( $.isPlainObject( v ) ) {
+										p += k + ":" + loop( v );
+									} else {
 										p += k + ": " + v + ",";
 									}
 								}
 							}
 							//remove last ", "
-							p = p.substr(-1) === "," ? p.substring(0, p.length-1) : p;
+							p = p.substr( -1 ) === "," ? p.substring( 0, p.length - 1 ) : p;
 							p += f ? "" : "},";
 							return p;
 						};
 						
-						return loop(objToConvert, true);
+						return loop( objToConvert, true );
 					}
 					return "";
 				}
@@ -484,17 +485,17 @@ define('firebrick-ui-all',["jquery", "firebrick", "knockout",  "devicejs", "knoc
 				 * @param $$context {KO Object}
 				 * @return {String} html
 				 */
-				getHtml: function( componentId, $data, $context ){
-					var component = Firebrick.getById(componentId),
+				getHtml: function( componentId, $data, $context ) {
+					var component = Firebrick.getById( componentId ),
 						html = component.html;
 					
-					if( $.isFunction(html) ){
+					if ( $.isFunction( html ) ) {
 						html = html( $data, $context );
 					}
 					
-					if(typeof html === "string"){
-						if( $data.hasOwnProperty( html ) ){
-							return $data[html];
+					if ( typeof html === "string" ) {
+						if ( $data.hasOwnProperty( html ) ) {
+							return $data[ html ];
 						}
 					}
 					return html;
@@ -503,16 +504,16 @@ define('firebrick-ui-all',["jquery", "firebrick", "knockout",  "devicejs", "knoc
 				/**
 				 * builds the items string used for functions such as "foreach"
 				 * @method tabBuilder
-				 * @param componentId {Objects} 
-				 * @return {String} 
+				 * @param componentId {Objects}
+				 * @return {String}
 				 */
-				tabBuilder: function(componentId){
-					var component = Firebrick.getById(componentId),
+				tabBuilder: function( componentId ) {
+					var component = Firebrick.getById( componentId ),
 						data = component.items;
 					
-					if($.isFunction(data)){
+					if ( $.isFunction( data ) ) {
 						return "Firebrick.getById('" + componentId + "').items()";
-					}else if($.isArray(data)){
+					} else if ( $.isArray( data ) ) {
 						return "Firebrick.getById('" + componentId + "').items";
 					}
 					
@@ -522,15 +523,15 @@ define('firebrick-ui-all',["jquery", "firebrick", "knockout",  "devicejs", "knoc
 				/**
 				 * builds the options string used for functions such as "foreach"
 				 * @method optionString
-				 * @param component {Objects} 
-				 * @return {String} 
+				 * @param component {Objects}
+				 * @return {String}
 				 */
-				optionString: function(component){
+				optionString: function( component ) {
 					var data = component.options;
 					
-					if($.isFunction(data)){
+					if ( $.isFunction( data ) ) {
 						return "Firebrick.ui.getCmp('" + component.getId() + "').options()";
-					}else if($.isArray(data)){
+					} else if ( $.isArray( data ) ) {
 						return "Firebrick.ui.getCmp('" + component.getId() + "').options";
 					}
 					
@@ -544,12 +545,12 @@ define('firebrick-ui-all',["jquery", "firebrick", "knockout",  "devicejs", "knoc
 				 * @param {Object} value.link
 				 * @return {String | false}
 				 */
-				linkBuilder: function(value){
+				linkBuilder: function( value ) {
 
-					if(value){
-						if( typeof value.link === "string" ){
+					if ( value ) {
+						if ( typeof value.link === "string" ) {
 							return value.link;
-						}else if( typeof value.href === "string"){
+						} else if ( typeof value.href === "string" ) {
 							return value.href;
 						}
 					}
@@ -557,11 +558,10 @@ define('firebrick-ui-all',["jquery", "firebrick", "knockout",  "devicejs", "knoc
 					return false;
 				},
 				
-				
-				callFunction: function(classId, functionName, args){
-					var clazz = Firebrick.getById(classId);
-					if(clazz && functionName){
-						clazz[functionName].apply(clazz, args);
+				callFunction: function( classId, functionName, args ) {
+					var clazz = Firebrick.getById( classId );
+					if ( clazz && functionName ) {
+						clazz[ functionName ].apply( clazz, args );
 					}
 				}
 				
@@ -578,7 +578,7 @@ define('firebrick-ui-all',["jquery", "firebrick", "knockout",  "devicejs", "knoc
 				 * @type {Object}
 				 * @private
 				 */
-				_registry:{},
+				_registry: {},
 				
 				/**
 				 * @method add
@@ -586,10 +586,10 @@ define('firebrick-ui-all',["jquery", "firebrick", "knockout",  "devicejs", "knoc
 				 * @param func {Function} function to call when the renderer is used - parameters given to the function when called: $data, $context, $parent, $root
 				 * @return self
 				 */
-				add: function(name, func){
+				add: function( name, func ) {
 					var me = this;
 					
-					me._registry[name] = func;
+					me._registry[ name ] = func;
 					
 					return me;
 				},
@@ -599,171 +599,25 @@ define('firebrick-ui-all',["jquery", "firebrick", "knockout",  "devicejs", "knoc
 				 * @param name {String} name of the renderer
 				 * @return {Function || null}
 				 */
-				get: function(name){
+				get: function( name ) {
 					var me = this;
-					if($.isFunction(name)){
+					if ( $.isFunction( name ) ) {
 						//catch KO function variation
 						name = name();
 					}
-					return me._registry[name];
+					return me._registry[ name ];
 				}
-			},
-			
-			/**
-			 * @property _sNames
-			 * @private
-			 * @type {Object}
-			 */
-			_sNames: {
-					"button.dropdown.list":{
-						path:"Firebrick.ui/button/dropdown/List"
-					},
-					"button.button":{
-						path:"Firebrick.ui/button/Button"
-					},
-					"button.buttongroup":{
-						path:"Firebrick.ui/button/ButtonGroup"
-					},
-					"button.icon":{
-						path:"Firebrick.ui/button/Icon"
-					},
-					"button.togglebutton":{
-						path:"Firebrick.ui/button/ToggleButton"
-					},
-					"containers.border.pane":{
-						path:"Firebrick.ui/containers/border/Pane"
-					},
-					"containers.tab.pane":{
-						path:"Firebrick.ui/containers/tab/Pane"
-					},
-					"containers.accordion":{
-						path:"Firebrick.ui/containers/Accordion"
-					},
-					"containers.borderlayout":{
-						path:"Firebrick.ui/containers/BorderLayout"
-					},
-					"containers.box":{
-						path:"Firebrick.ui/containers/Box"
-					},
-					"containers.form":{
-						path:"Firebrick.ui/containers/Form"
-					},
-					"containers.formpanel":{
-						path:"Firebrick.ui/containers/FormPanel"
-					},
-					"containers.gridcolumn":{
-						path:"Firebrick.ui/containers/GridColumn"
-					},
-					"containers.gridrow":{
-						path:"Firebrick.ui/containers/GridRow"
-					},
-					"containers.modal":{
-						path:"Firebrick.ui/containers/Modal"
-					},
-					"containers.fieldset": {
-						path:"Firebrick.ui/containers/Fieldset"
-					},
-					"containers.panel":{
-						path:"Firebrick.ui/containers/Panel"
-					},
-					"containers.tabpanel":{
-						path:"Firebrick.ui/containers/TabPanel"
-					},
-					"display.alert":{
-						path:"Firebrick.ui/display/Alert"
-					},
-					"display.divider":{
-						path:"Firebrick.ui/display/Divider"
-					},
-					"display.header":{
-						path:"Firebrick.ui/display/Header"
-					},
-					"display.image":{
-						path:"Firebrick.ui/display/Image"
-					},
-					"display.list":{
-						path:"Firebrick.ui/display/List"
-					},
-					"display.progress":{
-						path:"Firebrick.ui/display/Progress"
-					},
-					"display.span":{
-						path:"Firebrick.ui/display/Span"
-					},
-					"display.text":{
-						path:"Firebrick.ui/display/Text"
-					},
-					"display.loader": {
-						path:"Firebrick.ui/display/Loader"
-					},
-					"fields.checkbox":{
-						path:"Firebrick.ui/fields/Checkbox"
-					},
-					"fields.datepicker":{
-						path:"Firebrick.ui/fields/DatePicker"
-					},
-					"fields.display":{
-						path:"Firebrick.ui/fields/Display"
-					},
-					"fields.combobox":{
-						path:"Firebrick.ui/fields/ComboBox"
-					},
-					"fields.email":{
-						path:"Firebrick.ui/fields/Email"
-					},
-					"fields.file":{
-						path:"Firebrick.ui/fields/File"
-					},
-					"fields.input":{
-						path:"Firebrick.ui/fields/Input"
-					},
-					"fields.password":{
-						path:"Firebrick.ui/fields/Password"
-					},
-					"fields.radio":{
-						path:"Firebrick.ui/fields/Radio"
-					},
-					"fields.selectbox":{
-						path:"Firebrick.ui/fields/SelectBox"
-					},
-					"fields.textarea":{
-						path:"Firebrick.ui/fields/TextArea"
-					},
-					"nav.breadcrumbs":{
-						path:"Firebrick.ui/nav/Breadcrumbs"	
-					},
-					"nav.list":{
-						path:"Firebrick.ui/nav/List"
-					},
-					"nav.navbar":{
-						path:"Firebrick.ui/nav/Navbar"
-					},
-					"nav.pagination":{
-						path:"Firebrick.ui/nav/Pagination"
-					},
-					"nav.toolbar":{
-						path:"Firebrick.ui/nav/Toolbar"	
-					},
-					"table.table":{
-						path:"Firebrick.ui/table/Table"
-					},
-					"table.treetable":{
-						path:"Firebrick.ui/table/TreeTable"
-					}
 			}
 			
 	};
 	
-	Firebrick.classes.addSNames(Firebrick.ui._sNames);
-	
-	
 	/**
-	 * Overwrites "Firebrick.view.Base" 
+	 * Overwrites "Firebrick.view.Base"
 	 * @extends class.Base
 	 * @class view.Base
 	 */
-	Firebrick.classes.overwrite("Firebrick.view.Base", {
-		_ko:null,
+	Firebrick.classes.overwrite( "Firebrick.view.Base", {
+		_ko: null,
 		/**
 		 * @property passDownEvents
 		 * @type {Object}
@@ -773,7 +627,7 @@ define('firebrick-ui-all',["jquery", "firebrick", "knockout",  "devicejs", "knoc
 				unbound: 1
 			}
 		 */
-		passDownEvents:{
+		passDownEvents: {
 			rendered: 1,
 			htmlRendered: 1,
 			unbound: 1,
@@ -781,17 +635,17 @@ define('firebrick-ui-all',["jquery", "firebrick", "knockout",  "devicejs", "knoc
 		},
 		
 		listeners: {
-			uiBuilt: function(){
+			uiBuilt: function() {
 				var me = this,
 					k;
-				if(me.passDownEvents){
+				if ( me.passDownEvents ) {
 					
-					Firebrick.utils.merge("passDownEvents", me);
+					Firebrick.utils.merge( "passDownEvents", me );
 					
-					for(k in me.passDownEvents){
-						if(me.passDownEvents.hasOwnProperty(k)){
-							if(me._parent){
-								me._initPassDownEvent(k);
+					for ( k in me.passDownEvents ) {
+						if ( me.passDownEvents.hasOwnProperty( k ) ) {
+							if ( me._parent ) {
+								me._initPassDownEvent( k );
 							}
 						}
 					}
@@ -802,12 +656,12 @@ define('firebrick-ui-all',["jquery", "firebrick", "knockout",  "devicejs", "knoc
 		/**
 		 * @method _initPassDownEvent
 		 */
-		_initPassDownEvent: function(eventName){
+		_initPassDownEvent: function( eventName ) {
 			var me = this,
-				f = me._createPassEvent(me);
+				f = me._createPassEvent( me );
 			
-			me._parent.on(eventName, f);
-			me.on("destroy", function(){
+			me._parent.on( eventName, f );
+			me.on( "destroy", function() {
 				f.__isDestroyed = true;
 				//TODO: fixed this
 				//me._parent.off(eventName, f);
@@ -818,12 +672,12 @@ define('firebrick-ui-all',["jquery", "firebrick", "knockout",  "devicejs", "knoc
 		 * @private
 		 * @return {Function}
 		 */
-		_createPassEvent: function(scope){
-			return function(){
+		_createPassEvent: function( scope ) {
+			return function() {
 				var me = this,
-					args = Array.prototype.slice.call(arguments);
-				args = [me.event.eventName].concat(args);
-				scope.fireEvent.apply(scope, args);	
+					args = Array.prototype.slice.call( arguments );
+				args = [ me.event.eventName ].concat( args );
+				scope.fireEvent.apply( scope, args );
 			};
 		},
 		
@@ -838,9 +692,9 @@ define('firebrick-ui-all',["jquery", "firebrick", "knockout",  "devicejs", "knoc
 		 * @type {Function}
 		 * @return {String}
 		 */
-		tpl: function(){
+		tpl: function() {
 			var me = this;
-			if(me.items){
+			if ( me.items ) {
 				return Firebrick.ui.build({
 					items: me.items,
 					view: me
@@ -849,25 +703,24 @@ define('firebrick-ui-all',["jquery", "firebrick", "knockout",  "devicejs", "knoc
 		}
 	});
 	
-	
 	/*
 	 * Knockout bindingHandler extensions
 	 */
-	(function(ko){
+	(function( ko ) {
 		/*
 		 * use withProperties to pass extra properties down to the descendants
 		 * http://knockoutjs.com/documentation/custom-bindings-controlling-descendant-bindings.html
 		 */
 		ko.bindingHandlers.withProperties = {
-		    init: function(element, valueAccessor, allBindings, viewModel, bindingContext) {
+		    init: function( element, valueAccessor, allBindings, viewModel, bindingContext ) {
 		        // Make a modified binding context, with a extra properties, and apply it to descendant elements
 		        var childBindingContext = bindingContext.createChildContext(
 		            bindingContext.$rawData,
 		            null, // Optionally, pass a string here as an alias for the data item in descendant contexts
-		            function(context) {
-		                ko.utils.extend(context, valueAccessor());
+		            function( context ) {
+		                ko.utils.extend( context, valueAccessor() );
 		            });
-		        ko.applyBindingsToDescendants(childBindingContext, element);
+		        ko.applyBindingsToDescendants( childBindingContext, element );
 		 
 		        // Also tell KO *not* to bind the descendants itself, otherwise they will be bound twice
 		        return { controlsDescendantBindings: true };
@@ -877,12 +730,12 @@ define('firebrick-ui-all',["jquery", "firebrick", "knockout",  "devicejs", "knoc
 		//activate binding on any element injected with "html" property
 		//modified from http://stackoverflow.com/a/29605553/425226
 		ko.bindingHandlers.htmlWithBinding = {
-			  'init': function() {
-				  return { 'controlsDescendantBindings': true };
+			  "init": function() {
+				  return { "controlsDescendantBindings": true };
 			  },
-			  'update': function (element, valueAccessor, allBindings, viewModel, bindingContext) {
+			  "update": function( element, valueAccessor, allBindings, viewModel, bindingContext ) {
 				  element.innerHTML = valueAccessor();
-				  ko.applyBindingsToDescendants(bindingContext, element);
+				  ko.applyBindingsToDescendants( bindingContext, element );
 			  }
 		};
 		
@@ -892,34 +745,39 @@ define('firebrick-ui-all',["jquery", "firebrick", "knockout",  "devicejs", "knoc
 		 */
 		ko.virtualElements.allowedBindings.debug = true;
 		ko.bindingHandlers.debug = {
-		    init: function(element, valueAccessor, allBindings, viewModel, bindingContext) {
-		       console.warn("Debug:", element, valueAccessor(), allBindings(), viewModel, bindingContext);
+		    init: function( element, valueAccessor, allBindings, viewModel, bindingContext ) {
+		       console.warn( "Debug:", element, valueAccessor(), allBindings(), viewModel, bindingContext );
 		    }
 		};
 		
-	})(ko);
+	})( ko );
 	
-	return Firebrick;	
+	//{{SNAME.HOLDER}}
+ Firebrick.classes.addLookups( {} );
+//{{/SNAME.HOLDER}}
+	
+	return Firebrick;
 });
+
 /*!
  * @author Steven Masala [me@smasala.com]
  */
 
 /**
  * Super class for all components.
- * 
+ *
  * Extends from <a href="http://smasala.github.io/firebrick/docs/classes/view.Base.html">Firebrick.view.Base</a>
  * @module Firebrick.ui.components
  * @extends class.Base
  * @namespace components.common
  * @class Base
  */
-define('Firebrick.ui/common/Base',["doT", "firebrick", "jquery", "bootstrap.plugins/tooltip", "bootstrap.plugins/popover"], function(tplEngine, fb, $){
+define( 'Firebrick.ui/common/Base',[ "doT", "firebrick", "jquery", "bootstrap.plugins/tooltip", "bootstrap.plugins/popover" ], function( tplEngine, fb, $ ) {
 
 	"use strict";
 	
-	return Firebrick.define("Firebrick.ui.common.Base", {
-		extend:"Firebrick.view.Base",
+	return Firebrick.define( "Firebrick.ui.common.Base", {
+		extend: "Firebrick.view.Base",
 		/**
 		 * Override class id
 		 * @property _idPrefix
@@ -1004,7 +862,7 @@ define('Firebrick.ui/common/Base',["doT", "firebrick", "jquery", "bootstrap.plug
 		 * @type {Object}
 		 * @default null
 		 */
-		style:null,
+		style: null,
 		/**
 		 * variable shortcuts are created using the sName. by default the string after the last "-" is used
 		 * @example
@@ -1015,7 +873,7 @@ define('Firebrick.ui/common/Base',["doT", "firebrick", "jquery", "bootstrap.plug
 		 * @type {String}
 		 * @default null
 		 */
-		sName:null,
+		sName: null,
 		/**
 		 * @property _element
 		 * @type {Null|jQuery Object}
@@ -1027,14 +885,14 @@ define('Firebrick.ui/common/Base',["doT", "firebrick", "jquery", "bootstrap.plug
 		 * @type {Boolean|String} set to false to deactivate, string to set the text
 		 * @default false
 		 */
-		tooltip:false,
+		tooltip: false,
 		/**
 		 * where the tooltip should appear: "top", "left", "right", "bottom"
 		 * @property tooltipLocation
 		 * @type {String}
 		 * @default "top"
 		 */
-		tooltipLocation:"top",
+		tooltipLocation: "top",
 		/**
 		 * options defined by bootstrap
 		 * @property tooltipOptions
@@ -1047,20 +905,20 @@ define('Firebrick.ui/common/Base',["doT", "firebrick", "jquery", "bootstrap.plug
 		 * @type {Boolean|String} set to false to deactivate, string to set the text
 		 * @default false
 		 */
-		popover:false,
+		popover: false,
 		/**
 		 * @property popoverTitle
 		 * @type {Boolean|String} optional - set to false to deactivate, string to set the title
 		 * @default false
 		 */
-		popoverTitle:false,
+		popoverTitle: false,
 		/**
 		 * where the popover should appear: "top", "left", "right", "bottom"
 		 * @property popoverLocation
 		 * @type {String}
 		 * @default "top"
 		 */
-		popoverLocation:"top",
+		popoverLocation: "top",
 		/**
 		 * options defined by bootstrap
 		 * @property popoverOptions
@@ -1079,7 +937,7 @@ define('Firebrick.ui/common/Base',["doT", "firebrick", "jquery", "bootstrap.plug
 		 * @type {String|null} right, left
 		 * @default null
 		 */
-		align:null,
+		align: null,
 		/**
 		 * @property contextMenu
 		 * @type {Array of Objects}
@@ -1104,25 +962,25 @@ define('Firebrick.ui/common/Base',["doT", "firebrick", "jquery", "bootstrap.plug
 		 * @param bindObj {Object}
 		 * @return {Object} new Object
 		 */
-		addTooltipPopoverBind: function(bindObj){
+		addTooltipPopoverBind: function( bindObj ) {
 			var me = this;
-			if(me.tooltip || me.popover){
-				if(bindObj && $.isPlainObject(bindObj)){
-					if(!bindObj.attr){
+			if ( me.tooltip || me.popover ) {
+				if ( bindObj && $.isPlainObject( bindObj ) ) {
+					if ( !bindObj.attr ) {
 						bindObj.attr = {};
 					}
-					bindObj.attr["'data-toggle'"] = me.parseBind( me.tooltip ? "tooltip" : "popover" );
-					if(me.tooltip || me.popoverTitle){
-						bindObj.attr.title = me.textBind(me.tooltip || me.popoverTitle);
+					bindObj.attr[ "'data-toggle'" ] = me.parseBind( me.tooltip ? "tooltip" : "popover" );
+					if ( me.tooltip || me.popoverTitle ) {
+						bindObj.attr.title = me.textBind( me.tooltip || me.popoverTitle );
 					}
-					if(me.popover){
-						bindObj.attr["'data-content'"] = me.textBind(me.popover);
-						bindObj.attr["'data-container'"] = "'body'";
-						if(me.popoverDismissible){
-							bindObj.attr["'data-trigger'"] = "'focus'";
+					if ( me.popover ) {
+						bindObj.attr[ "'data-content'" ] = me.textBind( me.popover );
+						bindObj.attr[ "'data-container'" ] = "'body'";
+						if ( me.popoverDismissible ) {
+							bindObj.attr[ "'data-trigger'" ] = "'focus'";
 						}
 					}
-					bindObj.attr["'data-placement'"] = me.parseBind(me.tooltipLocation || me.popoverLocation);
+					bindObj.attr[ "'data-placement'" ] = me.parseBind( me.tooltipLocation || me.popoverLocation );
 				}
 			}
 			return bindObj;
@@ -1132,7 +990,7 @@ define('Firebrick.ui/common/Base',["doT", "firebrick", "jquery", "bootstrap.plug
 		 * @private
 		 * @return {String} jquery element selector string
 		 */
-		_getElementSelector: function(){
+		_getElementSelector: function() {
 			var me = this,
 				id = me.enclosedBind ? me.getEnclosedBindId() : me.getId();
 			return "#" + id;
@@ -1141,11 +999,11 @@ define('Firebrick.ui/common/Base',["doT", "firebrick", "jquery", "bootstrap.plug
 		 * @method getElement
 		 * @return {Object} jquery element object
 		 */
-		getElement: function(){
+		getElement: function() {
 			var me = this;
-			if(!me._element){
+			if ( !me._element ) {
 				me._element = $( me._getElementSelector() );
-				if(!me._element.length){
+				if ( !me._element.length ) {
 					//set to null if jquery object returned empty []
 					me._element = null;
 				}
@@ -1157,24 +1015,24 @@ define('Firebrick.ui/common/Base',["doT", "firebrick", "jquery", "bootstrap.plug
 		 * @method constructor
 		 * @return {Any} this.callParent(arguments)
 		 */
-		constructor: function(){
+		constructor: function() {
 			var me = this;
 			
 			me._precompile();
 			
-			return me.callParent(arguments);
+			return me.callParent( arguments );
 		},
 		/**
 		 * compile and cache template
-		 * 
+		 *
 		 * @method _precompile
 		 * @private
 		 * @return {Object} self
 		 */
-		_precompile: function(){
+		_precompile: function() {
 			var me = this,
 				it,
-				tpls = ["tpl", "beforeSubTpl", "subTpl", "afterSubTpl"];
+				tpls = [ "tpl", "beforeSubTpl", "subTpl", "afterSubTpl" ];
 			
 			//init objects so each class is unqiue
 			me._template = {};
@@ -1182,9 +1040,9 @@ define('Firebrick.ui/common/Base',["doT", "firebrick", "jquery", "bootstrap.plug
 			
 			//precompile the template as soon as possible - performance
 			//http://jsperf.com/dot-vs-handlebars/2
-			for(var i = 0, l = tpls.length; i<l; i++){
-				it = tpls[i];
-				if( me[it] ){
+			for ( var i = 0, l = tpls.length; i < l; i++ ) {
+				it = tpls[ i ];
+				if ( me[ it ] ) {
 					me.template( it );
 				}
 			}
@@ -1196,67 +1054,66 @@ define('Firebrick.ui/common/Base',["doT", "firebrick", "jquery", "bootstrap.plug
 		 * @param value {String|Function}
 		 * @return {String}
 		 */
-		b: function(value){
-			return $.isFunction(value) ? value.bind(this)() : value;
+		b: function( value ) {
+			return $.isFunction( value ) ? value.bind( this )() : value;
 		},
 		/**
 		 * when overriding this or any other method, this.callParent(arguments) calls the method in the super class
 		 * @method init
 		 */
-		init: function(){
+		init: function() {
 			var me = this;
 			
-			if(me.autoRender && me.getTarget()){
+			if ( me.autoRender && me.getTarget() ) {
 				me.tpl = me.build();
 			}
 			
 			me._registerHandler();
 					
-			
-			me.on("rendered", function(){
+			me.on( "rendered", function() {
 				var $el = me.getElement();
 				
 				me._prepTooltipPopover();
 				
-				if(me.contextMenu && !me.contextMenu._classname){
-					require(["Firebrick.ui/menu/ContextMenu"], function(){
-						$el.on("contextmenu", function(event){
+				if ( me.contextMenu && !me.contextMenu._classname ) {
+					require( [ "Firebrick.ui/menu/ContextMenu" ], function() {
+						$el.on( "contextmenu", function( event ) {
 							var conf = {
 								_parent: me,
 								contextMenuEvent: event
 							};
 							event.preventDefault();
 
-							me._contextMenu = Firebrick.create("Firebrick.ui.menu.ContextMenu", Firebrick.utils.overwrite(conf, me.contextMenu));
+							me._contextMenu = Firebrick.create( "Firebrick.ui.menu.ContextMenu", Firebrick.utils.overwrite( conf, me.contextMenu ) );
 						});
 					});
 				}
 				
-				if(me.autoFocus){
+				if ( me.autoFocus ) {
 					me.focus();
 				}
 			});
 				
-			return me.callParent(arguments);
+			return me.callParent( arguments );
 		},
 		/**
 		 * @method _prepTooltipPopover
 		 * @return self
 		 */
-		_prepTooltipPopover: function(){
+		_prepTooltipPopover: function() {
 			var me = this,
 				$el,
 				offset;
 			
-			if(me.tooltip || me.popover){
+			if ( me.tooltip || me.popover ) {
 				$el = me.getElement();
 				offset = $el.offset();
 				
-				if(me.tooltip){
+				if ( me.tooltip ) {
 					$el.tooltip( me.tooltipOptions );
 				}
 				
-				if(me.popover){
+				if ( me.popover ) {
 					$el.popover( me.popoverOptions );
 				}
 			}
@@ -1267,7 +1124,7 @@ define('Firebrick.ui/common/Base',["doT", "firebrick", "jquery", "bootstrap.plug
 		 * set focus on element
 		 * @method focus
 		 */
-		focus: function(){
+		focus: function() {
 			this.getElement().focus();
 		},
 		/**
@@ -1277,16 +1134,16 @@ define('Firebrick.ui/common/Base',["doT", "firebrick", "jquery", "bootstrap.plug
 		 * @param handler {Function} optional
 		 * @param handlerEvent {String} optional
 		 */
-		_registerHandler: function(elementSelector, handler, handlerEvent){
+		_registerHandler: function( elementSelector, handler, handlerEvent ) {
 			var me = this;
 			handler = handler || me.handler;
 			handlerEvent = handlerEvent || me.handlerEvent;
 			elementSelector = elementSelector || me._getElementSelector();
-			if(handler && handlerEvent){
-				$(document).on(handlerEvent, elementSelector, function(){
-					var args = Array.prototype.slice.call(arguments);
-					args.push(this);
-					handler.apply(me, args);
+			if ( handler && handlerEvent ) {
+				$( document ).on( handlerEvent, elementSelector, function() {
+					var args = Array.prototype.slice.call( arguments );
+					args.push( this );
+					handler.apply( me, args );
 				});
 			}
 		},
@@ -1295,22 +1152,22 @@ define('Firebrick.ui/common/Base',["doT", "firebrick", "jquery", "bootstrap.plug
 		 * @method bindings
 		 * @return {Object} {attr:{}, css:{}}
 		 */
-		bindings: function(){
+		bindings: function() {
 			var me = this,
 				obj = {
-					attr:{},
+					attr: {},
 					css: {}
 				};
 			
-			if( me.css ){
-				obj.css[ me.parseBind( me.css ) ] = true;	
+			if ( me.css ) {
+				obj.css[ me.parseBind( me.css ) ] = true;
 			}
 			
-			if(me.style){
+			if ( me.style ) {
 				obj.style = me.style;
 			}
 			
-			return me.addTooltipPopoverBind(obj);
+			return me.addTooltipPopoverBind( obj );
 		},
 		/**
 		 * compile the template
@@ -1319,25 +1176,25 @@ define('Firebrick.ui/common/Base',["doT", "firebrick", "jquery", "bootstrap.plug
 		 * @param force {Boolean} [force=false] optional - set to true to force a retemplate
 		 * @return {Function} template function
 		 */
-		template: function(prop, force){
+		template: function( prop, force ) {
 			var me = this;
 			prop = prop || "tpl";
-			if(!me._template[prop] || force){
-				me._template[prop] = tplEngine.template(me[prop]);
+			if ( !me._template[ prop ] || force ) {
+				me._template[ prop ] = tplEngine.template( me[ prop ] );
 			}
-			return me._template[prop];
+			return me._template[ prop ];
 		},
 		/**
 		 * build the compiled template
 		 * @method build
 		 * @param prop {String} [prop="tpl"] optional - name of property to build
-		 * @return {String} html 
+		 * @return {String} html
 		 */
-		build: function(prop){
+		build: function( prop ) {
 			var me = this;
 			prop = prop || "tpl";
-			me._build[prop] = me._template[prop](me);
-			return me._build[prop];
+			me._build[ prop ] = me._template[ prop ]( me );
+			return me._build[ prop ];
 		},
 		/**
 		 * @method dataBind
@@ -1346,22 +1203,22 @@ define('Firebrick.ui/common/Base',["doT", "firebrick", "jquery", "bootstrap.plug
 		 * @private
 		 * @return {String}
 		 */
-		dataBind: function(){
+		dataBind: function() {
 			var me = this,
 				args = Firebrick.utils.argsToArray( arguments ),
 				prop,
 				obj;
 			
-			if(args && args.length){
-				prop = args.splice(0, 1);
-			}else{
+			if ( args && args.length ) {
+				prop = args.splice( 0, 1 );
+			} else {
 				prop = "bindings";
 			}
 			
-			obj = me[prop];
+			obj = me[ prop ];
 				
-			if($.isFunction(obj)){
-				obj = obj.apply(me, args);
+			if ( $.isFunction( obj ) ) {
+				obj = obj.apply( me, args );
 			}
 			
 			return Firebrick.ui.utils.stringify( obj );
@@ -1371,15 +1228,15 @@ define('Firebrick.ui/common/Base',["doT", "firebrick", "jquery", "bootstrap.plug
 		 * @method getSubTpl
 		 * @return {String}
 		 */
-		getSubTpl: function(){
+		getSubTpl: function() {
 			var me = this,
-				tpl = me.build("subTpl");
+				tpl = me.build( "subTpl" );
 			
-			if(me.beforeSubTpl){
-				tpl = me.build("beforeSubTpl") + tpl;
+			if ( me.beforeSubTpl ) {
+				tpl = me.build( "beforeSubTpl" ) + tpl;
 			}
-			if(me.afterSubTpl){
-				tpl = tpl + me.build("afterSubTpl");
+			if ( me.afterSubTpl ) {
+				tpl = tpl + me.build( "afterSubTpl" );
 			}
 			
 			return tpl;
@@ -1391,42 +1248,42 @@ define('Firebrick.ui/common/Base',["doT", "firebrick", "jquery", "bootstrap.plug
 		 * @method _getParent
 		 * @return {Object}
 		 */
-		_getParent: function(clazz){
+		_getParent: function( clazz ) {
 			var me = clazz || this,
-				p = Object.getPrototypeOf(me);
+				p = Object.getPrototypeOf( me );
 
-			if(me._classname !== p._classname){
-				if((me.subTpl !== p.subTpl) || (me.tpl !== p.tpl)){
+			if ( me._classname !== p._classname ) {
+				if ( ( me.subTpl !== p.subTpl ) || ( me.tpl !== p.tpl ) ) {
 					return p;
 				}
 			}
-			return this._getParent(p);
+			return this._getParent( p );
 		},
 		/**
 		 * called when calling {{{getParentTpl}}} in component template
 		 * @method getParentTpl
 		 * @return {String}
 		 */
-		getParentTpl: function(){
+		getParentTpl: function() {
 			var me = this;
-			return tplEngine.template(me._getParent().tpl)(me);
+			return tplEngine.template( me._getParent().tpl )( me );
 		},
 		/**
 		 * called when calling {{{getParentSubTpl}}} in component template
 		 * @method getParentSubTpl
 		 * @return {String}
 		 */
-		getParentSubTpl: function(){
+		getParentSubTpl: function() {
 			var me = this;
-			return tplEngine.template(me._getParent().subTpl)(me);
+			return tplEngine.template( me._getParent().subTpl )( me );
 		},
 		/**
 		 * clean string - i.e. remove all ' from string
 		 * @method cleanString
 		 * @return {String}
 		 */
-		cleanString: function(string){
-			return string.replace(/\'/g, "");
+		cleanString: function( string ) {
+			return string.replace( /\'/g, "" );
 		},
 		/**
 		 * attach ' to the start and end of the string for KO binds
@@ -1434,7 +1291,7 @@ define('Firebrick.ui/common/Base',["doT", "firebrick", "jquery", "bootstrap.plug
 		 * @param  {String} str
 		 * @return {String} "'" + str + "'"
 		 */
-		parseBind: function(str){
+		parseBind: function( str ) {
 			return "'" + str + "'";
 		},
 		/**
@@ -1446,7 +1303,7 @@ define('Firebrick.ui/common/Base',["doT", "firebrick", "jquery", "bootstrap.plug
 		 * @param key {String}
 		 * @return {String}
 		 */
-		textBind: function(key){
+		textBind: function( key ) {
 			return "Firebrick.text('" + key + "')";
 		}
 	});
@@ -1462,14 +1319,14 @@ define('Firebrick.ui/common/Base',["doT", "firebrick", "jquery", "bootstrap.plug
  * @class Items
  * @static
  */
-define('Firebrick.ui/common/mixins/Items',["jquery"], function($){
+define( 'Firebrick.ui/common/mixins/Items',[], function( ) {
 	"use strict";
-	return Firebrick.define("Firebrick.ui.common.mixins.Items", {
+	return Firebrick.define( "Firebrick.ui.common.mixins.Items", {
 		/**
 		 * default configuration for direct children - i.e. direct items
 		 * @property defaults
 		 * @type {Object}
-		 * @default null 
+		 * @default null
 		 */
 		defaults: 1,
 		/**
@@ -1478,21 +1335,21 @@ define('Firebrick.ui/common/mixins/Items',["jquery"], function($){
 		 * @type {String|null} "center"
 		 * @default
 		 */
-		itemsAlign:null,
+		itemsAlign: null,
 		/**
 		 * @property items
 		 * @type {String|Object|Array of Object}
 		 * @default null
 		 */
-		items:null,
+		items: null,
 		/**
 		 * inject sub items
 		 * @method getItems
 		 * @return {String} html
 		 */
-		getItems: function(){
+		getItems: function() {
 			var me = this,
-				r = me._getItems(me.items);
+				r = me._getItems( me.items );
 				me.items = r.items;
 			return r.html;
 		},
@@ -1503,16 +1360,16 @@ define('Firebrick.ui/common/mixins/Items',["jquery"], function($){
 		 * @param [itemsName] {String}  name of property to get items from
 		 * @return {String} html
 		 */
-		getItemsProp: function(itemsName){
-			var me = this, 
+		getItemsProp: function( itemsName ) {
+			var me = this,
 				r,
 				html = "";
-			if(itemsName){
-				r = me._getItems(me[itemsName]);
-				me[itemsName] = r.items;
+			if ( itemsName ) {
+				r = me._getItems( me[ itemsName ] );
+				me[ itemsName ] = r.items;
 				html = r.html;
-			}else{
-				console.error("invalid function call getItemsProp():", itemsName);
+			} else {
+				console.error( "invalid function call getItemsProp():", itemsName );
 			}
 			
 			return html;
@@ -1524,32 +1381,33 @@ define('Firebrick.ui/common/mixins/Items',["jquery"], function($){
 		 * @param {Object|Array of Objects} items
 		 * @return {Object, Null} object - {html:"", items:[]}
 		 */
-		_getItems: function(items){
-			return Firebrick.ui._populate(items, this);
+		_getItems: function( items ) {
+			return Firebrick.ui._populate( items, this );
 		}
 	});
 });
+
 /*!
  * @author Steven Masala [me@smasala.com]
  */
 
 /**
- * 
+ *
  * do not extend from this but from Firebrick.ui.button.ButtonGroup
- * 
+ *
  * @private
- * 
+ *
  * @module Firebrick.ui.components
  * @extends components.common.Base
  * @namespace components.button
  * @class ButtonGroupBase
  */
-define('Firebrick.ui/button/Base',["../common/Base", "../common/mixins/Items"], function(){
+define( 'Firebrick.ui/button/Base',[ "../common/Base", "../common/mixins/Items" ], function() {
 	"use strict";
 	
-	return Firebrick.define("Firebrick.ui.button.Base", {
-		extend:"Firebrick.ui.common.Base",
-		mixins:"Firebrick.ui.common.mixins.Items"
+	return Firebrick.define( "Firebrick.ui.button.Base", {
+		extend: "Firebrick.ui.common.Base",
+		mixins: "Firebrick.ui.common.mixins.Items"
 	});
 	
 });
@@ -1567,9 +1425,9 @@ define('text!Firebrick.ui/button/Button.html',[],function () { return '{{?it.ite
  * @class Badges
  * @static
  */
-define('Firebrick.ui/common/mixins/Badges',[], function(){
+define( 'Firebrick.ui/common/mixins/Badges',[], function() {
 	"use strict";
-	return Firebrick.define("Firebrick.ui.common.mixins.Badges", {
+	return Firebrick.define( "Firebrick.ui.common.mixins.Badges", {
 		/**
 		 * false to hide badge, string to show text
 		 * @property badge
@@ -1581,11 +1439,11 @@ define('Firebrick.ui/common/mixins/Badges',[], function(){
 		 * @method badgeBindings
 		 * @return {Object}
 		 */
-		badgeBindings: function(){
+		badgeBindings: function() {
 			var me = this,
 				obj = {
-					attr:{},
-					css:{
+					attr: {},
+					css: {
 						badge: true
 					},
 					text: me.textBind( me.badge )
@@ -1594,6 +1452,7 @@ define('Firebrick.ui/common/mixins/Badges',[], function(){
 		}
 	});
 });
+
 
 define('text!Firebrick.ui/menu/Menu.html',[],function () { return '<ul id="{{=it.getId()}}" data-bind="{{=it.dataBind()}}">\r\n\t{{=it.getItems()}}\r\n</ul>';});
 
@@ -1611,16 +1470,16 @@ define('text!Firebrick.ui/menu/Item.html',[],function () { return '<li id="{{=it
  * @namespace components.menu
  * @class Item
  */
-define('Firebrick.ui/menu/Item',["text!./Item.html", "../common/Base"], function(tpl){
+define( 'Firebrick.ui/menu/Item',[ "text!./Item.html", "../common/Base" ], function( tpl ) {
 	"use strict";
-	return Firebrick.define("Firebrick.ui.menu.Item", {
+	return Firebrick.define( "Firebrick.ui.menu.Item", {
 		extend: "Firebrick.ui.common.Base",
-		mixins:"Firebrick.ui.common.mixins.Items",
+		mixins: "Firebrick.ui.common.mixins.Items",
 		sName: "menu.item",
 		text: null,
 		value: null,
 		href: null,
-		divider:false,
+		divider: false,
 		tpl: tpl,
 		/**
 		 * @property defaults
@@ -1636,11 +1495,11 @@ define('Firebrick.ui/menu/Item',["text!./Item.html", "../common/Base"], function
 		 * @method bindings
 		 * @return {Object}
 		 */
-		bindings: function(){
+		bindings: function() {
 			var me = this,
 				obj = me.callParent( arguments );
 			
-			if(me.divider){
+			if ( me.divider ) {
 				obj.css.divider = true;
 			}
 			
@@ -1652,16 +1511,16 @@ define('Firebrick.ui/menu/Item',["text!./Item.html", "../common/Base"], function
 		 * @method linkBindings
 		 * @return {Object}
 		 */
-		linkBindings: function(){
+		linkBindings: function() {
 			var me = this,
 				obj = {
-					attr:{}
+					attr: {}
 				};
 			
-			if(me.href){
+			if ( me.href ) {
 				obj.href = me.href;
 			}
-			if(me.text){
+			if ( me.text ) {
 				obj.text = me.textBind( me.text );
 			}
 			
@@ -1672,6 +1531,7 @@ define('Firebrick.ui/menu/Item',["text!./Item.html", "../common/Base"], function
 		}
 	});
 });
+
 /*!
  * @author Steven Masala [me@smasala.com]
  */
@@ -1683,92 +1543,90 @@ define('Firebrick.ui/menu/Item',["text!./Item.html", "../common/Base"], function
  * @namespace components.menu
  * @class Menu
  */
-define('Firebrick.ui/menu/Menu',["text!./Menu.html", "jquery", "../common/Base", "../common/mixins/Items", "./Item"], function(tpl, $){
+define( 'Firebrick.ui/menu/Menu',[ "text!./Menu.html", "../common/Base", "../common/mixins/Items", "./Item" ], function( tpl ) {
 	"use strict";
-	
-	return Firebrick.define("Firebrick.ui.menu.Menu", {
-		extend: "Firebrick.ui.common.Base",
-		mixins:"Firebrick.ui.common.mixins.Items",
-		/**
-		 * @property sName
-		 * @type {String}
-		 * @default "menu.list",
-		 */
-		sName:"menu.menu",
-		/**
-		 * @property tpl
-		 */
-		tpl: tpl,
-		/**
-		 * @property defaults
-		 * @type {object}
-		 * @default {
-		 * 		sName: "menu.item"
-		 * }
-		 */
-		defaults: {
-			sName: "menu.item"
-		},
-		/**
-		 * @property ariaLabelledBy
-		 * @type {String}
-		 * @default ""
-		 */
-		ariaLabelledBy: "",
-		/**
-		 * @method init
-		 */
-		init: function(){
-			var me = this;
-			
-			me._prepItems();
-			
-			return me.callParent( arguments );
-		},
-		/**
-		 * @method _prepItems
-		 * @private
-		 */
-		_prepItems: function(){
-			var me = this,
-				it,
-				items = me.items;
-			
-			for(var i = 0, l = items.length; i<l; i++){
-				it = items[i];
-				if(it === "|"){
-					it = {
-						divider: true
-					}
-				}else if( it.sName && it.sName !== "menu.item"){
-					it = {
-							items: [ items[i] ]
-					}
-				}
-				
-				items[i] = it;
-			}
-		},
-		/**
-		 * @method bindings
-		 * @return {Object}
-		 */ 
-		bindings: function(){
-			var me = this,
-				obj = me.callParent(arguments);
-			obj.css = {
-					"'dropdown-menu'": true
-			};
-			if(!obj.attr){
-				obj.attr = {};
-			}
-			obj.attr.role = "'menu'";
-			obj.attr["'aria-labelledby'"] = me.parseBind(me.ariaLabelledBy);
 
-			return obj;
-		}
-	});
-});
+	return Firebrick.define( "Firebrick.ui.menu.Menu", {
+	    extend: "Firebrick.ui.common.Base",
+	    mixins: "Firebrick.ui.common.mixins.Items",
+	    /**
+	     * @property sName
+	     * @type {String}
+	     * @default "menu.list",
+	     */
+	    sName: "menu.menu",
+	    /**
+	     * @property tpl
+	     */
+	    tpl: tpl,
+	    /**
+	     * @property defaults
+	     * @type {object}
+	     * @default {
+	     * 		sName: "menu.item"
+	     * }
+	     */
+	    defaults: {
+		    sName: "menu.item"
+	    },
+	    /**
+	     * @property ariaLabelledBy
+	     * @type {String}
+	     * @default ""
+	     */
+	    ariaLabelledBy: "",
+	    /**
+	     * @method init
+	     */
+	    init: function() {
+		    var me = this;
+
+		    me._prepItems();
+
+		    return me.callParent( arguments );
+	    },
+	    /**
+	     * @method _prepItems
+	     * @private
+	     */
+	    _prepItems: function() {
+		    var me = this, it, items = me.items;
+
+		    for ( var i = 0, l = items.length; i < l; i++ ) {
+			    it = items[ i ];
+			    if ( it === "|" ) {
+				    it = {
+					    divider: true
+				    };
+			    } else if ( it.sName && it.sName !== "menu.item" ) {
+				    it = {
+					    items: [ items[ i ] ]
+				    };
+			    }
+
+			    items[ i ] = it;
+		    }
+	    },
+	    /**
+	     * @method bindings
+	     * @return {Object}
+	     */
+	    bindings: function() {
+		    var me = this, obj = me.callParent( arguments );
+		    obj.css = {
+			    "'dropdown-menu'": true
+		    };
+		    if ( !obj.attr ) {
+			    obj.attr = {};
+		    }
+		    obj.attr.role = "'menu'";
+		    obj.attr[ "'aria-labelledby'" ] = me.parseBind( me.ariaLabelledBy );
+
+		    return obj;
+	    }
+	} );
+} );
+
 /*!
  * @author Steven Masala [me@smasala.com]
  */
@@ -1779,19 +1637,19 @@ define('Firebrick.ui/menu/Menu',["text!./Menu.html", "jquery", "../common/Base",
  * @namespace components.button
  * @class Button
  */
-define('Firebrick.ui/button/Button',["text!./Button.html", "./Base", "../common/mixins/Badges", "../menu/Menu"], function(tpl){
+define( 'Firebrick.ui/button/Button',[ "text!./Button.html", "./Base", "../common/mixins/Badges", "../menu/Menu" ], function( tpl ) {
 	"use strict";
-	return Firebrick.define("Firebrick.ui.button.Button", {
-		extend:"Firebrick.ui.button.Base",
-		mixins:["Firebrick.ui.common.mixins.Badges"],
+	return Firebrick.define( "Firebrick.ui.button.Button", {
+		extend: "Firebrick.ui.button.Base",
+		mixins: [ "Firebrick.ui.common.mixins.Badges" ],
 		sName: "button.button",
-		tpl:tpl,
+		tpl: tpl,
 		/**
 		 * @property text
 		 * @type {String}
 		 * @default ""
 		 */
-		text:"",
+		text: "",
 		/**
 		 * type: button, submit
 		 * @property type
@@ -1823,7 +1681,7 @@ define('Firebrick.ui/button/Button',["text!./Button.html", "./Base", "../common/
 		 * @type {Boolean|String} false |  ("sm", "lg", "xs")
 		 * @default false
 		 */
-		btnSize:false,
+		btnSize: false,
 		/**
 		 * @property disabled
 		 * @type {Boolean}
@@ -1835,7 +1693,7 @@ define('Firebrick.ui/button/Button',["text!./Button.html", "./Base", "../common/
 		 * @type {Boolean|String} false | (default, primary, success, info, warning, danger, link)
 		 * @default "default"
 		 */
-		btnStyle:"default",
+		btnStyle: "default",
 		/**
 		 * used to inject something before the text <span>
 		 * @property beforeText
@@ -1895,11 +1753,11 @@ define('Firebrick.ui/button/Button',["text!./Button.html", "./Base", "../common/
 		 * @method getDropdownParentEl
 		 * @return {jQuery Object}
 		 */
-		getDropdownParentEl: function(){
+		getDropdownParentEl: function() {
 			var me = this,
 				el;
 			
-			if(!me._dropdownParent){
+			if ( !me._dropdownParent ) {
 				el = me.getElement();
 				me._dropdownParent = el.parent();
 			}
@@ -1918,12 +1776,12 @@ define('Firebrick.ui/button/Button',["text!./Button.html", "./Base", "../common/
 		 * @method getDropdownEl
 		 * @return {jQuery Object}
 		 */
-		getDropdownEl: function(){
+		getDropdownEl: function() {
 			var me = this,
 				el;
-			if(!me._dropdown){
+			if ( !me._dropdown ) {
 				el = me.getElement();
-				me._dropdown = el.siblings("ul.dropdown-menu");
+				me._dropdown = el.siblings( "ul.dropdown-menu" );
 			}
 			
 			return me._dropdown;
@@ -1931,7 +1789,7 @@ define('Firebrick.ui/button/Button',["text!./Button.html", "./Base", "../common/
 		/**
 		 * @method init
 		 */
-		init: function(){
+		init: function() {
 			var me = this;
 			
 			me._initDropdown();
@@ -1942,13 +1800,13 @@ define('Firebrick.ui/button/Button',["text!./Button.html", "./Base", "../common/
 		 * @method _initDropdown
 		 * @private
 		 */
-		_initDropdown: function(){
+		_initDropdown: function() {
 			var me = this;
-			if( me.items && me.items.length ){
-				me.on("rendered", function(){
+			if ( me.items && me.items.length ) {
+				me.on( "rendered", function() {
 					var el = me.getDropdownParentEl();
-					if(el.length){
-						el.on("shown.bs.dropdown", function(){
+					if ( el.length ) {
+						el.on( "shown.bs.dropdown", function() {
 							me.positionDropdown();
 						});
 					}
@@ -1958,19 +1816,19 @@ define('Firebrick.ui/button/Button',["text!./Button.html", "./Base", "../common/
 		/**
 		 * @method positionDropdown
 		 */
-		positionDropdown: function(){
+		positionDropdown: function() {
 			var me = this,
 				el = me.getElement(),
 				drop = me.getDropdownEl(),
-				docWidth = $(document).width(),
+				docWidth = $( document ).width(),
 				elOffset = el.offset(),
 				startLeft = elOffset.left,
 				dropWidth = drop.outerWidth(),
 				elWidth = el.outerWidth(),
 				diff = dropWidth - elWidth;
 			
-			if(dropWidth > elWidth){
-				if( (elOffset.left + dropWidth) > docWidth){
+			if ( dropWidth > elWidth ) {
+				if ( ( elOffset.left + dropWidth ) > docWidth ) {
 					startLeft = elOffset.left - diff;
 				}
 			}
@@ -1986,42 +1844,42 @@ define('Firebrick.ui/button/Button',["text!./Button.html", "./Base", "../common/
 		 * @method bindings
 		 * @return {Object}
 		 */
-		bindings: function(){
+		bindings: function() {
 			var me = this,
-				obj = me.callParent(arguments);
+				obj = me.callParent( arguments );
 			
-			obj.attr.type = me.parseBind(me.type);
+			obj.attr.type = me.parseBind( me.type );
 			obj.css.btn = true;
 			
 			//firefox bug fix
 			obj.attr.autocomplete = "'off'";
 			//--//
 						
-			if(me.btnStyle){
-				obj.css[ me.parseBind("btn-"+me.btnStyle)] = true;
+			if ( me.btnStyle ) {
+				obj.css[ me.parseBind( "btn-" + me.btnStyle ) ] = true;
 			}
-			if(me.btnSize){
-				obj.css[ me.parseBind("btn-" + me.btnSize)] = true;
-			}
-			
-			if(me.items && !me.splitButton){
-				obj.css["'dropdown-toggle'"] = true;
-				obj.attr["'data-toggle'"] = "'dropdown'";
+			if ( me.btnSize ) {
+				obj.css[ me.parseBind( "btn-" + me.btnSize ) ] = true;
 			}
 			
-			if(me.navbarItem){
-				obj.css["'navbar-btn'"] = true;
+			if ( me.items && !me.splitButton ) {
+				obj.css[ "'dropdown-toggle'" ] = true;
+				obj.attr[ "'data-toggle'" ] = "'dropdown'";
 			}
 			
-			if(me.loadingText){
-				obj.attr["'data-loading-text'"] = me.textBind( me.loadingText );
+			if ( me.navbarItem ) {
+				obj.css[ "'navbar-btn'" ] = true;
 			}
 			
-			if(me.closeModal){
-				obj.attr["'data-dismiss'"] = "'modal'";
+			if ( me.loadingText ) {
+				obj.attr[ "'data-loading-text'" ] = me.textBind( me.loadingText );
 			}
 			
-			if(me.disabled){
+			if ( me.closeModal ) {
+				obj.attr[ "'data-dismiss'" ] = "'modal'";
+			}
+			
+			if ( me.disabled ) {
 				obj.attr.disabled = "'disabled'";
 			}
 			
@@ -2031,16 +1889,16 @@ define('Firebrick.ui/button/Button',["text!./Button.html", "./Base", "../common/
 		 * @property buttonTextBindings
 		 * @return {Object}
 		 */
-		buttonTextBindings: function(){
+		buttonTextBindings: function() {
 			var me = this,
 				obj = {
 						css: {},
-						text: me.textBind(me.text),
+						text: me.textBind( me.text )
 				};
 			
-			if(me.glyIcon){
+			if ( me.glyIcon ) {
 				obj.css.glyphicon = true;
-				obj.css[me.parseBind("glyphicon-" + me.glyIcon)] = true;
+				obj.css[ me.parseBind( "glyphicon-" + me.glyIcon ) ] = true;
 			}
 			
 			return obj;
@@ -2049,7 +1907,7 @@ define('Firebrick.ui/button/Button',["text!./Button.html", "./Base", "../common/
 		 * @method caretBindings
 		 * @return {Object}
 		 */
-		caretBindings: function(){
+		caretBindings: function() {
 			return {
 				css: {
 					caret: true
@@ -2060,22 +1918,22 @@ define('Firebrick.ui/button/Button',["text!./Button.html", "./Base", "../common/
 		 * @method dropdownContainerBindings
 		 * @return {Object}
 		 */
-		dropdownContainerBindings: function(){
+		dropdownContainerBindings: function() {
 			var me = this,
 				obj = {
-					css:{}
+					css: {}
 				};
 			
-			if(me.splitButton){
-				obj.css["'btn-group'"] = true;
-			}else{
+			if ( me.splitButton ) {
+				obj.css[ "'btn-group'" ] = true;
+			} else {
 				//standard dropdown
-				if(me.dropdownContainerClass && !me.splitButton){
-					obj.css[me.parseBind( me.dropdownContainerClass )] = true;
+				if ( me.dropdownContainerClass && !me.splitButton ) {
+					obj.css[ me.parseBind( me.dropdownContainerClass ) ] = true;
 				}
 			}
 
-			obj.css["'fb-ui-dropdown'"] = true;
+			obj.css[ "'fb-ui-dropdown'" ] = true;
 			
 			return obj;
 		},
@@ -2083,16 +1941,16 @@ define('Firebrick.ui/button/Button',["text!./Button.html", "./Base", "../common/
 		 * @method getDropdown
 		 * @return {Object}
 		 */
-		getDropdown: function(){
+		getDropdown: function() {
 			var me = this,
 				obj = {
 					sName: "menu.menu",
 					items: me.items
 				};
 			
-			obj = Firebrick.utils.copyover(obj, me.dropdownConfig || {});
+			obj = Firebrick.utils.copyover( obj, me.dropdownConfig || {});
 
-			obj = me._getItems(obj);
+			obj = me._getItems( obj );
 			
 			me.items = obj.items;
 			
@@ -2103,23 +1961,23 @@ define('Firebrick.ui/button/Button',["text!./Button.html", "./Base", "../common/
 		 * @method splitButtonBindings
 		 * @return {Object}
 		 */
-		splitButtonBindings: function(){
+		splitButtonBindings: function() {
 			var me = this,
-				obj = {css:{}, attr:{}};
+				obj = { css: {}, attr: {} };
 			
-			obj.attr.type = me.parseBind(me.type);
+			obj.attr.type = me.parseBind( me.type );
 			obj.css.btn = true;
-			if(me.btnStyle){
-				obj.css[ me.parseBind("btn-"+me.btnStyle)] = true;
+			if ( me.btnStyle ) {
+				obj.css[ me.parseBind( "btn-" + me.btnStyle ) ] = true;
 			}
-			if(me.btnSize){
-				obj.css[ me.parseBind("btn-" + me.btnSize)] = true;
+			if ( me.btnSize ) {
+				obj.css[ me.parseBind( "btn-" + me.btnSize ) ] = true;
 			}
-			if(me.items){
-				obj.css["'dropdown-toggle'"] = true;
-				obj.attr["'data-toggle'"] = "'dropdown'";
+			if ( me.items ) {
+				obj.css[ "'dropdown-toggle'" ] = true;
+				obj.attr[ "'data-toggle'" ] = "'dropdown'";
 			}
-			obj.attr["'aria-expanded'"] = false;
+			obj.attr[ "'aria-expanded'" ] = false;
 			
 			return obj;
 		},
@@ -2128,12 +1986,12 @@ define('Firebrick.ui/button/Button',["text!./Button.html", "./Base", "../common/
 		 * @method splitButtonSrOnlyBinding
 		 * @return {Object}
 		 */
-		splitButtonSrOnlyBinding: function(){
+		splitButtonSrOnlyBinding: function() {
 			var me = this,
-				obj = {css:{}};
+				obj = { css: {} };
 			
-			obj.css["'sr-only'"] = true;
-			obj.text = me.textBind(me.srOnlyText);
+			obj.css[ "'sr-only'" ] = true;
+			obj.text = me.textBind( me.srOnlyText );
 			
 			return obj;
 		},
@@ -2143,19 +2001,20 @@ define('Firebrick.ui/button/Button',["text!./Button.html", "./Base", "../common/
 		 * @event disabled
 		 * @param enable {Boolean}
 		 */
-		setEnabled: function( enable ){
+		setEnabled: function( enable ) {
 			var me = this,
 				$el = me.getElement();
-			if(enable){
-				$el.removeAttr("disabled");
-				me.fireEvent("enabled");
-			}else{
-				$el.attr("disabled", "disabled");
-				me.fireEvent("disabled");
+			if ( enable ) {
+				$el.removeAttr( "disabled" );
+				me.fireEvent( "enabled" );
+			} else {
+				$el.attr( "disabled", "disabled" );
+				me.fireEvent( "disabled" );
 			}
 		}
 	});
 });
+
 
 define('text!Firebrick.ui/button/ButtonGroup.html',[],function () { return '<div id="{{=it.getId()}}" data-bind="{{=it.dataBind()}}">\r\n\r\n\t{{=it.getItems()}}\r\n\r\n</div>';});
 
@@ -2164,29 +2023,29 @@ define('text!Firebrick.ui/button/ButtonGroup.html',[],function () { return '<div
  */
 
 /**
- * 
+ *
  * the items property does not need to have each object defined with its sName, that is down automatically
- * 
+ *
  * @module Firebrick.ui.components
  * @extends components.common.Base
  * @namespace components.button
  * @class ButtonGroup
  */
-define('Firebrick.ui/button/ButtonGroup',["text!./ButtonGroup.html", "./Base", "./Button"], function(tpl){
+define( 'Firebrick.ui/button/ButtonGroup',[ "text!./ButtonGroup.html", "./Base", "./Button" ], function( tpl ) {
 	"use strict";
 
-	return Firebrick.define("Firebrick.ui.button.ButtonGroup", {
-		extend:"Firebrick.ui.button.Base",
+	return Firebrick.define( "Firebrick.ui.button.ButtonGroup", {
+		extend: "Firebrick.ui.button.Base",
 		/**
 		 * @property sName
 		 * @type {String}
 		 * @default "fb-ui-buttongroup"
 		 */
 		sName: "button.buttongroup",
-		tpl:tpl,
-		defaults:{
-			sName:"button.button",
-			dropdownContainerClass:"btn-group" //needed for dropdown
+		tpl: tpl,
+		defaults: {
+			sName: "button.button",
+			dropdownContainerClass: "btn-group" //needed for dropdown
 		},
 		/**
 		 * @property vertical
@@ -2216,19 +2075,19 @@ define('Firebrick.ui/button/ButtonGroup',["text!./ButtonGroup.html", "./Base", "
 		 * @method bindings
 		 * @return {Object}
 		 */
-		bindings: function(){
+		bindings: function() {
 			var me = this,
-				obj = me.callParent(arguments);
+				obj = me.callParent( arguments );
 			
-			if(me.vertical){
-				obj.css["'btn-group-vertical'"] = true;				
-			}else{
-				obj.css["'btn-group'"] = true;
+			if ( me.vertical ) {
+				obj.css[ "'btn-group-vertical'" ] = true;
+			} else {
+				obj.css[ "'btn-group'" ] = true;
 			}
 			
-			obj.css[me.parseBind( "btn-group-" + me.groupSize )] = true;
+			obj.css[ me.parseBind( "btn-group-" + me.groupSize ) ] = true;
 			obj.attr.role = me.parseBind( me.role );
-			obj.attr["'aria-label'"] = me.textBind( me.arialLabel );
+			obj.attr[ "'aria-label'" ] = me.textBind( me.arialLabel );
 			
 			return obj;
 		}
@@ -2245,11 +2104,11 @@ define('Firebrick.ui/button/ButtonGroup',["text!./ButtonGroup.html", "./Base", "
  * @namespace components.button
  * @class Icon
  */
-define('Firebrick.ui/button/Icon',["./Button"], function(){
+define( 'Firebrick.ui/button/Icon',[ "./Button" ], function() {
 	"use strict";
-	return Firebrick.define("Firebrick.ui.button.Icon", {
+	return Firebrick.define( "Firebrick.ui.button.Icon", {
 		extend: "Firebrick.ui.button.Button",
-		sName:"button.icon",
+		sName: "button.icon",
 		/**
 		 * @property buttonSize
 		 * @type {Boolean|String} boolean = false
@@ -2279,7 +2138,7 @@ define('Firebrick.ui/button/Icon',["./Button"], function(){
 		 * @private
 		 * @type {Function}
 		 */
-		afterText: function(){
+		afterText: function() {
 			var me = this;
 			return me.text ? me.text : "";
 		},
@@ -2287,25 +2146,26 @@ define('Firebrick.ui/button/Icon',["./Button"], function(){
 		 * @method buttonTextBindings
 		 * @return {Object}
 		 */
-		buttonTextBindings: function(){
+		buttonTextBindings: function() {
 			var me = this,
-				obj = me.callParent(arguments);
+				obj = me.callParent( arguments );
 			
-			if(obj.hasOwnProperty("text")){
+			if ( obj.hasOwnProperty( "text" ) ) {
 				delete obj.text;
 			}
 			
-			if(!obj.css){
+			if ( !obj.css ) {
 				obj.css = {};
 			}
-			obj.css[me.glyphiconClass] = true;
-			obj.css[me.parseBind("glyphicon-" + me.glyIcon)] = true;
+			obj.css[ me.glyphiconClass ] = true;
+			obj.css[ me.parseBind( "glyphicon-" + me.glyIcon ) ] = true;
 			
 			return obj;
 		}
 		
 	});
 });
+
 
 define('text!Firebrick.ui/button/ToggleButton.html',[],function () { return '<div id="{{=it.getId()}}" data-bind="{{=it.dataBind(\'btnGroupBindings\')}}">\r\n\t{{?it.showLabel}}\r\n\t\t<label data-bind="{{=it.dataBind(\'toggleLabelBindings\')}}">\r\n\t{{?}}\r\n\t\t\t<input type="radio" data-bind="{{=it.dataBind(\'toggleInputBindings\')}}"><span data-bind="{{=it.dataBind(\'toggleLabelTextBindings\')}}"></span>\r\n\t{{?it.showLabel}}\r\n\t\t</label>\r\n\t{{?}}\r\n</div>';});
 
@@ -2325,36 +2185,37 @@ define('text!Firebrick.ui/fields/Input.html',[],function () { return '{{?it.inpl
  * @namespace components.fields
  * @class Base
  */
-define('Firebrick.ui/fields/Base',["../common/Base"], function(){
+define( 'Firebrick.ui/fields/Base',[ "../common/Base" ], function() {
 	"use strict";
-	return Firebrick.define("Firebrick.ui.fields.Base", {
-		extend:"Firebrick.ui.common.Base",
+	return Firebrick.define( "Firebrick.ui.fields.Base", {
+		extend: "Firebrick.ui.common.Base",
 		/**
 		 * @property sName
 		 * @type {String}
 		 */
-		sName:"fields.base",
+		sName: "fields.base",
 		/**
 		 * override method to fire events on actual element - append fb.ui. to event name
 		 * @method fireEvent
 		 */
-		fireEvent: function(){
+		fireEvent: function() {
 			var me = this,
 				$el = me.getElement(),
 				args = Firebrick.utils.argsToArray( arguments ),
-				eventName = args[0];
+				eventName = args[ 0 ];
 			
-			if($el){
+			if ( $el ) {
 				//remove eventName from args
-				args.splice(0, 1);
+				args.splice( 0, 1 );
 				//trigger event on the element - getElement()
-				$el.trigger("fb.ui." + eventName, args);
+				$el.trigger( "fb.ui." + eventName, args );
 			}
 			
 			return me.callParent( arguments );
 		}
 	});
 });
+
 
 define('text!Firebrick.ui/containers/GridRow.html',[],function () { return '<div id="{{=it.getId()}}" data-bind="{{=it.dataBind()}}">\r\n\r\n\t{{~ it.items :value:index}}\r\n\t\t{{=it.getGridItem(index, value)}}\r\n\t{{~}}\r\n\r\n</div>';});
 
@@ -2369,26 +2230,27 @@ define('text!Firebrick.ui/containers/GridRow.html',[],function () { return '<div
  * @uses components.common.mixins.Items
  * @class Base
  */
-define('Firebrick.ui/containers/Base',["../common/Base", "../common/mixins/Items"], function(){
+define( 'Firebrick.ui/containers/Base',[ "../common/Base", "../common/mixins/Items" ], function() {
 	
 	"use strict";
 	
-	return Firebrick.define("Firebrick.ui.containers.Base", {
-		extend:"Firebrick.ui.common.Base",
-		mixins:"Firebrick.ui.common.mixins.Items",
-		bindings: function(){
+	return Firebrick.define( "Firebrick.ui.containers.Base", {
+		extend: "Firebrick.ui.common.Base",
+		mixins: "Firebrick.ui.common.mixins.Items",
+		bindings: function() {
 			var me = this,
-				obj = me.callParent(arguments);
+				obj = me.callParent( arguments );
 
 			//property mixed in by mixins.Items
-			if(me.itemsAlign){
-				obj.css[me.parseBind("fb-ui-items-align-" + me.itemsAlign)] = true;
+			if ( me.itemsAlign ) {
+				obj.css[ me.parseBind( "fb-ui-items-align-" + me.itemsAlign ) ] = true;
 			}
 			
 			return obj;
 		}
 	});
 });
+
 
 define('text!Firebrick.ui/containers/GridColumn.html',[],function () { return '<div id="{{=it.getId()}}" data-bind="{{=it.dataBind()}}">\r\n\t{{=it.getItems()}}\r\n</div>';});
 
@@ -2402,23 +2264,23 @@ define('text!Firebrick.ui/containers/GridColumn.html',[],function () { return '<
  * @class Column
  * @static
  */
-define('Firebrick.ui/common/mixins/Column',[], function(){
+define( 'Firebrick.ui/common/mixins/Column',[], function() {
 	"use strict";
-	return Firebrick.define("Firebrick.ui.common.mixins.Column", {
+	return Firebrick.define( "Firebrick.ui.common.mixins.Column", {
 
 		/**
 		 * @property deviceSize
 		 * @type {String}
 		 * @default "md"
 		 */
-		deviceSize:"md",
+		deviceSize: "md",
 		/**
 		 * auto will attempt to provide the column width by dividing the number of items in the parent Grid by 12 - decimals will be rounded down
 		 * @property columnWidth
 		 * @type {Integer|String} number 1 to 12 or "auto"
 		 * @default "auto"
 		 */
-		columnWidth:"auto",
+		columnWidth: "auto",
 		/**
 		 * use this to offset the column by x columns
 		 * http://getbootstrap.com/css/#grid-offsetting
@@ -2426,7 +2288,7 @@ define('Firebrick.ui/common/mixins/Column',[], function(){
 		 * @type {Integer|null} 1 to 12
 		 * @default null
 		 */
-		columnOffset:null,
+		columnOffset: null,
 		/**
 		 * use this to offset the column by x columns
 		 * http://getbootstrap.com/css/#grid-column-ordering
@@ -2438,7 +2300,7 @@ define('Firebrick.ui/common/mixins/Column',[], function(){
 		 * @type {String|null} "push-{x}" or "pull-{x}" - x = 1 to 12
 		 * @default null
 		 */
-		columnOrder:null,
+		columnOrder: null,
 		/**
 		 * when property columnWidth is set to "auto", this function will attempt to calculate the correct size for each column.
 		 * Note: this function will round down to the nearest whole number - 5 columns will result in size 2 for each column
@@ -2447,11 +2309,11 @@ define('Firebrick.ui/common/mixins/Column',[], function(){
 		 * @private
 		 * @return {Int}
 		 */
-		_getColumnWidth:function(){
+		_getColumnWidth: function() {
 			var me = this,
 				colWidth = me.columnWidth;
-			if(colWidth === "auto"){
-				return Math.floor(12/me._parent.items.length);
+			if ( colWidth === "auto" ) {
+				return Math.floor( 12 / me._parent.items.length );
 			}
 			return colWidth;
 		},
@@ -2464,24 +2326,25 @@ define('Firebrick.ui/common/mixins/Column',[], function(){
 		 * @param {Object} obj.attr: {}
 		 * @return {Object}
 		 */
-		calColumn: function(obj){
+		calColumn: function( obj ) {
 			var me = this;
 			
 			obj.css.col = true;
-			obj.css[ me.parseBind("col-"+me.deviceSize+"-"+me._getColumnWidth()) ] = true;
+			obj.css[ me.parseBind( "col-" + me.deviceSize + "-" + me._getColumnWidth() ) ] = true;
 			
-			if(me.columnOffset){
-				obj.css[ me.parseBind("col-" + me.deviceSize + "-offset-" + me.columnOffset) ] = true;
+			if ( me.columnOffset ) {
+				obj.css[ me.parseBind( "col-" + me.deviceSize + "-offset-" + me.columnOffset ) ] = true;
 			}
 			
-			if(me.columnOrder){
-				obj.css[ me.parseBind("col-" + me.deviceSize + "-" + me.columnOrder) ] = true;
+			if ( me.columnOrder ) {
+				obj.css[ me.parseBind( "col-" + me.deviceSize + "-" + me.columnOrder ) ] = true;
 			}
 			
 			return obj;
 		}
 	});
 });
+
 /*!
  * @author Steven Masala [me@smasala.com]
  */
@@ -2492,31 +2355,32 @@ define('Firebrick.ui/common/mixins/Column',[], function(){
  * @namespace components.containers
  * @class GridColumn
  */
-define('Firebrick.ui/containers/GridColumn',["text!./GridColumn.html", "./Base", "../common/mixins/Column"], function(tpl){
+define( 'Firebrick.ui/containers/GridColumn',[ "text!./GridColumn.html", "./Base", "../common/mixins/Column" ], function( tpl ) {
 	"use strict";
-	return Firebrick.define("Firebrick.ui.containers.GridColumn", {
-		extend:"Firebrick.ui.containers.Base",
-		mixins:"Firebrick.ui.common.mixins.Column",
+	return Firebrick.define( "Firebrick.ui.containers.GridColumn", {
+		extend: "Firebrick.ui.containers.Base",
+		mixins: "Firebrick.ui.common.mixins.Column",
 		/**
 		 * @property sName
 		 * @type {String}
 		 */
-		sName:"containers.gridcolumn",
+		sName: "containers.gridcolumn",
 		/**
 		 * @property tpl
 		 * @type {String} html
 		 */
-		tpl:tpl,
+		tpl: tpl,
 		/**
 		 * @method bindings
 		 * @return {Object}
 		 */
-		bindings: function(){
+		bindings: function() {
 			var me = this;
-			return me.calColumn(me.callParent(arguments));
+			return me.calColumn( me.callParent( arguments ) );
 		}
 	});
 });
+
 /*!
  * @author Steven Masala [me@smasala.com]
  */
@@ -2527,15 +2391,15 @@ define('Firebrick.ui/containers/GridColumn',["text!./GridColumn.html", "./Base",
  * @namespace components.containers
  * @class GridRow
  */
-define('Firebrick.ui/containers/GridRow',["text!./GridRow.html", "jquery", "./Base", "./GridColumn"], function(tpl, $){
+define( 'Firebrick.ui/containers/GridRow',[ "text!./GridRow.html", "./Base", "./GridColumn" ], function( tpl ) {
 	"use strict";
-	return Firebrick.define("Firebrick.ui.containers.GridRow", {
-		extend:"Firebrick.ui.containers.Base",
+	return Firebrick.define( "Firebrick.ui.containers.GridRow", {
+		extend: "Firebrick.ui.containers.Base",
 		/**
 		 * @property sName
 		 * @type {String}
 		 */
-		sName:"containers.gridrow",
+		sName: "containers.gridrow",
 		/**
 		 * @property tpl
 		 * @type {String} html
@@ -2546,22 +2410,22 @@ define('Firebrick.ui/containers/GridRow',["text!./GridRow.html", "jquery", "./Ba
 		 * @type {Boolean|String}
 		 * @default true
 		 */
-		rowClass:true,
+		rowClass: true,
 		/**
 		 * @property defaults
 		 * @type {Object}
 		 * @default {sName: "containers.gridcolum"}
 		 */
-		defaults:{
+		defaults: {
 			sName: "containers.gridcolumn"
 		},
 		/**
 		 * @method bindings
 		 * @return {Object}
 		 */
-		bindings: function(){
+		bindings: function() {
 			var me = this,
-				obj = me.callParent(arguments);
+				obj = me.callParent( arguments );
 			
 			obj.css.row = me.rowClass;
 			
@@ -2571,12 +2435,12 @@ define('Firebrick.ui/containers/GridRow',["text!./GridRow.html", "jquery", "./Ba
 		 * @method getBasicBindings
 		 * @return {Object}
 		 */
-		getBasicBindings:function(){
+		getBasicBindings: function() {
 			var me = this,
 				obj = {
-						css:{}
+						css: {}
 				};
-			obj.css[ me.parseBind( "col-md-" + (Math.floor(12/me.items.length)) )] = true;
+			obj.css[ me.parseBind( "col-md-" + ( Math.floor( 12 / me.items.length ) ) ) ] = true;
 			return obj;
 		},
 		/**
@@ -2587,13 +2451,13 @@ define('Firebrick.ui/containers/GridRow',["text!./GridRow.html", "jquery", "./Ba
 		 * @param {Context} iteration context
 		 * @return {String}
 		 */
-		getGridItem: function(index, item){
+		getGridItem: function( index, item ) {
 			var me = this,
-				newItem = me._getItems(item);
+				newItem = me._getItems( item );
 			
-			if(newItem){
+			if ( newItem ) {
 				//replace items with the new object - _getItems returns an object {html:"", items:[]}
-				me.items[index] = newItem.items[0];
+				me.items[ index ] = newItem.items[ 0 ];
 				
 				return newItem.html;
 			}
@@ -2601,6 +2465,7 @@ define('Firebrick.ui/containers/GridRow',["text!./GridRow.html", "jquery", "./Ba
 		}
 	});
 });
+
 
 define('text!Firebrick.ui/containers/Box.html',[],function () { return '<div id="{{=it.getId()}}" data-bind="{{=it.dataBind()}}">\r\n\t{{? it.html }}\r\n\t\t{{=it.html}}\r\n\t{{?? true}}\r\n\t\t{{=it.getItems()}}\r\n\t{{?}}\r\n</div>';});
 
@@ -2614,12 +2479,12 @@ define('text!Firebrick.ui/containers/Box.html',[],function () { return '<div id=
  * @namespace components.containers
  * @class Box
  */
-define('Firebrick.ui/containers/Box',["text!./Box.html", "./Base"], function(tpl){
+define( 'Firebrick.ui/containers/Box',[ "text!./Box.html", "./Base" ], function( tpl ) {
 	"use strict";
-	return Firebrick.define("Firebrick.ui.containers.Box", {
-		extend:"Firebrick.ui.containers.Base",
+	return Firebrick.define( "Firebrick.ui.containers.Box", {
+		extend: "Firebrick.ui.containers.Base",
 		tpl: tpl,
-		sName:"containers.box",
+		sName: "containers.box",
 		/**
 		 * set as string to fill the div/box with text content
 		 * @property html
@@ -2629,6 +2494,7 @@ define('Firebrick.ui/containers/Box',["text!./Box.html", "./Base"], function(tpl
 		html: false
 	});
 });
+
 /*!
  * @author Steven Masala [me@smasala.com]
  */
@@ -2638,276 +2504,266 @@ define('Firebrick.ui/containers/Box',["text!./Box.html", "./Base"], function(tpl
  * @namespace plugins
  * @class InplaceEdit
  */
-define('Firebrick.ui/fields/plugins/InplaceEdit',["jquery", "knockout", "Firebrick.ui/containers/GridRow", "Firebrick.ui/containers/Box", "Firebrick.ui/button/Icon"], function($, ko){
+define( 'Firebrick.ui/fields/plugins/InplaceEdit',[ "jquery", "knockout", "Firebrick.ui/containers/GridRow", "Firebrick.ui/containers/Box", "Firebrick.ui/button/Icon" ], function( $, ko ) {
 	"use strict";
-	
-	return Firebrick.define("Firebrick.ui.fields.plugins.InplaceEdit", {
-		/**
-		 * @property fieldItem
-		 * @type {Firebrick UI Object}
-		 */
-		fieldItem: null,
-		/**
-		 * optional
-		 * @property items
-		 * @type {Array of Objects}
-		 */
-		items: null,
-		/**
-		 * @property showInplaceTitle
-		 * @type {Boolean}
-		 */
-		showInplaceTitle: true,
-		/**
-		 * @property inplaceTitle
-		 * @type {String}
-		 * @default null
-		 */
-		title: null,
-		/**
-		 * @property container
-		 * @type {String}
-		 * @default "body"
-		 */
-		container: "body",
-		/**
-		 * css width of the popover
-		 * @property width
-		 * @type {String}
-		 * @default "250px"
-		 */
-		width: "250px",
-		/**
-		 * popover placement
-		 * @property placement
-		 * @type {String|Function}
-		 * @default "auto"
-		 */
-		placement: "auto bottom",
-		/**
-		 * set to true to place at the bottom of the popover rather than the top
-		 * @property actionButtonsFooter
-		 * @type {Boolean}
-		 * @default false
-		 */
-		actionButtonsFooter: false,
-		/**
-		 * @method _getPopoverEl
-		 * @private
-		 * @return {jQuery Object}
-		 */
-		_getPopoverEl: function(){
-			var me = this;
-			return me.fieldItem.getElement().data('bs.popover').$tip;
-		},
-		/**
-		 * @method init
-		 */
-		init: function(){
-			var me = this,
-				$el = me.fieldItem.getElement();
-			if($el){
-				$el.on("click", function(){
-					return me.onEditClick.apply(me, arguments);
-				});
-				me.fieldItem.on("changed", function(){
-					$el.addClass("fb-ui-inplaceedit-changed");
-				});
-			}else{
-				console.info("no el", me);
-			}
-		},
-		/**
-		 * @method buildItems
-		 * @return {Array of Objects}
-		 */
-		buildItems: function(){
-			var me = this,
-				items = [],
-				type = me.fieldItem.type,
-				field,
-				valStr = "Firebrick.getById('" + me.fieldItem.getId() + "').getValue()",
-				tmp;
-			if(me.items){
-				items = me.items;
-			}else{
-				field = {
-					css: "fb-ui-inplaceedit-field",
-	    			inputSize: "sm",
-	    			label: false,
-	    			inputWidth:12,
-				};
-				if(type === "text"){
-					tmp = {
-		    			sName:	"fields.input",
-						value: valStr
-		    		};
-				}else if(type === "select"){
-					tmp = {
-						sName: "fields.selectbox",
-						options: me.fieldItem.options
-					}
-					if(me.fieldItem.multiSelect){
-						tmp.selectedOptions = valStr;
-					}else{
-						tmp.value = valStr;
-					}
-				}
-				items.push( Firebrick.utils.overwrite(field, tmp) );
-			}
-			return items;
-		},
-		/**
-		 * @method showPopover
-		 */
-		showPopover: function(){
-			var me = this;
-			me._initBSPopover();
-			me._showBSPopover();
-			me._initPopoverContent();
-		},
-		/**
-		 * @method _initPopoverContent
-		 */
-		_initPopoverContent: function(){
-			var me = this;
-			Firebrick.create("Firebrick.ui.containers.GridRow", {
-	    		target: $(".popover-content", me._getPopoverEl()),
-	    		store: ko.dataFor( me.fieldItem.getElement()[0] ),
-	    		items:[{
-	    			columnWidth: me.actionButtonsFooter ? 12 : 7,
-	    			items: me.buildItems()
-	    		},{
-	    			columnWidth: me.actionButtonsFooter ? 12 : 5,
-	    			items: me.actionButtons()
-	    		}]
-			});
-		},
-		/**
-		 * initialises the bootstrap popover - doesn't show it though
-		 * @method _initBSPopover
-		 */
-		_initBSPopover: function(){
-			var me = this,
-				title = Firebrick.text( me.showInplaceTitle ? ( me.fieldItem.popoverTitle || me.fieldItem.label || "" ) : "" );	//don't use title directly here, because it is also used for popup
 
-			me.fieldItem.getElement().popover({ 
-			    html : true,
-			    title: title || " ",
-			    container: me.container,			//so it has the right z-index
-			    placement: me.placement,
-			 	trigger: "manual",
-			});
-			
-		},
-		
-		/**
-		 * shows the actually bootstrap popover
-		 * @method _showBSPopover
-		 */
-		_showBSPopover: function(){
-			var me = this,
-				$popover,
-				$fieldItem = me.fieldItem.getElement();
-			
-			$fieldItem.popover("toggle");
-			
-			$popover = me._getPopoverEl();
-			if(me.width){
-				
-				$popover.css("width", me.width);
-				$popover.css("max-width", me.width);
-			}
+	return Firebrick.define( "Firebrick.ui.fields.plugins.InplaceEdit", {
+	    /**
+	     * @property fieldItem
+	     * @type {Firebrick UI Object}
+	     */
+	    fieldItem: null,
+	    /**
+	     * optional
+	     * @property items
+	     * @type {Array of Objects}
+	     */
+	    items: null,
+	    /**
+	     * @property showInplaceTitle
+	     * @type {Boolean}
+	     */
+	    showInplaceTitle: true,
+	    /**
+	     * @property inplaceTitle
+	     * @type {String}
+	     * @default null
+	     */
+	    title: null,
+	    /**
+	     * @property container
+	     * @type {String}
+	     * @default "body"
+	     */
+	    container: "body",
+	    /**
+	     * css width of the popover
+	     * @property width
+	     * @type {String}
+	     * @default "250px"
+	     */
+	    width: "250px",
+	    /**
+	     * popover placement
+	     * @property placement
+	     * @type {String|Function}
+	     * @default "auto"
+	     */
+	    placement: "auto bottom",
+	    /**
+	     * set to true to place at the bottom of the popover rather than the top
+	     * @property actionButtonsFooter
+	     * @type {Boolean}
+	     * @default false
+	     */
+	    actionButtonsFooter: false,
+	    /**
+	     * @method _getPopoverEl
+	     * @private
+	     * @return {jQuery Object}
+	     */
+	    _getPopoverEl: function() {
+		    var me = this;
+		    return me.fieldItem.getElement().data( "bs.popover" ).$tip;
+	    },
+	    /**
+	     * @method init
+	     */
+	    init: function() {
+		    var me = this, $el = me.fieldItem.getElement();
+		    if ( $el ) {
+			    $el.on( "click", function() {
+				    return me.onEditClick.apply( me, arguments );
+			    } );
+			    me.fieldItem.on( "changed", function() {
+				    $el.addClass( "fb-ui-inplaceedit-changed" );
+			    } );
+		    } else {
+			    console.info( "no el", me );
+		    }
+	    },
+	    /**
+	     * @method buildItems
+	     * @return {Array of Objects}
+	     */
+	    buildItems: function() {
+		    var me = this, items = [], type = me.fieldItem.type, field, valStr = "Firebrick.getById('" + me.fieldItem.getId() + "').getValue()", tmp;
+		    if ( me.items ) {
+			    items = me.items;
+		    } else {
+			    field = {
+			        css: "fb-ui-inplaceedit-field",
+			        inputSize: "sm",
+			        label: false,
+			        inputWidth: 12
+			    };
+			    if ( type === "text" ) {
+				    tmp = {
+				        sName: "fields.input",
+				        value: valStr
+				    };
+			    } else if ( type === "select" ) {
+				    tmp = {
+				        sName: "fields.selectbox",
+				        options: me.fieldItem.options
+				    };
+				    if ( me.fieldItem.multiSelect ) {
+					    tmp.selectedOptions = valStr;
+				    } else {
+					    tmp.value = valStr;
+				    }
+			    }
+			    items.push( Firebrick.utils.overwrite( field, tmp ) );
+		    }
+		    return items;
+	    },
+	    /**
+	     * @method showPopover
+	     */
+	    showPopover: function() {
+		    var me = this;
+		    me._initBSPopover();
+		    me._showBSPopover();
+		    me._initPopoverContent();
+	    },
+	    /**
+	     * @method _initPopoverContent
+	     */
+	    _initPopoverContent: function() {
+		    var me = this;
+		    Firebrick.create( "Firebrick.ui.containers.GridRow", {
+		        target: $( ".popover-content", me._getPopoverEl() ),
+		        store: ko.dataFor( me.fieldItem.getElement()[ 0 ] ),
+		        items: [ {
+		            columnWidth: me.actionButtonsFooter ? 12 : 7,
+		            items: me.buildItems()
+		        }, {
+		            columnWidth: me.actionButtonsFooter ? 12 : 5,
+		            items: me.actionButtons()
+		        } ]
+		    } );
+	    },
+	    /**
+	     * initialises the bootstrap popover - doesn't show it though
+	     * @method _initBSPopover
+	     */
+	    _initBSPopover: function() {
+		    var me = this, title = Firebrick.text( me.showInplaceTitle ? ( me.fieldItem.popoverTitle || me.fieldItem.label || "" ) : "" ); //don't use title directly here, because it is also used for popup
 
-			me._initDismissEvent();
-		},
-		/**
-		 * dismisses the popover when clicked out side it
-		 * @method _initDismissEvent
-		 */
-		_initDismissEvent: function(){
-			var me = this;
-			//delay because otherwise it catches the <a> click on opening the popover
-			Firebrick.delay(function(){
-				var func = function(event){
-					var $el = $(event.target);
-					if(!$el.closest(".popover").length){
-						me.fieldItem.getElement().popover("destroy");
-						$("html").off("click", func);	
-					}
-				};
-				$("html").on("click", func);
-				me.fieldItem.getElement().on("hide.bs.popover hidden.bs.popover", function(){
-					$("html").off("click", func);
-				});
-			}, 1);
-		},
-		/**
-		 * @method okAction
-		 */
-		okAction: function(){
-			var me = this;
-			me.setValue( me.getValue() );
-			me.fieldItem.getElement().popover("toggle");
-		},
+		    me.fieldItem.getElement().popover( {
+		        html: true,
+		        title: title || " ",
+		        container: me.container, //so it has the right z-index
+		        placement: me.placement,
+		        trigger: "manual"
+		    } );
 
-		/**
-		 * @method cancelAction
-		 */
-		cancelAction: function(){
-			var me = this;
-			me.fieldItem.getElement().popover("destroy");
-		},
-		
-		/**
-		 * @method actionButtons
-		 * @return {Array of Objects}
-		 */
-		actionButtons: function(){
-			var me = this;
-			return [{
-				sName: "containers.box",
-				css: me.actionButtonsFooter ? "pull-right" : "",
-				items:[{
-					sName: "button.button",
-					glyIcon:"ok",
-					btnStyle: "primary",
-					btnSize: "sm",
-					handler: function(){
-						return me.okAction.apply(me, arguments);
-					}
-				},{
-					sName: "button.button",
-					glyIcon:"remove",
-					btnStyle: "default",
-					btnSize: "sm",
-					handler: function(){
-						return me.cancelAction.apply(me, arguments);
-					}
-				}]
-			}];
-		},
-		
-		onEditClick: function(){
-			var me = this;
-			me.showPopover();
-		},
-		
-		getValue: function(){
-			var me = this,
-				$popover = me._getPopoverEl(),
-				$el = $(".fb-ui-inplaceedit-field", $popover);
-			
-			return $el.val();
-		},
-		
-		setValue: function( value ){
-			var me = this;
-			me.fieldItem.setValue( value );
-		}
-	});
-	
-});
+	    },
+
+	    /**
+	     * shows the actually bootstrap popover
+	     * @method _showBSPopover
+	     */
+	    _showBSPopover: function() {
+		    var me = this, $popover, $fieldItem = me.fieldItem.getElement();
+
+		    $fieldItem.popover( "toggle" );
+
+		    $popover = me._getPopoverEl();
+		    if ( me.width ) {
+
+			    $popover.css( "width", me.width );
+			    $popover.css( "max-width", me.width );
+		    }
+
+		    me._initDismissEvent();
+	    },
+	    /**
+	     * dismisses the popover when clicked out side it
+	     * @method _initDismissEvent
+	     */
+	    _initDismissEvent: function() {
+		    var me = this;
+		    //delay because otherwise it catches the <a> click on opening the popover
+		    Firebrick.delay( function() {
+			    var func = function( event ) {
+				    var $el = $( event.target );
+				    if ( !$el.closest( ".popover" ).length ) {
+					    me.fieldItem.getElement().popover( "destroy" );
+					    $( "html" ).off( "click", func );
+				    }
+			    };
+			    $( "html" ).on( "click", func );
+			    me.fieldItem.getElement().on( "hide.bs.popover hidden.bs.popover", function() {
+				    $( "html" ).off( "click", func );
+			    } );
+		    }, 1 );
+	    },
+	    /**
+	     * @method okAction
+	     */
+	    okAction: function() {
+		    var me = this;
+		    me.setValue( me.getValue() );
+		    me.fieldItem.getElement().popover( "toggle" );
+	    },
+
+	    /**
+	     * @method cancelAction
+	     */
+	    cancelAction: function() {
+		    var me = this;
+		    me.fieldItem.getElement().popover( "destroy" );
+	    },
+
+	    /**
+	     * @method actionButtons
+	     * @return {Array of Objects}
+	     */
+	    actionButtons: function() {
+		    var me = this;
+		    return [ {
+		        sName: "containers.box",
+		        css: me.actionButtonsFooter ? "pull-right" : "",
+		        items: [ {
+		            sName: "button.button",
+		            glyIcon: "ok",
+		            btnStyle: "primary",
+		            btnSize: "sm",
+		            handler: function() {
+			            return me.okAction.apply( me, arguments );
+		            }
+		        }, {
+		            sName: "button.button",
+		            glyIcon: "remove",
+		            btnStyle: "default",
+		            btnSize: "sm",
+		            handler: function() {
+			            return me.cancelAction.apply( me, arguments );
+		            }
+		        } ]
+		    } ];
+	    },
+
+	    onEditClick: function() {
+		    var me = this;
+		    me.showPopover();
+	    },
+
+	    getValue: function() {
+		    var me = this, $popover = me._getPopoverEl(), $el = $( ".fb-ui-inplaceedit-field", $popover );
+
+		    return $el.val();
+	    },
+
+	    setValue: function( value ) {
+		    var me = this;
+		    me.fieldItem.setValue( value );
+	    }
+	} );
+
+} );
+
 /*!
  * @author Steven Masala [me@smasala.com]
  */
@@ -2918,11 +2774,11 @@ define('Firebrick.ui/fields/plugins/InplaceEdit',["jquery", "knockout", "Firebri
  * @namespace components.fields
  * @class Input
  */
-define('Firebrick.ui/fields/Input',["knockout", "text!./Base.html", "text!./Input.html", "./Base", "../common/mixins/Items", "./plugins/InplaceEdit"], function(ko, tpl, subTpl){
+define( 'Firebrick.ui/fields/Input',[ "knockout", "text!./Base.html", "text!./Input.html", "./Base", "../common/mixins/Items", "./plugins/InplaceEdit" ], function( ko, tpl, subTpl ) {
 	"use strict";
-	return Firebrick.define("Firebrick.ui.fields.Input", {
-		extend:"Firebrick.ui.fields.Base",
-		mixins:["Firebrick.ui.common.mixins.Items"],
+	return Firebrick.define( "Firebrick.ui.fields.Input", {
+		extend: "Firebrick.ui.fields.Base",
+		mixins: [ "Firebrick.ui.common.mixins.Items" ],
 		/**
 		 * @property sName
 		 * @type {String}
@@ -2932,13 +2788,13 @@ define('Firebrick.ui/fields/Input',["knockout", "text!./Base.html", "text!./Inpu
 		 * @property subTpl
 		 * @type {String} html
 		 */
-		subTpl:subTpl,
+		subTpl: subTpl,
 		/**
 		 * @property type
 		 * @type {String}
 		 * @default "text"
 		 */
-		type:"text",
+		type: "text",
 		/**
 		 * @property label
 		 * @type {String}
@@ -2967,7 +2823,7 @@ define('Firebrick.ui/fields/Input',["knockout", "text!./Base.html", "text!./Inpu
 		 * @property tpl
 		 * @type {String} html
 		 */
-		tpl:tpl,
+		tpl: tpl,
 		/**
 		 * @property formGroupClass
 		 * @type {String}
@@ -3006,13 +2862,13 @@ define('Firebrick.ui/fields/Input',["knockout", "text!./Base.html", "text!./Inpu
 		 * @type {Boolean}
 		 * @default false
 		 */
-		readOnly:false,
+		readOnly: false,
 		/**
 		 * @property disabled
 		 * @type {Boolean}
 		 * @default false
 		 */
-		disabled:false,
+		disabled: false,
 		/**
 		 * type of column size -md, sm, lg etc
 		 * @property columnSize
@@ -3031,33 +2887,33 @@ define('Firebrick.ui/fields/Input',["knockout", "text!./Base.html", "text!./Inpu
 		 * @type {Boolean}
 		 * @default true
 		 */
-		controlLabel:true,
+		controlLabel: true,
 		/**
 		 * help text
 		 * @property helpText
 		 * @type {Boolean|String}
 		 * @default false
 		 */
-		helpText:false,
+		helpText: false,
 		/**
 		 * help text
 		 * @property helpBlockClass
 		 * @type {String}
 		 * @default "help-block"
 		 */
-		helpBlockClass:"help-block",
+		helpBlockClass: "help-block",
 		/**
 		 * @property placeholder
 		 * @type {String}
 		 * @default ""
 		 */
-		placeholder:"",
+		placeholder: "",
 		/**
 		 * @property showStateIcon
 		 * @type {Boolean}
 		 * @default false
 		 */
-		showStateIcon:false,
+		showStateIcon: false,
 		/**
 		 * @property formControlFeedbackClass
 		 * @type {String}
@@ -3070,13 +2926,13 @@ define('Firebrick.ui/fields/Input',["knockout", "text!./Base.html", "text!./Inpu
 		 * @type {Boolean|String} - string for inputAddon text - false to deactive, true to simply activate without text, true if you just want an icon (property: iconClass)
 		 * @default false
 		 */
-		inputAddon:false,
+		inputAddon: false,
 		/**
 		 * @property inputAddonClass
 		 * @type {String}
 		 * @default "input-group-addon"
 		 */
-		inputAddonClass:"input-group-addon",
+		inputAddonClass: "input-group-addon",
 		/**
 		 * @property inputAddonSpanClass
 		 * @type {String}
@@ -3088,21 +2944,21 @@ define('Firebrick.ui/fields/Input',["knockout", "text!./Base.html", "text!./Inpu
 		 * @type {Boolean}
 		 * @default true
 		 */
-		horizontal:true,
+		horizontal: true,
 		/**
 		 * Feedback css bindings
 		 * @property feedback_success
 		 * @type {Boolean|String}
 		 * @default false
 		 */
-		feedbackSuccess:false,
+		feedbackSuccess: false,
 		/**
 		 * Feedback css bindings
 		 * @property feedback_warning
 		 * @type {Boolean|String}
 		 * @default false
 		 */
-		feedbackWarning:false,
+		feedbackWarning: false,
 		/**
 		 * Feedback css bindings
 		 * @property feedback_error
@@ -3115,34 +2971,34 @@ define('Firebrick.ui/fields/Input',["knockout", "text!./Base.html", "text!./Inpu
 		 * @type {Boolean|String}
 		 * @default false
 		 */
-		multiplesInline:false,
+		multiplesInline: false,
 		/**
 		 * set as true to activate or object to activate and configure
 		 * @property inplaceEdit
 		 * @type {Boolean|Object}
 		 * @default false
 		 */
-		inplaceEdit:false,
+		inplaceEdit: false,
 		/**
 		 * @property showInplaceTitle
 		 * @type {Boolean}
 		 * @default true
 		 */
-		showInplaceTitle:true,
+		showInplaceTitle: true,
 		/**
 		 * adds html5 required attribute
 		 * @property required
 		 * @type {Boolean}
 		 * @default false
 		 */
-		required:false,
+		required: false,
 		/**
 		 * if none specified then the name is set to that of this.type
 		 * @property name
 		 * @type {String}
 		 * @default ""
 		 */
-		name:"",
+		name: "",
 		/**
 		 * @property inputAddonPosition
 		 * @type {String}
@@ -3181,53 +3037,52 @@ define('Firebrick.ui/fields/Input',["knockout", "text!./Base.html", "text!./Inpu
 		 * @method init
 		 * @return .callParent(arguments)
 		 */
-		init: function(){
+		init: function() {
 			var me = this;
 
-				me.on("rendered", function(){
+				me.on( "rendered", function() {
 					var inplaceConf;
 					
-					if(me.inplaceEdit){
+					if ( me.inplaceEdit ) {
 						inplaceConf = {
 								fieldItem: me,
 								showInplaceTitle: true
 						};
 						
-						if( $.isPlainObject( me.inplaceEdit ) ){
-							inplaceConf = Firebrick.utils.overwrite(inplaceConf, me.inplaceEdit);
+						if ( $.isPlainObject( me.inplaceEdit ) ) {
+							inplaceConf = Firebrick.utils.overwrite( inplaceConf, me.inplaceEdit );
 						}
 						
-						Firebrick.create("Firebrick.ui.fields.plugins.InplaceEdit", inplaceConf);	
+						Firebrick.create( "Firebrick.ui.fields.plugins.InplaceEdit", inplaceConf );
 					}
 					
-					if(me.required){
+					if ( me.required ) {
 						me.onChange();
 					}
-				});				
-			
-			
-			return me.callParent(arguments);
+				});
+
+			return me.callParent( arguments );
 		},
 		
 		/**
 		 * this functions is called when the component is rendered and determines what to do when the component is changed
 		 * @method onChange
 		 */
-		onChange: function(){
+		onChange: function() {
 			var me = this,
 				el = me.getElement(),
 				container;
 
-			if(me.required){
-				if(el && el.length){
-					el.change(function(){
-						container = el.closest(".form-group");
-						if(container.length){
+			if ( me.required ) {
+				if ( el && el.length ) {
+					el.change(function() {
+						container = el.closest( ".form-group" );
+						if ( container.length ) {
 							
-							if(el.is(":invalid")){
-								me.setStatus("error", container);
-							}else{
-								me.setStatus("success", container);
+							if ( el.is( ":invalid" ) ) {
+								me.setStatus( "error", container );
+							} else {
+								me.setStatus( "success", container );
 							}
 							
 						}
@@ -3242,24 +3097,24 @@ define('Firebrick.ui/fields/Input',["knockout", "text!./Base.html", "text!./Inpu
 		 * use this to set a particular BS3 has-* status - e.g "has-error"
 		 * @method setStatus
 		 * @param name {String} "error", "warning", "success"
-		 * @param element {jQuery Object} [default=getElement()] - set if you wish to set the status to a different element - e.g. like the components parent 
+		 * @param element {jQuery Object} [default=getElement()] - set if you wish to set the status to a different element - e.g. like the components parent
 		 * @return self {Object}
 		 */
-		setStatus: function(status, element){
+		setStatus: function( status, element ) {
 			var me = this,
 				el = element || me.getElement();
 			
-			if(el && el.length){
+			if ( el && el.length ) {
 				
-				if(status){
+				if ( status ) {
 					
-					el.attr("class", function(i, str){
-						str = str.replace(/(^|\s)has-\S+/g, '');	//replace all classes that start with "has-"
+					el.attr( "class", function( i, str ) {
+						str = str.replace( /(^|\s)has-\S+/g, "" );	//replace all classes that start with "has-"
 						str += " has-feedback";	//add the base class again (deleted by line above)
 						return str;
 					});
 					
-					el.addClass("has-" + status);
+					el.addClass( "has-" + status );
 					
 				}
 				
@@ -3272,9 +3127,9 @@ define('Firebrick.ui/fields/Input',["knockout", "text!./Base.html", "text!./Inpu
 		 * @method containerBindings
 		 * @return {Object}
 		 */
-		containerBindings:function(){
+		containerBindings: function() {
 			var me = this,
-				obj = { 
+				obj = {
 					css: {
 						"'has-success'": me.feedbackSuccess,
 						"'has-warning'": me.feedbackWarning,
@@ -3284,20 +3139,20 @@ define('Firebrick.ui/fields/Input',["knockout", "text!./Base.html", "text!./Inpu
 					}
 				};
 			
-			if( me.containerCSS ){
+			if ( me.containerCSS ) {
 				obj.css[ me.parseBind( me.containerCSS ) ] = true;
 			}
 			
-			if(me.align){
-				obj.css[me.parseBind("pull-" + me.align)] = true;
+			if ( me.align ) {
+				obj.css[ me.parseBind( "pull-" + me.align ) ] = true;
 			}
 			
-			if(me.inputSize){
-				obj.css[me.parseBind("form-group-" + me.inputSize)] = me.inputSize ? true : false;	
+			if ( me.inputSize ) {
+				obj.css[ me.parseBind( "form-group-" + me.inputSize ) ] = me.inputSize ? true : false;
 			}
 			
-			if(me.navbarItem){
-				obj.css["'fb-ui-navbar-field'"] = true; 
+			if ( me.navbarItem ) {
+				obj.css[ "'fb-ui-navbar-field'" ] = true;
 			}
 			
 			return obj;
@@ -3306,32 +3161,32 @@ define('Firebrick.ui/fields/Input',["knockout", "text!./Base.html", "text!./Inpu
 		 * @method helpBlockBindings
 		 * @return {Object}
 		 */
-		helpBlockBindings: function(){
+		helpBlockBindings: function() {
 			var me = this;
 			return {
-				text: me.textBind(me.helpText)
+				text: me.textBind( me.helpText )
 			};
 		},
 		/**
 		 * @method feedbackBindings
 		 * @return {Object}
 		 */
-		feedbackBindings:function(){
+		feedbackBindings: function() {
 			var me = this,
-				binds = {css:{}},
+				binds = { css: {} },
 				rootClass = "'glyphicon-";
-			if(me.containerBindings && me.containerBindings.css){
-				$.each(me.containerBindings.css, function(k,v){
-					if(v){
-						switch(k){
+			if ( me.containerBindings && me.containerBindings.css ) {
+				$.each( me.containerBindings.css, function( k,v ) {
+					if ( v ) {
+						switch ( k ){
 							case "'has-success'":
-								binds.css[rootClass + "ok'"] = v;
+								binds.css[ rootClass + "ok'" ] = v;
 								break;
 							case "'has-warning'":
-								binds.css[rootClass + "warning'"] = v;
+								binds.css[ rootClass + "warning'" ] = v;
 								break;
 							case "'has-error'":
-								binds.css[rootClass + "remove'"] = v;
+								binds.css[ rootClass + "remove'" ] = v;
 								break;
 						}
 					}
@@ -3343,38 +3198,38 @@ define('Firebrick.ui/fields/Input',["knockout", "text!./Base.html", "text!./Inpu
 		 * @method bindings
 		 * @return {Object}
 		 */
-		bindings: function(){
+		bindings: function() {
 			var me = this,
 				type =  me.parseBind( me.type ),
-				obj = me.callParent(arguments);
+				obj = me.callParent( arguments );
 			
 			obj.attr.disabled = me.disabled;
-			obj.attr.readonly = me.readOnly; 
-			if(!me.inplaceEdit){
-				obj.attr.type = type;	
+			obj.attr.readonly = me.readOnly;
+			if ( !me.inplaceEdit ) {
+				obj.attr.type = type;
 			}
 			obj.attr.name = me.name ?  me.parseBind( me.name ) : type;
 			
 			obj.value = me.value;
 			
-			if(me.inplaceEdit){
+			if ( me.inplaceEdit ) {
 				
 				obj.text = "Firebrick.getById('" + me.getId() + "')._getInplaceEditText( $data )";
-				obj.css["'fb-ui-inplaceedit'"] = true;
+				obj.css[ "'fb-ui-inplaceedit'" ] = true;
 
-			}else{
-				if(me.formControlClass){
-					obj.css[me.parseBind(me.formControlClass)] = true;
+			} else {
+				if ( me.formControlClass ) {
+					obj.css[ me.parseBind( me.formControlClass ) ] = true;
 				}
 				obj.attr.placeholder = me.textBind( me.placeholder );
 			}
 			
-			if(me.required){
+			if ( me.required ) {
 				obj.attr.required = true;
 			}
 			
-			if(me.inputSize){
-				obj.css[ me.parseBind("input-" + me.inputSize) ] = true;
+			if ( me.inputSize ) {
+				obj.css[ me.parseBind( "input-" + me.inputSize ) ] = true;
 			}
 			
 			return obj;
@@ -3383,24 +3238,24 @@ define('Firebrick.ui/fields/Input',["knockout", "text!./Base.html", "text!./Inpu
 		 * @method inputAddonBindings
 		 * @return {Object}
 		 */
-		inputAddonBindings: function(){
+		inputAddonBindings: function() {
 			var me = this,
 				obj = {
-					css:{}
+					css: {}
 				};
-			if(me.inputAddon){
-				if($.isPlainObject(me.inputAddon)){
+			if ( me.inputAddon ) {
+				if ( $.isPlainObject( me.inputAddon ) ) {
 					
 					//button has been loaded
-					if(me.inputAddon.sName === "button.button"){
+					if ( me.inputAddon.sName === "button.button" ) {
 						//the addon is a button
 						//remove if exists
-						me.inputAddonClass = me.inputAddonClass.replace("input-group-addon", "");
+						me.inputAddonClass = me.inputAddonClass.replace( "input-group-addon", "" );
 						//add the correct class
 						me.inputAddonClass += " input-group-btn";
 					}
 				}
-				obj.css[me.parseBind(me.inputAddonClass)] = true;
+				obj.css[ me.parseBind( me.inputAddonClass ) ] = true;
 			}
 			return obj;
 		},
@@ -3408,18 +3263,18 @@ define('Firebrick.ui/fields/Input',["knockout", "text!./Base.html", "text!./Inpu
 		 * @method inputAddonSpanBindings
 		 * @return {Object}
 		 */
-		inputAddonSpanBindings: function(){
+		inputAddonSpanBindings: function() {
 			var me = this,
-				obj = {css:{}};
+				obj = { css: {} };
 			
-			if(me.inputAddon && typeof me.inputAddon === "string"){
-				obj.text = me.textBind(me.inputAddon);
+			if ( me.inputAddon && typeof me.inputAddon === "string" ) {
+				obj.text = me.textBind( me.inputAddon );
 			}
 			
-			obj.css[me.parseBind(me.glyphiconClass)] = true;
+			obj.css[ me.parseBind( me.glyphiconClass ) ] = true;
 			
-			if(me.iconClass){
-				obj.css[me.parseBind(me.iconClass)] = true;	
+			if ( me.iconClass ) {
+				obj.css[ me.parseBind( me.iconClass ) ] = true;
 			}
 			
 			return obj;
@@ -3428,23 +3283,23 @@ define('Firebrick.ui/fields/Input',["knockout", "text!./Base.html", "text!./Inpu
 		 * @method inputAddonTemplateBindings
 		 * @return {Object}
 		 */
-		inputAddonTemplateBindings: function(){
+		inputAddonTemplateBindings: function() {
 			var me = this,
 				obj = {
-					template:me.parseBind(me.getAddonId()),
+					template: me.parseBind( me.getAddonId() ),
 					data: "$data"
 				};
 			return obj;
 		},
 		/**
-		 * 
+		 *
 		 * @method getAddonId
 		 * @return {String} unique id
 		 */
-		getAddonId: function(){
+		getAddonId: function() {
 			var me = this;
 			
-			if(!me._inputAddonTplId){
+			if ( !me._inputAddonTplId ) {
 				me._inputAddonTplId = "fb-inputaddon-" + Firebrick.utils.uniqId();
 			}
 			
@@ -3454,16 +3309,16 @@ define('Firebrick.ui/fields/Input',["knockout", "text!./Base.html", "text!./Inpu
 		 * @method labelBindings
 		 * @return {Object}
 		 */
-		labelBindings: function(){
+		labelBindings: function() {
 			var me = this,
 				obj = {
 					text: me.textBind( me.label ),
-					css:{
+					css: {
 						"'control-label'": me.controlLabel
 					}
 				};
-			if(me.horizontal){
-				obj.css[ me.parseBind("col-" + me.columnSize + "-" + me.labelWidth )] = me.horizontal;
+			if ( me.horizontal ) {
+				obj.css[ me.parseBind( "col-" + me.columnSize + "-" + me.labelWidth ) ] = me.horizontal;
 			}
 			return obj;
 		},
@@ -3471,12 +3326,12 @@ define('Firebrick.ui/fields/Input',["knockout", "text!./Base.html", "text!./Inpu
 		 * @method inputContainerBindings
 		 * @return {Object}
 		 */
-		inputContainerBindings: function(){
+		inputContainerBindings: function() {
 			var me = this,
 				obj = {
-					css:{}
+					css: {}
 				};
-			if(me.horizontal){
+			if ( me.horizontal ) {
 				obj.css[ me.parseBind( "col-" + me.columnSize + "-" + me.inputWidth ) ] = me.horizontal;
 			}
 
@@ -3486,16 +3341,16 @@ define('Firebrick.ui/fields/Input',["knockout", "text!./Base.html", "text!./Inpu
 		 * @method fieldBindings
 		 * @return {Object}
 		 */
-		fieldBindings: function(){
-			var me = this, 
+		fieldBindings: function() {
+			var me = this,
 				obj = {
-					css:{
+					css: {
 						"'input-group'": me.inputAddon ? true : false
 					}
-			}
+				};
 			
-			if(me.align){
-				obj.css[me.parseBind("pull-" + me.align)] = true;
+			if ( me.align ) {
+				obj.css[ me.parseBind( "pull-" + me.align ) ] = true;
 			}
 			
 			return obj;
@@ -3504,7 +3359,7 @@ define('Firebrick.ui/fields/Input',["knockout", "text!./Base.html", "text!./Inpu
 		 * @method getValue
 		 * @return {Any}
 		 */
-		getValue: function(){
+		getValue: function() {
 			var me = this;
 			return me.getElement().val();
 		},
@@ -3513,17 +3368,17 @@ define('Firebrick.ui/fields/Input',["knockout", "text!./Base.html", "text!./Inpu
 		 * @event changed
 		 * @return self
 		 */
-		setValue: function(value){
+		setValue: function( value ) {
 			var me = this,
 				oldValue = me.getValue(),
 				newValue;
 
 			me._lastValue = oldValue;
-			me._setValue(value);
+			me._setValue( value );
 			
 			newValue = me.getValue();
 			
-			me._checkChange(newValue, oldValue);
+			me._checkChange( newValue, oldValue );
 			
 			return me;
 		},
@@ -3536,12 +3391,12 @@ define('Firebrick.ui/fields/Input',["knockout", "text!./Base.html", "text!./Inpu
 		 * @param silent {Boolean} default=false
 		 * @return {Boolean}
 		 */
-		_checkChange: function(newVal, oldVal, silent){
+		_checkChange: function( newVal, oldVal, silent ) {
 			var me = this;
 			
-			if( me._hasChange(newVal, oldVal) ){
-				if(!silent){
-					me.fireEvent("changed", newVal, oldVal);
+			if ( me._hasChange( newVal, oldVal ) ) {
+				if ( !silent ) {
+					me.fireEvent( "changed", newVal, oldVal );
 				}
 				return true;
 			}
@@ -3554,7 +3409,7 @@ define('Firebrick.ui/fields/Input',["knockout", "text!./Base.html", "text!./Inpu
 		 * @param newVal {Any}
 		 * @param oldVal {Any}
 		 */
-		_hasChange: function(newVal, oldVal){
+		_hasChange: function( newVal, oldVal ) {
 			return newVal !== oldVal;
 		},
 		/**
@@ -3562,13 +3417,13 @@ define('Firebrick.ui/fields/Input',["knockout", "text!./Base.html", "text!./Inpu
 		 * @param value
 		 * @private
 		 */
-		_setValue: function(value){
+		_setValue: function( value ) {
 			var me = this,
 				$el = me.getElement();
 			
 			$el.val( value );
 			
-			if(me.inplaceEdit){
+			if ( me.inplaceEdit ) {
 				me._setValueInplaceEdit( value );
 			}
 			
@@ -3579,11 +3434,11 @@ define('Firebrick.ui/fields/Input',["knockout", "text!./Base.html", "text!./Inpu
 		 * @param value
 		 * @private
 		 */
-		_setValueInplaceEdit: function( value ){
+		_setValueInplaceEdit: function() {
 			var me = this,
 				$el = me.getElement();
-			$el.text( me._getInplaceEditText( Firebrick.utils.dataFor( $el[0] ) ) );
-			$el.trigger("change");
+			$el.text( me._getInplaceEditText( Firebrick.utils.dataFor( $el[ 0 ] ) ) );
+			$el.trigger( "change" );
 			return me;
 		},
 		/**
@@ -3592,19 +3447,19 @@ define('Firebrick.ui/fields/Input',["knockout", "text!./Base.html", "text!./Inpu
 		 * @param $data {KO Object}
 		 * @return {String}
 		 */
-		_getInplaceEditText: function( $data ){
+		_getInplaceEditText: function( $data ) {
 			var me = this,
 				$el = me.getElement(),
 				value = $el ? me.getValue() : me.value,
 				text = "";
 				
-			if( value ){
-				if( $data.hasOwnProperty( value ) ){
+			if ( value ) {
+				if ( $data.hasOwnProperty( value ) ) {
 					text = ko.unwrap( $data[ value ] );
-				}else{
+				} else {
 					text = value;
 				}
-			}else{
+			} else {
 				text = Firebrick.text( me.inplaceEditEmptyText );
 			}
 				
@@ -3612,6 +3467,7 @@ define('Firebrick.ui/fields/Input',["knockout", "text!./Base.html", "text!./Inpu
 		}
 	});
 });
+
 /*!
  * @author Steven Masala [me@smasala.com]
  */
@@ -3623,30 +3479,30 @@ define('Firebrick.ui/fields/Input',["knockout", "text!./Base.html", "text!./Inpu
  * @namespace components.common
  * @class MultiplesBase
  */
-define('Firebrick.ui/common/MultiplesBase',["knockout-mapping", "../fields/Input"], function(kom){
+define( 'Firebrick.ui/common/MultiplesBase',[ "knockout-mapping", "../fields/Input" ], function( kom ) {
 	"use strict";
-	return Firebrick.define("Firebrick.ui.common.MultiplesBase", {
-		extend:"Firebrick.ui.fields.Input",
+	return Firebrick.define( "Firebrick.ui.common.MultiplesBase", {
+		extend: "Firebrick.ui.fields.Input",
 		/**
 		 * @method fieldBindings
 		 * @return {Object}
 		 */
-		fieldBindings:function(){
+		fieldBindings: function() {
 			var me = this,
-				obj = me.callParent(arguments);
-			if(!me.inplaceEdit){
+				obj = me.callParent( arguments );
+			if ( !me.inplaceEdit ) {
 				
 				obj.withProperties = {
 							itemId: "'fb-ui-id-' + Firebrick.utils.uniqId()"
 						};
 
-				if(me.multiplesInline){
+				if ( me.multiplesInline ) {
 					
-					if(!obj.css){
+					if ( !obj.css ) {
 						obj.css = {};
 					}
 					
-					obj.css[ me.parseBind(me.cleanString(me.type)+"-inline")] = me.multiplesInline;
+					obj.css[ me.parseBind( me.cleanString( me.type ) + "-inline" ) ] = me.multiplesInline;
 				}
 			}
 			
@@ -3661,29 +3517,29 @@ define('Firebrick.ui/common/MultiplesBase',["knockout-mapping", "../fields/Input
 		 * @param $data {Any} value of iteration item
 		 * @default {Boolean}
 		 */
-		_valueChecker: function($default, $data){
+		_valueChecker: function( $default, $data ) {
 			var me = this;
 			
-			if(kom.isMapped($data)){
-				$data = kom.toJS($data);
+			if ( kom.isMapped( $data ) ) {
+				$data = kom.toJS( $data );
 			}
 			
-			if($.isPlainObject($data)){
-				if($data.active){
+			if ( $.isPlainObject( $data ) ) {
+				if ( $data.active ) {
 					//active property wins
-					return $.isFunction($data.active) ? $data.active() : $data.active;
-				}else if($data.checked){
-					return $.isFunction($data.checked) ? $data.checked() : $data.checked;
-				}else if($data.value){
+					return $.isFunction( $data.active ) ? $data.active() : $data.active;
+				} else if ( $data.checked ) {
+					return $.isFunction( $data.checked ) ? $data.checked() : $data.checked;
+				} else if ( $data.value ) {
 					//get the value prop
 					$data = $data.value;
 				}
 			}
 
 			//something to compare too
-			if($default){
+			if ( $default ) {
 				//ko function?
-				if($.isFunction($default)){
+				if ( $.isFunction( $default ) ) {
 					$default = $default();
 				}
 				//compare
@@ -3695,6 +3551,7 @@ define('Firebrick.ui/common/MultiplesBase',["knockout-mapping", "../fields/Input
 		}
 	});
 });
+
 /*!
  * @author Steven Masala [me@smasala.com]
  */
@@ -3705,47 +3562,47 @@ define('Firebrick.ui/common/MultiplesBase',["knockout-mapping", "../fields/Input
  * @namespace components.button
  * @class ToggleButton
  */
-define('Firebrick.ui/button/ToggleButton',["text!./ToggleButton.html", "knockout", "jquery", "../common/MultiplesBase"], function(subTpl, ko, $){
+define( 'Firebrick.ui/button/ToggleButton',[ "text!./ToggleButton.html", "knockout", "jquery", "../common/MultiplesBase" ], function( subTpl, ko, $ ) {
 	"use strict";
 	
-	if(!ko.bindingHandlers.toggleRenderer){
+	if ( !ko.bindingHandlers.toggleRenderer ) {
 		/*
 		 * optionsRenderer for togglebuttons
 		 * create dynamic css along with static
 		 */
 		ko.bindingHandlers.toggleRenderer = {
-		    init: function(element, valueAccessor, allBindings, viewModel, bindingContext) {
-				var me = Firebrick.ui.getCmp(valueAccessor()),
-					currentStyle = "btn-"+me.btnStyle,
-					$el = $(element),
+		    init: function( element, valueAccessor, allBindings, viewModel ) {
+				var me = Firebrick.ui.getCmp( valueAccessor() ),
+					currentStyle = "btn-" + me.btnStyle,
+					$el = $( element ),
 					inputId = allBindings().withProperties.inputItemId;
 
 				//ko data bound observable
-				inputId = Firebrick.ui.utils.getValue(inputId);
+				inputId = Firebrick.ui.utils.getValue( inputId );
 				
-				if($el.length){
-					if(viewModel){
-						if(viewModel.btnStyle){
+				if ( $el.length ) {
+					if ( viewModel ) {
+						if ( viewModel.btnStyle ) {
 							//replace element className with the new one defined in the binding
-							$el.attr("class", function(i, v){
-								return v.replace(currentStyle, "btn-" + Firebrick.ui.utils.getValue(viewModel.btnStyle));
+							$el.attr( "class", function( i, v ) {
+								return v.replace( currentStyle, "btn-" + Firebrick.ui.utils.getValue( viewModel.btnStyle ) );
 							});
 						}
-						if(viewModel.css){
-							$el.addClass(Firebrick.ui.utils.getValue(viewModel.css));
+						if ( viewModel.css ) {
+							$el.addClass( Firebrick.ui.utils.getValue( viewModel.css ) );
 						}
 					}
 					//add the correct "for" attribute id and the input id
-					$el.attr("for", inputId);
-					$("> input", $el).attr("id", inputId);
+					$el.attr( "for", inputId );
+					$( "> input", $el ).attr( "id", inputId );
 				}
 				
 		    }
 		};
 	}
 	
-	return Firebrick.define("Firebrick.ui.button.ToggleButton", {
-		extend:"Firebrick.ui.common.MultiplesBase",
+	return Firebrick.define( "Firebrick.ui.button.ToggleButton", {
+		extend: "Firebrick.ui.common.MultiplesBase",
 		/**
 		 * component alias
 		 * @property sName
@@ -3756,13 +3613,13 @@ define('Firebrick.ui/button/ToggleButton',["text!./ToggleButton.html", "knockout
 		 * @property subTpl
 		 * @type {String} html
 		 */
-		subTpl:subTpl,
+		subTpl: subTpl,
 		/**
 		 * @property btnGroupClass
 		 * @type {Boolean|String}
 		 * @default true
 		 */
-		btnGroupClass:true,
+		btnGroupClass: true,
 		/**
 		 * @property btnClass
 		 * @type {Boolean|String}
@@ -3801,7 +3658,7 @@ define('Firebrick.ui/button/ToggleButton',["text!./ToggleButton.html", "knockout
 		 * @type {String|Array of Objects}
 		 * @default "''"
 		 */
-		options:"''",
+		options: "''",
 		/**
 		 * @property showLabel
 		 * @type {Boolean}
@@ -3818,30 +3675,30 @@ define('Firebrick.ui/button/ToggleButton',["text!./ToggleButton.html", "knockout
 		 * @method btnGroupBindings
 		 * @return {Object}
 		 */
-		btnGroupBindings: function(){
+		btnGroupBindings: function() {
 			var me = this;
 			return {
-				css:{
+				css: {
 					"'btn-group'": me.btnGroupClass
 				},
-				attr:{
-					"'data-toggle'": me.parseBind(me.dataToggle)
+				attr: {
+					"'data-toggle'": me.parseBind( me.dataToggle )
 				},
-				foreach: Firebrick.ui.helper.optionString(me)
+				foreach: Firebrick.ui.helper.optionString( me )
 			};
 		},
 		/**
 		 * @method toggleInputBindings
 		 * @return {Object}
 		 */
-		toggleInputBindings: function(){
+		toggleInputBindings: function() {
 			var me = this;
 			return {
-				attr:{
+				attr: {
 					//id attribute is parsed by the toggleRenderer
-					name: me.parseBind(me.name)
+					name: me.parseBind( me.name )
 				},
-				value:"$data.value || $data.text ? $data.value || $data.text : $data"
+				value: "$data.value || $data.text ? $data.value || $data.text : $data"
 			};
 		},
 		
@@ -3849,31 +3706,31 @@ define('Firebrick.ui/button/ToggleButton',["text!./ToggleButton.html", "knockout
 		 * @method toggleLabelBindings
 		 * @return {Object}
 		 */
-		toggleLabelBindings: function(){
+		toggleLabelBindings: function() {
 			var me = this,
 				obj = {
-					attr:{
+					attr: {
 						id: "$data.labelId || 'fb-ui-id-' + Firebrick.utils.uniqId()"
 					},
-					withProperties:{
-						inputItemId:"$data.id || 'fb-ui-id-' + Firebrick.utils.uniqId()"
+					withProperties: {
+						inputItemId: "$data.id || 'fb-ui-id-' + Firebrick.utils.uniqId()"
 					},
-					css:{
-						active: "Firebrick.ui.getCmp('"+me.getId()+"')._valueChecker("+me.value+", $data)"
+					css: {
+						active: "Firebrick.ui.getCmp('" + me.getId() + "')._valueChecker(" + me.value + ", $data)"
 					},
-					toggleRenderer: me.parseBind(me.getId()) 
+					toggleRenderer: me.parseBind( me.getId() )
 				};
 
-			if(me.btnClass){
+			if ( me.btnClass ) {
 				obj.css.btn = true;
 			}
 			
-			if(me.btnStyle){
-				obj.css[me.parseBind("btn-" + me.btnStyle)] = true;
+			if ( me.btnStyle ) {
+				obj.css[ me.parseBind( "btn-" + me.btnStyle ) ] = true;
 			}
 			
-			if(me.btnSize){
-				obj.css[me.parseBind("btn-" + me.btnSize)] = true;
+			if ( me.btnSize ) {
+				obj.css[ me.parseBind( "btn-" + me.btnSize ) ] = true;
 			}
 			
 			return obj;
@@ -3882,13 +3739,14 @@ define('Firebrick.ui/button/ToggleButton',["text!./ToggleButton.html", "knockout
 		 * @method toggleLabelTextBindings
 		 * @return {Object}
 		 */
-		toggleLabelTextBindings: function(){
+		toggleLabelTextBindings: function() {
 			return {
 				"text": "$data.text ? $data.text : $data"
 			};
 		}
 	});
 });
+
 
 define('text!Firebrick.ui/common/mixins/tpl/Label.html',[],function () { return '{{?it.labelText}}\r\n<span data-bind="{{=it.dataBind(\'labelBindings\')}}"></span>\r\n{{?}}';});
 
@@ -3902,9 +3760,9 @@ define('text!Firebrick.ui/common/mixins/tpl/Label.html',[],function () { return 
  * @class Label
  * @static
  */
-define('Firebrick.ui/common/mixins/Label',["text!./tpl/Label.html"], function(tpl){
+define( 'Firebrick.ui/common/mixins/Label',[ "text!./tpl/Label.html" ], function( tpl ) {
 	"use strict";
-	return Firebrick.define("Firebrick.ui.common.mixins.Label", {
+	return Firebrick.define( "Firebrick.ui.common.mixins.Label", {
 		/**
 		 * @property labelTpl
 		 * @type {String} html
@@ -3923,17 +3781,17 @@ define('Firebrick.ui/common/mixins/Label',["text!./tpl/Label.html"], function(tp
 		 * @type {String}
 		 * @default ""
 		 */
-		labelText:"",
+		labelText: "",
 		/**
 		 * @method getLabelTpl
 		 */
-		getLabelTpl: function(){
+		getLabelTpl: function() {
 			var me = this;
 			me.template( "labelTpl" );
 			return me.build( "labelTpl" );
 		},
 		/**
-		 * string = "default", "primary", "success" "info", "warning", "danger"  
+		 * string = "default", "primary", "success" "info", "warning", "danger"
 		 * @property labelStyle
 		 * @type {Boolean|String}
 		 * @default "default"
@@ -3943,27 +3801,28 @@ define('Firebrick.ui/common/mixins/Label',["text!./tpl/Label.html"], function(tp
 		 * @method labelBindings
 		 * @return Object
 		 */
-		labelBindings: function(){
-			var me = this, 
+		labelBindings: function() {
+			var me = this,
 				obj = {
 						text: me.textBind( me.labelText ),
-						css:{
+						css: {
 							label: true
 						}
 					};
 			
-				if(me.labelStyle){
+				if ( me.labelStyle ) {
 					obj.css[ me.parseBind( "label-" + me.labelStyle ) ] = true;
 				}
 				
-			if( me.labelCSS ){
+			if ( me.labelCSS ) {
 				obj.css[ me.parseBind( me.labelCSS ) ] = true;
 			}
 				
 			return obj;
-		},
+		}
 	});
 });
+
 
 define('text!Firebrick.ui/nav/Navbar.html',[],function () { return '<nav id="{{=it.getId()}}" data-bind="{{=it.dataBind()}}">\r\n\t<div data-bind="{{=it.dataBind(\'navbarWrapperBindings\')}}">\r\n\t\t{{?it.showNavbarHeader}}\r\n\t\t<div data-bind="{{=it.dataBind(\'navbarHeaderBindings\')}}">\r\n\t\t\t{{?it.toggleButton}}\r\n\t\t\t\t<button data-bind="{{=it.dataBind(\'toggleButtonBindings\')}}">\r\n\t\t         \t<span class="sr-only" data-bind="{{=it.dataBind(\'toggleTextBindings\')}}"></span>\r\n\t\t         \t<span class="icon-bar"></span>\r\n\t\t         \t<span class="icon-bar"></span>\r\n\t\t         \t<span class="icon-bar"></span>\r\n\t       \t\t</button>\r\n       \t\t{{?}}\r\n       \t\t{{?it.showBranding}}\r\n      \t\t\t<a data-bind="{{=it.dataBind(\'brandBindings\')}}">{{=it.brandTpl}}</a>\r\n      \t\t{{?}}\r\n\t\t</div>\r\n\t\t{{?}}\r\n\t\t<div data-bind="{{=it.dataBind(\'navbarContainerBindings\')}}">\r\n     \t\t{{=it.getItems()}}\r\n     \t</div>\r\n\t</div>\r\n</nav>';});
 
@@ -3978,16 +3837,17 @@ define('text!Firebrick.ui/nav/Navbar.html',[],function () { return '<nav id="{{=
  * @uses components.common.mixins.Items
  * @class Base
  */
-define('Firebrick.ui/nav/Base',["../common/Base", "../common/mixins/Items"], function(){
+define( 'Firebrick.ui/nav/Base',[ "../common/Base", "../common/mixins/Items" ], function() {
 	
 	"use strict";
 	
-	return Firebrick.define("Firebrick.ui.nav.Base", {
-		extend:"Firebrick.ui.common.Base",
-		mixins:"Firebrick.ui.common.mixins.Items"
+	return Firebrick.define( "Firebrick.ui.nav.Base", {
+		extend: "Firebrick.ui.common.Base",
+		mixins: "Firebrick.ui.common.mixins.Items"
 	});
 	
 });
+
 
 define('text!Firebrick.ui/display/List.html',[],function () { return '<!-- ko {{=it.dataBind(\'listTemplateBindings\')}} --><!-- /ko -->\r\n\r\n<script type="text/html" id="{{=it._getTplId()}}">\r\n\t<!-- ko {{=it.dataBind(\'virtualContainerBindings\')}} -->\r\n\t\t<{{=it.listType}} data-bind="{{=it.dataBind()}}">\r\n\t\t\t<li data-bind="{{=it.dataBind(\'listItemBindings\')}}">\r\n\t\t\t\t{{?it._preNode}}\r\n\t\t\t\t<span data-bind="{{=it.dataBind(\'listItemNodeBindings\')}}"></span>\r\n\t\t\t\t{{?}}\r\n\t\t\t\t{{=it.b(it.preItemTpl)}}\r\n\t\t\t\t\t{{?it.linkedList}}\r\n\t\t\t\t\t\t<a data-bind="{{=it.dataBind(\'listLinkBindings\')}}">\r\n\t\t\t\t\t{{?}}\r\n\t\t\t\t\t\t\t<span data-bind="{{=it.dataBind(\'listItemTextBindings\')}}"></span>\r\n\t\r\n\t\t\t\t\t\t\t{{?it.badge}}\r\n\t\t\t\t\t\t\t\t<span data-bind="{{=it.dataBind(\'badgeBindings\')}}"></span>\r\n\t\t\t\t\t\t\t{{?}}\r\n\r\n\t\t\t\t\t{{?it.linkedList}}\r\n\t\t\t\t\t\t</a>\r\n\t\t\t\t\t{{?}}\r\n\t\t\t\t{{=it.b(it.postItemTpl)}}\r\n\t\t\t\t<!-- ko {{=it.dataBind(\'childrenBindings\')}} --><!-- /ko -->\r\n\t\t\t</li>\r\n\t\t</{{=it.listType}}>\r\n\t<!-- /ko -->\r\n</script>\r\n';});
 
@@ -4001,43 +3861,41 @@ define('text!Firebrick.ui/display/List.html',[],function () { return '<!-- ko {{
  * @namespace components.display
  * @class List
  */
-define('Firebrick.ui/display/List',["text!./List.html", "knockout", "jquery", "../common/Base",  "../common/mixins/Items", "../common/mixins/Badges"], function(tpl, ko, $){
+define( 'Firebrick.ui/display/List',[ "text!./List.html", "knockout", "jquery", "../common/Base",  "../common/mixins/Items", "../common/mixins/Badges" ], function( tpl, ko, $ ) {
 	"use strict";
 	
-	if(!ko.bindingHandlers.listRenderer){
+	if ( !ko.bindingHandlers.listRenderer ) {
 		/*
 		 * optionsRenderer for list
 		 * create dynamic css along with static
 		 */
 		ko.virtualElements.allowedBindings.listRenderer = true;
 		ko.bindingHandlers.listRenderer = {
-		    init: function(element, valueAccessor, allBindings, viewModel, bindingContext) {
-		    	var childNodes = ko.virtualElements.childNodes(element),
-		    		node,
-		    		ul;
+			init: function( element, valueAccessor ) {
+				var childNodes = ko.virtualElements.childNodes( element ),
+					node;
 
-		    	for(var i = 0, l = childNodes.length; i<l; i++){
-		    		node = childNodes[i];
-		    		if(node instanceof HTMLUListElement){
-		    			//list item
-		    			$(node).attr("id", valueAccessor());
-		    		}
-		    	}
-		    	
-		    }
+				for ( var i = 0, l = childNodes.length; i < l; i++ ) {
+					node = childNodes[ i ];
+					if ( node instanceof window.HTMLUListElement ) {
+						//list item
+						$( node ).attr( "id", valueAccessor() );
+					}
+				}
+			}
 		};
 	}
 	
-	if(!ko.bindingHandlers.listItemRenderer){
+	if ( !ko.bindingHandlers.listItemRenderer ) {
 		ko.virtualElements.allowedBindings.listItemRenderer = true;
 		ko.bindingHandlers.listItemRenderer = {
-		    init: function(element, valueAccessor, allBindings, viewModel, bindingContext) {
-				var $el = $(element);
+		    init: function( element, valueAccessor, allBindings, viewModel ) {
+				var $el = $( element );
 	
-				if($el.length){
-					if(viewModel){
-						if(viewModel.css){
-							$el.addClass(Firebrick.ui.utils.getValue(viewModel.css));
+				if ( $el.length ) {
+					if ( viewModel ) {
+						if ( viewModel.css ) {
+							$el.addClass( Firebrick.ui.utils.getValue( viewModel.css ) );
 						}
 					}
 				}
@@ -4045,70 +3903,70 @@ define('Firebrick.ui/display/List',["text!./List.html", "knockout", "jquery", ".
 		};
 	}
 	
-	return Firebrick.define("Firebrick.ui.display.List", {
-		extend:"Firebrick.ui.common.Base",
-		mixins:["Firebrick.ui.common.mixins.Items", "Firebrick.ui.common.mixins.Badges"],
+	return Firebrick.define( "Firebrick.ui.display.List", {
+		extend: "Firebrick.ui.common.Base",
+		mixins: [ "Firebrick.ui.common.mixins.Items", "Firebrick.ui.common.mixins.Badges" ],
 		/**
 		 * @property sName
 		 * @type {String}
 		 * @default "fb-ui-list"
 		 */
-		sName:"display.list",
+		sName: "display.list",
 		/**
 		 * @property tpl
 		 * @type {String} html
 		 * @default components/display/List.html
 		 */
-		tpl:tpl,
+		tpl: tpl,
 		/**
 		 * type of list, ul or ol
 		 * @property listType
 		 * @type {String}
 		 * @default "ul"
 		 */
-		listType:"ul",
+		listType: "ul",
 		/**
 		 * is a list group?
 		 * @property listGroup
 		 * @type {Boolean|String}
 		 * @default true
 		 */
-		listGroup:false,
+		listGroup: false,
 		/**
 		 * defaults to true but only comes into effect with property "listGroup"
 		 * @property listItemGroupClass
 		 * @type {Boolean|String}
 		 * @default true
 		 */
-		listItemGroupClass:true,
+		listItemGroupClass: true,
 		/**
 		 * items to parse into the list
 		 * @property data
 		 * @type {String}
 		 * @default null
 		 */
-		data:null,
+		data: null,
 		/**
 		 * unstyled - applies list-unstyled css class to list container (ul/ol)
 		 * @property unstyled
 		 * @type {boolean}
 		 * @default false
 		 */
-		unstyled:false,
+		unstyled: false,
 		/**
 		 * inject a template into the <li>{preItemTpl}<span></span>{postItemTpl}</li> item
 		 * @property preItemTpl
 		 * @type {String|Function} html
 		 * @default ""
 		 */
-		preItemTpl:"",
+		preItemTpl: "",
 		/**
 		 * inject a template into the <li>{preItemTpl}<span></span>{postItemTpl}</li> item
 		 * @property postItemTpl
 		 * @type {String|Function} html
 		 * @default ""
 		 */
-		postItemTpl:"",
+		postItemTpl: "",
 		/**
 		 * wrap the list element content in a <a></a> link
 		 * @property linkedList
@@ -4120,8 +3978,8 @@ define('Firebrick.ui/display/List',["text!./List.html", "knockout", "jquery", ".
 		 * @method virtualContainerBindings
 		 * @return {Object}
 		 */
-		virtualContainerBindings: function(){
-			return {"if": "$data && $data.length"};
+		virtualContainerBindings: function() {
+			return { "if": "$data && $data.length" };
 		},
 		/**
 		 * set to true to add attribute [fb-ignore-router=true] to all links - these links are then ignored by the history api (Firebrick.router.history)
@@ -4144,50 +4002,37 @@ define('Firebrick.ui/display/List',["text!./List.html", "knockout", "jquery", ".
 		 */
 		preNode: true,
 		/**
-		 * used by nodeRenderer()
 		 * @method nodeCSSRenderer
 		 * @param $data {ko bindings context}
 		 * @return {Object} passed to $element.addClass()
 		 */
-		nodeCSSRenderer: function( $data ){
-			var me = this,
-				obj = {},
+		nodeCSSRenderer: function( $data ) {
+			var obj = {},
 				children = $data.children;
 			
-			obj["fb-ui-node-action"] = true;
+			obj[ "fb-ui-node-action" ] = true;
 			
-			if(children){
+			if ( children ) {
 				
 				obj.glyphicon = true;
 				
-				if(children.expandable !== false){
-					obj["fb-ui-list-expandable-node"] = true;
+				if ( children.expandable !== false ) {
+					obj[ "fb-ui-list-expandable-node" ] = true;
 				}
 				
-			}else{
-				obj["fb-ui-hidden"] = true;
+			} else {
+				obj[ "fb-ui-hidden" ] = true;
 			}
 			
 			return obj;
 		},
 		/**
-		 * @method nodeRenderer 
-		 * @param $element {jQuery Object}
-		 * @param bindingContext {KO Context Object]
-		 */
-		nodeRenderer: function($element, bindingContext ){
-			var me = this,
-				$data = bindingContext.$data,
-				children = $data.children;
-			
-		},
-		/**
 		 * @method init
 		 */
-		init: function(){
+		init: function() {
 			var me = this;
 			
-			me.on("rendered", function(){
+			me.on( "rendered", function() {
 				me._initUIEvents();
 			});
 			
@@ -4197,18 +4042,18 @@ define('Firebrick.ui/display/List',["text!./List.html", "knockout", "jquery", ".
 		 * @method _initUIEvents
 		 * @private
 		 */
-		_initUIEvents: function(){
+		_initUIEvents: function() {
 			var me = this,
 				$el = me.getElement(),
-				$collapsibles = $(".fb-ui-list-expandable-node", $el),
-				func = function(){
+				$collapsibles = $( ".fb-ui-list-expandable-node", $el ),
+				func = function() {
 					return me._nodeClick( this, arguments );
-				}
+				};
 
-			if( $collapsibles.length ){
-				$collapsibles.on("click", func);
-				me.on("destroy", function(){
-					$collapsibles.off("click", func);
+			if ( $collapsibles.length ) {
+				$collapsibles.on( "click", func );
+				me.on( "destroy", function() {
+					$collapsibles.off( "click", func );
 				});
 			}
 		},
@@ -4217,10 +4062,10 @@ define('Firebrick.ui/display/List',["text!./List.html", "knockout", "jquery", ".
 		 * @private
 		 * used by jQuery on click event
 		 */
-		_nodeClick: function(element, clickArgs){
+		_nodeClick: function( element, clickArgs ) {
 			var me = this,
-				$el = $(element),
-				$node = $el.closest("li.fb-ui-listitem-parent"),
+				$el = $( element ),
+				$node = $el.closest( "li.fb-ui-listitem-parent" ),
 				args = Firebrick.utils.argsToArray( clickArgs );
 			
 			args.unshift( "nodeClicked" );	//add to the begining
@@ -4228,20 +4073,20 @@ define('Firebrick.ui/display/List',["text!./List.html", "knockout", "jquery", ".
 			
 			me.toggleCollapse( $node );
 			
-			return me.fireEvent( "nodeClicked", args);
+			return me.fireEvent( "nodeClicked", args );
 		},
 		/**
 		 * @method toggleCollapse
 		 * @param $node {jQuery Object} li node item
 		 */
-		toggleCollapse: function( $node ){
+		toggleCollapse: function( $node ) {
 			var me = this,
-				$ul = $("> ul", $node);
+				$ul = $( "> ul", $node );
 			
-			if($ul.length){
-				if( $ul.is(":visible") ){
+			if ( $ul.length ) {
+				if ( $ul.is( ":visible" ) ) {
 					me.collapseNode( $node );
-				}else{
+				} else {
 					me.expandNode( $node );
 				}
 			}
@@ -4250,13 +4095,13 @@ define('Firebrick.ui/display/List',["text!./List.html", "knockout", "jquery", ".
 		 * @method collapseNode
 		 * @param $node {jQuery Object} li node item
 		 */
-		collapseNode: function( $node ){
+		collapseNode: function( $node ) {
 			var me = this,
-				$ul = $("> ul", $node);
+				$ul = $( "> ul", $node );
 			
-			if($ul.length){
+			if ( $ul.length ) {
 				$ul.hide();
-				me.fireEvent("nodeCollapsed", $node, $ul);
+				me.fireEvent( "nodeCollapsed", $node, $ul );
 				$node.addClass( me.collapsedCSS );
 			}
 		},
@@ -4264,13 +4109,13 @@ define('Firebrick.ui/display/List',["text!./List.html", "knockout", "jquery", ".
 		 * @method expandNode
 		 * @param $node {jQuery Object} li node item
 		 */
-		expandNode: function( $node ){
+		expandNode: function( $node ) {
 			var me = this,
-				$ul = $("> ul", $node);
+				$ul = $( "> ul", $node );
 			
-			if($ul.length){
+			if ( $ul.length ) {
 				$ul.show();
-				me.fireEvent("nodeExpanded", $node, $ul);
+				me.fireEvent( "nodeExpanded", $node, $ul );
 				$node.removeClass( me.collapsedCSS );
 			}
 		},
@@ -4278,17 +4123,17 @@ define('Firebrick.ui/display/List',["text!./List.html", "knockout", "jquery", ".
 		 * @method bindings
 		 * @return {Object}
 		 */
-		bindings: function(){
+		bindings: function() {
 			var me = this,
-				obj = me.callParent(arguments);
+				obj = me.callParent( arguments );
 
-			if(me.listGroup){
-				obj.css["'list-group'"] = me.listGroup;
+			if ( me.listGroup ) {
+				obj.css[ "'list-group'" ] = me.listGroup;
 			}
-			if(me.unstyled){
-				obj.css["'fb-ui-list-unstyled'"] = me.unstyled;
+			if ( me.unstyled ) {
+				obj.css[ "'fb-ui-list-unstyled'" ] = me.unstyled;
 			}
-			if(me.items){
+			if ( me.items ) {
 				obj.foreach = "$data";
 			}
 			
@@ -4300,18 +4145,18 @@ define('Firebrick.ui/display/List',["text!./List.html", "knockout", "jquery", ".
 		 * @method listItemBindings
 		 * @return {Object}
 		 */
-		listItemBindings: function(){
+		listItemBindings: function() {
 			var me  = this,
 				obj = {
-					css:{
+					css: {
 						"'fb-ui-listitem-parent'": "$data.children ? true : false",
 						"'fb-ui-listitem-haschildren'": "$data.children ? true : false"
-					}, 
-					attr:{}
+					},
+					attr: {}
 				};
 			
-			if(me.listGroup && me.listItemGroupClass){
-				obj.css["'list-group-item'"] = me.listItemGroupClass;
+			if ( me.listGroup && me.listItemGroupClass ) {
+				obj.css[ "'list-group-item'" ] = me.listItemGroupClass;
 			}
 			
 			obj.css[ me.parseBind( me.collapsedCSS ) ] = "$data.children && $data.expandable !== false && $data.expanded === false ? true : false";
@@ -4320,33 +4165,31 @@ define('Firebrick.ui/display/List',["text!./List.html", "knockout", "jquery", ".
 			obj.attr.id = "$data.id || 'fb-ui-listitem-' + Firebrick.utils.uniqId()";
 			obj.listItemRenderer = true;
 			
-			
 			return obj;
 		},
 		/**
 		 * @method listItemTextBindings
 		 * @return {Object}
 		 */
-		listItemTextBindings:function(){
-			var me = this;
+		listItemTextBindings: function() {
 			return {
 				value: "$data.hasOwnProperty('value') ? $data.value : $data",
 				htmlWithBinding: "$data.renderer ? $data.renderer($data, $context) : ($data.text ? $data.text : $data)",
 				css: {
 					"'fb-ui-listitem-text'": true
-				} 
+				}
 			};
 		},
 		/**
 		 * @method listTemplateBindings
 		 * @return {Object}
 		 */
-		listTemplateBindings: function(){
+		listTemplateBindings: function() {
 			var me = this;
 			return {
 				template: {
-					name:  me.parseBind(me._getTplId()),
-					data: $.isArray(me.items) ? "Firebrick.ui.getCmp('" + me.getId() + "').items" : me.items,
+					name:  me.parseBind( me._getTplId() ),
+					data: $.isArray( me.items ) ? "Firebrick.ui.getCmp('" + me.getId() + "').items" : me.items
 				},
 				listRenderer: me.parseBind( me.getId() )
 			};
@@ -4356,14 +4199,14 @@ define('Firebrick.ui/display/List',["text!./List.html", "knockout", "jquery", ".
 		 * @method _getTplId
 		 * @return {String}
 		 */
-		_getTplId: function(){
-			return "fb-ui-tpl-" + this.getId(); 
+		_getTplId: function() {
+			return "fb-ui-tpl-" + this.getId();
 		},
 		/**
 		 * @method childrenBindings
 		 * @return {Object}
 		 */
-		childrenBindings: function(){
+		childrenBindings: function() {
 			var me = this;
 			return {
 				template: {
@@ -4376,24 +4219,24 @@ define('Firebrick.ui/display/List',["text!./List.html", "knockout", "jquery", ".
 		 * @method listLinkBindings
 		 * @return {Object}
 		 */
-		listLinkBindings: function(){
+		listLinkBindings: function() {
 			var me = this,
 				obj = {
-					attr:{
+					attr: {
 						href: "Firebrick.ui.helper.linkBuilder( $data )",
 						"'data-value'": "$data.hasOwnProperty('value') ? $data.value : $data"
 					},
-					value: "$data.hasOwnProperty('value') ? $data.value : $data",
+					value: "$data.hasOwnProperty('value') ? $data.value : $data"
 			};
-			obj.attr["'data-target'"] = "$data.dataTarget ? $data.dataTarget : false";
-			obj.attr["'fb-ignore-router'"] = "$data.hasOwnProperty( 'ignoreRouter' ) ? $data.ignoreRouter : " + me.ignoreRouter;
+			obj.attr[ "'data-target'" ] = "$data.dataTarget ? $data.dataTarget : false";
+			obj.attr[ "'fb-ignore-router'" ] = "$data.hasOwnProperty( 'ignoreRouter' ) ? $data.ignoreRouter : " + me.ignoreRouter;
 			return obj;
 		},
 		/**
 		 * @method listItemNodeBindings
 		 * @return {Object}
 		 */
-		listItemNodeBindings: function(){
+		listItemNodeBindings: function() {
 			var me = this,
 				obj = {
 					css: "Firebrick.getById('" + me.getId() + "').nodeCSSRenderer( $data )"
@@ -4403,6 +4246,7 @@ define('Firebrick.ui/display/List',["text!./List.html", "knockout", "jquery", ".
 		}
 	});
 });
+
 /*!
  * @author Steven Masala [me@smasala.com]
  */
@@ -4413,12 +4257,12 @@ define('Firebrick.ui/display/List',["text!./List.html", "knockout", "jquery", ".
  * @namespace components.nav
  * @class List
  */
-define('Firebrick.ui/nav/List',["../display/List"], function(){
+define( 'Firebrick.ui/nav/List',[ "../display/List" ], function() {
 	"use strict";
-	return Firebrick.define("Firebrick.ui.nav.List", {
-		extend: "Firebrick.ui.display.List", 
-		sName:"nav.list",
-		unstyled:true,
+	return Firebrick.define( "Firebrick.ui.nav.List", {
+		extend: "Firebrick.ui.display.List",
+		sName: "nav.list",
+		unstyled: true,
 		linkedList: true,
 		/**
 		 * whether navbar-nav class is applied to list
@@ -4431,12 +4275,12 @@ define('Firebrick.ui/nav/List',["../display/List"], function(){
 		 * @method bindings
 		 * @return {Object}
 		 */
-		bindings: function(){
+		bindings: function() {
 			var me = this,
-				obj = me.callParent(arguments);
+				obj = me.callParent( arguments );
 			
-			if(me.navbarNavClass){
-				obj.css["'navbar-nav'"] = true;
+			if ( me.navbarNavClass ) {
+				obj.css[ "'navbar-nav'" ] = true;
 			}
 
 			obj.css.nav = true;
@@ -4445,6 +4289,7 @@ define('Firebrick.ui/nav/List',["../display/List"], function(){
 		}
 	});
 });
+
 /*!
  * @author Steven Masala [me@smasala.com]
  */
@@ -4455,12 +4300,12 @@ define('Firebrick.ui/nav/List',["../display/List"], function(){
  * @namespace components.nav
  * @class Navbar
  */
-define('Firebrick.ui/nav/Navbar',["text!./Navbar.html", "./Base", "./List"], function(tpl){
+define( 'Firebrick.ui/nav/Navbar',[ "text!./Navbar.html", "./Base", "./List" ], function( tpl ) {
 	"use strict";
-	return Firebrick.define("Firebrick.ui.nav.Navbar", {
-		extend:"Firebrick.ui.nav.Base",
-		tpl:tpl,
-		sName:"nav.navbar",
+	return Firebrick.define( "Firebrick.ui.nav.Navbar", {
+		extend: "Firebrick.ui.nav.Base",
+		tpl: tpl,
+		sName: "nav.navbar",
 		/**
 		 * passed on to the toolbar items (direct children only)
 		 * @property toolbarDefaults
@@ -4469,7 +4314,7 @@ define('Firebrick.ui/nav/Navbar',["text!./Navbar.html", "./Base", "./List"], fun
 		 * 		navbarItem: true
 		 * }
 		 */
-		defaults:{
+		defaults: {
 			navbarItem: true
 		},
 		/**
@@ -4492,7 +4337,7 @@ define('Firebrick.ui/nav/Navbar',["text!./Navbar.html", "./Base", "./List"], fun
 		 * @type {Boolean}
 		 * @default true
 		 */
-		navbarClass:true,
+		navbarClass: true,
 		/**
 		 * whether "navbar-form" css class is used
 		 * @property navbarFormClass
@@ -4506,7 +4351,7 @@ define('Firebrick.ui/nav/Navbar',["text!./Navbar.html", "./Base", "./List"], fun
 		 * @type {Boolean}
 		 * @default true
 		 */
-		navbarHeaderClass:true, 
+		navbarHeaderClass: true,
 		/**
 		 * if false then the navigation won't collapse to the small menu button
 		 * @property toggleButton
@@ -4539,27 +4384,27 @@ define('Firebrick.ui/nav/Navbar',["text!./Navbar.html", "./Base", "./List"], fun
 		 * @type {Boolean|String}
 		 * @default "Firebrick.ui"
 		 */
-		brandText:"Firebrick.ui",
+		brandText: "Firebrick.ui",
 		/**
 		 * false to deactivate
 		 * @property brandTpl
 		 * @type {Boolean|String}
 		 * @default false
 		 */
-		brandTpl:false,
+		brandTpl: false,
 		/**
 		 * data to populate navigation with
 		 * @property data
 		 * @type {String}
 		 * @default null
 		 */
-		data:null,
+		data: null,
 		/**
 		 * overriding parent
 		 * @property listGroupClass
 		 * @default false
 		 */
-		listGroupClass:false,
+		listGroupClass: false,
 		/**
 		 * sets nav && nav-bar css classes to the list container
 		 * @property navClass
@@ -4583,16 +4428,16 @@ define('Firebrick.ui/nav/Navbar',["text!./Navbar.html", "./Base", "./List"], fun
 		 * @method bindings
 		 * @return {Object}
 		 */
-		bindings: function(){
+		bindings: function() {
 			var me = this,
-				obj = me.callParent(arguments);
+				obj = me.callParent( arguments );
 		
 			obj.attr.role = "'navigation'";
-			obj.css["'navbar-default'"] = me.navbarDefaultClass;
+			obj.css[ "'navbar-default'" ] = me.navbarDefaultClass;
 			obj.css.navbar = me.navbarClass;
 			
-			if(me.navTypeClass){
-				obj.css[ me.parseBind(me.navTypeClass) ] = true;
+			if ( me.navTypeClass ) {
+				obj.css[ me.parseBind( me.navTypeClass ) ] = true;
 			}
 			
 			return obj;
@@ -4601,22 +4446,22 @@ define('Firebrick.ui/nav/Navbar',["text!./Navbar.html", "./Base", "./List"], fun
 		 * @method brandBindings
 		 * @return {Object}
 		 */
-		brandBindings: function(){
+		brandBindings: function() {
 			var me = this,
 				obj = {
-					css:{},
-					attr:{}
+					css: {},
+					attr: {}
 				};
 			
-			if(me.brandLink !== false){
+			if ( me.brandLink !== false ) {
 				obj.attr.href =  me.parseBind( me.brandLink );
 			}
 			
-			if(me.brandClass){
-				obj.css["'navbar-brand'"] = me.brandClass;
+			if ( me.brandClass ) {
+				obj.css[ "'navbar-brand'" ] = me.brandClass;
 			}
-			if(me.brandText && !me.brandTpl){
-				obj.text = me.parseBind(me.brandText);
+			if ( me.brandText && !me.brandTpl ) {
+				obj.text = me.parseBind( me.brandText );
 			}
 			return obj;
 		},
@@ -4625,7 +4470,7 @@ define('Firebrick.ui/nav/Navbar',["text!./Navbar.html", "./Base", "./List"], fun
 		 * @method listItemBindings
 		 * @return {Object}
 		 */
-		listItemBindings: function(){
+		listItemBindings: function() {
 			return {
 					css: {
 						active: "$data.active ? $data.active : false"
@@ -4636,11 +4481,11 @@ define('Firebrick.ui/nav/Navbar',["text!./Navbar.html", "./Base", "./List"], fun
 		 * @method navbarHeaderBindings
 		 * @return {Object}
 		 */
-		navbarHeaderBindings: function(){
+		navbarHeaderBindings: function() {
 			var me = this,
-				obj = {css:{}};
-			if(me.navbarHeaderClass){
-				obj.css["'navbar-header'"] = me.navbarHeaderClass;
+				obj = { css: {} };
+			if ( me.navbarHeaderClass ) {
+				obj.css[ "'navbar-header'" ] = me.navbarHeaderClass;
 			}
 			return obj;
 		},
@@ -4648,21 +4493,21 @@ define('Firebrick.ui/nav/Navbar',["text!./Navbar.html", "./Base", "./List"], fun
 		 * @method navbarContainerBindings
 		 * @return {Object}
 		 */
-		navbarContainerBindings: function(){
+		navbarContainerBindings: function() {
 			var me = this,
 				obj = {
-						attr:{
+						attr: {
 							id:  me.parseBind( "fb-nav-" + me.getId() )
 						},
-						css:{}
+						css: {}
 					};
-			if(me.toggleButton){
+			if ( me.toggleButton ) {
 				obj.css.collapse = true;
-				obj.css["'navbar-collapse'"] = true;
+				obj.css[ "'navbar-collapse'" ] = true;
 			}
 			
-			if(me.navbarFormClass){
-				obj.css["'navbar-form'"] = true;
+			if ( me.navbarFormClass ) {
+				obj.css[ "'navbar-form'" ] = true;
 			}
 			
 			return obj;
@@ -4671,7 +4516,7 @@ define('Firebrick.ui/nav/Navbar',["text!./Navbar.html", "./Base", "./List"], fun
 		 * @method toggleTextBindings
 		 * @return {Object}
 		 */
-		toggleTextBindings: function(){
+		toggleTextBindings: function() {
 			var me = this;
 			return {
 				text: me.textBind( me.toggleText )
@@ -4681,18 +4526,18 @@ define('Firebrick.ui/nav/Navbar',["text!./Navbar.html", "./Base", "./List"], fun
 		 * @method toggleButtonBindings
 		 * @return {Object}
 		 */
-		toggleButtonBindings: function(){
+		toggleButtonBindings: function() {
 			var me = this,
 				id = "fb-nav-" + me.getId() + "'",
 				obj = {
-					attr:{
+					attr: {
 						type: "'button'",
 						"'data-toggle'": "'collapse'",
 						"'data-target'": "'#" + id,
 						"'aria-expanded'": false,
 						"'aria-controls'": "'" + id
 					},
-					css:{
+					css: {
 						collapsed: true,
 						"'navbar-toggle'": true
 					}
@@ -4704,15 +4549,16 @@ define('Firebrick.ui/nav/Navbar',["text!./Navbar.html", "./Base", "./List"], fun
 		 * @method navbarWrapperBindings
 		 * @return {Object}
 		 */
-		navbarWrapperBindings: function(){
+		navbarWrapperBindings: function() {
 			return {
-				css:{
+				css: {
 					"container": true
 				}
 			};
 		}
 	});
 });
+
 /*!
  * @author Steven Masala [me@smasala.com]
  */
@@ -4723,12 +4569,12 @@ define('Firebrick.ui/nav/Navbar',["text!./Navbar.html", "./Base", "./List"], fun
  * @namespace components.nav
  * @class Toolbar
  */
-define('Firebrick.ui/nav/Toolbar',["./Navbar"], function(){
+define( 'Firebrick.ui/nav/Toolbar',[ "./Navbar" ], function() {
 	"use strict";
-	return Firebrick.define("Firebrick.ui.nav.Toolbar", {
-		extend:"Firebrick.ui.nav.Navbar",
-		sName:"nav.toolbar",
-		showBranding:false,
+	return Firebrick.define( "Firebrick.ui.nav.Toolbar", {
+		extend: "Firebrick.ui.nav.Navbar",
+		sName: "nav.toolbar",
+		showBranding: false,
 		/**
 		 * possible positions: top, bottom
 		 * @property position
@@ -4736,28 +4582,28 @@ define('Firebrick.ui/nav/Toolbar',["./Navbar"], function(){
 		 * @default "top"
 		 */
 		position: "top",
-		init:function(){
+		init: function() {
 			var me = this;
 			
 			me.navTypeClass = "navbar-fixed-" + me.position;
 			
-			return me.callParent(arguments);
+			return me.callParent( arguments );
 		},
-		bindings: function(){
+		bindings: function() {
 			var me = this,
-				obj = me.callParent(arguments);
+				obj = me.callParent( arguments );
 			
-			obj.css["'fb-ui-toolbar'"] = true;
+			obj.css[ "'fb-ui-toolbar'" ] = true;
 			
 			return obj;
 		},
-		navbarContainerBindings: function(){
+		navbarContainerBindings: function() {
 			var me = this,
-				obj = me.callParent(arguments);
+				obj = me.callParent( arguments );
 			
-			obj.css["'navbar-nav'"] = false;
-			obj.css["'fb-ui-navbar'"] = true;
-			obj.css["'form-horizontal'"] = true;
+			obj.css[ "'navbar-nav'" ] = false;
+			obj.css[ "'fb-ui-navbar'" ] = true;
+			obj.css[ "'form-horizontal'" ] = true;
 			
 			return obj;
 		},
@@ -4765,20 +4611,21 @@ define('Firebrick.ui/nav/Toolbar',["./Navbar"], function(){
 		 * @method navbarWrapperBindings
 		 * @return {Object}
 		 */
-		navbarWrapperBindings: function(){
+		navbarWrapperBindings: function() {
 			var me = this,
-				obj = me.callParent(arguments);
+				obj = me.callParent( arguments );
 			
-			if(obj.css.container){
+			if ( obj.css.container ) {
 				delete obj.css.container;
 			}
 			
-			obj.css["'container-fluid'"] = true;
+			obj.css[ "'container-fluid'" ] = true;
 			
 			return obj;
 		}
 	});
 });
+
 /*!
  * @author Steven Masala [me@smasala.com]
  */
@@ -4789,9 +4636,9 @@ define('Firebrick.ui/nav/Toolbar',["./Navbar"], function(){
  * @class Toolbars
  * @static
  */
-define('Firebrick.ui/common/mixins/Toolbars',["jquery", "./Items", "Firebrick.ui/nav/Toolbar"], function($){
+define( 'Firebrick.ui/common/mixins/Toolbars',[ "jquery", "./Items", "Firebrick.ui/nav/Toolbar" ], function( $ ) {
 	"use strict";
-	return Firebrick.define("Firebrick.ui.common.mixins.Toolbars", {
+	return Firebrick.define( "Firebrick.ui.common.mixins.Toolbars", {
 		/**
 		 * passed on to the toolbar items (direct children only)
 		 * @property _toolbarDefaults
@@ -4801,7 +4648,7 @@ define('Firebrick.ui/common/mixins/Toolbars',["jquery", "./Items", "Firebrick.ui
 		 * 		navbarItem: true
 		 * }
 		 */
-		_toolbarDefaults:{
+		_toolbarDefaults: {
 			navbarItem: true
 		},
 		/**
@@ -4823,25 +4670,25 @@ define('Firebrick.ui/common/mixins/Toolbars',["jquery", "./Items", "Firebrick.ui
 		 * @type {Array of Objects}
 		 * @default null
 		 */
-		toolbars:null,
+		toolbars: null,
 		/**
 		 * add css classes and other configuration to the container
 		 * @method toolbarContainer
 		 * @param obj {Object} obj that is later pass to the binder
 		 * @return {Object}
 		 */
-		toolbarContainer: function(obj){
+		toolbarContainer: function( obj ) {
 			var me = this,
 				toolbarPosition;
 			
-			if(me.toolbars && $.isArray(me.toolbars)){
+			if ( me.toolbars && $.isArray( me.toolbars ) ) {
 				
-				obj.css["'fb-ui-toolbar-container'"] = true;
+				obj.css[ "'fb-ui-toolbar-container'" ] = true;
 				
-				for(var i = 0, l = me.toolbars.length; i<l; i++){
-					toolbarPosition = me.toolbars[i].position;
-					if(toolbarPosition){
-						obj.css[ me.parseBind("fb-ui-toolbar-" + toolbarPosition) ] = true;
+				for ( var i = 0, l = me.toolbars.length; i < l; i++ ) {
+					toolbarPosition = me.toolbars[ i ].position;
+					if ( toolbarPosition ) {
+						obj.css[ me.parseBind( "fb-ui-toolbar-" + toolbarPosition ) ] = true;
 					}
 				}
 			}
@@ -4852,31 +4699,31 @@ define('Firebrick.ui/common/mixins/Toolbars',["jquery", "./Items", "Firebrick.ui
 		 * @method getToolbars
 		 * @return {html}
 		 */
-		getToolbars: function(){
+		getToolbars: function() {
 			var me = this,
 				toolbars = me.toolbars,
 				tbItem,
 				html = "",
 				items;
 			
-			if(toolbars){
-				if($.isArray(toolbars)){
-					for(var i = 0, l = toolbars.length; i<l; i++){
-						tbItem = toolbars[i];
-						if(tbItem.items){
+			if ( toolbars ) {
+				if ( $.isArray( toolbars ) ) {
+					for ( var i = 0, l = toolbars.length; i < l; i++ ) {
+						tbItem = toolbars[ i ];
+						if ( tbItem.items ) {
 							//wrap the items inside a toolbar component
 							tbItem.sName = "nav.toolbar";
-							tbItem.defaults = Firebrick.utils.overwrite(me._toolbarDefaults, (tbItem.defaults || {}));
-							items = me._getItems(tbItem);
+							tbItem.defaults = Firebrick.utils.overwrite( me._toolbarDefaults, ( tbItem.defaults || {}) );
+							items = me._getItems( tbItem );
 							//load the html for the template compiler
 							html += items.html;
-							me.toolbars[i] = items.items[0];
-						}else{
-							console.warn("a toolbar was found without the items property and didn't render");
+							me.toolbars[ i ] = items.items[ 0 ];
+						} else {
+							console.warn( "a toolbar was found without the items property and didn't render" );
 						}
 					}
-				}else{
-					console.warn("unable to load toolbars for this panel", me, "toolbars property must be an array of objects");
+				} else {
+					console.warn( "unable to load toolbars for this panel", me, "toolbars property must be an array of objects" );
 				}
 			}
 			
@@ -4885,10 +4732,11 @@ define('Firebrick.ui/common/mixins/Toolbars',["jquery", "./Items", "Firebrick.ui
 	});
 });
 
+
 define('text!Firebrick.ui/containers/Accordion.html',[],function () { return '<div id="{{=it.getId()}}" data-bind="{{=it.dataBind()}}">\r\n\t{{=it.getItems()}}\r\n</div>';});
 
 
-define('text!Firebrick.ui/containers/Panel.html',[],function () { return '<div id="{{=it.getId()}}" data-bind="{{=it.dataBind()}}">\r\n\t{{?it.title !== false && (it.collapsible || it.headerItems) }}\r\n\t<div data-bind="{{=it.dataBind(\'panelHeaderBindings\')}}">\r\n\t\t{{?it.title}}\r\n\t\t\t{{?it.collapsible}}\r\n\t\t\t\t<a data-bind="{{=it.dataBind(\'collapsibleLinkBindings\')}}">\r\n\t\t\t{{?}}\r\n\t\t\t\t<h{{=it.headerSize}} data-bind="{{=it.dataBind(\'panelHeaderTextBindings\')}}"></h{{=it.headerSize}}>\t\r\n\t\t\t\t{{=it.getLabelTpl()}}\r\n\t\t\t{{?it.collapsible}}\r\n\t\t\t\t</a>\r\n\t\t\t{{?}}\r\n\t\t{{?}}\r\n\t\t{{=it.getDefaultIcons()}}\r\n\t\t{{?it.headerItems}}\r\n\t\t\t<div data-bind="{{=it.dataBind(\'headerItemsBindings\')}}">\r\n\t\t\t\t{{=it.getItemsProp(\'headerItems\')}}\r\n\t\t\t</div>\r\n\t\t{{?}}\r\n\t</div>\r\n\t{{?}}\r\n\t\t<div data-bind="{{=it.dataBind(\'tabBindings\')}}">\r\n\t\t\t<div data-bind="{{=it.dataBind(\'panelBodyBindings\')}}" >\r\n\t\t\t\t{{=it.getToolbars()}}\r\n\t\t\t\t<div data-bind="{{=it.dataBind(\'panelItemBindings\')}}">\r\n\t\t\t\t\t{{=it.getItems()}}\r\n\t\t\t\t</div>\r\n\t\t\t</div>\r\n\t\t</div>\r\n</div>';});
+define('text!Firebrick.ui/containers/Panel.html',[],function () { return '<div id="{{=it.getId()}}" data-bind="{{=it.dataBind()}}">\r\n\t{{?it.title !== false || it.collapsible || it.headerItems}}\r\n\t<div data-bind="{{=it.dataBind(\'panelHeaderBindings\')}}">\r\n\t\t{{?it.title !== false}}\r\n\t\t\t{{?it.title}}\r\n\t\t{{?}}\r\n\t\t\t{{?it.collapsible}}\r\n\t\t\t\t<a data-bind="{{=it.dataBind(\'collapsibleLinkBindings\')}}">\r\n\t\t\t{{?}}\r\n\t\t\t\t<h{{=it.headerSize}} data-bind="{{=it.dataBind(\'panelHeaderTextBindings\')}}"></h{{=it.headerSize}}>\t\r\n\t\t\t\t{{=it.getLabelTpl()}}\r\n\t\t\t{{?it.collapsible}}\r\n\t\t\t\t</a>\r\n\t\t\t{{?}}\r\n\t\t{{?}}\r\n\t\t{{=it.getDefaultIcons()}}\r\n\t\t{{?it.headerItems}}\r\n\t\t\t<div data-bind="{{=it.dataBind(\'headerItemsBindings\')}}">\r\n\t\t\t\t{{=it.getItemsProp(\'headerItems\')}}\r\n\t\t\t</div>\r\n\t\t{{?}}\r\n\t</div>\r\n\t{{?}}\r\n\t\t<div data-bind="{{=it.dataBind(\'tabBindings\')}}">\r\n\t\t\t<div data-bind="{{=it.dataBind(\'panelBodyBindings\')}}" >\r\n\t\t\t\t{{=it.getToolbars()}}\r\n\t\t\t\t<div data-bind="{{=it.dataBind(\'panelItemBindings\')}}">\r\n\t\t\t\t\t{{=it.getItems()}}\r\n\t\t\t\t</div>\r\n\t\t\t</div>\r\n\t\t</div>\r\n</div>';});
 
 
 define('text!Firebrick.ui/containers/panel/Icon.html',[],function () { return '{{?it.scope[it.property] && it.scope[it.showProperty] !== false}}\r\n\t<a data-bind="{{=it.scope.dataBind(it.bindingMethod)}}"></a>\r\n{{?}}';});
@@ -4903,12 +4751,12 @@ define('text!Firebrick.ui/containers/panel/Icon.html',[],function () { return '{
  * @namespace components.containers
  * @class Panel
  */
-define('Firebrick.ui/containers/Panel',["text!./Panel.html", "text!./panel/Icon.html", "jquery", "doT", "./Base", "../nav/Toolbar", "../common/mixins/Toolbars", "../common/mixins/Label"], function(tpl, iconTpl, $, doT){
+define( 'Firebrick.ui/containers/Panel',[ "text!./Panel.html", "text!./panel/Icon.html", "jquery", "doT", "./Base", "../nav/Toolbar", "../common/mixins/Toolbars", "../common/mixins/Label" ], function( tpl, iconTpl, $, doT ) {
 	"use strict";
-	return Firebrick.define("Firebrick.ui.containers.Panel", {
-		extend:"Firebrick.ui.containers.Base",
-		mixins: ["Firebrick.ui.common.mixins.Toolbars",
-		         "Firebrick.ui.common.mixins.Label"],
+	return Firebrick.define( "Firebrick.ui.containers.Panel", {
+		extend: "Firebrick.ui.containers.Base",
+		mixins: [ "Firebrick.ui.common.mixins.Toolbars",
+		         "Firebrick.ui.common.mixins.Label" ],
 		/**
 		 * @property sName
 		 * @type {String}
@@ -4918,7 +4766,7 @@ define('Firebrick.ui/containers/Panel',["text!./Panel.html", "text!./panel/Icon.
 		 * @property tpl
 		 * @type {String} html
 		 */
-		tpl:tpl,
+		tpl: tpl,
 		/**
 		 * used to the default header icons
 		 * @property iconTpl
@@ -4942,14 +4790,14 @@ define('Firebrick.ui/containers/Panel',["text!./Panel.html", "text!./panel/Icon.
 		 * @type {String|false} set to false to hide the title
 		 * @default ""
 		 */
-		title:"",
+		title: "",
 		/**
 		 * use to determine whether h1, h2, h3 etc - default = 3
 		 * @property headerSize
 		 * @type {Int}
 		 * @default 3
 		 */
-		headerSize:3,
+		headerSize: 3,
 		/**
 		 * @property panelClass
 		 * @type {Boolean|String}
@@ -4959,7 +4807,7 @@ define('Firebrick.ui/containers/Panel',["text!./Panel.html", "text!./panel/Icon.
 		/**
 		 * string = (default, primary, success, info, warning, danger)
 		 * @property panelTypeClass
-		 * @type {Boolean|String} 
+		 * @type {Boolean|String}
 		 * @default "default"
 		 */
 		panelTypeClass: "default",
@@ -4994,7 +4842,7 @@ define('Firebrick.ui/containers/Panel',["text!./Panel.html", "text!./panel/Icon.
 		 * @type {Boolean|String}
 		 * @default false
 		 */
-		collapsible:false,
+		collapsible: false,
 		/**
 		 * @property showCollapseIcon
 		 * @type {Boolean}
@@ -5006,7 +4854,7 @@ define('Firebrick.ui/containers/Panel',["text!./Panel.html", "text!./panel/Icon.
 		 * @type {Boolean|String}
 		 * @default false
 		 */
-		collapsed:false,
+		collapsed: false,
 		/**
 		 * @private
 		 * @property _collapsedState
@@ -5060,40 +4908,40 @@ define('Firebrick.ui/containers/Panel',["text!./Panel.html", "text!./panel/Icon.
 		 * @type {Array of Strings}
 		 * @default ["maximizable", "collapsible"]
 		 */
-		_defaultPanelIcons: ["collapsible", "maximizable"],
+		_defaultPanelIcons: [ "collapsible", "maximizable" ],
 		/**
 		 * @method init
 		 * @return {Object}
 		 */
-		init: function(){
+		init: function() {
 			var me = this;
 			
 			me._collapsedState = me.collapsed;
 			
-			me.on("rendered", function(){
+			me.on( "rendered", function() {
 				var panel = me.getElement(),
 					eventFunction;
 
-				if(me.collapsed){
+				if ( me.collapsed ) {
 					panel.addClass( me._collapsedClass );
 				}
 				
-				eventFunction = function () {
+				eventFunction = function() {
 					panel.toggleClass( me._collapsedClass );
-					panel.trigger("fb-ui-panel-state-change");
+					panel.trigger( "fb-ui-panel-state-change" );
 					me._collapsedState = !me._collapsedState;	//toggle value
 				};
 				
 				//this is important for the collapse icon
-				panel.on("show.bs.collapse hide.bs.collapse", eventFunction);
+				panel.on( "show.bs.collapse hide.bs.collapse", eventFunction );
 				
-				me.on("unbound", function(){
-					panel.off("show.bs.collapse hide.bs.collapse", eventFunction);
+				me.on( "unbound", function() {
+					panel.off( "show.bs.collapse hide.bs.collapse", eventFunction );
 				});
 				
 			});
 			
-			return me.callParent(arguments);
+			return me.callParent( arguments );
 		},
 		
 		/**
@@ -5101,12 +4949,12 @@ define('Firebrick.ui/containers/Panel',["text!./Panel.html", "text!./panel/Icon.
 		 * @method toggleCollapse
 		 * @return self
 		 */
-		toggleCollapse: function(){
+		toggleCollapse: function() {
 			var me = this;
 				
-			if(me._collapsedState){
+			if ( me._collapsedState ) {
 				me.expand();
-			}else{
+			} else {
 				me.collapse();
 			}
 			
@@ -5114,28 +4962,28 @@ define('Firebrick.ui/containers/Panel',["text!./Panel.html", "text!./panel/Icon.
 		},
 		/**
 		 * used within the Panel.html template
-		 * iterates through the _defaultPanelIcons array and builds for each value a 
+		 * iterates through the _defaultPanelIcons array and builds for each value a
 		 * template from panel/Icon (this.iconTpl) together for each property
 		 * @private
 		 * @method defaultPanelIcons
 		 * @return {String} html
 		 */
-		getDefaultIcons: function(){
+		getDefaultIcons: function() {
 			var me = this,
 				it,
 				icons = me._defaultPanelIcons,
 				html = "",
 				conf;
 			
-			for(var i = 0, l = icons.length; i<l; i++){
-				it = icons[i];
+			for ( var i = 0, l = icons.length; i < l; i++ ) {
+				it = icons[ i ];
 				conf = {
-					property: icons[i],
+					property: icons[ i ],
 					showProperty: "show" + Firebrick.utils.firstToUpper( it ),
 					bindingMethod: it + "IconBindings",
 					scope: me
 				};
-				html += doT.template( me.iconTpl )(conf);
+				html += doT.template( me.iconTpl )( conf );
 			}
 			
 			return html;
@@ -5145,12 +4993,12 @@ define('Firebrick.ui/containers/Panel',["text!./Panel.html", "text!./panel/Icon.
 		 * @method collapse
 		 * @return self
 		 */
-		collapse: function(){
+		collapse: function() {
 			var me = this,
 				panel = me.getElement(),
-				collapsiblePart = $("> .panel-collapse", panel);
+				collapsiblePart = $( "> .panel-collapse", panel );
 		
-			collapsiblePart.collapse("hide");
+			collapsiblePart.collapse( "hide" );
 			
 			return me;
 		},
@@ -5160,30 +5008,29 @@ define('Firebrick.ui/containers/Panel',["text!./Panel.html", "text!./panel/Icon.
 		 * @method expand
 		 * @return self
 		 */
-		expand: function(){
+		expand: function() {
 			var me = this,
 				panel = me.getElement(),
-				collapsiblePart = $("> .panel-collapse", panel);
+				collapsiblePart = $( "> .panel-collapse", panel );
 	
-			collapsiblePart.collapse("show");
+			collapsiblePart.collapse( "show" );
 			
 			return me;
 		},
-		
 		
 		/**
 		 * Data bindings
 		 * @method bindings
 		 * @return {Object}
 		 */
-		bindings: function(){
+		bindings: function() {
 			var me = this,
-				obj = me.callParent(arguments);
+				obj = me.callParent( arguments );
 
 			obj.css.panel = me.panelClass;
 
-			if(me.panelTypeClass){
-				obj.css[ me.parseBind("panel-" + me.panelTypeClass) ] = true;
+			if ( me.panelTypeClass ) {
+				obj.css[ me.parseBind( "panel-" + me.panelTypeClass ) ] = true;
 			}
 			
 			return obj;
@@ -5192,53 +5039,53 @@ define('Firebrick.ui/containers/Panel',["text!./Panel.html", "text!./panel/Icon.
 		 * @method tabBindings
 		 * @return {Object}
 		 */
-		tabBindings: function(){
+		tabBindings: function() {
 			var me = this,
 				obj = {
-					css:{},
-					attr:{
+					css: {},
+					attr: {
 						id: me.parseBind( "fb-ui-collapse-" + me.getId() )
 					}
 			};
 			
-			if( me.collapsible ){
-				obj.css["'panel-collapse'"] = me.collapsible;
+			if ( me.collapsible ) {
+				obj.css[ "'panel-collapse'" ] = me.collapsible;
 				obj.css.collapse = me.collapsible;
-				if(!me.collapsed){
-					obj.css["in"] = true;
+				if ( !me.collapsed ) {
+					obj.css[ "in" ] = true;
 				}
-			}else if( me.collapsed ){
+			} else if ( me.collapsed ) {
 				//just collapsed
-				obj.css["'panel-collapse'"] = true;
+				obj.css[ "'panel-collapse'" ] = true;
 				obj.css.collapse = true;
 			}
 			
-			if(me.collapseRole){
-				obj.attr.role = me.parseBind(me.collapseRole);
+			if ( me.collapseRole ) {
+				obj.attr.role = me.parseBind( me.collapseRole );
 			}
 			
-			obj.css["'fb-ui-panel-body-container'"] = true;
+			obj.css[ "'fb-ui-panel-body-container'" ] = true;
 			return obj;
 		},
 		/**
 		 * @method panelHeaderBindings
 		 * @return {Object}
 		 */
-		panelHeaderBindings: function(){
+		panelHeaderBindings: function() {
 			var me = this,
 				obj = {
-					css:{
+					css: {
 						"'panel-heading'": me.panelHeaderClass
 					},
-					attr:{}
+					attr: {}
 			};
 			
-			if(me.headerItems){
+			if ( me.headerItems ) {
 				obj.css.clearfix = true;
 			}
 			
-			if(me.role){
-				obj.attr.role = me.parseBind(me.role);
+			if ( me.role ) {
+				obj.attr.role = me.parseBind( me.role );
 			}
 			
 			return obj;
@@ -5247,16 +5094,16 @@ define('Firebrick.ui/containers/Panel',["text!./Panel.html", "text!./panel/Icon.
 		 * @method headerItemsBindings
 		 * @return {Object}
 		 */
-		headerItemsBindings: function(){
+		headerItemsBindings: function() {
 			var me = this,
-				obj= {
+				obj = {
 					css: {
 						"'btn-group'": true
 					}
 				};
 			
-			if(me.headerItemsPosition){
-				obj.css[me.parseBind(me.headerItemsPosition)] = true;
+			if ( me.headerItemsPosition ) {
+				obj.css[ me.parseBind( me.headerItemsPosition ) ] = true;
 			}
 			
 			return obj;
@@ -5266,23 +5113,23 @@ define('Firebrick.ui/containers/Panel',["text!./Panel.html", "text!./panel/Icon.
 		 * @method collapsibleLinkBindings
 		 * @return {Object}
 		 */
-		collapsibleLinkBindings: function(){
+		collapsibleLinkBindings: function() {
 			var me = this,
 				id = "fb-ui-collapse-" + me.getId(),
 				obj = {
-					css:{
+					css: {
 						"'fb-ui-title-link'": true
 					},
-					attr:{
+					attr: {
 						"'data-toggle'":  "'collapse'",
-						"'data-target'":  me.parseBind("#" + id ),
+						"'data-target'":  me.parseBind( "#" + id ),
 						"'aria-expanded'": typeof me.collapsed === "boolean" ? me.collapsed : true,
-						"'aria-controls'":  me.parseBind( id ),
+						"'aria-controls'":  me.parseBind( id )
 					}
 				};
 			
-			if(me.dataParentId){
-				obj.attr["'data-parent'"] = me.dataParentId;
+			if ( me.dataParentId ) {
+				obj.attr[ "'data-parent'" ] = me.dataParentId;
 			}
 			
 			return obj;
@@ -5292,17 +5139,17 @@ define('Firebrick.ui/containers/Panel',["text!./Panel.html", "text!./panel/Icon.
 		 * @method collapsibleIconBindings
 		 * @return {Object}
 		 */
-		collapsibleIconBindings: function(){
+		collapsibleIconBindings: function() {
 			var me = this,
 				obj = {
-					css:{
+					css: {
 						"'fb-ui-panel-icon'": true,
 						"'fb-ui-collapse-icon'": true
-					}, 
-					attr:{}
+					},
+					attr: {}
 				};
 			
-			obj.click = "function(){ return Firebrick.ui.helper.callFunction('"+me.getId()+"', '_collapseIconClick', arguments)}";
+			obj.click = "function(){ return Firebrick.ui.helper.callFunction('" + me.getId() + "', '_collapseIconClick', arguments)}";
 			
 			return obj;
 		},
@@ -5313,7 +5160,7 @@ define('Firebrick.ui/containers/Panel',["text!./Panel.html", "text!./panel/Icon.
 		 * @param obj
 		 * @param event {Object} jquery event
 		 */
-		_collapseIconClick: function(obj, event){
+		_collapseIconClick: function( ) {
 			var me = this;
 			me.toggleCollapse();
 		},
@@ -5321,10 +5168,9 @@ define('Firebrick.ui/containers/Panel',["text!./Panel.html", "text!./panel/Icon.
 		 * @method maximizableIconBindings
 		 * @return {Object}
 		 */
-		maximizableIconBindings: function(){
-			var me = this,
-				obj = {
-					css:{
+		maximizableIconBindings: function() {
+			var obj = {
+					css: {
 						"'fb-ui-panel-icon'": true,
 						"glyphicon": true,
 						"'glyphicon-fullscreen'": true
@@ -5337,24 +5183,24 @@ define('Firebrick.ui/containers/Panel',["text!./Panel.html", "text!./panel/Icon.
 		 * @method panelHeaderTextBindings
 		 * @return {Object}
 		 */
-		panelHeaderTextBindings: function(){
+		panelHeaderTextBindings: function() {
 			var me = this,
 				obj = {
-						css:{
+						css: {
 							"'panel-title'": me.panelTitleClass
 						}
 					};
 			
-			if(typeof me.title !== "boolean"){
-				obj.text = me.textBind(me.title)
+			if ( typeof me.title !== "boolean" ) {
+				obj.text = me.textBind( me.title );
 			}
 			
-			if(me.headerItems){
-				obj.css["'pull-left'"] = true;
+			if ( me.headerItems ) {
+				obj.css[ "'pull-left'" ] = true;
 			}
 			
-			if( me.labelText ){
-				obj.css["'fb-ui-has-label'"] = true;
+			if ( me.labelText ) {
+				obj.css[ "'fb-ui-has-label'" ] = true;
 			}
 			
 			return obj;
@@ -5363,15 +5209,15 @@ define('Firebrick.ui/containers/Panel',["text!./Panel.html", "text!./panel/Icon.
 		 * @method panelBodyBindings
 		 * @return {Object}
 		 */
-		panelBodyBindings: function(){
+		panelBodyBindings: function() {
 			var me = this,
 				obj = {
-					css:{
+					css: {
 						"'panel-body'": me.panelBodyClass
 					}
 				};
 
-			me.toolbarContainer(obj);
+			me.toolbarContainer( obj );
 			
 			return obj;
 		},
@@ -5379,12 +5225,12 @@ define('Firebrick.ui/containers/Panel',["text!./Panel.html", "text!./panel/Icon.
 		 * @method panelItemBindings
 		 * @return {Object}
 		 */
-		panelItemBindings: function(){
+		panelItemBindings: function() {
 			var me = this,
 				obj = {};
 
 			//no items are defined or it is an empty array
-			if( !me.items || (me.items && !me.items.length) ){
+			if ( !me.items || ( me.items && !me.items.length ) ) {
 				obj.html = "Firebrick.ui.helper.getHtml( '" + me.getId() + "', $data, $context )";
 			}
 			
@@ -5392,6 +5238,7 @@ define('Firebrick.ui/containers/Panel',["text!./Panel.html", "text!./panel/Icon.
 		}
 	});
 });
+
 /*!
  * @author Steven Masala [me@smasala.com]
  */
@@ -5402,10 +5249,10 @@ define('Firebrick.ui/containers/Panel',["text!./Panel.html", "text!./panel/Icon.
  * @namespace components.containers
  * @class Accordion
  */
-define('Firebrick.ui/containers/Accordion',["text!./Accordion.html", "./Base", "./Panel", "bootstrap.plugins/collapse"], function(tpl){
+define( 'Firebrick.ui/containers/Accordion',[ "text!./Accordion.html", "./Base", "./Panel", "bootstrap.plugins/collapse" ], function( tpl ) {
 	"use strict";
-	return Firebrick.define("Firebrick.ui.containers.Accordion", {
-		extend:"Firebrick.ui.containers.Base",
+	return Firebrick.define( "Firebrick.ui.containers.Accordion", {
+		extend: "Firebrick.ui.containers.Base",
 		/**
 		 * @property tpl
 		 * @type {String} html
@@ -5416,7 +5263,7 @@ define('Firebrick.ui/containers/Accordion',["text!./Accordion.html", "./Base", "
 		 * @property sName
 		 * @type {String}
 		 */
-		sName:"containers.accordion",
+		sName: "containers.accordion",
 		
 		/**
 		 * @property defaults
@@ -5427,7 +5274,7 @@ define('Firebrick.ui/containers/Accordion',["text!./Accordion.html", "./Base", "
 		 */
 		defaults: {
 			sName: "containers.panel",
-			collapsible:true,
+			collapsible: true,
 			role: "tab",
 			collapseRole: "tabpanel"
 		},
@@ -5453,158 +5300,149 @@ define('Firebrick.ui/containers/Accordion',["text!./Accordion.html", "./Base", "
 		 * @method bindings
 		 * @return {Object}
 		 */
-		bindings: function(){
+		bindings: function() {
 			var me = this,
-				obj = me.callParent(arguments);
+				obj = me.callParent( arguments );
 			
 			//<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
 			
-			obj.attr.role = me.parseBind(me.role);
-			obj.attr["'aria-multiselectable'"] = me.ariaMultiselectable;
-			if(me.panelGroupClass){
-				obj.css[me.parseBind(me.panelGroupClass)] = true;
+			obj.attr.role = me.parseBind( me.role );
+			obj.attr[ "'aria-multiselectable'" ] = me.ariaMultiselectable;
+			if ( me.panelGroupClass ) {
+				obj.css[ me.parseBind( me.panelGroupClass ) ] = true;
 			}
 			
 			return obj;
 		},
 		
-		getItems: function(){
+		getItems: function() {
 			var me = this,
 				item;
 			
-			for(var i = 0, l = me.items.length; i<l; i++){
-				item = me.items[i];
-				item.dataParentId = me.parseBind("#" + me.getId());
+			for ( var i = 0, l = me.items.length; i < l; i++ ) {
+				item = me.items[ i ];
+				item.dataParentId = me.parseBind( "#" + me.getId() );
 				item.collapsed = item.active ? false : true;
 			}
 			
-			return me.callParent(arguments);
+			return me.callParent( arguments );
 		}
 	});
 });
+
 /*!
  * @author Steven Masala [me@smasala.com]
  */
 
 /**
  * built on the back of: http://css-tricks.com/snippets/jquery/draggable-without-jquery-ui/
- * 
+ *
  * @module plugins
  * @namespace plugins
  * @class Draggable
  */
-define('Firebrick.ui/containers/border/Draggable',["jquery"], function($){
+define( 'Firebrick.ui/containers/border/Draggable',[ "jquery" ], function( $ ) {
 	"use strict";
-	
+
 	/**
 	 * @method drags
 	 * @event dragged - fired on mouseup
 	 * set property "dragDisabled" on element to disable dragging at anytime
-	 * @example 
+	 * @example
 	 * 		jqueryEl.prop("dragDisabled", {true|false});
 	 * @example
 	 * 		jqueryEl.drags("vertical");
 	 * 		jqueryEl.drags("horizontal");
 	 */
-    $.fn.drags = function(direction, opt) {
-    	var $el,
-    		origPageX,
-    		origPageY,
-    		top,
-    		left,
-    		correctPageCoord = function(event, axis){
-	    		axis = axis.toUpperCase();
-    		
-	    		//get the correct page(X|Y) coord depending on whether it is a touch device
-	    		if(event.type.indexOf("touch") >= 0){
-	    			return event.originalEvent.targetTouches[0]["page" + axis];
-	    		}else{
-	    			return event["page" + axis];
-	    		}
-    		
-    		};
-    	
-    	direction = direction.toLowerCase();
-        opt = $.extend({handle:""}, opt);
+	$.fn.drags = function( direction, opt ) {
+		var $el, origPageX, origPageY, top, left, correctPageCoord = function( event, axis ) {
+			axis = axis.toUpperCase();
 
-        if(opt.handle === "") {
-            $el = this;
-        } else {
-            $el = this.find(opt.handle);
-        }
-        
-        
-        if($el.prop("dragSet") === true){
-        	return $el;
-        }
-        
-        //set a prop on the element to ensure that the event aren't registered more than once
-        $el.prop("dragSet", true);
-        
-        return $el.on("mouseover", function(){
-        		var $drag = $(this);
-        		if($drag.prop("dragDisabled") === true){
-        			$drag.css("cursor", "auto");
-        		}else{
-        			$drag.css("cursor", "");
-        		}
-	        }).on("mousedown touchstart", function(e) {
-	        	var $drag = !opt.handle ? $(this).addClass('draggable') : $(this).addClass('active-handle').parent().addClass('draggable'),
-	        		zIdx = $drag.css('z-index'),
-	                drgH = $drag.outerHeight(),
-	                drgW = $drag.outerWidth(),
-	                posY = $drag.offset().top + drgH - correctPageCoord(e, "y"),
-	                posX = $drag.offset().left + drgW - correctPageCoord(e, "x"),
-	                mouseMove;
-	        	
-	                origPageY = correctPageCoord(e, "y");
-	                origPageX = correctPageCoord(e, "x");
-	                
-	                mouseMove = function(e){
-	            		top = (direction === "horizontal" ? origPageY : correctPageCoord(e, "y")) + posY - drgH;
-	        			left = (direction === "vertical" ? origPageX : correctPageCoord(e, "x")) + posX - drgW;
-	        			$drag.offset({
-		                    top: top,
-		                    left: left
-		                });
-	        		};
-	        	
-        		$drag.on("mouseup touchend", function() {
-                	$drag.removeClass('draggable').css('z-index', zIdx);
-                	//remove handler
-                    $("html").off("mousemove touchmove", "body", mouseMove);
-                });
-	        		
-	    		if($drag.prop("dragDisabled") === true){
-	    			$("html").off("mousemove touchmove", "body", mouseMove);
-	    		}else{
-	    			$drag.css('z-index', 1000);
-	            	//add handler
-	            	$("html").on("mousemove touchmove", "body", mouseMove);
-	    		}
-	        	
-	            
-	            e.preventDefault(); // disable selection
-	            
-	        }).on("mouseup touchend", function() {
-	        	var $this = $(this);
-	        	if($this.prop("dragDisabled") !== true){
-	        		if(opt.handle === "") {
-	                	$this.removeClass('draggable');
-	                } else {
-	                	$this.removeClass('active-handle').parent().removeClass('draggable');
-	                }
-	                $this.trigger("dragged", [top - origPageY, left - origPageX]);
-	                $this.css({
-	            		top:0,
-	            		left:0
-	            	});
-	        	}
-	        });
+			//get the correct page(X|Y) coord depending on whether it is a touch device
+			if ( event.type.indexOf( "touch" ) >= 0 ) {
+				return event.originalEvent.targetTouches[ 0 ][ "page" + axis ];
+			} else {
+				return event[ "page" + axis ];
+			}
 
-    };
-	
-});
+		};
+
+		direction = direction.toLowerCase();
+		opt = $.extend( {
+			handle: ""
+		}, opt );
+
+		if ( opt.handle === "" ) {
+			$el = this;
+		} else {
+			$el = this.find( opt.handle );
+		}
+
+		if ( $el.prop( "dragSet" ) === true ) {
+			return $el;
+		}
+
+		//set a prop on the element to ensure that the event aren't registered more than once
+		$el.prop( "dragSet", true );
+
+		return $el.on( "mouseover", function() {
+			var $drag = $( this );
+			if ( $drag.prop( "dragDisabled" ) === true ) {
+				$drag.css( "cursor", "auto" );
+			} else {
+				$drag.css( "cursor", "" );
+			}
+		} ).on( "mousedown touchstart", function( e ) {
+			var $drag = !opt.handle ? $( this ).addClass( "draggable" ) : $( this ).addClass( "active-handle" ).parent().addClass( "draggable" ), zIdx = $drag.css( "z-index" ), drgH = $drag.outerHeight(), drgW = $drag.outerWidth(), posY = $drag.offset().top + drgH - correctPageCoord( e, "y" ), posX = $drag.offset().left + drgW - correctPageCoord( e, "x" ), mouseMove;
+
+			origPageY = correctPageCoord( e, "y" );
+			origPageX = correctPageCoord( e, "x" );
+
+			mouseMove = function( e ) {
+				top = ( direction === "horizontal" ? origPageY : correctPageCoord( e, "y" ) ) + posY - drgH;
+				left = ( direction === "vertical" ? origPageX : correctPageCoord( e, "x" ) ) + posX - drgW;
+				$drag.offset( {
+				    top: top,
+				    left: left
+				} );
+			};
+
+			$drag.on( "mouseup touchend", function() {
+				$drag.removeClass( "draggable" ).css( "z-index", zIdx );
+				//remove handler
+				$( "html" ).off( "mousemove touchmove", "body", mouseMove );
+			} );
+
+			if ( $drag.prop( "dragDisabled" ) === true ) {
+				$( "html" ).off( "mousemove touchmove", "body", mouseMove );
+			} else {
+				$drag.css( "z-index", 1000 );
+				//add handler
+				$( "html" ).on( "mousemove touchmove", "body", mouseMove );
+			}
+
+			e.preventDefault(); // disable selection
+
+		} ).on( "mouseup touchend", function() {
+			var $this = $( this );
+			if ( $this.prop( "dragDisabled" ) !== true ) {
+				if ( opt.handle === "" ) {
+					$this.removeClass( "draggable" );
+				} else {
+					$this.removeClass( "active-handle" ).parent().removeClass( "draggable" );
+				}
+				$this.trigger( "dragged", [ top - origPageY, left - origPageX ] );
+				$this.css( {
+				    top: 0,
+				    left: 0
+				} );
+			}
+		} );
+
+	};
+
+} );
+
 
 define('text!Firebrick.ui/containers/border/SplitBar.html',[],function () { return '{{?it.resizable || it.collapsible}}\r\n<div id="{{=it.getSplitBarId()}}" data-bind="{{=it.dataBind(\'splitBarBindings\')}}">\r\n\t{{?it.collapsible}}\r\n\t\t<span data-bind="{{=it.dataBind(\'splitBarCollapseBindings\')}}"></span>\r\n\t{{?}}\r\n</div>\r\n{{?}}';});
 
@@ -5613,23 +5451,23 @@ define('text!Firebrick.ui/containers/border/SplitBar.html',[],function () { retu
  */
 
 /**
- * 
+ *
  * @module Firebrick.ui.components
  * @extends components.containers.Base
  * @namespace components.containers.border
  * @class Pane
  */
-define('Firebrick.ui/containers/border/Pane',["text!./SplitBar.html", "jquery", "../../common/mixins/Column", "./Draggable", "../Panel"], function(splitBarTpl, $){
+define( 'Firebrick.ui/containers/border/Pane',[ "text!./SplitBar.html", "jquery", "../../common/mixins/Column", "./Draggable", "../Panel" ], function( splitBarTpl, $ ) {
 	"use strict";
-	return Firebrick.define("Firebrick.ui.containers.border.Pane", {
-		extend:"Firebrick.ui.containers.Panel",
-		mixins:"Firebrick.ui.common.mixins.Column",
+	return Firebrick.define( "Firebrick.ui.containers.border.Pane", {
+		extend: "Firebrick.ui.containers.Panel",
+		mixins: "Firebrick.ui.common.mixins.Column",
 		/**
 		 * @property sName
 		 * @type {String}
 		 * @default "containers.border.pane"
 		 */
-		sName:"containers.border.pane",
+		sName: "containers.border.pane",
 		/**
 		 * @property resizable
 		 * @type {Boolean}
@@ -5712,18 +5550,18 @@ define('Firebrick.ui/containers/border/Pane',["text!./SplitBar.html", "jquery", 
 		 * @method init
 		 * @return {Object}
 		 */
-		init: function(){
+		init: function() {
 			var me = this;
 			
-			me.on("htmlRendered", function(){
-				return me._htmlRendered.apply(me, arguments);
+			me.on( "htmlRendered", function() {
+				return me._htmlRendered.apply( me, arguments );
 			});
 			
-			me.on("rendered", function(){
-				return me._rendered.apply(me, arguments);
+			me.on( "rendered", function() {
+				return me._rendered.apply( me, arguments );
 			});
 			
-			return me.callParent(arguments);
+			return me.callParent( arguments );
 		},
 		
 		/**
@@ -5733,20 +5571,20 @@ define('Firebrick.ui/containers/border/Pane',["text!./SplitBar.html", "jquery", 
 		 * @private
 		 * @method _htmlRendered
 		 */
-		_htmlRendered: function(){
+		_htmlRendered: function() {
 			var me = this,
 				el, splitBarHtml,
 				position = me.position;
 			
-			if(position !== "center"){
+			if ( position !== "center" ) {
 				el = me.getElement();
-				if(el){
-					me.template("splitBarTpl");
-					splitBarHtml = me.build("splitBarTpl");
-					if(position !== "right" && position !== "bottom"){
-						el.after(splitBarHtml);	
-					}else{
-						el.before(splitBarHtml);	
+				if ( el ) {
+					me.template( "splitBarTpl" );
+					splitBarHtml = me.build( "splitBarTpl" );
+					if ( position !== "right" && position !== "bottom" ) {
+						el.after( splitBarHtml );
+					} else {
+						el.before( splitBarHtml );
 					}
 					
 				}
@@ -5761,23 +5599,23 @@ define('Firebrick.ui/containers/border/Pane',["text!./SplitBar.html", "jquery", 
 		 * @private
 		 * @method _setDimensions
 		 */
-		_setDimensions: function(){
+		_setDimensions: function() {
 			var me = this,
 				el = me.getElement(),
 				position = me.position,
 				height = me.height,
 				width = me.width;
 
-			if(position === "top" || position === "bottom"){
-				if(height !== "auto"){
-					el.css("height", height);
-					el.css("min-height", height);
+			if ( position === "top" || position === "bottom" ) {
+				if ( height !== "auto" ) {
+					el.css( "height", height );
+					el.css( "min-height", height );
 				}
 			}
 			
-			if(position === "left" || position === "right"){
-				el.css("width", width);
-				el.css("min-width", width);
+			if ( position === "left" || position === "right" ) {
+				el.css( "width", width );
+				el.css( "min-width", width );
 			}
 			
 		},
@@ -5787,33 +5625,33 @@ define('Firebrick.ui/containers/border/Pane',["text!./SplitBar.html", "jquery", 
 		 * @private
 		 * @method _rendered
 		 */
-		_rendered: function(){
+		_rendered: function() {
 			var me = this,
 				pane = me.getElement(),
 				position = me.position,
 				direction = position === "top" || position === "bottom" ? "vertical" : "horizontal",
 				lookMethod = position === "top" || position === "left" ? "next" : "prev",
-				splitBar = pane[lookMethod](".fb-ui-splitbar");
+				splitBar = pane[ lookMethod ]( ".fb-ui-splitbar" );
 			
-			pane.prop("fb-direction", direction);
-			pane.prop("fb-splitbar", splitBar);
-			if (me.collapsible){
-				splitBar.on("click touchstart", "> .fb-ui-collapse-icon", function(){
-					me.toggleCollapse.call(me);
+			pane.prop( "fb-direction", direction );
+			pane.prop( "fb-splitbar", splitBar );
+			if ( me.collapsible ) {
+				splitBar.on( "click touchstart", "> .fb-ui-collapse-icon", function() {
+					me.toggleCollapse.call( me );
 				});
 				me.setCollapsibleActions();
 			}
 			
-			if(me.resizable){
+			if ( me.resizable ) {
 				me.setResizableActions();
-			}	
-			
-			if(me.resizable || me.collapsible){
-				pane.on("fb-ui-panel-state-change", function(){
+			}
+
+			if ( me.resizable || me.collapsible ) {
+				pane.on( "fb-ui-panel-state-change", function() {
 					//disable resize if the pane is collapsed
-					if(pane.hasClass( me._collapsedClass )){
+					if ( pane.hasClass( me._collapsedClass ) ) {
 						me.onCollapsed();
-					}else{
+					} else {
 						me.onExpanded();
 					}
 				});
@@ -5824,30 +5662,29 @@ define('Firebrick.ui/containers/border/Pane',["text!./SplitBar.html", "jquery", 
 		 * @method collapse
 		 */
 		
-		
 		/**
 		 * @method setCollapsibleActions
 		 */
-		setCollapsibleActions: function(){
+		setCollapsibleActions: function() {
 			var me = this,
 				el = me.getElement(),
 				position = me.position;
 			
-			if(position === "left" || position === "right"){
-				$("> .panel-collapse", el).on("hide.bs.collapse", function(){
-					return me._onRLPaneCollapse.apply(me, arguments);
+			if ( position === "left" || position === "right" ) {
+				$( "> .panel-collapse", el ).on( "hide.bs.collapse", function() {
+					return me._onRLPaneCollapse.apply( me, arguments );
 				});
 				
-				$("> .panel-collapse", el).on("show.bs.collapse", function(){
-					return me._onRLPaneExpand.apply(me, arguments);
+				$( "> .panel-collapse", el ).on( "show.bs.collapse", function() {
+					return me._onRLPaneExpand.apply( me, arguments );
 				});
-			}else{
+			} else {
 				//bottom & top panes
-				$("> .panel-collapse", el).on("hide.bs.collapse", function(){
-					return me._onTBPaneCollapse.apply(me, arguments);
+				$( "> .panel-collapse", el ).on( "hide.bs.collapse", function() {
+					return me._onTBPaneCollapse.apply( me, arguments );
 				});
-				$("> .panel-collapse", el).on("show.bs.collapse", function(){
-					return me._onTBPaneExpand.apply(me, arguments);
+				$( "> .panel-collapse", el ).on( "show.bs.collapse", function() {
+					return me._onTBPaneExpand.apply( me, arguments );
 				});
 			}
 		},
@@ -5855,62 +5692,62 @@ define('Firebrick.ui/containers/border/Pane',["text!./SplitBar.html", "jquery", 
 		/**
 		 * @method setResizableActions
 		 */
-		setResizableActions: function(){
+		setResizableActions: function() {
 			var me = this,
 				position = me.position,
 				pane = me.getElement(),
-				paneHeader = $("> .panel-heading", pane),
-				direction = pane.prop("fb-direction"),
-				splitbar = pane.prop("fb-splitbar");
+				paneHeader = $( "> .panel-heading", pane ),
+				direction = pane.prop( "fb-direction" ),
+				splitbar = pane.prop( "fb-splitbar" );
 				
-			if(splitbar.length){
-				if(direction === "vertical"){
+			if ( splitbar.length ) {
+				if ( direction === "vertical" ) {
 					//top bottom panes
 
 					//if the class if NOT collapsed from the start, then enable resizing
-					if(!pane.hasClass( me._collapsedClass )){
+					if ( !pane.hasClass( me._collapsedClass ) ) {
 						me.onExpanded();
 					}
 					
 					//when the splitbar has been dragged, if the panel a new height
-					splitbar.on("dragged", function(event, top/*, left*/){
+					splitbar.on( "dragged", function( event, top/*, left*/ ) {
 						var val;
-						if(position === "top"){
+						if ( position === "top" ) {
 							val = pane.height() + top;
-							if(val > 0){
+							if ( val > 0 ) {
 								//subtract the header height to position the splitbar in the right place
 								val -= paneHeader.height();
 							}
-							pane.css("height", val);
-							pane.css("min-height", val);
-						}else{
+							pane.css( "height", val );
+							pane.css( "min-height", val );
+						} else {
 							val = pane.height() - top;
-							if(val < 0){
+							if ( val < 0 ) {
 								//add the header height to position the splitbar in the right place
 								val += paneHeader.height();
 							}
-							pane.css("height", val);
-							pane.css("min-height", val);
+							pane.css( "height", val );
+							pane.css( "min-height", val );
 						}
 						
 					});
 					
-				}else{
+				} else {
 					
 					//if the pane is NOT collapsed from the start, enable resize functionality
-					if(!pane.hasClass( me._collapsedClass )){
+					if ( !pane.hasClass( me._collapsedClass ) ) {
 						me.onExpanded();
 					}
 					
 					//when the splitbar has been moved, calculate the new width of the pane
-					splitbar.on("dragged", function(event, top, left){
+					splitbar.on( "dragged", function( event, top, left ) {
 						var width = pane.width();
-						if(position === "right"){
-							pane.width(width-left);
-							pane.css("min-width", width-left);
-						}else{
-							pane.width(width+left);
-							pane.css("min-width", width+left);
+						if ( position === "right" ) {
+							pane.width( width - left );
+							pane.css( "min-width", width - left );
+						} else {
+							pane.width( width + left );
+							pane.css( "min-width", width + left );
 						}
 						
 					});
@@ -5927,26 +5764,26 @@ define('Firebrick.ui/containers/border/Pane',["text!./SplitBar.html", "jquery", 
 		 * @param me {Object} this class
 		 * @param el {jQuery Object} panel|pane
 		 */
-		_onTBPaneCollapse: function(){
+		_onTBPaneCollapse: function() {
 			var me = this,
 				pane = me.getElement(),
-				paneHeader = $("> .panel-heading", pane),
+				paneHeader = $( "> .panel-heading", pane ),
 				paneHeaderHeight = paneHeader.outerHeight();
 
-			if(!pane.prop("_fbResizeHeight")){
+			if ( !pane.prop( "_fbResizeHeight" ) ) {
 				//first time this is collapse - set the current height/min-height to the current values
 				//if not set, css snaps a little and does not do the animation/transition properly
-				pane.css("min-height", pane.css("min-height"));
-				pane.css("height", pane.css("height"));
+				pane.css( "min-height", pane.css( "min-height" ) );
+				pane.css( "height", pane.css( "height" ) );
 			}
 			
 			pane.addClass( me._transitionClass );
 
-			pane.prop("_fbResizeHeight", pane.css("height"));	//save the height in the property, this is needed for transitions when the pane is expaneded again
-			pane.css("min-height", paneHeaderHeight);
-			pane.css("height", paneHeaderHeight);
+			pane.prop( "_fbResizeHeight", pane.css( "height" ) );	//save the height in the property, this is needed for transitions when the pane is expaneded again
+			pane.css( "min-height", paneHeaderHeight );
+			pane.css( "height", paneHeaderHeight );
 			
-			pane.one("webkitTransitionEnd otransitionend oTransitionEnd msTransitionEnd transitionend", function() {
+			pane.one( "webkitTransitionEnd otransitionend oTransitionEnd msTransitionEnd transitionend", function() {
 				pane.removeClass( me._transitionClass );
 			});
 		},
@@ -5959,17 +5796,17 @@ define('Firebrick.ui/containers/border/Pane',["text!./SplitBar.html", "jquery", 
 		 * @param me {Object} this class
 		 * @param el {jQuery Object} panel|pane
 		 */
-		_onTBPaneExpand: function(){
+		_onTBPaneExpand: function() {
 			var me = this,
 				pane = me.getElement();
 			
 			//start transition
 			pane.addClass( me._transitionClass );
-			pane.css("min-height", pane.prop("_fbResizeHeight"));
-			pane.css("height", pane.prop("_fbResizeHeight"));
+			pane.css( "min-height", pane.prop( "_fbResizeHeight" ) );
+			pane.css( "height", pane.prop( "_fbResizeHeight" ) );
 			
 			//listener when the transition has ended
-			pane.one("webkitTransitionEnd otransitionend oTransitionEnd msTransitionEnd transitionend", function() {
+			pane.one( "webkitTransitionEnd otransitionend oTransitionEnd msTransitionEnd transitionend", function() {
 				pane.removeClass( me._transitionClass );
 			});
 		},
@@ -5981,24 +5818,24 @@ define('Firebrick.ui/containers/border/Pane',["text!./SplitBar.html", "jquery", 
 		 * @method _onRLPaneExpand
 		 * @param event {jQuery event Object}
 		 */
-		_onRLPaneExpand: function(){
+		_onRLPaneExpand: function() {
 			var me = this,
-				pane = me.getElement(), 
-				paneHeader = $("> .panel-heading", pane),
-				paneTitle = $(".panel-title", paneHeader);
+				pane = me.getElement(),
+				paneHeader = $( "> .panel-heading", pane ),
+				paneTitle = $( ".panel-title", paneHeader );
 			
 			//start transition
 			pane.addClass( me._transitionClass );
-			pane.trigger("pane-expanding");
+			pane.trigger( "pane-expanding" );
 			
 			//remove the rotated effect on the panel title
 			paneHeader.removeClass( me._rotatedHeadingClass );
 			paneTitle.removeClass( me._rotatedTitleClass );
 			
-			pane.css("min-width", pane.prop("_fbResizeWidth"));
+			pane.css( "min-width", pane.prop( "_fbResizeWidth" ) );
 			
 			//listener for when the transition has ended
-			pane.one("webkitTransitionEnd otransitionend oTransitionEnd msTransitionEnd transitionend", function() {
+			pane.one( "webkitTransitionEnd otransitionend oTransitionEnd msTransitionEnd transitionend", function() {
 				pane.removeClass( me._transitionClass );
 			});
 			
@@ -6011,24 +5848,24 @@ define('Firebrick.ui/containers/border/Pane',["text!./SplitBar.html", "jquery", 
 		 * @method _onRLPaneCollapse
 		 * @param event {jQuery event Object}
 		 */
-		_onRLPaneCollapse: function(){
+		_onRLPaneCollapse: function() {
 			var me = this,
-				pane = me.getElement(), 
-				paneHeader = $("> .panel-heading", pane),
-				paneTitle = $(".panel-title", paneHeader),
+				pane = me.getElement(),
+				paneHeader = $( "> .panel-heading", pane ),
+				paneTitle = $( ".panel-title", paneHeader ),
 				paneHeaderHeight = paneHeader.outerHeight() || 0;
 			
 			//start transition
 			pane.addClass( me._transitionClass );
-			pane.trigger("pane-collapsing");
+			pane.trigger( "pane-collapsing" );
 			
-			pane.prop("_fbResizeWidth", pane.css("width"));	//save the width in the property, this is needed for transitions when the pane is expaneded again
+			pane.prop( "_fbResizeWidth", pane.css( "width" ) );	//save the width in the property, this is needed for transitions when the pane is expaneded again
 			
-			pane.css("min-width", paneHeaderHeight);
-			pane.css("width", paneHeaderHeight);
+			pane.css( "min-width", paneHeaderHeight );
+			pane.css( "width", paneHeaderHeight );
 			
 			//listener for when the transition has ended
-			pane.one("webkitTransitionEnd otransitionend oTransitionEnd msTransitionEnd transitionend", function() {
+			pane.one( "webkitTransitionEnd otransitionend oTransitionEnd msTransitionEnd transitionend", function() {
 				//rotate header & title
 				paneHeader.addClass( me._rotatedHeadingClass );
 				paneTitle.addClass( me._rotatedTitleClass );
@@ -6042,49 +5879,49 @@ define('Firebrick.ui/containers/border/Pane',["text!./SplitBar.html", "jquery", 
 		 * enable drags function on element
 		 * @method onExpanded
 		 */
-		onExpanded: function(){
+		onExpanded: function() {
 			var me = this,
 				pane = me.getElement(),
-				direction = pane.prop("fb-direction"),
-				splitBar = pane.prop("fb-splitbar");
+				direction = pane.prop( "fb-direction" ),
+				splitBar = pane.prop( "fb-splitbar" );
 			
-			if(splitBar.length && me.resizable){
-				splitBar.prop("dragDisabled", false);
-				splitBar.drags(direction);	
+			if ( splitBar.length && me.resizable ) {
+				splitBar.prop( "dragDisabled", false );
+				splitBar.drags( direction );
 			}
 			
-			splitBar.removeClass("fb-ui-is-collapsed");
+			splitBar.removeClass( "fb-ui-is-collapsed" );
 		},
 		/**
 		 * disable drags function on element
 		 * @method onCollapsed
 		 */
-		onCollapsed: function(){
+		onCollapsed: function() {
 			var me = this,
 				pane = me.getElement(),
-				splitBar = pane.prop("fb-splitbar");
+				splitBar = pane.prop( "fb-splitbar" );
 			
-			if(splitBar.length && me.resizable){
-				splitBar.prop("dragDisabled", true);
+			if ( splitBar.length && me.resizable ) {
+				splitBar.prop( "dragDisabled", true );
 			}
 			
-			splitBar.addClass("fb-ui-is-collapsed");
+			splitBar.addClass( "fb-ui-is-collapsed" );
 		},
 		/**
 		 * @method bindings
 		 * @return {Object}
 		 */
-		bindings: function(){
+		bindings: function() {
 			var me = this,
-				obj = me.callParent(arguments);
+				obj = me.callParent( arguments );
 			
-			obj.css["'fb-ui-border-pane'"] = true;
+			obj.css[ "'fb-ui-border-pane'" ] = true;
 			
 			//type of pane - top, right, left etc..
-			obj.css[me.parseBind(me._positionPrefixClass + me.position)] = true;
+			obj.css[ me.parseBind( me._positionPrefixClass + me.position ) ] = true;
 			
-			if(me.collapsible){
-				obj.css["'fb-ui-pane-collapsible'"] = true;
+			if ( me.collapsible ) {
+				obj.css[ "'fb-ui-pane-collapsible'" ] = true;
 			}
 			
 			return obj;
@@ -6094,30 +5931,30 @@ define('Firebrick.ui/containers/border/Pane',["text!./SplitBar.html", "jquery", 
 		 * @method splitBarBindings
 		 * @return {Object}
 		 */
-		splitBarBindings: function(){
+		splitBarBindings: function() {
 			var me = this,
 				obj = {
-					css:{
+					css: {
 						"'fb-ui-splitbar'": true
 					},
-					attr:{}
+					attr: {}
 				};
 
-			obj.css[me.parseBind("fb-ui-splitbar-" + me.position)] = true;
+			obj.css[ me.parseBind( "fb-ui-splitbar-" + me.position ) ] = true;
 			
-			if(me.resizable){
-				if(me.position === "top" || me.position === "bottom"){
+			if ( me.resizable ) {
+				if ( me.position === "top" || me.position === "bottom" ) {
 //					obj.css.col = true;
 //					obj.css[me.parseBind("col-" + me.deviceSize + "-12")] = true;
-					obj.css["'fb-ui-splitbar-horizontal'"] = true;
-				}else{
-					obj.css["'fb-ui-splitbar-vertical'"] = true;
+					obj.css[ "'fb-ui-splitbar-horizontal'" ] = true;
+				} else {
+					obj.css[ "'fb-ui-splitbar-vertical'" ] = true;
 				}
 			}
 			
-			if(me.collapsible){
+			if ( me.collapsible ) {
 
-				obj.css["'fb-ui-collapsebar'"] = true;
+				obj.css[ "'fb-ui-collapsebar'" ] = true;
 				
 			}
 			
@@ -6128,7 +5965,7 @@ define('Firebrick.ui/containers/border/Pane',["text!./SplitBar.html", "jquery", 
 		 * @method getSplitBarId
 		 * @return {String}
 		 */
-		getSplitBarId: function(){
+		getSplitBarId: function() {
 			var me = this;
 			return me.splitBarIdPrefix + me.getId();
 		},
@@ -6137,23 +5974,23 @@ define('Firebrick.ui/containers/border/Pane',["text!./SplitBar.html", "jquery", 
 		 * @method  splitBarCollapseBindings
 		 * @return {Object}
 		 */
-		splitBarCollapseBindings: function(){
+		splitBarCollapseBindings: function() {
 			var me = this,
 				obj = {
-					css:{}
+					css: {}
 			};
 			
 			obj.css.glyphicon = true;
-			obj.css["'fb-ui-collapse-icon'"] = true;
+			obj.css[ "'fb-ui-collapse-icon'" ] = true;
 			
-			if(me.position === "left"){
-				obj.css["'glyphicon-chevron-left'"] = true;	
-			}else if(me.position === "right"){
-				obj.css["'glyphicon-chevron-right'"] = true;
-			}else if(me.position === "top"){
-				obj.css["'glyphicon-chevron-up'"] = true;
-			}else if(me.position === "bottom"){
-				obj.css["'glyphicon-chevron-down'"] = true;
+			if ( me.position === "left" ) {
+				obj.css[ "'glyphicon-chevron-left'" ] = true;
+			} else if ( me.position === "right" ) {
+				obj.css[ "'glyphicon-chevron-right'" ] = true;
+			} else if ( me.position === "top" ) {
+				obj.css[ "'glyphicon-chevron-up'" ] = true;
+			} else if ( me.position === "bottom" ) {
+				obj.css[ "'glyphicon-chevron-down'" ] = true;
 			}
 			
 			return obj;
@@ -6163,18 +6000,19 @@ define('Firebrick.ui/containers/border/Pane',["text!./SplitBar.html", "jquery", 
 		 * @method panelBodyBindings
 		 * @return {Object}
 		 */
-		panelBodyBindings: function(){
+		panelBodyBindings: function() {
 			var me = this,
 				obj = me.callParent( arguments );
 			
 			obj.css = obj.css || {};
-			obj.css["'fb-ui-border-pane-body'"] = true;
+			obj.css[ "'fb-ui-border-pane-body'" ] = true;
 			
 			return obj;
 		}
 		
 	});
 });
+
 
 define('text!Firebrick.ui/containers/BorderLayout.html',[],function () { return '<div id="{{=it.getId()}}" data-bind="{{=it.dataBind()}}">\r\n\r\n\t{{=it.getItems()}}\r\n\r\n</div>';});
 
@@ -6188,10 +6026,10 @@ define('text!Firebrick.ui/containers/BorderLayout.html',[],function () { return 
  * @namespace components.containers
  * @class BorderLayout
  */
-define('Firebrick.ui/containers/BorderLayout',["text!./BorderLayout.html", "./Base", "./Box", "./border/Pane"], function(tpl){
+define( 'Firebrick.ui/containers/BorderLayout',[ "text!./BorderLayout.html", "./Base", "./Box", "./border/Pane" ], function( tpl ) {
 	"use strict";
-	return Firebrick.define("Firebrick.ui.containers.BorderLayout", {
-		extend:"Firebrick.ui.containers.Base",
+	return Firebrick.define( "Firebrick.ui.containers.BorderLayout", {
+		extend: "Firebrick.ui.containers.Base",
 		/**
 		 * @property tpl
 		 * @type {String} html
@@ -6202,7 +6040,7 @@ define('Firebrick.ui/containers/BorderLayout',["text!./BorderLayout.html", "./Ba
 		 * @property sName
 		 * @type {String}
 		 */
-		sName:"containers.borderlayout",
+		sName: "containers.borderlayout",
 		
 		/**
 		 * @property defaults
@@ -6228,7 +6066,7 @@ define('Firebrick.ui/containers/BorderLayout',["text!./BorderLayout.html", "./Ba
 		 * @type {Array of Objects}
 		 * @default null
 		 */
-		items:null,
+		items: null,
 		
 		/**
 		 * number of cols in Bootstraps grid system
@@ -6250,14 +6088,14 @@ define('Firebrick.ui/containers/BorderLayout',["text!./BorderLayout.html", "./Ba
 		 * 		center: 6
 		 * }
 		 */
-		defaultSizes:{
+		defaultSizes: {
 			top: "100%",
 			right: "33%",
 			bottom: "100%",
 			left: "33%"
 		},
 		/**
-		 * 
+		 *
 		 * @property height
 		 * @type {Integer|String} px value | auto | fit
 		 * @default "auto"
@@ -6267,38 +6105,38 @@ define('Firebrick.ui/containers/BorderLayout',["text!./BorderLayout.html", "./Ba
 		 * @method init
 		 * @return {Object}
 		 */
-		init: function(){
+		init: function() {
 			var me = this,
 				resize;
 			
-			me.on("rendered", function(){
+			me.on( "rendered", function() {
 				var el = me.getElement(),
 					height = me.height;
-				if(height === "fit"){
+				if ( height === "fit" ) {
 					//set a fixed height for the borderLayout so that the height
 					//of the vertical panes grow in the correct direction
-					el.css("height", el.parent().height());
-					resize = function(){
-						el.css("height", el.parent().height());
+					el.css( "height", el.parent().height() );
+					resize = function() {
+						el.css( "height", el.parent().height() );
 					};
-					$(window).on("resize", resize);
-					me.on("unbound", function(){
-						$(window).off("resize", resize);
+					$( window ).on( "resize", resize );
+					me.on( "unbound", function() {
+						$( window ).off( "resize", resize );
 					});
-				}else if(height !== "auto"){
+				} else if ( height !== "auto" ) {
 					//not fixed and not auto
-					el.css("height", height);
+					el.css( "height", height );
 				}
 			});
 			
-			return me.callParent(arguments);
+			return me.callParent( arguments );
 		},
 		/**
 		 * overriding base method build
 		 * @private
 		 * @method build
 		 */
-		build: function(){
+		build: function() {
 			var me = this,
 				map = {},
 				reorderedItems = [],
@@ -6308,43 +6146,43 @@ define('Firebrick.ui/containers/BorderLayout',["text!./BorderLayout.html", "./Ba
 				centerGrid = {
 					sName: "containers.box",
 					defaults: me.defaults,
-					css:'row-eq-height fb-ui-center-row',
-					items:[]
+					css: "row-eq-height fb-ui-center-row",
+					items: []
 				},
 				entered = false;
 			
 			//if items is defined and has >= 1 item
-			if(me.items){
+			if ( me.items ) {
 				
 				length = me.items.length;
 				
-				if(length){
-					for(var i = 0; i<length; i++){
-						item = me.items[i];	//get current item in iteration
+				if ( length ) {
+					for ( var i = 0; i < length; i++ ) {
+						item = me.items[ i ];	//get current item in iteration
 						//get the correct position where this item should be: 0 - 4
 						item.position = item.position.toLowerCase();
-						position = me._itemArrayPosition(item.position);
+						position = me._itemArrayPosition( item.position );
 						//store the position and item
-						map[position] = item;
+						map[ position ] = item;
 					}
 					
-					for(var ii = 0; ii<5; ii++){
+					for ( var ii = 0; ii < 5; ii++ ) {
 						//get each item from the map in the correct order
-						item = map[ii];
+						item = map[ ii ];
 						//check if the item was defined
-						if(item){
+						if ( item ) {
 							//get the correct dimensions
-							if(ii>0 && ii<4){
+							if ( ii > 0 && ii < 4 ) {
 								//center pieces
 								// 1|2|3
-								centerGrid.items.push(item);
-								if(centerGrid.items.length && !entered){
+								centerGrid.items.push( item );
+								if ( centerGrid.items.length && !entered ) {
 									entered = true;
-									reorderedItems.push(centerGrid);
+									reorderedItems.push( centerGrid );
 								}
-							}else{
+							} else {
 								//place the item in the correct order
-								reorderedItems.push(item);
+								reorderedItems.push( item );
 							}
 							
 						}
@@ -6354,32 +6192,32 @@ define('Firebrick.ui/containers/BorderLayout',["text!./BorderLayout.html", "./Ba
 				}
 				
 			}
-			return me.callParent(arguments);
+			return me.callParent( arguments );
 		},
 		
 		/**
-		 * get item border position 
-		 * 
+		 * get item border position
+		 *
 		 * ---- 0 ----
 		 * 1 | 2 | 3 |
 		 * ---- 4 ----
-		 * 
+		 *
 		 * @method _itemArrayPosition
 		 * @param position {String} top, right, bottom, left, center
 		 * @return {Integer}
 		 */
-		_itemArrayPosition: function(position){
+		_itemArrayPosition: function( position ) {
 			var pos;
 			
-			if(position === "top"){
+			if ( position === "top" ) {
 				pos = 0;
-			}else if(position === "left"){
+			} else if ( position === "left" ) {
 				pos = 1;
-			}else if(position === "center"){
+			} else if ( position === "center" ) {
 				pos = 2;
-			}else if(position === "right"){
+			} else if ( position === "right" ) {
 				pos = 3;
-			}else if(position === "bottom"){
+			} else if ( position === "bottom" ) {
 				pos = 4;
 			}
 			
@@ -6390,17 +6228,18 @@ define('Firebrick.ui/containers/BorderLayout',["text!./BorderLayout.html", "./Ba
 		 * @method bindings
 		 * @return {Object}
 		 */
-		bindings: function(){
+		bindings: function() {
 			var me = this,
-				obj = me.callParent(arguments);
+				obj = me.callParent( arguments );
 			
-			obj.css["'fb-ui-borderlayout'"] = true;
+			obj.css[ "'fb-ui-borderlayout'" ] = true;
 			
 			return obj;
 		}
 		
 	});
 });
+
 
 define('text!Firebrick.ui/containers/Fieldset.html',[],function () { return '<fieldset id="{{=it.getId()}}" data-bind="{{=it.dataBind()}}">\r\n\t{{?it.showLegend}}\r\n\t\t{{?it.collapsible}}\r\n\t\t\t<a data-bind="{{=it.dataBind(\'collapsibleLinkBindings\')}}">\r\n\t\t{{?}}\r\n\t\t\t<legend data-bind="{{=it.dataBind(\'legendBindings\')}}">\r\n\t\t\t\t{{?it.collapsible}}\r\n\t\t\t\t\t<span data-bind="{{=it.dataBind(\'collapsibleBindings\')}}"></span>\r\n\t\t\t\t{{?}}\r\n\t\t\t\t<span data-bind="{{=it.dataBind(\'legendTextBindings\')}}"></span>\r\n\t\t\t\t{{=it.getLabelTpl()}}\r\n\t\t\t</legend>\r\n\t\t{{?it.collapsible}}\r\n\t\t\t</a>\r\n\t\t{{?}}\r\n\t{{?}}\r\n\r\n\t<div data-bind="{{=it.dataBind(\'contentBindings\')}}">\r\n\t\t{{=it.getItems()}}\r\n\t</div>\r\n\r\n</fieldset>';});
 
@@ -6414,11 +6253,11 @@ define('text!Firebrick.ui/containers/Fieldset.html',[],function () { return '<fi
  * @namespace components.containers
  * @class Fieldset
  */
-define('Firebrick.ui/containers/Fieldset',["text!./Fieldset.html", "jquery", "../common/mixins/Label"], function(tpl, $){
+define( 'Firebrick.ui/containers/Fieldset',[ "text!./Fieldset.html", "jquery", "../common/mixins/Label" ], function( tpl, $ ) {
 	"use strict";
-	return Firebrick.define("Firebrick.ui.containers.Fieldset", {
-		extend:"Firebrick.ui.containers.Base",
-		mixins:"Firebrick.ui.common.mixins.Label",
+	return Firebrick.define( "Firebrick.ui.containers.Fieldset", {
+		extend: "Firebrick.ui.containers.Base",
+		mixins: "Firebrick.ui.common.mixins.Label",
 		/**
 		 * @property sName
 		 * @type {String}
@@ -6428,13 +6267,13 @@ define('Firebrick.ui/containers/Fieldset',["text!./Fieldset.html", "jquery", "..
 		 * @property tpl
 		 * @type {String} html
 		 */
-		tpl:tpl,
+		tpl: tpl,
 		/**
 		 * @property title
 		 * @type {String}
 		 * @default ""
 		 */
-		title:"",
+		title: "",
 		/**
 		 * @property collapsible
 		 * @type {Boolean}
@@ -6498,16 +6337,16 @@ define('Firebrick.ui/containers/Fieldset',["text!./Fieldset.html", "jquery", "..
 		 * @method init
 		 * @return {Object}
 		 */
-		init: function(){
+		init: function() {
 			var me = this,
 				obj = me.callParent();
 			
-			me.on("rendered", function(){
+			me.on( "rendered", function() {
 				var el = me.getElement(),
-					linkEl = $("> a[data-collapse='" + me.getId() + "']", el);
+					linkEl = $( "> a[data-collapse='" + me.getId() + "']", el );
 				
-				linkEl.on("click", function(){
-					me.collapseClick.apply(me, arguments);
+				linkEl.on( "click", function() {
+					me.collapseClick.apply( me, arguments );
 				});
 				
 			});
@@ -6517,20 +6356,20 @@ define('Firebrick.ui/containers/Fieldset',["text!./Fieldset.html", "jquery", "..
 		/**
 		 * @method bindings
 		 */
-		bindings: function(){
+		bindings: function() {
 			var me = this,
 				obj = me.callParent( arguments );
 			
-			obj.css["'form-horizontal'"] = me.formHorizontalClass;
+			obj.css[ "'form-horizontal'" ] = me.formHorizontalClass;
 			
 			return obj;
 		},
 		/**
-		 * called when the legend is clicked on 
+		 * called when the legend is clicked on
 		 * @method collapseClick
 		 * @param jQuery "click" event arguments {Any}
 		 */
-		collapseClick: function(event){
+		collapseClick: function( event ) {
 			var me = this,
 				el, body, title;
 			
@@ -6538,17 +6377,17 @@ define('Firebrick.ui/containers/Fieldset',["text!./Fieldset.html", "jquery", "..
 			
 			//init after preventDefault
 			el = me.getElement();
-			body = $("> div." + me.fieldsetBodyClass, el);
-			title = $("> a > legend > span.fb-ui-collapsed-icon", el);
+			body = $( "> div." + me.fieldsetBodyClass, el );
+			title = $( "> a > legend > span.fb-ui-collapsed-icon", el );
 
 			//TODO: animation
-			if(body.is(":visible")){
+			if ( body.is( ":visible" ) ) {
 				title.removeClass( me.collapseIconClass );
 				title.addClass( me.expandIconClass );
 				
 				el.addClass( me.collapsedClass );
 				body.hide();
-			}else{
+			} else {
 				title.removeClass( me.expandIconClass );
 				title.addClass( me.collapseIconClass );
 				
@@ -6561,19 +6400,19 @@ define('Firebrick.ui/containers/Fieldset',["text!./Fieldset.html", "jquery", "..
 		 * @method legendBindings
 		 * @return {Object}
 		 */
-		legendBindings: function(){
+		legendBindings: function() {
 			return {};
 		},
 		/**
 		 * @method legendTextBindings
 		 * @return {Object}
 		 */
-		legendTextBindings: function(){
+		legendTextBindings: function() {
 			var me = this,
 				obj = {
-					css:{},
-					attr:{},
-					text: me.textBind(me.title)
+					css: {},
+					attr: {},
+					text: me.textBind( me.title )
 				};
 			return obj;
 		},
@@ -6581,19 +6420,19 @@ define('Firebrick.ui/containers/Fieldset',["text!./Fieldset.html", "jquery", "..
 		 * @method collapsibleBindings
 		 * @return {Object}
 		 */
-		collapsibleBindings: function(){
+		collapsibleBindings: function() {
 			var me = this,
 				obj = {
-					css:{
+					css: {
 						"'fb-ui-collapsed-icon'": true
 					}
 				};
 			
 			obj.css.glyphicon = true;
-			if(me.collapsed){
-				obj.css[ me.parseBind(me.expandIconClass) ] = true;
-			}else{
-				obj.css[ me.parseBind(me.collapseIconClass) ] = true;
+			if ( me.collapsed ) {
+				obj.css[ me.parseBind( me.expandIconClass ) ] = true;
+			} else {
+				obj.css[ me.parseBind( me.collapseIconClass ) ] = true;
 			}
 			
 			return obj;
@@ -6602,10 +6441,10 @@ define('Firebrick.ui/containers/Fieldset',["text!./Fieldset.html", "jquery", "..
 		 * @method collapsibleLinkBindings
 		 * @return {Object}
 		 */
-		collapsibleLinkBindings: function(){
+		collapsibleLinkBindings: function() {
 			var me = this,
 				obj = {
-					attr:{
+					attr: {
 						"'data-collapse'": me.parseBind( me.getId() )
 					}
 				};
@@ -6615,20 +6454,21 @@ define('Firebrick.ui/containers/Fieldset',["text!./Fieldset.html", "jquery", "..
 		 * @method contentBindings
 		 * @return {Object}
 		 */
-		contentBindings: function(){
+		contentBindings: function() {
 			var me = this,
 				obj = {
-					css:{
+					css: {
 						collapsed: me.collapsed
 					}
 				};
 			
-			obj.css[me.parseBind(me.fieldsetBodyClass)] = true;
+			obj.css[ me.parseBind( me.fieldsetBodyClass ) ] = true;
 			
 			return obj;
 		}
 	});
 });
+
 
 define('text!Firebrick.ui/containers/Form.html',[],function () { return '<form id="{{=it.getId()}}" data-bind="{{=it.dataBind()}}">\r\n\t{{=it.getItems()}}\r\n</form>';});
 
@@ -6642,10 +6482,10 @@ define('text!Firebrick.ui/containers/Form.html',[],function () { return '<form i
  * @namespace components.containers
  * @class Form
  */
-define('Firebrick.ui/containers/Form',["text!./Form.html", "jquery", "./Base"], function(tpl, $){
+define( 'Firebrick.ui/containers/Form',[ "text!./Form.html", "jquery", "./Base" ], function( tpl, $ ) {
 	"use strict";
-	return Firebrick.define("Firebrick.ui.containers.Form", {
-		extend:"Firebrick.ui.containers.Base",
+	return Firebrick.define( "Firebrick.ui.containers.Form", {
+		extend: "Firebrick.ui.containers.Base",
 		/**
 		 * @property sName
 		 * @type {String}
@@ -6655,20 +6495,20 @@ define('Firebrick.ui/containers/Form',["text!./Form.html", "jquery", "./Base"], 
 		 * @property tpl
 		 * @type {String} html
 		 */
-		tpl:tpl,
+		tpl: tpl,
 		/**
 		 * @property formRole
 		 * @type {String}
 		 * @default "'form'"
 		 */
-		formRole:"form",
+		formRole: "form",
 		/**
 		 * controls the css class form-horizontal
 		 * @property horizontal
 		 * @type {Boolean|String}
 		 * @default true
 		 */
-		horizontal:true,
+		horizontal: true,
 		/**
 		 * fill the panel body with html
 		 * @property html
@@ -6682,7 +6522,7 @@ define('Firebrick.ui/containers/Form',["text!./Form.html", "jquery", "./Base"], 
 		 * @type {Boolean|String}
 		 * @default false
 		 */
-		inline:false,
+		inline: false,
 		/**
 		 * multipart/form-data for files
 		 * @property enctype
@@ -6727,11 +6567,11 @@ define('Firebrick.ui/containers/Form',["text!./Form.html", "jquery", "./Base"], 
 		catchProgress: false,
 		/**
 		 * this is called before the form is submitted, use this
-		 * return false to stop the submit function being called; 
+		 * return false to stop the submit function being called;
 		 * @method preSubmit
 		 * @param jquery "submit" event arguments
 		 */
-		preSubmit: function(event){
+		preSubmit: function( event ) {
 			event.preventDefault();
 		},
 		/**
@@ -6747,51 +6587,51 @@ define('Firebrick.ui/containers/Form',["text!./Form.html", "jquery", "./Base"], 
 		 * @property xhr
 		 * @type {Function}
 		 */
-		xhr: function(){
+		xhr: function() {
 			var me = this,
 				xhr = new window.XMLHttpRequest();
 
 			//Upload progress
-		    xhr.upload.addEventListener("progress", function(evt){
-		    	if (evt.lengthComputable) {
-		    		var percentComplete = evt.loaded / evt.total;
-		    		if(me.catchProgress){
-		    			//fire the percentCompleted
-		    			me.fireEvent("progressChanged", percentComplete);
-		    		}
-		    	}
-		    }, false);
-		    
-		    //Download progress
-		    xhr.addEventListener("progress", function(evt){
-		    	if (evt.lengthComputable) {
-		    		var percentComplete = evt.loaded / evt.total;
-		    		if(me.catchProgress){
-		    			//fire the percentCompleted
-		    			me.fireEvent("progressChanged", percentComplete);
-		    		}
-		    	}
-		    }, false);
-		    
-		    return xhr;
+			xhr.upload.addEventListener( "progress", function( evt ) {
+				if ( evt.lengthComputable ) {
+					var percentComplete = evt.loaded / evt.total;
+					if ( me.catchProgress ) {
+						//fire the percentCompleted
+						me.fireEvent( "progressChanged", percentComplete );
+					}
+				}
+			}, false );
+
+			//Download progress
+			xhr.addEventListener( "progress", function( evt ) {
+				if ( evt.lengthComputable ) {
+					var percentComplete = evt.loaded / evt.total;
+					if ( me.catchProgress ) {
+						//fire the percentCompleted
+						me.fireEvent( "progressChanged", percentComplete );
+					}
+				}
+			}, false );
+
+			return xhr;
 		},
 		/**
 		 * method called on submit ajax
 		 * @property success
 		 * @type {Function}
-		 * @default 
+		 * @default
 		 */
-		success: function(){
-			console.info("success", arguments);
+		success: function() {
+			console.info( "success", arguments );
 		},
 		/**
 		 * method called on submit ajax
 		 * @property error
 		 * @type {Function}
-		 * @default 
+		 * @default
 		 */
-		error: function(){
-			console.warn("error", arguments);
+		error: function() {
+			console.warn( "error", arguments );
 		},
 		/**
 		 * method called on submit ajax
@@ -6799,103 +6639,103 @@ define('Firebrick.ui/containers/Form',["text!./Form.html", "jquery", "./Base"], 
 		 * @type {Function}
 		 * @default function(){}
 		 */
-		complete: function(){},
+		complete: function() {},
 		/**
 		 * method called after ajax
 		 * @method always
 		 * @param {Arguments} always function arguments from ajax
 		 */
-		always: function(){},
+		always: function() {},
 		/**
 		 * method called after ajax
 		 * @method beforeSend
 		 * @param {Arguments} beforeSend function arguments from ajax
 		 */
-		beforeSend: function(){},
+		beforeSend: function() {},
 		/**
 		 * this function requires the HTML5 function FormData to be supported
 		 * @method getFormData
 		 * @return {Object}
 		 */
-		getFormData: function(){
+		getFormData: function() {
 			var me = this;
-			return new window.FormData(me.getElement());
+			return new window.FormData( me.getElement() );
 		},
 		/**
 		 * @method init
 		 */
-		init: function(){
+		init: function() {
 			var me = this;
 				
-			me.on("rendered", function(){
+			me.on( "rendered", function() {
 				var el = me.getElement();
-				if(el){
-					el.on("submit", function(event){
-						if(me.preSubmit.apply(me, arguments) !== false){
-							me.submit();	
+				if ( el ) {
+					el.on( "submit", function( ) {	//arg: event
+						if ( me.preSubmit.apply( me, arguments ) !== false ) {
+							me.submit();
 						}
 					});
 				}
 			});
 			
-			return me.callParent(arguments);
+			return me.callParent( arguments );
 		},
 		/**
 		 * make sure this.url is set before calling this function
 		 * @method submit
 		 */
-		submit: function(){
+		submit: function() {
 			var me = this,
 				form = me.getElement();
 
-			if(!me.url || typeof me.url !== "string"){
-				console.error("unable to submit form. No url is set or is set incorrectly", me.url, me);
+			if ( !me.url || typeof me.url !== "string" ) {
+				console.error( "unable to submit form. No url is set or is set incorrectly", me.url, me );
 				return;
 			}
 			
-			if(!form){
-				console.error("unable to submit form. Form not found for id", me.getId());
+			if ( !form ) {
+				console.error( "unable to submit form. Form not found for id", me.getId() );
 				return;
 			}
 
-			if(window.FormData){
-				//HTML 5 - IE10+ 
+			if ( window.FormData ) {
+				//HTML 5 - IE10+
 				$.ajax({
 					xhr: me.xhr,
-					url: me.url, 
-					type: me.submitType, 
-					data: new window.FormData(form[0]), 
-					processData: me.ajaxProcessData, 
+					url: me.url,
+					type: me.submitType,
+					data: new window.FormData( form[ 0 ] ),
+					processData: me.ajaxProcessData,
 					contentType: me.enctype,
-					beforeSend: me.beforeSend.bind(me),
-					complete: me.complete.bind(me), //regardless of success of failure
-					success: me.success.bind(me),
-					error: me.error.bind(me)
-				}).always(me.always.bind(me));
-			}else{
-				console.error("FormData is not supported by your browser");
+					beforeSend: me.beforeSend.bind( me ),
+					complete: me.complete.bind( me ), //regardless of success of failure
+					success: me.success.bind( me ),
+					error: me.error.bind( me )
+				}).always( me.always.bind( me ) );
+			} else {
+				console.error( "FormData is not supported by your browser" );
 			}
 		},
 		/**
 		 * @method formBindings
 		 * @return {Object}
 		 */
-		bindings:function(){
+		bindings: function() {
 			var me = this,
-				obj = me.callParent(arguments);
+				obj = me.callParent( arguments );
 			
-			obj.attr.role =  me.parseBind(me.formRole);
-			obj.attr.enctype =  me.parseBind(me.enctype);
-			obj.css["'form-horizontal'"] =  me.horizontal;
-			obj.css["'form-inline'"] =  me.inline;
+			obj.attr.role =  me.parseBind( me.formRole );
+			obj.attr.enctype =  me.parseBind( me.enctype );
+			obj.css[ "'form-horizontal'" ] =  me.horizontal;
+			obj.css[ "'form-inline'" ] =  me.inline;
 			obj.attr.action = "Firebrick.getById('" + me.getId() + "').url";
 			obj.attr.method = me.parseBind( me.submitType );
 			
-			if(me.formTarget){
+			if ( me.formTarget ) {
 				obj.attr.target = me.parseBind( me.formTarget );
 			}
 			
-			if(!me.items){
+			if ( !me.items ) {
 				obj.html = "Firebrick.ui.helper.getHtml( '" + me.getId() + "', $data, $context )";
 			}
 			
@@ -6903,6 +6743,7 @@ define('Firebrick.ui/containers/Form',["text!./Form.html", "jquery", "./Base"], 
 		}
 	});
 });
+
 /*!
  * @author Steven Masala [me@smasala.com]
  */
@@ -6913,10 +6754,10 @@ define('Firebrick.ui/containers/Form',["text!./Form.html", "jquery", "./Base"], 
  * @namespace components.containers
  * @class FormPanel
  */
-define('Firebrick.ui/containers/FormPanel',["./Panel", "./Form"], function(){
+define( 'Firebrick.ui/containers/FormPanel',[ "./Panel", "./Form" ], function() {
 	"use strict";
-	return Firebrick.define("Firebrick.ui.containers.FormPanel", {
-		extend:"Firebrick.ui.containers.Panel",
+	return Firebrick.define( "Firebrick.ui.containers.FormPanel", {
+		extend: "Firebrick.ui.containers.Panel",
 		/**
 		 * @property sName
 		 * @type {String}
@@ -6929,29 +6770,30 @@ define('Firebrick.ui/containers/FormPanel',["./Panel", "./Form"], function(){
 		 * @type {Object}
 		 * @default null
 		 */
-		formConfig:null,
+		formConfig: null,
 		/**
 		 * @method build
 		 * @private
 		 */
-		init: function(){
+		init: function() {
 			var me = this,
 				formItem = me.formConfig || {};
 				
-			formItem.sName = "containers.form";	
+			formItem.sName = "containers.form";
 
-			if(me.items){
+			if ( me.items ) {
 				formItem.items = me.items;
-			}else{
+			} else {
 				formItem.html = me.html;
 			}
 			
-			me.items = [formItem];
+			me.items = [ formItem ];
 			 
-			return me.callParent(arguments);
+			return me.callParent( arguments );
 		}
 	});
 });
+
 
 define('text!Firebrick.ui/containers/Modal.html',[],function () { return '<div id="{{=it.getId()}}" data-bind="{{=it.dataBind()}}">\r\n  <div data-bind="{{=it.dataBind(\'dialogBindings\')}}">\r\n    <div data-bind="{{=it.dataBind(\'contentBindings\')}}">\r\n      <div data-bind="{{=it.dataBind(\'headerBindings\')}}">\r\n      \t{{?it.showCloseIcon}}\r\n      \t\t<button data-bind="{{=it.dataBind(\'closeButtonBindings\')}}"><span aria-hidden="true">&times;</span><span data-bind="{{=it.dataBind(\'srCloseIconBindings\')}}"></span></button>\r\n      \t{{?}}\r\n        <h{{=it.titleSize}} id="{{=it.getTitleId()}}" data-bind="{{=it.dataBind(\'titleBindings\')}}"></h{{=it.titleSize}}>\r\n      </div>\r\n      <div data-bind="{{=it.dataBind(\'bodyBindings\')}}">\r\n        {{=it.getItems()}}\r\n      </div>\r\n      {{?it.footerItems}}\r\n\t      <div data-bind="{{=it.dataBind(\'footerBindings\')}}">\r\n\t      \t{{=it.getItemsProp(\'footerItems\')}}\r\n\t      </div>\r\n      {{?}}\r\n    </div><!-- /.modal-content -->\r\n  </div><!-- /.modal-dialog -->\r\n</div><!-- /.modal -->';});
 
@@ -6965,28 +6807,28 @@ define('text!Firebrick.ui/containers/Modal.html',[],function () { return '<div i
  * @namespace components.containers
  * @class Modal
  */
-define('Firebrick.ui/containers/Modal',["text!./Modal.html", "./Base"], function(tpl){
+define( 'Firebrick.ui/containers/Modal',[ "text!./Modal.html", "./Base" ], function( tpl ) {
 	"use strict";
 	
-	return Firebrick.define("Firebrick.ui.containers.Modal", {
-		extend:"Firebrick.ui.containers.Base",
+	return Firebrick.define( "Firebrick.ui.containers.Modal", {
+		extend: "Firebrick.ui.containers.Base",
 		tpl: tpl,
-		target:"body",
+		target: "body",
 		appendTarget: true,
-		sName:"containers.modal",
-		init: function(){
+		sName: "containers.modal",
+		init: function() {
 			var me = this;
-			me.on("rendered", function(){
-				if(me.showOnCreate){
-					me.showMe();	
+			me.on( "rendered", function() {
+				if ( me.showOnCreate ) {
+					me.showMe();
 				}
-				me.getElement().on("hidden.bs.modal", function(){
+				me.getElement().on( "hidden.bs.modal", function() {
 					me.destroy();
 				});
 			});
-			return me.callParent(arguments);
+			return me.callParent( arguments );
 		},
-		enclosedBind:true,
+		enclosedBind: true,
 		/**
 		 * @property _modalEl
 		 * @private
@@ -6998,10 +6840,10 @@ define('Firebrick.ui/containers/Modal',["text!./Modal.html", "./Base"], function
 		 * @method getModalEl
 		 * @return {jQuery Object}
 		 */
-		getModalEl: function(){
+		getModalEl: function() {
 			var me = this;
-			if(!me._modalEl){
-				me._modalEl = $("> .modal", me.getElement());
+			if ( !me._modalEl ) {
+				me._modalEl = $( "> .modal", me.getElement() );
 			}
 			return me._modalEl;
 		},
@@ -7010,7 +6852,7 @@ define('Firebrick.ui/containers/Modal',["text!./Modal.html", "./Base"], function
 		 * @method showMe
 		 * @return {Object} self
 		 */
-		showMe: function(){
+		showMe: function() {
 			var me = this;
 			me.getModalEl().modal();
 		},
@@ -7032,7 +6874,7 @@ define('Firebrick.ui/containers/Modal',["text!./Modal.html", "./Base"], function
 		 * @type {String}
 		 * @default ""
 		 */
-		title:"",
+		title: "",
 		/**
 		 * fill the panel body with html
 		 * @property html
@@ -7100,7 +6942,7 @@ define('Firebrick.ui/containers/Modal',["text!./Modal.html", "./Base"], function
 		 * @type {Integer}
 		 * @default 4
 		 */
-		titleSize:4,
+		titleSize: 4,
 		/**
 		 * @property showCloseIcon
 		 * @type {Boolean}
@@ -7118,26 +6960,26 @@ define('Firebrick.ui/containers/Modal',["text!./Modal.html", "./Base"], function
 		 * @method srCloseIconBindings
 		 * @return {Object}
 		 */
-		srCloseIconBindings: function(){
+		srCloseIconBindings: function() {
 			var me = this;
 			return {
-				css:{
+				css: {
 					"'sr-only'": true
 				},
-				text: me.parseBind(me.srCloseText)
+				text: me.parseBind( me.srCloseText )
 			};
 		},
 		/**
 		 * @method closeButtonBindings
 		 * @return {Object}
 		 */
-		closeButtonBindings: function(){
+		closeButtonBindings: function() {
 			return {
-				attr:{
+				attr: {
 					type: "'button'",
 					"'data-dismiss'": "'modal'"
 				},
-				css:{
+				css: {
 					close: true
 				}
 			};
@@ -7146,27 +6988,27 @@ define('Firebrick.ui/containers/Modal',["text!./Modal.html", "./Base"], function
 		 * @method getTitleId
 		 * @return {String}
 		 */
-		getTitleId: function(){
+		getTitleId: function() {
 			return "fb-modal-title-" + this.getId();
 		},
 		/**
 		 * @method bindings
 		 * @return {Object}
 		 */
-		bindings: function(){
+		bindings: function() {
 			var me = this,
 				obj = this.callParent();
 			
 			obj.css.modal = me.isModal;
 			
-			obj.attr["'aria-labelledby'"] = me.parseBind(me.getTitleId());
-			obj.attr["'aria-describedby'"] = me.parseBind(me.ariaDescribedBy);
+			obj.attr[ "'aria-labelledby'" ] = me.parseBind( me.getTitleId() );
+			obj.attr[ "'aria-describedby'" ] = me.parseBind( me.ariaDescribedBy );
 			obj.attr.role = "'dialog'";
 			obj.attr.tabindex = -1;
-			obj.attr["'aria-hidden'"] = true;
+			obj.attr[ "'aria-hidden'" ] = true;
 			
-			if(me.animationClass){
-				obj.css[me.animationClass] = true;
+			if ( me.animationClass ) {
+				obj.css[ me.animationClass ] = true;
 			}
 			
 			return obj;
@@ -7175,7 +7017,7 @@ define('Firebrick.ui/containers/Modal',["text!./Modal.html", "./Base"], function
 		 * @method dialogBindings
 		 * @return {Object}
 		 */
-		dialogBindings: function(){
+		dialogBindings: function() {
 			var me = this;
 			return {
 				css: {
@@ -7187,7 +7029,7 @@ define('Firebrick.ui/containers/Modal',["text!./Modal.html", "./Base"], function
 		 * @method contentBindings
 		 * @return {Object}
 		 */
-		contentBindings: function(){
+		contentBindings: function() {
 			var me = this;
 			return {
 				css: {
@@ -7199,7 +7041,7 @@ define('Firebrick.ui/containers/Modal',["text!./Modal.html", "./Base"], function
 		 * @method headerBindings
 		 * @return {Object}
 		 */
-		headerBindings: function(){
+		headerBindings: function() {
 			var me = this;
 			return {
 				css: {
@@ -7211,7 +7053,7 @@ define('Firebrick.ui/containers/Modal',["text!./Modal.html", "./Base"], function
 		 * @method titleBindings
 		 * @return {Object}
 		 */
-		titleBindings: function(){
+		titleBindings: function() {
 			var me = this;
 			return {
 				text: me.textBind( me.title ),
@@ -7224,15 +7066,15 @@ define('Firebrick.ui/containers/Modal',["text!./Modal.html", "./Base"], function
 		 * @method bodyBindings
 		 * @return {Object}
 		 */
-		bodyBindings: function(){
-			var me = this, 
-				obj ={
-					css:{
+		bodyBindings: function() {
+			var me = this,
+				obj = {
+					css: {
 						"'modal-body'": me.bodyClass
 					}
 				};
 			
-			if(!me.items){
+			if ( !me.items ) {
 				obj.html = "Firebrick.ui.helper.getHtml( '" + me.getId() + "', $data, $context )";
 			}
 			
@@ -7242,10 +7084,10 @@ define('Firebrick.ui/containers/Modal',["text!./Modal.html", "./Base"], function
 		 * @method footerBindings
 		 * @return {Object}
 		 */
-		footerBindings: function(){
+		footerBindings: function() {
 			var me = this;
 			return {
-				css:{
+				css: {
 					"'modal-footer'": me.footerClass
 				}
 			};
@@ -7254,13 +7096,14 @@ define('Firebrick.ui/containers/Modal',["text!./Modal.html", "./Base"], function
 		 * close modal
 		 * @method close
 		 */
-		close: function(){
+		close: function() {
 			var me = this;
-			me.getModalEl().modal("hide");
+			me.getModalEl().modal( "hide" );
 		}
 	});
 	
 });
+
 
 define('text!Firebrick.ui/containers/tab/Pane.html',[],function () { return '<div data-bind="{{=it.dataBind()}}">\r\n\t{{=it.getItems()}}\r\n</div>';});
 
@@ -7269,23 +7112,23 @@ define('text!Firebrick.ui/containers/tab/Pane.html',[],function () { return '<di
  */
 
 /**
- * 
+ *
  * @module Firebrick.ui.components
  * @extends components.containers.Base
  * @namespace components.containers.tab
  * @class Pane
  */
-define('Firebrick.ui/containers/tab/Pane',["text!./Pane.html", "../Base", "bootstrap.plugins/tab"], function(tpl){
+define( 'Firebrick.ui/containers/tab/Pane',[ "text!./Pane.html", "../Base", "bootstrap.plugins/tab" ], function( tpl ) {
 	"use strict";
-	return Firebrick.define("Firebrick.ui.containers.tab.Pane", {
-		extend:"Firebrick.ui.containers.Base",
+	return Firebrick.define( "Firebrick.ui.containers.tab.Pane", {
+		extend: "Firebrick.ui.containers.Base",
 		tpl: tpl,
 		/**
 		 * @property sName
 		 * @type {String}
 		 * @default "fb-ui-tab.pane"
 		 */
-		sName:"containers.tab.pane",
+		sName: "containers.tab.pane",
 		/**
 		 * @property active
 		 * @type {Boolean}
@@ -7304,7 +7147,7 @@ define('Firebrick.ui/containers/tab/Pane',["text!./Pane.html", "../Base", "boots
 		 * @method getTabId
 		 * @return {String}
 		 */
-		getTab: function(){
+		getTab: function() {
 			return this._parent;
 		},
 		/**
@@ -7313,39 +7156,40 @@ define('Firebrick.ui/containers/tab/Pane',["text!./Pane.html", "../Base", "boots
 		 * @type {integer}
 		 * @default 0
 		 */
-		paneIndex:0,
+		paneIndex: 0,
 		/**
 		 * @method getPaneId
 		 * @return {String}
 		 */
-		getPaneId: function(){
+		getPaneId: function() {
 			var me = this,
 				parent = me.getTab();
 			
-			return parent.getTabId(me.paneIndex);
+			return parent.getTabId( me.paneIndex );
 		},
 		/**
 		 * @method bindings
 		 * @return {Object}
 		 */
-		bindings: function(){
+		bindings: function() {
 			var me = this,
 				obj = me.callParent();
 		
 			obj.attr.role = "'tabpanel'";
-			obj.css["'tab-pane'"] = true;
+			obj.css[ "'tab-pane'" ] = true;
 			obj.css.active = me.active;
 			
-			obj.attr.id = "Firebrick.getById('"+me.getId()+"').getPaneId()";
+			obj.attr.id = "Firebrick.getById('" + me.getId() + "').getPaneId()";
 
-			if(!me.items){
+			if ( !me.items ) {
 				obj.html = "Firebrick.ui.helper.getHtml( '" + me.getId() + "', $data, $context )";
 			}
 			
 			return obj;
-		},
+		}
 	});
 });
+
 
 define('text!Firebrick.ui/containers/TabPanel.html',[],function () { return '<div id="{{=it.getId()}}" data-bind="{{=it.dataBind()}}">\r\n\r\n\t<ul data-bind="{{=it.dataBind(\'listBindings\')}}">\r\n\t\t<!-- ko {{=it.dataBind(\'listTemplateBindings\')}} --><!-- /ko -->\r\n\t</ul>\r\n\t\r\n\t<div data-bind="{{=it.dataBind(\'tabContentBindings\')}}">\r\n\t\t{{~ it.items :value:index}}\r\n\t\t\t{{=it.getTabPaneItem(index, value)}}\r\n\t\t{{~}}\r\n\t</div>\r\n\t\r\n\t<script type="text/html" id="{{=it._getListTplId()}}">\r\n\t\t<li data-bind="{{=it.dataBind(\'listItemBindings\')}}"><a data-bind="{{=it.dataBind(\'listItemLinkBindings\')}}"><span data-bind="{{=it.dataBind(\'listItemTextBindings\')}}"></span></a></li>\r\n\t</script>\r\n\r\n</div>';});
 
@@ -7359,10 +7203,10 @@ define('text!Firebrick.ui/containers/TabPanel.html',[],function () { return '<di
  * @namespace components.containers
  * @class TabPanel
  */
-define('Firebrick.ui/containers/TabPanel',["text!./TabPanel.html", "./Base", "bootstrap.plugins/tab", "./tab/Pane"], function(tpl){
+define( 'Firebrick.ui/containers/TabPanel',[ "text!./TabPanel.html", "./Base", "bootstrap.plugins/tab", "./tab/Pane" ], function( tpl ) {
 	"use strict";
-	return Firebrick.define("Firebrick.ui.containers.TabPanel", {
-		extend:"Firebrick.ui.containers.Base",
+	return Firebrick.define( "Firebrick.ui.containers.TabPanel", {
+		extend: "Firebrick.ui.containers.Base",
 		tpl: tpl,
 		/**
 		* @property sName
@@ -7375,16 +7219,16 @@ define('Firebrick.ui/containers/TabPanel',["text!./TabPanel.html", "./Base", "bo
 		 * @method _getListTplId
 		 * @return {String}
 		 */
-		_getListTplId: function(){
-			return "fb-ui-tpl-list-" + this.getId(); 
+		_getListTplId: function() {
+			return "fb-ui-tpl-list-" + this.getId();
 		},
 		/**
 		 * @private
 		 * @method _getTabPaneTplId
 		 * @return {String}
 		 */
-		_getTabPaneTplId: function(){
-			return "fb-ui-tpl-tabpane-" + this.getId(); 
+		_getTabPaneTplId: function() {
+			return "fb-ui-tpl-tabpane-" + this.getId();
 		},
 		/**
 		 * @property _tabs
@@ -7400,14 +7244,14 @@ define('Firebrick.ui/containers/TabPanel',["text!./TabPanel.html", "./Base", "bo
 				sName: "containers.tab.pane"
 			}
 		 */
-		defaults:{
+		defaults: {
 			sName: "containers.tab.pane"
 		},
 		/**
 		 * @method init
 		 * @return self
 		 */
-		init: function(){
+		init: function() {
 			var me = this;
 			this._firstTabActive();
 			return me.callParent( arguments );
@@ -7417,23 +7261,23 @@ define('Firebrick.ui/containers/TabPanel',["text!./TabPanel.html", "./Base", "bo
 		 * @method _firstTabActive
 		 * @return self
 		 */
-		_firstTabActive: function(){
+		_firstTabActive: function() {
 			var me = this,
-			it, 
+			it,
 			active = false,
 			length = me.items.length;
 		
-			for(var i = 0; i<length; i++){
-				it = me.items[i];
-				if(it.active){
+			for ( var i = 0; i < length; i++ ) {
+				it = me.items[ i ];
+				if ( it.active ) {
 					active = true;
 					break;
 				}
 			}
 			
-			if(!active && length){
+			if ( !active && length ) {
 				//force first tab to be active
-				me.items[0].active = true;
+				me.items[ 0 ].active = true;
 			}
 			return me;
 		},
@@ -7441,7 +7285,7 @@ define('Firebrick.ui/containers/TabPanel',["text!./TabPanel.html", "./Base", "bo
 		 * @method bindings
 		 * @return {Object}
 		 */
-		bindings: function(){
+		bindings: function() {
 			var me = this,
 				obj = me.callParent();
 			
@@ -7453,14 +7297,14 @@ define('Firebrick.ui/containers/TabPanel',["text!./TabPanel.html", "./Base", "bo
 		 * @method listTemplateBindings
 		 * @return {Object}
 		 */
-		listTemplateBindings: function(){
+		listTemplateBindings: function() {
 			var me = this,
 				obj = {};
 			
 			obj.template = {
 					name: me.parseBind( me._getListTplId() ),
-					foreach: Firebrick.ui.helper.tabBuilder(me.getId()),
-					as:"'tab'"
+					foreach: Firebrick.ui.helper.tabBuilder( me.getId() ),
+					as: "'tab'"
 			};
 			
 			return obj;
@@ -7469,13 +7313,12 @@ define('Firebrick.ui/containers/TabPanel',["text!./TabPanel.html", "./Base", "bo
 		 * @method listBindings
 		 * @return {Object}
 		 */
-		listBindings: function(){
-			var me = this,
-				obj = {css:{}, attr:{}};
+		listBindings: function() {
+			var obj = { css: {}, attr: {} };
 			
 			obj.attr.role = "'tablist'";
 			obj.css.nav = true;
-			obj.css["'nav-tabs'"] = true;
+			obj.css[ "'nav-tabs'" ] = true;
 			
 			return obj;
 		},
@@ -7483,9 +7326,8 @@ define('Firebrick.ui/containers/TabPanel',["text!./TabPanel.html", "./Base", "bo
 		 * @method listItemBindings
 		 * @return {Object}
 		 */
-		listItemBindings: function(){
-			var me = this,
-				obj = {css:{}, attr:{}};
+		listItemBindings: function() {
+			var obj = { css: {}, attr: {} };
 			
 			obj.attr.role = "'presentation'";
 			obj.css.active = "tab.hasOwnProperty('active') ? tab.active : false";
@@ -7497,15 +7339,15 @@ define('Firebrick.ui/containers/TabPanel',["text!./TabPanel.html", "./Base", "bo
 		 * @method listItemLinkBindings
 		 * @return {Object}
 		 */
-		listItemLinkBindings: function(){
+		listItemLinkBindings: function() {
 			var me = this,
-				obj = {css:{}, attr:{}};
+				obj = { css: {}, attr: {} };
 			
 			obj.attr.href = "Firebrick.ui.helper.linkBuilder(tab)";
-			obj.attr["'aria-controls'"] = "tab.id";
-			obj.attr["'data-target'"] = "Firebrick.getById('"+me.getId()+"').registerTab(tab.id, $index)";
+			obj.attr[ "'aria-controls'" ] = "tab.id";
+			obj.attr[ "'data-target'" ] = "Firebrick.getById('" + me.getId() + "').registerTab(tab.id, $index)";
 			obj.attr.role = "'tab'";
-			obj.attr["'data-toggle'"] = "tab.disabled !== true ? 'tab' : false";
+			obj.attr[ "'data-toggle'" ] = "tab.disabled !== true ? 'tab' : false";
 			
 			return obj;
 		},
@@ -7513,11 +7355,11 @@ define('Firebrick.ui/containers/TabPanel',["text!./TabPanel.html", "./Base", "bo
 		 * @method listItemTextBindings
 		 * @return {Object}
 		 */
-		listItemTextBindings: function(){
+		listItemTextBindings: function() {
 			var me = this,
-				obj = {css:{}, attr:{}};
+				obj = { css: {}, attr: {} };
 			
-			obj.text = me.textBind("'+tab.title+'");
+			obj.text = me.textBind( "'+tab.title+'" );
 			
 			return obj;
 		},
@@ -7526,11 +7368,10 @@ define('Firebrick.ui/containers/TabPanel',["text!./TabPanel.html", "./Base", "bo
 		 * @method tabContentBindings
 		 * @return {Object}
 		 */
-		tabContentBindings: function(){
-			var me = this,
-				obj = {css:{}, attr:{}};
+		tabContentBindings: function() {
+			var obj = { css: {}, attr: {} };
 			
-			obj.css["'tab-content'"] = true;
+			obj.css[ "'tab-content'" ] = true;
 			
 			return obj;
 		},
@@ -7541,17 +7382,17 @@ define('Firebrick.ui/containers/TabPanel',["text!./TabPanel.html", "./Base", "bo
 		 * @param index {Integer}
 		 * @return "#{id}"
 		 */
-		registerTab: function(tabId, index){
-			var me = this, 
+		registerTab: function( tabId, index ) {
+			var me = this,
 				id;
 			
-			if($.isFunction(index)){
+			if ( $.isFunction( index ) ) {
 				index = index();
 			}
 			
 			id = tabId || "fb-ui-tab-" + me.getId() + "-" + index;
 			
-			me.addTab(id);
+			me.addTab( id );
 			
 			return "#" + id;
 		},
@@ -7561,12 +7402,12 @@ define('Firebrick.ui/containers/TabPanel',["text!./TabPanel.html", "./Base", "bo
 		 * @param id {String}
 		 * @return self
 		 */
-		addTab: function(id){
+		addTab: function( id ) {
 			var me = this;
-			if(!me._tabs){
+			if ( !me._tabs ) {
 				me._tabs = [];
 			}
-			me._tabs.push(id);
+			me._tabs.push( id );
 			return me;
 		},
 		
@@ -7576,8 +7417,8 @@ define('Firebrick.ui/containers/TabPanel',["text!./TabPanel.html", "./Base", "bo
 		 * @param index {Integer}
 		 * @return {String}
 		 */
-		getTabId: function(index){
-			return this._tabs[index];
+		getTabId: function( index ) {
+			return this._tabs[ index ];
 		},
 		
 		/**
@@ -7588,17 +7429,17 @@ define('Firebrick.ui/containers/TabPanel',["text!./TabPanel.html", "./Base", "bo
 		 * @param {Context} iteration context
 		 * @return {String}
 		 */
-		getTabPaneItem: function(index, item){
+		getTabPaneItem: function( index, item ) {
 			var me = this,
 				newItem;
 			
 			item.paneIndex = index;
 			
-			newItem = me._getItems(item);
+			newItem = me._getItems( item );
 			
-			if(newItem){
+			if ( newItem ) {
 				//replace items with the new object - _getItems returns an object {html:"", items:[]}
-				me.items[index] = newItem.items[0];
+				me.items[ index ] = newItem.items[ 0 ];
 				
 				return newItem.html;
 			}
@@ -7606,6 +7447,7 @@ define('Firebrick.ui/containers/TabPanel',["text!./TabPanel.html", "./Base", "bo
 		}
 	});
 });
+
 
 define('text!Firebrick.ui/display/Alert.html',[],function () { return '<div data-bind="{{=it.dataBind()}}">\r\n\t{{?it.dismissible}}\r\n      <button data-bind="{{=it.dataBind(\'closeButtonBindings\')}}"><span aria-hidden="true">&times;</span><span data-bind="{{=it.dataBind(\'srCloseIconBindings\')}}"></span></button>\r\n    {{?}}\r\n    {{?it.title || it.html}}\r\n    \t<h4>{{=fb.text(it.title)}}</h4>\r\n    \t<p data-bind="{{=it.dataBind(\'paragraphBindings\')}}">\r\n    \t</p>\r\n    {{?? true }}\r\n    \t{{=it.getItems()}}\r\n    {{?}}\r\n\t\r\n</div>';});
 
@@ -7620,13 +7462,13 @@ define('text!Firebrick.ui/display/Alert.html',[],function () { return '<div data
  * @uses components.common.mixins.Items
  * @class Alert
  */
-define('Firebrick.ui/display/Alert',["text!./Alert.html", "../common/Base", "../common/mixins/Items"], function(tpl){
+define( 'Firebrick.ui/display/Alert',[ "text!./Alert.html", "../common/Base", "../common/mixins/Items" ], function( tpl ) {
 	"use strict";
-	return Firebrick.define("Firebrick.ui.display.Alert", {
+	return Firebrick.define( "Firebrick.ui.display.Alert", {
 		extend: "Firebrick.ui.common.Base",
-		mixins:"Firebrick.ui.common.mixins.Items",
+		mixins: "Firebrick.ui.common.mixins.Items",
 		tpl: tpl,
-		sName:"display.alert",
+		sName: "display.alert",
 		/**
 		 * whether the alert is dismissible - also controls whether the X button is shown or not
 		 * @property dismissible
@@ -7639,12 +7481,12 @@ define('Firebrick.ui/display/Alert',["text!./Alert.html", "../common/Base", "../
 		 * @type {String|false}
 		 * @default "fade in"
 		 */
-		animationClasses:"fade in",
+		animationClasses: "fade in",
 		/**
 		 * alert type, "danger", "info", "warn" etc
 		 * @property type
 		 * @type {String}
-		 * @default "danger" 
+		 * @default "danger"
 		 */
 		type: "danger",
 		/**
@@ -7653,7 +7495,7 @@ define('Firebrick.ui/display/Alert',["text!./Alert.html", "../common/Base", "../
 		 * @type {String}
 		 * @default ""
 		 */
-		title:"",
+		title: "",
 		/**
 		 * fill the panel body with html
 		 * @property html
@@ -7665,17 +7507,17 @@ define('Firebrick.ui/display/Alert',["text!./Alert.html", "../common/Base", "../
 		 * @method bindings
 		 * @return {Object}
 		 */
-		bindings: function(){
+		bindings: function() {
 			var me = this,
-				obj = me.callParent(arguments);
+				obj = me.callParent( arguments );
 			
 			obj.attr.role = "'alert'";
 			obj.css.alert = true;
-			obj.css["'alert-dismissible'"] = me.dismissible;
-			if(me.animationClasses){
-				obj.css[me.parseBind(me.animationClasses)] = true;
+			obj.css[ "'alert-dismissible'" ] = me.dismissible;
+			if ( me.animationClasses ) {
+				obj.css[ me.parseBind( me.animationClasses ) ] = true;
 			}
-			obj.css[me.parseBind("alert-" + me.type)] = true;
+			obj.css[ me.parseBind( "alert-" + me.type ) ] = true;
 			
 			return obj;
 		},
@@ -7683,11 +7525,11 @@ define('Firebrick.ui/display/Alert',["text!./Alert.html", "../common/Base", "../
 		 * @method paragraphBindings
 		 * @return {Object}
 		 */
-		paragraphBindings: function(){
+		paragraphBindings: function() {
 			var me = this,
 				obj = {};
 			
-			obj.html = "Firebrick.getById('"+me.getId()+"').html";
+			obj.html = "Firebrick.getById('" + me.getId() + "').html";
 			
 			return obj;
 		},
@@ -7703,32 +7545,33 @@ define('Firebrick.ui/display/Alert',["text!./Alert.html", "../common/Base", "../
 		 * @method srCloseIconBindings
 		 * @return {Object}
 		 */
-		srCloseIconBindings: function(){
+		srCloseIconBindings: function() {
 			var me = this;
 			return {
-				css:{
+				css: {
 					"'sr-only'": true
 				},
-				text: me.parseBind(me.srCloseText)
+				text: me.parseBind( me.srCloseText )
 			};
 		},
 		/**
 		 * @method closeButtonBindings
 		 * @return {Object}
 		 */
-		closeButtonBindings: function(){
+		closeButtonBindings: function() {
 			return {
-				attr:{
+				attr: {
 					type: "'button'",
 					"'data-dismiss'": "'alert'"
 				},
-				css:{
+				css: {
 					close: true
 				}
 			};
-		},
+		}
 	});
 });
+
 
 define('text!Firebrick.ui/display/Divider.html',[],function () { return '<hr data-bind="{{=it.dataBind()}}" />';});
 
@@ -7742,15 +7585,15 @@ define('text!Firebrick.ui/display/Divider.html',[],function () { return '<hr dat
  * @namespace components.display
  * @class Divider
  */
-define('Firebrick.ui/display/Divider',["text!./Divider.html", "../common/Base"], function(tpl){
+define( 'Firebrick.ui/display/Divider',[ "text!./Divider.html", "../common/Base" ], function( tpl ) {
 	"use strict";
-	return Firebrick.define("Firebrick.ui.display.Divider", {
-		extend:"Firebrick.ui.common.Base",
+	return Firebrick.define( "Firebrick.ui.display.Divider", {
+		extend: "Firebrick.ui.common.Base",
 		/**
 		 * @property sName
 		 * @type {String}
 		 */
-		sName:"display.divider",
+		sName: "display.divider",
 		/**
 		 * @property tpl
 		 * @type {html}
@@ -7758,6 +7601,7 @@ define('Firebrick.ui/display/Divider',["text!./Divider.html", "../common/Base"],
 		tpl: tpl
 	});
 });
+
 
 define('text!Firebrick.ui/display/Header.html',[],function () { return '<h{{=it.headerSize}} id="{{=it.getId()}}" data-bind="{{=it.dataBind()}}">\r\n\t{{?it.href}}\r\n\t\t<a href="{{=it.href}}" data-bind="{{=it.dataBind(\'hrefBindings\')}}">\r\n\t{{?}}\r\n\t<span data-bind="{{=it.dataBind(\'textBindings\')}}"></span>\r\n\t<small data-bind="{{=it.dataBind(\'secondaryTextBindings\')}}"></small>\r\n\t{{=it.getLabelTpl()}}\r\n\t{{?it.href}}\r\n\t\t</a>\r\n\t{{?}}\r\n</h{{=it.headerSize}}>';});
 
@@ -7771,40 +7615,40 @@ define('text!Firebrick.ui/display/Header.html',[],function () { return '<h{{=it.
  * @namespace components.display
  * @class Header
  */
-define('Firebrick.ui/display/Header',["text!./Header.html", "../common/Base", "../common/mixins/Label"], function(tpl){
+define( 'Firebrick.ui/display/Header',[ "text!./Header.html", "../common/Base", "../common/mixins/Label" ], function( tpl ) {
 	"use strict";
-	return Firebrick.define("Firebrick.ui.display.Header", {
-		extend:"Firebrick.ui.common.Base",
+	return Firebrick.define( "Firebrick.ui.display.Header", {
+		extend: "Firebrick.ui.common.Base",
 		mixins: "Firebrick.ui.common.mixins.Label",
 		/**
 		 * @property sName
 		 * @type {String}
 		 */
-		sName:"display.header",
+		sName: "display.header",
 		/**
 		 * @property tpl
 		 * @type {String}
 		 */
-		tpl:tpl,
+		tpl: tpl,
 		/**
 		 * use to determine whether h1, h2, h3 etc - default = 1
 		 * @property headerSize
 		 * @type {Int}
 		 * @default 1
 		 */
-		headerSize:1,
+		headerSize: 1,
 		/**
 		 * @property text
 		 * @type {String}
 		 * @default ""
 		 */
-		text:"",
+		text: "",
 		/**
 		 * @property secondaryText
 		 * @type {String}
 		 * @default ""
 		 */
-		secondaryText:"",
+		secondaryText: "",
 		/**
 		 * change to a url if you wish to convert the header into a link
 		 * @property href
@@ -7823,11 +7667,11 @@ define('Firebrick.ui/display/Header',["text!./Header.html", "../common/Base", ".
 		 * @method textBindings
 		 * @return Object
 		 */
-		textBindings: function(){
+		textBindings: function() {
 			var me = this,
 				obj = {};
 			
-			obj.text = me.textBind(me.text);
+			obj.text = me.textBind( me.text );
 			
 			return obj;
 		},
@@ -7835,15 +7679,15 @@ define('Firebrick.ui/display/Header',["text!./Header.html", "../common/Base", ".
 		 * @method secondaryTextBindings
 		 * @return Object
 		 */
-		secondaryTextBindings: function(){
+		secondaryTextBindings: function() {
 			var me = this;
-			if(me.secondaryText){
+			if ( me.secondaryText ) {
 				return {
-					text: me.textBind(me.secondaryText)
+					text: me.textBind( me.secondaryText )
 				};
-			}else{
+			} else {
 				return {
-					visible:false
+					visible: false
 				};
 			}
 		},
@@ -7851,15 +7695,16 @@ define('Firebrick.ui/display/Header',["text!./Header.html", "../common/Base", ".
 		 * @method hrefBindings
 		 * @return {Object}
 		 */
-		hrefBindings: function(){
+		hrefBindings: function() {
 			var me = this,
-				obj = {attr:{}};
-			obj.attr["'fb-ignore-router'"] = "$data.hasOwnProperty( 'ignoreRouter' ) ? $data.ignoreRouter : " + me.ignoreRouter;
+				obj = { attr: {} };
+			obj.attr[ "'fb-ignore-router'" ] = "$data.hasOwnProperty( 'ignoreRouter' ) ? $data.ignoreRouter : " + me.ignoreRouter;
 			return obj;
 		}
 		
 	});
 });
+
 
 define('text!Firebrick.ui/display/Image.html',[],function () { return '<img id="{{=it.getId()}}" data-bind="{{=it.dataBind()}}" />';});
 
@@ -7873,23 +7718,23 @@ define('text!Firebrick.ui/display/Image.html',[],function () { return '<img id="
  * @namespace components.display
  * @class Image
  */
-define('Firebrick.ui/display/Image',["text!./Image.html", "../common/Base", "responsive-images"], function(tpl){
+define( 'Firebrick.ui/display/Image',[ "text!./Image.html", "../common/Base", "responsive-images" ], function( tpl ) {
 	"use strict";
-	return Firebrick.define("Firebrick.ui.display.Image", {
-		extend:"Firebrick.ui.common.Base",
-		sName:"display.image",
+	return Firebrick.define( "Firebrick.ui.display.Image", {
+		extend: "Firebrick.ui.common.Base",
+		sName: "display.image",
 		tpl: tpl,
 		/**
 		 * @method init
 		 */
-		init: function(){
+		init: function() {
 			var me = this;
-			me.on("rendered", function(){
-				if(window.responsiveImages){
-					window.responsiveImages.update(me.getId());
+			me.on( "rendered", function() {
+				if ( window.responsiveImages ) {
+					window.responsiveImages.update( me.getId() );
 				}
 			});
-			this.callParent(arguments);
+			this.callParent( arguments );
 		},
 		/**
 		 * @property src
@@ -7931,25 +7776,25 @@ define('Firebrick.ui/display/Image',["text!./Image.html", "../common/Base", "res
 		 * @method bindings
 		 * @return {Object}
 		 */
-		bindings: function(){
+		bindings: function() {
 			var me = this,
-				obj = me.callParent(arguments);
+				obj = me.callParent( arguments );
 			
-			obj.css["'img-responsive'"] = me.responsiveClass;
+			obj.css[ "'img-responsive'" ] = me.responsiveClass;
 
-			if(me.imgType){
-				obj.css[ me.parseBind( "img-"+me.imgType ) ] = true;
+			if ( me.imgType ) {
+				obj.css[ me.parseBind( "img-" + me.imgType ) ] = true;
 			}
 			
-			if(me.sizes){
-				obj.attr["'data-sizes'"] = me.sizes;
+			if ( me.sizes ) {
+				obj.attr[ "'data-sizes'" ] = me.sizes;
 			}
 			
-			if(me.srcset){
-				obj.attr["'data-srcset'"] = me.srcset;
+			if ( me.srcset ) {
+				obj.attr[ "'data-srcset'" ] = me.srcset;
 			}
 			
-			if(me.src){
+			if ( me.src ) {
 				obj.attr.src = me.src;
 			}
 			
@@ -7957,6 +7802,7 @@ define('Firebrick.ui/display/Image',["text!./Image.html", "../common/Base", "res
 		}
 	});
 });
+
 
 define('text!Firebrick.ui/display/Loader.html',[],function () { return '<div id="{{=it.getId()}}" data-bind="{{=it.dataBind()}}">\r\n\t<div data-bind="{{=it.dataBind(\'maskBindings\')}}"></div>\r\n\t<div data-bind="{{=it.dataBind(\'msgContainerBindings\')}}">\r\n\t\t<span data-bind="{{=it.dataBind(\'spinnerBindings\')}}"></span>\r\n\t\t<span data-bind="{{=it.dataBind(\'msgBindings\')}}"></span>\r\n\t</div>\t\r\n</div>';});
 
@@ -7971,11 +7817,11 @@ define('text!Firebrick.ui/display/Loader.html',[],function () { return '<div id=
  * @uses components.common.mixins.Items
  * @class Loader
  */
-define('Firebrick.ui/display/Loader',["text!./Loader.html", "jquery", "../common/Base", "../common/mixins/Items"], function(tpl, $){
+define( 'Firebrick.ui/display/Loader',[ "text!./Loader.html", "jquery", "../common/Base", "../common/mixins/Items" ], function( tpl, $ ) {
 	"use strict";
-	return Firebrick.define("Firebrick.ui.display.Loader", {
+	return Firebrick.define( "Firebrick.ui.display.Loader", {
 		extend: "Firebrick.ui.common.Base",
-		enclosedBind:true,
+		enclosedBind: true,
 		/**
 		 * @property target
 		 * @type {String or jQuery Object}
@@ -8015,15 +7861,15 @@ define('Firebrick.ui/display/Loader',["text!./Loader.html", "jquery", "../common
 		/**
 		 * @method init
 		 */
-		init: function(){
+		init: function() {
 			var me = this,
 				target = me.getTarget();
 			
-			if(target.is("input")){
+			if ( target.is( "input" ) ) {
 				me.target = target.parent();
 			}
 			
-			me.on("rendered", function(){
+			me.on( "rendered", function() {
 				me._initRender();
 			});
 			return me.callParent( arguments );
@@ -8032,45 +7878,45 @@ define('Firebrick.ui/display/Loader',["text!./Loader.html", "jquery", "../common
 		 * @method _initRender
 		 * @private
 		 */
-		_initRender: function(){
+		_initRender: function() {
 			var me = this,
 				target = me.getTarget();
 			
-			target.addClass("fb-ui-loader-open"); //TODO: if target is absolute or fixed?
+			target.addClass( "fb-ui-loader-open" ); //TODO: if target is absolute or fixed?
 			me.position();
 		},
 		/**
 		 * @method destroy
 		 */
-		destroy: function(){
+		destroy: function() {
 			var me = this,
 				target = me.getTarget();
-			target.removeClass("fb-ui-loader-open");
+			target.removeClass( "fb-ui-loader-open" );
 			return me.callParent( arguments );
 		},
 		/**
 		 * @method _getCalcTarget
 		 * @return {jQuery Object}
 		 */
-		_getCalcTarget: function(){
+		_getCalcTarget: function() {
 			var me = this;
-			return me.target === "body" || me.target === "html" ? $(window) : me.getTarget();
+			return me.target === "body" || me.target === "html" ? $( window ) : me.getTarget();
 		},
 		/**
 		 * positions loader
 		 * @method position
 		 */
-		position: function(){
+		position: function() {
 			var me = this,
 				$target = me._getCalcTarget(),
 				$el = me.getElement(),
-				$loader = $(".fb-ui-loader-msg-container", $el),
+				$loader = $( ".fb-ui-loader-msg-container", $el ),
 				xPos = $loader.outerWidth() / 2,
 				yPos = $loader.outerHeight() / 2;
 
 			$loader.css({
-				top: ($target.height() / 2) - yPos,
-				left: ($target.width() / 2) - xPos
+				top: ( $target.height() / 2 ) - yPos,
+				left: ( $target.width() / 2 ) - xPos
 			});
 			
 		},
@@ -8078,11 +7924,11 @@ define('Firebrick.ui/display/Loader',["text!./Loader.html", "jquery", "../common
 		 * @method bindings
 		 * @return {Object}
 		 */
-		bindings: function(){
+		bindings: function() {
 			var me = this,
 				obj = me.callParent( arguments );
 			
-			obj.css["'fb-ui-loader-container'"] = true;
+			obj.css[ "'fb-ui-loader-container'" ] = true;
 			
 			return obj;
 		},
@@ -8090,9 +7936,8 @@ define('Firebrick.ui/display/Loader',["text!./Loader.html", "jquery", "../common
 		 * @method maskBindings
 		 * @return {Object}
 		 */
-		maskBindings: function(){
-			var me = this,
-				obj = {
+		maskBindings: function() {
+			var obj = {
 					css: {
 						"'fb-ui-loader-mask'": true
 					}
@@ -8103,9 +7948,8 @@ define('Firebrick.ui/display/Loader',["text!./Loader.html", "jquery", "../common
 		 * @method spinnerBindings
 		 * @return {Object}
 		 */
-		spinnerBindings: function(){
-			var me = this,
-				obj = {
+		spinnerBindings: function() {
+			var obj = {
 					css: {
 						"'fb-ui-loader-spinner'": true,
 						glyphicon: true,
@@ -8119,9 +7963,8 @@ define('Firebrick.ui/display/Loader',["text!./Loader.html", "jquery", "../common
 		 * @method msgContainerBindings
 		 * @return {Object}
 		 */
-		msgContainerBindings: function(){
-			var me = this,
-				obj = {
+		msgContainerBindings: function() {
+			var obj = {
 					css: {
 						"'fb-ui-loader-msg-container'": true
 					}
@@ -8133,7 +7976,7 @@ define('Firebrick.ui/display/Loader',["text!./Loader.html", "jquery", "../common
 		 * @method msgBindings
 		 * @return {Object}
 		 */
-		msgBindings: function(){
+		msgBindings: function() {
 			var me = this,
 				obj = {
 					css: {
@@ -8141,7 +7984,7 @@ define('Firebrick.ui/display/Loader',["text!./Loader.html", "jquery", "../common
 					}
 				};
 			
-			if( me.msgText ){
+			if ( me.msgText ) {
 				obj.text = me.textBind( me.msgText );
 			}
 			
@@ -8149,6 +7992,7 @@ define('Firebrick.ui/display/Loader',["text!./Loader.html", "jquery", "../common
 		}
 	});
 });
+
 
 define('text!Firebrick.ui/display/Progress.html',[],function () { return '<div id="{{=it.getId()}}" data-bind="{{=it.dataBind(\'progressContainerBindings\')}}">\r\n\t{{?it.showLabel}}\r\n\t\t<p data-bind="{{=it.dataBind(\'progressLabelBindings\')}}" ></p>\r\n\t{{?}}\r\n\t<progress data-bind="{{=it.dataBind()}}"></progress>\r\n</div>';});
 
@@ -8162,11 +8006,11 @@ define('text!Firebrick.ui/display/Progress.html',[],function () { return '<div i
  * @namespace components.display
  * @class Progress
  */
-define('Firebrick.ui/display/Progress',["text!./Progress.html", "../common/Base"], function(tpl){
+define( 'Firebrick.ui/display/Progress',[ "text!./Progress.html", "../common/Base" ], function( tpl ) {
 	"use strict";
-	return Firebrick.define("Firebrick.ui.display.Progress", {
+	return Firebrick.define( "Firebrick.ui.display.Progress", {
 		extend: "Firebrick.ui.common.Base",
-		sName:"display.progress",
+		sName: "display.progress",
 		tpl: tpl,
 		/**
 		 * progress html5 element max attribute
@@ -8174,14 +8018,14 @@ define('Firebrick.ui/display/Progress',["text!./Progress.html", "../common/Base"
 		 * @type {Integer|String|Function}
 		 * @default 100
 		 */
-		max:100,
+		max: 100,
 		/**
 		 * progress html5 element value attribute
 		 * @property value
-		 * @type {Integer|String|Function} use a string or function for data binding 
+		 * @type {Integer|String|Function} use a string or function for data binding
 		 * @default 0
 		 */
-		value:0,
+		value: 0,
 		/**
 		 * whether or not to show a label with the progress bar
 		 * @property showLabel
@@ -8206,47 +8050,48 @@ define('Firebrick.ui/display/Progress',["text!./Progress.html", "../common/Base"
 		 * @method bindings
 		 * @return {Object}
 		 */
-		bindings: function(){
+		bindings: function() {
 			var me = this,
-				obj = me.callParent(arguments);
+				obj = me.callParent( arguments );
 			
 			obj.attr.max = me.max;
 			obj.attr.value = me.value;
-			obj.text = me.parseBind(me.value+"%");
+			obj.text = me.parseBind( me.value + "%" );
 			
 			return obj;
 		},
 		/**
 		 * @method progressLabelBindings
 		 */
-		progressLabelBindings: function(){
+		progressLabelBindings: function() {
 			var me = this;
 			return {
 				css: {
 					"'progress-label'": true
 				},
 				attr: {
-					"'data-symbol'": me.parseBind(me.dataSymbol),
+					"'data-symbol'": me.parseBind( me.dataSymbol ),
 					"'data-value'": me.value
 				},
-				text: me.textBind(me.label),
+				text: me.textBind( me.label ),
 				style: {
-					width: me.parseBind(me.value+"%")
+					width: me.parseBind( me.value + "%" )
 				}
 			};
 		},
 		/**
 		 * @method progressContainerBindings
 		 */
-		progressContainerBindings: function(){
+		progressContainerBindings: function() {
 			return {
-				css:{
+				css: {
 					"'progress-container'": true
 				}
 			};
 		}
 	});
 });
+
 
 define('text!Firebrick.ui/display/Span.html',[],function () { return '<span id="{{=it.getId()}}" data-bind="{{=it.dataBind()}}"></span>';});
 
@@ -8260,18 +8105,18 @@ define('text!Firebrick.ui/display/Span.html',[],function () { return '<span id="
  * @namespace components.display
  * @class Span
  */
-define('Firebrick.ui/display/Span',["text!./Span.html", "../common/Base"], function(tpl){
+define( 'Firebrick.ui/display/Span',[ "text!./Span.html", "../common/Base" ], function( tpl ) {
 	"use strict";
-	return Firebrick.define("Firebrick.ui.display.Span", {
+	return Firebrick.define( "Firebrick.ui.display.Span", {
 		extend: "Firebrick.ui.common.Base",
-		sName:"display.span",
+		sName: "display.span",
 		tpl: tpl,
 		/**
 		 * @property text
 		 * @type {String}
 		 * @default ""
 		 */
-		text:"",
+		text: "",
 		/**
 		 * set as "primary", "default", "warning", "danger", "success", "info" to convert the span to a BS label component
 		 * @property labelStyle
@@ -8283,21 +8128,22 @@ define('Firebrick.ui/display/Span',["text!./Span.html", "../common/Base"], funct
 		 * @method bindings
 		 * @return {Object}
 		 */
-		bindings: function(){
+		bindings: function() {
 			var me = this,
-				obj = me.callParent(arguments);
+				obj = me.callParent( arguments );
 			
-			obj.text = "Firebrick.getById('"+me.getId()+"').text";
+			obj.text = "Firebrick.getById('" + me.getId() + "').text";
 			
-			if(me.labelStyle){
+			if ( me.labelStyle ) {
 				me.css.label = true;
-				me.css[me.parseBind("label-" + me.labelStyle)] = true;
+				me.css[ me.parseBind( "label-" + me.labelStyle ) ] = true;
 			}
 			
 			return obj;
 		}
 	});
 });
+
 
 define('text!Firebrick.ui/display/Text.html',[],function () { return '{{?it.blockQuote}}\r\n<blockquote data-bind="{{=it.dataBind(\'blockQuoteBindings\')}}">\r\n{{?}}\r\n\t<p data-bind="{{=it.dataBind()}}">\r\n\t</p>\r\n\t{{?it.blockQuoteFooter}}\r\n\t<footer data-bind="{{=it.dataBind(\'blockQuoteFooterBindings\')}}"></footer>\r\n\t{{?}}\r\n{{?it.blockQuote}}\r\n</blockquote>\r\n{{?}}';});
 
@@ -8311,45 +8157,45 @@ define('text!Firebrick.ui/display/Text.html',[],function () { return '{{?it.bloc
  * @namespace components.display
  * @class Text
  */
-define('Firebrick.ui/display/Text',["text!./Text.html", "../common/Base"], function(tpl){
+define( 'Firebrick.ui/display/Text',[ "text!./Text.html", "../common/Base" ], function( tpl ) {
 	"use strict";
-	return Firebrick.define("Firebrick.ui.display.Text", {
+	return Firebrick.define( "Firebrick.ui.display.Text", {
 		extend: "Firebrick.ui.common.Base",
 		/**
 		 * @property sName
 		 * @type {String}
 		 */
-		sName:"display.text",
+		sName: "display.text",
 		/**
 		 * @property tpl
 		 * @type {String}
 		 */
-		tpl:tpl,
+		tpl: tpl,
 		/**
 		 * whether text is raw html or not
 		 * @property isHtml
 		 * @type {Boolean}
 		 * @default false
 		 */
-		isHtml:false,
+		isHtml: false,
 		/**
 		 * @property text
 		 * @type {String}
 		 * @default ""
 		 */
-		text:"",
+		text: "",
 		/**
 		 * @property leadCSS
 		 * @type {Boolean}
 		 * @default false
 		 */
-		leadCSS:false,
+		leadCSS: false,
 		/**
 		 * @property blockQuote
 		 * @type {Boolean}
 		 * @default false
 		 */
-		blockQuote:false,
+		blockQuote: false,
 		/**
 		 * @property blockQuoteReverseCSS
 		 * @type {Boolean}
@@ -8362,7 +8208,7 @@ define('Firebrick.ui/display/Text',["text!./Text.html", "../common/Base"], funct
 		 * @type {Boolean|String}
 		 * @default false
 		 */
-		blockQuoteFooter:false,
+		blockQuoteFooter: false,
 		/**
 		 * @property isBlockQuoteFooterHTML
 		 * @type {Boolean}
@@ -8375,26 +8221,26 @@ define('Firebrick.ui/display/Text',["text!./Text.html", "../common/Base"], funct
 		 * @type {Boolean|String}
 		 * @default ""
 		 */
-		textAlignment:"",
+		textAlignment: "",
 		/**
 		 * Bindings
 		 * @method bindings
 		 * @return {Object}
 		 */
-		bindings:function(){
+		bindings: function() {
 			var me = this,
-				obj = me.callParent(arguments);
+				obj = me.callParent( arguments );
 			
 			obj.css.lead = me.leadCSS;
 			
-			if(me.textAlignment){
-				obj.css[ me.parseBind("text-"+me.textAlignment) ] = true;	
+			if ( me.textAlignment ) {
+				obj.css[ me.parseBind( "text-" + me.textAlignment ) ] = true;
 			}
 			
-			if(me.isHtml){
-				obj.html = me.text; 
-			}else if(me.text){
-				obj.text = me.textBind(me.text);
+			if ( me.isHtml ) {
+				obj.html = me.text;
+			} else if ( me.text ) {
+				obj.text = me.textBind( me.text );
 			}
 			
 			return obj;
@@ -8403,9 +8249,9 @@ define('Firebrick.ui/display/Text',["text!./Text.html", "../common/Base"], funct
 		 * @method blockQuoteBindings
 		 * @return {Object}
 		 */
-		blockQuoteBindings: function(){
+		blockQuoteBindings: function() {
 			return {
-				css:{
+				css: {
 					"'blockquote-reverse'": this.blockQuoteReverseCSS
 				}
 			};
@@ -8414,18 +8260,19 @@ define('Firebrick.ui/display/Text',["text!./Text.html", "../common/Base"], funct
 		 * @method blockQuoteFooterBindings
 		 * @return {Object}
 		 */
-		blockQuoteFooterBindings: function(){
+		blockQuoteFooterBindings: function() {
 			var me = this,
 				obj = {};
-			if(me.isHtml){
-				obj.html = me.blockQuoteFooter; 
-			}else{
-				obj.text = me.textBind(me.blockQuoteFooter);
+			if ( me.isHtml ) {
+				obj.html = me.blockQuoteFooter;
+			} else {
+				obj.text = me.textBind( me.blockQuoteFooter );
 			}
 			return obj;
 		}
 	});
 });
+
 
 define('text!Firebrick.ui/fields/Radio.html',[],function () { return '{{?it.showOptionLabel}}\r\n<label data-bind="{{=it.dataBind(\'optionLabelContainerBindings\')}}">\r\n{{?}}\r\n\t{{=it.getParentSubTpl()}}\r\n{{?it.showOptionLabel}}\r\n\t<span data-bind="{{=it.dataBind(\'optionLabelBindings\')}}"></span>\r\n</label>\r\n{{?}}';});
 
@@ -8439,32 +8286,32 @@ define('text!Firebrick.ui/fields/Radio.html',[],function () { return '{{?it.show
  * @namespace components.fields
  * @class Radio
  */
-define('Firebrick.ui/fields/Radio',["text!./Radio.html", "../common/MultiplesBase"], function(subTpl){
+define( 'Firebrick.ui/fields/Radio',[ "text!./Radio.html", "../common/MultiplesBase" ], function( subTpl ) {
 	"use strict";
-	return Firebrick.define("Firebrick.ui.fields.Radio", {
-		extend:"Firebrick.ui.common.MultiplesBase",
+	return Firebrick.define( "Firebrick.ui.fields.Radio", {
+		extend: "Firebrick.ui.common.MultiplesBase",
 		/**
 		 * @property sName
 		 * @type {String}
 		 */
-		sName:"fields.radio",
+		sName: "fields.radio",
 		/**
 		 * @property type
 		 * @type {String}
 		 * @default "'radio'"
 		 */
-		type:"radio",
+		type: "radio",
 		/**
 		 * @property dataType
 		 * @type {String}
 		 * @default "'radiolist'"
 		 */
-		dataType:"radiolist",
+		dataType: "radiolist",
 		/**
 		 * @property subTpl
 		 * @type {String} html
 		 */
-		subTpl:subTpl,
+		subTpl: subTpl,
 		/**
 		 * @property showOptionLabel
 		 * @type {Boolean}
@@ -8477,7 +8324,7 @@ define('Firebrick.ui/fields/Radio',["text!./Radio.html", "../common/MultiplesBas
 		 * @type {Boolean|String}
 		 * @default false
 		 */
-		options:false,
+		options: false,
 		/**
 		 * @property optionsPropValue
 		 * @type {String}
@@ -8494,9 +8341,9 @@ define('Firebrick.ui/fields/Radio',["text!./Radio.html", "../common/MultiplesBas
 		 * @method optionLabelBindings
 		 * @return {Object}
 		 */
-		optionLabelBindings:function(){
+		optionLabelBindings: function() {
 			var me = this;
-			if(!me.inplaceEdit){
+			if ( !me.inplaceEdit ) {
 				return {
 					text: "$data.text ? Firebrick.text($data.text) : ''"
 				};
@@ -8508,11 +8355,11 @@ define('Firebrick.ui/fields/Radio',["text!./Radio.html", "../common/MultiplesBas
 		 * @method optionLabelContainerBindings
 		 * @return {Object}
 		 */
-		optionLabelContainerBindings:function(){
+		optionLabelContainerBindings: function() {
 			var me = this;
 			return {
 				attr: {
-					"for": me.inplaceEdit ?  me.parseBind(me.getId()) : "itemId"
+					"for": me.inplaceEdit ?  me.parseBind( me.getId() ) : "itemId"
 				}
 			};
 		},
@@ -8520,16 +8367,16 @@ define('Firebrick.ui/fields/Radio',["text!./Radio.html", "../common/MultiplesBas
 		 * @method inputContainerBindings
 		 * @return {Object}
 		 */
-		inputContainerBindings:function(){
+		inputContainerBindings: function() {
 			var me = this,
-				obj = me.callParent(arguments);
+				obj = me.callParent( arguments );
 			
-			if(me.options && !me.inplaceEdit){
-				obj.foreach = Firebrick.ui.helper.optionString(me);
+			if ( me.options && !me.inplaceEdit ) {
+				obj.foreach = Firebrick.ui.helper.optionString( me );
 			}
 			
 			obj.attr = obj.attr || {};
-			obj.attr.id = me.parseBind(me.getId());
+			obj.attr.id = me.parseBind( me.getId() );
 			
 			return obj;
 		},
@@ -8537,49 +8384,50 @@ define('Firebrick.ui/fields/Radio',["text!./Radio.html", "../common/MultiplesBas
 		 * @method bindings
 		 * @return {Object}
 		 */
-		bindings:function(){
+		bindings: function() {
 			var me = this,
-				obj = me.callParent(arguments),
+				obj = me.callParent( arguments ),
 				value = me.value || null;
 			
-			if($.isPlainObject(value) && value.value){
-				if($.isFunction(value.value)){
+			if ( $.isPlainObject( value ) && value.value ) {
+				if ( $.isFunction( value.value ) ) {
 					value = value.value();
-				}else{
+				} else {
 					value = value.value;
 				}
 			}
 			
-			if(me.inplaceEdit){
+			if ( me.inplaceEdit ) {
 				obj.editable = me.selectedOptions || false;
 				obj.editableOptions = {
-						optionsValue:me.parseBind(me.optionsPropValue),
-						optionsText:me.parseBind(me.optionsPropText),
-						options:Firebrick.ui.helper.optionString(me),
-						type:"'checklist'"
+						optionsValue: me.parseBind( me.optionsPropValue ),
+						optionsText: me.parseBind( me.optionsPropText ),
+						options: Firebrick.ui.helper.optionString( me ),
+						type: "'checklist'"
 				};
 			}
 			
-			obj.css["'form-control'"] = false;
-			if(!me.inplaceEdit){
+			obj.css[ "'form-control'" ] = false;
+			if ( !me.inplaceEdit ) {
 				obj.value = "$data.value ? $data.value : $data";
 				obj.attr.id = "itemId";
-			}else{
-				obj.attr.id =  me.parseBind(me.getId());
+			} else {
+				obj.attr.id =  me.parseBind( me.getId() );
 			}
-			obj.attr.name = me.parseBind( me.cleanString(me.type)+"-group-"+Firebrick.utils.uniqId() );
-			if(value !== null){
+			obj.attr.name = me.parseBind( me.cleanString( me.type ) + "-group-" + Firebrick.utils.uniqId() );
+			if ( value !== null ) {
 				obj.checked = value;
-			}else{
+			} else {
 				obj.checked = "($data && $data.checked)";
 			}
 			
-			obj.attr["'data-cmp-id'"] = me.parseBind(me.getId());
+			obj.attr[ "'data-cmp-id'" ] = me.parseBind( me.getId() );
 			
 			return obj;
 		}
 	});
 });
+
 /*!
  * @author Steven Masala [me@smasala.com]
  */
@@ -8590,50 +8438,50 @@ define('Firebrick.ui/fields/Radio',["text!./Radio.html", "../common/MultiplesBas
  * @namespace components.fields
  * @class Checkbox
  */
-define('Firebrick.ui/fields/Checkbox',["./Radio"], function(){
+define( 'Firebrick.ui/fields/Checkbox',[ "./Radio" ], function() {
 	"use strict";
-	return Firebrick.define("Firebrick.ui.fields.Checkbox", {
-		extend:"Firebrick.ui.fields.Radio",
+	return Firebrick.define( "Firebrick.ui.fields.Checkbox", {
+		extend: "Firebrick.ui.fields.Radio",
 		/**
 		 * @property sName
 		 * @type {String}
 		 */
-		sName:"fields.checkbox",
+		sName: "fields.checkbox",
 		/**
 		 * @property type
 		 * @type {String}
 		 * @default "'checkbox'"
 		 */
-		type:"checkbox",
+		type: "checkbox",
 		/**
 		 * @property dataType
 		 * @type {String}
 		 * @default "'checklist'"
 		 */
-		dataType:"checklist",
+		dataType: "checklist",
 		/**
 		 * @method bindings
 		 * @return {Object}
 		 */
-		bindings:function(){
+		bindings: function() {
 			var me = this,
-				obj = me.callParent(arguments);
+				obj = me.callParent( arguments );
 
-			if(me.inplaceEdit){
+			if ( me.inplaceEdit ) {
 				obj.editable = me.selectedOptions || false;
 				obj.editableOptions = {
-						optionsValue:me.parseBind(me.optionsPropValue),
-						optionsText:me.parseBind(me.optionsPropText),
-						options:me.options,
+						optionsValue: me.parseBind( me.optionsPropValue ),
+						optionsText: me.parseBind( me.optionsPropText ),
+						options: me.options,
 						type:  me.parseBind( me.dataType )
 				};
 			}
 			
-	
 			return obj;
 		}
 	});
 });
+
 
 define('text!Firebrick.ui/fields/combo/Group.html',[],function () { return '<div class="fb-ui-combo-group-item">\r\n\t<span class="fb-ui-combo-group-title">{{=it[it._scope.groupLabelKey || it._scope.labelKey]}}</span>\r\n\t<div class="fb-ui-combo-group-children">\r\n\t</div>\r\n</div>';});
 
@@ -8655,201 +8503,200 @@ define('text!Firebrick.ui/fields/ComboBox.html',[],function () { return '<div id
  * @module Firebrick.engine
  * @class Suggest
  */
-define('Firebrick.ui.engines/Suggest',["jquery", "firebrick"], function($){
+define( 'Firebrick.ui.engines/Suggest',[ "jquery", "firebrick" ], function( $ ) {
 	"use strict";
 	
-	return Firebrick.define("Firebrick.ui.engines.Suggest", {
+	return Firebrick.define( "Firebrick.ui.engines.Suggest", {
 		/**
-		 * @property store
-		 * @type {Firebrick.store.Base}
-		 * @default null
-		 */
+		* @property store
+		* @type {Firebrick.store.Base}
+		* @default null
+		*/
 		store: null,
 		/**
-		 * local | remote
-		 * @property mode
-		 * @type {String}
-		 * @default "local"
-		 */
+		* local | remote
+		* @property mode
+		* @type {String}
+		* @default "local"
+		*/
 		mode: "local",
 		/**
-		 * @property _cache
-		 * @private
-		 * @type {Object}
-		 */
+		* @property _cache
+		* @private
+		* @type {Object}
+		*/
 		_cache: null,
 		/**
-		 * set this property if you wish to find matches for a certain property
-		 * {name:"Steven", age: 10} - searchKey = "age" will result in all queries searching the age property
-		 * set as null|false if you want to search in all properties (if data is an object and not primitive value)
-		 * @property searchKey
-		 * @type {String | Array of Strings | null | false}
-		 * @default null;
-		 */
+		* set this property if you wish to find matches for a certain property
+		* {name:"Steven", age: 10} - searchKey = "age" will result in all queries searching the age property
+		* set as null|false if you want to search in all properties (if data is an object and not primitive value)
+		* @property searchKey
+		* @type {String | Array of Strings | null | false}
+		* @default null;
+		*/
 		searchKeys: null,
 		/**
-		 * used to prefetch data on init
-		 * @property prefetch
-		 * 	 .url {String}
-		 * @type {Object}
-		 * @default null
-		 */
+		* used to prefetch data on init
+		* @property prefetch
+		*	.url {String}
+		* @type {Object}
+		* @default null
+		*/
 		prefetch: null,
 		/**
-		 * @method init
-		 */
-		init: function(){
+		* @method init
+		*/
+		init: function() {
 			var me = this;
 			me._initCache();
 		},
 		/**
-		 * @method _initCache
-		 */
-		_initCache: function(){
+		* @method _initCache
+		*/
+		_initCache: function() {
 			var me = this;
 			me._cache = {};
 		},
 		/**
-		 * clears cache (search indexes)
-		 * @method clear
-		 */
-		clear: function(){
+		* clears cache (search indexes)
+		* @method clear
+		*/
+		clear: function() {
+			var me = this;
 			me._initCache();
 		},
 		/**
-		 * used to filter out items in when performing a query
-		 * @method filter
-		 * @param value {Value Object}
-		 * @return {Boolean}
-		 */
-		filter: function(){
+		* used to filter out items in when performing a query
+		* @method filter
+		* @param value {Value Object}
+		* @return {Boolean}
+		*/
+		filter: function() {
 			return true;
 		},
 		/**
-		 * @method query
-		 * @param query {String}
-		 * @param callback {Function}
-		 */
-		query: function(query, callback){
+		* @method query
+		* @param query {String}
+		* @param callback {Function}
+		*/
+		query: function( query, callback ) {
 			var me = this,
-				matches = [],
-				data,
-				ajax;
+				matches = [], data;
 			
-			if(me.store){
-				if( me.mode === "remote" ){
+			if ( me.store ) {
+				if ( me.mode === "remote" ) {
 					me.store.load({
-						suggest:{
+						suggest: {
 							query: query
 						},
-						callback: function(data){
-							matches = me._query(query, me.store.toPlainObject());
-							callback( matches );
+						callback: function() {	//arg: data
+								matches = me._query( query, me.store.toPlainObject() );
+								callback( matches );
 						}
 					});
-				}else if( me.mode === "local" ){
-					if(!me._cache[query]){
-						matches = me._query(query, me.store.toPlainObject());
-					    me._cache[query] = matches;
-					}else{
-						data = me._cache[query];
-						matches = me._cache[query].filter( function(){
-							return me.filter.apply(me, arguments);
+				} else if ( me.mode === "local" ) {
+					if ( !me._cache[ query ] ) {
+						matches = me._query( query, me.store.toPlainObject() );
+						me._cache[ query ] = matches;
+					} else {
+						data = me._cache[ query ];
+						matches = me._cache[ query ].filter( function() {
+							return me.filter.apply( me, arguments );
 						});
 					}
-					
+				
 					callback( matches );
 				}
 			}
 		},
 		/**
-		 * @method _query
-		 * @param query {String}
-		 * @param data {Array | JSON Object}
-		 * @return matches {Array}
-		 */
-		_query: function(query, data){
+		* @method _query
+		* @param query {String}
+		* @param data {Array | JSON Object}
+		* @return matches {Array}
+		*/
+		_query: function( query, data ) {
 			var me = this,
 				matches = [],
 				childMatches = [],
 				tmp,
 				lookups,
 				lukup,
-				substrRegex = new RegExp(query, 'i'),
+				substrRegex = new RegExp( query, "i" ),
 				it;
-
-			for(var i = 0, l = data.length; i<l; i++){
-		    	it = data[i];
-		    	if( me.filter(it) ){
-		    		if( it.exclude !== true ){	//if exclude === true then ignore this node and children
-		    			if(it.suggestable !== false){ //suggestable === false means that the current node is ignored but not their children
-		    				lookups = me._getSearchStrings( it );
-				    		for(var ii = 0, ll = lookups.length; ii<ll; ii++){
-						    	//search for a match
-				    			lukup = lookups[ii];
-				    			//check for Knockout observables - maybe needed if store is defined for data
-				    			lukup = $.isFunction( lukup ) ? lukup() : lukup;
-						    	if( substrRegex.test( lukup ) ){
-						    		matches.push(it);
-						    		//break lookups loop
-						    		break;
-						    	}
-				    		}
-		    			}
-		    			if($.isArray(it.children)){
-		    				//has child nodes
-		    				//search child nodes too
-		    				childMatches = me._query(query, it.children);
-		    				if( childMatches.length ){
-		    					tmp = Firebrick.utils.copyover({}, it);	//make a new copy of the parent node
-		    					tmp.children = childMatches;	//add the matches to it
-		    					matches.push(tmp);
-		    				}
-		    			}
-		    		}
-		    	}
-		    }
+		
+			for ( var i = 0, l = data.length; i < l; i++ ) {
+				it = data[ i ];
+				if ( me.filter( it ) ) {
+					if ( it.exclude !== true ) {	//if exclude === true then ignore this node and children
+						if ( it.suggestable !== false ) { //suggestable === false means that the current node is ignored but not their children
+							lookups = me._getSearchStrings( it );
+								for ( var ii = 0, ll = lookups.length; ii < ll; ii++ ) {
+									//search for a match
+									lukup = lookups[ ii ];
+									//check for Knockout observables - maybe needed if store is defined for data
+									lukup = $.isFunction( lukup ) ? lukup() : lukup;
+									if ( substrRegex.test( lukup ) ) {
+									matches.push( it );
+									//break lookups loop
+									break;
+								}
+							}
+						}
+						if ( $.isArray( it.children ) ) {
+							//has child nodes
+							//search child nodes too
+							childMatches = me._query( query, it.children );
+							if ( childMatches.length ) {
+								tmp = Firebrick.utils.copyover({}, it );	//make a new copy of the parent node
+								tmp.children = childMatches;	//add the matches to it
+								matches.push( tmp );
+							}
+						}
+					}
+				}
+			}
 			
 			return matches;
 		},
 		/**
-		 * returns an array of all the data which can be tested by the query method
-		 * @method _getSearchStrings
-		 * @param value {Any} query iteration value
-		 * @return {Array}
-		 */
-		_getSearchStrings: function( value ){
+		* returns an array of all the data which can be tested by the query method
+		* @method _getSearchStrings
+		* @param value {Any} query iteration value
+		* @return {Array}
+		*/
+		_getSearchStrings: function( value ) {
 			var me = this,
-				searchKeys = me.searchKeys,
-				str = [],
-				sk;
-
+			searchKeys = me.searchKeys,
+			str = [],
+			sk;
+	
 			//e.g. value = {text:"Java", desc:"some kinda of programming language", icon:"java.png"}
-			if( $.isPlainObject(value) ){
+			if ( $.isPlainObject( value ) ) {
 				//searchKeys !== null
-				if(searchKeys){
+				if ( searchKeys ) {
 					//searchKeys === ["text", "desc"];
-					if( $.isArray( searchKeys ) ){
-						for(var i = 0, l = searchKeys.length; i<l; i++){
-							sk = searchKeys[i];
-							if( value.hasOwnProperty( sk ) ){
-								str.push( value[sk] );	
+					if ( $.isArray( searchKeys ) ) {
+						for ( var i = 0, l = searchKeys.length; i < l; i++ ) {
+							sk = searchKeys[ i ];
+							if ( value.hasOwnProperty( sk ) ) {
+								str.push( value[ sk ] );
 							}
 						}
-					}else{
-						if( value.hasOwnProperty( searchKeys ) ){
-							str.push( value[searchKeys] );	
+					} else {
+						if ( value.hasOwnProperty( searchKeys ) ) {
+							str.push( value[ searchKeys ] );
 						}
 					}
-				}else{
+				} else {
 					//searchKeys === null. get all
-					for(var key in value){
-						if( value.hasOwnProperty(key) ){
-							str.push( value[key] );
+					for ( var key in value ) {
+						if ( value.hasOwnProperty( key ) ) {
+							str.push( value[ key ] );
 						}
 					}
 				}
-			}else{
+			} else {
 				//value === primitive type, string, int, boolean etc
 				str.push( value );
 			}
@@ -8857,8 +8704,8 @@ define('Firebrick.ui.engines/Suggest',["jquery", "firebrick"], function($){
 			return str;
 		}
 	});
-	
 });
+
 /*!
  * @author Steven Masala [me@smasala.com]
  */
@@ -8869,30 +8716,29 @@ define('Firebrick.ui.engines/Suggest',["jquery", "firebrick"], function($){
  * @namespace components.fields
  * @class ComboBox
  */
-define('Firebrick.ui/fields/ComboBox',["text!./ComboBox.html", 
-        "jquery", 
+define( 'Firebrick.ui/fields/ComboBox',[ "text!./ComboBox.html",
+        "jquery",
         "text!./combo/Item.html",
         "text!./combo/Group.html",
-        "text!./combo/Value.html", 
-        "doT", 
-        "knockout", 
-        "./Input", 
+        "text!./combo/Value.html",
+        "doT",
+        "./Input",
         "Firebrick.ui.engines/Suggest",
-        "../display/Loader"], function(subTpl, $, comboItemTpl, comboGroupTpl, valueItemTpl, tplEngine, ko){
+        "../display/Loader" ], function( subTpl, $, comboItemTpl, comboGroupTpl, valueItemTpl, tplEngine ) {
 	"use strict";
 	
-	return Firebrick.define("Firebrick.ui.fields.ComboBox", {
-		extend:'Firebrick.ui.fields.Input',
+	return Firebrick.define( "Firebrick.ui.fields.ComboBox", {
+		extend: "Firebrick.ui.fields.Input",
 		/**
 		 * @property sName
 		 * @type {String}
 		 */
-		sName:"fields.combobox",
+		sName: "fields.combobox",
 		/**
 		 * @property subTpl
 		 * @type {String} html
 		 */
-		subTpl:subTpl,
+		subTpl: subTpl,
 		/**
 		 * @property multiSelect
 		 * @type {Boolean}
@@ -9007,10 +8853,10 @@ define('Firebrick.ui/fields/ComboBox',["text!./ComboBox.html",
 		 * @method getValueEl
 		 * @return {jQuery Object}
 		 */
-		getValueEl: function(){
+		getValueEl: function() {
 			var me = this;
-			if(!me._valueEl){
-				me._valueEl = $("> .fb-ui-combo-values", me.getElement());
+			if ( !me._valueEl ) {
+				me._valueEl = $( "> .fb-ui-combo-values", me.getElement() );
 			}
 			return me._valueEl;
 		},
@@ -9025,10 +8871,10 @@ define('Firebrick.ui/fields/ComboBox',["text!./ComboBox.html",
 		 * @method getInputEl
 		 * @return {jQuery Object}
 		 */
-		getInputEl: function(){
+		getInputEl: function() {
 			var me = this;
-			if(!me._inputEl){
-				me._inputEl = $("> input.fb-ui-combo-input", me.getElement());
+			if ( !me._inputEl ) {
+				me._inputEl = $( "> input.fb-ui-combo-input", me.getElement() );
 			}
 			return me._inputEl;
 		},
@@ -9049,10 +8895,10 @@ define('Firebrick.ui/fields/ComboBox',["text!./ComboBox.html",
 		 * @method getCaretEl
 		 * @return {jQuery Object}
 		 */
-		getCaretEl: function(){
+		getCaretEl: function() {
 			var me = this;
-			if(!me._caretEl){
-				me._caretEl = $("> .fb-ui-combo-select", me.getElement());
+			if ( !me._caretEl ) {
+				me._caretEl = $( "> .fb-ui-combo-select", me.getElement() );
 			}
 			return me._caretEl;
 		},
@@ -9067,10 +8913,10 @@ define('Firebrick.ui/fields/ComboBox',["text!./ComboBox.html",
 		 * @method getResultEl
 		 * @return {jQuery Object}
 		 */
-		getResultEl: function(){
+		getResultEl: function() {
 			var me = this;
-			if(!me._resultEl){
-				me._resultEl = me.getElement().next(".fb-ui-combo-result[data-for='" + me.getId() + "']");
+			if ( !me._resultEl ) {
+				me._resultEl = me.getElement().next( ".fb-ui-combo-result[data-for='" + me.getId() + "']" );
 			}
 			return me._resultEl;
 		},
@@ -9085,10 +8931,10 @@ define('Firebrick.ui/fields/ComboBox',["text!./ComboBox.html",
 		 * @method getClearIconEl
 		 * @return {jQuery Object}
 		 */
-		getClearIconEl: function(){
+		getClearIconEl: function() {
 			var me = this;
-			if(!me._clearIconEl){
-				me._cleanIconEl = $(".fb-ui-combo-clear-icon", me.getElement());
+			if ( !me._clearIconEl ) {
+				me._cleanIconEl = $( ".fb-ui-combo-clear-icon", me.getElement() );
 			}
 			return me._cleanIconEl;
 		},
@@ -9096,50 +8942,50 @@ define('Firebrick.ui/fields/ComboBox',["text!./ComboBox.html",
 		 * override base function
 		 * @method focus
 		 */
-		focus: function(){
+		focus: function() {
 			this.getInputEl().focus();
 		},
 		/**
 		 * @method init
 		 */
-		init: function(){
+		init: function() {
 			var me = this;
 			
 			me._itemTemplate = {};
 			
-			me.on("rendered", function(){
+			me.on( "rendered", function() {
 				me._initSuggestionEngine();
 				me._initRendered();
 			});
 			
-			me.on("removeAll", function(){
+			me.on( "removeAll", function() {
 				me.getClearIconEl().hide();
 			});
 			
-			return me.callParent(arguments);
+			return me.callParent( arguments );
 		},
 		/**
 		 * @method _initSuggestionEngine
 		 */
-		_initSuggestionEngine: function(){
+		_initSuggestionEngine: function() {
 			var me = this,
 				conf = {
 					store: me.store,
-					filter: function(val){
+					filter: function( val ) {
 						//used to exclude results from future selections - local mode
 						return !val._exclude;
 					}
 				};
 			
-			conf = Firebrick.utils.overwrite(conf, (me.suggest || {}) );
+			conf = Firebrick.utils.overwrite( conf, ( me.suggest || {}) );
 			
-			me._engine = Firebrick.create("Firebrick.ui.engines.Suggest", conf );
+			me._engine = Firebrick.create( "Firebrick.ui.engines.Suggest", conf );
 		},
 		/**
 		 * @method _initRendered
 		 * @private
 		 */
-		_initRendered: function(){
+		_initRendered: function() {
 			var me = this,
 				$el = me.getElement(),
 				$input = me.getInputEl(),
@@ -9147,69 +8993,69 @@ define('Firebrick.ui/fields/ComboBox',["text!./ComboBox.html",
 				$clearIcon = me.getClearIconEl();
 			
 			$el.on({
-				click: function(){
-					return me._onClick.apply(me, arguments);
+				click: function() {
+					return me._onClick.apply( me, arguments );
 				}
 			});
 			
 			$clearIcon.on({
-				click: function(){
-					return me._onClearIconClick.apply(me, arguments);
+				click: function() {
+					return me._onClearIconClick.apply( me, arguments );
 				}
 			});
 
-			$input.on("keydown keyup fb.update blur", function(){
-				return me.resizeInput.apply(me, arguments);
+			$input.on( "keydown keyup fb.update blur", function() {
+				return me.resizeInput.apply( me, arguments );
 			});
 			
 			$input.on({
-				focus: function(){
-					return me._onFocus.apply(me, arguments);
+				focus: function() {
+					return me._onFocus.apply( me, arguments );
 				},
-				keydown: function(){
-					return me._onKeyDown.apply(me, arguments);
+				keydown: function() {
+					return me._onKeyDown.apply( me, arguments );
 				},
-				keyup: function(){
-					return me._onKeyUp.apply(me, arguments);
+				keyup: function() {
+					return me._onKeyUp.apply( me, arguments );
 				},
-				blur: function(){
-					return me._onBlur.apply(me, arguments);
+				blur: function() {
+					return me._onBlur.apply( me, arguments );
 				}
 			});
 			
-			$result.on("mousedown", ".fb-ui-combo-item", function(){
-				return me._onItemClick.apply(me, arguments);
+			$result.on( "mousedown", ".fb-ui-combo-item", function() {
+				return me._onItemClick.apply( me, arguments );
 			});
 			
-			$result.on("mouseover", ".fb-ui-combo-item", function(){
-				return me._onMouseOver.apply(me, arguments);
+			$result.on( "mouseover", ".fb-ui-combo-item", function() {
+				return me._onMouseOver.apply( me, arguments );
 			});
 			
-			if(me.multiSelect){
-				$el.on("click", ".fb-ui-combo-value-item", function(){
-					return me.removeItem( $(this) );
+			if ( me.multiSelect ) {
+				$el.on( "click", ".fb-ui-combo-value-item", function() {
+					return me.removeItem( $( this ) );
 				});
 			}
 			
 			me.on({
-				expand: function(){
+				expand: function() {
 					var me = this,
 						$el = me.getElement(),
 						$result = me.getResultEl(),
 						$active = me.getActiveItem(),
 						$first;
 					
-					$el.addClass("open");
+					$el.addClass( "open" );
 					
-					if(me.forceSelect && !$active.length){
-						$first = $(".fb-ui-combo-item:first-child", $result);
-						if($first.length){
-							me.markActive($first);
+					if ( me.forceSelect && !$active.length ) {
+						$first = $( ".fb-ui-combo-item:first-child", $result );
+						if ( $first.length ) {
+							me.markActive( $first );
 						}
 					}
 					
 				},
-				collapse: function(){
+				collapse: function() {
 					me.resultDefaults();
 				}
 			});
@@ -9218,22 +9064,22 @@ define('Firebrick.ui/fields/ComboBox',["text!./ComboBox.html",
 		 * default actions on results expand/collapse
 		 * @method resultsDefault
 		 */
-		resultDefaults: function(){
+		resultDefaults: function() {
 			var me = this,
 				$el = me.getElement();
 			
-			$el.removeClass("open");
+			$el.removeClass( "open" );
 		},
 		/**
 		 * @method onFocus
 		 * @private
 		 */
-		_onFocus: function(){
+		_onFocus: function() {
 			var me = this;
 			
 			me.showResults();
 			
-			if(me.getValue().length){
+			if ( me.getValue().length ) {
 				me.getClearIconEl().show();
 			}
 			
@@ -9242,9 +9088,8 @@ define('Firebrick.ui/fields/ComboBox',["text!./ComboBox.html",
 		 * @method _onClick
 		 * @private
 		 */
-		_onClick: function(){
+		_onClick: function() {
 			var me = this,
-				$el = me.getElement(),
 				$input = me.getInputEl();
 			$input.focus();
 		},
@@ -9252,14 +9097,14 @@ define('Firebrick.ui/fields/ComboBox',["text!./ComboBox.html",
 		 * @method _onClearIconClick
 		 * @private
 		 */
-		_onClearIconClick: function(){
+		_onClearIconClick: function() {
 			this.removeAll();
 		},
 		/**
 		 * @method _onItemClick
 		 * @private
 		 */
-		_onItemClick: function(){
+		_onItemClick: function() {
 			var me = this;
 			me.selectActive();
 		},
@@ -9267,14 +9112,14 @@ define('Firebrick.ui/fields/ComboBox',["text!./ComboBox.html",
 		 * @method _onMouseOver
 		 * @private
 		 */
-		_onMouseOver: function(event){
+		_onMouseOver: function( event ) {
 			var me = this,
 				clazz = "fb-ui-combo-item",
 				selector = "." + clazz,
-				$item = $(event.target);
+				$item = $( event.target );
 			
-				if(!$item.hasClass(clazz)){
-					$item = $item.parent(selector);
+				if ( !$item.hasClass( clazz ) ) {
+					$item = $item.parent( selector );
 				}
 			
 				me.markActive( $item );
@@ -9283,21 +9128,21 @@ define('Firebrick.ui/fields/ComboBox',["text!./ComboBox.html",
 		 * @method onKeyDown
 		 * @private
 		 */
-		_onKeyDown: function(event){
+		_onKeyDown: function( event ) {
 			var me = this,
 				key = event.which,
 				KeyEvent = Firebrick.ui.KeyEvents,
 				$input = me.getInputEl();
 			
-			if(key === KeyEvent.DOM_VK_RETURN){
+			if ( key === KeyEvent.DOM_VK_RETURN ) {
 				event.preventDefault();
-			}else if(key === KeyEvent.DOM_VK_BACK_SPACE){
-				if(!$input.val()){
-					me.removeLastItem();	
+			} else if ( key === KeyEvent.DOM_VK_BACK_SPACE ) {
+				if ( !$input.val() ) {
+					me.removeLastItem();
 				}
 			}
 			
-			me._arrowKey(key);
+			me._arrowKey( key );
 			
 			me._timestamp = new Date().getTime();
 		},
@@ -9305,36 +9150,35 @@ define('Firebrick.ui/fields/ComboBox',["text!./ComboBox.html",
 		 * @method _onKeyUp
 		 * @private
 		 */
-		_onKeyUp: function(event){
+		_onKeyUp: function( event ) {
 			var me = this,
 				key = event.which,
 				KeyEvent = Firebrick.ui.KeyEvents,
-				$el = me.getElement(),
 				$input = me.getInputEl();
 			
-			if(!me.actionKey(key)){
-				if($input.val().trim()){
+			if ( !me.actionKey( key ) ) {
+				if ( $input.val().trim() ) {
 					
-					Firebrick.delay(function(){
+					Firebrick.delay(function() {
 						var t = new Date().getTime();
-						if( (t - me._timestamp) >= 300 ){
+						if ( ( t - me._timestamp ) >= 300 ) {
 							me._timestamp = t;
 							me.showResults();
 						}
-					}, 301);
+					}, 301 );
 					
-				}else{
+				} else {
 					me.hideResults();
 				}
-			}else{
-				if(key === KeyEvent.DOM_VK_RETURN){
+			} else {
+				if ( key === KeyEvent.DOM_VK_RETURN ) {
 					event.preventDefault();
 					me.selectActive();
-				}else if( key === KeyEvent.DOM_VK_DOWN){
-					if(!$input.val()){
+				} else if ( key === KeyEvent.DOM_VK_DOWN ) {
+					if ( !$input.val() ) {
 						//show all
-						if(!me._resultsVisible){
-							me.showResults();	
+						if ( !me._resultsVisible ) {
+							me.showResults();
 						}
 					}
 				}
@@ -9345,23 +9189,23 @@ define('Firebrick.ui/fields/ComboBox',["text!./ComboBox.html",
 		 * @method _onBlur
 		 * @private
 		 */
-		_onBlur: function(){
+		_onBlur: function() {
 			var me = this;
-			if(me.forceSelect){
+			if ( me.forceSelect ) {
 				//TODO: only if no value already set
-				if(!me.getValue().length){
-					me.selectActive();	
+				if ( !me.getValue().length ) {
+					me.selectActive();
 				}
 			}
-			Firebrick.delay(function(){
-				me.getClearIconEl().hide();	
-			}, 200);
-			me.reset();
+			Firebrick.delay(function() {
+				me.getClearIconEl().hide();
+			}, 200 );
+			me.hideResults();
 		},
 		/**
 		 * @method reset
 		 */
-		reset: function(){
+		reset: function() {
 			var me = this;
 			me.hideResults();
 			me.clearInput();
@@ -9369,13 +9213,13 @@ define('Firebrick.ui/fields/ComboBox',["text!./ComboBox.html",
 		/**
 		 * @method resizeInput
 		 */
-		resizeInput: function(){
+		resizeInput: function() {
 			var me = this,
 				$input = me.getInputEl(),
 				currentWidth = $input.width(),
-				width = me._measureWidth($input) + 8;
-			if (width !== currentWidth) {
-				$input.width(width);
+				width = me._measureWidth( $input ) + 8;
+			if ( width !== currentWidth ) {
+				$input.width( width );
 			}
 		},
 		/**
@@ -9383,30 +9227,30 @@ define('Firebrick.ui/fields/ComboBox',["text!./ComboBox.html",
 		 * @private
 		 * @return {Integer}
 		 */
-		_measureWidth: function($input){
-			var $tmp = $("<tmp>").css({
+		_measureWidth: function( $input ) {
+			var $tmp = $( "<tmp>" ).css({
 					position: "absolute",
 					top: -99999,
 					left: -99999,
 					width: "auto",
 					padding: 0,
-					whiteSpace: 'pre'
-				}).text($input.val()).appendTo("body"),
-				styles = ['letterSpacing',
-				'fontSize',
-				'fontFamily',
-				'fontWeight',
-				'textTransform'],
+					whiteSpace: "pre"
+				}).text( $input.val() ).appendTo( "body" ),
+				styles = [ "letterSpacing",
+				"fontSize",
+				"fontFamily",
+				"fontWeight",
+				"textTransform" ],
 				style,
 				copiedStyles = {},
 				width;
 			
-			for(var i = 0, l = styles.length; i<l; i++){
-				style = styles[i];
-				copiedStyles[style] = $input.css(style);
+			for ( var i = 0, l = styles.length; i < l; i++ ) {
+				style = styles[ i ];
+				copiedStyles[ style ] = $input.css( style );
 			}
 			
-			$tmp.css(copiedStyles);
+			$tmp.css( copiedStyles );
 			width = $tmp.width();
 			$tmp.remove();
 			return width;
@@ -9415,10 +9259,10 @@ define('Firebrick.ui/fields/ComboBox',["text!./ComboBox.html",
 		 * @method actionKey
 		 * @return {Boolean}
 		 */
-		actionKey: function(keyCode){
+		actionKey: function( keyCode ) {
 			var KeyEvent = Firebrick.ui.KeyEvents;
 			
-			if(	keyCode === KeyEvent.DOM_VK_DOWN || 
+			if (	keyCode === KeyEvent.DOM_VK_DOWN ||
 				keyCode === KeyEvent.DOM_VK_UP ||
 				keyCode === KeyEvent.DOM_VK_RETURN ) {
 				return true;
@@ -9428,11 +9272,11 @@ define('Firebrick.ui/fields/ComboBox',["text!./ComboBox.html",
 		},
 		/**
 		 * @method getActiveItem
-		 * @return {jQuery Object} 
+		 * @return {jQuery Object}
 		 */
-		getActiveItem: function(){
+		getActiveItem: function() {
 			var me = this,
-				$item = $(".fb-ui-combo-item.active", me.getResultEl());
+				$item = $( ".fb-ui-combo-item.active", me.getResultEl() );
 			return $item;
 		},
 		
@@ -9440,12 +9284,12 @@ define('Firebrick.ui/fields/ComboBox',["text!./ComboBox.html",
 		 * @method markActive
 		 * @param $item {jQuery Object}
 		 */
-		markActive: function($item){
+		markActive: function( $item ) {
 			var me = this,
 				$active = me.getActiveItem();
-			if($item.length){
-				$active.removeClass("active");
-				$item.addClass("active");
+			if ( $item.length ) {
+				$active.removeClass( "active" );
+				$item.addClass( "active" );
 				$item.focus();
 			}
 		},
@@ -9453,17 +9297,15 @@ define('Firebrick.ui/fields/ComboBox',["text!./ComboBox.html",
 		 * @method selectActive
 		 * @param $item {jQuery Object} optional
 		 */
-		selectActive: function($item){
+		selectActive: function( $item ) {
 			var me = this,
 				$active = $item || me.getActiveItem(),
-				options = me.options,
 				data = {},
-				index,
 				values = [];
 					
-			if($active.length){
+			if ( $active.length ) {
 
-				data = $active.prop("data-value");
+				data = $active.prop( "data-value" );
 				
 				//exclude result from future searches
 				data._exclude = true;
@@ -9472,7 +9314,7 @@ define('Firebrick.ui/fields/ComboBox',["text!./ComboBox.html",
 
 				me.setValue( values );
 				
-				if(values.length){
+				if ( values.length ) {
 					me.getClearIconEl().show();
 				}
 			}
@@ -9482,107 +9324,107 @@ define('Firebrick.ui/fields/ComboBox',["text!./ComboBox.html",
 		 * @event removeAll
 		 * @method removeAll
 		 */
-		removeAll: function(){
+		removeAll: function() {
 			var me = this,
 				oldValue = me.getValue(),
-				$items = $(".fb-ui-combo-value-item", me.getValueEl());
+				$items = $( ".fb-ui-combo-value-item", me.getValueEl() );
 			
-			for(var i = 0, l = $items.length; i<l; i++){
+			for ( var i = 0, l = $items.length; i < l; i++ ) {
 				//remove exclude filter on all items
-				$( $items[0] ).prop("data-value")._exclude = false;
+				$( $items[ 0 ] ).prop( "data-value" )._exclude = false;
 			}
 			
 			$items.remove();
-			me._checkChange(me.getValue(), oldValue);
-			me.fireEvent("removeAll");
+			me._checkChange( me.getValue(), oldValue );
+			me.fireEvent( "removeAll" );
 		},
 		/**
 		 * @event removeItem
 		 * @method removeItem
 		 * @param $item {jQuery Item}
 		 */
-		removeItem: function($item){
+		removeItem: function( $item ) {
 			var me = this,
 				oldValue = me.getValue(),
-				data = $item.prop("data-value");
+				data = $item.prop( "data-value" );
 			data._exclude = false;
 			$item.remove();
-			me._checkChange(me.getValue(), oldValue);
-			me.on("removeItem");
+			me._checkChange( me.getValue(), oldValue );
+			me.on( "removeItem" );
 		},
 		/**
 		 * @method removeLastItem
 		 */
-		removeLastItem: function(){
+		removeLastItem: function() {
 			var me = this,
-				$items = $(".fb-ui-combo-value-item", me.getValueEl()),
+				$items = $( ".fb-ui-combo-value-item", me.getValueEl() ),
 				$last = $items.last();
 			
-			if($items.length === 1 && me.forceSelect){
+			if ( $items.length === 1 && me.forceSelect ) {
 				return;
 			}
 			
-			if($last.length){
-				me.removeItem( $last );	
+			if ( $last.length ) {
+				me.removeItem( $last );
 			}
 		},
 		/**
 		 * @method clearInput
 		 */
-		clearInput: function(){
+		clearInput: function() {
 			var me = this,
 				$input = me.getInputEl();
 			
-			$input.val("");
+			$input.val( "" );
 		},
 		/**
 		 * @method _arrowKey
 		 * @private
 		 * @return boolean
 		 */
-		_arrowKey: function(keyCode){
+		_arrowKey: function( keyCode ) {
 			var me = this,
 				keyboard = Firebrick.ui.KeyEvents,
 				selector = ".fb-ui-combo-item",
 				groupSelector = ".fb-ui-combo-group-item",
 				$result = me.getResultEl(),
-				$active = $(selector + ".active", $result),
+				$active = $( selector + ".active", $result ),
 				$sibling;
 			
-			if(me._resultsVisible){
+			if ( me._resultsVisible ) {
 				
 				//only on up and down actions
-				if(keyCode === keyboard.DOM_VK_DOWN || keyCode === keyboard.DOM_VK_UP){
+				if ( keyCode === keyboard.DOM_VK_DOWN || keyCode === keyboard.DOM_VK_UP ) {
 					
-					if($active.length){
+					if ( $active.length ) {
 						
-						if(keyCode === keyboard.DOM_VK_DOWN){
+						if ( keyCode === keyboard.DOM_VK_DOWN ) {
 							$sibling = $active.next();
-							if( !$sibling.length ){
+							if ( !$sibling.length ) {
 								$sibling = $active.closest( groupSelector ).next();
 							}
-						}else{
+						} else {
 							$sibling = $active.prev();
-							if( !$sibling.length ){
+							if ( !$sibling.length ) {
 								$sibling = $active.closest( groupSelector ).prev();
 							}
 						}
 						
 						//check if sibling is another group
-						if( $sibling.is( groupSelector ) ){
-							//find appropriate sibling in group 
-							if( keyCode === keyboard.DOM_VK_DOWN ){
+						if ( $sibling.is( groupSelector ) ) {
+							//find appropriate sibling in group
+							if ( keyCode === keyboard.DOM_VK_DOWN ) {
 								$sibling = $sibling.find( selector ).first();
-							}else{
+							} else {
 								$sibling = $sibling.find( selector ).last();
 							}
 						}
 						
 						me.markActive( $sibling );
-						me._scrollOnKey(keyCode, $sibling, $result);
+						me._scrollOnKey( keyCode, $sibling, $result );
 						
-					}else{
-						me.markActive( $result.find(".fb-ui-combo-item").first() );
+					} else {
+						me.markActive( $result.find( ".fb-ui-combo-item" ).first() );
 					}
 					
 					return true;
@@ -9597,20 +9439,20 @@ define('Firebrick.ui/fields/ComboBox',["text!./ComboBox.html",
 		 * @method getSelection
 		 * @return {jQuery Object | null}
 		 */
-		getSelection: function(){
+		getSelection: function() {
 			var me = this,
 				$result = me.getResultEl();
-			if(me._resultsVisible){
-				return $(".fb-ui-combo-item.active", $result);
+			if ( me._resultsVisible ) {
+				return $( ".fb-ui-combo-item.active", $result );
 			}
 		},
 		/**
 		 * @method _scollOnKey
-		 * @param keycode {Integer} 
+		 * @param keycode {Integer}
 		 * @param $target {jQuery Object}
 		 * @param $container {jQuery Object}
 		 */
-		_scrollOnKey: function( keycode, $target, $container ){
+		_scrollOnKey: function( keycode, $target, $container ) {
 			var sibTop,
 				sibBottom,
 				KeyEvent = Firebrick.ui.KeyEvents,
@@ -9619,19 +9461,19 @@ define('Firebrick.ui/fields/ComboBox',["text!./ComboBox.html",
 				resBottom = resTop + resHeight,
 				scrollTo = null;
 			
-			if($target.length){
-				if( keycode === KeyEvent.DOM_VK_DOWN ){
+			if ( $target.length ) {
+				if ( keycode === KeyEvent.DOM_VK_DOWN ) {
 					sibBottom = $target.offset().top + $target.outerHeight();
-					if(sibBottom > resBottom){
-						scrollTo = ($container.scrollTop() + sibBottom) - resTop - resHeight;
+					if ( sibBottom > resBottom ) {
+						scrollTo = ( $container.scrollTop() + sibBottom ) - resTop - resHeight;
 					}
-				}else{
+				} else {
 					sibTop = $target.offset().top;
-					if(sibTop < resTop){
+					if ( sibTop < resTop ) {
 						scrollTo = sibTop - resTop + $container.scrollTop();
 					}
 				}
-				if(scrollTo !== null){
+				if ( scrollTo !== null ) {
 					$container.scrollTop( scrollTo );
 				}
 			}
@@ -9643,17 +9485,17 @@ define('Firebrick.ui/fields/ComboBox',["text!./ComboBox.html",
 		 * @param callback {Function} called after search is complete - args {Array of Results}
 		 * @return {self}
 		 */
-		search: function(query, callback){
+		search: function( query, callback ) {
 			var me = this;
 			
-			me._engine.query(query, callback);
+			me._engine.query( query, callback );
 			
 			return me;
 		},
 		/**
 		 * @method showResults
 		 */
-		showResults: function(){
+		showResults: function() {
 			var me = this,
 				$el = me.getElement(),
 				$input = me.getInputEl(),
@@ -9662,7 +9504,7 @@ define('Firebrick.ui/fields/ComboBox',["text!./ComboBox.html",
 				loader,
 				item;
 
-			if(query.length >= me.typeahead){
+			if ( query.length >= me.typeahead ) {
 				$result.empty();
 				
 				$result.css({
@@ -9674,22 +9516,22 @@ define('Firebrick.ui/fields/ComboBox',["text!./ComboBox.html",
 				
 				me._resultsVisible = true;
 				
-				if(me._engine.mode !== "local"){
-					loader = Firebrick.create("Firebrick.ui.display.Loader", {
+				if ( me._engine.mode !== "local" ) {
+					loader = Firebrick.create( "Firebrick.ui.display.Loader", {
 						target: $result
 					});
 				}
 
 				//delay the search to allow the loader to be displayed
-				Firebrick.delay(function(){
-					me.search( query, function(results){
+				Firebrick.delay(function() {
+					me.search( query, function( results ) {
 						var elements = [];
-						if(loader){
+						if ( loader ) {
 							loader.destroy();
 						}
-						if(results){
-							for(var i = 0, l = results.length; i<l; i++){
-								item = results[i];
+						if ( results ) {
+							for ( var i = 0, l = results.length; i < l; i++ ) {
+								item = results[ i ];
 								item.index = i;
 								elements.push( me.renderItem( item ) );
 							}
@@ -9698,27 +9540,25 @@ define('Firebrick.ui/fields/ComboBox',["text!./ComboBox.html",
 							$result.append( elements );
 							
 							//make sure scrolled at the top
-							$result.scrollTop(0);
+							$result.scrollTop( 0 );
 						
-							me.fireEvent("expand");
+							me.fireEvent( "expand" );
 						}
 					});
-				}, 10);
+				}, 10 );
 			}
 		},
 		/**
 		 * @method hideResults
 		 */
-		hideResults: function(){
+		hideResults: function() {
 			var me = this,
-				$el = me.getElement(),
-				$input = me.getInputEl(),
 				$result = me.getResultEl();
 			
-			if(me._resultsVisible){
+			if ( me._resultsVisible ) {
 				me._resultsVisible = false;
 				$result.hide();
-				me.fireEvent("collapse");	
+				me.fireEvent( "collapse" );
 			}
 		},
 		/**
@@ -9727,12 +9567,12 @@ define('Firebrick.ui/fields/ComboBox',["text!./ComboBox.html",
 		 * @param scope {Object} optional
 		 * @return {Array} jQuery elements
 		 */
-		renderChildren: function(data, scope){
+		renderChildren: function( data, scope ) {
 			var me = this,
 				items = [];
-			if( data.children ){
-				for(var i = 0, l = data.children.length; i<l; i++){
-					items.push( me.renderItem( data.children[i], scope) );
+			if ( data.children ) {
+				for ( var i = 0, l = data.children.length; i < l; i++ ) {
+					items.push( me.renderItem( data.children[ i ], scope ) );
 				}
 			}
 			return items;
@@ -9743,15 +9583,15 @@ define('Firebrick.ui/fields/ComboBox',["text!./ComboBox.html",
 		 * @param scope {Object} optional
 		 * @return {jQuery Object} element
 		 */
-		renderItem: function(data, scope){
+		renderItem: function( data, scope ) {
 			var me = this,
 				prop = data.children ? "groupTpl" : "itemTpl",
 				$el;
 			
-			$el = me._renderItem(prop, data, scope);
+			$el = me._renderItem( prop, data, scope );
 			
-			if(data.children){
-				$(".fb-ui-combo-group-children", $el).html( me.renderChildren( data, scope ) );
+			if ( data.children ) {
+				$( ".fb-ui-combo-group-children", $el ).html( me.renderChildren( data, scope ) );
 			}
 			
 			return $el;
@@ -9762,8 +9602,8 @@ define('Firebrick.ui/fields/ComboBox',["text!./ComboBox.html",
 		 * @param scope {Object} optional
 		 * @return {jQuery Object} element
 		 */
-		renderValueItem: function(data, scope){
-			return this._renderItem("valueTpl", data, scope);
+		renderValueItem: function( data, scope ) {
+			return this._renderItem( "valueTpl", data, scope );
 		},
 		/**
 		 * @method _renderItem
@@ -9773,27 +9613,27 @@ define('Firebrick.ui/fields/ComboBox',["text!./ComboBox.html",
 		 * @param scope {Object} optional
 		 * @return {jQuery Object} html element
 		 */
-		_renderItem: function(tplProp, data, scope){
+		_renderItem: function( tplProp, data, scope ) {
 			var me = this,
-				tpl = $.isFunction(me[tplProp]) ? me[tplProp]() : me[tplProp];
+				tpl = $.isFunction( me[ tplProp ] ) ? me[ tplProp ]() : me[ tplProp ];
 			data._scope = data._scope || scope || me;
-			if(!me._itemTemplate[tplProp]){
-				me._itemTemplate[tplProp] = tplEngine.template( tpl );
+			if ( !me._itemTemplate[ tplProp ] ) {
+				me._itemTemplate[ tplProp ] = tplEngine.template( tpl );
 			}
-			return $( me._itemTemplate[tplProp](data) ).prop("data-value", data);
+			return $( me._itemTemplate[ tplProp ]( data ) ).prop( "data-value", data );
 		},
 		/**
 		 * @method bindings
 		 */
-		bindings: function(){
+		bindings: function() {
 			var me = this,
-				obj = me.callParent(arguments);
+				obj = me.callParent( arguments );
 			
-			obj.css["'fb-ui-combobox'"] = true;
+			obj.css[ "'fb-ui-combobox'" ] = true;
 			
-			if(me.multiSelect){
+			if ( me.multiSelect ) {
 				obj.css.multiple = true;
-			}else{
+			} else {
 				obj.css.single = true;
 			}
 			
@@ -9802,9 +9642,8 @@ define('Firebrick.ui/fields/ComboBox',["text!./ComboBox.html",
 		/**
 		 * @method valueBindings
 		 */
-		valueBindings: function(){
-			var me = this,
-				obj = {
+		valueBindings: function() {
+			var obj = {
 					css: {
 						"'fb-ui-combo-values'": true
 					}
@@ -9815,27 +9654,25 @@ define('Firebrick.ui/fields/ComboBox',["text!./ComboBox.html",
 		/**
 		 * @method inputBindings
 		 */
-		inputBindings: function(){
-			var me = this,
-				obj = {
-					css:{},
-					attr:{
+		inputBindings: function() {
+			var obj = {
+					css: {},
+					attr: {
 						autocomplete: true,
 						tabindex: true
 					}
 				};
 			
-			obj.css["'fb-ui-combo-input'"] = true;
+			obj.css[ "'fb-ui-combo-input'" ] = true;
 			
 			return obj;
 		},
 		/**
 		 * @method clearIconBindings
 		 */
-		clearIconBindings: function(){
-			var me = this,
-				obj = {
-					css:{
+		clearIconBindings: function() {
+			var obj = {
+					css: {
 						glyphicon: true,
 						"'glyphicon-remove-circle'": true,
 						"'fb-ui-combo-clear-icon'": true
@@ -9847,7 +9684,7 @@ define('Firebrick.ui/fields/ComboBox',["text!./ComboBox.html",
 		/**
 		 * @method singleSelectBindings
 		 */
-		singleSelectBindings: function(){
+		singleSelectBindings: function() {
 			var me = this,
 				obj = {
 					css: {
@@ -9861,9 +9698,8 @@ define('Firebrick.ui/fields/ComboBox',["text!./ComboBox.html",
 		/**
 		 * @method resultBindings
 		 */
-		resultBindings: function(){
-			var me = this,
-				obj = {
+		resultBindings: function() {
+			var obj = {
 					css: {
 						"'fb-ui-combo-result'": true
 					}
@@ -9878,23 +9714,23 @@ define('Firebrick.ui/fields/ComboBox',["text!./ComboBox.html",
 		 * @param oldVal {Any}
 		 * @return {Boolean}
 		 */
-		_hasChange: function(newVal, oldVal){
-			return !Firebrick.utils.compareArrays(newVal, oldVal);
+		_hasChange: function( newVal, oldVal ) {
+			return !Firebrick.utils.compareArrays( newVal, oldVal );
 		},
 		/**
 		 * @method getValue
 		 * @return {Array}
 		 */
-		getValue: function(){
+		getValue: function() {
 			var me = this,
-				$vals = $("> .fb-ui-combo-value-item", me.getValueEl()),
+				$vals = $( "> .fb-ui-combo-value-item", me.getValueEl() ),
 				values = [],
 				valKey = me.valueKey,
 				val;
 			
-			for(var i = 0, l = $vals.length; i<l; i++){
-				val = $( $vals[i] ).prop("data-value");
-				val = valKey ? val[valKey] : val;
+			for ( var i = 0, l = $vals.length; i < l; i++ ) {
+				val = $( $vals[ i ] ).prop( "data-value" );
+				val = valKey ? val[ valKey ] : val;
 				values.push( val );
 			}
 			
@@ -9905,47 +9741,48 @@ define('Firebrick.ui/fields/ComboBox',["text!./ComboBox.html",
 		 * @param values {Array}
 		 * @return parent
 		 */
-		setValue: function(){
+		setValue: function() {
 			var me = this,
 				$valueBox = me.getValueEl();
 	
-			if(me.maxItems !== false){
-				if($(".fb-ui-combo-value-item", $valueBox).length === me.maxItems){
+			if ( me.maxItems !== false ) {
+				if ( $( ".fb-ui-combo-value-item", $valueBox ).length === me.maxItems ) {
 					//number of max items already reached
 					return;
 				}
 			}
 			
-			return me.callParent(arguments);
+			return me.callParent( arguments );
 		},
 		/**
 		 * @method _setValue
 		 * @param value {Array}
 		 * @private
 		 */
-		_setValue: function( values ){
+		_setValue: function( values ) {
 			var me = this,
 				$valueBox = me.getValueEl(),
 				$vals = [];
 	
-			if(values.length){
+			if ( values.length ) {
 				
-				for(var i = 0, l = values.length; i<l; i++){
-					$vals.push( me.renderValueItem( values[i] ) );
+				for ( var i = 0, l = values.length; i < l; i++ ) {
+					$vals.push( me.renderValueItem( values[ i ] ) );
 				}
 				
-				if(me.multiSelect){
-					$valueBox.append( $vals );	
-				}else{
+				if ( me.multiSelect ) {
+					$valueBox.append( $vals );
+				} else {
 					$valueBox.html( $vals );
 				}
 				
 				me.reset();
 			}
 			return me;
-		},
+		}
 	});
 });
+
 /*!
  * @author Steven Masala [me@smasala.com]
  */
@@ -9957,10 +9794,10 @@ define('Firebrick.ui/fields/ComboBox',["text!./ComboBox.html",
  * @namespace components.fields
  * @class Datepicker
  */
-define('Firebrick.ui/fields/DatePicker',["./Input", "bootstrap-datepicker"], function(){
+define( 'Firebrick.ui/fields/DatePicker',[ "./Input", "bootstrap-datepicker" ], function() {
 	"use strict";
-	return Firebrick.define("Firebrick.ui.fields.DatePicker", {
-		extend:"Firebrick.ui.fields.Input",
+	return Firebrick.define( "Firebrick.ui.fields.DatePicker", {
+		extend: "Firebrick.ui.fields.Input",
 		/**
 		 * @property sName
 		 * @type {String}
@@ -9979,7 +9816,7 @@ define('Firebrick.ui/fields/DatePicker',["./Input", "bootstrap-datepicker"], fun
 		 */
 		dateFormat: "dd/mm/yyyy",
 		/**
-		 * Sunday = 0, Saturday = 6 
+		 * Sunday = 0, Saturday = 6
 		 * @property weekStart
 		 * @type {Integer}
 		 * @default 1
@@ -9989,7 +9826,7 @@ define('Firebrick.ui/fields/DatePicker',["./Input", "bootstrap-datepicker"], fun
 		 * @method datePickerOptions
 		 * @return {Object}
 		 */
-		datePickerOptions: function(){
+		datePickerOptions: function() {
 			var me = this;
 			return {
 				autoclose: true,
@@ -10015,31 +9852,31 @@ define('Firebrick.ui/fields/DatePicker',["./Input", "bootstrap-datepicker"], fun
 		 * @method init
 		 * @return parent
 		 */
-		init: function(){
+		init: function() {
 			var me = this;
 			
-			me.on("rendered", function(){
+			me.on( "rendered", function() {
 				var el = me.getElement(),
 					inputAddon,
 					icon;
 				
-				if(el.length){
-					el.datepicker(me.datePickerOptions());
+				if ( el.length ) {
+					el.datepicker( me.datePickerOptions() );
 				}
 				
-				if(me.inputAddon && me.clickableIcon){
-					inputAddon = el.siblings("." + me.inputAddonClass);
-					if(inputAddon.length){
-						icon = inputAddon.find("." + me.iconClass);
-						if(icon.length){
-							icon.css("cursor", "pointer");
-							icon.on("click", function(){
+				if ( me.inputAddon && me.clickableIcon ) {
+					inputAddon = el.siblings( "." + me.inputAddonClass );
+					if ( inputAddon.length ) {
+						icon = inputAddon.find( "." + me.iconClass );
+						if ( icon.length ) {
+							icon.css( "cursor", "pointer" );
+							icon.on( "click", function() {
 								var prop = "fb-date-open";
-								if(el.prop(prop) === true){
-									el.datepicker("hide");
-									el.prop(prop, false);
+								if ( el.prop( prop ) === true ) {
+									el.datepicker( "hide" );
+									el.prop( prop, false );
 								} else {
-									el.prop(prop, true);
+									el.prop( prop, true );
 									//when the icon is clicked focus is given to the input field to open the datepicker
 									el.focus();
 								}
@@ -10049,7 +9886,7 @@ define('Firebrick.ui/fields/DatePicker',["./Input", "bootstrap-datepicker"], fun
 				}
 			});
 			
-			return me.callParent(arguments);
+			return me.callParent( arguments );
 		},
 		
 		/**
@@ -10058,12 +9895,13 @@ define('Firebrick.ui/fields/DatePicker',["./Input", "bootstrap-datepicker"], fun
 		 * @type {String}
 		 * @default current day
 		 */
-		value:(function(){
+		value: (function() {
 			var dt = new Date();
-			return "'" +  ("0" + dt.getDate()).slice(-2)  + "/" + dt.getMonth() + 1 + "/" +  dt.getFullYear() + "'";
+			return "'" +  ( "0" + dt.getDate() ).slice( -2 )  + "/" + dt.getMonth() + 1 + "/" +  dt.getFullYear() + "'";
 		})()
 	});
 });
+
 
 define('text!Firebrick.ui/fields/Display.html',[],function () { return '{{?it.inplaceEdit}}\r\n\t<a id="{{=it.getId()}}" data-bind="{{=it.dataBind()}}"></a>\r\n{{?? true }}\r\n\t<p id="{{=it.getId()}}" data-bind="{{=it.dataBind()}}"></p>\r\n{{?}}';});
 
@@ -10073,16 +9911,16 @@ define('text!Firebrick.ui/fields/Display.html',[],function () { return '{{?it.in
 
 /**
  * read only input field but doesn't look like an input field
- * 
+ *
  * @module Firebrick.ui.components
  * @extends components.fields.Base
  * @namespace components.fields
  * @class Display
  */
-define('Firebrick.ui/fields/Display',["text!./Display.html", "./Input"], function(subTpl){
+define( 'Firebrick.ui/fields/Display',[ "text!./Display.html", "./Input" ], function( subTpl ) {
 	"use strict";
-	return Firebrick.define("Firebrick.ui.fields.Display", {
-		extend:"Firebrick.ui.fields.Input",
+	return Firebrick.define( "Firebrick.ui.fields.Display", {
+		extend: "Firebrick.ui.fields.Input",
 		/**
 		 * @property sName
 		 * @type {String}
@@ -10106,7 +9944,7 @@ define('Firebrick.ui/fields/Display',["text!./Display.html", "./Input"], functio
 		 * @method bindings
 		 * @return {Object}
 		 */
-		bindings: function(){
+		bindings: function() {
 			var me = this,
 				obj = me.callParent(),
 				text = obj.value;
@@ -10123,6 +9961,7 @@ define('Firebrick.ui/fields/Display',["text!./Display.html", "./Input"], functio
 		}
 	});
 });
+
 /*!
  * @author Steven Masala [me@smasala.com]
  */
@@ -10133,10 +9972,10 @@ define('Firebrick.ui/fields/Display',["text!./Display.html", "./Input"], functio
  * @namespace components.fields
  * @class Email
  */
-define('Firebrick.ui/fields/Email',["./Input"], function(){
+define( 'Firebrick.ui/fields/Email',[ "./Input" ], function() {
 	"use strict";
-	return Firebrick.define("Firebrick.ui.fields.Email", {
-		extend:"Firebrick.ui.fields.Input",
+	return Firebrick.define( "Firebrick.ui.fields.Email", {
+		extend: "Firebrick.ui.fields.Input",
 		/**
 		 * @property sName
 		 * @type {String}
@@ -10147,15 +9986,16 @@ define('Firebrick.ui/fields/Email',["./Input"], function(){
 		 * @type {String}
 		 * @default "'email'"
 		 */
-		type:"email",
+		type: "email",
 		/**
 		 * @property dataType
 		 * @type {String}
 		 * @default "'text'"
 		 */
-		dataType:"text"
+		dataType: "text"
 	});
 });
+
 /*!
  * @author Steven Masala [me@smasala.com]
  */
@@ -10166,15 +10006,16 @@ define('Firebrick.ui/fields/Email',["./Input"], function(){
  * @namespace components.fields
  * @class File
  */
-define('Firebrick.ui/fields/File',["./Input"], function(){
+define( 'Firebrick.ui/fields/File',[ "./Input" ], function() {
 	"use strict";
-	return Firebrick.define("Firebrick.ui.fields.File", {
-		extend:"Firebrick.ui.fields.Input",
-		sName:"fields.file",
-		type:"file",
-		formControlClass:false
+	return Firebrick.define( "Firebrick.ui.fields.File", {
+		extend: "Firebrick.ui.fields.Input",
+		sName: "fields.file",
+		type: "file",
+		formControlClass: false
 	});
 });
+
 /*!
  * @author Steven Masala [me@smasala.com]
  */
@@ -10185,10 +10026,10 @@ define('Firebrick.ui/fields/File',["./Input"], function(){
  * @namespace components.fields
  * @class Hidden
  */
-define('Firebrick.ui/fields/Hidden',["./Input"], function(){
+define( 'Firebrick.ui/fields/Hidden',[ "./Input" ], function() {
 	"use strict";
 	
-	return Firebrick.define("Firebrick.ui.fields.Hidden", {
+	return Firebrick.define( "Firebrick.ui.fields.Hidden", {
 		extend: "fields.input",
 		/**
 		 * @property sName
@@ -10200,17 +10041,18 @@ define('Firebrick.ui/fields/Hidden',["./Input"], function(){
 		 * @method containerBindings
 		 * @return {Object}
 		 */
-		containerBindings: function(){
+		containerBindings: function() {
 			var me = this,
 				obj = me.callParent( arguments );
 			
-			obj.css["'fb-ui-hidden-field'"] = true;
+			obj.css[ "'fb-ui-hidden-field'" ] = true;
 			
 			return obj;
 		}
 	});
 	
 });
+
 
 define('text!Firebrick.ui/fields/TextArea.html',[],function () { return '{{?it.inplaceEdit}}\r\n\t<a data-bind="{{=it.dataBind()}}"></a>\r\n{{?? true }}\r\n\t<textarea id="{{=it.getId()}}" rows="{{=it.rows}}" data-bind="{{=it.dataBind()}}"></textarea>\r\n{{?}}';});
 
@@ -10224,10 +10066,10 @@ define('text!Firebrick.ui/fields/TextArea.html',[],function () { return '{{?it.i
  * @namespace components.fields
  * @class TextArea
  */
-define('Firebrick.ui/fields/TextArea',["text!./TextArea.html", "./Input"], function(subTpl){
+define( 'Firebrick.ui/fields/TextArea',[ "text!./TextArea.html", "./Input" ], function( subTpl ) {
 	"use strict";
-	return Firebrick.define("Firebrick.ui.fields.TextArea", {
-		extend:"Firebrick.ui.fields.Input",
+	return Firebrick.define( "Firebrick.ui.fields.TextArea", {
+		extend: "Firebrick.ui.fields.Input",
 		/**
 		 * @property sName
 		 * @type {String}
@@ -10239,20 +10081,21 @@ define('Firebrick.ui/fields/TextArea',["text!./TextArea.html", "./Input"], funct
 		 * @type {Int}
 		 * @default 5
 		 */
-		rows:5,
+		rows: 5,
 		/**
 		 * @property subTpl
 		 * @type {String}
 		 */
-		subTpl:subTpl,
+		subTpl: subTpl,
 		/**
 		 * @property dataType
 		 * @type {String}
 		 * @default "'textarea'"
 		 */
-		dataType:"textarea"
+		dataType: "textarea"
 	});
 });
+
 /*!
  * @author Steven Masala [me@smasala.com]
  */
@@ -10263,10 +10106,10 @@ define('Firebrick.ui/fields/TextArea',["text!./TextArea.html", "./Input"], funct
  * @namespace components.fields
  * @class HtmlEditor
  */
-define('Firebrick.ui/fields/HtmlEditor',["./TextArea", "summernote"], function(){
+define( 'Firebrick.ui/fields/HtmlEditor',[ "./TextArea", "summernote" ], function() {
 	"use strict";
-	return Firebrick.define("Firebrick.ui.fields.HtmlEditor", {
-		extend:"Firebrick.ui.fields.TextArea",
+	return Firebrick.define( "Firebrick.ui.fields.HtmlEditor", {
+		extend: "Firebrick.ui.fields.TextArea",
 		/**
 		 * @property sName
 		 * @type {String}
@@ -10283,38 +10126,40 @@ define('Firebrick.ui/fields/HtmlEditor',["./TextArea", "summernote"], function()
 		 * @method getEditorConfig
 		 * @return {Object}
 		 */
-		getEditorConfig: function(){
+		getEditorConfig: function() {
 			var me = this,
 				editorConf = me.editorConf || {},
 				obj = {
 					height: 200
 				};
-			return Firebrick.utils.overwrite(obj, editorConf);
+			return Firebrick.utils.overwrite( obj, editorConf );
 		},
 		/**
 		 * @method setValue
 		 */
-		_setValue: function( value ){
+		_setValue: function( value ) {
+			var me = this;
 			return me.getElement().code( value );
 		},
 		/**
 		 * @method getValue
 		 * @return {Html}
 		 */
-		getValue: function(){
+		getValue: function() {
+			var me = this;
 			return me.getElement().code();
 		},
 		/**
 		 * @method init
 		 */
-		init: function(){
+		init: function() {
 			var me = this;
 			
-			if( !me.inplaceEdit ){
-				me.on("rendered", function(){
+			if ( !me.inplaceEdit ) {
+				me.on( "rendered", function() {
 					me._initEditor();
 				});
-				me.on("destroy", function(){
+				me.on( "destroy", function() {
 					me.getElement().destroy();
 				});
 			}
@@ -10325,14 +10170,15 @@ define('Firebrick.ui/fields/HtmlEditor',["./TextArea", "summernote"], function()
 		 * @method _initEditor
 		 * @private
 		 */
-		_initEditor: function(){
+		_initEditor: function() {
 			var me = this,
 				$el = me.getElement();
 				
-			$el.summernote( me.getEditorConfig() ); 
+			$el.summernote( me.getEditorConfig() );
 		}
 	});
 });
+
 /*!
  * @author Steven Masala [me@smasala.com]
  */
@@ -10343,24 +10189,25 @@ define('Firebrick.ui/fields/HtmlEditor',["./TextArea", "summernote"], function()
  * @namespace components.fields
  * @class Password
  */
-define('Firebrick.ui/fields/Password',["./Input"], function(){
+define( 'Firebrick.ui/fields/Password',[ "./Input" ], function() {
 	"use strict";
-	return Firebrick.define("Firebrick.ui.fields.Password", {
-		extend:"Firebrick.ui.fields.Input",
+	return Firebrick.define( "Firebrick.ui.fields.Password", {
+		extend: "Firebrick.ui.fields.Input",
 		/**
 		 * @property sName
 		 * @type {String}
 		 * @default "fb-ui-password"
 		 */
-		sName:"fields.password",
+		sName: "fields.password",
 		/**
 		 * @property type
 		 * @type {String}
 		 * @default "password"
 		 */
-		type:"password"
+		type: "password"
 	});
 });
+
 
 define('text!Firebrick.ui/fields/SelectBox.html',[],function () { return '{{?it.inplaceEdit}}\r\n\t<a id="{{=it.getId()}}" data-bind="{{=it.dataBind()}}"></a>\r\n{{?? true }}\r\n\t<select id="{{=it.getId()}}" data-bind="{{=it.dataBind()}}"></select>\r\n{{?}}';});
 
@@ -10374,63 +10221,63 @@ define('text!Firebrick.ui/fields/SelectBox.html',[],function () { return '{{?it.
  * @namespace components.fields
  * @class SelectBox
  */
-define('Firebrick.ui/fields/SelectBox',["text!./SelectBox.html", "jquery", "knockout", "./Input"], function(subTpl, $, ko){
+define( 'Firebrick.ui/fields/SelectBox',[ "text!./SelectBox.html", "jquery", "knockout", "./Input" ], function( subTpl, $, ko ) {
 	"use strict";
-	return Firebrick.define("Firebrick.ui.fields.SelectBox", {
-		extend:'Firebrick.ui.fields.Input',
+	return Firebrick.define( "Firebrick.ui.fields.SelectBox", {
+		extend: "Firebrick.ui.fields.Input",
 		/**
 		 * @property sName
 		 * @type {String}
 		 */
-		sName:"fields.selectbox",
+		sName: "fields.selectbox",
 		/**
 		 * @property multiSelect
 		 * @type {Boolean}
 		 * @default false
 		 */
-		multiSelect:false,
+		multiSelect: false,
 		/**
 		 * @property subTpl
 		 * @type {String} html
 		 */
-		subTpl:subTpl,
+		subTpl: subTpl,
 		/**
 		 * @property options
 		 * @type {KO String|Function|Array of Objects}
 		 * @default false
 		 */
-		options:false,
+		options: false,
 		/**
 		 * @property type
 		 * @type {String}
 		 * @default "select"
 		 */
-		type:"select",
+		type: "select",
 		/**
 		 * @property optionsValue
 		 * @type {String}
 		 * @default "value"
 		 */
-		optionsValue:"value",
+		optionsValue: "value",
 		/**
 		 * @property optionsText
 		 * @type {String}
 		 * @default "text"
 		 */
-		optionsText:"text",
+		optionsText: "text",
 		/**
 		 * @method bindings
 		 * @return {Object}
 		 */
-		bindings:function(){
+		bindings: function() {
 			var me = this,
-				obj = me.callParent(arguments);
+				obj = me.callParent( arguments );
 			
-			if(!me.inplaceEdit){
-				obj.options = Firebrick.ui.helper.optionString(me);
-				if(!me.multiSelect){
+			if ( !me.inplaceEdit ) {
+				obj.options = Firebrick.ui.helper.optionString( me );
+				if ( !me.multiSelect ) {
 					obj.value = me.value;
-				}else{
+				} else {
 					obj.selectedOptions = me.value;
 				}
 				obj.optionsText = me.parseBind( me.optionsText );
@@ -10447,7 +10294,7 @@ define('Firebrick.ui/fields/SelectBox',["text!./SelectBox.html", "jquery", "knoc
 		 * @param $data {KO Object}
 		 * @return {String}
 		 */
-		_getInplaceEditText: function( $data ){
+		_getInplaceEditText: function( $data ) {
 			var me = this,
 				$el = me.getElement(),
 				value = $el ? me.getValue() : me.value,
@@ -10457,30 +10304,30 @@ define('Firebrick.ui/fields/SelectBox',["text!./SelectBox.html", "jquery", "knoc
 				text = "",
 				it, unwrapped;
 			
-			if( value ){
+			if ( value ) {
 				
-				if($.isFunction(options)){
+				if ( $.isFunction( options ) ) {
 					options = options();
-				}else if( typeof options === "string" ){
+				} else if ( typeof options === "string" ) {
 					options = ko.unwrap( $data.hasOwnProperty( options ) ? $data[ options ] : $data );
 				}
 				
-				if( !$.isArray(options) ){
-					options = [options];
+				if ( !$.isArray( options ) ) {
+					options = [ options ];
 				}
 				
-				for(var i = 0, l = options.length; i<l; i++){
-					it = options[i];
-					if( $.isPlainObject(it) ){
+				for ( var i = 0, l = options.length; i < l; i++ ) {
+					it = options[ i ];
+					if ( $.isPlainObject( it ) ) {
 						unwrapped = ko.unwrap( it[ optVal ] );
-						if(unwrapped === value.replace("'", "")){
+						if ( unwrapped === value.replace( "'", "" ) ) {
 							text = ko.unwrap( it[ optText ] );
 							break;
 						}
 					}
 				}
 				
-			}else{
+			} else {
 				text = Firebrick.text( me.inplaceEditEmptyText );
 			}
 			
@@ -10488,6 +10335,7 @@ define('Firebrick.ui/fields/SelectBox',["text!./SelectBox.html", "jquery", "knoc
 		}
 	});
 });
+
 /*!
  * @author Steven Masala [me@smasala.com]
  */
@@ -10499,32 +10347,32 @@ define('Firebrick.ui/fields/SelectBox',["text!./SelectBox.html", "jquery", "knoc
  * @namespace components.menu
  * @class ContextMenu
  */
-define('Firebrick.ui/menu/ContextMenu',["jquery", "./Menu", "../common/mixins/Items"], function($){
+define( 'Firebrick.ui/menu/ContextMenu',[ "jquery", "./Menu", "../common/mixins/Items" ], function( $ ) {
 	"use strict";
 	
-	return Firebrick.define("Firebrick.ui.menu.ContextMenu", {
+	return Firebrick.define( "Firebrick.ui.menu.ContextMenu", {
 		extend: "Firebrick.ui.menu.Menu",
-		mixins:"Firebrick.ui.common.mixins.Items",
+		mixins: "Firebrick.ui.common.mixins.Items",
 		sName: "menu.contextmenu",
 		target: "body",
 		enclosedBind: true,
 		appendTarget: true,
 		contextMenuEvent: null,
 		
-		init: function(){
+		init: function() {
 			var me = this;
 			
-			me.on("rendered", function(){
+			me.on( "rendered", function() {
 				me._initContext();
 				me.position();
 			});
 			
-			return me.callParent(arguments);
+			return me.callParent( arguments );
 		},
 		
-		position: function(){
+		position: function() {
 			var me = this,
-				el = $("> ul", me.getElement()),
+				el = $( "> ul", me.getElement() ),
 				event = me.contextMenuEvent;
 	
 			el.css({
@@ -10536,34 +10384,34 @@ define('Firebrick.ui/menu/ContextMenu',["jquery", "./Menu", "../common/mixins/It
 			});
 		},
 		
-		_initContext: function(){
+		_initContext: function() {
 			var me = this,
-				globalClick = function(e){
-					var $e = $(e.target),
+				globalClick = function( e ) {
+					var $e = $( e.target ),
 						$el = me.getElement();
 					
-					if(!$el.is($e) || $el.has($e).length){
+					if ( !$el.is( $e ) || $el.has( $e ).length ) {
 						me.destroy();
-						$(document).off("click", globalClick);	
+						$( document ).off( "click", globalClick );
 					}
 					
 				};
 				
-			$(document).on("click", globalClick);
+			$( document ).on( "click", globalClick );
 		},
 		
-		
-		bindings: function(){
+		bindings: function() {
 			var me = this,
-				obj = me.callParent(arguments);
+				obj = me.callParent( arguments );
 			
-			obj.css["'fb-ui-contextmenu'"] = true;
+			obj.css[ "'fb-ui-contextmenu'" ] = true;
 			
 			return obj;
 		}
 	});
 	
 });
+
 /*!
  * @author Steven Masala [me@smasala.com]
  */
@@ -10574,21 +10422,22 @@ define('Firebrick.ui/menu/ContextMenu',["jquery", "./Menu", "../common/mixins/It
  * @namespace components.nav
  * @class Breadcrumbs
  */
-define('Firebrick.ui/nav/Breadcrumbs',["../display/List"], function(){
+define( 'Firebrick.ui/nav/Breadcrumbs',[ "../display/List" ], function() {
 	"use strict";
-	return Firebrick.define("Firebrick.ui.nav.Breadcrumbs", {
-		extend:"Firebrick.ui.display.List",
-		sName:"nav.breadcrumbs",
+	return Firebrick.define( "Firebrick.ui.nav.Breadcrumbs", {
+		extend: "Firebrick.ui.display.List",
+		sName: "nav.breadcrumbs",
 		listType: "ol",
-		linkedList:true,
-		bindings: function(){
+		linkedList: true,
+		bindings: function() {
 			var me = this,
-				obj = me.callParent(arguments);
+				obj = me.callParent( arguments );
 			obj.css.breadcrumb = true;
 			return obj;
 		}
 	});
 });
+
 /*!
  * @author Steven Masala [me@smasala.com]
  */
@@ -10599,11 +10448,11 @@ define('Firebrick.ui/nav/Breadcrumbs',["../display/List"], function(){
  * @namespace components.nav
  * @class Pagination
  */
-define('Firebrick.ui/nav/Pagination',["../display/List"], function(){
+define( 'Firebrick.ui/nav/Pagination',[ "../display/List" ], function() {
 	"use strict";
-	return Firebrick.define("Firebrick.ui.nav.Pagination", {
-		extend:"Firebrick.ui.display.List",
-		sName:"nav.pagination",
+	return Firebrick.define( "Firebrick.ui.nav.Pagination", {
+		extend: "Firebrick.ui.display.List",
+		sName: "nav.pagination",
 		preNode: false,
 		linkedList: true,
 		/**
@@ -10612,18 +10461,18 @@ define('Firebrick.ui/nav/Pagination',["../display/List"], function(){
 		 * @type {String}
 		 * @default null
 		 */
-		paginationSize:null,
+		paginationSize: null,
 		/**
 		 * override parent
 		 * @method bindings
 		 * @return {Object}
 		 */
-		bindings: function(){
+		bindings: function() {
 			var me = this,
-				obj = me.callParent(arguments);
+				obj = me.callParent( arguments );
 			obj.css.pagination = true;
-			if(me.paginationSize){
-				obj.css[ me.parseBind("pagination-"+me.paginationSize) ] = true;
+			if ( me.paginationSize ) {
+				obj.css[ me.parseBind( "pagination-" + me.paginationSize ) ] = true;
 			}
 			return obj;
 		},
@@ -10631,27 +10480,28 @@ define('Firebrick.ui/nav/Pagination',["../display/List"], function(){
 		 * @method setActive
 		 * @param val {String|Integer} - correspond to the pagination link data-value attribute
 		 */
-		setActive: function( val ){
+		setActive: function( val ) {
 			var me = this,
 				$el = me.getElement(),
 				$active = me.getActive(),
-				$it = $("a[data-value='" + val + "']", $el).parent("li");
+				$it = $( "a[data-value='" + val + "']", $el ).parent( "li" );
 			
-			$active.removeClass("active");
-			$it.addClass("active");
+			$active.removeClass( "active" );
+			$it.addClass( "active" );
 		},
 		/**
 		 * get active item
 		 * @method getActive
 		 * @return {jQuery Object} <li>
 		 */
-		getActive: function(){
+		getActive: function() {
 			var me = this,
 				$el = me.getElement();
-			return $("li.active", $el);
+			return $( "li.active", $el );
 		}
 	});
 });
+
 /*!
  * @author Steven Masala [me@smasala.com]
  */
@@ -10664,16 +10514,16 @@ define('Firebrick.ui/nav/Pagination',["../display/List"], function(){
  * 			// all other class config properties
  * 		}
  * }
- * 
- * 
+ *
+ *
  * @module plugins
  * @namespace plugins
  * @class EditableTable
  */
-define('Firebrick.ui/table/plugins/EditableTable',["jquery"], function($){
+define( 'Firebrick.ui/table/plugins/EditableTable',[ "jquery" ], function( $ ) {
 	"use strict";
 	
-	var clazz = Firebrick.define("Firebrick.ui.table.plugins.EditableTable", {
+	var clazz = Firebrick.define( "Firebrick.ui.table.plugins.EditableTable", {
 		indexAttr: "data-tt-id",	//when TR - row number, when TD column number
 		rowAttr: "fb-ui-row-id",	//for TD to determine which row number
 		editMarker: "fb-ui-cell-editing",	//added to the TD when it cell edit is active
@@ -10688,7 +10538,7 @@ define('Firebrick.ui/table/plugins/EditableTable',["jquery"], function($){
 		 * @param columns {Array of Objects} which columns are being edited
 		 * @return {Object} {deps:[], fields:[]}
 		 */
-		editFields: function(editElement, clazz, columns){
+		editFields: function( editElement, clazz, columns ) {
 			var me = this,
 				//holder to populate with all the edit fields needed
 				editFields = [],
@@ -10697,33 +10547,33 @@ define('Firebrick.ui/table/plugins/EditableTable',["jquery"], function($){
 				//map of all the already added dependencies - stop duplicates
 				addedPaths = {},
 				//boolean
-				isRow = editElement.is("tr"),
+				isRow = editElement.is( "tr" ),
 				//find correct parent el where the data values are stored
-				parentEl = isRow ? editElement : editElement.closest("tr"),
+				parentEl = isRow ? editElement : editElement.closest( "tr" ),
 				//holder for iteration
 				colNumber,
 				field,
 				col;
 			
-			if(columns){
+			if ( columns ) {
 				
 				//iterate over column passed to this function
-				for(var i = 0, l = columns.length; i<l; i++){
-					colNumber = isRow ? i : editElement.attr(me.indexAttr);
-					col = columns[i];
-					if(col.editable !== false){
-						field = me.getFieldConfiguration(clazz, parentEl, editElement, col, colNumber, deps, addedPaths);
-						if(field){
+				for ( var i = 0, l = columns.length; i < l; i++ ) {
+					colNumber = isRow ? i : editElement.attr( me.indexAttr );
+					col = columns[ i ];
+					if ( col.editable !== false ) {
+						field = me.getFieldConfiguration( clazz, parentEl, editElement, col, colNumber, deps, addedPaths );
+						if ( field ) {
 							editFields.push( field );
 						}
 					}
 				}
 			}
-			return {deps: deps, items: editFields};
+			return { deps: deps, items: editFields };
 		},
 		
 		/**
-		 * @method getFieldConfiguration 
+		 * @method getFieldConfiguration
 		 * @param clazz {Object} table component class
 		 * @param $tr {jQuery Object TR}
 		 * @param $clickedItem {jQuery Object TR | TD etc}
@@ -10733,47 +10583,47 @@ define('Firebrick.ui/table/plugins/EditableTable',["jquery"], function($){
 		 * @param addedPaths {Object} to populate which which dependencies have already been added to deps - **variable pointers**
 		 * @return {Object|null} field config {sName:"fields.input", value:"abc", ...}
 		 */
-		getFieldConfiguration: function(clazz, $tr, $clickedItem, col, colNumber, deps, addedPaths){
+		getFieldConfiguration: function( clazz, $tr, $clickedItem, col, colNumber, deps, addedPaths ) {
 			var me = this,
 				fieldConfig = col.editConf && col.editConf.field ? col.editConf.field : {},
 				path,
 				data = $tr.prop( clazz.propDataName ),
 				value = Firebrick.utils.getDeepProperty( col.mapping, data );
 			
-			if(data.children){
-				if(col.editConf && col.editConf.parentsEditable === false){
+			if ( data.children ) {
+				if ( col.editConf && col.editConf.parentsEditable === false ) {
 					//cancel edit field creation as this column should not be editable when a parent item
 					return;
-				}	
+				}
 			}
 
-			if(value === null || value === undefined){
+			if ( value === null || value === undefined ) {
 				//property not found by getDeepProperty() so we assume an edit should not be possible here
 				return;
-			}else if (col.renderer && !col.type){
+			} else if ( col.renderer && !col.type ) {
 				//don't support custom renderers if no type is given
 				return;
 			}
 
-			if(fieldConfig.sName){
+			if ( fieldConfig.sName ) {
 				//get the correct dependency path for the field type - i.e. "fields.input" => "Firebrick.ui/fields/Input"
-				path = Firebrick.classes.getSNameConfig(fieldConfig.sName).path;
-			}else{
+				path = Firebrick.classes.getSNameConfig( fieldConfig.sName ).path;
+			} else {
 				//default to input field if non given
 				fieldConfig.sName = col.type === "checkbox" ? "fields.checkbox" : "fields.input";
-				path = Firebrick.classes.getSNameConfig(fieldConfig.sName).path;
+				path = Firebrick.classes.getSNameConfig( fieldConfig.sName ).path;
 			}
 			
-			if(!addedPaths[path]){
-				addedPaths[path] = true;
-				deps.push(path);
+			if ( !addedPaths[ path ] ) {
+				addedPaths[ path ] = true;
+				deps.push( path );
 			}
 			
-			fieldConfig.label = fieldConfig.label || (col.text ? col.text : col);
-			fieldConfig.init = me._initFunction(colNumber);
-			fieldConfig.value = $.isFunction(value) ? value() : value;
+			fieldConfig.label = fieldConfig.label || ( col.text ? col.text : col );
+			fieldConfig.init = me._initFunction( colNumber );
+			fieldConfig.value = $.isFunction( value ) ? value() : value;
 			
-			if(typeof fieldConfig.value === "string"){
+			if ( typeof fieldConfig.value === "string" ) {
 				fieldConfig.value = "'" + fieldConfig.value + "'";
 			}
 			
@@ -10786,9 +10636,9 @@ define('Firebrick.ui/table/plugins/EditableTable',["jquery"], function($){
 		 * @method removeCurrent
 		 * @private
 		 */
-		removeCurrent: function(editElement){
+		removeCurrent: function( editElement ) {
 			var me = this;
-			editElement.removeClass(me.editMarker);
+			editElement.removeClass( me.editMarker );
 			me.currentEdit = null;
 		},
 		
@@ -10799,25 +10649,25 @@ define('Firebrick.ui/table/plugins/EditableTable',["jquery"], function($){
 		 * @param tableClass {Object} table component class
 		 * @param editElement {jQuery Object} TD
 		 */
-		cancelChanges: function(tableClass, editElement){
+		cancelChanges: function( tableClass, editElement ) {
 			var me = this;
 			
 			//reset html
-			me.resetCell(tableClass, editElement);
+			me.resetCell( tableClass, editElement );
 		},
 		
 		/**
 		 * @method resetCell
 		 * @param value {Any} optional - if set, once the cell is reset to its original state, the value will be set
 		 */
-		resetCell: function(tableClass, editElement, value){
+		resetCell: function( tableClass, editElement, value ) {
 			var me = this,
 				tdSpanClass = tableClass.tdSpanClass,
-				el = $("> [fb-view-bind]", editElement);	//find the inline edit field
+				el = $( "> [fb-view-bind]", editElement );	//find the inline edit field
 			
-			me.removeCurrent(editElement);
+			me.removeCurrent( editElement );
 			
-			if(el.length){
+			if ( el.length ) {
 				//remove the edit field
 				el.remove();
 			}
@@ -10825,8 +10675,8 @@ define('Firebrick.ui/table/plugins/EditableTable',["jquery"], function($){
 			//reset html
 			editElement.children().removeClass( me.hideCellClass );
 			
-			if(value){
-				$("> span." + tdSpanClass, editElement).html(value);
+			if ( value ) {
+				$( "> span." + tdSpanClass, editElement ).html( value );
 			}
 		},
 		
@@ -10837,11 +10687,11 @@ define('Firebrick.ui/table/plugins/EditableTable',["jquery"], function($){
 		 * @param value {Any}
 		 * @return value {Any} parsed
 		 */
-		parseValue: function(type, value){
-			if(type === "number"){
-				return parseInt(value);
-			}else if(type === "float"){
-				return parseFloat(value);
+		parseValue: function( type, value ) {
+			if ( type === "number" ) {
+				return parseInt( value );
+			} else if ( type === "float" ) {
+				return parseFloat( value );
 			}
 			return value;
 		},
@@ -10853,39 +10703,36 @@ define('Firebrick.ui/table/plugins/EditableTable',["jquery"], function($){
 		 * @event beforeChanges(tableClass, editElement)	- event fired on tableClass
 		 * @event afterChanges(tableClass, editElement)	- event fired on tableClass
 		 */
-		makeChanges: function(tableClass, editElement){
+		makeChanges: function( tableClass, editElement ) {
 				var me = this,
 					columns = tableClass.columns,
-					isTreeTable = tableClass.treetable,
-					inputs = editElement.find("input"),
+					inputs = editElement.find( "input" ),
 					input,
 					value, //holder
 					model,
 					oldValue,
-					tdSpanClass = tableClass.tdSpanClass,	//needed for manual table alterations
 					editType = tableClass.editType,
-					isRow = editElement.is("tr"),
-					$tr = isRow ? editElement : editElement.closest("tr"),
-					rowNumber = isRow ? editElement.attr(me.indexAttr) : editElement.attr(me.rowAttr),
-					colNumber;	
+					isRow = editElement.is( "tr" ),
+					$tr = isRow ? editElement : editElement.closest( "tr" ),
+					colNumber;
+
+				tableClass.fireEvent( "beforeChanges", arguments );
 				
-				tableClass.fireEvent("beforeChanges", arguments);
-				
-				if(inputs.length){
-					for(var i = 0, l = inputs.length; i<l; i++){
-						input = $(inputs[i]);
+				if ( inputs.length ) {
+					for ( var i = 0, l = inputs.length; i < l; i++ ) {
+						input = $( inputs[ i ] );
 						//filter out (continue) non checked (selected) checkboxes or radio buttons
-						if(input.attr("type") === "radio" || input.attr("type") === "checkbox"){
-							if(!input.is(":checked")){
+						if ( input.attr( "type" ) === "radio" || input.attr( "type" ) === "checkbox" ) {
+							if ( !input.is( ":checked" ) ) {
 								continue;
-							}else{
-								colNumber = Firebrick.getById( input.attr("data-cmp-id") )._prop;
+							} else {
+								colNumber = Firebrick.getById( input.attr( "data-cmp-id" ) )._prop;
 							}
-						}else{
-							colNumber = Firebrick.getById( input.attr("id") )._prop;
+						} else {
+							colNumber = Firebrick.getById( input.attr( "id" ) )._prop;
 						}
 						
-						//example tableClass.getData()() => 
+						//example tableClass.getData()() =>
 						//						[{
 						//							name: "John",
 						//							age: 35,
@@ -10901,27 +10748,27 @@ define('Firebrick.ui/table/plugins/EditableTable',["jquery"], function($){
 						//							}]
 						//						}]
 						
-						model = Firebrick.utils.getDeepProperty( columns[colNumber].mapping, $tr.prop( tableClass.propDataName ) );
+						model = Firebrick.utils.getDeepProperty( columns[ colNumber ].mapping, $tr.prop( tableClass.propDataName ) );
 						
 						oldValue = model();	//extract observable
 						
-						if(model){
+						if ( model ) {
 								value = input.val();
-								value = me.parseValue(columns[colNumber].type, value);
-								if(editType === "cell" && value === oldValue){
-									return me.cancelChanges(tableClass, editElement);
-								}else{
-									if(model.value){
-										model.value(value);
+								value = me.parseValue( columns[ colNumber ].type, value );
+								if ( editType === "cell" && value === oldValue ) {
+									return me.cancelChanges( tableClass, editElement );
+								} else {
+									if ( model.value ) {
+										model.value( value );
 										//cell edit
-										if(!isRow){
-											me.resetCell(tableClass, editElement);	
+										if ( !isRow ) {
+											me.resetCell( tableClass, editElement );
 										}
-									}else{
-										if(value !== oldValue){
-											model(value);	//set new value
-											if(!isRow){
-												me.resetCell(tableClass, editElement, value);
+									} else {
+										if ( value !== oldValue ) {
+											model( value );	//set new value
+											if ( !isRow ) {
+												me.resetCell( tableClass, editElement, value );
 											}
 										}
 									}
@@ -10932,7 +10779,7 @@ define('Firebrick.ui/table/plugins/EditableTable',["jquery"], function($){
 					}
 				}
 				
-				tableClass.fireEvent("afterChanges", arguments);
+				tableClass.fireEvent( "afterChanges", arguments );
 		},
 		
 		/**
@@ -10943,22 +10790,22 @@ define('Firebrick.ui/table/plugins/EditableTable',["jquery"], function($){
 		 * @param editFields.items {Array of Object} items configuration for the body of the modal
 		 * @param $tr {jQuery Object} tr that is to be edited
 		 */
-		buildModal: function(clazz, editFields, $tr){
+		buildModal: function( clazz, editFields, $tr ) {
 			var me = this,
 				customConfig = clazz.editModalConfig || {},
 				
 				defaultConfig = {
 					title: customConfig.modalTitle || "Edit",
 					target: $tr,
-					items:[{
+					items: [{
 						sName: "containers.form",
-						preSubmit: function(){
+						preSubmit: function() {
 							var me2 = this;
 							
 							//make changes to table
-							me.makeChanges(clazz, $tr);
+							me.makeChanges( clazz, $tr );
 							//hide the modal
-							$(me2._parent.getElement()).modal("hide");
+							$( me2._parent.getElement() ).modal( "hide" );
 							
 							//prevent default form submission
 							return false;
@@ -10967,28 +10814,28 @@ define('Firebrick.ui/table/plugins/EditableTable',["jquery"], function($){
 					}]
 				};
 				
-			if(customConfig._showEditButtons !== false){
+			if ( customConfig._showEditButtons !== false ) {
 				defaultConfig.footerItems = [{
 					sName: "button.button",
 					closeModal: true,	//hide modal
 					text: customConfig.buttonUpdateText || "Update",
-					handler: function(){
-						me.makeChanges(clazz, $tr);
+					handler: function() {
+						me.makeChanges( clazz, $tr );
 					}
 				}];
 			}
 				
-			customConfig = Firebrick.utils.overwrite(defaultConfig, customConfig);
+			customConfig = Firebrick.utils.overwrite( defaultConfig, customConfig );
 			
 			//add standard dependencies
-			editFields.deps.push( Firebrick.classes.getSNameConfig("containers.modal").path );
-			editFields.deps.push( Firebrick.classes.getSNameConfig("containers.form").path ); 
-			editFields.deps.push( Firebrick.classes.getSNameConfig("button.button").path );
+			editFields.deps.push( Firebrick.classes.getSNameConfig( "containers.modal" ).path );
+			editFields.deps.push( Firebrick.classes.getSNameConfig( "containers.form" ).path );
+			editFields.deps.push( Firebrick.classes.getSNameConfig( "button.button" ).path );
 			
-			me.tableLoadMask(clazz.getElement());
-			require(editFields.deps, function(){
-				Firebrick.create("Firebrick.ui.containers.Modal", customConfig);
-				me.removeTableLoadMask(clazz.getElement());
+			me.tableLoadMask( clazz.getElement() );
+			require( editFields.deps, function() {
+				Firebrick.create( "Firebrick.ui.containers.Modal", customConfig );
+				me.removeTableLoadMask( clazz.getElement() );
 			});
 		},
 		
@@ -10996,41 +10843,41 @@ define('Firebrick.ui/table/plugins/EditableTable',["jquery"], function($){
 		 * @method tableLoadMask
 		 * @param $table {jquery Object} table
 		 */
-		tableLoadMask: function($table){
+		tableLoadMask: function( $table ) {
 			var me = this,
-				tbody = $("tbody", $table),
-				div = $("<div class='fb-ui-load-mask'></div>");
-			tbody.addClass(me.rowLoadClass);
-			me.appendLoadIcon(div);
-			tbody.append(div);
+				tbody = $( "tbody", $table ),
+				div = $( "<div class='fb-ui-load-mask'></div>" );
+			tbody.addClass( me.rowLoadClass );
+			me.appendLoadIcon( div );
+			tbody.append( div );
 			
 		},
 		
 		/**
 		 * @method removeTableLoadMask
-		 * @param $table {jquery Object} table 
+		 * @param $table {jquery Object} table
 		 */
-		removeTableLoadMask: function($table){
+		removeTableLoadMask: function( $table ) {
 			var me = this,
-				tbody = $("tbody", $table);
-			tbody.removeClass(me.rowLoadClass);
-			$("> div.fb-ui-load-mask", tbody).remove();
+				tbody = $( "tbody", $table );
+			tbody.removeClass( me.rowLoadClass );
+			$( "> div.fb-ui-load-mask", tbody ).remove();
 		},
 		
 		/**
 		 * @method appendLoadIcon
 		 * @param $context {jquery Object} to append icon too
 		 */
-		appendLoadIcon: function($context){
-			$context.append("<span class='fb-ui-load-block glyphicon glyphicon-refresh glyphicon-refresh-animate'></span>");
+		appendLoadIcon: function( $context ) {
+			$context.append( "<span class='fb-ui-load-block glyphicon glyphicon-refresh glyphicon-refresh-animate'></span>" );
 		},
 		
 		/**
 		 * @method appendLoadIcon
 		 * @param $context {jquery Object} to remove icon from
 		 */
-		removeLoadIcon: function($context){
-			$("> .fb-ui-load-block", $context).remove();
+		removeLoadIcon: function( $context ) {
+			$( "> .fb-ui-load-block", $context ).remove();
 		},
 		
 		/**
@@ -11041,13 +10888,13 @@ define('Firebrick.ui/table/plugins/EditableTable',["jquery"], function($){
 		 * @param editFields.items {Array of Object} items configuration for the body of the modal
 		 * @param $td {jQuery Object} td that is to be edited
 		 */
-		buildCellEditor: function(clazz, editFields, $td){
+		buildCellEditor: function( clazz, editFields, $td ) {
 			var me = this;
-			editFields.deps.push(Firebrick.classes.getSNameConfig("containers.box").path);
+			editFields.deps.push( Firebrick.classes.getSNameConfig( "containers.box" ).path );
 			
-			me.appendLoadIcon($td);
-			require(editFields.deps, function(){
-				var field = editFields.items[0];
+			me.appendLoadIcon( $td );
+			require( editFields.deps, function() {
+				var field = editFields.items[ 0 ];
 				
 				$td.children().addClass( me.hideCellClass );
 				
@@ -11055,16 +10902,16 @@ define('Firebrick.ui/table/plugins/EditableTable',["jquery"], function($){
 				field.inputWidth = 12;
 				field.inputContainerBindings = me.cellEditInputContainerBindings();
 
-				field.init = me._cellEditInit(clazz, $td);
+				field.init = me._cellEditInit( clazz, $td );
 				//build edit field
-				Firebrick.create("containers.box", {
+				Firebrick.create( "containers.box", {
 					target: $td,
 					appendTarget: true,
 					enclosedBind: true,
-					items: [field]
-				});	
-				
-				me.removeLoadIcon($td);
+					items: [ field ]
+				});
+
+				me.removeLoadIcon( $td );
 			});
 		},
 		
@@ -11074,12 +10921,12 @@ define('Firebrick.ui/table/plugins/EditableTable',["jquery"], function($){
 		 * @param $table {jQuery Object} table element
 		 * @param $tr {jQuery Object} tr that was double clicked
 		 */
-		initEditingTR: function(clazz, $table, $tr){
+		initEditingTR: function( clazz, $table, $tr ) {
 			var me = this,
 				//holder - this populates the fields that are shown in the edit mask ".items"
-				editFields = me.editFields($tr, clazz, clazz.columns);
-			if(editFields.items.length){
-				me.buildModal(clazz, editFields, $tr);
+				editFields = me.editFields( $tr, clazz, clazz.columns );
+			if ( editFields.items.length ) {
+				me.buildModal( clazz, editFields, $tr );
 			}
 		},
 		
@@ -11089,21 +10936,21 @@ define('Firebrick.ui/table/plugins/EditableTable',["jquery"], function($){
 		 * @param $table {jQuery Object} table element
 		 * @param $tr {jQuery Object} td that was double clicked
 		 */
-		initEditingTD: function(clazz, $table, $td){
+		initEditingTD: function( clazz, $table, $td ) {
 			var me = this,
 				currentEdit = me.currentEdit,
-				index = $td.attr(me.indexAttr),
+				index = $td.attr( me.indexAttr ),
 				//holder - this populates the fields that are shown in the edit mask ".items"
-				editFields, 
+				editFields,
 				globalClick;
 			
-			if(me.currentEdit){
-				if(me.currentEdit.is($td)){
+			if ( me.currentEdit ) {
+				if ( me.currentEdit.is( $td ) ) {
 					//same cell that is already open
 					return;
-				}else{
+				} else {
 					//different cell, close the open one
-					me.makeChanges(clazz, currentEdit);
+					me.makeChanges( clazz, currentEdit );
 				}
 			}
 			
@@ -11113,66 +10960,65 @@ define('Firebrick.ui/table/plugins/EditableTable',["jquery"], function($){
 			/*
 			 * listener for clicking outside the edit cell
 			 */
-			globalClick = function(event){
-				var $target = $(event.target),
+			globalClick = function( event ) {
+				var $target = $( event.target ),
 					current = me.currentEdit;
 				//different cell, close the open one
-				if(current){
+				if ( current ) {
 					//is the clicked target the edit element and not anything inside it
-					if(!current.is($target) && !current.has($target).length){
+					if ( !current.is( $target ) && !current.has( $target ).length ) {
 						//make changes (i.e. act like a "blur" event) and remove this click listener
-						me.makeChanges(clazz, current);
-						$(document).off("click", globalClick);					
+						me.makeChanges( clazz, current );
+						$( document ).off( "click", globalClick );
 					}
-				}else{
+				} else {
 					//makeChanges has been called before this already
 					//ie. the currentEdit item has been closed elsewhere, so just delete the click event
-					$(document).off("click", globalClick);
+					$( document ).off( "click", globalClick );
 				}
 				
 			};
-			$(document).on("click", globalClick);
+			$( document ).on( "click", globalClick );
 			/* --- **/
 			
 			//check if this cell isn't open for editing already
-			if(!$td.hasClass(me.editMarker)){
+			if ( !$td.hasClass( me.editMarker ) ) {
 				
 				//get the field to display for editing
-				editFields = me.editFields($td, clazz, [ clazz.columns[index] ]);
+				editFields = me.editFields( $td, clazz, [ clazz.columns[ index ] ] );
 				
-				if(editFields.items.length){
+				if ( editFields.items.length ) {
 					//add the css to mark as open for editing and show the field
-					$td.addClass(me.editMarker);
-					me.buildCellEditor(clazz, editFields, $td);
+					$td.addClass( me.editMarker );
+					me.buildCellEditor( clazz, editFields, $td );
 				}
 			}
 		},
 		
-		
 		/*
-		 * 
-		 * 
-		 * 
-		 * 
+		 *
+		 *
+		 *
+		 *
 		 * Component method overrides
-		 * 
-		 * 
-		 * 
-		 * 
-		 * 
+		 *
+		 *
+		 *
+		 *
+		 *
 		 */
 		/**
-		 * override InputContainerBindings function to add more properties 
+		 * override InputContainerBindings function to add more properties
 		 * @method cellEditInputContainerBindings
 		 * @return {Function}
 		 */
-		cellEditInputContainerBindings: function(){
-			return function(){
+		cellEditInputContainerBindings: function() {
+			return function() {
 				var me2 = this,
-					obj = me2.callParent(arguments);
+					obj = me2.callParent( arguments );
 				
-				obj.css["'col-md-10'"] = true;
-				obj.css["'col-lg-8'"] = true;
+				obj.css[ "'col-md-10'" ] = true;
+				obj.css[ "'col-lg-8'" ] = true;
 				
 				return obj;
 			};
@@ -11184,7 +11030,7 @@ define('Firebrick.ui/table/plugins/EditableTable',["jquery"], function($){
 		 * @param clazz {Object} component class
 		 * @param colNum {Integer}
 		 */
-		_defaultRenderAction: function(clazz, colNum){
+		_defaultRenderAction: function( clazz, colNum ) {
 			clazz._prop = colNum;
 		},
 		
@@ -11195,16 +11041,16 @@ define('Firebrick.ui/table/plugins/EditableTable',["jquery"], function($){
 		 * @param colNum {Integer}
 		 * @return {Function}
 		 */
-		_initFunction: function(colNum){
+		_initFunction: function( colNum ) {
 			var me = this;
-			return function(){
+			return function() {
 				var me2 = this;
 				
-				me2.on("rendered", function(){
-					me._defaultRenderAction(me2, colNum);
+				me2.on( "rendered", function() {
+					me._defaultRenderAction( me2, colNum );
 				});
 				
-				return me2.callParent(arguments);
+				return me2.callParent( arguments );
 			};
 		},
 		
@@ -11214,104 +11060,104 @@ define('Firebrick.ui/table/plugins/EditableTable',["jquery"], function($){
 		 * @param clazz {Object} component clazz - edit field
 		 * @param $td {jQuery Object}
 		 */
-		_cellEditInit: function(clazz, $td){
+		_cellEditInit: function( clazz, $td ) {
 			var me = this;
-			return function(){
+			return function() {
 				var me2 = this,
 					sName = me2.sName;
 				
-				me2.on("rendered", function(){
+				me2.on( "rendered", function() {
 					var el = me2.getElement(),
 						children,
 						f;
 					
-					me._defaultRenderAction(me2, $td.attr(me.indexAttr));
+					me._defaultRenderAction( me2, $td.attr( me.indexAttr ) );
 					
-					el.on("keydown", function(event){
+					el.on( "keydown", function( event ) {
 						var k = event.which;
-						if(k === 13){
-							me.makeChanges(clazz, $td);
-						}else if(k === 27){
-							me.cancelChanges(clazz, $td);
+						if ( k === 13 ) {
+							me.makeChanges( clazz, $td );
+						} else if ( k === 27 ) {
+							me.cancelChanges( clazz, $td );
 						}
 					});
 					
-					if(sName !== "fields.input"){
-						children = el.is("input") ? el : el.find("input");
-						f = function(){
-							me.makeChanges(clazz, $td);
-							children.off("change", f);
+					if ( sName !== "fields.input" ) {
+						children = el.is( "input" ) ? el : el.find( "input" );
+						f = function() {
+							me.makeChanges( clazz, $td );
+							children.off( "change", f );
 						};
-						children.on("change", f);
-					}else{
+						children.on( "change", f );
+					} else {
 						el.focus();
 					}
 					
-					
 				});
 				
-				return me2.callParent(arguments);
+				return me2.callParent( arguments );
 			};
 		}
 		
 	});
 	
 	//jquery plugin to init editable table
-	$.fn.EditableTable = $.fn.EditableTable || function(){
-		var $table = $(this),
+	$.fn.EditableTable = $.fn.EditableTable || function() {
+		var $table = $( this ),
 			elements,
-			plugin = Firebrick.create("Firebrick.ui.table.plugins.EditableTable"),	//create Plugin Class instance
-			clazz = Firebrick.getById($table.attr("id")),
+			plugin = Firebrick.create( "Firebrick.ui.table.plugins.EditableTable" ),	//create Plugin Class instance
+			clazz = Firebrick.getById( $table.attr( "id" ) ),
 			editType = clazz.editType,
 			eventCallback,
 			ths, $th;
 		
-		$table.addClass("fb-ui-editabletable");	
-		
-		if(editType === "row"){
-			$table.addClass("fb-ui-row-editing");
+		$table.addClass( "fb-ui-editabletable" );
+
+		if ( editType === "row" ) {
+			$table.addClass( "fb-ui-row-editing" );
 			//for OPERA - http://stackoverflow.com/questions/7018324/how-do-i-stop-highlighting-of-a-div-element-when-double-clicking-on
-			$table.attr("unselectable", "on");
-			elements = $("tbody tr", $table);
-			eventCallback = function(){
-				var $this = $(this);
+			$table.attr( "unselectable", "on" );
+			elements = $( "tbody tr", $table );
+			eventCallback = function() {
+				var $this = $( this );
 				//stop the double click of taking event when a child element of TR is dblclicked
-				if($this.is("tr")){
-					plugin.initEditingTR(clazz, $table, $this);
+				if ( $this.is( "tr" ) ) {
+					plugin.initEditingTR( clazz, $table, $this );
 				}
 			};
 			
-		}else if (editType === "cell"){
+		} else if ( editType === "cell" ) {
 			/*
 			 * workaround to stop col width shifting from inline edit
 			 * datatable plugin stops this from happening
 			 */
-			if(!clazz.datatable){ //if not active
-				ths = $("> thead th", $table);
-				for(var i = 0, l = ths.length; i<l; i++){
-					$th = $(ths[i]);
-					$th.css("width", $th.width());
+			if ( !clazz.datatable ) { //if not active
+				ths = $( "> thead th", $table );
+				for ( var i = 0, l = ths.length; i < l; i++ ) {
+					$th = $( ths[ i ] );
+					$th.css( "width", $th.width() );
 				}
 			}
 			
 			//get the cells for the table
-			elements = $("tbody td", $table);
+			elements = $( "tbody td", $table );
 			//create the correct event function
-			eventCallback = function(){
-				var $this = $(this);
-				if($this.is("td")){
-					plugin.initEditingTD(clazz, $table, $this);	
+			eventCallback = function() {
+				var $this = $( this );
+				if ( $this.is( "td" ) ) {
+					plugin.initEditingTD( clazz, $table, $this );
 				}
 			};
 		}
 		
 		//register event with callback
-		elements.on("dblclick", eventCallback);
+		elements.on( "dblclick", eventCallback );
 	};
 	
 	return clazz;
 	
 });
+
 
 define('text!Firebrick.ui/table/Table.html',[],function () { return '<div data-bind="{{=it.dataBind(\'containerBindings\')}}">\r\n\t<table id={{=it.getId()}} data-bind="{{=it.dataBind()}}">\r\n\t{{?it.treetable && it.showOptions}}\r\n\t\t<caption data-bind="{{=it.dataBind(\'captionBindings\')}}">\r\n\t\t\t<a data-bind="{{=it.dataBind(\'expandBindings\')}}"></a>\r\n\t\t\t<a data-bind="{{=it.dataBind(\'collapseBindings\')}}"></a>\r\n\t\t</caption>\r\n\t{{?}}\r\n\t{{?it.showHeadings}}\r\n\t\t<thead data-bind="{{=it.dataBind(\'theadBindings\')}}">\r\n\t      <tr data-bind="{{=it.dataBind(\'theadTRBindings\')}}">\r\n\t        <th data-bind="{{=it.dataBind(\'theadTRTDBindings\')}}"></th>\r\n\t      </tr>\r\n\t    </thead>\r\n    {{?}}\r\n    {{?it.showRows}}\r\n\t    <tbody data-bind="{{=it.dataBind(\'tbodyBindings\')}}">\r\n\t      <!-- ko {{=it.dataBind(\'tbodyTRTemplateBindings\')}} --><!-- /ko -->\r\n\t    </tbody>\r\n    {{?}}\r\n\t</table>\r\n\t\r\n\t<script type="text/html" id="{{=it._getTplId()}}">\r\n\t\t<tr data-bind="{{=it.dataBind(\'tbodyTRBindings\')}}">\r\n\t\t\t<td data-bind="{{=it.dataBind(\'tbodyTRTDBindings\')}}">\r\n\t\t\t\t<span data-bind="{{=it.dataBind(\'tbodyTRTDSpanBindings\')}}"></span>\r\n\t\t\t</td>\r\n\t\t</tr>\r\n\t\t{{?it.treetable}}\r\n\t\t<!-- ko {{=it.dataBind(\'tbodyTRChildrenTemplateBindings\')}} --><!-- /ko -->\r\n\t\t{{?}}\r\n\t</script>\r\n\t\r\n</div>';});
 
@@ -11328,220 +11174,222 @@ define('text!Firebrick.ui/table/tpls/checkbox.html',[],function () { return '<in
  * @namespace components.table
  * @class Table
  */
-define('Firebrick.ui/table/Table',["knockout", "knockout-mapping", "jquery", "doT", "text!./Table.html", "text!./tpls/checkbox.html", "../common/Base", "datatables", "jquery-treetable", "responsive-tables-js", "./plugins/EditableTable"], function(ko, kom, $, doT, tpl, checkboxTpl){
+define( 'Firebrick.ui/table/Table',[ "knockout", "knockout-mapping", "jquery", "doT", "text!./Table.html", "text!./tpls/checkbox.html", "../common/Base",
+        "datatables", "jquery-treetable", "responsive-tables-js", "./plugins/EditableTable" ], function( ko, kom, $, doT, tpl, checkboxTpl ) {
 	"use strict";
-	
-	if(!ko.bindingHandlers.trRenderer){
+
+	if ( !ko.bindingHandlers.trRenderer ) {
 		/*
-		 * optionsRenderer for list
-		 * create dynamic css along with static
+		 * optionsRenderer for list create dynamic css along with static
 		 */
 		ko.virtualElements.allowedBindings.trRenderer = true;
 		ko.bindingHandlers.trRenderer = {
-		    init: function(element, valueAccessor, allBindings, viewModel, bindingContext) {
-		    	var clazz = valueAccessor(),
-		    		propName = clazz.propDataName,
-		    		$el = $( element );
-		    	
-		    	$el.prop(propName, viewModel);
-		    }
+			init: function( element, valueAccessor, allBindings, viewModel  ) { //bindingContext
+				var clazz = valueAccessor(), propName = clazz.propDataName, $el = $( element );
+
+				$el.prop( propName, viewModel );
+			}
 		};
 	}
-	
-	return Firebrick.define("Firebrick.ui.table.Table", {
-		extend:"Firebrick.ui.common.Base",
-		/**
+
+	return Firebrick.define( "Firebrick.ui.table.Table", {
+	    extend: "Firebrick.ui.common.Base",
+	    /**
 		 * @property sName
 		 * @type {String}
 		 * @default "fb-ui-table"
 		 */
-		sName: "table.table",
-		/**
+	    sName: "table.table",
+	    /**
 		 * @property tpl
 		 * @type {String} html
 		 */
-		tpl: tpl,
-		/**
+	    tpl: tpl,
+	    /**
 		 * sets the bootstrap css class "responsive" to the table
 		 * @property responsiveClass
 		 * @type {Boolean}
 		 * @default true
 		 */
-		responsiveClass:true,
-		/**
+	    responsiveClass: true,
+	    /**
 		 * activates the responsive-table-js package on the table
 		 * @property responsive
 		 * @type {Boolean}
 		 * @default true
 		 */
-		responsive:true,
-		/**
+	    responsive: true,
+	    /**
 		 * @property editType
 		 * @type {String} row|cell
 		 * @default "row"
 		 */
-		editType:"row",
-		/**
-		 * @example
-		 * 
-		 * columns: [{
-		 * 		mapping:  {String} dot notation to property in store json
-		 * 		type: {String} [default=input] | number, float, checkbox, date - used to format the value or run a default renderer
-		 * 		format: {String} - used to format the type if needed. Example for type=date - format YYYY-MM-DD
-		 * 		editable: {Boolean} [default=true] - specify whether the cells in this column should be editable. Only valid if the table's editabletable is also set to true
-		 * 		editConf: {Object} used to configure the Editable table plugin - see Plugin for configuration
-		 * 		text: {String} column title (<th></th>)
-		 * 		renderer: {Function} define this to parse the value before it is display and output "anything" you like - for example to convert an String value into an <img> tag. data-bind attributes on dynamic created elements work here too
-		 * 							 arguments passed are -> (columnConfig, koValue, rawValue)
-		 * }]
-		 * 
-		 * 
+	    editType: "row",
+	    /**
+		 * @example columns: [{ mapping: {String} dot notation to property in
+		 *          store json type: {String} [default=input] | number, float,
+		 *          checkbox, date - used to format the value or run a default
+		 *          renderer format: {String} - used to format the type if
+		 *          needed. Example for type=date - format YYYY-MM-DD editable:
+		 *          {Boolean} [default=true] - specify whether the cells in this
+		 *          column should be editable. Only valid if the table's
+		 *          editabletable is also set to true editConf: {Object} used to
+		 *          configure the Editable table plugin - see Plugin for
+		 *          configuration text: {String} column title (
+		 *          <th></th>) renderer: {Function} define this to parse the
+		 *          value before it is display and output "anything" you like -
+		 *          for example to convert an String value into an <img> tag.
+		 *          data-bind attributes on dynamic created elements work here
+		 *          too arguments passed are -> (columnConfig, koValue,
+		 *          rawValue) }]
 		 * @property columns
 		 * @type {Array of Objects}
 		 * @default null
 		 */
-		columns:null,
-		/**
+	    columns: null,
+	    /**
 		 * @property tdSpanClass
 		 * @type {String}
 		 * @default "fb-ui-tablecell-data"
 		 */
-		tdSpanClass: "fb-ui-tablecell-data",
-		/**
+	    tdSpanClass: "fb-ui-tablecell-data",
+	    /**
 		 * @property tableStriped
 		 * @type {Boolean|String}
 		 * @default true
 		 */
-		tableStriped:true,
-		/**
+	    tableStriped: true,
+	    /**
 		 * @property tableHover
 		 * @type {Boolean|String}
 		 * @default true
 		 */
-		tableHover:true,
-		/**
+	    tableHover: true,
+	    /**
 		 * @property tableCondensed
 		 * @type {Boolean|String}
 		 * @default false
 		 */
-		tableCondensed:false,
-		/**
+	    tableCondensed: false,
+	    /**
 		 * @property tableBordered
 		 * @type {Boolean|String}
 		 * @default false
 		 */
-		tableBordered:false,
-		/**
+	    tableBordered: false,
+	    /**
 		 * @property showHeadings
 		 * @type {Boolean}
 		 * @default true
 		 */
-		showHeadings:true,
-		/**
+	    showHeadings: true,
+	    /**
 		 * @property showRows
 		 * @type {Boolean}
 		 * @default true
 		 */
-		showRows:true,
-		/**
+	    showRows: true,
+	    /**
 		 * activate the editable table plugin
 		 * @property editabletable
 		 * @type {Boolean}
 		 * @default false
 		 */
-		editabletable:false,
-		/**
+	    editabletable: false,
+	    /**
 		 * which property the data of the tr is stored to the element
 		 * @property propDataName
 		 * @type {String}
 		 * @default "fb-ui-tr-data"
 		 */
-		propDataName: "fb-ui-tr-data",
-		/**
-		 * use option to enable and configure datable: http://datatables.net/examples/index
+	    propDataName: "fb-ui-tr-data",
+	    /**
+		 * use option to enable and configure datable:
+		 * http://datatables.net/examples/index
 		 * @property datatable
 		 * @type {Boolean|Object|Function (return Object) }
 		 * @default false
 		 */
-		datatable: false,
-		/**
+	    datatable: false,
+	    /**
 		 * default datatable configurations
 		 * @property _datatable
 		 * @type {Object|Function (return Object) }
 		 * @default {}
 		 */
-		_datatable: {},
-		/**
+	    _datatable: {},
+	    /**
 		 * works with parameter treetable
 		 * @property expandable
 		 * @type {Boolean}
 		 * @default true
 		 */
-		expandable:true,
-		/**
+	    expandable: true,
+	    /**
 		 * set the initialState property of the tree table plugin
 		 * @property expanded
 		 * @type {Boolean}
 		 * @default false
 		 */
-		expanded: false,
-		/**
+	    expanded: false,
+	    /**
 		 * works with parameter treetable
 		 * @property showCaption
 		 * @type {Boolean|String}
 		 * @default true
 		 */
-		showCaption:true,
-		/**
+	    showCaption: true,
+	    /**
 		 * works with parameter treetable
 		 * @property expandText
 		 * @type {String}
 		 * @default "Expand"
 		 */
-		expandText:'Expand',
-		/**
+	    expandText: "Expand",
+	    /**
 		 * works with parameter treetable
 		 * @property collapseText
 		 * @type {String}
 		 * @default "Collapse"
 		 */
-		collapseText: 'Collapse',
-		/**
+	    collapseText: "Collapse",
+	    /**
 		 * whether to show the collapse / expand buttons for the treetable
 		 * @property showOptions
 		 * @type {Boolean}
 		 * @default true
 		 */
-		showOptions: true,
-		/**
-		 * this is the very config that is used to configure the modal that is shown for editing a record - use the properties of Firebrick.ui.containers.Modal
-		 * @example
-		 * 		{
-		 * 			_showEditButtons: true|false //controls whether the footer buttons are shown [default=true]
-		 * 			_editOkText: "OK" // [default="OK"] only if _showEditButtons === true
-		 * 			_editCancelText: "Cancel" // [default="Cancel"] only if _showEditButtons === true
-		 * 		}
+	    showOptions: true,
+	    /**
+		 * this is the very config that is used to configure the modal that is
+		 * shown for editing a record - use the properties of
+		 * Firebrick.ui.containers.Modal
+		 * @example { _showEditButtons: true|false //controls whether the footer
+		 *          buttons are shown [default=true] _editOkText: "OK" //
+		 *          [default="OK"] only if _showEditButtons === true
+		 *          _editCancelText: "Cancel" // [default="Cancel"] only if
+		 *          _showEditButtons === true }
 		 * @event beforeChanges, afterChanges
 		 * @property editModalConfig
 		 * @type {Object}
 		 * @default null
 		 */
-		editModalConfig: null,
-		/**
+	    editModalConfig: null,
+	    /**
 		 * @method _itemId
 		 * @private
 		 * @type {Integer}
 		 * @default 0
 		 */
-		_itemId: 0,
-		/**
+	    _itemId: 0,
+	    /**
 		 * configuration: http://ludo.cubicphuse.nl/jquery-treetable/
 		 * @property treetable
 		 * @type {Boolean|Object|Function (return Object)}
 		 * @default false
 		 */
-		treetable: false,
-		/**
+	    treetable: false,
+	    /**
 		 * default treetable configuration
 		 * @property _treetable
 		 * @private
@@ -11549,470 +11397,458 @@ define('Firebrick.ui/table/Table',["knockout", "knockout-mapping", "jquery", "do
 		 * @return {Object}
 		 * @default {}
 		 */
-		_treetable: function(){
-			var me = this;
-			return {
-				expandable: me.expandable,
-				initialState: me.expanded ? "expanded" : "collapsed",
-				expanderTemplate: '<a class="glyphicon">&nbsp;</a>'
-			};
-		},
-		/**
+	    _treetable: function() {
+		    var me = this;
+		    return {
+		        expandable: me.expandable,
+		        initialState: me.expanded ? "expanded" : "collapsed",
+		        expanderTemplate: '<a class="glyphicon">&nbsp;</a>'
+		    };
+	    },
+	    /**
 		 * used to cache a ko computed observable by _allCheckedObservable()
 		 * @property _allCheckedObservableProp
 		 * @private
 		 * @type {KO Computed}
 		 * @default null
 		 */
-		_allCheckedObservableProp: null, 
-		/**
+	    _allCheckedObservableProp: null,
+	    /**
 		 * @method init
 		 */
-		init:function(){
-			var me = this;
-			
-			me.data = kom.fromJS(me.data); 
-			
-			me.on("rendered", function(){
-				var id = me.getId(),
-					table = me.getElement();
-				if(me.datatable && !me.treetable){
-					me._preTableConfig("datatable");
-					table.dataTable( me.datatable );
-				}
-				
-				if(me.editabletable){
-					table.EditableTable();
-				}
-				
-				if(me.treetable){
-					if(me.showOptions){
-						$("a#fb-expand-" + id).on("click", me.generateOnclick("expandAll"));
-						$("a#fb-collapse-" + id).on("click", me.generateOnclick("collapseAll"));
-					}
-					me._preTableConfig("treetable");
-					table.treetable( me.treetable );
-				}
-				if(me.responsive && window.responsiveTables){
-					window.responsiveTables.update(id);
-				}
-			});
-			me.callParent(arguments);
-		},
-		/**
+	    init: function() {
+		    var me = this;
+
+		    me.data = kom.fromJS( me.data );
+
+		    me.on( "rendered", function() {
+			    var id = me.getId(), table = me.getElement();
+			    if ( me.datatable && !me.treetable ) {
+				    me._preTableConfig( "datatable" );
+				    table.dataTable( me.datatable );
+			    }
+
+			    if ( me.editabletable ) {
+				    table.EditableTable();
+			    }
+
+			    if ( me.treetable ) {
+				    if ( me.showOptions ) {
+					    $( "a#fb-expand-" + id ).on( "click", me.generateOnclick( "expandAll" ) );
+					    $( "a#fb-collapse-" + id ).on( "click", me.generateOnclick( "collapseAll" ) );
+				    }
+				    me._preTableConfig( "treetable" );
+				    table.treetable( me.treetable );
+			    }
+			    if ( me.responsive && window.responsiveTables ) {
+				    window.responsiveTables.update( id );
+			    }
+		    } );
+		    me.callParent( arguments );
+	    },
+	    /**
 		 * used by _preTableConfig
 		 * @method __preTableConfig
 		 * @param propName {String}
 		 * @private
 		 * @return {self}
 		 */
-		__preTableConfig: function( propName ){
-			var me = this,
-				prop = me[propName];
-			if( !$.isPlainObject(prop) && !$.isFunction(prop) ){
-				prop = {};
-			}
-			if( $.isFunction( me[propName] ) ){
-				prop = prop.apply(me);
-			}
-			me[propName] = prop;
-			return me;
-		},
-		/**
-		 * 
+	    __preTableConfig: function( propName ) {
+		    var me = this, prop = me[ propName ];
+		    if ( !$.isPlainObject( prop ) && !$.isFunction( prop ) ) {
+			    prop = {};
+		    }
+		    if ( $.isFunction( me[ propName ] ) ) {
+			    prop = prop.apply( me );
+		    }
+		    me[ propName ] = prop;
+		    return me;
+	    },
+	    /**
 		 * @method _preTableConfig
 		 * @param propName {String}
 		 * @private
 		 * @return {self}
 		 */
-		_preTableConfig: function( propName ){
-			var me = this,
-				defaultProp = "_" + propName;
-			me.__preTableConfig( propName );
-			me.__preTableConfig( defaultProp );
-			me[propName] = Firebrick.utils.copyover( me[propName], me[defaultProp] );
-			return me;
-		},
-		/**
+	    _preTableConfig: function( propName ) {
+		    var me = this, defaultProp = "_" + propName;
+		    me.__preTableConfig( propName );
+		    me.__preTableConfig( defaultProp );
+		    me[ propName ] = Firebrick.utils.copyover( me[ propName ], me[ defaultProp ] );
+		    return me;
+	    },
+	    /**
 		 * @method containerBindings
 		 * @return {Object}
 		 */
-		containerBindings: function(){
-			var me = this;
-			return {
-				css:{
-					"'responsive'": me.responsiveClass
-				}
-			};
-		},
-		/**
+	    containerBindings: function() {
+		    var me = this;
+		    return {
+			    css: {
+				    "'responsive'": me.responsiveClass
+			    }
+		    };
+	    },
+	    /**
 		 * @method _getData
 		 * @private
 		 * @return {Object}
 		 */
-		_getData: function(){
-			var me = this;
-			if(me.store && me.store.isStore){
-				return "Firebrick.getById('" + me.getId() + "').getData()";
-			}
-			return {};
-		},
-		/**
+	    _getData: function() {
+		    var me = this;
+		    if ( me.store && me.store.isStore ) {
+			    return "Firebrick.getById('" + me.getId() + "').getData()";
+		    }
+		    return {};
+	    },
+	    /**
 		 * @method bindings
 		 * @return {Object}
 		 */
-		bindings: function(){
-			var me = this,
-				obj = me.callParent(arguments);
-			
-			obj["with"] = me._getData();
-			obj.css.table = true;
-			obj.css["'table-striped'"] = me.tableStriped;
-			obj.css["'table-hover'"] = me.tableHover;
-			obj.css["'table-condensed'"] = me.tableCondensed;
-			obj.css["'table-bordered'"] = me.tableBordered;
-			obj.css["'responsive'"] =  me.responsive;
-			
-			return obj;
-		},
-		/**
+	    bindings: function() {
+		    var me = this, obj = me.callParent( arguments );
+
+		    obj[ "with" ] = me._getData();
+		    obj.css.table = true;
+		    obj.css[ "'table-striped'" ] = me.tableStriped;
+		    obj.css[ "'table-hover'" ] = me.tableHover;
+		    obj.css[ "'table-condensed'" ] = me.tableCondensed;
+		    obj.css[ "'table-bordered'" ] = me.tableBordered;
+		    obj.css[ "'responsive'" ] = me.responsive;
+
+		    return obj;
+	    },
+	    /**
 		 * @method theadBindings
 		 * @return {Object}
 		 */
-		theadBindings: function(){
-			var me = this,
-				obj = {
-					"if": false
-				};
-			
-			if(me.columns){
-				obj["if"] = true;
-			}
-			
-			return obj;
-		},
-		/**
+	    theadBindings: function() {
+		    var me = this, obj = {
+			    "if": false
+		    };
+
+		    if ( me.columns ) {
+			    obj[ "if" ] = true;
+		    }
+
+		    return obj;
+	    },
+	    /**
 		 * @method theadTRBindings
 		 * @return {Object}
 		 */
-		theadTRBindings:function(){
-			return {
-				"foreach": "Firebrick.getById('" + this.getId() + "').columns"
-			};
-		},
-		/**
+	    theadTRBindings: function() {
+		    return {
+			    "foreach": "Firebrick.getById('" + this.getId() + "').columns"
+		    };
+	    },
+	    /**
 		 * @method theadTRTDBindings
 		 * @return {Object}
 		 */
-		theadTRTDBindings:function(){
-			var me = this;
-			return {
-				htmlWithBinding: "Firebrick.getById('" + me.getId() + "')._thRenderer($data, $context, $parent, $root)"
-			};
-		},
-		/**
+	    theadTRTDBindings: function() {
+		    var me = this;
+		    return {
+			    htmlWithBinding: "Firebrick.getById('" + me.getId() + "')._thRenderer($data, $context, $parent, $root)"
+		    };
+	    },
+	    /**
 		 * used by theadTRTDBindings
 		 * @method _thRenderer
 		 * @private
+		 * @param $data
+		 * @param $context
+		 * @param $parent
+		 * @param $root
 		 * @return {Any}
 		 */
-		_thRenderer: function($data, $context, $parent, $root){
-			var me = this,
-				type = $data.type,
-				html = $data.text ? $data.text : $data;
-			
-			if(type === "checkbox"){
-				html = '<input type="checkbox" data-bind="' + me.dataBind("thCheckboxBindings") + '" /> ' + html;
-			}
-			
-			return html;
-		},
-		/**
+	    _thRenderer: function( $data ) {
+		    var me = this, type = $data.type, html = $data.text ? $data.text : $data;
+
+		    if ( type === "checkbox" ) {
+			    html = '<input type="checkbox" data-bind="' + me.dataBind( "thCheckboxBindings" ) + '" /> ' + html;
+		    }
+
+		    return html;
+	    },
+	    /**
 		 * @method tbodyBindings
 		 * @return {Object}
 		 */
-		tbodyBindings:function(){
-			return {};
-		},
-		/**
+	    tbodyBindings: function() {
+		    return {};
+	    },
+	    /**
 		 * @method tbodyTRTemplateBindings
 		 * @return {Object}
 		 */
-		tbodyTRTemplateBindings: function(){
-			var me = this;
-			return {
-				template: {
-					name:  me.parseBind( me._getTplId() ),
-					"foreach": "$data"
-				}
-			};
-		},
-		/**
+	    tbodyTRTemplateBindings: function() {
+		    var me = this;
+		    return {
+			    template: {
+			        name: me.parseBind( me._getTplId() ),
+			        "foreach": "$data"
+			    }
+		    };
+	    },
+	    /**
 		 * @method tbodyTRBindings
 		 * @return {Object}
 		 */
-		tbodyTRBindings:function(){
-			var me = this;
-			return {
-				foreach: "Firebrick.getById('" + me.getId() + "').columns",
-				"attr":{
-					"'data-tt-id'": "Firebrick.getById('" + me.getId() + "')._getItemId( $data )",
-					"'data-tt-parent-id'": "$parent._ttId"
-				},
-				css: {
-					"group": "$data.children ? true : false"
-				},
-				trRenderer: "Firebrick.getById('" + me.getId() + "')"
-			};
-		},
-		/**
+	    tbodyTRBindings: function() {
+		    var me = this;
+		    return {
+		        foreach: "Firebrick.getById('" + me.getId() + "').columns",
+		        "attr": {
+		            "'data-tt-id'": "Firebrick.getById('" + me.getId() + "')._getItemId( $data )",
+		            "'data-tt-parent-id'": "$parent._ttId"
+		        },
+		        css: {
+			        "group": "$data.children ? true : false"
+		        },
+		        trRenderer: "Firebrick.getById('" + me.getId() + "')"
+		    };
+	    },
+	    /**
 		 * @method _getItemId
 		 * @param $data {ko data object}
 		 * @return {ko.observable || Integer}
 		 */
-		_getItemId: function($data){
-			var me = this;
-			
-			if( $.isPlainObject($data) ){
-				if( !$data.hasOwnProperty( "_ttId" ) ){
-					$data._ttId = me._itemId++;
-				}
-				return $data._ttId;
-			}
-			
-			return;
-		},
-		/**
+	    _getItemId: function( $data ) {
+		    var me = this;
+
+		    if ( $.isPlainObject( $data ) ) {
+			    if ( !$data.hasOwnProperty( "_ttId" ) ) {
+				    $data._ttId = me._itemId++;
+			    }
+			    return $data._ttId;
+		    }
+
+		    return;
+	    },
+	    /**
 		 * @method tbodyTRTDBindings
 		 * @return {Object}
 		 */
-		tbodyTRTDBindings:function(){
-			return {
-				attr: {
-					"'data-tt-id'": "$index",
-					"'fb-ui-row-id'": "$parentContext.$parent._ttId"
-				}
-			};
-		},
-		/**
+	    tbodyTRTDBindings: function() {
+		    return {
+			    attr: {
+			        "'data-tt-id'": "$index",
+			        "'fb-ui-row-id'": "$parentContext.$parent._ttId"
+			    }
+		    };
+	    },
+	    /**
 		 * @method tbodyTRTDSpanBindings
 		 * @return {Object}
 		 */
-		tbodyTRTDSpanBindings: function(){
-			var me = this,
-				obj = {
-					css: {},
-					allowBindings: true,
-					htmlWithBinding: "Firebrick.getById('" + me.getId() + "')._tdRenderer($data, $context, $parentContext, $root, $element)"
-				};
-			
-			obj.css[me.parseBind( me.tdSpanClass )] = true;
-			
-			return obj;
-		},
-		/**
+	    tbodyTRTDSpanBindings: function() {
+		    var me = this, obj = {
+		        css: {},
+		        allowBindings: true,
+		        htmlWithBinding: "Firebrick.getById('" + me.getId() + "')._tdRenderer($data, $context, $parentContext, $root, $element)"
+		    };
+
+		    obj.css[ me.parseBind( me.tdSpanClass ) ] = true;
+
+		    return obj;
+	    },
+	    /**
 		 * @method _tdRenderer
 		 * @private
 		 * @return {Any}
 		 */
-		_tdRenderer: function($data, $context, $parentContext, $root, $element){
-			var me = this,
-				data = Firebrick.utils.getDeepProperty( $data.mapping,  $parentContext.$data ),	//get the value of mapping property in the parent data object
-				value = me.b( data ),	//get the primitive value - so if an observable (function) simply call it, else return primitive
-				type = $data.type, //check the column for the type specified
-				cssClazz = "fb-ui-col-" + $context.$index();		
-			
-			if(!$data._colId){
-				$data._colId = cssClazz;
-			}
-			
-			$($element).addClass( cssClazz );
-			
-			if(type){
-				if(type === "number"){
-					value = parseInt( value );
-				}else if(type === "float"){
-					value = parseFloat( value );
-				}else if (type === "checkbox"){
-					if(data !== null){
-						if(typeof value === "string"){
-							value = value === "true" ? true : false;
-						}
-						value = me.checkboxRenderer( $data, data, value, $context, $parentContext, $root, $element );
-					}
-				}
-			}
-			
-			if($data.renderer){
-				value = $data.renderer( $data, data, value, $context, $parentContext, $root, $element );
-			}
-			
-			return value;
-		},
-		/**
+	    _tdRenderer: function( $data, $context, $parentContext, $root, $element ) {
+		    var me = this, data = Firebrick.utils.getDeepProperty( $data.mapping, $parentContext.$data ), //get the value of mapping property in the parent data object
+		    value = me.b( data ), //get the primitive value - so if an observable (function) simply call it, else return primitive
+		    type = $data.type, //check the column for the type specified
+		    cssClazz = "fb-ui-col-" + $context.$index();
+
+		    if ( !$data._colId ) {
+			    $data._colId = cssClazz;
+		    }
+
+		    $( $element ).addClass( cssClazz );
+
+		    if ( type ) {
+			    if ( type === "number" ) {
+				    value = parseInt( value );
+			    } else if ( type === "float" ) {
+				    value = parseFloat( value );
+			    } else if ( type === "checkbox" ) {
+				    if ( data !== null ) {
+					    if ( typeof value === "string" ) {
+						    value = value === "true" ? true : false;
+					    }
+					    value = me.checkboxRenderer( $data, data, value, $context, $parentContext, $root, $element );
+				    }
+			    }
+		    }
+
+		    if ( $data.renderer ) {
+			    value = $data.renderer( $data, data, value, $context, $parentContext, $root, $element );
+		    }
+
+		    return value;
+	    },
+	    /**
 		 * @method thCheckboxBindings
 		 * @return {Object}
 		 */
-		thCheckboxBindings: function(){
-			var me = this,
-				obj = {};
-			
-			obj.checked = "Firebrick.getById('" + me.getId() + "')._allCheckedObservable($context)";
-			
-			return obj;
-		},
-		/**
+	    thCheckboxBindings: function() {
+		    var me = this, obj = {};
+
+		    obj.checked = "Firebrick.getById('" + me.getId() + "')._allCheckedObservable($context)";
+
+		    return obj;
+	    },
+	    /**
 		 * adapted from: http://stackoverflow.com/a/31520911/425226
 		 * @method _allCheckedObservable
 		 * @private
 		 * @param $context {ko Object}
 		 * @return ko.computed
 		 */
-		_allCheckedObservable: function($context){
-			var me = this,
-				$col = $context.$data,
-				$el = me.getElement();
-			//store in prop and return that prop to stop memory leak from occurring
-			me._allCheckedObservableProp = me._allCheckedObservableProp || ko.computed({
-				read: function () {
-				    var mapping = $col.mapping,
-			    		data = me.getData(),
-				    	func = function(_data){				//recursive function
-				    		var it,
-				    			children;
-				    		it = Firebrick.utils.getDeepProperty( mapping, _data );	//returns property or null
-							if( $.isFunction(it) && !it() ){
-								return false;
-							}else if( _data.children ){
-								children = _data.children();
-								for(var i = 0, l = children.length; i<l; i++){
-									return func( children[i] );
-								}
-							}
-					    	return true;
-				    	};
-				    
-				    if(data && $.isFunction(data)){
-				    	data = data();
-				    	for(var i = 0, l = data.length; i<l; i++){
-				    		return func( data[i] );	//iterate over all properties and children to determine whether the checkbox should be checked initially
-				    	}
-				    }
-				    
-				    return false;
-				},
-				write: function (newValue) {
-					var $selector = $("tbody tr", $el),
-						data,
-						mapping = $col.mapping;
-				    for(var i = 0, l = $selector.length; i<l; i++){
-						data = Firebrick.utils.getDeepProperty(mapping, $( $selector[i] ).prop( me.propDataName ) );	//returns property or null
-						if( $.isFunction( data ) ){
-							data( newValue );	
-						}
-					}
-				}
-			});
-			return me._allCheckedObservableProp;
-		},
-		/**
+	    _allCheckedObservable: function( $context ) {
+		    var me = this, $col = $context.$data, $el = me.getElement();
+		    //store in prop and return that prop to stop memory leak from occurring
+		    me._allCheckedObservableProp = me._allCheckedObservableProp || ko.computed( {
+		        read: function() {
+			        var mapping = $col.mapping, data = me.getData(), func = function( _data ) { //recursive function
+				        var it, children;
+				        it = Firebrick.utils.getDeepProperty( mapping, _data ); //returns property or null
+				        if ( $.isFunction( it ) && !it() ) {
+					        return false;
+				        } else if ( _data.children ) {
+					        children = _data.children();
+					        for ( var i = 0, l = children.length; i < l; i++ ) {
+						        return func( children[ i ] );
+					        }
+				        }
+				        return true;
+			        };
+
+			        if ( data && $.isFunction( data ) ) {
+				        data = data();
+				        for ( var i = 0, l = data.length; i < l; i++ ) {
+					        return func( data[ i ] ); //iterate over all properties and children to determine whether the checkbox should be checked initially
+				        }
+			        }
+
+			        return false;
+		        },
+		        write: function( newValue ) {
+			        var $selector = $( "tbody tr", $el ), data, mapping = $col.mapping;
+			        for ( var i = 0, l = $selector.length; i < l; i++ ) {
+				        data = Firebrick.utils.getDeepProperty( mapping, $( $selector[ i ] ).prop( me.propDataName ) ); //returns property or null
+				        if ( $.isFunction( data ) ) {
+					        data( newValue );
+				        }
+			        }
+		        }
+		    } );
+		    return me._allCheckedObservableProp;
+	    },
+	    /**
 		 * @method checkboxRenderer
 		 * @param $data
 		 * @param data
 		 * @param value
 		 * @return {String} HTML
 		 */
-		checkboxRenderer: function($data, data, value){
-			var me = this;
-			return doT.template(checkboxTpl)({
-				scope: me,
-				value: value
-			});
-		},
-		/**
+	    checkboxRenderer: function( $data, data, value ) {
+		    var me = this;
+		    return doT.template( checkboxTpl )( {
+		        scope: me,
+		        value: value
+		    } );
+	    },
+	    /**
 		 * used by checkbox tpl
 		 * @method checkboxBindings
-		 * @return 
+		 * @param value
+		 * @return
 		 */
-		checkboxBindings: function( value ){
-			return {
-				checked: "Firebrick.utils.getDeepProperty( $data.mapping, $parent )"
-			};
-		},
-		/**
+	    checkboxBindings: function( ) {
+		    return {
+			    checked: "Firebrick.utils.getDeepProperty( $data.mapping, $parent )"
+		    };
+	    },
+	    /**
 		 * @private
 		 * @method _getTplId
 		 * @return {String}
 		 */
-		_getTplId: function(){
-			return "fb-ui-tpl-" + this.getId(); 
-		},
-		/**
+	    _getTplId: function() {
+		    return "fb-ui-tpl-" + this.getId();
+	    },
+	    /**
 		 * @method tbodyTRChildrenTemplateBindings
 		 * @return {Object}
 		 */
-		tbodyTRChildrenTemplateBindings: function(){
-			var me = this;
-			return {
-				template: {
-					name:  me.parseBind( me._getTplId() ),
-					"foreach": "$data.children"
-				}
-			};
-		},
-		/**
+	    tbodyTRChildrenTemplateBindings: function() {
+		    var me = this;
+		    return {
+			    template: {
+			        name: me.parseBind( me._getTplId() ),
+			        "foreach": "$data.children"
+			    }
+		    };
+	    },
+	    /**
 		 * @method captionBindings
 		 * @return {Object}
 		 */
-		captionBindings:function(){
-			var me = this;
-			return {
-				show: me.showCaption
-			};
-		},
-		/**
+	    captionBindings: function() {
+		    var me = this;
+		    return {
+			    show: me.showCaption
+		    };
+	    },
+	    /**
 		 * @method generateOnclick
 		 * @param type {String} expandAll, collapseAll
 		 * @return {Function}
 		 */
-		generateOnclick: function(type){
-			var me = this;
-			return function(){
-				me.getElement().treetable(type); 
-				return false;
-			};
-		},
-		/**
+	    generateOnclick: function( type ) {
+		    var me = this;
+		    return function() {
+			    me.getElement().treetable( type );
+			    return false;
+		    };
+	    },
+	    /**
 		 * @method expandBindings
 		 * @return {Object}
 		 */
-		expandBindings:function(){
-			var me = this;
-			return {
-				text: me.textBind( me.expandText ),
-				attr:{
-					id: me.parseBind("fb-expand-" + me.getId()),
-					href:"''"
-				}
-			};
-		},
-		/**
+	    expandBindings: function() {
+		    var me = this;
+		    return {
+		        text: me.textBind( me.expandText ),
+		        attr: {
+		            id: me.parseBind( "fb-expand-" + me.getId() ),
+		            href: "''"
+		        }
+		    };
+	    },
+	    /**
 		 * @method collapseBindings
 		 * @return {Object}
 		 */
-		collapseBindings:function(){
-			var me = this;
-			return {
-				text: me.textBind( me.collapseText ),
-				attr:{
-					id: me.parseBind("fb-collapse-" + me.getId()),
-					href:"''"
-				}
-			};
-		}
-		
-	});
-});
+	    collapseBindings: function() {
+		    var me = this;
+		    return {
+		        text: me.textBind( me.collapseText ),
+		        attr: {
+		            id: me.parseBind( "fb-collapse-" + me.getId() ),
+		            href: "''"
+		        }
+		    };
+	    }
+
+	} );
+} );
+
 /*!
  * @author Steven Masala [me@smasala.com]
  */
@@ -12023,10 +11859,10 @@ define('Firebrick.ui/table/Table',["knockout", "knockout-mapping", "jquery", "do
  * @namespace components.table
  * @class TreeTable
  */
-define('Firebrick.ui/table/TreeTable',["./Table", "jquery-treetable"], function(){
+define( 'Firebrick.ui/table/TreeTable',[ "./Table", "jquery-treetable" ], function() {
 	"use strict";
-	return Firebrick.define("Firebrick.ui.table.TreeTable", {
-		extend:"Firebrick.ui.table.Table",
+	return Firebrick.define( "Firebrick.ui.table.TreeTable", {
+		extend: "Firebrick.ui.table.Table",
 		/**
 		 * @property sName
 		 * @type {String}
@@ -12037,12 +11873,13 @@ define('Firebrick.ui/table/TreeTable',["./Table", "jquery-treetable"], function(
 		 * @type {Object|String}
 		 * @default "''"
 		 */
-		store:false,
+		store: false,
 		/**
 		 * @property treetable
 		 * @type {Boolean}
 		 * @default true
 		 */
-		treetable:true
+		treetable: true
 	});
 });
+

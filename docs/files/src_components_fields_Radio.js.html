@@ -244,32 +244,32 @@
  * @namespace components.fields
  * @class Radio
  */
-define([&quot;text!./Radio.html&quot;, &quot;../common/MultiplesBase&quot;], function(subTpl){
+define( [ &quot;text!./Radio.html&quot;, &quot;../common/MultiplesBase&quot; ], function( subTpl ) {
 	&quot;use strict&quot;;
-	return Firebrick.define(&quot;Firebrick.ui.fields.Radio&quot;, {
-		extend:&quot;Firebrick.ui.common.MultiplesBase&quot;,
+	return Firebrick.define( &quot;Firebrick.ui.fields.Radio&quot;, {
+		extend: &quot;Firebrick.ui.common.MultiplesBase&quot;,
 		/**
 		 * @property sName
 		 * @type {String}
 		 */
-		sName:&quot;fields.radio&quot;,
+		sName: &quot;fields.radio&quot;,
 		/**
 		 * @property type
 		 * @type {String}
 		 * @default &quot;&#x27;radio&#x27;&quot;
 		 */
-		type:&quot;radio&quot;,
+		type: &quot;radio&quot;,
 		/**
 		 * @property dataType
 		 * @type {String}
 		 * @default &quot;&#x27;radiolist&#x27;&quot;
 		 */
-		dataType:&quot;radiolist&quot;,
+		dataType: &quot;radiolist&quot;,
 		/**
 		 * @property subTpl
 		 * @type {String} html
 		 */
-		subTpl:subTpl,
+		subTpl: subTpl,
 		/**
 		 * @property showOptionLabel
 		 * @type {Boolean}
@@ -282,7 +282,7 @@ define([&quot;text!./Radio.html&quot;, &quot;../common/MultiplesBase&quot;], fun
 		 * @type {Boolean|String}
 		 * @default false
 		 */
-		options:false,
+		options: false,
 		/**
 		 * @property optionsPropValue
 		 * @type {String}
@@ -299,9 +299,9 @@ define([&quot;text!./Radio.html&quot;, &quot;../common/MultiplesBase&quot;], fun
 		 * @method optionLabelBindings
 		 * @return {Object}
 		 */
-		optionLabelBindings:function(){
+		optionLabelBindings: function() {
 			var me = this;
-			if(!me.inplaceEdit){
+			if ( !me.inplaceEdit ) {
 				return {
 					text: &quot;$data.text ? Firebrick.text($data.text) : &#x27;&#x27;&quot;
 				};
@@ -313,11 +313,11 @@ define([&quot;text!./Radio.html&quot;, &quot;../common/MultiplesBase&quot;], fun
 		 * @method optionLabelContainerBindings
 		 * @return {Object}
 		 */
-		optionLabelContainerBindings:function(){
+		optionLabelContainerBindings: function() {
 			var me = this;
 			return {
 				attr: {
-					&quot;for&quot;: me.inplaceEdit ?  me.parseBind(me.getId()) : &quot;itemId&quot;
+					&quot;for&quot;: me.inplaceEdit ?  me.parseBind( me.getId() ) : &quot;itemId&quot;
 				}
 			};
 		},
@@ -325,16 +325,16 @@ define([&quot;text!./Radio.html&quot;, &quot;../common/MultiplesBase&quot;], fun
 		 * @method inputContainerBindings
 		 * @return {Object}
 		 */
-		inputContainerBindings:function(){
+		inputContainerBindings: function() {
 			var me = this,
-				obj = me.callParent(arguments);
+				obj = me.callParent( arguments );
 			
-			if(me.options &amp;&amp; !me.inplaceEdit){
-				obj.foreach = Firebrick.ui.helper.optionString(me);
+			if ( me.options &amp;&amp; !me.inplaceEdit ) {
+				obj.foreach = Firebrick.ui.helper.optionString( me );
 			}
 			
 			obj.attr = obj.attr || {};
-			obj.attr.id = me.parseBind(me.getId());
+			obj.attr.id = me.parseBind( me.getId() );
 			
 			return obj;
 		},
@@ -342,49 +342,50 @@ define([&quot;text!./Radio.html&quot;, &quot;../common/MultiplesBase&quot;], fun
 		 * @method bindings
 		 * @return {Object}
 		 */
-		bindings:function(){
+		bindings: function() {
 			var me = this,
-				obj = me.callParent(arguments),
+				obj = me.callParent( arguments ),
 				value = me.value || null;
 			
-			if($.isPlainObject(value) &amp;&amp; value.value){
-				if($.isFunction(value.value)){
+			if ( $.isPlainObject( value ) &amp;&amp; value.value ) {
+				if ( $.isFunction( value.value ) ) {
 					value = value.value();
-				}else{
+				} else {
 					value = value.value;
 				}
 			}
 			
-			if(me.inplaceEdit){
+			if ( me.inplaceEdit ) {
 				obj.editable = me.selectedOptions || false;
 				obj.editableOptions = {
-						optionsValue:me.parseBind(me.optionsPropValue),
-						optionsText:me.parseBind(me.optionsPropText),
-						options:Firebrick.ui.helper.optionString(me),
-						type:&quot;&#x27;checklist&#x27;&quot;
+						optionsValue: me.parseBind( me.optionsPropValue ),
+						optionsText: me.parseBind( me.optionsPropText ),
+						options: Firebrick.ui.helper.optionString( me ),
+						type: &quot;&#x27;checklist&#x27;&quot;
 				};
 			}
 			
-			obj.css[&quot;&#x27;form-control&#x27;&quot;] = false;
-			if(!me.inplaceEdit){
+			obj.css[ &quot;&#x27;form-control&#x27;&quot; ] = false;
+			if ( !me.inplaceEdit ) {
 				obj.value = &quot;$data.value ? $data.value : $data&quot;;
 				obj.attr.id = &quot;itemId&quot;;
-			}else{
-				obj.attr.id =  me.parseBind(me.getId());
+			} else {
+				obj.attr.id =  me.parseBind( me.getId() );
 			}
-			obj.attr.name = me.parseBind( me.cleanString(me.type)+&quot;-group-&quot;+Firebrick.utils.uniqId() );
-			if(value !== null){
+			obj.attr.name = me.parseBind( me.cleanString( me.type ) + &quot;-group-&quot; + Firebrick.utils.uniqId() );
+			if ( value !== null ) {
 				obj.checked = value;
-			}else{
+			} else {
 				obj.checked = &quot;($data &amp;&amp; $data.checked)&quot;;
 			}
 			
-			obj.attr[&quot;&#x27;data-cmp-id&#x27;&quot;] = me.parseBind(me.getId());
+			obj.attr[ &quot;&#x27;data-cmp-id&#x27;&quot; ] = me.parseBind( me.getId() );
 			
 			return obj;
 		}
 	});
 });
+
     </pre>
 </div>
 

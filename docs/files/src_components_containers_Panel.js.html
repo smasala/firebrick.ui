@@ -244,12 +244,12 @@
  * @namespace components.containers
  * @class Panel
  */
-define([&quot;text!./Panel.html&quot;, &quot;text!./panel/Icon.html&quot;, &quot;jquery&quot;, &quot;doT&quot;, &quot;./Base&quot;, &quot;../nav/Toolbar&quot;, &quot;../common/mixins/Toolbars&quot;, &quot;../common/mixins/Label&quot;], function(tpl, iconTpl, $, doT){
+define( [ &quot;text!./Panel.html&quot;, &quot;text!./panel/Icon.html&quot;, &quot;jquery&quot;, &quot;doT&quot;, &quot;./Base&quot;, &quot;../nav/Toolbar&quot;, &quot;../common/mixins/Toolbars&quot;, &quot;../common/mixins/Label&quot; ], function( tpl, iconTpl, $, doT ) {
 	&quot;use strict&quot;;
-	return Firebrick.define(&quot;Firebrick.ui.containers.Panel&quot;, {
-		extend:&quot;Firebrick.ui.containers.Base&quot;,
-		mixins: [&quot;Firebrick.ui.common.mixins.Toolbars&quot;,
-		         &quot;Firebrick.ui.common.mixins.Label&quot;],
+	return Firebrick.define( &quot;Firebrick.ui.containers.Panel&quot;, {
+		extend: &quot;Firebrick.ui.containers.Base&quot;,
+		mixins: [ &quot;Firebrick.ui.common.mixins.Toolbars&quot;,
+		         &quot;Firebrick.ui.common.mixins.Label&quot; ],
 		/**
 		 * @property sName
 		 * @type {String}
@@ -259,7 +259,7 @@ define([&quot;text!./Panel.html&quot;, &quot;text!./panel/Icon.html&quot;, &quot
 		 * @property tpl
 		 * @type {String} html
 		 */
-		tpl:tpl,
+		tpl: tpl,
 		/**
 		 * used to the default header icons
 		 * @property iconTpl
@@ -283,14 +283,14 @@ define([&quot;text!./Panel.html&quot;, &quot;text!./panel/Icon.html&quot;, &quot
 		 * @type {String|false} set to false to hide the title
 		 * @default &quot;&quot;
 		 */
-		title:&quot;&quot;,
+		title: &quot;&quot;,
 		/**
 		 * use to determine whether h1, h2, h3 etc - default = 3
 		 * @property headerSize
 		 * @type {Int}
 		 * @default 3
 		 */
-		headerSize:3,
+		headerSize: 3,
 		/**
 		 * @property panelClass
 		 * @type {Boolean|String}
@@ -300,7 +300,7 @@ define([&quot;text!./Panel.html&quot;, &quot;text!./panel/Icon.html&quot;, &quot
 		/**
 		 * string = (default, primary, success, info, warning, danger)
 		 * @property panelTypeClass
-		 * @type {Boolean|String} 
+		 * @type {Boolean|String}
 		 * @default &quot;default&quot;
 		 */
 		panelTypeClass: &quot;default&quot;,
@@ -335,7 +335,7 @@ define([&quot;text!./Panel.html&quot;, &quot;text!./panel/Icon.html&quot;, &quot
 		 * @type {Boolean|String}
 		 * @default false
 		 */
-		collapsible:false,
+		collapsible: false,
 		/**
 		 * @property showCollapseIcon
 		 * @type {Boolean}
@@ -347,7 +347,7 @@ define([&quot;text!./Panel.html&quot;, &quot;text!./panel/Icon.html&quot;, &quot
 		 * @type {Boolean|String}
 		 * @default false
 		 */
-		collapsed:false,
+		collapsed: false,
 		/**
 		 * @private
 		 * @property _collapsedState
@@ -401,40 +401,40 @@ define([&quot;text!./Panel.html&quot;, &quot;text!./panel/Icon.html&quot;, &quot
 		 * @type {Array of Strings}
 		 * @default [&quot;maximizable&quot;, &quot;collapsible&quot;]
 		 */
-		_defaultPanelIcons: [&quot;collapsible&quot;, &quot;maximizable&quot;],
+		_defaultPanelIcons: [ &quot;collapsible&quot;, &quot;maximizable&quot; ],
 		/**
 		 * @method init
 		 * @return {Object}
 		 */
-		init: function(){
+		init: function() {
 			var me = this;
 			
 			me._collapsedState = me.collapsed;
 			
-			me.on(&quot;rendered&quot;, function(){
+			me.on( &quot;rendered&quot;, function() {
 				var panel = me.getElement(),
 					eventFunction;
 
-				if(me.collapsed){
+				if ( me.collapsed ) {
 					panel.addClass( me._collapsedClass );
 				}
 				
-				eventFunction = function () {
+				eventFunction = function() {
 					panel.toggleClass( me._collapsedClass );
-					panel.trigger(&quot;fb-ui-panel-state-change&quot;);
+					panel.trigger( &quot;fb-ui-panel-state-change&quot; );
 					me._collapsedState = !me._collapsedState;	//toggle value
 				};
 				
 				//this is important for the collapse icon
-				panel.on(&quot;show.bs.collapse hide.bs.collapse&quot;, eventFunction);
+				panel.on( &quot;show.bs.collapse hide.bs.collapse&quot;, eventFunction );
 				
-				me.on(&quot;unbound&quot;, function(){
-					panel.off(&quot;show.bs.collapse hide.bs.collapse&quot;, eventFunction);
+				me.on( &quot;unbound&quot;, function() {
+					panel.off( &quot;show.bs.collapse hide.bs.collapse&quot;, eventFunction );
 				});
 				
 			});
 			
-			return me.callParent(arguments);
+			return me.callParent( arguments );
 		},
 		
 		/**
@@ -442,12 +442,12 @@ define([&quot;text!./Panel.html&quot;, &quot;text!./panel/Icon.html&quot;, &quot
 		 * @method toggleCollapse
 		 * @return self
 		 */
-		toggleCollapse: function(){
+		toggleCollapse: function() {
 			var me = this;
 				
-			if(me._collapsedState){
+			if ( me._collapsedState ) {
 				me.expand();
-			}else{
+			} else {
 				me.collapse();
 			}
 			
@@ -455,28 +455,28 @@ define([&quot;text!./Panel.html&quot;, &quot;text!./panel/Icon.html&quot;, &quot
 		},
 		/**
 		 * used within the Panel.html template
-		 * iterates through the _defaultPanelIcons array and builds for each value a 
+		 * iterates through the _defaultPanelIcons array and builds for each value a
 		 * template from panel/Icon (this.iconTpl) together for each property
 		 * @private
 		 * @method defaultPanelIcons
 		 * @return {String} html
 		 */
-		getDefaultIcons: function(){
+		getDefaultIcons: function() {
 			var me = this,
 				it,
 				icons = me._defaultPanelIcons,
 				html = &quot;&quot;,
 				conf;
 			
-			for(var i = 0, l = icons.length; i&lt;l; i++){
-				it = icons[i];
+			for ( var i = 0, l = icons.length; i &lt; l; i++ ) {
+				it = icons[ i ];
 				conf = {
-					property: icons[i],
+					property: icons[ i ],
 					showProperty: &quot;show&quot; + Firebrick.utils.firstToUpper( it ),
 					bindingMethod: it + &quot;IconBindings&quot;,
 					scope: me
 				};
-				html += doT.template( me.iconTpl )(conf);
+				html += doT.template( me.iconTpl )( conf );
 			}
 			
 			return html;
@@ -486,12 +486,12 @@ define([&quot;text!./Panel.html&quot;, &quot;text!./panel/Icon.html&quot;, &quot
 		 * @method collapse
 		 * @return self
 		 */
-		collapse: function(){
+		collapse: function() {
 			var me = this,
 				panel = me.getElement(),
-				collapsiblePart = $(&quot;&gt; .panel-collapse&quot;, panel);
+				collapsiblePart = $( &quot;&gt; .panel-collapse&quot;, panel );
 		
-			collapsiblePart.collapse(&quot;hide&quot;);
+			collapsiblePart.collapse( &quot;hide&quot; );
 			
 			return me;
 		},
@@ -501,30 +501,29 @@ define([&quot;text!./Panel.html&quot;, &quot;text!./panel/Icon.html&quot;, &quot
 		 * @method expand
 		 * @return self
 		 */
-		expand: function(){
+		expand: function() {
 			var me = this,
 				panel = me.getElement(),
-				collapsiblePart = $(&quot;&gt; .panel-collapse&quot;, panel);
+				collapsiblePart = $( &quot;&gt; .panel-collapse&quot;, panel );
 	
-			collapsiblePart.collapse(&quot;show&quot;);
+			collapsiblePart.collapse( &quot;show&quot; );
 			
 			return me;
 		},
-		
 		
 		/**
 		 * Data bindings
 		 * @method bindings
 		 * @return {Object}
 		 */
-		bindings: function(){
+		bindings: function() {
 			var me = this,
-				obj = me.callParent(arguments);
+				obj = me.callParent( arguments );
 
 			obj.css.panel = me.panelClass;
 
-			if(me.panelTypeClass){
-				obj.css[ me.parseBind(&quot;panel-&quot; + me.panelTypeClass) ] = true;
+			if ( me.panelTypeClass ) {
+				obj.css[ me.parseBind( &quot;panel-&quot; + me.panelTypeClass ) ] = true;
 			}
 			
 			return obj;
@@ -533,53 +532,53 @@ define([&quot;text!./Panel.html&quot;, &quot;text!./panel/Icon.html&quot;, &quot
 		 * @method tabBindings
 		 * @return {Object}
 		 */
-		tabBindings: function(){
+		tabBindings: function() {
 			var me = this,
 				obj = {
-					css:{},
-					attr:{
+					css: {},
+					attr: {
 						id: me.parseBind( &quot;fb-ui-collapse-&quot; + me.getId() )
 					}
 			};
 			
-			if( me.collapsible ){
-				obj.css[&quot;&#x27;panel-collapse&#x27;&quot;] = me.collapsible;
+			if ( me.collapsible ) {
+				obj.css[ &quot;&#x27;panel-collapse&#x27;&quot; ] = me.collapsible;
 				obj.css.collapse = me.collapsible;
-				if(!me.collapsed){
-					obj.css[&quot;in&quot;] = true;
+				if ( !me.collapsed ) {
+					obj.css[ &quot;in&quot; ] = true;
 				}
-			}else if( me.collapsed ){
+			} else if ( me.collapsed ) {
 				//just collapsed
-				obj.css[&quot;&#x27;panel-collapse&#x27;&quot;] = true;
+				obj.css[ &quot;&#x27;panel-collapse&#x27;&quot; ] = true;
 				obj.css.collapse = true;
 			}
 			
-			if(me.collapseRole){
-				obj.attr.role = me.parseBind(me.collapseRole);
+			if ( me.collapseRole ) {
+				obj.attr.role = me.parseBind( me.collapseRole );
 			}
 			
-			obj.css[&quot;&#x27;fb-ui-panel-body-container&#x27;&quot;] = true;
+			obj.css[ &quot;&#x27;fb-ui-panel-body-container&#x27;&quot; ] = true;
 			return obj;
 		},
 		/**
 		 * @method panelHeaderBindings
 		 * @return {Object}
 		 */
-		panelHeaderBindings: function(){
+		panelHeaderBindings: function() {
 			var me = this,
 				obj = {
-					css:{
+					css: {
 						&quot;&#x27;panel-heading&#x27;&quot;: me.panelHeaderClass
 					},
-					attr:{}
+					attr: {}
 			};
 			
-			if(me.headerItems){
+			if ( me.headerItems ) {
 				obj.css.clearfix = true;
 			}
 			
-			if(me.role){
-				obj.attr.role = me.parseBind(me.role);
+			if ( me.role ) {
+				obj.attr.role = me.parseBind( me.role );
 			}
 			
 			return obj;
@@ -588,16 +587,16 @@ define([&quot;text!./Panel.html&quot;, &quot;text!./panel/Icon.html&quot;, &quot
 		 * @method headerItemsBindings
 		 * @return {Object}
 		 */
-		headerItemsBindings: function(){
+		headerItemsBindings: function() {
 			var me = this,
-				obj= {
+				obj = {
 					css: {
 						&quot;&#x27;btn-group&#x27;&quot;: true
 					}
 				};
 			
-			if(me.headerItemsPosition){
-				obj.css[me.parseBind(me.headerItemsPosition)] = true;
+			if ( me.headerItemsPosition ) {
+				obj.css[ me.parseBind( me.headerItemsPosition ) ] = true;
 			}
 			
 			return obj;
@@ -607,23 +606,23 @@ define([&quot;text!./Panel.html&quot;, &quot;text!./panel/Icon.html&quot;, &quot
 		 * @method collapsibleLinkBindings
 		 * @return {Object}
 		 */
-		collapsibleLinkBindings: function(){
+		collapsibleLinkBindings: function() {
 			var me = this,
 				id = &quot;fb-ui-collapse-&quot; + me.getId(),
 				obj = {
-					css:{
+					css: {
 						&quot;&#x27;fb-ui-title-link&#x27;&quot;: true
 					},
-					attr:{
+					attr: {
 						&quot;&#x27;data-toggle&#x27;&quot;:  &quot;&#x27;collapse&#x27;&quot;,
-						&quot;&#x27;data-target&#x27;&quot;:  me.parseBind(&quot;#&quot; + id ),
+						&quot;&#x27;data-target&#x27;&quot;:  me.parseBind( &quot;#&quot; + id ),
 						&quot;&#x27;aria-expanded&#x27;&quot;: typeof me.collapsed === &quot;boolean&quot; ? me.collapsed : true,
-						&quot;&#x27;aria-controls&#x27;&quot;:  me.parseBind( id ),
+						&quot;&#x27;aria-controls&#x27;&quot;:  me.parseBind( id )
 					}
 				};
 			
-			if(me.dataParentId){
-				obj.attr[&quot;&#x27;data-parent&#x27;&quot;] = me.dataParentId;
+			if ( me.dataParentId ) {
+				obj.attr[ &quot;&#x27;data-parent&#x27;&quot; ] = me.dataParentId;
 			}
 			
 			return obj;
@@ -633,17 +632,17 @@ define([&quot;text!./Panel.html&quot;, &quot;text!./panel/Icon.html&quot;, &quot
 		 * @method collapsibleIconBindings
 		 * @return {Object}
 		 */
-		collapsibleIconBindings: function(){
+		collapsibleIconBindings: function() {
 			var me = this,
 				obj = {
-					css:{
+					css: {
 						&quot;&#x27;fb-ui-panel-icon&#x27;&quot;: true,
 						&quot;&#x27;fb-ui-collapse-icon&#x27;&quot;: true
-					}, 
-					attr:{}
+					},
+					attr: {}
 				};
 			
-			obj.click = &quot;function(){ return Firebrick.ui.helper.callFunction(&#x27;&quot;+me.getId()+&quot;&#x27;, &#x27;_collapseIconClick&#x27;, arguments)}&quot;;
+			obj.click = &quot;function(){ return Firebrick.ui.helper.callFunction(&#x27;&quot; + me.getId() + &quot;&#x27;, &#x27;_collapseIconClick&#x27;, arguments)}&quot;;
 			
 			return obj;
 		},
@@ -654,7 +653,7 @@ define([&quot;text!./Panel.html&quot;, &quot;text!./panel/Icon.html&quot;, &quot
 		 * @param obj
 		 * @param event {Object} jquery event
 		 */
-		_collapseIconClick: function(obj, event){
+		_collapseIconClick: function( ) {
 			var me = this;
 			me.toggleCollapse();
 		},
@@ -662,10 +661,9 @@ define([&quot;text!./Panel.html&quot;, &quot;text!./panel/Icon.html&quot;, &quot
 		 * @method maximizableIconBindings
 		 * @return {Object}
 		 */
-		maximizableIconBindings: function(){
-			var me = this,
-				obj = {
-					css:{
+		maximizableIconBindings: function() {
+			var obj = {
+					css: {
 						&quot;&#x27;fb-ui-panel-icon&#x27;&quot;: true,
 						&quot;glyphicon&quot;: true,
 						&quot;&#x27;glyphicon-fullscreen&#x27;&quot;: true
@@ -678,24 +676,24 @@ define([&quot;text!./Panel.html&quot;, &quot;text!./panel/Icon.html&quot;, &quot
 		 * @method panelHeaderTextBindings
 		 * @return {Object}
 		 */
-		panelHeaderTextBindings: function(){
+		panelHeaderTextBindings: function() {
 			var me = this,
 				obj = {
-						css:{
+						css: {
 							&quot;&#x27;panel-title&#x27;&quot;: me.panelTitleClass
 						}
 					};
 			
-			if(typeof me.title !== &quot;boolean&quot;){
-				obj.text = me.textBind(me.title)
+			if ( typeof me.title !== &quot;boolean&quot; ) {
+				obj.text = me.textBind( me.title );
 			}
 			
-			if(me.headerItems){
-				obj.css[&quot;&#x27;pull-left&#x27;&quot;] = true;
+			if ( me.headerItems ) {
+				obj.css[ &quot;&#x27;pull-left&#x27;&quot; ] = true;
 			}
 			
-			if( me.labelText ){
-				obj.css[&quot;&#x27;fb-ui-has-label&#x27;&quot;] = true;
+			if ( me.labelText ) {
+				obj.css[ &quot;&#x27;fb-ui-has-label&#x27;&quot; ] = true;
 			}
 			
 			return obj;
@@ -704,15 +702,15 @@ define([&quot;text!./Panel.html&quot;, &quot;text!./panel/Icon.html&quot;, &quot
 		 * @method panelBodyBindings
 		 * @return {Object}
 		 */
-		panelBodyBindings: function(){
+		panelBodyBindings: function() {
 			var me = this,
 				obj = {
-					css:{
+					css: {
 						&quot;&#x27;panel-body&#x27;&quot;: me.panelBodyClass
 					}
 				};
 
-			me.toolbarContainer(obj);
+			me.toolbarContainer( obj );
 			
 			return obj;
 		},
@@ -720,12 +718,12 @@ define([&quot;text!./Panel.html&quot;, &quot;text!./panel/Icon.html&quot;, &quot
 		 * @method panelItemBindings
 		 * @return {Object}
 		 */
-		panelItemBindings: function(){
+		panelItemBindings: function() {
 			var me = this,
 				obj = {};
 
 			//no items are defined or it is an empty array
-			if( !me.items || (me.items &amp;&amp; !me.items.length) ){
+			if ( !me.items || ( me.items &amp;&amp; !me.items.length ) ) {
 				obj.html = &quot;Firebrick.ui.helper.getHtml( &#x27;&quot; + me.getId() + &quot;&#x27;, $data, $context )&quot;;
 			}
 			
@@ -733,6 +731,7 @@ define([&quot;text!./Panel.html&quot;, &quot;text!./panel/Icon.html&quot;, &quot
 		}
 	});
 });
+
     </pre>
 </div>
 

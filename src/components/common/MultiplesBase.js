@@ -9,30 +9,30 @@
  * @namespace components.common
  * @class MultiplesBase
  */
-define(["knockout-mapping", "../fields/Input"], function(kom){
+define( [ "knockout-mapping", "../fields/Input" ], function( kom ) {
 	"use strict";
-	return Firebrick.define("Firebrick.ui.common.MultiplesBase", {
-		extend:"Firebrick.ui.fields.Input",
+	return Firebrick.define( "Firebrick.ui.common.MultiplesBase", {
+		extend: "Firebrick.ui.fields.Input",
 		/**
 		 * @method fieldBindings
 		 * @return {Object}
 		 */
-		fieldBindings:function(){
+		fieldBindings: function() {
 			var me = this,
-				obj = me.callParent(arguments);
-			if(!me.inplaceEdit){
+				obj = me.callParent( arguments );
+			if ( !me.inplaceEdit ) {
 				
 				obj.withProperties = {
 							itemId: "'fb-ui-id-' + Firebrick.utils.uniqId()"
 						};
 
-				if(me.multiplesInline){
+				if ( me.multiplesInline ) {
 					
-					if(!obj.css){
+					if ( !obj.css ) {
 						obj.css = {};
 					}
 					
-					obj.css[ me.parseBind(me.cleanString(me.type)+"-inline")] = me.multiplesInline;
+					obj.css[ me.parseBind( me.cleanString( me.type ) + "-inline" ) ] = me.multiplesInline;
 				}
 			}
 			
@@ -47,29 +47,29 @@ define(["knockout-mapping", "../fields/Input"], function(kom){
 		 * @param $data {Any} value of iteration item
 		 * @default {Boolean}
 		 */
-		_valueChecker: function($default, $data){
+		_valueChecker: function( $default, $data ) {
 			var me = this;
 			
-			if(kom.isMapped($data)){
-				$data = kom.toJS($data);
+			if ( kom.isMapped( $data ) ) {
+				$data = kom.toJS( $data );
 			}
 			
-			if($.isPlainObject($data)){
-				if($data.active){
+			if ( $.isPlainObject( $data ) ) {
+				if ( $data.active ) {
 					//active property wins
-					return $.isFunction($data.active) ? $data.active() : $data.active;
-				}else if($data.checked){
-					return $.isFunction($data.checked) ? $data.checked() : $data.checked;
-				}else if($data.value){
+					return $.isFunction( $data.active ) ? $data.active() : $data.active;
+				} else if ( $data.checked ) {
+					return $.isFunction( $data.checked ) ? $data.checked() : $data.checked;
+				} else if ( $data.value ) {
 					//get the value prop
 					$data = $data.value;
 				}
 			}
 
 			//something to compare too
-			if($default){
+			if ( $default ) {
 				//ko function?
-				if($.isFunction($default)){
+				if ( $.isFunction( $default ) ) {
 					$default = $default();
 				}
 				//compare

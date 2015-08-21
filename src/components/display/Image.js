@@ -8,23 +8,23 @@
  * @namespace components.display
  * @class Image
  */
-define(["text!./Image.html", "../common/Base", "responsive-images"], function(tpl){
+define( [ "text!./Image.html", "../common/Base", "responsive-images" ], function( tpl ) {
 	"use strict";
-	return Firebrick.define("Firebrick.ui.display.Image", {
-		extend:"Firebrick.ui.common.Base",
-		sName:"display.image",
+	return Firebrick.define( "Firebrick.ui.display.Image", {
+		extend: "Firebrick.ui.common.Base",
+		sName: "display.image",
 		tpl: tpl,
 		/**
 		 * @method init
 		 */
-		init: function(){
+		init: function() {
 			var me = this;
-			me.on("rendered", function(){
-				if(window.responsiveImages){
-					window.responsiveImages.update(me.getId());
+			me.on( "rendered", function() {
+				if ( window.responsiveImages ) {
+					window.responsiveImages.update( me.getId() );
 				}
 			});
-			this.callParent(arguments);
+			this.callParent( arguments );
 		},
 		/**
 		 * @property src
@@ -66,25 +66,25 @@ define(["text!./Image.html", "../common/Base", "responsive-images"], function(tp
 		 * @method bindings
 		 * @return {Object}
 		 */
-		bindings: function(){
+		bindings: function() {
 			var me = this,
-				obj = me.callParent(arguments);
+				obj = me.callParent( arguments );
 			
-			obj.css["'img-responsive'"] = me.responsiveClass;
+			obj.css[ "'img-responsive'" ] = me.responsiveClass;
 
-			if(me.imgType){
-				obj.css[ me.parseBind( "img-"+me.imgType ) ] = true;
+			if ( me.imgType ) {
+				obj.css[ me.parseBind( "img-" + me.imgType ) ] = true;
 			}
 			
-			if(me.sizes){
-				obj.attr["'data-sizes'"] = me.sizes;
+			if ( me.sizes ) {
+				obj.attr[ "'data-sizes'" ] = me.sizes;
 			}
 			
-			if(me.srcset){
-				obj.attr["'data-srcset'"] = me.srcset;
+			if ( me.srcset ) {
+				obj.attr[ "'data-srcset'" ] = me.srcset;
 			}
 			
-			if(me.src){
+			if ( me.src ) {
 				obj.attr.src = me.src;
 			}
 			

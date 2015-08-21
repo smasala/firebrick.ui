@@ -8,11 +8,11 @@
  * @namespace components.button
  * @class Icon
  */
-define(["./Button"], function(){
+define( [ "./Button" ], function() {
 	"use strict";
-	return Firebrick.define("Firebrick.ui.button.Icon", {
+	return Firebrick.define( "Firebrick.ui.button.Icon", {
 		extend: "Firebrick.ui.button.Button",
-		sName:"button.icon",
+		sName: "button.icon",
 		/**
 		 * @property buttonSize
 		 * @type {Boolean|String} boolean = false
@@ -42,7 +42,7 @@ define(["./Button"], function(){
 		 * @private
 		 * @type {Function}
 		 */
-		afterText: function(){
+		afterText: function() {
 			var me = this;
 			return me.text ? me.text : "";
 		},
@@ -50,19 +50,19 @@ define(["./Button"], function(){
 		 * @method buttonTextBindings
 		 * @return {Object}
 		 */
-		buttonTextBindings: function(){
+		buttonTextBindings: function() {
 			var me = this,
-				obj = me.callParent(arguments);
+				obj = me.callParent( arguments );
 			
-			if(obj.hasOwnProperty("text")){
+			if ( obj.hasOwnProperty( "text" ) ) {
 				delete obj.text;
 			}
 			
-			if(!obj.css){
+			if ( !obj.css ) {
 				obj.css = {};
 			}
-			obj.css[me.glyphiconClass] = true;
-			obj.css[me.parseBind("glyphicon-" + me.glyIcon)] = true;
+			obj.css[ me.glyphiconClass ] = true;
+			obj.css[ me.parseBind( "glyphicon-" + me.glyIcon ) ] = true;
 			
 			return obj;
 		}

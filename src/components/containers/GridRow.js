@@ -8,15 +8,15 @@
  * @namespace components.containers
  * @class GridRow
  */
-define(["text!./GridRow.html", "jquery", "./Base", "./GridColumn"], function(tpl, $){
+define( [ "text!./GridRow.html", "./Base", "./GridColumn" ], function( tpl ) {
 	"use strict";
-	return Firebrick.define("Firebrick.ui.containers.GridRow", {
-		extend:"Firebrick.ui.containers.Base",
+	return Firebrick.define( "Firebrick.ui.containers.GridRow", {
+		extend: "Firebrick.ui.containers.Base",
 		/**
 		 * @property sName
 		 * @type {String}
 		 */
-		sName:"containers.gridrow",
+		sName: "containers.gridrow",
 		/**
 		 * @property tpl
 		 * @type {String} html
@@ -27,22 +27,22 @@ define(["text!./GridRow.html", "jquery", "./Base", "./GridColumn"], function(tpl
 		 * @type {Boolean|String}
 		 * @default true
 		 */
-		rowClass:true,
+		rowClass: true,
 		/**
 		 * @property defaults
 		 * @type {Object}
 		 * @default {sName: "containers.gridcolum"}
 		 */
-		defaults:{
+		defaults: {
 			sName: "containers.gridcolumn"
 		},
 		/**
 		 * @method bindings
 		 * @return {Object}
 		 */
-		bindings: function(){
+		bindings: function() {
 			var me = this,
-				obj = me.callParent(arguments);
+				obj = me.callParent( arguments );
 			
 			obj.css.row = me.rowClass;
 			
@@ -52,12 +52,12 @@ define(["text!./GridRow.html", "jquery", "./Base", "./GridColumn"], function(tpl
 		 * @method getBasicBindings
 		 * @return {Object}
 		 */
-		getBasicBindings:function(){
+		getBasicBindings: function() {
 			var me = this,
 				obj = {
-						css:{}
+						css: {}
 				};
-			obj.css[ me.parseBind( "col-md-" + (Math.floor(12/me.items.length)) )] = true;
+			obj.css[ me.parseBind( "col-md-" + ( Math.floor( 12 / me.items.length ) ) ) ] = true;
 			return obj;
 		},
 		/**
@@ -68,13 +68,13 @@ define(["text!./GridRow.html", "jquery", "./Base", "./GridColumn"], function(tpl
 		 * @param {Context} iteration context
 		 * @return {String}
 		 */
-		getGridItem: function(index, item){
+		getGridItem: function( index, item ) {
 			var me = this,
-				newItem = me._getItems(item);
+				newItem = me._getItems( item );
 			
-			if(newItem){
+			if ( newItem ) {
 				//replace items with the new object - _getItems returns an object {html:"", items:[]}
-				me.items[index] = newItem.items[0];
+				me.items[ index ] = newItem.items[ 0 ];
 				
 				return newItem.html;
 			}

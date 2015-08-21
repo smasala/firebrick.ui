@@ -244,30 +244,29 @@
  * @namespace components.fields
  * @class ComboBox
  */
-define([&quot;text!./ComboBox.html&quot;, 
-        &quot;jquery&quot;, 
+define( [ &quot;text!./ComboBox.html&quot;,
+        &quot;jquery&quot;,
         &quot;text!./combo/Item.html&quot;,
         &quot;text!./combo/Group.html&quot;,
-        &quot;text!./combo/Value.html&quot;, 
-        &quot;doT&quot;, 
-        &quot;knockout&quot;, 
-        &quot;./Input&quot;, 
+        &quot;text!./combo/Value.html&quot;,
+        &quot;doT&quot;,
+        &quot;./Input&quot;,
         &quot;Firebrick.ui.engines/Suggest&quot;,
-        &quot;../display/Loader&quot;], function(subTpl, $, comboItemTpl, comboGroupTpl, valueItemTpl, tplEngine, ko){
+        &quot;../display/Loader&quot; ], function( subTpl, $, comboItemTpl, comboGroupTpl, valueItemTpl, tplEngine ) {
 	&quot;use strict&quot;;
 	
-	return Firebrick.define(&quot;Firebrick.ui.fields.ComboBox&quot;, {
-		extend:&#x27;Firebrick.ui.fields.Input&#x27;,
+	return Firebrick.define( &quot;Firebrick.ui.fields.ComboBox&quot;, {
+		extend: &quot;Firebrick.ui.fields.Input&quot;,
 		/**
 		 * @property sName
 		 * @type {String}
 		 */
-		sName:&quot;fields.combobox&quot;,
+		sName: &quot;fields.combobox&quot;,
 		/**
 		 * @property subTpl
 		 * @type {String} html
 		 */
-		subTpl:subTpl,
+		subTpl: subTpl,
 		/**
 		 * @property multiSelect
 		 * @type {Boolean}
@@ -382,10 +381,10 @@ define([&quot;text!./ComboBox.html&quot;,
 		 * @method getValueEl
 		 * @return {jQuery Object}
 		 */
-		getValueEl: function(){
+		getValueEl: function() {
 			var me = this;
-			if(!me._valueEl){
-				me._valueEl = $(&quot;&gt; .fb-ui-combo-values&quot;, me.getElement());
+			if ( !me._valueEl ) {
+				me._valueEl = $( &quot;&gt; .fb-ui-combo-values&quot;, me.getElement() );
 			}
 			return me._valueEl;
 		},
@@ -400,10 +399,10 @@ define([&quot;text!./ComboBox.html&quot;,
 		 * @method getInputEl
 		 * @return {jQuery Object}
 		 */
-		getInputEl: function(){
+		getInputEl: function() {
 			var me = this;
-			if(!me._inputEl){
-				me._inputEl = $(&quot;&gt; input.fb-ui-combo-input&quot;, me.getElement());
+			if ( !me._inputEl ) {
+				me._inputEl = $( &quot;&gt; input.fb-ui-combo-input&quot;, me.getElement() );
 			}
 			return me._inputEl;
 		},
@@ -424,10 +423,10 @@ define([&quot;text!./ComboBox.html&quot;,
 		 * @method getCaretEl
 		 * @return {jQuery Object}
 		 */
-		getCaretEl: function(){
+		getCaretEl: function() {
 			var me = this;
-			if(!me._caretEl){
-				me._caretEl = $(&quot;&gt; .fb-ui-combo-select&quot;, me.getElement());
+			if ( !me._caretEl ) {
+				me._caretEl = $( &quot;&gt; .fb-ui-combo-select&quot;, me.getElement() );
 			}
 			return me._caretEl;
 		},
@@ -442,10 +441,10 @@ define([&quot;text!./ComboBox.html&quot;,
 		 * @method getResultEl
 		 * @return {jQuery Object}
 		 */
-		getResultEl: function(){
+		getResultEl: function() {
 			var me = this;
-			if(!me._resultEl){
-				me._resultEl = me.getElement().next(&quot;.fb-ui-combo-result[data-for=&#x27;&quot; + me.getId() + &quot;&#x27;]&quot;);
+			if ( !me._resultEl ) {
+				me._resultEl = me.getElement().next( &quot;.fb-ui-combo-result[data-for=&#x27;&quot; + me.getId() + &quot;&#x27;]&quot; );
 			}
 			return me._resultEl;
 		},
@@ -460,10 +459,10 @@ define([&quot;text!./ComboBox.html&quot;,
 		 * @method getClearIconEl
 		 * @return {jQuery Object}
 		 */
-		getClearIconEl: function(){
+		getClearIconEl: function() {
 			var me = this;
-			if(!me._clearIconEl){
-				me._cleanIconEl = $(&quot;.fb-ui-combo-clear-icon&quot;, me.getElement());
+			if ( !me._clearIconEl ) {
+				me._cleanIconEl = $( &quot;.fb-ui-combo-clear-icon&quot;, me.getElement() );
 			}
 			return me._cleanIconEl;
 		},
@@ -471,50 +470,50 @@ define([&quot;text!./ComboBox.html&quot;,
 		 * override base function
 		 * @method focus
 		 */
-		focus: function(){
+		focus: function() {
 			this.getInputEl().focus();
 		},
 		/**
 		 * @method init
 		 */
-		init: function(){
+		init: function() {
 			var me = this;
 			
 			me._itemTemplate = {};
 			
-			me.on(&quot;rendered&quot;, function(){
+			me.on( &quot;rendered&quot;, function() {
 				me._initSuggestionEngine();
 				me._initRendered();
 			});
 			
-			me.on(&quot;removeAll&quot;, function(){
+			me.on( &quot;removeAll&quot;, function() {
 				me.getClearIconEl().hide();
 			});
 			
-			return me.callParent(arguments);
+			return me.callParent( arguments );
 		},
 		/**
 		 * @method _initSuggestionEngine
 		 */
-		_initSuggestionEngine: function(){
+		_initSuggestionEngine: function() {
 			var me = this,
 				conf = {
 					store: me.store,
-					filter: function(val){
+					filter: function( val ) {
 						//used to exclude results from future selections - local mode
 						return !val._exclude;
 					}
 				};
 			
-			conf = Firebrick.utils.overwrite(conf, (me.suggest || {}) );
+			conf = Firebrick.utils.overwrite( conf, ( me.suggest || {}) );
 			
-			me._engine = Firebrick.create(&quot;Firebrick.ui.engines.Suggest&quot;, conf );
+			me._engine = Firebrick.create( &quot;Firebrick.ui.engines.Suggest&quot;, conf );
 		},
 		/**
 		 * @method _initRendered
 		 * @private
 		 */
-		_initRendered: function(){
+		_initRendered: function() {
 			var me = this,
 				$el = me.getElement(),
 				$input = me.getInputEl(),
@@ -522,69 +521,69 @@ define([&quot;text!./ComboBox.html&quot;,
 				$clearIcon = me.getClearIconEl();
 			
 			$el.on({
-				click: function(){
-					return me._onClick.apply(me, arguments);
+				click: function() {
+					return me._onClick.apply( me, arguments );
 				}
 			});
 			
 			$clearIcon.on({
-				click: function(){
-					return me._onClearIconClick.apply(me, arguments);
+				click: function() {
+					return me._onClearIconClick.apply( me, arguments );
 				}
 			});
 
-			$input.on(&quot;keydown keyup fb.update blur&quot;, function(){
-				return me.resizeInput.apply(me, arguments);
+			$input.on( &quot;keydown keyup fb.update blur&quot;, function() {
+				return me.resizeInput.apply( me, arguments );
 			});
 			
 			$input.on({
-				focus: function(){
-					return me._onFocus.apply(me, arguments);
+				focus: function() {
+					return me._onFocus.apply( me, arguments );
 				},
-				keydown: function(){
-					return me._onKeyDown.apply(me, arguments);
+				keydown: function() {
+					return me._onKeyDown.apply( me, arguments );
 				},
-				keyup: function(){
-					return me._onKeyUp.apply(me, arguments);
+				keyup: function() {
+					return me._onKeyUp.apply( me, arguments );
 				},
-				blur: function(){
-					return me._onBlur.apply(me, arguments);
+				blur: function() {
+					return me._onBlur.apply( me, arguments );
 				}
 			});
 			
-			$result.on(&quot;mousedown&quot;, &quot;.fb-ui-combo-item&quot;, function(){
-				return me._onItemClick.apply(me, arguments);
+			$result.on( &quot;mousedown&quot;, &quot;.fb-ui-combo-item&quot;, function() {
+				return me._onItemClick.apply( me, arguments );
 			});
 			
-			$result.on(&quot;mouseover&quot;, &quot;.fb-ui-combo-item&quot;, function(){
-				return me._onMouseOver.apply(me, arguments);
+			$result.on( &quot;mouseover&quot;, &quot;.fb-ui-combo-item&quot;, function() {
+				return me._onMouseOver.apply( me, arguments );
 			});
 			
-			if(me.multiSelect){
-				$el.on(&quot;click&quot;, &quot;.fb-ui-combo-value-item&quot;, function(){
-					return me.removeItem( $(this) );
+			if ( me.multiSelect ) {
+				$el.on( &quot;click&quot;, &quot;.fb-ui-combo-value-item&quot;, function() {
+					return me.removeItem( $( this ) );
 				});
 			}
 			
 			me.on({
-				expand: function(){
+				expand: function() {
 					var me = this,
 						$el = me.getElement(),
 						$result = me.getResultEl(),
 						$active = me.getActiveItem(),
 						$first;
 					
-					$el.addClass(&quot;open&quot;);
+					$el.addClass( &quot;open&quot; );
 					
-					if(me.forceSelect &amp;&amp; !$active.length){
-						$first = $(&quot;.fb-ui-combo-item:first-child&quot;, $result);
-						if($first.length){
-							me.markActive($first);
+					if ( me.forceSelect &amp;&amp; !$active.length ) {
+						$first = $( &quot;.fb-ui-combo-item:first-child&quot;, $result );
+						if ( $first.length ) {
+							me.markActive( $first );
 						}
 					}
 					
 				},
-				collapse: function(){
+				collapse: function() {
 					me.resultDefaults();
 				}
 			});
@@ -593,22 +592,22 @@ define([&quot;text!./ComboBox.html&quot;,
 		 * default actions on results expand/collapse
 		 * @method resultsDefault
 		 */
-		resultDefaults: function(){
+		resultDefaults: function() {
 			var me = this,
 				$el = me.getElement();
 			
-			$el.removeClass(&quot;open&quot;);
+			$el.removeClass( &quot;open&quot; );
 		},
 		/**
 		 * @method onFocus
 		 * @private
 		 */
-		_onFocus: function(){
+		_onFocus: function() {
 			var me = this;
 			
 			me.showResults();
 			
-			if(me.getValue().length){
+			if ( me.getValue().length ) {
 				me.getClearIconEl().show();
 			}
 			
@@ -617,9 +616,8 @@ define([&quot;text!./ComboBox.html&quot;,
 		 * @method _onClick
 		 * @private
 		 */
-		_onClick: function(){
+		_onClick: function() {
 			var me = this,
-				$el = me.getElement(),
 				$input = me.getInputEl();
 			$input.focus();
 		},
@@ -627,14 +625,14 @@ define([&quot;text!./ComboBox.html&quot;,
 		 * @method _onClearIconClick
 		 * @private
 		 */
-		_onClearIconClick: function(){
+		_onClearIconClick: function() {
 			this.removeAll();
 		},
 		/**
 		 * @method _onItemClick
 		 * @private
 		 */
-		_onItemClick: function(){
+		_onItemClick: function() {
 			var me = this;
 			me.selectActive();
 		},
@@ -642,14 +640,14 @@ define([&quot;text!./ComboBox.html&quot;,
 		 * @method _onMouseOver
 		 * @private
 		 */
-		_onMouseOver: function(event){
+		_onMouseOver: function( event ) {
 			var me = this,
 				clazz = &quot;fb-ui-combo-item&quot;,
 				selector = &quot;.&quot; + clazz,
-				$item = $(event.target);
+				$item = $( event.target );
 			
-				if(!$item.hasClass(clazz)){
-					$item = $item.parent(selector);
+				if ( !$item.hasClass( clazz ) ) {
+					$item = $item.parent( selector );
 				}
 			
 				me.markActive( $item );
@@ -658,21 +656,21 @@ define([&quot;text!./ComboBox.html&quot;,
 		 * @method onKeyDown
 		 * @private
 		 */
-		_onKeyDown: function(event){
+		_onKeyDown: function( event ) {
 			var me = this,
 				key = event.which,
 				KeyEvent = Firebrick.ui.KeyEvents,
 				$input = me.getInputEl();
 			
-			if(key === KeyEvent.DOM_VK_RETURN){
+			if ( key === KeyEvent.DOM_VK_RETURN ) {
 				event.preventDefault();
-			}else if(key === KeyEvent.DOM_VK_BACK_SPACE){
-				if(!$input.val()){
-					me.removeLastItem();	
+			} else if ( key === KeyEvent.DOM_VK_BACK_SPACE ) {
+				if ( !$input.val() ) {
+					me.removeLastItem();
 				}
 			}
 			
-			me._arrowKey(key);
+			me._arrowKey( key );
 			
 			me._timestamp = new Date().getTime();
 		},
@@ -680,36 +678,35 @@ define([&quot;text!./ComboBox.html&quot;,
 		 * @method _onKeyUp
 		 * @private
 		 */
-		_onKeyUp: function(event){
+		_onKeyUp: function( event ) {
 			var me = this,
 				key = event.which,
 				KeyEvent = Firebrick.ui.KeyEvents,
-				$el = me.getElement(),
 				$input = me.getInputEl();
 			
-			if(!me.actionKey(key)){
-				if($input.val().trim()){
+			if ( !me.actionKey( key ) ) {
+				if ( $input.val().trim() ) {
 					
-					Firebrick.delay(function(){
+					Firebrick.delay(function() {
 						var t = new Date().getTime();
-						if( (t - me._timestamp) &gt;= 300 ){
+						if ( ( t - me._timestamp ) &gt;= 300 ) {
 							me._timestamp = t;
 							me.showResults();
 						}
-					}, 301);
+					}, 301 );
 					
-				}else{
+				} else {
 					me.hideResults();
 				}
-			}else{
-				if(key === KeyEvent.DOM_VK_RETURN){
+			} else {
+				if ( key === KeyEvent.DOM_VK_RETURN ) {
 					event.preventDefault();
 					me.selectActive();
-				}else if( key === KeyEvent.DOM_VK_DOWN){
-					if(!$input.val()){
+				} else if ( key === KeyEvent.DOM_VK_DOWN ) {
+					if ( !$input.val() ) {
 						//show all
-						if(!me._resultsVisible){
-							me.showResults();	
+						if ( !me._resultsVisible ) {
+							me.showResults();
 						}
 					}
 				}
@@ -720,23 +717,23 @@ define([&quot;text!./ComboBox.html&quot;,
 		 * @method _onBlur
 		 * @private
 		 */
-		_onBlur: function(){
+		_onBlur: function() {
 			var me = this;
-			if(me.forceSelect){
+			if ( me.forceSelect ) {
 				//TODO: only if no value already set
-				if(!me.getValue().length){
-					me.selectActive();	
+				if ( !me.getValue().length ) {
+					me.selectActive();
 				}
 			}
-			Firebrick.delay(function(){
-				me.getClearIconEl().hide();	
-			}, 200);
-			me.reset();
+			Firebrick.delay(function() {
+				me.getClearIconEl().hide();
+			}, 200 );
+			me.hideResults();
 		},
 		/**
 		 * @method reset
 		 */
-		reset: function(){
+		reset: function() {
 			var me = this;
 			me.hideResults();
 			me.clearInput();
@@ -744,13 +741,13 @@ define([&quot;text!./ComboBox.html&quot;,
 		/**
 		 * @method resizeInput
 		 */
-		resizeInput: function(){
+		resizeInput: function() {
 			var me = this,
 				$input = me.getInputEl(),
 				currentWidth = $input.width(),
-				width = me._measureWidth($input) + 8;
-			if (width !== currentWidth) {
-				$input.width(width);
+				width = me._measureWidth( $input ) + 8;
+			if ( width !== currentWidth ) {
+				$input.width( width );
 			}
 		},
 		/**
@@ -758,30 +755,30 @@ define([&quot;text!./ComboBox.html&quot;,
 		 * @private
 		 * @return {Integer}
 		 */
-		_measureWidth: function($input){
-			var $tmp = $(&quot;&lt;tmp&gt;&quot;).css({
+		_measureWidth: function( $input ) {
+			var $tmp = $( &quot;&lt;tmp&gt;&quot; ).css({
 					position: &quot;absolute&quot;,
 					top: -99999,
 					left: -99999,
 					width: &quot;auto&quot;,
 					padding: 0,
-					whiteSpace: &#x27;pre&#x27;
-				}).text($input.val()).appendTo(&quot;body&quot;),
-				styles = [&#x27;letterSpacing&#x27;,
-				&#x27;fontSize&#x27;,
-				&#x27;fontFamily&#x27;,
-				&#x27;fontWeight&#x27;,
-				&#x27;textTransform&#x27;],
+					whiteSpace: &quot;pre&quot;
+				}).text( $input.val() ).appendTo( &quot;body&quot; ),
+				styles = [ &quot;letterSpacing&quot;,
+				&quot;fontSize&quot;,
+				&quot;fontFamily&quot;,
+				&quot;fontWeight&quot;,
+				&quot;textTransform&quot; ],
 				style,
 				copiedStyles = {},
 				width;
 			
-			for(var i = 0, l = styles.length; i&lt;l; i++){
-				style = styles[i];
-				copiedStyles[style] = $input.css(style);
+			for ( var i = 0, l = styles.length; i &lt; l; i++ ) {
+				style = styles[ i ];
+				copiedStyles[ style ] = $input.css( style );
 			}
 			
-			$tmp.css(copiedStyles);
+			$tmp.css( copiedStyles );
 			width = $tmp.width();
 			$tmp.remove();
 			return width;
@@ -790,10 +787,10 @@ define([&quot;text!./ComboBox.html&quot;,
 		 * @method actionKey
 		 * @return {Boolean}
 		 */
-		actionKey: function(keyCode){
+		actionKey: function( keyCode ) {
 			var KeyEvent = Firebrick.ui.KeyEvents;
 			
-			if(	keyCode === KeyEvent.DOM_VK_DOWN || 
+			if (	keyCode === KeyEvent.DOM_VK_DOWN ||
 				keyCode === KeyEvent.DOM_VK_UP ||
 				keyCode === KeyEvent.DOM_VK_RETURN ) {
 				return true;
@@ -803,11 +800,11 @@ define([&quot;text!./ComboBox.html&quot;,
 		},
 		/**
 		 * @method getActiveItem
-		 * @return {jQuery Object} 
+		 * @return {jQuery Object}
 		 */
-		getActiveItem: function(){
+		getActiveItem: function() {
 			var me = this,
-				$item = $(&quot;.fb-ui-combo-item.active&quot;, me.getResultEl());
+				$item = $( &quot;.fb-ui-combo-item.active&quot;, me.getResultEl() );
 			return $item;
 		},
 		
@@ -815,12 +812,12 @@ define([&quot;text!./ComboBox.html&quot;,
 		 * @method markActive
 		 * @param $item {jQuery Object}
 		 */
-		markActive: function($item){
+		markActive: function( $item ) {
 			var me = this,
 				$active = me.getActiveItem();
-			if($item.length){
-				$active.removeClass(&quot;active&quot;);
-				$item.addClass(&quot;active&quot;);
+			if ( $item.length ) {
+				$active.removeClass( &quot;active&quot; );
+				$item.addClass( &quot;active&quot; );
 				$item.focus();
 			}
 		},
@@ -828,17 +825,15 @@ define([&quot;text!./ComboBox.html&quot;,
 		 * @method selectActive
 		 * @param $item {jQuery Object} optional
 		 */
-		selectActive: function($item){
+		selectActive: function( $item ) {
 			var me = this,
 				$active = $item || me.getActiveItem(),
-				options = me.options,
 				data = {},
-				index,
 				values = [];
 					
-			if($active.length){
+			if ( $active.length ) {
 
-				data = $active.prop(&quot;data-value&quot;);
+				data = $active.prop( &quot;data-value&quot; );
 				
 				//exclude result from future searches
 				data._exclude = true;
@@ -847,7 +842,7 @@ define([&quot;text!./ComboBox.html&quot;,
 
 				me.setValue( values );
 				
-				if(values.length){
+				if ( values.length ) {
 					me.getClearIconEl().show();
 				}
 			}
@@ -857,107 +852,107 @@ define([&quot;text!./ComboBox.html&quot;,
 		 * @event removeAll
 		 * @method removeAll
 		 */
-		removeAll: function(){
+		removeAll: function() {
 			var me = this,
 				oldValue = me.getValue(),
-				$items = $(&quot;.fb-ui-combo-value-item&quot;, me.getValueEl());
+				$items = $( &quot;.fb-ui-combo-value-item&quot;, me.getValueEl() );
 			
-			for(var i = 0, l = $items.length; i&lt;l; i++){
+			for ( var i = 0, l = $items.length; i &lt; l; i++ ) {
 				//remove exclude filter on all items
-				$( $items[0] ).prop(&quot;data-value&quot;)._exclude = false;
+				$( $items[ 0 ] ).prop( &quot;data-value&quot; )._exclude = false;
 			}
 			
 			$items.remove();
-			me._checkChange(me.getValue(), oldValue);
-			me.fireEvent(&quot;removeAll&quot;);
+			me._checkChange( me.getValue(), oldValue );
+			me.fireEvent( &quot;removeAll&quot; );
 		},
 		/**
 		 * @event removeItem
 		 * @method removeItem
 		 * @param $item {jQuery Item}
 		 */
-		removeItem: function($item){
+		removeItem: function( $item ) {
 			var me = this,
 				oldValue = me.getValue(),
-				data = $item.prop(&quot;data-value&quot;);
+				data = $item.prop( &quot;data-value&quot; );
 			data._exclude = false;
 			$item.remove();
-			me._checkChange(me.getValue(), oldValue);
-			me.on(&quot;removeItem&quot;);
+			me._checkChange( me.getValue(), oldValue );
+			me.on( &quot;removeItem&quot; );
 		},
 		/**
 		 * @method removeLastItem
 		 */
-		removeLastItem: function(){
+		removeLastItem: function() {
 			var me = this,
-				$items = $(&quot;.fb-ui-combo-value-item&quot;, me.getValueEl()),
+				$items = $( &quot;.fb-ui-combo-value-item&quot;, me.getValueEl() ),
 				$last = $items.last();
 			
-			if($items.length === 1 &amp;&amp; me.forceSelect){
+			if ( $items.length === 1 &amp;&amp; me.forceSelect ) {
 				return;
 			}
 			
-			if($last.length){
-				me.removeItem( $last );	
+			if ( $last.length ) {
+				me.removeItem( $last );
 			}
 		},
 		/**
 		 * @method clearInput
 		 */
-		clearInput: function(){
+		clearInput: function() {
 			var me = this,
 				$input = me.getInputEl();
 			
-			$input.val(&quot;&quot;);
+			$input.val( &quot;&quot; );
 		},
 		/**
 		 * @method _arrowKey
 		 * @private
 		 * @return boolean
 		 */
-		_arrowKey: function(keyCode){
+		_arrowKey: function( keyCode ) {
 			var me = this,
 				keyboard = Firebrick.ui.KeyEvents,
 				selector = &quot;.fb-ui-combo-item&quot;,
 				groupSelector = &quot;.fb-ui-combo-group-item&quot;,
 				$result = me.getResultEl(),
-				$active = $(selector + &quot;.active&quot;, $result),
+				$active = $( selector + &quot;.active&quot;, $result ),
 				$sibling;
 			
-			if(me._resultsVisible){
+			if ( me._resultsVisible ) {
 				
 				//only on up and down actions
-				if(keyCode === keyboard.DOM_VK_DOWN || keyCode === keyboard.DOM_VK_UP){
+				if ( keyCode === keyboard.DOM_VK_DOWN || keyCode === keyboard.DOM_VK_UP ) {
 					
-					if($active.length){
+					if ( $active.length ) {
 						
-						if(keyCode === keyboard.DOM_VK_DOWN){
+						if ( keyCode === keyboard.DOM_VK_DOWN ) {
 							$sibling = $active.next();
-							if( !$sibling.length ){
+							if ( !$sibling.length ) {
 								$sibling = $active.closest( groupSelector ).next();
 							}
-						}else{
+						} else {
 							$sibling = $active.prev();
-							if( !$sibling.length ){
+							if ( !$sibling.length ) {
 								$sibling = $active.closest( groupSelector ).prev();
 							}
 						}
 						
 						//check if sibling is another group
-						if( $sibling.is( groupSelector ) ){
-							//find appropriate sibling in group 
-							if( keyCode === keyboard.DOM_VK_DOWN ){
+						if ( $sibling.is( groupSelector ) ) {
+							//find appropriate sibling in group
+							if ( keyCode === keyboard.DOM_VK_DOWN ) {
 								$sibling = $sibling.find( selector ).first();
-							}else{
+							} else {
 								$sibling = $sibling.find( selector ).last();
 							}
 						}
 						
 						me.markActive( $sibling );
-						me._scrollOnKey(keyCode, $sibling, $result);
+						me._scrollOnKey( keyCode, $sibling, $result );
 						
-					}else{
-						me.markActive( $result.find(&quot;.fb-ui-combo-item&quot;).first() );
+					} else {
+						me.markActive( $result.find( &quot;.fb-ui-combo-item&quot; ).first() );
 					}
 					
 					return true;
@@ -972,20 +967,20 @@ define([&quot;text!./ComboBox.html&quot;,
 		 * @method getSelection
 		 * @return {jQuery Object | null}
 		 */
-		getSelection: function(){
+		getSelection: function() {
 			var me = this,
 				$result = me.getResultEl();
-			if(me._resultsVisible){
-				return $(&quot;.fb-ui-combo-item.active&quot;, $result);
+			if ( me._resultsVisible ) {
+				return $( &quot;.fb-ui-combo-item.active&quot;, $result );
 			}
 		},
 		/**
 		 * @method _scollOnKey
-		 * @param keycode {Integer} 
+		 * @param keycode {Integer}
 		 * @param $target {jQuery Object}
 		 * @param $container {jQuery Object}
 		 */
-		_scrollOnKey: function( keycode, $target, $container ){
+		_scrollOnKey: function( keycode, $target, $container ) {
 			var sibTop,
 				sibBottom,
 				KeyEvent = Firebrick.ui.KeyEvents,
@@ -994,19 +989,19 @@ define([&quot;text!./ComboBox.html&quot;,
 				resBottom = resTop + resHeight,
 				scrollTo = null;
 			
-			if($target.length){
-				if( keycode === KeyEvent.DOM_VK_DOWN ){
+			if ( $target.length ) {
+				if ( keycode === KeyEvent.DOM_VK_DOWN ) {
 					sibBottom = $target.offset().top + $target.outerHeight();
-					if(sibBottom &gt; resBottom){
-						scrollTo = ($container.scrollTop() + sibBottom) - resTop - resHeight;
+					if ( sibBottom &gt; resBottom ) {
+						scrollTo = ( $container.scrollTop() + sibBottom ) - resTop - resHeight;
 					}
-				}else{
+				} else {
 					sibTop = $target.offset().top;
-					if(sibTop &lt; resTop){
+					if ( sibTop &lt; resTop ) {
 						scrollTo = sibTop - resTop + $container.scrollTop();
 					}
 				}
-				if(scrollTo !== null){
+				if ( scrollTo !== null ) {
 					$container.scrollTop( scrollTo );
 				}
 			}
@@ -1018,17 +1013,17 @@ define([&quot;text!./ComboBox.html&quot;,
 		 * @param callback {Function} called after search is complete - args {Array of Results}
 		 * @return {self}
 		 */
-		search: function(query, callback){
+		search: function( query, callback ) {
 			var me = this;
 			
-			me._engine.query(query, callback);
+			me._engine.query( query, callback );
 			
 			return me;
 		},
 		/**
 		 * @method showResults
 		 */
-		showResults: function(){
+		showResults: function() {
 			var me = this,
 				$el = me.getElement(),
 				$input = me.getInputEl(),
@@ -1037,7 +1032,7 @@ define([&quot;text!./ComboBox.html&quot;,
 				loader,
 				item;
 
-			if(query.length &gt;= me.typeahead){
+			if ( query.length &gt;= me.typeahead ) {
 				$result.empty();
 				
 				$result.css({
@@ -1049,22 +1044,22 @@ define([&quot;text!./ComboBox.html&quot;,
 				
 				me._resultsVisible = true;
 				
-				if(me._engine.mode !== &quot;local&quot;){
-					loader = Firebrick.create(&quot;Firebrick.ui.display.Loader&quot;, {
+				if ( me._engine.mode !== &quot;local&quot; ) {
+					loader = Firebrick.create( &quot;Firebrick.ui.display.Loader&quot;, {
 						target: $result
 					});
 				}
 
 				//delay the search to allow the loader to be displayed
-				Firebrick.delay(function(){
-					me.search( query, function(results){
+				Firebrick.delay(function() {
+					me.search( query, function( results ) {
 						var elements = [];
-						if(loader){
+						if ( loader ) {
 							loader.destroy();
 						}
-						if(results){
-							for(var i = 0, l = results.length; i&lt;l; i++){
-								item = results[i];
+						if ( results ) {
+							for ( var i = 0, l = results.length; i &lt; l; i++ ) {
+								item = results[ i ];
 								item.index = i;
 								elements.push( me.renderItem( item ) );
 							}
@@ -1073,27 +1068,25 @@ define([&quot;text!./ComboBox.html&quot;,
 							$result.append( elements );
 							
 							//make sure scrolled at the top
-							$result.scrollTop(0);
+							$result.scrollTop( 0 );
 						
-							me.fireEvent(&quot;expand&quot;);
+							me.fireEvent( &quot;expand&quot; );
 						}
 					});
-				}, 10);
+				}, 10 );
 			}
 		},
 		/**
 		 * @method hideResults
 		 */
-		hideResults: function(){
+		hideResults: function() {
 			var me = this,
-				$el = me.getElement(),
-				$input = me.getInputEl(),
 				$result = me.getResultEl();
 			
-			if(me._resultsVisible){
+			if ( me._resultsVisible ) {
 				me._resultsVisible = false;
 				$result.hide();
-				me.fireEvent(&quot;collapse&quot;);	
+				me.fireEvent( &quot;collapse&quot; );
 			}
 		},
 		/**
@@ -1102,12 +1095,12 @@ define([&quot;text!./ComboBox.html&quot;,
 		 * @param scope {Object} optional
 		 * @return {Array} jQuery elements
 		 */
-		renderChildren: function(data, scope){
+		renderChildren: function( data, scope ) {
 			var me = this,
 				items = [];
-			if( data.children ){
-				for(var i = 0, l = data.children.length; i&lt;l; i++){
-					items.push( me.renderItem( data.children[i], scope) );
+			if ( data.children ) {
+				for ( var i = 0, l = data.children.length; i &lt; l; i++ ) {
+					items.push( me.renderItem( data.children[ i ], scope ) );
 				}
 			}
 			return items;
@@ -1118,15 +1111,15 @@ define([&quot;text!./ComboBox.html&quot;,
 		 * @param scope {Object} optional
 		 * @return {jQuery Object} element
 		 */
-		renderItem: function(data, scope){
+		renderItem: function( data, scope ) {
 			var me = this,
 				prop = data.children ? &quot;groupTpl&quot; : &quot;itemTpl&quot;,
 				$el;
 			
-			$el = me._renderItem(prop, data, scope);
+			$el = me._renderItem( prop, data, scope );
 			
-			if(data.children){
-				$(&quot;.fb-ui-combo-group-children&quot;, $el).html( me.renderChildren( data, scope ) );
+			if ( data.children ) {
+				$( &quot;.fb-ui-combo-group-children&quot;, $el ).html( me.renderChildren( data, scope ) );
 			}
 			
 			return $el;
@@ -1137,8 +1130,8 @@ define([&quot;text!./ComboBox.html&quot;,
 		 * @param scope {Object} optional
 		 * @return {jQuery Object} element
 		 */
-		renderValueItem: function(data, scope){
-			return this._renderItem(&quot;valueTpl&quot;, data, scope);
+		renderValueItem: function( data, scope ) {
+			return this._renderItem( &quot;valueTpl&quot;, data, scope );
 		},
 		/**
 		 * @method _renderItem
@@ -1148,27 +1141,27 @@ define([&quot;text!./ComboBox.html&quot;,
 		 * @param scope {Object} optional
 		 * @return {jQuery Object} html element
 		 */
-		_renderItem: function(tplProp, data, scope){
+		_renderItem: function( tplProp, data, scope ) {
 			var me = this,
-				tpl = $.isFunction(me[tplProp]) ? me[tplProp]() : me[tplProp];
+				tpl = $.isFunction( me[ tplProp ] ) ? me[ tplProp ]() : me[ tplProp ];
 			data._scope = data._scope || scope || me;
-			if(!me._itemTemplate[tplProp]){
-				me._itemTemplate[tplProp] = tplEngine.template( tpl );
+			if ( !me._itemTemplate[ tplProp ] ) {
+				me._itemTemplate[ tplProp ] = tplEngine.template( tpl );
 			}
-			return $( me._itemTemplate[tplProp](data) ).prop(&quot;data-value&quot;, data);
+			return $( me._itemTemplate[ tplProp ]( data ) ).prop( &quot;data-value&quot;, data );
 		},
 		/**
 		 * @method bindings
 		 */
-		bindings: function(){
+		bindings: function() {
 			var me = this,
-				obj = me.callParent(arguments);
+				obj = me.callParent( arguments );
 			
-			obj.css[&quot;&#x27;fb-ui-combobox&#x27;&quot;] = true;
+			obj.css[ &quot;&#x27;fb-ui-combobox&#x27;&quot; ] = true;
 			
-			if(me.multiSelect){
+			if ( me.multiSelect ) {
 				obj.css.multiple = true;
-			}else{
+			} else {
 				obj.css.single = true;
 			}
 			
@@ -1177,9 +1170,8 @@ define([&quot;text!./ComboBox.html&quot;,
 		/**
 		 * @method valueBindings
 		 */
-		valueBindings: function(){
-			var me = this,
-				obj = {
+		valueBindings: function() {
+			var obj = {
 					css: {
 						&quot;&#x27;fb-ui-combo-values&#x27;&quot;: true
 					}
@@ -1190,27 +1182,25 @@ define([&quot;text!./ComboBox.html&quot;,
 		/**
 		 * @method inputBindings
 		 */
-		inputBindings: function(){
-			var me = this,
-				obj = {
-					css:{},
-					attr:{
+		inputBindings: function() {
+			var obj = {
+					css: {},
+					attr: {
 						autocomplete: true,
 						tabindex: true
 					}
 				};
 			
-			obj.css[&quot;&#x27;fb-ui-combo-input&#x27;&quot;] = true;
+			obj.css[ &quot;&#x27;fb-ui-combo-input&#x27;&quot; ] = true;
 			
 			return obj;
 		},
 		/**
 		 * @method clearIconBindings
 		 */
-		clearIconBindings: function(){
-			var me = this,
-				obj = {
-					css:{
+		clearIconBindings: function() {
+			var obj = {
+					css: {
 						glyphicon: true,
 						&quot;&#x27;glyphicon-remove-circle&#x27;&quot;: true,
 						&quot;&#x27;fb-ui-combo-clear-icon&#x27;&quot;: true
@@ -1222,7 +1212,7 @@ define([&quot;text!./ComboBox.html&quot;,
 		/**
 		 * @method singleSelectBindings
 		 */
-		singleSelectBindings: function(){
+		singleSelectBindings: function() {
 			var me = this,
 				obj = {
 					css: {
@@ -1236,9 +1226,8 @@ define([&quot;text!./ComboBox.html&quot;,
 		/**
 		 * @method resultBindings
 		 */
-		resultBindings: function(){
-			var me = this,
-				obj = {
+		resultBindings: function() {
+			var obj = {
 					css: {
 						&quot;&#x27;fb-ui-combo-result&#x27;&quot;: true
 					}
@@ -1253,23 +1242,23 @@ define([&quot;text!./ComboBox.html&quot;,
 		 * @param oldVal {Any}
 		 * @return {Boolean}
 		 */
-		_hasChange: function(newVal, oldVal){
-			return !Firebrick.utils.compareArrays(newVal, oldVal);
+		_hasChange: function( newVal, oldVal ) {
+			return !Firebrick.utils.compareArrays( newVal, oldVal );
 		},
 		/**
 		 * @method getValue
 		 * @return {Array}
 		 */
-		getValue: function(){
+		getValue: function() {
 			var me = this,
-				$vals = $(&quot;&gt; .fb-ui-combo-value-item&quot;, me.getValueEl()),
+				$vals = $( &quot;&gt; .fb-ui-combo-value-item&quot;, me.getValueEl() ),
 				values = [],
 				valKey = me.valueKey,
 				val;
 			
-			for(var i = 0, l = $vals.length; i&lt;l; i++){
-				val = $( $vals[i] ).prop(&quot;data-value&quot;);
-				val = valKey ? val[valKey] : val;
+			for ( var i = 0, l = $vals.length; i &lt; l; i++ ) {
+				val = $( $vals[ i ] ).prop( &quot;data-value&quot; );
+				val = valKey ? val[ valKey ] : val;
 				values.push( val );
 			}
 			
@@ -1280,47 +1269,48 @@ define([&quot;text!./ComboBox.html&quot;,
 		 * @param values {Array}
 		 * @return parent
 		 */
-		setValue: function(){
+		setValue: function() {
 			var me = this,
 				$valueBox = me.getValueEl();
 	
-			if(me.maxItems !== false){
-				if($(&quot;.fb-ui-combo-value-item&quot;, $valueBox).length === me.maxItems){
+			if ( me.maxItems !== false ) {
+				if ( $( &quot;.fb-ui-combo-value-item&quot;, $valueBox ).length === me.maxItems ) {
 					//number of max items already reached
 					return;
 				}
 			}
 			
-			return me.callParent(arguments);
+			return me.callParent( arguments );
 		},
 		/**
 		 * @method _setValue
 		 * @param value {Array}
 		 * @private
 		 */
-		_setValue: function( values ){
+		_setValue: function( values ) {
 			var me = this,
 				$valueBox = me.getValueEl(),
 				$vals = [];
 	
-			if(values.length){
+			if ( values.length ) {
 				
-				for(var i = 0, l = values.length; i&lt;l; i++){
-					$vals.push( me.renderValueItem( values[i] ) );
+				for ( var i = 0, l = values.length; i &lt; l; i++ ) {
+					$vals.push( me.renderValueItem( values[ i ] ) );
 				}
 				
-				if(me.multiSelect){
-					$valueBox.append( $vals );	
-				}else{
+				if ( me.multiSelect ) {
+					$valueBox.append( $vals );
+				} else {
 					$valueBox.html( $vals );
 				}
 				
 				me.reset();
 			}
 			return me;
-		},
+		}
 	});
 });
+
     </pre>
 </div>
 

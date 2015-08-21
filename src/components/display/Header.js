@@ -8,40 +8,40 @@
  * @namespace components.display
  * @class Header
  */
-define(["text!./Header.html", "../common/Base", "../common/mixins/Label"], function(tpl){
+define( [ "text!./Header.html", "../common/Base", "../common/mixins/Label" ], function( tpl ) {
 	"use strict";
-	return Firebrick.define("Firebrick.ui.display.Header", {
-		extend:"Firebrick.ui.common.Base",
+	return Firebrick.define( "Firebrick.ui.display.Header", {
+		extend: "Firebrick.ui.common.Base",
 		mixins: "Firebrick.ui.common.mixins.Label",
 		/**
 		 * @property sName
 		 * @type {String}
 		 */
-		sName:"display.header",
+		sName: "display.header",
 		/**
 		 * @property tpl
 		 * @type {String}
 		 */
-		tpl:tpl,
+		tpl: tpl,
 		/**
 		 * use to determine whether h1, h2, h3 etc - default = 1
 		 * @property headerSize
 		 * @type {Int}
 		 * @default 1
 		 */
-		headerSize:1,
+		headerSize: 1,
 		/**
 		 * @property text
 		 * @type {String}
 		 * @default ""
 		 */
-		text:"",
+		text: "",
 		/**
 		 * @property secondaryText
 		 * @type {String}
 		 * @default ""
 		 */
-		secondaryText:"",
+		secondaryText: "",
 		/**
 		 * change to a url if you wish to convert the header into a link
 		 * @property href
@@ -60,11 +60,11 @@ define(["text!./Header.html", "../common/Base", "../common/mixins/Label"], funct
 		 * @method textBindings
 		 * @return Object
 		 */
-		textBindings: function(){
+		textBindings: function() {
 			var me = this,
 				obj = {};
 			
-			obj.text = me.textBind(me.text);
+			obj.text = me.textBind( me.text );
 			
 			return obj;
 		},
@@ -72,15 +72,15 @@ define(["text!./Header.html", "../common/Base", "../common/mixins/Label"], funct
 		 * @method secondaryTextBindings
 		 * @return Object
 		 */
-		secondaryTextBindings: function(){
+		secondaryTextBindings: function() {
 			var me = this;
-			if(me.secondaryText){
+			if ( me.secondaryText ) {
 				return {
-					text: me.textBind(me.secondaryText)
+					text: me.textBind( me.secondaryText )
 				};
-			}else{
+			} else {
 				return {
-					visible:false
+					visible: false
 				};
 			}
 		},
@@ -88,10 +88,10 @@ define(["text!./Header.html", "../common/Base", "../common/mixins/Label"], funct
 		 * @method hrefBindings
 		 * @return {Object}
 		 */
-		hrefBindings: function(){
+		hrefBindings: function() {
 			var me = this,
-				obj = {attr:{}};
-			obj.attr["'fb-ignore-router'"] = "$data.hasOwnProperty( 'ignoreRouter' ) ? $data.ignoreRouter : " + me.ignoreRouter;
+				obj = { attr: {} };
+			obj.attr[ "'fb-ignore-router'" ] = "$data.hasOwnProperty( 'ignoreRouter' ) ? $data.ignoreRouter : " + me.ignoreRouter;
 			return obj;
 		}
 		

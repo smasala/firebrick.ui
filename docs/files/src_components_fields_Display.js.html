@@ -240,16 +240,16 @@
 
 /**
  * read only input field but doesn&#x27;t look like an input field
- * 
+ *
  * @module Firebrick.ui.components
  * @extends components.fields.Base
  * @namespace components.fields
  * @class Display
  */
-define([&quot;text!./Display.html&quot;, &quot;./Input&quot;], function(subTpl){
+define( [ &quot;text!./Display.html&quot;, &quot;./Input&quot; ], function( subTpl ) {
 	&quot;use strict&quot;;
-	return Firebrick.define(&quot;Firebrick.ui.fields.Display&quot;, {
-		extend:&quot;Firebrick.ui.fields.Input&quot;,
+	return Firebrick.define( &quot;Firebrick.ui.fields.Display&quot;, {
+		extend: &quot;Firebrick.ui.fields.Input&quot;,
 		/**
 		 * @property sName
 		 * @type {String}
@@ -273,7 +273,7 @@ define([&quot;text!./Display.html&quot;, &quot;./Input&quot;], function(subTpl){
 		 * @method bindings
 		 * @return {Object}
 		 */
-		bindings: function(){
+		bindings: function() {
 			var me = this,
 				obj = me.callParent(),
 				text = obj.value;
@@ -290,6 +290,7 @@ define([&quot;text!./Display.html&quot;, &quot;./Input&quot;], function(subTpl){
 		}
 	});
 });
+
     </pre>
 </div>
 

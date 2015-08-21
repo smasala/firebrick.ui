@@ -8,10 +8,10 @@
  * @namespace components.fields
  * @class Email
  */
-define(["./Input"], function(){
+define( [ "./Input" ], function() {
 	"use strict";
-	return Firebrick.define("Firebrick.ui.fields.Email", {
-		extend:"Firebrick.ui.fields.Input",
+	return Firebrick.define( "Firebrick.ui.fields.Email", {
+		extend: "Firebrick.ui.fields.Input",
 		/**
 		 * @property sName
 		 * @type {String}
@@ -22,12 +22,12 @@ define(["./Input"], function(){
 		 * @type {String}
 		 * @default "'email'"
 		 */
-		type:"email",
+		type: "email",
 		/**
 		 * @property dataType
 		 * @type {String}
 		 * @default "'text'"
 		 */
-		dataType:"text"
+		dataType: "text"
 	});
 });

@@ -244,9 +244,9 @@
  * @class Badges
  * @static
  */
-define([], function(){
+define( [], function() {
 	&quot;use strict&quot;;
-	return Firebrick.define(&quot;Firebrick.ui.common.mixins.Badges&quot;, {
+	return Firebrick.define( &quot;Firebrick.ui.common.mixins.Badges&quot;, {
 		/**
 		 * false to hide badge, string to show text
 		 * @property badge
@@ -258,11 +258,11 @@ define([], function(){
 		 * @method badgeBindings
 		 * @return {Object}
 		 */
-		badgeBindings: function(){
+		badgeBindings: function() {
 			var me = this,
 				obj = {
-					attr:{},
-					css:{
+					attr: {},
+					css: {
 						badge: true
 					},
 					text: me.textBind( me.badge )
@@ -271,6 +271,7 @@ define([], function(){
 		}
 	});
 });
+
     </pre>
 </div>
 

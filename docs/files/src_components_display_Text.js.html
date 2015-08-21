@@ -244,45 +244,45 @@
  * @namespace components.display
  * @class Text
  */
-define([&quot;text!./Text.html&quot;, &quot;../common/Base&quot;], function(tpl){
+define( [ &quot;text!./Text.html&quot;, &quot;../common/Base&quot; ], function( tpl ) {
 	&quot;use strict&quot;;
-	return Firebrick.define(&quot;Firebrick.ui.display.Text&quot;, {
+	return Firebrick.define( &quot;Firebrick.ui.display.Text&quot;, {
 		extend: &quot;Firebrick.ui.common.Base&quot;,
 		/**
 		 * @property sName
 		 * @type {String}
 		 */
-		sName:&quot;display.text&quot;,
+		sName: &quot;display.text&quot;,
 		/**
 		 * @property tpl
 		 * @type {String}
 		 */
-		tpl:tpl,
+		tpl: tpl,
 		/**
 		 * whether text is raw html or not
 		 * @property isHtml
 		 * @type {Boolean}
 		 * @default false
 		 */
-		isHtml:false,
+		isHtml: false,
 		/**
 		 * @property text
 		 * @type {String}
 		 * @default &quot;&quot;
 		 */
-		text:&quot;&quot;,
+		text: &quot;&quot;,
 		/**
 		 * @property leadCSS
 		 * @type {Boolean}
 		 * @default false
 		 */
-		leadCSS:false,
+		leadCSS: false,
 		/**
 		 * @property blockQuote
 		 * @type {Boolean}
 		 * @default false
 		 */
-		blockQuote:false,
+		blockQuote: false,
 		/**
 		 * @property blockQuoteReverseCSS
 		 * @type {Boolean}
@@ -295,7 +295,7 @@ define([&quot;text!./Text.html&quot;, &quot;../common/Base&quot;], function(tpl)
 		 * @type {Boolean|String}
 		 * @default false
 		 */
-		blockQuoteFooter:false,
+		blockQuoteFooter: false,
 		/**
 		 * @property isBlockQuoteFooterHTML
 		 * @type {Boolean}
@@ -308,26 +308,26 @@ define([&quot;text!./Text.html&quot;, &quot;../common/Base&quot;], function(tpl)
 		 * @type {Boolean|String}
 		 * @default &quot;&quot;
 		 */
-		textAlignment:&quot;&quot;,
+		textAlignment: &quot;&quot;,
 		/**
 		 * Bindings
 		 * @method bindings
 		 * @return {Object}
 		 */
-		bindings:function(){
+		bindings: function() {
 			var me = this,
-				obj = me.callParent(arguments);
+				obj = me.callParent( arguments );
 			
 			obj.css.lead = me.leadCSS;
 			
-			if(me.textAlignment){
-				obj.css[ me.parseBind(&quot;text-&quot;+me.textAlignment) ] = true;	
+			if ( me.textAlignment ) {
+				obj.css[ me.parseBind( &quot;text-&quot; + me.textAlignment ) ] = true;
 			}
 			
-			if(me.isHtml){
-				obj.html = me.text; 
-			}else if(me.text){
-				obj.text = me.textBind(me.text);
+			if ( me.isHtml ) {
+				obj.html = me.text;
+			} else if ( me.text ) {
+				obj.text = me.textBind( me.text );
 			}
 			
 			return obj;
@@ -336,9 +336,9 @@ define([&quot;text!./Text.html&quot;, &quot;../common/Base&quot;], function(tpl)
 		 * @method blockQuoteBindings
 		 * @return {Object}
 		 */
-		blockQuoteBindings: function(){
+		blockQuoteBindings: function() {
 			return {
-				css:{
+				css: {
 					&quot;&#x27;blockquote-reverse&#x27;&quot;: this.blockQuoteReverseCSS
 				}
 			};
@@ -347,18 +347,19 @@ define([&quot;text!./Text.html&quot;, &quot;../common/Base&quot;], function(tpl)
 		 * @method blockQuoteFooterBindings
 		 * @return {Object}
 		 */
-		blockQuoteFooterBindings: function(){
+		blockQuoteFooterBindings: function() {
 			var me = this,
 				obj = {};
-			if(me.isHtml){
-				obj.html = me.blockQuoteFooter; 
-			}else{
-				obj.text = me.textBind(me.blockQuoteFooter);
+			if ( me.isHtml ) {
+				obj.html = me.blockQuoteFooter;
+			} else {
+				obj.text = me.textBind( me.blockQuoteFooter );
 			}
 			return obj;
 		}
 	});
 });
+
     </pre>
 </div>
 

@@ -243,276 +243,266 @@
  * @namespace plugins
  * @class InplaceEdit
  */
-define([&quot;jquery&quot;, &quot;knockout&quot;, &quot;Firebrick.ui/containers/GridRow&quot;, &quot;Firebrick.ui/containers/Box&quot;, &quot;Firebrick.ui/button/Icon&quot;], function($, ko){
+define( [ &quot;jquery&quot;, &quot;knockout&quot;, &quot;Firebrick.ui/containers/GridRow&quot;, &quot;Firebrick.ui/containers/Box&quot;, &quot;Firebrick.ui/button/Icon&quot; ], function( $, ko ) {
 	&quot;use strict&quot;;
-	
-	return Firebrick.define(&quot;Firebrick.ui.fields.plugins.InplaceEdit&quot;, {
-		/**
-		 * @property fieldItem
-		 * @type {Firebrick UI Object}
-		 */
-		fieldItem: null,
-		/**
-		 * optional
-		 * @property items
-		 * @type {Array of Objects}
-		 */
-		items: null,
-		/**
-		 * @property showInplaceTitle
-		 * @type {Boolean}
-		 */
-		showInplaceTitle: true,
-		/**
-		 * @property inplaceTitle
-		 * @type {String}
-		 * @default null
-		 */
-		title: null,
-		/**
-		 * @property container
-		 * @type {String}
-		 * @default &quot;body&quot;
-		 */
-		container: &quot;body&quot;,
-		/**
-		 * css width of the popover
-		 * @property width
-		 * @type {String}
-		 * @default &quot;250px&quot;
-		 */
-		width: &quot;250px&quot;,
-		/**
-		 * popover placement
-		 * @property placement
-		 * @type {String|Function}
-		 * @default &quot;auto&quot;
-		 */
-		placement: &quot;auto bottom&quot;,
-		/**
-		 * set to true to place at the bottom of the popover rather than the top
-		 * @property actionButtonsFooter
-		 * @type {Boolean}
-		 * @default false
-		 */
-		actionButtonsFooter: false,
-		/**
-		 * @method _getPopoverEl
-		 * @private
-		 * @return {jQuery Object}
-		 */
-		_getPopoverEl: function(){
-			var me = this;
-			return me.fieldItem.getElement().data(&#x27;bs.popover&#x27;).$tip;
-		},
-		/**
-		 * @method init
-		 */
-		init: function(){
-			var me = this,
-				$el = me.fieldItem.getElement();
-			if($el){
-				$el.on(&quot;click&quot;, function(){
-					return me.onEditClick.apply(me, arguments);
-				});
-				me.fieldItem.on(&quot;changed&quot;, function(){
-					$el.addClass(&quot;fb-ui-inplaceedit-changed&quot;);
-				});
-			}else{
-				console.info(&quot;no el&quot;, me);
-			}
-		},
-		/**
-		 * @method buildItems
-		 * @return {Array of Objects}
-		 */
-		buildItems: function(){
-			var me = this,
-				items = [],
-				type = me.fieldItem.type,
-				field,
-				valStr = &quot;Firebrick.getById(&#x27;&quot; + me.fieldItem.getId() + &quot;&#x27;).getValue()&quot;,
-				tmp;
-			if(me.items){
-				items = me.items;
-			}else{
-				field = {
-					css: &quot;fb-ui-inplaceedit-field&quot;,
-	    			inputSize: &quot;sm&quot;,
-	    			label: false,
-	    			inputWidth:12,
-				};
-				if(type === &quot;text&quot;){
-					tmp = {
-		    			sName:	&quot;fields.input&quot;,
-						value: valStr
-		    		};
-				}else if(type === &quot;select&quot;){
-					tmp = {
-						sName: &quot;fields.selectbox&quot;,
-						options: me.fieldItem.options
-					}
-					if(me.fieldItem.multiSelect){
-						tmp.selectedOptions = valStr;
-					}else{
-						tmp.value = valStr;
-					}
-				}
-				items.push( Firebrick.utils.overwrite(field, tmp) );
-			}
-			return items;
-		},
-		/**
-		 * @method showPopover
-		 */
-		showPopover: function(){
-			var me = this;
-			me._initBSPopover();
-			me._showBSPopover();
-			me._initPopoverContent();
-		},
-		/**
-		 * @method _initPopoverContent
-		 */
-		_initPopoverContent: function(){
-			var me = this;
-			Firebrick.create(&quot;Firebrick.ui.containers.GridRow&quot;, {
-	    		target: $(&quot;.popover-content&quot;, me._getPopoverEl()),
-	    		store: ko.dataFor( me.fieldItem.getElement()[0] ),
-	    		items:[{
-	    			columnWidth: me.actionButtonsFooter ? 12 : 7,
-	    			items: me.buildItems()
-	    		},{
-	    			columnWidth: me.actionButtonsFooter ? 12 : 5,
-	    			items: me.actionButtons()
-	    		}]
-			});
-		},
-		/**
-		 * initialises the bootstrap popover - doesn&#x27;t show it though
-		 * @method _initBSPopover
-		 */
-		_initBSPopover: function(){
-			var me = this,
-				title = Firebrick.text( me.showInplaceTitle ? ( me.fieldItem.popoverTitle || me.fieldItem.label || &quot;&quot; ) : &quot;&quot; );	//don&#x27;t use title directly here, because it is also used for popup
 
-			me.fieldItem.getElement().popover({ 
-			    html : true,
-			    title: title || &quot; &quot;,
-			    container: me.container,			//so it has the right z-index
-			    placement: me.placement,
-			 	trigger: &quot;manual&quot;,
-			});
-			
-		},
-		
-		/**
-		 * shows the actually bootstrap popover
-		 * @method _showBSPopover
-		 */
-		_showBSPopover: function(){
-			var me = this,
-				$popover,
-				$fieldItem = me.fieldItem.getElement();
-			
-			$fieldItem.popover(&quot;toggle&quot;);
-			
-			$popover = me._getPopoverEl();
-			if(me.width){
-				
-				$popover.css(&quot;width&quot;, me.width);
-				$popover.css(&quot;max-width&quot;, me.width);
-			}
+	return Firebrick.define( &quot;Firebrick.ui.fields.plugins.InplaceEdit&quot;, {
+	    /**
+	     * @property fieldItem
+	     * @type {Firebrick UI Object}
+	     */
+	    fieldItem: null,
+	    /**
+	     * optional
+	     * @property items
+	     * @type {Array of Objects}
+	     */
+	    items: null,
+	    /**
+	     * @property showInplaceTitle
+	     * @type {Boolean}
+	     */
+	    showInplaceTitle: true,
+	    /**
+	     * @property inplaceTitle
+	     * @type {String}
+	     * @default null
+	     */
+	    title: null,
+	    /**
+	     * @property container
+	     * @type {String}
+	     * @default &quot;body&quot;
+	     */
+	    container: &quot;body&quot;,
+	    /**
+	     * css width of the popover
+	     * @property width
+	     * @type {String}
+	     * @default &quot;250px&quot;
+	     */
+	    width: &quot;250px&quot;,
+	    /**
+	     * popover placement
+	     * @property placement
+	     * @type {String|Function}
+	     * @default &quot;auto&quot;
+	     */
+	    placement: &quot;auto bottom&quot;,
+	    /**
+	     * set to true to place at the bottom of the popover rather than the top
+	     * @property actionButtonsFooter
+	     * @type {Boolean}
+	     * @default false
+	     */
+	    actionButtonsFooter: false,
+	    /**
+	     * @method _getPopoverEl
+	     * @private
+	     * @return {jQuery Object}
+	     */
+	    _getPopoverEl: function() {
+		    var me = this;
+		    return me.fieldItem.getElement().data( &quot;bs.popover&quot; ).$tip;
+	    },
+	    /**
+	     * @method init
+	     */
+	    init: function() {
+		    var me = this, $el = me.fieldItem.getElement();
+		    if ( $el ) {
+			    $el.on( &quot;click&quot;, function() {
+				    return me.onEditClick.apply( me, arguments );
+			    } );
+			    me.fieldItem.on( &quot;changed&quot;, function() {
+				    $el.addClass( &quot;fb-ui-inplaceedit-changed&quot; );
+			    } );
+		    } else {
+			    console.info( &quot;no el&quot;, me );
+		    }
+	    },
+	    /**
+	     * @method buildItems
+	     * @return {Array of Objects}
+	     */
+	    buildItems: function() {
+		    var me = this, items = [], type = me.fieldItem.type, field, valStr = &quot;Firebrick.getById(&#x27;&quot; + me.fieldItem.getId() + &quot;&#x27;).getValue()&quot;, tmp;
+		    if ( me.items ) {
+			    items = me.items;
+		    } else {
+			    field = {
+			        css: &quot;fb-ui-inplaceedit-field&quot;,
+			        inputSize: &quot;sm&quot;,
+			        label: false,
+			        inputWidth: 12
+			    };
+			    if ( type === &quot;text&quot; ) {
+				    tmp = {
+				        sName: &quot;fields.input&quot;,
+				        value: valStr
+				    };
+			    } else if ( type === &quot;select&quot; ) {
+				    tmp = {
+				        sName: &quot;fields.selectbox&quot;,
+				        options: me.fieldItem.options
+				    };
+				    if ( me.fieldItem.multiSelect ) {
+					    tmp.selectedOptions = valStr;
+				    } else {
+					    tmp.value = valStr;
+				    }
+			    }
+			    items.push( Firebrick.utils.overwrite( field, tmp ) );
+		    }
+		    return items;
+	    },
+	    /**
+	     * @method showPopover
+	     */
+	    showPopover: function() {
+		    var me = this;
+		    me._initBSPopover();
+		    me._showBSPopover();
+		    me._initPopoverContent();
+	    },
+	    /**
+	     * @method _initPopoverContent
+	     */
+	    _initPopoverContent: function() {
+		    var me = this;
+		    Firebrick.create( &quot;Firebrick.ui.containers.GridRow&quot;, {
+		        target: $( &quot;.popover-content&quot;, me._getPopoverEl() ),
+		        store: ko.dataFor( me.fieldItem.getElement()[ 0 ] ),
+		        items: [ {
+		            columnWidth: me.actionButtonsFooter ? 12 : 7,
+		            items: me.buildItems()
+		        }, {
+		            columnWidth: me.actionButtonsFooter ? 12 : 5,
+		            items: me.actionButtons()
+		        } ]
+		    } );
+	    },
+	    /**
+	     * initialises the bootstrap popover - doesn&#x27;t show it though
+	     * @method _initBSPopover
+	     */
+	    _initBSPopover: function() {
+		    var me = this, title = Firebrick.text( me.showInplaceTitle ? ( me.fieldItem.popoverTitle || me.fieldItem.label || &quot;&quot; ) : &quot;&quot; ); //don&#x27;t use title directly here, because it is also used for popup
 
-			me._initDismissEvent();
-		},
-		/**
-		 * dismisses the popover when clicked out side it
-		 * @method _initDismissEvent
-		 */
-		_initDismissEvent: function(){
-			var me = this;
-			//delay because otherwise it catches the &lt;a&gt; click on opening the popover
-			Firebrick.delay(function(){
-				var func = function(event){
-					var $el = $(event.target);
-					if(!$el.closest(&quot;.popover&quot;).length){
-						me.fieldItem.getElement().popover(&quot;destroy&quot;);
-						$(&quot;html&quot;).off(&quot;click&quot;, func);	
-					}
-				};
-				$(&quot;html&quot;).on(&quot;click&quot;, func);
-				me.fieldItem.getElement().on(&quot;hide.bs.popover hidden.bs.popover&quot;, function(){
-					$(&quot;html&quot;).off(&quot;click&quot;, func);
-				});
-			}, 1);
-		},
-		/**
-		 * @method okAction
-		 */
-		okAction: function(){
-			var me = this;
-			me.setValue( me.getValue() );
-			me.fieldItem.getElement().popover(&quot;toggle&quot;);
-		},
+		    me.fieldItem.getElement().popover( {
+		        html: true,
+		        title: title || &quot; &quot;,
+		        container: me.container, //so it has the right z-index
+		        placement: me.placement,
+		        trigger: &quot;manual&quot;
+		    } );
 
-		/**
-		 * @method cancelAction
-		 */
-		cancelAction: function(){
-			var me = this;
-			me.fieldItem.getElement().popover(&quot;destroy&quot;);
-		},
-		
-		/**
-		 * @method actionButtons
-		 * @return {Array of Objects}
-		 */
-		actionButtons: function(){
-			var me = this;
-			return [{
-				sName: &quot;containers.box&quot;,
-				css: me.actionButtonsFooter ? &quot;pull-right&quot; : &quot;&quot;,
-				items:[{
-					sName: &quot;button.button&quot;,
-					glyIcon:&quot;ok&quot;,
-					btnStyle: &quot;primary&quot;,
-					btnSize: &quot;sm&quot;,
-					handler: function(){
-						return me.okAction.apply(me, arguments);
-					}
-				},{
-					sName: &quot;button.button&quot;,
-					glyIcon:&quot;remove&quot;,
-					btnStyle: &quot;default&quot;,
-					btnSize: &quot;sm&quot;,
-					handler: function(){
-						return me.cancelAction.apply(me, arguments);
-					}
-				}]
-			}];
-		},
-		
-		onEditClick: function(){
-			var me = this;
-			me.showPopover();
-		},
-		
-		getValue: function(){
-			var me = this,
-				$popover = me._getPopoverEl(),
-				$el = $(&quot;.fb-ui-inplaceedit-field&quot;, $popover);
-			
-			return $el.val();
-		},
-		
-		setValue: function( value ){
-			var me = this;
-			me.fieldItem.setValue( value );
-		}
-	});
-	
-});
+	    },
+
+	    /**
+	     * shows the actually bootstrap popover
+	     * @method _showBSPopover
+	     */
+	    _showBSPopover: function() {
+		    var me = this, $popover, $fieldItem = me.fieldItem.getElement();
+
+		    $fieldItem.popover( &quot;toggle&quot; );
+
+		    $popover = me._getPopoverEl();
+		    if ( me.width ) {
+
+			    $popover.css( &quot;width&quot;, me.width );
+			    $popover.css( &quot;max-width&quot;, me.width );
+		    }
+
+		    me._initDismissEvent();
+	    },
+	    /**
+	     * dismisses the popover when clicked out side it
+	     * @method _initDismissEvent
+	     */
+	    _initDismissEvent: function() {
+		    var me = this;
+		    //delay because otherwise it catches the &lt;a&gt; click on opening the popover
+		    Firebrick.delay( function() {
+			    var func = function( event ) {
+				    var $el = $( event.target );
+				    if ( !$el.closest( &quot;.popover&quot; ).length ) {
+					    me.fieldItem.getElement().popover( &quot;destroy&quot; );
+					    $( &quot;html&quot; ).off( &quot;click&quot;, func );
+				    }
+			    };
+			    $( &quot;html&quot; ).on( &quot;click&quot;, func );
+			    me.fieldItem.getElement().on( &quot;hide.bs.popover hidden.bs.popover&quot;, function() {
+				    $( &quot;html&quot; ).off( &quot;click&quot;, func );
+			    } );
+		    }, 1 );
+	    },
+	    /**
+	     * @method okAction
+	     */
+	    okAction: function() {
+		    var me = this;
+		    me.setValue( me.getValue() );
+		    me.fieldItem.getElement().popover( &quot;toggle&quot; );
+	    },
+
+	    /**
+	     * @method cancelAction
+	     */
+	    cancelAction: function() {
+		    var me = this;
+		    me.fieldItem.getElement().popover( &quot;destroy&quot; );
+	    },
+
+	    /**
+	     * @method actionButtons
+	     * @return {Array of Objects}
+	     */
+	    actionButtons: function() {
+		    var me = this;
+		    return [ {
+		        sName: &quot;containers.box&quot;,
+		        css: me.actionButtonsFooter ? &quot;pull-right&quot; : &quot;&quot;,
+		        items: [ {
+		            sName: &quot;button.button&quot;,
+		            glyIcon: &quot;ok&quot;,
+		            btnStyle: &quot;primary&quot;,
+		            btnSize: &quot;sm&quot;,
+		            handler: function() {
+			            return me.okAction.apply( me, arguments );
+		            }
+		        }, {
+		            sName: &quot;button.button&quot;,
+		            glyIcon: &quot;remove&quot;,
+		            btnStyle: &quot;default&quot;,
+		            btnSize: &quot;sm&quot;,
+		            handler: function() {
+			            return me.cancelAction.apply( me, arguments );
+		            }
+		        } ]
+		    } ];
+	    },
+
+	    onEditClick: function() {
+		    var me = this;
+		    me.showPopover();
+	    },
+
+	    getValue: function() {
+		    var me = this, $popover = me._getPopoverEl(), $el = $( &quot;.fb-ui-inplaceedit-field&quot;, $popover );
+
+		    return $el.val();
+	    },
+
+	    setValue: function( value ) {
+		    var me = this;
+		    me.fieldItem.setValue( value );
+	    }
+	} );
+
+} );
+
     </pre>
 </div>
 

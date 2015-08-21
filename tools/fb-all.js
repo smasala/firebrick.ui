@@ -30,14 +30,21 @@ var app = {
 	},
 	convertResults: function( fileArray ){
 		var newPath = "Firebrick.ui/",
-			file;
+			file,
+			isHtml,
+			isJs;
 		for(var i = 0, l = fileArray.length; i<l; i++){
 			file = fileArray[i];
-			file = file.replace("../src/components/", newPath).replace(".js", "");
-			if( file.indexOf(".html") !== -1 ){
-				file = "text!" + file;
+			isHtml = file.indexOf(".html");
+			isJs = file.indexOf(".js");
+			//only if it is an html or js file
+			if(isHtml !== -1 || isJs !== -1){
+				file = file.replace("../src/components/", newPath).replace(".js", "");
+				if( file.indexOf(".html") !== -1 ){
+					file = "text!" + file;
+				}
+				fileArray[i] = file;
 			}
-			fileArray[i] = file;
 		}
 		return fileArray;
 	},
@@ -48,6 +55,7 @@ var app = {
 	
 	/**
 	 * http://stackoverflow.com/a/15778106/425226
+	 * @method convertToString
 	 */
 	convertToString: function(obj){
 		var props = [],
@@ -62,7 +70,7 @@ var app = {
 				}
 			}
 		}
-		return "({" + props.join(",\n") + "})";
+		return "{" + props.join(",\n") + "}";
 	},
 	
 	getConfig: function(env, includePaths){
@@ -75,7 +83,6 @@ var app = {
 			    onBuildWrite: function (moduleName, path, contents) {
 			    	if(moduleName === "firebrick-ui"){
 			    		contents = contents.replace("define('firebrick-ui',[", "define('firebrick-ui-all',[");
-			        	console.info("---->", contents.substr(0, 500))
 			        }
 			        return contents;
 			    },
@@ -110,31 +117,80 @@ var app = {
 	},
 	
 	/**
+	 * @method writeBuild
 	 * @param path {String} ".{env}.js" is auto added at the end
 	 */
 	writeBuild: function(path,  env, includePaths){
 		var me = this;
 		path = path + "." + env + ".js";
-		me.write(path, me.convertToString( me.getConfig( env, includePaths ) ), function(err){
+		me.write(path, "(" + me.convertToString( me.getConfig( env, includePaths ) ) + ")", function(err){
 			if(err) {
 		        return console.log(err);
 		    }
 
 		    console.log(env + ": The file was saved!");
 		});
+	},
+	
+	readFiles: function(arr, i, l, callback, map){
+		var me = this,
+			file = arr[i];
+		
+		if(i < l){
+			map = map || {};
+			if(file.indexOf(".js") !== -1){
+				fs.readFile(file, "utf8", function(err, data){
+					var content, className, sName;
+					if(err){
+						console.info(err);
+					}else{
+						content = data.toString();
+						className = content.match(/return *Firebrick.define *\( *["']+([a-z0-9\.\_\-]* *)["']+ *, *{/ig) || [];
+						sName = content.match(/sName *\: *["']+([a-z0-9\.-_]*)["']+/ig) || [];
+						if(className.length > 1 && sName.length > 1){
+							map[sName[1]] = className[1];
+						}
+					}
+					
+					me.readFiles(arr, (i+1), l, callback, map);
+				});
+			}else{
+				me.readFiles(arr, (i+1), l, callback, map)
+			}
+		}else{
+			callback(map);
+		}
 	}
 		
 };
 
 app.walk("../src/components", function(err, results) {
-	var path = "Firebrick.ui.all.build";
+	var path = "Firebrick.ui.all.build",
+		convertedResults;
 	if (err){
 		throw err;
 	}
+
+	app.readFiles(results, 0, results.length, function(map){
+		var sourceFile = "../src/firebrick.ui.js";
+		fs.readFile(sourceFile, "utf8", function(e,data){
+			var content, newContent;
+			if(e){
+				console.info(e);
+			}else{
+				content = data.toString();
+				newContent = "//{{SNAME.HOLDER}}\n Firebrick.classes.addLookups( " + app.convertToString(map) + " );\n//{{/SNAME.HOLDER}}";
+				content = content.replace(/\/\/\{\{SNAME\.HOLDER\}\}(.|[\r\n])*\/\/\{\{\/SNAME\.HOLDER\}\}/g, newContent);
+				app.write(sourceFile, content);
+				
+				convertedResults = app.convertResults( results );
+				app.writeBuild(path, "src", convertedResults);
+				app.writeBuild(path, "dist", convertedResults);
+			}
+		});
+	});
 	
-	results = app.convertResults( results );
 	
-	app.writeBuild(path, "src", results);
-	app.writeBuild(path, "dist", results);
+
 	
 });

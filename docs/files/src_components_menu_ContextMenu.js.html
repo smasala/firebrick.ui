@@ -245,32 +245,32 @@
  * @namespace components.menu
  * @class ContextMenu
  */
-define([&quot;jquery&quot;, &quot;./Menu&quot;, &quot;../common/mixins/Items&quot;], function($){
+define( [ &quot;jquery&quot;, &quot;./Menu&quot;, &quot;../common/mixins/Items&quot; ], function( $ ) {
 	&quot;use strict&quot;;
 	
-	return Firebrick.define(&quot;Firebrick.ui.menu.ContextMenu&quot;, {
+	return Firebrick.define( &quot;Firebrick.ui.menu.ContextMenu&quot;, {
 		extend: &quot;Firebrick.ui.menu.Menu&quot;,
-		mixins:&quot;Firebrick.ui.common.mixins.Items&quot;,
+		mixins: &quot;Firebrick.ui.common.mixins.Items&quot;,
 		sName: &quot;menu.contextmenu&quot;,
 		target: &quot;body&quot;,
 		enclosedBind: true,
 		appendTarget: true,
 		contextMenuEvent: null,
 		
-		init: function(){
+		init: function() {
 			var me = this;
 			
-			me.on(&quot;rendered&quot;, function(){
+			me.on( &quot;rendered&quot;, function() {
 				me._initContext();
 				me.position();
 			});
 			
-			return me.callParent(arguments);
+			return me.callParent( arguments );
 		},
 		
-		position: function(){
+		position: function() {
 			var me = this,
-				el = $(&quot;&gt; ul&quot;, me.getElement()),
+				el = $( &quot;&gt; ul&quot;, me.getElement() ),
 				event = me.contextMenuEvent;
 	
 			el.css({
@@ -282,34 +282,34 @@ define([&quot;jquery&quot;, &quot;./Menu&quot;, &quot;../common/mixins/Items&quo
 			});
 		},
 		
-		_initContext: function(){
+		_initContext: function() {
 			var me = this,
-				globalClick = function(e){
-					var $e = $(e.target),
+				globalClick = function( e ) {
+					var $e = $( e.target ),
 						$el = me.getElement();
 					
-					if(!$el.is($e) || $el.has($e).length){
+					if ( !$el.is( $e ) || $el.has( $e ).length ) {
 						me.destroy();
-						$(document).off(&quot;click&quot;, globalClick);	
+						$( document ).off( &quot;click&quot;, globalClick );
 					}
 					
 				};
 				
-			$(document).on(&quot;click&quot;, globalClick);
+			$( document ).on( &quot;click&quot;, globalClick );
 		},
 		
-		
-		bindings: function(){
+		bindings: function() {
 			var me = this,
-				obj = me.callParent(arguments);
+				obj = me.callParent( arguments );
 			
-			obj.css[&quot;&#x27;fb-ui-contextmenu&#x27;&quot;] = true;
+			obj.css[ &quot;&#x27;fb-ui-contextmenu&#x27;&quot; ] = true;
 			
 			return obj;
 		}
 	});
 	
 });
+
     </pre>
 </div>
 

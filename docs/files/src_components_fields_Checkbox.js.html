@@ -244,50 +244,50 @@
  * @namespace components.fields
  * @class Checkbox
  */
-define([&quot;./Radio&quot;], function(){
+define( [ &quot;./Radio&quot; ], function() {
 	&quot;use strict&quot;;
-	return Firebrick.define(&quot;Firebrick.ui.fields.Checkbox&quot;, {
-		extend:&quot;Firebrick.ui.fields.Radio&quot;,
+	return Firebrick.define( &quot;Firebrick.ui.fields.Checkbox&quot;, {
+		extend: &quot;Firebrick.ui.fields.Radio&quot;,
 		/**
 		 * @property sName
 		 * @type {String}
 		 */
-		sName:&quot;fields.checkbox&quot;,
+		sName: &quot;fields.checkbox&quot;,
 		/**
 		 * @property type
 		 * @type {String}
 		 * @default &quot;&#x27;checkbox&#x27;&quot;
 		 */
-		type:&quot;checkbox&quot;,
+		type: &quot;checkbox&quot;,
 		/**
 		 * @property dataType
 		 * @type {String}
 		 * @default &quot;&#x27;checklist&#x27;&quot;
 		 */
-		dataType:&quot;checklist&quot;,
+		dataType: &quot;checklist&quot;,
 		/**
 		 * @method bindings
 		 * @return {Object}
 		 */
-		bindings:function(){
+		bindings: function() {
 			var me = this,
-				obj = me.callParent(arguments);
+				obj = me.callParent( arguments );
 
-			if(me.inplaceEdit){
+			if ( me.inplaceEdit ) {
 				obj.editable = me.selectedOptions || false;
 				obj.editableOptions = {
-						optionsValue:me.parseBind(me.optionsPropValue),
-						optionsText:me.parseBind(me.optionsPropText),
-						options:me.options,
+						optionsValue: me.parseBind( me.optionsPropValue ),
+						optionsText: me.parseBind( me.optionsPropText ),
+						options: me.options,
 						type:  me.parseBind( me.dataType )
 				};
 			}
 			
-	
 			return obj;
 		}
 	});
 });
+
     </pre>
 </div>
 

@@ -8,11 +8,11 @@
  * @namespace components.display
  * @class Progress
  */
-define(["text!./Progress.html", "../common/Base"], function(tpl){
+define( [ "text!./Progress.html", "../common/Base" ], function( tpl ) {
 	"use strict";
-	return Firebrick.define("Firebrick.ui.display.Progress", {
+	return Firebrick.define( "Firebrick.ui.display.Progress", {
 		extend: "Firebrick.ui.common.Base",
-		sName:"display.progress",
+		sName: "display.progress",
 		tpl: tpl,
 		/**
 		 * progress html5 element max attribute
@@ -20,14 +20,14 @@ define(["text!./Progress.html", "../common/Base"], function(tpl){
 		 * @type {Integer|String|Function}
 		 * @default 100
 		 */
-		max:100,
+		max: 100,
 		/**
 		 * progress html5 element value attribute
 		 * @property value
-		 * @type {Integer|String|Function} use a string or function for data binding 
+		 * @type {Integer|String|Function} use a string or function for data binding
 		 * @default 0
 		 */
-		value:0,
+		value: 0,
 		/**
 		 * whether or not to show a label with the progress bar
 		 * @property showLabel
@@ -52,41 +52,41 @@ define(["text!./Progress.html", "../common/Base"], function(tpl){
 		 * @method bindings
 		 * @return {Object}
 		 */
-		bindings: function(){
+		bindings: function() {
 			var me = this,
-				obj = me.callParent(arguments);
+				obj = me.callParent( arguments );
 			
 			obj.attr.max = me.max;
 			obj.attr.value = me.value;
-			obj.text = me.parseBind(me.value+"%");
+			obj.text = me.parseBind( me.value + "%" );
 			
 			return obj;
 		},
 		/**
 		 * @method progressLabelBindings
 		 */
-		progressLabelBindings: function(){
+		progressLabelBindings: function() {
 			var me = this;
 			return {
 				css: {
 					"'progress-label'": true
 				},
 				attr: {
-					"'data-symbol'": me.parseBind(me.dataSymbol),
+					"'data-symbol'": me.parseBind( me.dataSymbol ),
 					"'data-value'": me.value
 				},
-				text: me.textBind(me.label),
+				text: me.textBind( me.label ),
 				style: {
-					width: me.parseBind(me.value+"%")
+					width: me.parseBind( me.value + "%" )
 				}
 			};
 		},
 		/**
 		 * @method progressContainerBindings
 		 */
-		progressContainerBindings: function(){
+		progressContainerBindings: function() {
 			return {
-				css:{
+				css: {
 					"'progress-container'": true
 				}
 			};

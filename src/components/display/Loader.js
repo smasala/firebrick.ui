@@ -9,11 +9,11 @@
  * @uses components.common.mixins.Items
  * @class Loader
  */
-define(["text!./Loader.html", "jquery", "../common/Base", "../common/mixins/Items"], function(tpl, $){
+define( [ "text!./Loader.html", "jquery", "../common/Base", "../common/mixins/Items" ], function( tpl, $ ) {
 	"use strict";
-	return Firebrick.define("Firebrick.ui.display.Loader", {
+	return Firebrick.define( "Firebrick.ui.display.Loader", {
 		extend: "Firebrick.ui.common.Base",
-		enclosedBind:true,
+		enclosedBind: true,
 		/**
 		 * @property target
 		 * @type {String or jQuery Object}
@@ -53,15 +53,15 @@ define(["text!./Loader.html", "jquery", "../common/Base", "../common/mixins/Item
 		/**
 		 * @method init
 		 */
-		init: function(){
+		init: function() {
 			var me = this,
 				target = me.getTarget();
 			
-			if(target.is("input")){
+			if ( target.is( "input" ) ) {
 				me.target = target.parent();
 			}
 			
-			me.on("rendered", function(){
+			me.on( "rendered", function() {
 				me._initRender();
 			});
 			return me.callParent( arguments );
@@ -70,45 +70,45 @@ define(["text!./Loader.html", "jquery", "../common/Base", "../common/mixins/Item
 		 * @method _initRender
 		 * @private
 		 */
-		_initRender: function(){
+		_initRender: function() {
 			var me = this,
 				target = me.getTarget();
 			
-			target.addClass("fb-ui-loader-open"); //TODO: if target is absolute or fixed?
+			target.addClass( "fb-ui-loader-open" ); //TODO: if target is absolute or fixed?
 			me.position();
 		},
 		/**
 		 * @method destroy
 		 */
-		destroy: function(){
+		destroy: function() {
 			var me = this,
 				target = me.getTarget();
-			target.removeClass("fb-ui-loader-open");
+			target.removeClass( "fb-ui-loader-open" );
 			return me.callParent( arguments );
 		},
 		/**
 		 * @method _getCalcTarget
 		 * @return {jQuery Object}
 		 */
-		_getCalcTarget: function(){
+		_getCalcTarget: function() {
 			var me = this;
-			return me.target === "body" || me.target === "html" ? $(window) : me.getTarget();
+			return me.target === "body" || me.target === "html" ? $( window ) : me.getTarget();
 		},
 		/**
 		 * positions loader
 		 * @method position
 		 */
-		position: function(){
+		position: function() {
 			var me = this,
 				$target = me._getCalcTarget(),
 				$el = me.getElement(),
-				$loader = $(".fb-ui-loader-msg-container", $el),
+				$loader = $( ".fb-ui-loader-msg-container", $el ),
 				xPos = $loader.outerWidth() / 2,
 				yPos = $loader.outerHeight() / 2;
 
 			$loader.css({
-				top: ($target.height() / 2) - yPos,
-				left: ($target.width() / 2) - xPos
+				top: ( $target.height() / 2 ) - yPos,
+				left: ( $target.width() / 2 ) - xPos
 			});
 			
 		},
@@ -116,11 +116,11 @@ define(["text!./Loader.html", "jquery", "../common/Base", "../common/mixins/Item
 		 * @method bindings
 		 * @return {Object}
 		 */
-		bindings: function(){
+		bindings: function() {
 			var me = this,
 				obj = me.callParent( arguments );
 			
-			obj.css["'fb-ui-loader-container'"] = true;
+			obj.css[ "'fb-ui-loader-container'" ] = true;
 			
 			return obj;
 		},
@@ -128,9 +128,8 @@ define(["text!./Loader.html", "jquery", "../common/Base", "../common/mixins/Item
 		 * @method maskBindings
 		 * @return {Object}
 		 */
-		maskBindings: function(){
-			var me = this,
-				obj = {
+		maskBindings: function() {
+			var obj = {
 					css: {
 						"'fb-ui-loader-mask'": true
 					}
@@ -141,9 +140,8 @@ define(["text!./Loader.html", "jquery", "../common/Base", "../common/mixins/Item
 		 * @method spinnerBindings
 		 * @return {Object}
 		 */
-		spinnerBindings: function(){
-			var me = this,
-				obj = {
+		spinnerBindings: function() {
+			var obj = {
 					css: {
 						"'fb-ui-loader-spinner'": true,
 						glyphicon: true,
@@ -157,9 +155,8 @@ define(["text!./Loader.html", "jquery", "../common/Base", "../common/mixins/Item
 		 * @method msgContainerBindings
 		 * @return {Object}
 		 */
-		msgContainerBindings: function(){
-			var me = this,
-				obj = {
+		msgContainerBindings: function() {
+			var obj = {
 					css: {
 						"'fb-ui-loader-msg-container'": true
 					}
@@ -171,7 +168,7 @@ define(["text!./Loader.html", "jquery", "../common/Base", "../common/mixins/Item
 		 * @method msgBindings
 		 * @return {Object}
 		 */
-		msgBindings: function(){
+		msgBindings: function() {
 			var me = this,
 				obj = {
 					css: {
@@ -179,7 +176,7 @@ define(["text!./Loader.html", "jquery", "../common/Base", "../common/mixins/Item
 					}
 				};
 			
-			if( me.msgText ){
+			if ( me.msgText ) {
 				obj.text = me.textBind( me.msgText );
 			}
 			

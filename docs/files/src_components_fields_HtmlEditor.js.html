@@ -244,10 +244,10 @@
  * @namespace components.fields
  * @class HtmlEditor
  */
-define([&quot;./TextArea&quot;, &quot;summernote&quot;], function(){
+define( [ &quot;./TextArea&quot;, &quot;summernote&quot; ], function() {
 	&quot;use strict&quot;;
-	return Firebrick.define(&quot;Firebrick.ui.fields.HtmlEditor&quot;, {
-		extend:&quot;Firebrick.ui.fields.TextArea&quot;,
+	return Firebrick.define( &quot;Firebrick.ui.fields.HtmlEditor&quot;, {
+		extend: &quot;Firebrick.ui.fields.TextArea&quot;,
 		/**
 		 * @property sName
 		 * @type {String}
@@ -264,38 +264,40 @@ define([&quot;./TextArea&quot;, &quot;summernote&quot;], function(){
 		 * @method getEditorConfig
 		 * @return {Object}
 		 */
-		getEditorConfig: function(){
+		getEditorConfig: function() {
 			var me = this,
 				editorConf = me.editorConf || {},
 				obj = {
 					height: 200
 				};
-			return Firebrick.utils.overwrite(obj, editorConf);
+			return Firebrick.utils.overwrite( obj, editorConf );
 		},
 		/**
 		 * @method setValue
 		 */
-		_setValue: function( value ){
+		_setValue: function( value ) {
+			var me = this;
 			return me.getElement().code( value );
 		},
 		/**
 		 * @method getValue
 		 * @return {Html}
 		 */
-		getValue: function(){
+		getValue: function() {
+			var me = this;
 			return me.getElement().code();
 		},
 		/**
 		 * @method init
 		 */
-		init: function(){
+		init: function() {
 			var me = this;
 			
-			if( !me.inplaceEdit ){
-				me.on(&quot;rendered&quot;, function(){
+			if ( !me.inplaceEdit ) {
+				me.on( &quot;rendered&quot;, function() {
 					me._initEditor();
 				});
-				me.on(&quot;destroy&quot;, function(){
+				me.on( &quot;destroy&quot;, function() {
 					me.getElement().destroy();
 				});
 			}
@@ -306,14 +308,15 @@ define([&quot;./TextArea&quot;, &quot;summernote&quot;], function(){
 		 * @method _initEditor
 		 * @private
 		 */
-		_initEditor: function(){
+		_initEditor: function() {
 			var me = this,
 				$el = me.getElement();
 				
-			$el.summernote( me.getEditorConfig() ); 
+			$el.summernote( me.getEditorConfig() );
 		}
 	});
 });
+
     </pre>
 </div>
 

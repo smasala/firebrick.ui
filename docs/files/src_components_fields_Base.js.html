@@ -244,36 +244,37 @@
  * @namespace components.fields
  * @class Base
  */
-define([&quot;../common/Base&quot;], function(){
+define( [ &quot;../common/Base&quot; ], function() {
 	&quot;use strict&quot;;
-	return Firebrick.define(&quot;Firebrick.ui.fields.Base&quot;, {
-		extend:&quot;Firebrick.ui.common.Base&quot;,
+	return Firebrick.define( &quot;Firebrick.ui.fields.Base&quot;, {
+		extend: &quot;Firebrick.ui.common.Base&quot;,
 		/**
 		 * @property sName
 		 * @type {String}
 		 */
-		sName:&quot;fields.base&quot;,
+		sName: &quot;fields.base&quot;,
 		/**
 		 * override method to fire events on actual element - append fb.ui. to event name
 		 * @method fireEvent
 		 */
-		fireEvent: function(){
+		fireEvent: function() {
 			var me = this,
 				$el = me.getElement(),
 				args = Firebrick.utils.argsToArray( arguments ),
-				eventName = args[0];
+				eventName = args[ 0 ];
 			
-			if($el){
+			if ( $el ) {
 				//remove eventName from args
-				args.splice(0, 1);
+				args.splice( 0, 1 );
 				//trigger event on the element - getElement()
-				$el.trigger(&quot;fb.ui.&quot; + eventName, args);
+				$el.trigger( &quot;fb.ui.&quot; + eventName, args );
 			}
 			
 			return me.callParent( arguments );
 		}
 	});
 });
+
     </pre>
 </div>
 

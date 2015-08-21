@@ -244,47 +244,47 @@
  * @namespace components.button
  * @class ToggleButton
  */
-define([&quot;text!./ToggleButton.html&quot;, &quot;knockout&quot;, &quot;jquery&quot;, &quot;../common/MultiplesBase&quot;], function(subTpl, ko, $){
+define( [ &quot;text!./ToggleButton.html&quot;, &quot;knockout&quot;, &quot;jquery&quot;, &quot;../common/MultiplesBase&quot; ], function( subTpl, ko, $ ) {
 	&quot;use strict&quot;;
 	
-	if(!ko.bindingHandlers.toggleRenderer){
+	if ( !ko.bindingHandlers.toggleRenderer ) {
 		/*
 		 * optionsRenderer for togglebuttons
 		 * create dynamic css along with static
 		 */
 		ko.bindingHandlers.toggleRenderer = {
-		    init: function(element, valueAccessor, allBindings, viewModel, bindingContext) {
-				var me = Firebrick.ui.getCmp(valueAccessor()),
-					currentStyle = &quot;btn-&quot;+me.btnStyle,
-					$el = $(element),
+		    init: function( element, valueAccessor, allBindings, viewModel ) {
+				var me = Firebrick.ui.getCmp( valueAccessor() ),
+					currentStyle = &quot;btn-&quot; + me.btnStyle,
+					$el = $( element ),
 					inputId = allBindings().withProperties.inputItemId;
 
 				//ko data bound observable
-				inputId = Firebrick.ui.utils.getValue(inputId);
+				inputId = Firebrick.ui.utils.getValue( inputId );
 				
-				if($el.length){
-					if(viewModel){
-						if(viewModel.btnStyle){
+				if ( $el.length ) {
+					if ( viewModel ) {
+						if ( viewModel.btnStyle ) {
 							//replace element className with the new one defined in the binding
-							$el.attr(&quot;class&quot;, function(i, v){
-								return v.replace(currentStyle, &quot;btn-&quot; + Firebrick.ui.utils.getValue(viewModel.btnStyle));
+							$el.attr( &quot;class&quot;, function( i, v ) {
+								return v.replace( currentStyle, &quot;btn-&quot; + Firebrick.ui.utils.getValue( viewModel.btnStyle ) );
 							});
 						}
-						if(viewModel.css){
-							$el.addClass(Firebrick.ui.utils.getValue(viewModel.css));
+						if ( viewModel.css ) {
+							$el.addClass( Firebrick.ui.utils.getValue( viewModel.css ) );
 						}
 					}
 					//add the correct &quot;for&quot; attribute id and the input id
-					$el.attr(&quot;for&quot;, inputId);
-					$(&quot;&gt; input&quot;, $el).attr(&quot;id&quot;, inputId);
+					$el.attr( &quot;for&quot;, inputId );
+					$( &quot;&gt; input&quot;, $el ).attr( &quot;id&quot;, inputId );
 				}
 				
 		    }
 		};
 	}
 	
-	return Firebrick.define(&quot;Firebrick.ui.button.ToggleButton&quot;, {
-		extend:&quot;Firebrick.ui.common.MultiplesBase&quot;,
+	return Firebrick.define( &quot;Firebrick.ui.button.ToggleButton&quot;, {
+		extend: &quot;Firebrick.ui.common.MultiplesBase&quot;,
 		/**
 		 * component alias
 		 * @property sName
@@ -295,13 +295,13 @@ define([&quot;text!./ToggleButton.html&quot;, &quot;knockout&quot;, &quot;jquery
 		 * @property subTpl
 		 * @type {String} html
 		 */
-		subTpl:subTpl,
+		subTpl: subTpl,
 		/**
 		 * @property btnGroupClass
 		 * @type {Boolean|String}
 		 * @default true
 		 */
-		btnGroupClass:true,
+		btnGroupClass: true,
 		/**
 		 * @property btnClass
 		 * @type {Boolean|String}
@@ -340,7 +340,7 @@ define([&quot;text!./ToggleButton.html&quot;, &quot;knockout&quot;, &quot;jquery
 		 * @type {String|Array of Objects}
 		 * @default &quot;&#x27;&#x27;&quot;
 		 */
-		options:&quot;&#x27;&#x27;&quot;,
+		options: &quot;&#x27;&#x27;&quot;,
 		/**
 		 * @property showLabel
 		 * @type {Boolean}
@@ -357,30 +357,30 @@ define([&quot;text!./ToggleButton.html&quot;, &quot;knockout&quot;, &quot;jquery
 		 * @method btnGroupBindings
 		 * @return {Object}
 		 */
-		btnGroupBindings: function(){
+		btnGroupBindings: function() {
 			var me = this;
 			return {
-				css:{
+				css: {
 					&quot;&#x27;btn-group&#x27;&quot;: me.btnGroupClass
 				},
-				attr:{
-					&quot;&#x27;data-toggle&#x27;&quot;: me.parseBind(me.dataToggle)
+				attr: {
+					&quot;&#x27;data-toggle&#x27;&quot;: me.parseBind( me.dataToggle )
 				},
-				foreach: Firebrick.ui.helper.optionString(me)
+				foreach: Firebrick.ui.helper.optionString( me )
 			};
 		},
 		/**
 		 * @method toggleInputBindings
 		 * @return {Object}
 		 */
-		toggleInputBindings: function(){
+		toggleInputBindings: function() {
 			var me = this;
 			return {
-				attr:{
+				attr: {
 					//id attribute is parsed by the toggleRenderer
-					name: me.parseBind(me.name)
+					name: me.parseBind( me.name )
 				},
-				value:&quot;$data.value || $data.text ? $data.value || $data.text : $data&quot;
+				value: &quot;$data.value || $data.text ? $data.value || $data.text : $data&quot;
 			};
 		},
 		
@@ -388,31 +388,31 @@ define([&quot;text!./ToggleButton.html&quot;, &quot;knockout&quot;, &quot;jquery
 		 * @method toggleLabelBindings
 		 * @return {Object}
 		 */
-		toggleLabelBindings: function(){
+		toggleLabelBindings: function() {
 			var me = this,
 				obj = {
-					attr:{
+					attr: {
 						id: &quot;$data.labelId || &#x27;fb-ui-id-&#x27; + Firebrick.utils.uniqId()&quot;
 					},
-					withProperties:{
-						inputItemId:&quot;$data.id || &#x27;fb-ui-id-&#x27; + Firebrick.utils.uniqId()&quot;
+					withProperties: {
+						inputItemId: &quot;$data.id || &#x27;fb-ui-id-&#x27; + Firebrick.utils.uniqId()&quot;
 					},
-					css:{
-						active: &quot;Firebrick.ui.getCmp(&#x27;&quot;+me.getId()+&quot;&#x27;)._valueChecker(&quot;+me.value+&quot;, $data)&quot;
+					css: {
+						active: &quot;Firebrick.ui.getCmp(&#x27;&quot; + me.getId() + &quot;&#x27;)._valueChecker(&quot; + me.value + &quot;, $data)&quot;
 					},
-					toggleRenderer: me.parseBind(me.getId()) 
+					toggleRenderer: me.parseBind( me.getId() )
 				};
 
-			if(me.btnClass){
+			if ( me.btnClass ) {
 				obj.css.btn = true;
 			}
 			
-			if(me.btnStyle){
-				obj.css[me.parseBind(&quot;btn-&quot; + me.btnStyle)] = true;
+			if ( me.btnStyle ) {
+				obj.css[ me.parseBind( &quot;btn-&quot; + me.btnStyle ) ] = true;
 			}
 			
-			if(me.btnSize){
-				obj.css[me.parseBind(&quot;btn-&quot; + me.btnSize)] = true;
+			if ( me.btnSize ) {
+				obj.css[ me.parseBind( &quot;btn-&quot; + me.btnSize ) ] = true;
 			}
 			
 			return obj;
@@ -421,13 +421,14 @@ define([&quot;text!./ToggleButton.html&quot;, &quot;knockout&quot;, &quot;jquery
 		 * @method toggleLabelTextBindings
 		 * @return {Object}
 		 */
-		toggleLabelTextBindings: function(){
+		toggleLabelTextBindings: function() {
 			return {
 				&quot;text&quot;: &quot;$data.text ? $data.text : $data&quot;
 			};
 		}
 	});
 });
+
     </pre>
 </div>
 

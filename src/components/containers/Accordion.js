@@ -8,10 +8,10 @@
  * @namespace components.containers
  * @class Accordion
  */
-define(["text!./Accordion.html", "./Base", "./Panel", "bootstrap.plugins/collapse"], function(tpl){
+define( [ "text!./Accordion.html", "./Base", "./Panel", "bootstrap.plugins/collapse" ], function( tpl ) {
 	"use strict";
-	return Firebrick.define("Firebrick.ui.containers.Accordion", {
-		extend:"Firebrick.ui.containers.Base",
+	return Firebrick.define( "Firebrick.ui.containers.Accordion", {
+		extend: "Firebrick.ui.containers.Base",
 		/**
 		 * @property tpl
 		 * @type {String} html
@@ -22,7 +22,7 @@ define(["text!./Accordion.html", "./Base", "./Panel", "bootstrap.plugins/collaps
 		 * @property sName
 		 * @type {String}
 		 */
-		sName:"containers.accordion",
+		sName: "containers.accordion",
 		
 		/**
 		 * @property defaults
@@ -33,7 +33,7 @@ define(["text!./Accordion.html", "./Base", "./Panel", "bootstrap.plugins/collaps
 		 */
 		defaults: {
 			sName: "containers.panel",
-			collapsible:true,
+			collapsible: true,
 			role: "tab",
 			collapseRole: "tabpanel"
 		},
@@ -59,32 +59,32 @@ define(["text!./Accordion.html", "./Base", "./Panel", "bootstrap.plugins/collaps
 		 * @method bindings
 		 * @return {Object}
 		 */
-		bindings: function(){
+		bindings: function() {
 			var me = this,
-				obj = me.callParent(arguments);
+				obj = me.callParent( arguments );
 			
 			//<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
 			
-			obj.attr.role = me.parseBind(me.role);
-			obj.attr["'aria-multiselectable'"] = me.ariaMultiselectable;
-			if(me.panelGroupClass){
-				obj.css[me.parseBind(me.panelGroupClass)] = true;
+			obj.attr.role = me.parseBind( me.role );
+			obj.attr[ "'aria-multiselectable'" ] = me.ariaMultiselectable;
+			if ( me.panelGroupClass ) {
+				obj.css[ me.parseBind( me.panelGroupClass ) ] = true;
 			}
 			
 			return obj;
 		},
 		
-		getItems: function(){
+		getItems: function() {
 			var me = this,
 				item;
 			
-			for(var i = 0, l = me.items.length; i<l; i++){
-				item = me.items[i];
-				item.dataParentId = me.parseBind("#" + me.getId());
+			for ( var i = 0, l = me.items.length; i < l; i++ ) {
+				item = me.items[ i ];
+				item.dataParentId = me.parseBind( "#" + me.getId() );
 				item.collapsed = item.active ? false : true;
 			}
 			
-			return me.callParent(arguments);
+			return me.callParent( arguments );
 		}
 	});
 });

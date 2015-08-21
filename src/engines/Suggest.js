@@ -7,201 +7,200 @@
  * @module Firebrick.engine
  * @class Suggest
  */
-define(["jquery", "firebrick"], function($){
+define( [ "jquery", "firebrick" ], function( $ ) {
 	"use strict";
 	
-	return Firebrick.define("Firebrick.ui.engines.Suggest", {
+	return Firebrick.define( "Firebrick.ui.engines.Suggest", {
 		/**
-		 * @property store
-		 * @type {Firebrick.store.Base}
-		 * @default null
-		 */
+		* @property store
+		* @type {Firebrick.store.Base}
+		* @default null
+		*/
 		store: null,
 		/**
-		 * local | remote
-		 * @property mode
-		 * @type {String}
-		 * @default "local"
-		 */
+		* local | remote
+		* @property mode
+		* @type {String}
+		* @default "local"
+		*/
 		mode: "local",
 		/**
-		 * @property _cache
-		 * @private
-		 * @type {Object}
-		 */
+		* @property _cache
+		* @private
+		* @type {Object}
+		*/
 		_cache: null,
 		/**
-		 * set this property if you wish to find matches for a certain property
-		 * {name:"Steven", age: 10} - searchKey = "age" will result in all queries searching the age property
-		 * set as null|false if you want to search in all properties (if data is an object and not primitive value)
-		 * @property searchKey
-		 * @type {String | Array of Strings | null | false}
-		 * @default null;
-		 */
+		* set this property if you wish to find matches for a certain property
+		* {name:"Steven", age: 10} - searchKey = "age" will result in all queries searching the age property
+		* set as null|false if you want to search in all properties (if data is an object and not primitive value)
+		* @property searchKey
+		* @type {String | Array of Strings | null | false}
+		* @default null;
+		*/
 		searchKeys: null,
 		/**
-		 * used to prefetch data on init
-		 * @property prefetch
-		 * 	 .url {String}
-		 * @type {Object}
-		 * @default null
-		 */
+		* used to prefetch data on init
+		* @property prefetch
+		*	.url {String}
+		* @type {Object}
+		* @default null
+		*/
 		prefetch: null,
 		/**
-		 * @method init
-		 */
-		init: function(){
+		* @method init
+		*/
+		init: function() {
 			var me = this;
 			me._initCache();
 		},
 		/**
-		 * @method _initCache
-		 */
-		_initCache: function(){
+		* @method _initCache
+		*/
+		_initCache: function() {
 			var me = this;
 			me._cache = {};
 		},
 		/**
-		 * clears cache (search indexes)
-		 * @method clear
-		 */
-		clear: function(){
+		* clears cache (search indexes)
+		* @method clear
+		*/
+		clear: function() {
+			var me = this;
 			me._initCache();
 		},
 		/**
-		 * used to filter out items in when performing a query
-		 * @method filter
-		 * @param value {Value Object}
-		 * @return {Boolean}
-		 */
-		filter: function(){
+		* used to filter out items in when performing a query
+		* @method filter
+		* @param value {Value Object}
+		* @return {Boolean}
+		*/
+		filter: function() {
 			return true;
 		},
 		/**
-		 * @method query
-		 * @param query {String}
-		 * @param callback {Function}
-		 */
-		query: function(query, callback){
+		* @method query
+		* @param query {String}
+		* @param callback {Function}
+		*/
+		query: function( query, callback ) {
 			var me = this,
-				matches = [],
-				data,
-				ajax;
+				matches = [], data;
 			
-			if(me.store){
-				if( me.mode === "remote" ){
+			if ( me.store ) {
+				if ( me.mode === "remote" ) {
 					me.store.load({
-						suggest:{
+						suggest: {
 							query: query
 						},
-						callback: function(data){
-							matches = me._query(query, me.store.toPlainObject());
-							callback( matches );
+						callback: function() {	//arg: data
+								matches = me._query( query, me.store.toPlainObject() );
+								callback( matches );
 						}
 					});
-				}else if( me.mode === "local" ){
-					if(!me._cache[query]){
-						matches = me._query(query, me.store.toPlainObject());
-					    me._cache[query] = matches;
-					}else{
-						data = me._cache[query];
-						matches = me._cache[query].filter( function(){
-							return me.filter.apply(me, arguments);
+				} else if ( me.mode === "local" ) {
+					if ( !me._cache[ query ] ) {
+						matches = me._query( query, me.store.toPlainObject() );
+						me._cache[ query ] = matches;
+					} else {
+						data = me._cache[ query ];
+						matches = me._cache[ query ].filter( function() {
+							return me.filter.apply( me, arguments );
 						});
 					}
-					
+				
 					callback( matches );
 				}
 			}
 		},
 		/**
-		 * @method _query
-		 * @param query {String}
-		 * @param data {Array | JSON Object}
-		 * @return matches {Array}
-		 */
-		_query: function(query, data){
+		* @method _query
+		* @param query {String}
+		* @param data {Array | JSON Object}
+		* @return matches {Array}
+		*/
+		_query: function( query, data ) {
 			var me = this,
 				matches = [],
 				childMatches = [],
 				tmp,
 				lookups,
 				lukup,
-				substrRegex = new RegExp(query, 'i'),
+				substrRegex = new RegExp( query, "i" ),
 				it;
-
-			for(var i = 0, l = data.length; i<l; i++){
-		    	it = data[i];
-		    	if( me.filter(it) ){
-		    		if( it.exclude !== true ){	//if exclude === true then ignore this node and children
-		    			if(it.suggestable !== false){ //suggestable === false means that the current node is ignored but not their children
-		    				lookups = me._getSearchStrings( it );
-				    		for(var ii = 0, ll = lookups.length; ii<ll; ii++){
-						    	//search for a match
-				    			lukup = lookups[ii];
-				    			//check for Knockout observables - maybe needed if store is defined for data
-				    			lukup = $.isFunction( lukup ) ? lukup() : lukup;
-						    	if( substrRegex.test( lukup ) ){
-						    		matches.push(it);
-						    		//break lookups loop
-						    		break;
-						    	}
-				    		}
-		    			}
-		    			if($.isArray(it.children)){
-		    				//has child nodes
-		    				//search child nodes too
-		    				childMatches = me._query(query, it.children);
-		    				if( childMatches.length ){
-		    					tmp = Firebrick.utils.copyover({}, it);	//make a new copy of the parent node
-		    					tmp.children = childMatches;	//add the matches to it
-		    					matches.push(tmp);
-		    				}
-		    			}
-		    		}
-		    	}
-		    }
+		
+			for ( var i = 0, l = data.length; i < l; i++ ) {
+				it = data[ i ];
+				if ( me.filter( it ) ) {
+					if ( it.exclude !== true ) {	//if exclude === true then ignore this node and children
+						if ( it.suggestable !== false ) { //suggestable === false means that the current node is ignored but not their children
+							lookups = me._getSearchStrings( it );
+								for ( var ii = 0, ll = lookups.length; ii < ll; ii++ ) {
+									//search for a match
+									lukup = lookups[ ii ];
+									//check for Knockout observables - maybe needed if store is defined for data
+									lukup = $.isFunction( lukup ) ? lukup() : lukup;
+									if ( substrRegex.test( lukup ) ) {
+									matches.push( it );
+									//break lookups loop
+									break;
+								}
+							}
+						}
+						if ( $.isArray( it.children ) ) {
+							//has child nodes
+							//search child nodes too
+							childMatches = me._query( query, it.children );
+							if ( childMatches.length ) {
+								tmp = Firebrick.utils.copyover({}, it );	//make a new copy of the parent node
+								tmp.children = childMatches;	//add the matches to it
+								matches.push( tmp );
+							}
+						}
+					}
+				}
+			}
 			
 			return matches;
 		},
 		/**
-		 * returns an array of all the data which can be tested by the query method
-		 * @method _getSearchStrings
-		 * @param value {Any} query iteration value
-		 * @return {Array}
-		 */
-		_getSearchStrings: function( value ){
+		* returns an array of all the data which can be tested by the query method
+		* @method _getSearchStrings
+		* @param value {Any} query iteration value
+		* @return {Array}
+		*/
+		_getSearchStrings: function( value ) {
 			var me = this,
-				searchKeys = me.searchKeys,
-				str = [],
-				sk;
-
+			searchKeys = me.searchKeys,
+			str = [],
+			sk;
+	
 			//e.g. value = {text:"Java", desc:"some kinda of programming language", icon:"java.png"}
-			if( $.isPlainObject(value) ){
+			if ( $.isPlainObject( value ) ) {
 				//searchKeys !== null
-				if(searchKeys){
+				if ( searchKeys ) {
 					//searchKeys === ["text", "desc"];
-					if( $.isArray( searchKeys ) ){
-						for(var i = 0, l = searchKeys.length; i<l; i++){
-							sk = searchKeys[i];
-							if( value.hasOwnProperty( sk ) ){
-								str.push( value[sk] );	
+					if ( $.isArray( searchKeys ) ) {
+						for ( var i = 0, l = searchKeys.length; i < l; i++ ) {
+							sk = searchKeys[ i ];
+							if ( value.hasOwnProperty( sk ) ) {
+								str.push( value[ sk ] );
 							}
 						}
-					}else{
-						if( value.hasOwnProperty( searchKeys ) ){
-							str.push( value[searchKeys] );	
+					} else {
+						if ( value.hasOwnProperty( searchKeys ) ) {
+							str.push( value[ searchKeys ] );
 						}
 					}
-				}else{
+				} else {
 					//searchKeys === null. get all
-					for(var key in value){
-						if( value.hasOwnProperty(key) ){
-							str.push( value[key] );
+					for ( var key in value ) {
+						if ( value.hasOwnProperty( key ) ) {
+							str.push( value[ key ] );
 						}
 					}
 				}
-			}else{
+			} else {
 				//value === primitive type, string, int, boolean etc
 				str.push( value );
 			}
@@ -209,5 +208,4 @@ define(["jquery", "firebrick"], function($){
 			return str;
 		}
 	});
-	
 });

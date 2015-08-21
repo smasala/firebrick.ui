@@ -3,23 +3,23 @@
  */
 
 /**
- * 
+ *
  * @module Firebrick.ui.components
  * @extends components.containers.Base
  * @namespace components.containers.tab
  * @class Pane
  */
-define(["text!./Pane.html", "../Base", "bootstrap.plugins/tab"], function(tpl){
+define( [ "text!./Pane.html", "../Base", "bootstrap.plugins/tab" ], function( tpl ) {
 	"use strict";
-	return Firebrick.define("Firebrick.ui.containers.tab.Pane", {
-		extend:"Firebrick.ui.containers.Base",
+	return Firebrick.define( "Firebrick.ui.containers.tab.Pane", {
+		extend: "Firebrick.ui.containers.Base",
 		tpl: tpl,
 		/**
 		 * @property sName
 		 * @type {String}
 		 * @default "fb-ui-tab.pane"
 		 */
-		sName:"containers.tab.pane",
+		sName: "containers.tab.pane",
 		/**
 		 * @property active
 		 * @type {Boolean}
@@ -38,7 +38,7 @@ define(["text!./Pane.html", "../Base", "bootstrap.plugins/tab"], function(tpl){
 		 * @method getTabId
 		 * @return {String}
 		 */
-		getTab: function(){
+		getTab: function() {
 			return this._parent;
 		},
 		/**
@@ -47,36 +47,36 @@ define(["text!./Pane.html", "../Base", "bootstrap.plugins/tab"], function(tpl){
 		 * @type {integer}
 		 * @default 0
 		 */
-		paneIndex:0,
+		paneIndex: 0,
 		/**
 		 * @method getPaneId
 		 * @return {String}
 		 */
-		getPaneId: function(){
+		getPaneId: function() {
 			var me = this,
 				parent = me.getTab();
 			
-			return parent.getTabId(me.paneIndex);
+			return parent.getTabId( me.paneIndex );
 		},
 		/**
 		 * @method bindings
 		 * @return {Object}
 		 */
-		bindings: function(){
+		bindings: function() {
 			var me = this,
 				obj = me.callParent();
 		
 			obj.attr.role = "'tabpanel'";
-			obj.css["'tab-pane'"] = true;
+			obj.css[ "'tab-pane'" ] = true;
 			obj.css.active = me.active;
 			
-			obj.attr.id = "Firebrick.getById('"+me.getId()+"').getPaneId()";
+			obj.attr.id = "Firebrick.getById('" + me.getId() + "').getPaneId()";
 
-			if(!me.items){
+			if ( !me.items ) {
 				obj.html = "Firebrick.ui.helper.getHtml( '" + me.getId() + "', $data, $context )";
 			}
 			
 			return obj;
-		},
+		}
 	});
 });

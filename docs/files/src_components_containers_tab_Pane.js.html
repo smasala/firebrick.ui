@@ -239,23 +239,23 @@
  */
 
 /**
- * 
+ *
  * @module Firebrick.ui.components
  * @extends components.containers.Base
  * @namespace components.containers.tab
  * @class Pane
  */
-define([&quot;text!./Pane.html&quot;, &quot;../Base&quot;, &quot;bootstrap.plugins/tab&quot;], function(tpl){
+define( [ &quot;text!./Pane.html&quot;, &quot;../Base&quot;, &quot;bootstrap.plugins/tab&quot; ], function( tpl ) {
 	&quot;use strict&quot;;
-	return Firebrick.define(&quot;Firebrick.ui.containers.tab.Pane&quot;, {
-		extend:&quot;Firebrick.ui.containers.Base&quot;,
+	return Firebrick.define( &quot;Firebrick.ui.containers.tab.Pane&quot;, {
+		extend: &quot;Firebrick.ui.containers.Base&quot;,
 		tpl: tpl,
 		/**
 		 * @property sName
 		 * @type {String}
 		 * @default &quot;fb-ui-tab.pane&quot;
 		 */
-		sName:&quot;containers.tab.pane&quot;,
+		sName: &quot;containers.tab.pane&quot;,
 		/**
 		 * @property active
 		 * @type {Boolean}
@@ -274,7 +274,7 @@ define([&quot;text!./Pane.html&quot;, &quot;../Base&quot;, &quot;bootstrap.plugi
 		 * @method getTabId
 		 * @return {String}
 		 */
-		getTab: function(){
+		getTab: function() {
 			return this._parent;
 		},
 		/**
@@ -283,39 +283,40 @@ define([&quot;text!./Pane.html&quot;, &quot;../Base&quot;, &quot;bootstrap.plugi
 		 * @type {integer}
 		 * @default 0
 		 */
-		paneIndex:0,
+		paneIndex: 0,
 		/**
 		 * @method getPaneId
 		 * @return {String}
 		 */
-		getPaneId: function(){
+		getPaneId: function() {
 			var me = this,
 				parent = me.getTab();
 			
-			return parent.getTabId(me.paneIndex);
+			return parent.getTabId( me.paneIndex );
 		},
 		/**
 		 * @method bindings
 		 * @return {Object}
 		 */
-		bindings: function(){
+		bindings: function() {
 			var me = this,
 				obj = me.callParent();
 		
 			obj.attr.role = &quot;&#x27;tabpanel&#x27;&quot;;
-			obj.css[&quot;&#x27;tab-pane&#x27;&quot;] = true;
+			obj.css[ &quot;&#x27;tab-pane&#x27;&quot; ] = true;
 			obj.css.active = me.active;
 			
-			obj.attr.id = &quot;Firebrick.getById(&#x27;&quot;+me.getId()+&quot;&#x27;).getPaneId()&quot;;
+			obj.attr.id = &quot;Firebrick.getById(&#x27;&quot; + me.getId() + &quot;&#x27;).getPaneId()&quot;;
 
-			if(!me.items){
+			if ( !me.items ) {
 				obj.html = &quot;Firebrick.ui.helper.getHtml( &#x27;&quot; + me.getId() + &quot;&#x27;, $data, $context )&quot;;
 			}
 			
 			return obj;
-		},
+		}
 	});
 });
+
     </pre>
 </div>
 

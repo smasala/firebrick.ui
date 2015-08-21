@@ -245,11 +245,11 @@
  * @uses components.common.mixins.Items
  * @class Loader
  */
-define([&quot;text!./Loader.html&quot;, &quot;jquery&quot;, &quot;../common/Base&quot;, &quot;../common/mixins/Items&quot;], function(tpl, $){
+define( [ &quot;text!./Loader.html&quot;, &quot;jquery&quot;, &quot;../common/Base&quot;, &quot;../common/mixins/Items&quot; ], function( tpl, $ ) {
 	&quot;use strict&quot;;
-	return Firebrick.define(&quot;Firebrick.ui.display.Loader&quot;, {
+	return Firebrick.define( &quot;Firebrick.ui.display.Loader&quot;, {
 		extend: &quot;Firebrick.ui.common.Base&quot;,
-		enclosedBind:true,
+		enclosedBind: true,
 		/**
 		 * @property target
 		 * @type {String or jQuery Object}
@@ -289,15 +289,15 @@ define([&quot;text!./Loader.html&quot;, &quot;jquery&quot;, &quot;../common/Base
 		/**
 		 * @method init
 		 */
-		init: function(){
+		init: function() {
 			var me = this,
 				target = me.getTarget();
 			
-			if(target.is(&quot;input&quot;)){
+			if ( target.is( &quot;input&quot; ) ) {
 				me.target = target.parent();
 			}
 			
-			me.on(&quot;rendered&quot;, function(){
+			me.on( &quot;rendered&quot;, function() {
 				me._initRender();
 			});
 			return me.callParent( arguments );
@@ -306,45 +306,45 @@ define([&quot;text!./Loader.html&quot;, &quot;jquery&quot;, &quot;../common/Base
 		 * @method _initRender
 		 * @private
 		 */
-		_initRender: function(){
+		_initRender: function() {
 			var me = this,
 				target = me.getTarget();
 			
-			target.addClass(&quot;fb-ui-loader-open&quot;); //TODO: if target is absolute or fixed?
+			target.addClass( &quot;fb-ui-loader-open&quot; ); //TODO: if target is absolute or fixed?
 			me.position();
 		},
 		/**
 		 * @method destroy
 		 */
-		destroy: function(){
+		destroy: function() {
 			var me = this,
 				target = me.getTarget();
-			target.removeClass(&quot;fb-ui-loader-open&quot;);
+			target.removeClass( &quot;fb-ui-loader-open&quot; );
 			return me.callParent( arguments );
 		},
 		/**
 		 * @method _getCalcTarget
 		 * @return {jQuery Object}
 		 */
-		_getCalcTarget: function(){
+		_getCalcTarget: function() {
 			var me = this;
-			return me.target === &quot;body&quot; || me.target === &quot;html&quot; ? $(window) : me.getTarget();
+			return me.target === &quot;body&quot; || me.target === &quot;html&quot; ? $( window ) : me.getTarget();
 		},
 		/**
 		 * positions loader
 		 * @method position
 		 */
-		position: function(){
+		position: function() {
 			var me = this,
 				$target = me._getCalcTarget(),
 				$el = me.getElement(),
-				$loader = $(&quot;.fb-ui-loader-msg-container&quot;, $el),
+				$loader = $( &quot;.fb-ui-loader-msg-container&quot;, $el ),
 				xPos = $loader.outerWidth() / 2,
 				yPos = $loader.outerHeight() / 2;
 
 			$loader.css({
-				top: ($target.height() / 2) - yPos,
-				left: ($target.width() / 2) - xPos
+				top: ( $target.height() / 2 ) - yPos,
+				left: ( $target.width() / 2 ) - xPos
 			});
 			
 		},
@@ -352,11 +352,11 @@ define([&quot;text!./Loader.html&quot;, &quot;jquery&quot;, &quot;../common/Base
 		 * @method bindings
 		 * @return {Object}
 		 */
-		bindings: function(){
+		bindings: function() {
 			var me = this,
 				obj = me.callParent( arguments );
 			
-			obj.css[&quot;&#x27;fb-ui-loader-container&#x27;&quot;] = true;
+			obj.css[ &quot;&#x27;fb-ui-loader-container&#x27;&quot; ] = true;
 			
 			return obj;
 		},
@@ -364,9 +364,8 @@ define([&quot;text!./Loader.html&quot;, &quot;jquery&quot;, &quot;../common/Base
 		 * @method maskBindings
 		 * @return {Object}
 		 */
-		maskBindings: function(){
-			var me = this,
-				obj = {
+		maskBindings: function() {
+			var obj = {
 					css: {
 						&quot;&#x27;fb-ui-loader-mask&#x27;&quot;: true
 					}
@@ -377,9 +376,8 @@ define([&quot;text!./Loader.html&quot;, &quot;jquery&quot;, &quot;../common/Base
 		 * @method spinnerBindings
 		 * @return {Object}
 		 */
-		spinnerBindings: function(){
-			var me = this,
-				obj = {
+		spinnerBindings: function() {
+			var obj = {
 					css: {
 						&quot;&#x27;fb-ui-loader-spinner&#x27;&quot;: true,
 						glyphicon: true,
@@ -393,9 +391,8 @@ define([&quot;text!./Loader.html&quot;, &quot;jquery&quot;, &quot;../common/Base
 		 * @method msgContainerBindings
 		 * @return {Object}
 		 */
-		msgContainerBindings: function(){
-			var me = this,
-				obj = {
+		msgContainerBindings: function() {
+			var obj = {
 					css: {
 						&quot;&#x27;fb-ui-loader-msg-container&#x27;&quot;: true
 					}
@@ -407,7 +404,7 @@ define([&quot;text!./Loader.html&quot;, &quot;jquery&quot;, &quot;../common/Base
 		 * @method msgBindings
 		 * @return {Object}
 		 */
-		msgBindings: function(){
+		msgBindings: function() {
 			var me = this,
 				obj = {
 					css: {
@@ -415,7 +412,7 @@ define([&quot;text!./Loader.html&quot;, &quot;jquery&quot;, &quot;../common/Base
 					}
 				};
 			
-			if( me.msgText ){
+			if ( me.msgText ) {
 				obj.text = me.textBind( me.msgText );
 			}
 			
@@ -423,6 +420,7 @@ define([&quot;text!./Loader.html&quot;, &quot;jquery&quot;, &quot;../common/Base
 		}
 	});
 });
+
     </pre>
 </div>
 

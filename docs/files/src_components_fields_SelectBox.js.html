@@ -244,63 +244,63 @@
  * @namespace components.fields
  * @class SelectBox
  */
-define([&quot;text!./SelectBox.html&quot;, &quot;jquery&quot;, &quot;knockout&quot;, &quot;./Input&quot;], function(subTpl, $, ko){
+define( [ &quot;text!./SelectBox.html&quot;, &quot;jquery&quot;, &quot;knockout&quot;, &quot;./Input&quot; ], function( subTpl, $, ko ) {
 	&quot;use strict&quot;;
-	return Firebrick.define(&quot;Firebrick.ui.fields.SelectBox&quot;, {
-		extend:&#x27;Firebrick.ui.fields.Input&#x27;,
+	return Firebrick.define( &quot;Firebrick.ui.fields.SelectBox&quot;, {
+		extend: &quot;Firebrick.ui.fields.Input&quot;,
 		/**
 		 * @property sName
 		 * @type {String}
 		 */
-		sName:&quot;fields.selectbox&quot;,
+		sName: &quot;fields.selectbox&quot;,
 		/**
 		 * @property multiSelect
 		 * @type {Boolean}
 		 * @default false
 		 */
-		multiSelect:false,
+		multiSelect: false,
 		/**
 		 * @property subTpl
 		 * @type {String} html
 		 */
-		subTpl:subTpl,
+		subTpl: subTpl,
 		/**
 		 * @property options
 		 * @type {KO String|Function|Array of Objects}
 		 * @default false
 		 */
-		options:false,
+		options: false,
 		/**
 		 * @property type
 		 * @type {String}
 		 * @default &quot;select&quot;
 		 */
-		type:&quot;select&quot;,
+		type: &quot;select&quot;,
 		/**
 		 * @property optionsValue
 		 * @type {String}
 		 * @default &quot;value&quot;
 		 */
-		optionsValue:&quot;value&quot;,
+		optionsValue: &quot;value&quot;,
 		/**
 		 * @property optionsText
 		 * @type {String}
 		 * @default &quot;text&quot;
 		 */
-		optionsText:&quot;text&quot;,
+		optionsText: &quot;text&quot;,
 		/**
 		 * @method bindings
 		 * @return {Object}
 		 */
-		bindings:function(){
+		bindings: function() {
 			var me = this,
-				obj = me.callParent(arguments);
+				obj = me.callParent( arguments );
 			
-			if(!me.inplaceEdit){
-				obj.options = Firebrick.ui.helper.optionString(me);
-				if(!me.multiSelect){
+			if ( !me.inplaceEdit ) {
+				obj.options = Firebrick.ui.helper.optionString( me );
+				if ( !me.multiSelect ) {
 					obj.value = me.value;
-				}else{
+				} else {
 					obj.selectedOptions = me.value;
 				}
 				obj.optionsText = me.parseBind( me.optionsText );
@@ -317,7 +317,7 @@ define([&quot;text!./SelectBox.html&quot;, &quot;jquery&quot;, &quot;knockout&qu
 		 * @param $data {KO Object}
 		 * @return {String}
 		 */
-		_getInplaceEditText: function( $data ){
+		_getInplaceEditText: function( $data ) {
 			var me = this,
 				$el = me.getElement(),
 				value = $el ? me.getValue() : me.value,
@@ -327,30 +327,30 @@ define([&quot;text!./SelectBox.html&quot;, &quot;jquery&quot;, &quot;knockout&qu
 				text = &quot;&quot;,
 				it, unwrapped;
 			
-			if( value ){
+			if ( value ) {
 				
-				if($.isFunction(options)){
+				if ( $.isFunction( options ) ) {
 					options = options();
-				}else if( typeof options === &quot;string&quot; ){
+				} else if ( typeof options === &quot;string&quot; ) {
 					options = ko.unwrap( $data.hasOwnProperty( options ) ? $data[ options ] : $data );
 				}
 				
-				if( !$.isArray(options) ){
-					options = [options];
+				if ( !$.isArray( options ) ) {
+					options = [ options ];
 				}
 				
-				for(var i = 0, l = options.length; i&lt;l; i++){
-					it = options[i];
-					if( $.isPlainObject(it) ){
+				for ( var i = 0, l = options.length; i &lt; l; i++ ) {
+					it = options[ i ];
+					if ( $.isPlainObject( it ) ) {
 						unwrapped = ko.unwrap( it[ optVal ] );
-						if(unwrapped === value.replace(&quot;&#x27;&quot;, &quot;&quot;)){
+						if ( unwrapped === value.replace( &quot;&#x27;&quot;, &quot;&quot; ) ) {
 							text = ko.unwrap( it[ optText ] );
 							break;
 						}
 					}
 				}
 				
-			}else{
+			} else {
 				text = Firebrick.text( me.inplaceEditEmptyText );
 			}
 			
@@ -358,6 +358,7 @@ define([&quot;text!./SelectBox.html&quot;, &quot;jquery&quot;, &quot;knockout&qu
 		}
 	});
 });
+
     </pre>
 </div>
 

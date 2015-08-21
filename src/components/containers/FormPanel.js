@@ -8,10 +8,10 @@
  * @namespace components.containers
  * @class FormPanel
  */
-define(["./Panel", "./Form"], function(){
+define( [ "./Panel", "./Form" ], function() {
 	"use strict";
-	return Firebrick.define("Firebrick.ui.containers.FormPanel", {
-		extend:"Firebrick.ui.containers.Panel",
+	return Firebrick.define( "Firebrick.ui.containers.FormPanel", {
+		extend: "Firebrick.ui.containers.Panel",
 		/**
 		 * @property sName
 		 * @type {String}
@@ -24,26 +24,26 @@ define(["./Panel", "./Form"], function(){
 		 * @type {Object}
 		 * @default null
 		 */
-		formConfig:null,
+		formConfig: null,
 		/**
 		 * @method build
 		 * @private
 		 */
-		init: function(){
+		init: function() {
 			var me = this,
 				formItem = me.formConfig || {};
 				
-			formItem.sName = "containers.form";	
+			formItem.sName = "containers.form";
 
-			if(me.items){
+			if ( me.items ) {
 				formItem.items = me.items;
-			}else{
+			} else {
 				formItem.html = me.html;
 			}
 			
-			me.items = [formItem];
+			me.items = [ formItem ];
 			 
-			return me.callParent(arguments);
+			return me.callParent( arguments );
 		}
 	});
 });

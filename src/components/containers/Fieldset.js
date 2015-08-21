@@ -8,11 +8,11 @@
  * @namespace components.containers
  * @class Fieldset
  */
-define(["text!./Fieldset.html", "jquery", "../common/mixins/Label"], function(tpl, $){
+define( [ "text!./Fieldset.html", "jquery", "../common/mixins/Label" ], function( tpl, $ ) {
 	"use strict";
-	return Firebrick.define("Firebrick.ui.containers.Fieldset", {
-		extend:"Firebrick.ui.containers.Base",
-		mixins:"Firebrick.ui.common.mixins.Label",
+	return Firebrick.define( "Firebrick.ui.containers.Fieldset", {
+		extend: "Firebrick.ui.containers.Base",
+		mixins: "Firebrick.ui.common.mixins.Label",
 		/**
 		 * @property sName
 		 * @type {String}
@@ -22,13 +22,13 @@ define(["text!./Fieldset.html", "jquery", "../common/mixins/Label"], function(tp
 		 * @property tpl
 		 * @type {String} html
 		 */
-		tpl:tpl,
+		tpl: tpl,
 		/**
 		 * @property title
 		 * @type {String}
 		 * @default ""
 		 */
-		title:"",
+		title: "",
 		/**
 		 * @property collapsible
 		 * @type {Boolean}
@@ -92,16 +92,16 @@ define(["text!./Fieldset.html", "jquery", "../common/mixins/Label"], function(tp
 		 * @method init
 		 * @return {Object}
 		 */
-		init: function(){
+		init: function() {
 			var me = this,
 				obj = me.callParent();
 			
-			me.on("rendered", function(){
+			me.on( "rendered", function() {
 				var el = me.getElement(),
-					linkEl = $("> a[data-collapse='" + me.getId() + "']", el);
+					linkEl = $( "> a[data-collapse='" + me.getId() + "']", el );
 				
-				linkEl.on("click", function(){
-					me.collapseClick.apply(me, arguments);
+				linkEl.on( "click", function() {
+					me.collapseClick.apply( me, arguments );
 				});
 				
 			});
@@ -111,20 +111,20 @@ define(["text!./Fieldset.html", "jquery", "../common/mixins/Label"], function(tp
 		/**
 		 * @method bindings
 		 */
-		bindings: function(){
+		bindings: function() {
 			var me = this,
 				obj = me.callParent( arguments );
 			
-			obj.css["'form-horizontal'"] = me.formHorizontalClass;
+			obj.css[ "'form-horizontal'" ] = me.formHorizontalClass;
 			
 			return obj;
 		},
 		/**
-		 * called when the legend is clicked on 
+		 * called when the legend is clicked on
 		 * @method collapseClick
 		 * @param jQuery "click" event arguments {Any}
 		 */
-		collapseClick: function(event){
+		collapseClick: function( event ) {
 			var me = this,
 				el, body, title;
 			
@@ -132,17 +132,17 @@ define(["text!./Fieldset.html", "jquery", "../common/mixins/Label"], function(tp
 			
 			//init after preventDefault
 			el = me.getElement();
-			body = $("> div." + me.fieldsetBodyClass, el);
-			title = $("> a > legend > span.fb-ui-collapsed-icon", el);
+			body = $( "> div." + me.fieldsetBodyClass, el );
+			title = $( "> a > legend > span.fb-ui-collapsed-icon", el );
 
 			//TODO: animation
-			if(body.is(":visible")){
+			if ( body.is( ":visible" ) ) {
 				title.removeClass( me.collapseIconClass );
 				title.addClass( me.expandIconClass );
 				
 				el.addClass( me.collapsedClass );
 				body.hide();
-			}else{
+			} else {
 				title.removeClass( me.expandIconClass );
 				title.addClass( me.collapseIconClass );
 				
@@ -155,19 +155,19 @@ define(["text!./Fieldset.html", "jquery", "../common/mixins/Label"], function(tp
 		 * @method legendBindings
 		 * @return {Object}
 		 */
-		legendBindings: function(){
+		legendBindings: function() {
 			return {};
 		},
 		/**
 		 * @method legendTextBindings
 		 * @return {Object}
 		 */
-		legendTextBindings: function(){
+		legendTextBindings: function() {
 			var me = this,
 				obj = {
-					css:{},
-					attr:{},
-					text: me.textBind(me.title)
+					css: {},
+					attr: {},
+					text: me.textBind( me.title )
 				};
 			return obj;
 		},
@@ -175,19 +175,19 @@ define(["text!./Fieldset.html", "jquery", "../common/mixins/Label"], function(tp
 		 * @method collapsibleBindings
 		 * @return {Object}
 		 */
-		collapsibleBindings: function(){
+		collapsibleBindings: function() {
 			var me = this,
 				obj = {
-					css:{
+					css: {
 						"'fb-ui-collapsed-icon'": true
 					}
 				};
 			
 			obj.css.glyphicon = true;
-			if(me.collapsed){
-				obj.css[ me.parseBind(me.expandIconClass) ] = true;
-			}else{
-				obj.css[ me.parseBind(me.collapseIconClass) ] = true;
+			if ( me.collapsed ) {
+				obj.css[ me.parseBind( me.expandIconClass ) ] = true;
+			} else {
+				obj.css[ me.parseBind( me.collapseIconClass ) ] = true;
 			}
 			
 			return obj;
@@ -196,10 +196,10 @@ define(["text!./Fieldset.html", "jquery", "../common/mixins/Label"], function(tp
 		 * @method collapsibleLinkBindings
 		 * @return {Object}
 		 */
-		collapsibleLinkBindings: function(){
+		collapsibleLinkBindings: function() {
 			var me = this,
 				obj = {
-					attr:{
+					attr: {
 						"'data-collapse'": me.parseBind( me.getId() )
 					}
 				};
@@ -209,15 +209,15 @@ define(["text!./Fieldset.html", "jquery", "../common/mixins/Label"], function(tp
 		 * @method contentBindings
 		 * @return {Object}
 		 */
-		contentBindings: function(){
+		contentBindings: function() {
 			var me = this,
 				obj = {
-					css:{
+					css: {
 						collapsed: me.collapsed
 					}
 				};
 			
-			obj.css[me.parseBind(me.fieldsetBodyClass)] = true;
+			obj.css[ me.parseBind( me.fieldsetBodyClass ) ] = true;
 			
 			return obj;
 		}

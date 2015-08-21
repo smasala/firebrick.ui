@@ -8,12 +8,12 @@
  * @namespace components.nav
  * @class Toolbar
  */
-define(["./Navbar"], function(){
+define( [ "./Navbar" ], function() {
 	"use strict";
-	return Firebrick.define("Firebrick.ui.nav.Toolbar", {
-		extend:"Firebrick.ui.nav.Navbar",
-		sName:"nav.toolbar",
-		showBranding:false,
+	return Firebrick.define( "Firebrick.ui.nav.Toolbar", {
+		extend: "Firebrick.ui.nav.Navbar",
+		sName: "nav.toolbar",
+		showBranding: false,
 		/**
 		 * possible positions: top, bottom
 		 * @property position
@@ -21,28 +21,28 @@ define(["./Navbar"], function(){
 		 * @default "top"
 		 */
 		position: "top",
-		init:function(){
+		init: function() {
 			var me = this;
 			
 			me.navTypeClass = "navbar-fixed-" + me.position;
 			
-			return me.callParent(arguments);
+			return me.callParent( arguments );
 		},
-		bindings: function(){
+		bindings: function() {
 			var me = this,
-				obj = me.callParent(arguments);
+				obj = me.callParent( arguments );
 			
-			obj.css["'fb-ui-toolbar'"] = true;
+			obj.css[ "'fb-ui-toolbar'" ] = true;
 			
 			return obj;
 		},
-		navbarContainerBindings: function(){
+		navbarContainerBindings: function() {
 			var me = this,
-				obj = me.callParent(arguments);
+				obj = me.callParent( arguments );
 			
-			obj.css["'navbar-nav'"] = false;
-			obj.css["'fb-ui-navbar'"] = true;
-			obj.css["'form-horizontal'"] = true;
+			obj.css[ "'navbar-nav'" ] = false;
+			obj.css[ "'fb-ui-navbar'" ] = true;
+			obj.css[ "'form-horizontal'" ] = true;
 			
 			return obj;
 		},
@@ -50,15 +50,15 @@ define(["./Navbar"], function(){
 		 * @method navbarWrapperBindings
 		 * @return {Object}
 		 */
-		navbarWrapperBindings: function(){
+		navbarWrapperBindings: function() {
 			var me = this,
-				obj = me.callParent(arguments);
+				obj = me.callParent( arguments );
 			
-			if(obj.css.container){
+			if ( obj.css.container ) {
 				delete obj.css.container;
 			}
 			
-			obj.css["'container-fluid'"] = true;
+			obj.css[ "'container-fluid'" ] = true;
 			
 			return obj;
 		}

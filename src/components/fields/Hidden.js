@@ -8,10 +8,10 @@
  * @namespace components.fields
  * @class Hidden
  */
-define(["./Input"], function(){
+define( [ "./Input" ], function() {
 	"use strict";
 	
-	return Firebrick.define("Firebrick.ui.fields.Hidden", {
+	return Firebrick.define( "Firebrick.ui.fields.Hidden", {
 		extend: "fields.input",
 		/**
 		 * @property sName
@@ -23,11 +23,11 @@ define(["./Input"], function(){
 		 * @method containerBindings
 		 * @return {Object}
 		 */
-		containerBindings: function(){
+		containerBindings: function() {
 			var me = this,
 				obj = me.callParent( arguments );
 			
-			obj.css["'fb-ui-hidden-field'"] = true;
+			obj.css[ "'fb-ui-hidden-field'" ] = true;
 			
 			return obj;
 		}

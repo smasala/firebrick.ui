@@ -8,10 +8,10 @@
  * @namespace components.containers
  * @class TabPanel
  */
-define(["text!./TabPanel.html", "./Base", "bootstrap.plugins/tab", "./tab/Pane"], function(tpl){
+define( [ "text!./TabPanel.html", "./Base", "bootstrap.plugins/tab", "./tab/Pane" ], function( tpl ) {
 	"use strict";
-	return Firebrick.define("Firebrick.ui.containers.TabPanel", {
-		extend:"Firebrick.ui.containers.Base",
+	return Firebrick.define( "Firebrick.ui.containers.TabPanel", {
+		extend: "Firebrick.ui.containers.Base",
 		tpl: tpl,
 		/**
 		* @property sName
@@ -24,16 +24,16 @@ define(["text!./TabPanel.html", "./Base", "bootstrap.plugins/tab", "./tab/Pane"]
 		 * @method _getListTplId
 		 * @return {String}
 		 */
-		_getListTplId: function(){
-			return "fb-ui-tpl-list-" + this.getId(); 
+		_getListTplId: function() {
+			return "fb-ui-tpl-list-" + this.getId();
 		},
 		/**
 		 * @private
 		 * @method _getTabPaneTplId
 		 * @return {String}
 		 */
-		_getTabPaneTplId: function(){
-			return "fb-ui-tpl-tabpane-" + this.getId(); 
+		_getTabPaneTplId: function() {
+			return "fb-ui-tpl-tabpane-" + this.getId();
 		},
 		/**
 		 * @property _tabs
@@ -49,14 +49,14 @@ define(["text!./TabPanel.html", "./Base", "bootstrap.plugins/tab", "./tab/Pane"]
 				sName: "containers.tab.pane"
 			}
 		 */
-		defaults:{
+		defaults: {
 			sName: "containers.tab.pane"
 		},
 		/**
 		 * @method init
 		 * @return self
 		 */
-		init: function(){
+		init: function() {
 			var me = this;
 			this._firstTabActive();
 			return me.callParent( arguments );
@@ -66,23 +66,23 @@ define(["text!./TabPanel.html", "./Base", "bootstrap.plugins/tab", "./tab/Pane"]
 		 * @method _firstTabActive
 		 * @return self
 		 */
-		_firstTabActive: function(){
+		_firstTabActive: function() {
 			var me = this,
-			it, 
+			it,
 			active = false,
 			length = me.items.length;
 		
-			for(var i = 0; i<length; i++){
-				it = me.items[i];
-				if(it.active){
+			for ( var i = 0; i < length; i++ ) {
+				it = me.items[ i ];
+				if ( it.active ) {
 					active = true;
 					break;
 				}
 			}
 			
-			if(!active && length){
+			if ( !active && length ) {
 				//force first tab to be active
-				me.items[0].active = true;
+				me.items[ 0 ].active = true;
 			}
 			return me;
 		},
@@ -90,7 +90,7 @@ define(["text!./TabPanel.html", "./Base", "bootstrap.plugins/tab", "./tab/Pane"]
 		 * @method bindings
 		 * @return {Object}
 		 */
-		bindings: function(){
+		bindings: function() {
 			var me = this,
 				obj = me.callParent();
 			
@@ -102,14 +102,14 @@ define(["text!./TabPanel.html", "./Base", "bootstrap.plugins/tab", "./tab/Pane"]
 		 * @method listTemplateBindings
 		 * @return {Object}
 		 */
-		listTemplateBindings: function(){
+		listTemplateBindings: function() {
 			var me = this,
 				obj = {};
 			
 			obj.template = {
 					name: me.parseBind( me._getListTplId() ),
-					foreach: Firebrick.ui.helper.tabBuilder(me.getId()),
-					as:"'tab'"
+					foreach: Firebrick.ui.helper.tabBuilder( me.getId() ),
+					as: "'tab'"
 			};
 			
 			return obj;
@@ -118,13 +118,12 @@ define(["text!./TabPanel.html", "./Base", "bootstrap.plugins/tab", "./tab/Pane"]
 		 * @method listBindings
 		 * @return {Object}
 		 */
-		listBindings: function(){
-			var me = this,
-				obj = {css:{}, attr:{}};
+		listBindings: function() {
+			var obj = { css: {}, attr: {} };
 			
 			obj.attr.role = "'tablist'";
 			obj.css.nav = true;
-			obj.css["'nav-tabs'"] = true;
+			obj.css[ "'nav-tabs'" ] = true;
 			
 			return obj;
 		},
@@ -132,9 +131,8 @@ define(["text!./TabPanel.html", "./Base", "bootstrap.plugins/tab", "./tab/Pane"]
 		 * @method listItemBindings
 		 * @return {Object}
 		 */
-		listItemBindings: function(){
-			var me = this,
-				obj = {css:{}, attr:{}};
+		listItemBindings: function() {
+			var obj = { css: {}, attr: {} };
 			
 			obj.attr.role = "'presentation'";
 			obj.css.active = "tab.hasOwnProperty('active') ? tab.active : false";
@@ -146,15 +144,15 @@ define(["text!./TabPanel.html", "./Base", "bootstrap.plugins/tab", "./tab/Pane"]
 		 * @method listItemLinkBindings
 		 * @return {Object}
 		 */
-		listItemLinkBindings: function(){
+		listItemLinkBindings: function() {
 			var me = this,
-				obj = {css:{}, attr:{}};
+				obj = { css: {}, attr: {} };
 			
 			obj.attr.href = "Firebrick.ui.helper.linkBuilder(tab)";
-			obj.attr["'aria-controls'"] = "tab.id";
-			obj.attr["'data-target'"] = "Firebrick.getById('"+me.getId()+"').registerTab(tab.id, $index)";
+			obj.attr[ "'aria-controls'" ] = "tab.id";
+			obj.attr[ "'data-target'" ] = "Firebrick.getById('" + me.getId() + "').registerTab(tab.id, $index)";
 			obj.attr.role = "'tab'";
-			obj.attr["'data-toggle'"] = "tab.disabled !== true ? 'tab' : false";
+			obj.attr[ "'data-toggle'" ] = "tab.disabled !== true ? 'tab' : false";
 			
 			return obj;
 		},
@@ -162,11 +160,11 @@ define(["text!./TabPanel.html", "./Base", "bootstrap.plugins/tab", "./tab/Pane"]
 		 * @method listItemTextBindings
 		 * @return {Object}
 		 */
-		listItemTextBindings: function(){
+		listItemTextBindings: function() {
 			var me = this,
-				obj = {css:{}, attr:{}};
+				obj = { css: {}, attr: {} };
 			
-			obj.text = me.textBind("'+tab.title+'");
+			obj.text = me.textBind( "'+tab.title+'" );
 			
 			return obj;
 		},
@@ -175,11 +173,10 @@ define(["text!./TabPanel.html", "./Base", "bootstrap.plugins/tab", "./tab/Pane"]
 		 * @method tabContentBindings
 		 * @return {Object}
 		 */
-		tabContentBindings: function(){
-			var me = this,
-				obj = {css:{}, attr:{}};
+		tabContentBindings: function() {
+			var obj = { css: {}, attr: {} };
 			
-			obj.css["'tab-content'"] = true;
+			obj.css[ "'tab-content'" ] = true;
 			
 			return obj;
 		},
@@ -190,17 +187,17 @@ define(["text!./TabPanel.html", "./Base", "bootstrap.plugins/tab", "./tab/Pane"]
 		 * @param index {Integer}
 		 * @return "#{id}"
 		 */
-		registerTab: function(tabId, index){
-			var me = this, 
+		registerTab: function( tabId, index ) {
+			var me = this,
 				id;
 			
-			if($.isFunction(index)){
+			if ( $.isFunction( index ) ) {
 				index = index();
 			}
 			
 			id = tabId || "fb-ui-tab-" + me.getId() + "-" + index;
 			
-			me.addTab(id);
+			me.addTab( id );
 			
 			return "#" + id;
 		},
@@ -210,12 +207,12 @@ define(["text!./TabPanel.html", "./Base", "bootstrap.plugins/tab", "./tab/Pane"]
 		 * @param id {String}
 		 * @return self
 		 */
-		addTab: function(id){
+		addTab: function( id ) {
 			var me = this;
-			if(!me._tabs){
+			if ( !me._tabs ) {
 				me._tabs = [];
 			}
-			me._tabs.push(id);
+			me._tabs.push( id );
 			return me;
 		},
 		
@@ -225,8 +222,8 @@ define(["text!./TabPanel.html", "./Base", "bootstrap.plugins/tab", "./tab/Pane"]
 		 * @param index {Integer}
 		 * @return {String}
 		 */
-		getTabId: function(index){
-			return this._tabs[index];
+		getTabId: function( index ) {
+			return this._tabs[ index ];
 		},
 		
 		/**
@@ -237,17 +234,17 @@ define(["text!./TabPanel.html", "./Base", "bootstrap.plugins/tab", "./tab/Pane"]
 		 * @param {Context} iteration context
 		 * @return {String}
 		 */
-		getTabPaneItem: function(index, item){
+		getTabPaneItem: function( index, item ) {
 			var me = this,
 				newItem;
 			
 			item.paneIndex = index;
 			
-			newItem = me._getItems(item);
+			newItem = me._getItems( item );
 			
-			if(newItem){
+			if ( newItem ) {
 				//replace items with the new object - _getItems returns an object {html:"", items:[]}
-				me.items[index] = newItem.items[0];
+				me.items[ index ] = newItem.items[ 0 ];
 				
 				return newItem.html;
 			}

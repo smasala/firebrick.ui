@@ -1,3 +1,10 @@
+v0.20.xxx
+----------------------------
+* css fixes for nested list
+* add button style btn-xl
+* panel title fix when collapsible === false
+
+
 v0.20.12
 ----------------------------
 * change table data "id" property for treetables to "_ttId"

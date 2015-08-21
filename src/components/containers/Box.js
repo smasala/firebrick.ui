@@ -8,12 +8,12 @@
  * @namespace components.containers
  * @class Box
  */
-define(["text!./Box.html", "./Base"], function(tpl){
+define( [ "text!./Box.html", "./Base" ], function( tpl ) {
 	"use strict";
-	return Firebrick.define("Firebrick.ui.containers.Box", {
-		extend:"Firebrick.ui.containers.Base",
+	return Firebrick.define( "Firebrick.ui.containers.Box", {
+		extend: "Firebrick.ui.containers.Base",
 		tpl: tpl,
-		sName:"containers.box",
+		sName: "containers.box",
 		/**
 		 * set as string to fill the div/box with text content
 		 * @property html

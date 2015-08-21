@@ -239,23 +239,23 @@
  */
 
 /**
- * 
+ *
  * @module Firebrick.ui.components
  * @extends components.containers.Base
  * @namespace components.containers.border
  * @class Pane
  */
-define([&quot;text!./SplitBar.html&quot;, &quot;jquery&quot;, &quot;../../common/mixins/Column&quot;, &quot;./Draggable&quot;, &quot;../Panel&quot;], function(splitBarTpl, $){
+define( [ &quot;text!./SplitBar.html&quot;, &quot;jquery&quot;, &quot;../../common/mixins/Column&quot;, &quot;./Draggable&quot;, &quot;../Panel&quot; ], function( splitBarTpl, $ ) {
 	&quot;use strict&quot;;
-	return Firebrick.define(&quot;Firebrick.ui.containers.border.Pane&quot;, {
-		extend:&quot;Firebrick.ui.containers.Panel&quot;,
-		mixins:&quot;Firebrick.ui.common.mixins.Column&quot;,
+	return Firebrick.define( &quot;Firebrick.ui.containers.border.Pane&quot;, {
+		extend: &quot;Firebrick.ui.containers.Panel&quot;,
+		mixins: &quot;Firebrick.ui.common.mixins.Column&quot;,
 		/**
 		 * @property sName
 		 * @type {String}
 		 * @default &quot;containers.border.pane&quot;
 		 */
-		sName:&quot;containers.border.pane&quot;,
+		sName: &quot;containers.border.pane&quot;,
 		/**
 		 * @property resizable
 		 * @type {Boolean}
@@ -338,18 +338,18 @@ define([&quot;text!./SplitBar.html&quot;, &quot;jquery&quot;, &quot;../../common
 		 * @method init
 		 * @return {Object}
 		 */
-		init: function(){
+		init: function() {
 			var me = this;
 			
-			me.on(&quot;htmlRendered&quot;, function(){
-				return me._htmlRendered.apply(me, arguments);
+			me.on( &quot;htmlRendered&quot;, function() {
+				return me._htmlRendered.apply( me, arguments );
 			});
 			
-			me.on(&quot;rendered&quot;, function(){
-				return me._rendered.apply(me, arguments);
+			me.on( &quot;rendered&quot;, function() {
+				return me._rendered.apply( me, arguments );
 			});
 			
-			return me.callParent(arguments);
+			return me.callParent( arguments );
 		},
 		
 		/**
@@ -359,20 +359,20 @@ define([&quot;text!./SplitBar.html&quot;, &quot;jquery&quot;, &quot;../../common
 		 * @private
 		 * @method _htmlRendered
 		 */
-		_htmlRendered: function(){
+		_htmlRendered: function() {
 			var me = this,
 				el, splitBarHtml,
 				position = me.position;
 			
-			if(position !== &quot;center&quot;){
+			if ( position !== &quot;center&quot; ) {
 				el = me.getElement();
-				if(el){
-					me.template(&quot;splitBarTpl&quot;);
-					splitBarHtml = me.build(&quot;splitBarTpl&quot;);
-					if(position !== &quot;right&quot; &amp;&amp; position !== &quot;bottom&quot;){
-						el.after(splitBarHtml);	
-					}else{
-						el.before(splitBarHtml);	
+				if ( el ) {
+					me.template( &quot;splitBarTpl&quot; );
+					splitBarHtml = me.build( &quot;splitBarTpl&quot; );
+					if ( position !== &quot;right&quot; &amp;&amp; position !== &quot;bottom&quot; ) {
+						el.after( splitBarHtml );
+					} else {
+						el.before( splitBarHtml );
 					}
 					
 				}
@@ -387,23 +387,23 @@ define([&quot;text!./SplitBar.html&quot;, &quot;jquery&quot;, &quot;../../common
 		 * @private
 		 * @method _setDimensions
 		 */
-		_setDimensions: function(){
+		_setDimensions: function() {
 			var me = this,
 				el = me.getElement(),
 				position = me.position,
 				height = me.height,
 				width = me.width;
 
-			if(position === &quot;top&quot; || position === &quot;bottom&quot;){
-				if(height !== &quot;auto&quot;){
-					el.css(&quot;height&quot;, height);
-					el.css(&quot;min-height&quot;, height);
+			if ( position === &quot;top&quot; || position === &quot;bottom&quot; ) {
+				if ( height !== &quot;auto&quot; ) {
+					el.css( &quot;height&quot;, height );
+					el.css( &quot;min-height&quot;, height );
 				}
 			}
 			
-			if(position === &quot;left&quot; || position === &quot;right&quot;){
-				el.css(&quot;width&quot;, width);
-				el.css(&quot;min-width&quot;, width);
+			if ( position === &quot;left&quot; || position === &quot;right&quot; ) {
+				el.css( &quot;width&quot;, width );
+				el.css( &quot;min-width&quot;, width );
 			}
 			
 		},
@@ -413,33 +413,33 @@ define([&quot;text!./SplitBar.html&quot;, &quot;jquery&quot;, &quot;../../common
 		 * @private
 		 * @method _rendered
 		 */
-		_rendered: function(){
+		_rendered: function() {
 			var me = this,
 				pane = me.getElement(),
 				position = me.position,
 				direction = position === &quot;top&quot; || position === &quot;bottom&quot; ? &quot;vertical&quot; : &quot;horizontal&quot;,
 				lookMethod = position === &quot;top&quot; || position === &quot;left&quot; ? &quot;next&quot; : &quot;prev&quot;,
-				splitBar = pane[lookMethod](&quot;.fb-ui-splitbar&quot;);
+				splitBar = pane[ lookMethod ]( &quot;.fb-ui-splitbar&quot; );
 			
-			pane.prop(&quot;fb-direction&quot;, direction);
-			pane.prop(&quot;fb-splitbar&quot;, splitBar);
-			if (me.collapsible){
-				splitBar.on(&quot;click touchstart&quot;, &quot;&gt; .fb-ui-collapse-icon&quot;, function(){
-					me.toggleCollapse.call(me);
+			pane.prop( &quot;fb-direction&quot;, direction );
+			pane.prop( &quot;fb-splitbar&quot;, splitBar );
+			if ( me.collapsible ) {
+				splitBar.on( &quot;click touchstart&quot;, &quot;&gt; .fb-ui-collapse-icon&quot;, function() {
+					me.toggleCollapse.call( me );
 				});
 				me.setCollapsibleActions();
 			}
 			
-			if(me.resizable){
+			if ( me.resizable ) {
 				me.setResizableActions();
-			}	
-			
-			if(me.resizable || me.collapsible){
-				pane.on(&quot;fb-ui-panel-state-change&quot;, function(){
+			}
+
+			if ( me.resizable || me.collapsible ) {
+				pane.on( &quot;fb-ui-panel-state-change&quot;, function() {
 					//disable resize if the pane is collapsed
-					if(pane.hasClass( me._collapsedClass )){
+					if ( pane.hasClass( me._collapsedClass ) ) {
 						me.onCollapsed();
-					}else{
+					} else {
 						me.onExpanded();
 					}
 				});
@@ -450,30 +450,29 @@ define([&quot;text!./SplitBar.html&quot;, &quot;jquery&quot;, &quot;../../common
 		 * @method collapse
 		 */
 		
-		
 		/**
 		 * @method setCollapsibleActions
 		 */
-		setCollapsibleActions: function(){
+		setCollapsibleActions: function() {
 			var me = this,
 				el = me.getElement(),
 				position = me.position;
 			
-			if(position === &quot;left&quot; || position === &quot;right&quot;){
-				$(&quot;&gt; .panel-collapse&quot;, el).on(&quot;hide.bs.collapse&quot;, function(){
-					return me._onRLPaneCollapse.apply(me, arguments);
+			if ( position === &quot;left&quot; || position === &quot;right&quot; ) {
+				$( &quot;&gt; .panel-collapse&quot;, el ).on( &quot;hide.bs.collapse&quot;, function() {
+					return me._onRLPaneCollapse.apply( me, arguments );
 				});
 				
-				$(&quot;&gt; .panel-collapse&quot;, el).on(&quot;show.bs.collapse&quot;, function(){
-					return me._onRLPaneExpand.apply(me, arguments);
+				$( &quot;&gt; .panel-collapse&quot;, el ).on( &quot;show.bs.collapse&quot;, function() {
+					return me._onRLPaneExpand.apply( me, arguments );
 				});
-			}else{
+			} else {
 				//bottom &amp; top panes
-				$(&quot;&gt; .panel-collapse&quot;, el).on(&quot;hide.bs.collapse&quot;, function(){
-					return me._onTBPaneCollapse.apply(me, arguments);
+				$( &quot;&gt; .panel-collapse&quot;, el ).on( &quot;hide.bs.collapse&quot;, function() {
+					return me._onTBPaneCollapse.apply( me, arguments );
 				});
-				$(&quot;&gt; .panel-collapse&quot;, el).on(&quot;show.bs.collapse&quot;, function(){
-					return me._onTBPaneExpand.apply(me, arguments);
+				$( &quot;&gt; .panel-collapse&quot;, el ).on( &quot;show.bs.collapse&quot;, function() {
+					return me._onTBPaneExpand.apply( me, arguments );
 				});
 			}
 		},
@@ -481,62 +480,62 @@ define([&quot;text!./SplitBar.html&quot;, &quot;jquery&quot;, &quot;../../common
 		/**
 		 * @method setResizableActions
 		 */
-		setResizableActions: function(){
+		setResizableActions: function() {
 			var me = this,
 				position = me.position,
 				pane = me.getElement(),
-				paneHeader = $(&quot;&gt; .panel-heading&quot;, pane),
-				direction = pane.prop(&quot;fb-direction&quot;),
-				splitbar = pane.prop(&quot;fb-splitbar&quot;);
+				paneHeader = $( &quot;&gt; .panel-heading&quot;, pane ),
+				direction = pane.prop( &quot;fb-direction&quot; ),
+				splitbar = pane.prop( &quot;fb-splitbar&quot; );
 				
-			if(splitbar.length){
-				if(direction === &quot;vertical&quot;){
+			if ( splitbar.length ) {
+				if ( direction === &quot;vertical&quot; ) {
 					//top bottom panes
 
 					//if the class if NOT collapsed from the start, then enable resizing
-					if(!pane.hasClass( me._collapsedClass )){
+					if ( !pane.hasClass( me._collapsedClass ) ) {
 						me.onExpanded();
 					}
 					
 					//when the splitbar has been dragged, if the panel a new height
-					splitbar.on(&quot;dragged&quot;, function(event, top/*, left*/){
+					splitbar.on( &quot;dragged&quot;, function( event, top/*, left*/ ) {
 						var val;
-						if(position === &quot;top&quot;){
+						if ( position === &quot;top&quot; ) {
 							val = pane.height() + top;
-							if(val &gt; 0){
+							if ( val &gt; 0 ) {
 								//subtract the header height to position the splitbar in the right place
 								val -= paneHeader.height();
 							}
-							pane.css(&quot;height&quot;, val);
-							pane.css(&quot;min-height&quot;, val);
-						}else{
+							pane.css( &quot;height&quot;, val );
+							pane.css( &quot;min-height&quot;, val );
+						} else {
 							val = pane.height() - top;
-							if(val &lt; 0){
+							if ( val &lt; 0 ) {
 								//add the header height to position the splitbar in the right place
 								val += paneHeader.height();
 							}
-							pane.css(&quot;height&quot;, val);
-							pane.css(&quot;min-height&quot;, val);
+							pane.css( &quot;height&quot;, val );
+							pane.css( &quot;min-height&quot;, val );
 						}
 						
 					});
 					
-				}else{
+				} else {
 					
 					//if the pane is NOT collapsed from the start, enable resize functionality
-					if(!pane.hasClass( me._collapsedClass )){
+					if ( !pane.hasClass( me._collapsedClass ) ) {
 						me.onExpanded();
 					}
 					
 					//when the splitbar has been moved, calculate the new width of the pane
-					splitbar.on(&quot;dragged&quot;, function(event, top, left){
+					splitbar.on( &quot;dragged&quot;, function( event, top, left ) {
 						var width = pane.width();
-						if(position === &quot;right&quot;){
-							pane.width(width-left);
-							pane.css(&quot;min-width&quot;, width-left);
-						}else{
-							pane.width(width+left);
-							pane.css(&quot;min-width&quot;, width+left);
+						if ( position === &quot;right&quot; ) {
+							pane.width( width - left );
+							pane.css( &quot;min-width&quot;, width - left );
+						} else {
+							pane.width( width + left );
+							pane.css( &quot;min-width&quot;, width + left );
 						}
 						
 					});
@@ -553,26 +552,26 @@ define([&quot;text!./SplitBar.html&quot;, &quot;jquery&quot;, &quot;../../common
 		 * @param me {Object} this class
 		 * @param el {jQuery Object} panel|pane
 		 */
-		_onTBPaneCollapse: function(){
+		_onTBPaneCollapse: function() {
 			var me = this,
 				pane = me.getElement(),
-				paneHeader = $(&quot;&gt; .panel-heading&quot;, pane),
+				paneHeader = $( &quot;&gt; .panel-heading&quot;, pane ),
 				paneHeaderHeight = paneHeader.outerHeight();
 
-			if(!pane.prop(&quot;_fbResizeHeight&quot;)){
+			if ( !pane.prop( &quot;_fbResizeHeight&quot; ) ) {
 				//first time this is collapse - set the current height/min-height to the current values
 				//if not set, css snaps a little and does not do the animation/transition properly
-				pane.css(&quot;min-height&quot;, pane.css(&quot;min-height&quot;));
-				pane.css(&quot;height&quot;, pane.css(&quot;height&quot;));
+				pane.css( &quot;min-height&quot;, pane.css( &quot;min-height&quot; ) );
+				pane.css( &quot;height&quot;, pane.css( &quot;height&quot; ) );
 			}
 			
 			pane.addClass( me._transitionClass );
 
-			pane.prop(&quot;_fbResizeHeight&quot;, pane.css(&quot;height&quot;));	//save the height in the property, this is needed for transitions when the pane is expaneded again
-			pane.css(&quot;min-height&quot;, paneHeaderHeight);
-			pane.css(&quot;height&quot;, paneHeaderHeight);
+			pane.prop( &quot;_fbResizeHeight&quot;, pane.css( &quot;height&quot; ) );	//save the height in the property, this is needed for transitions when the pane is expaneded again
+			pane.css( &quot;min-height&quot;, paneHeaderHeight );
+			pane.css( &quot;height&quot;, paneHeaderHeight );
 			
-			pane.one(&quot;webkitTransitionEnd otransitionend oTransitionEnd msTransitionEnd transitionend&quot;, function() {
+			pane.one( &quot;webkitTransitionEnd otransitionend oTransitionEnd msTransitionEnd transitionend&quot;, function() {
 				pane.removeClass( me._transitionClass );
 			});
 		},
@@ -585,17 +584,17 @@ define([&quot;text!./SplitBar.html&quot;, &quot;jquery&quot;, &quot;../../common
 		 * @param me {Object} this class
 		 * @param el {jQuery Object} panel|pane
 		 */
-		_onTBPaneExpand: function(){
+		_onTBPaneExpand: function() {
 			var me = this,
 				pane = me.getElement();
 			
 			//start transition
 			pane.addClass( me._transitionClass );
-			pane.css(&quot;min-height&quot;, pane.prop(&quot;_fbResizeHeight&quot;));
-			pane.css(&quot;height&quot;, pane.prop(&quot;_fbResizeHeight&quot;));
+			pane.css( &quot;min-height&quot;, pane.prop( &quot;_fbResizeHeight&quot; ) );
+			pane.css( &quot;height&quot;, pane.prop( &quot;_fbResizeHeight&quot; ) );
 			
 			//listener when the transition has ended
-			pane.one(&quot;webkitTransitionEnd otransitionend oTransitionEnd msTransitionEnd transitionend&quot;, function() {
+			pane.one( &quot;webkitTransitionEnd otransitionend oTransitionEnd msTransitionEnd transitionend&quot;, function() {
 				pane.removeClass( me._transitionClass );
 			});
 		},
@@ -607,24 +606,24 @@ define([&quot;text!./SplitBar.html&quot;, &quot;jquery&quot;, &quot;../../common
 		 * @method _onRLPaneExpand
 		 * @param event {jQuery event Object}
 		 */
-		_onRLPaneExpand: function(){
+		_onRLPaneExpand: function() {
 			var me = this,
-				pane = me.getElement(), 
-				paneHeader = $(&quot;&gt; .panel-heading&quot;, pane),
-				paneTitle = $(&quot;.panel-title&quot;, paneHeader);
+				pane = me.getElement(),
+				paneHeader = $( &quot;&gt; .panel-heading&quot;, pane ),
+				paneTitle = $( &quot;.panel-title&quot;, paneHeader );
 			
 			//start transition
 			pane.addClass( me._transitionClass );
-			pane.trigger(&quot;pane-expanding&quot;);
+			pane.trigger( &quot;pane-expanding&quot; );
 			
 			//remove the rotated effect on the panel title
 			paneHeader.removeClass( me._rotatedHeadingClass );
 			paneTitle.removeClass( me._rotatedTitleClass );
 			
-			pane.css(&quot;min-width&quot;, pane.prop(&quot;_fbResizeWidth&quot;));
+			pane.css( &quot;min-width&quot;, pane.prop( &quot;_fbResizeWidth&quot; ) );
 			
 			//listener for when the transition has ended
-			pane.one(&quot;webkitTransitionEnd otransitionend oTransitionEnd msTransitionEnd transitionend&quot;, function() {
+			pane.one( &quot;webkitTransitionEnd otransitionend oTransitionEnd msTransitionEnd transitionend&quot;, function() {
 				pane.removeClass( me._transitionClass );
 			});
 			
@@ -637,24 +636,24 @@ define([&quot;text!./SplitBar.html&quot;, &quot;jquery&quot;, &quot;../../common
 		 * @method _onRLPaneCollapse
 		 * @param event {jQuery event Object}
 		 */
-		_onRLPaneCollapse: function(){
+		_onRLPaneCollapse: function() {
 			var me = this,
-				pane = me.getElement(), 
-				paneHeader = $(&quot;&gt; .panel-heading&quot;, pane),
-				paneTitle = $(&quot;.panel-title&quot;, paneHeader),
+				pane = me.getElement(),
+				paneHeader = $( &quot;&gt; .panel-heading&quot;, pane ),
+				paneTitle = $( &quot;.panel-title&quot;, paneHeader ),
 				paneHeaderHeight = paneHeader.outerHeight() || 0;
 			
 			//start transition
 			pane.addClass( me._transitionClass );
-			pane.trigger(&quot;pane-collapsing&quot;);
+			pane.trigger( &quot;pane-collapsing&quot; );
 			
-			pane.prop(&quot;_fbResizeWidth&quot;, pane.css(&quot;width&quot;));	//save the width in the property, this is needed for transitions when the pane is expaneded again
+			pane.prop( &quot;_fbResizeWidth&quot;, pane.css( &quot;width&quot; ) );	//save the width in the property, this is needed for transitions when the pane is expaneded again
 			
-			pane.css(&quot;min-width&quot;, paneHeaderHeight);
-			pane.css(&quot;width&quot;, paneHeaderHeight);
+			pane.css( &quot;min-width&quot;, paneHeaderHeight );
+			pane.css( &quot;width&quot;, paneHeaderHeight );
 			
 			//listener for when the transition has ended
-			pane.one(&quot;webkitTransitionEnd otransitionend oTransitionEnd msTransitionEnd transitionend&quot;, function() {
+			pane.one( &quot;webkitTransitionEnd otransitionend oTransitionEnd msTransitionEnd transitionend&quot;, function() {
 				//rotate header &amp; title
 				paneHeader.addClass( me._rotatedHeadingClass );
 				paneTitle.addClass( me._rotatedTitleClass );
@@ -668,49 +667,49 @@ define([&quot;text!./SplitBar.html&quot;, &quot;jquery&quot;, &quot;../../common
 		 * enable drags function on element
 		 * @method onExpanded
 		 */
-		onExpanded: function(){
+		onExpanded: function() {
 			var me = this,
 				pane = me.getElement(),
-				direction = pane.prop(&quot;fb-direction&quot;),
-				splitBar = pane.prop(&quot;fb-splitbar&quot;);
+				direction = pane.prop( &quot;fb-direction&quot; ),
+				splitBar = pane.prop( &quot;fb-splitbar&quot; );
 			
-			if(splitBar.length &amp;&amp; me.resizable){
-				splitBar.prop(&quot;dragDisabled&quot;, false);
-				splitBar.drags(direction);	
+			if ( splitBar.length &amp;&amp; me.resizable ) {
+				splitBar.prop( &quot;dragDisabled&quot;, false );
+				splitBar.drags( direction );
 			}
 			
-			splitBar.removeClass(&quot;fb-ui-is-collapsed&quot;);
+			splitBar.removeClass( &quot;fb-ui-is-collapsed&quot; );
 		},
 		/**
 		 * disable drags function on element
 		 * @method onCollapsed
 		 */
-		onCollapsed: function(){
+		onCollapsed: function() {
 			var me = this,
 				pane = me.getElement(),
-				splitBar = pane.prop(&quot;fb-splitbar&quot;);
+				splitBar = pane.prop( &quot;fb-splitbar&quot; );
 			
-			if(splitBar.length &amp;&amp; me.resizable){
-				splitBar.prop(&quot;dragDisabled&quot;, true);
+			if ( splitBar.length &amp;&amp; me.resizable ) {
+				splitBar.prop( &quot;dragDisabled&quot;, true );
 			}
 			
-			splitBar.addClass(&quot;fb-ui-is-collapsed&quot;);
+			splitBar.addClass( &quot;fb-ui-is-collapsed&quot; );
 		},
 		/**
 		 * @method bindings
 		 * @return {Object}
 		 */
-		bindings: function(){
+		bindings: function() {
 			var me = this,
-				obj = me.callParent(arguments);
+				obj = me.callParent( arguments );
 			
-			obj.css[&quot;&#x27;fb-ui-border-pane&#x27;&quot;] = true;
+			obj.css[ &quot;&#x27;fb-ui-border-pane&#x27;&quot; ] = true;
 			
 			//type of pane - top, right, left etc..
-			obj.css[me.parseBind(me._positionPrefixClass + me.position)] = true;
+			obj.css[ me.parseBind( me._positionPrefixClass + me.position ) ] = true;
 			
-			if(me.collapsible){
-				obj.css[&quot;&#x27;fb-ui-pane-collapsible&#x27;&quot;] = true;
+			if ( me.collapsible ) {
+				obj.css[ &quot;&#x27;fb-ui-pane-collapsible&#x27;&quot; ] = true;
 			}
 			
 			return obj;
@@ -720,30 +719,30 @@ define([&quot;text!./SplitBar.html&quot;, &quot;jquery&quot;, &quot;../../common
 		 * @method splitBarBindings
 		 * @return {Object}
 		 */
-		splitBarBindings: function(){
+		splitBarBindings: function() {
 			var me = this,
 				obj = {
-					css:{
+					css: {
 						&quot;&#x27;fb-ui-splitbar&#x27;&quot;: true
 					},
-					attr:{}
+					attr: {}
 				};
 
-			obj.css[me.parseBind(&quot;fb-ui-splitbar-&quot; + me.position)] = true;
+			obj.css[ me.parseBind( &quot;fb-ui-splitbar-&quot; + me.position ) ] = true;
 			
-			if(me.resizable){
-				if(me.position === &quot;top&quot; || me.position === &quot;bottom&quot;){
+			if ( me.resizable ) {
+				if ( me.position === &quot;top&quot; || me.position === &quot;bottom&quot; ) {
 //					obj.css.col = true;
 //					obj.css[me.parseBind(&quot;col-&quot; + me.deviceSize + &quot;-12&quot;)] = true;
-					obj.css[&quot;&#x27;fb-ui-splitbar-horizontal&#x27;&quot;] = true;
-				}else{
-					obj.css[&quot;&#x27;fb-ui-splitbar-vertical&#x27;&quot;] = true;
+					obj.css[ &quot;&#x27;fb-ui-splitbar-horizontal&#x27;&quot; ] = true;
+				} else {
+					obj.css[ &quot;&#x27;fb-ui-splitbar-vertical&#x27;&quot; ] = true;
 				}
 			}
 			
-			if(me.collapsible){
+			if ( me.collapsible ) {
 
-				obj.css[&quot;&#x27;fb-ui-collapsebar&#x27;&quot;] = true;
+				obj.css[ &quot;&#x27;fb-ui-collapsebar&#x27;&quot; ] = true;
 				
 			}
 			
@@ -754,7 +753,7 @@ define([&quot;text!./SplitBar.html&quot;, &quot;jquery&quot;, &quot;../../common
 		 * @method getSplitBarId
 		 * @return {String}
 		 */
-		getSplitBarId: function(){
+		getSplitBarId: function() {
 			var me = this;
 			return me.splitBarIdPrefix + me.getId();
 		},
@@ -763,23 +762,23 @@ define([&quot;text!./SplitBar.html&quot;, &quot;jquery&quot;, &quot;../../common
 		 * @method  splitBarCollapseBindings
 		 * @return {Object}
 		 */
-		splitBarCollapseBindings: function(){
+		splitBarCollapseBindings: function() {
 			var me = this,
 				obj = {
-					css:{}
+					css: {}
 			};
 			
 			obj.css.glyphicon = true;
-			obj.css[&quot;&#x27;fb-ui-collapse-icon&#x27;&quot;] = true;
+			obj.css[ &quot;&#x27;fb-ui-collapse-icon&#x27;&quot; ] = true;
 			
-			if(me.position === &quot;left&quot;){
-				obj.css[&quot;&#x27;glyphicon-chevron-left&#x27;&quot;] = true;	
-			}else if(me.position === &quot;right&quot;){
-				obj.css[&quot;&#x27;glyphicon-chevron-right&#x27;&quot;] = true;
-			}else if(me.position === &quot;top&quot;){
-				obj.css[&quot;&#x27;glyphicon-chevron-up&#x27;&quot;] = true;
-			}else if(me.position === &quot;bottom&quot;){
-				obj.css[&quot;&#x27;glyphicon-chevron-down&#x27;&quot;] = true;
+			if ( me.position === &quot;left&quot; ) {
+				obj.css[ &quot;&#x27;glyphicon-chevron-left&#x27;&quot; ] = true;
+			} else if ( me.position === &quot;right&quot; ) {
+				obj.css[ &quot;&#x27;glyphicon-chevron-right&#x27;&quot; ] = true;
+			} else if ( me.position === &quot;top&quot; ) {
+				obj.css[ &quot;&#x27;glyphicon-chevron-up&#x27;&quot; ] = true;
+			} else if ( me.position === &quot;bottom&quot; ) {
+				obj.css[ &quot;&#x27;glyphicon-chevron-down&#x27;&quot; ] = true;
 			}
 			
 			return obj;
@@ -789,18 +788,19 @@ define([&quot;text!./SplitBar.html&quot;, &quot;jquery&quot;, &quot;../../common
 		 * @method panelBodyBindings
 		 * @return {Object}
 		 */
-		panelBodyBindings: function(){
+		panelBodyBindings: function() {
 			var me = this,
 				obj = me.callParent( arguments );
 			
 			obj.css = obj.css || {};
-			obj.css[&quot;&#x27;fb-ui-border-pane-body&#x27;&quot;] = true;
+			obj.css[ &quot;&#x27;fb-ui-border-pane-body&#x27;&quot; ] = true;
 			
 			return obj;
 		}
 		
 	});
 });
+
     </pre>
 </div>
 

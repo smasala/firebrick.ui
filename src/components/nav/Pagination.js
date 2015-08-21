@@ -8,11 +8,11 @@
  * @namespace components.nav
  * @class Pagination
  */
-define(["../display/List"], function(){
+define( [ "../display/List" ], function() {
 	"use strict";
-	return Firebrick.define("Firebrick.ui.nav.Pagination", {
-		extend:"Firebrick.ui.display.List",
-		sName:"nav.pagination",
+	return Firebrick.define( "Firebrick.ui.nav.Pagination", {
+		extend: "Firebrick.ui.display.List",
+		sName: "nav.pagination",
 		preNode: false,
 		linkedList: true,
 		/**
@@ -21,18 +21,18 @@ define(["../display/List"], function(){
 		 * @type {String}
 		 * @default null
 		 */
-		paginationSize:null,
+		paginationSize: null,
 		/**
 		 * override parent
 		 * @method bindings
 		 * @return {Object}
 		 */
-		bindings: function(){
+		bindings: function() {
 			var me = this,
-				obj = me.callParent(arguments);
+				obj = me.callParent( arguments );
 			obj.css.pagination = true;
-			if(me.paginationSize){
-				obj.css[ me.parseBind("pagination-"+me.paginationSize) ] = true;
+			if ( me.paginationSize ) {
+				obj.css[ me.parseBind( "pagination-" + me.paginationSize ) ] = true;
 			}
 			return obj;
 		},
@@ -40,24 +40,24 @@ define(["../display/List"], function(){
 		 * @method setActive
 		 * @param val {String|Integer} - correspond to the pagination link data-value attribute
 		 */
-		setActive: function( val ){
+		setActive: function( val ) {
 			var me = this,
 				$el = me.getElement(),
 				$active = me.getActive(),
-				$it = $("a[data-value='" + val + "']", $el).parent("li");
+				$it = $( "a[data-value='" + val + "']", $el ).parent( "li" );
 			
-			$active.removeClass("active");
-			$it.addClass("active");
+			$active.removeClass( "active" );
+			$it.addClass( "active" );
 		},
 		/**
 		 * get active item
 		 * @method getActive
 		 * @return {jQuery Object} <li>
 		 */
-		getActive: function(){
+		getActive: function() {
 			var me = this,
 				$el = me.getElement();
-			return $("li.active", $el);
+			return $( "li.active", $el );
 		}
 	});
 });

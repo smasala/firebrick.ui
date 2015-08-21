@@ -244,10 +244,10 @@
  * @namespace components.containers
  * @class Form
  */
-define([&quot;text!./Form.html&quot;, &quot;jquery&quot;, &quot;./Base&quot;], function(tpl, $){
+define( [ &quot;text!./Form.html&quot;, &quot;jquery&quot;, &quot;./Base&quot; ], function( tpl, $ ) {
 	&quot;use strict&quot;;
-	return Firebrick.define(&quot;Firebrick.ui.containers.Form&quot;, {
-		extend:&quot;Firebrick.ui.containers.Base&quot;,
+	return Firebrick.define( &quot;Firebrick.ui.containers.Form&quot;, {
+		extend: &quot;Firebrick.ui.containers.Base&quot;,
 		/**
 		 * @property sName
 		 * @type {String}
@@ -257,20 +257,20 @@ define([&quot;text!./Form.html&quot;, &quot;jquery&quot;, &quot;./Base&quot;], f
 		 * @property tpl
 		 * @type {String} html
 		 */
-		tpl:tpl,
+		tpl: tpl,
 		/**
 		 * @property formRole
 		 * @type {String}
 		 * @default &quot;&#x27;form&#x27;&quot;
 		 */
-		formRole:&quot;form&quot;,
+		formRole: &quot;form&quot;,
 		/**
 		 * controls the css class form-horizontal
 		 * @property horizontal
 		 * @type {Boolean|String}
 		 * @default true
 		 */
-		horizontal:true,
+		horizontal: true,
 		/**
 		 * fill the panel body with html
 		 * @property html
@@ -284,7 +284,7 @@ define([&quot;text!./Form.html&quot;, &quot;jquery&quot;, &quot;./Base&quot;], f
 		 * @type {Boolean|String}
 		 * @default false
 		 */
-		inline:false,
+		inline: false,
 		/**
 		 * multipart/form-data for files
 		 * @property enctype
@@ -329,11 +329,11 @@ define([&quot;text!./Form.html&quot;, &quot;jquery&quot;, &quot;./Base&quot;], f
 		catchProgress: false,
 		/**
 		 * this is called before the form is submitted, use this
-		 * return false to stop the submit function being called; 
+		 * return false to stop the submit function being called;
 		 * @method preSubmit
 		 * @param jquery &quot;submit&quot; event arguments
 		 */
-		preSubmit: function(event){
+		preSubmit: function( event ) {
 			event.preventDefault();
 		},
 		/**
@@ -349,51 +349,51 @@ define([&quot;text!./Form.html&quot;, &quot;jquery&quot;, &quot;./Base&quot;], f
 		 * @property xhr
 		 * @type {Function}
 		 */
-		xhr: function(){
+		xhr: function() {
 			var me = this,
 				xhr = new window.XMLHttpRequest();
 
 			//Upload progress
-		    xhr.upload.addEventListener(&quot;progress&quot;, function(evt){
-		    	if (evt.lengthComputable) {
-		    		var percentComplete = evt.loaded / evt.total;
-		    		if(me.catchProgress){
-		    			//fire the percentCompleted
-		    			me.fireEvent(&quot;progressChanged&quot;, percentComplete);
-		    		}
-		    	}
-		    }, false);
-		    
-		    //Download progress
-		    xhr.addEventListener(&quot;progress&quot;, function(evt){
-		    	if (evt.lengthComputable) {
-		    		var percentComplete = evt.loaded / evt.total;
-		    		if(me.catchProgress){
-		    			//fire the percentCompleted
-		    			me.fireEvent(&quot;progressChanged&quot;, percentComplete);
-		    		}
-		    	}
-		    }, false);
-		    
-		    return xhr;
+			xhr.upload.addEventListener( &quot;progress&quot;, function( evt ) {
+				if ( evt.lengthComputable ) {
+					var percentComplete = evt.loaded / evt.total;
+					if ( me.catchProgress ) {
+						//fire the percentCompleted
+						me.fireEvent( &quot;progressChanged&quot;, percentComplete );
+					}
+				}
+			}, false );
+
+			//Download progress
+			xhr.addEventListener( &quot;progress&quot;, function( evt ) {
+				if ( evt.lengthComputable ) {
+					var percentComplete = evt.loaded / evt.total;
+					if ( me.catchProgress ) {
+						//fire the percentCompleted
+						me.fireEvent( &quot;progressChanged&quot;, percentComplete );
+					}
+				}
+			}, false );
+
+			return xhr;
 		},
 		/**
 		 * method called on submit ajax
 		 * @property success
 		 * @type {Function}
-		 * @default 
+		 * @default
 		 */
-		success: function(){
-			console.info(&quot;success&quot;, arguments);
+		success: function() {
+			console.info( &quot;success&quot;, arguments );
 		},
 		/**
 		 * method called on submit ajax
 		 * @property error
 		 * @type {Function}
-		 * @default 
+		 * @default
 		 */
-		error: function(){
-			console.warn(&quot;error&quot;, arguments);
+		error: function() {
+			console.warn( &quot;error&quot;, arguments );
 		},
 		/**
 		 * method called on submit ajax
@@ -401,103 +401,103 @@ define([&quot;text!./Form.html&quot;, &quot;jquery&quot;, &quot;./Base&quot;], f
 		 * @type {Function}
 		 * @default function(){}
 		 */
-		complete: function(){},
+		complete: function() {},
 		/**
 		 * method called after ajax
 		 * @method always
 		 * @param {Arguments} always function arguments from ajax
 		 */
-		always: function(){},
+		always: function() {},
 		/**
 		 * method called after ajax
 		 * @method beforeSend
 		 * @param {Arguments} beforeSend function arguments from ajax
 		 */
-		beforeSend: function(){},
+		beforeSend: function() {},
 		/**
 		 * this function requires the HTML5 function FormData to be supported
 		 * @method getFormData
 		 * @return {Object}
 		 */
-		getFormData: function(){
+		getFormData: function() {
 			var me = this;
-			return new window.FormData(me.getElement());
+			return new window.FormData( me.getElement() );
 		},
 		/**
 		 * @method init
 		 */
-		init: function(){
+		init: function() {
 			var me = this;
 				
-			me.on(&quot;rendered&quot;, function(){
+			me.on( &quot;rendered&quot;, function() {
 				var el = me.getElement();
-				if(el){
-					el.on(&quot;submit&quot;, function(event){
-						if(me.preSubmit.apply(me, arguments) !== false){
-							me.submit();	
+				if ( el ) {
+					el.on( &quot;submit&quot;, function( ) {	//arg: event
+						if ( me.preSubmit.apply( me, arguments ) !== false ) {
+							me.submit();
 						}
 					});
 				}
 			});
 			
-			return me.callParent(arguments);
+			return me.callParent( arguments );
 		},
 		/**
 		 * make sure this.url is set before calling this function
 		 * @method submit
 		 */
-		submit: function(){
+		submit: function() {
 			var me = this,
 				form = me.getElement();
 
-			if(!me.url || typeof me.url !== &quot;string&quot;){
-				console.error(&quot;unable to submit form. No url is set or is set incorrectly&quot;, me.url, me);
+			if ( !me.url || typeof me.url !== &quot;string&quot; ) {
+				console.error( &quot;unable to submit form. No url is set or is set incorrectly&quot;, me.url, me );
 				return;
 			}
 			
-			if(!form){
-				console.error(&quot;unable to submit form. Form not found for id&quot;, me.getId());
+			if ( !form ) {
+				console.error( &quot;unable to submit form. Form not found for id&quot;, me.getId() );
 				return;
 			}
 
-			if(window.FormData){
-				//HTML 5 - IE10+ 
+			if ( window.FormData ) {
+				//HTML 5 - IE10+
 				$.ajax({
 					xhr: me.xhr,
-					url: me.url, 
-					type: me.submitType, 
-					data: new window.FormData(form[0]), 
-					processData: me.ajaxProcessData, 
+					url: me.url,
+					type: me.submitType,
+					data: new window.FormData( form[ 0 ] ),
+					processData: me.ajaxProcessData,
 					contentType: me.enctype,
-					beforeSend: me.beforeSend.bind(me),
-					complete: me.complete.bind(me), //regardless of success of failure
-					success: me.success.bind(me),
-					error: me.error.bind(me)
-				}).always(me.always.bind(me));
-			}else{
-				console.error(&quot;FormData is not supported by your browser&quot;);
+					beforeSend: me.beforeSend.bind( me ),
+					complete: me.complete.bind( me ), //regardless of success of failure
+					success: me.success.bind( me ),
+					error: me.error.bind( me )
+				}).always( me.always.bind( me ) );
+			} else {
+				console.error( &quot;FormData is not supported by your browser&quot; );
 			}
 		},
 		/**
 		 * @method formBindings
 		 * @return {Object}
 		 */
-		bindings:function(){
+		bindings: function() {
 			var me = this,
-				obj = me.callParent(arguments);
+				obj = me.callParent( arguments );
 			
-			obj.attr.role =  me.parseBind(me.formRole);
-			obj.attr.enctype =  me.parseBind(me.enctype);
-			obj.css[&quot;&#x27;form-horizontal&#x27;&quot;] =  me.horizontal;
-			obj.css[&quot;&#x27;form-inline&#x27;&quot;] =  me.inline;
+			obj.attr.role =  me.parseBind( me.formRole );
+			obj.attr.enctype =  me.parseBind( me.enctype );
+			obj.css[ &quot;&#x27;form-horizontal&#x27;&quot; ] =  me.horizontal;
+			obj.css[ &quot;&#x27;form-inline&#x27;&quot; ] =  me.inline;
 			obj.attr.action = &quot;Firebrick.getById(&#x27;&quot; + me.getId() + &quot;&#x27;).url&quot;;
 			obj.attr.method = me.parseBind( me.submitType );
 			
-			if(me.formTarget){
+			if ( me.formTarget ) {
 				obj.attr.target = me.parseBind( me.formTarget );
 			}
 			
-			if(!me.items){
+			if ( !me.items ) {
 				obj.html = &quot;Firebrick.ui.helper.getHtml( &#x27;&quot; + me.getId() + &quot;&#x27;, $data, $context )&quot;;
 			}
 			
@@ -505,6 +505,7 @@ define([&quot;text!./Form.html&quot;, &quot;jquery&quot;, &quot;./Base&quot;], f
 		}
 	});
 });
+
     </pre>
 </div>
 

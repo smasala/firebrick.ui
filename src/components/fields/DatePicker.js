@@ -9,10 +9,10 @@
  * @namespace components.fields
  * @class Datepicker
  */
-define(["./Input", "bootstrap-datepicker"], function(){
+define( [ "./Input", "bootstrap-datepicker" ], function() {
 	"use strict";
-	return Firebrick.define("Firebrick.ui.fields.DatePicker", {
-		extend:"Firebrick.ui.fields.Input",
+	return Firebrick.define( "Firebrick.ui.fields.DatePicker", {
+		extend: "Firebrick.ui.fields.Input",
 		/**
 		 * @property sName
 		 * @type {String}
@@ -31,7 +31,7 @@ define(["./Input", "bootstrap-datepicker"], function(){
 		 */
 		dateFormat: "dd/mm/yyyy",
 		/**
-		 * Sunday = 0, Saturday = 6 
+		 * Sunday = 0, Saturday = 6
 		 * @property weekStart
 		 * @type {Integer}
 		 * @default 1
@@ -41,7 +41,7 @@ define(["./Input", "bootstrap-datepicker"], function(){
 		 * @method datePickerOptions
 		 * @return {Object}
 		 */
-		datePickerOptions: function(){
+		datePickerOptions: function() {
 			var me = this;
 			return {
 				autoclose: true,
@@ -67,31 +67,31 @@ define(["./Input", "bootstrap-datepicker"], function(){
 		 * @method init
 		 * @return parent
 		 */
-		init: function(){
+		init: function() {
 			var me = this;
 			
-			me.on("rendered", function(){
+			me.on( "rendered", function() {
 				var el = me.getElement(),
 					inputAddon,
 					icon;
 				
-				if(el.length){
-					el.datepicker(me.datePickerOptions());
+				if ( el.length ) {
+					el.datepicker( me.datePickerOptions() );
 				}
 				
-				if(me.inputAddon && me.clickableIcon){
-					inputAddon = el.siblings("." + me.inputAddonClass);
-					if(inputAddon.length){
-						icon = inputAddon.find("." + me.iconClass);
-						if(icon.length){
-							icon.css("cursor", "pointer");
-							icon.on("click", function(){
+				if ( me.inputAddon && me.clickableIcon ) {
+					inputAddon = el.siblings( "." + me.inputAddonClass );
+					if ( inputAddon.length ) {
+						icon = inputAddon.find( "." + me.iconClass );
+						if ( icon.length ) {
+							icon.css( "cursor", "pointer" );
+							icon.on( "click", function() {
 								var prop = "fb-date-open";
-								if(el.prop(prop) === true){
-									el.datepicker("hide");
-									el.prop(prop, false);
+								if ( el.prop( prop ) === true ) {
+									el.datepicker( "hide" );
+									el.prop( prop, false );
 								} else {
-									el.prop(prop, true);
+									el.prop( prop, true );
 									//when the icon is clicked focus is given to the input field to open the datepicker
 									el.focus();
 								}
@@ -101,7 +101,7 @@ define(["./Input", "bootstrap-datepicker"], function(){
 				}
 			});
 			
-			return me.callParent(arguments);
+			return me.callParent( arguments );
 		},
 		
 		/**
@@ -110,9 +110,9 @@ define(["./Input", "bootstrap-datepicker"], function(){
 		 * @type {String}
 		 * @default current day
 		 */
-		value:(function(){
+		value: (function() {
 			var dt = new Date();
-			return "'" +  ("0" + dt.getDate()).slice(-2)  + "/" + dt.getMonth() + 1 + "/" +  dt.getFullYear() + "'";
+			return "'" +  ( "0" + dt.getDate() ).slice( -2 )  + "/" + dt.getMonth() + 1 + "/" +  dt.getFullYear() + "'";
 		})()
 	});
 });

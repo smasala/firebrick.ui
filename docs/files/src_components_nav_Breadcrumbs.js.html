@@ -244,21 +244,22 @@
  * @namespace components.nav
  * @class Breadcrumbs
  */
-define([&quot;../display/List&quot;], function(){
+define( [ &quot;../display/List&quot; ], function() {
 	&quot;use strict&quot;;
-	return Firebrick.define(&quot;Firebrick.ui.nav.Breadcrumbs&quot;, {
-		extend:&quot;Firebrick.ui.display.List&quot;,
-		sName:&quot;nav.breadcrumbs&quot;,
+	return Firebrick.define( &quot;Firebrick.ui.nav.Breadcrumbs&quot;, {
+		extend: &quot;Firebrick.ui.display.List&quot;,
+		sName: &quot;nav.breadcrumbs&quot;,
 		listType: &quot;ol&quot;,
-		linkedList:true,
-		bindings: function(){
+		linkedList: true,
+		bindings: function() {
 			var me = this,
-				obj = me.callParent(arguments);
+				obj = me.callParent( arguments );
 			obj.css.breadcrumb = true;
 			return obj;
 		}
 	});
 });
+
     </pre>
 </div>
 

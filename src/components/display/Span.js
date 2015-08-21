@@ -8,18 +8,18 @@
  * @namespace components.display
  * @class Span
  */
-define(["text!./Span.html", "../common/Base"], function(tpl){
+define( [ "text!./Span.html", "../common/Base" ], function( tpl ) {
 	"use strict";
-	return Firebrick.define("Firebrick.ui.display.Span", {
+	return Firebrick.define( "Firebrick.ui.display.Span", {
 		extend: "Firebrick.ui.common.Base",
-		sName:"display.span",
+		sName: "display.span",
 		tpl: tpl,
 		/**
 		 * @property text
 		 * @type {String}
 		 * @default ""
 		 */
-		text:"",
+		text: "",
 		/**
 		 * set as "primary", "default", "warning", "danger", "success", "info" to convert the span to a BS label component
 		 * @property labelStyle
@@ -31,15 +31,15 @@ define(["text!./Span.html", "../common/Base"], function(tpl){
 		 * @method bindings
 		 * @return {Object}
 		 */
-		bindings: function(){
+		bindings: function() {
 			var me = this,
-				obj = me.callParent(arguments);
+				obj = me.callParent( arguments );
 			
-			obj.text = "Firebrick.getById('"+me.getId()+"').text";
+			obj.text = "Firebrick.getById('" + me.getId() + "').text";
 			
-			if(me.labelStyle){
+			if ( me.labelStyle ) {
 				me.css.label = true;
-				me.css[me.parseBind("label-" + me.labelStyle)] = true;
+				me.css[ me.parseBind( "label-" + me.labelStyle ) ] = true;
 			}
 			
 			return obj;

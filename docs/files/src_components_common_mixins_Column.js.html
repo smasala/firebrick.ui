@@ -244,23 +244,23 @@
  * @class Column
  * @static
  */
-define([], function(){
+define( [], function() {
 	&quot;use strict&quot;;
-	return Firebrick.define(&quot;Firebrick.ui.common.mixins.Column&quot;, {
+	return Firebrick.define( &quot;Firebrick.ui.common.mixins.Column&quot;, {
 
 		/**
 		 * @property deviceSize
 		 * @type {String}
 		 * @default &quot;md&quot;
 		 */
-		deviceSize:&quot;md&quot;,
+		deviceSize: &quot;md&quot;,
 		/**
 		 * auto will attempt to provide the column width by dividing the number of items in the parent Grid by 12 - decimals will be rounded down
 		 * @property columnWidth
 		 * @type {Integer|String} number 1 to 12 or &quot;auto&quot;
 		 * @default &quot;auto&quot;
 		 */
-		columnWidth:&quot;auto&quot;,
+		columnWidth: &quot;auto&quot;,
 		/**
 		 * use this to offset the column by x columns
 		 * http://getbootstrap.com/css/#grid-offsetting
@@ -268,7 +268,7 @@ define([], function(){
 		 * @type {Integer|null} 1 to 12
 		 * @default null
 		 */
-		columnOffset:null,
+		columnOffset: null,
 		/**
 		 * use this to offset the column by x columns
 		 * http://getbootstrap.com/css/#grid-column-ordering
@@ -280,7 +280,7 @@ define([], function(){
 		 * @type {String|null} &quot;push-{x}&quot; or &quot;pull-{x}&quot; - x = 1 to 12
 		 * @default null
 		 */
-		columnOrder:null,
+		columnOrder: null,
 		/**
 		 * when property columnWidth is set to &quot;auto&quot;, this function will attempt to calculate the correct size for each column.
 		 * Note: this function will round down to the nearest whole number - 5 columns will result in size 2 for each column
@@ -289,11 +289,11 @@ define([], function(){
 		 * @private
 		 * @return {Int}
 		 */
-		_getColumnWidth:function(){
+		_getColumnWidth: function() {
 			var me = this,
 				colWidth = me.columnWidth;
-			if(colWidth === &quot;auto&quot;){
-				return Math.floor(12/me._parent.items.length);
+			if ( colWidth === &quot;auto&quot; ) {
+				return Math.floor( 12 / me._parent.items.length );
 			}
 			return colWidth;
 		},
@@ -306,24 +306,25 @@ define([], function(){
 		 * @param {Object} obj.attr: {}
 		 * @return {Object}
 		 */
-		calColumn: function(obj){
+		calColumn: function( obj ) {
 			var me = this;
 			
 			obj.css.col = true;
-			obj.css[ me.parseBind(&quot;col-&quot;+me.deviceSize+&quot;-&quot;+me._getColumnWidth()) ] = true;
+			obj.css[ me.parseBind( &quot;col-&quot; + me.deviceSize + &quot;-&quot; + me._getColumnWidth() ) ] = true;
 			
-			if(me.columnOffset){
-				obj.css[ me.parseBind(&quot;col-&quot; + me.deviceSize + &quot;-offset-&quot; + me.columnOffset) ] = true;
+			if ( me.columnOffset ) {
+				obj.css[ me.parseBind( &quot;col-&quot; + me.deviceSize + &quot;-offset-&quot; + me.columnOffset ) ] = true;
 			}
 			
-			if(me.columnOrder){
-				obj.css[ me.parseBind(&quot;col-&quot; + me.deviceSize + &quot;-&quot; + me.columnOrder) ] = true;
+			if ( me.columnOrder ) {
+				obj.css[ me.parseBind( &quot;col-&quot; + me.deviceSize + &quot;-&quot; + me.columnOrder ) ] = true;
 			}
 			
 			return obj;
 		}
 	});
 });
+
     </pre>
 </div>
 

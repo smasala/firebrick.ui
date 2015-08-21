@@ -8,10 +8,10 @@
  * @namespace components.table
  * @class TreeTable
  */
-define(["./Table", "jquery-treetable"], function(){
+define( [ "./Table", "jquery-treetable" ], function() {
 	"use strict";
-	return Firebrick.define("Firebrick.ui.table.TreeTable", {
-		extend:"Firebrick.ui.table.Table",
+	return Firebrick.define( "Firebrick.ui.table.TreeTable", {
+		extend: "Firebrick.ui.table.Table",
 		/**
 		 * @property sName
 		 * @type {String}
@@ -22,12 +22,12 @@ define(["./Table", "jquery-treetable"], function(){
 		 * @type {Object|String}
 		 * @default "''"
 		 */
-		store:false,
+		store: false,
 		/**
 		 * @property treetable
 		 * @type {Boolean}
 		 * @default true
 		 */
-		treetable:true
+		treetable: true
 	});
 });

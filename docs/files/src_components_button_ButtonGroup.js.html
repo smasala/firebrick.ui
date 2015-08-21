@@ -239,29 +239,29 @@
  */
 
 /**
- * 
+ *
  * the items property does not need to have each object defined with its sName, that is down automatically
- * 
+ *
  * @module Firebrick.ui.components
  * @extends components.common.Base
  * @namespace components.button
  * @class ButtonGroup
  */
-define([&quot;text!./ButtonGroup.html&quot;, &quot;./Base&quot;, &quot;./Button&quot;], function(tpl){
+define( [ &quot;text!./ButtonGroup.html&quot;, &quot;./Base&quot;, &quot;./Button&quot; ], function( tpl ) {
 	&quot;use strict&quot;;
 
-	return Firebrick.define(&quot;Firebrick.ui.button.ButtonGroup&quot;, {
-		extend:&quot;Firebrick.ui.button.Base&quot;,
+	return Firebrick.define( &quot;Firebrick.ui.button.ButtonGroup&quot;, {
+		extend: &quot;Firebrick.ui.button.Base&quot;,
 		/**
 		 * @property sName
 		 * @type {String}
 		 * @default &quot;fb-ui-buttongroup&quot;
 		 */
 		sName: &quot;button.buttongroup&quot;,
-		tpl:tpl,
-		defaults:{
-			sName:&quot;button.button&quot;,
-			dropdownContainerClass:&quot;btn-group&quot; //needed for dropdown
+		tpl: tpl,
+		defaults: {
+			sName: &quot;button.button&quot;,
+			dropdownContainerClass: &quot;btn-group&quot; //needed for dropdown
 		},
 		/**
 		 * @property vertical
@@ -291,19 +291,19 @@ define([&quot;text!./ButtonGroup.html&quot;, &quot;./Base&quot;, &quot;./Button&
 		 * @method bindings
 		 * @return {Object}
 		 */
-		bindings: function(){
+		bindings: function() {
 			var me = this,
-				obj = me.callParent(arguments);
+				obj = me.callParent( arguments );
 			
-			if(me.vertical){
-				obj.css[&quot;&#x27;btn-group-vertical&#x27;&quot;] = true;				
-			}else{
-				obj.css[&quot;&#x27;btn-group&#x27;&quot;] = true;
+			if ( me.vertical ) {
+				obj.css[ &quot;&#x27;btn-group-vertical&#x27;&quot; ] = true;
+			} else {
+				obj.css[ &quot;&#x27;btn-group&#x27;&quot; ] = true;
 			}
 			
-			obj.css[me.parseBind( &quot;btn-group-&quot; + me.groupSize )] = true;
+			obj.css[ me.parseBind( &quot;btn-group-&quot; + me.groupSize ) ] = true;
 			obj.attr.role = me.parseBind( me.role );
-			obj.attr[&quot;&#x27;aria-label&#x27;&quot;] = me.textBind( me.arialLabel );
+			obj.attr[ &quot;&#x27;aria-label&#x27;&quot; ] = me.textBind( me.arialLabel );
 			
 			return obj;
 		}

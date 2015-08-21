@@ -10,16 +10,16 @@
  * 			// all other class config properties
  * 		}
  * }
- * 
- * 
+ *
+ *
  * @module plugins
  * @namespace plugins
  * @class EditableTable
  */
-define(["jquery"], function($){
+define( [ "jquery" ], function( $ ) {
 	"use strict";
 	
-	var clazz = Firebrick.define("Firebrick.ui.table.plugins.EditableTable", {
+	var clazz = Firebrick.define( "Firebrick.ui.table.plugins.EditableTable", {
 		indexAttr: "data-tt-id",	//when TR - row number, when TD column number
 		rowAttr: "fb-ui-row-id",	//for TD to determine which row number
 		editMarker: "fb-ui-cell-editing",	//added to the TD when it cell edit is active
@@ -34,7 +34,7 @@ define(["jquery"], function($){
 		 * @param columns {Array of Objects} which columns are being edited
 		 * @return {Object} {deps:[], fields:[]}
 		 */
-		editFields: function(editElement, clazz, columns){
+		editFields: function( editElement, clazz, columns ) {
 			var me = this,
 				//holder to populate with all the edit fields needed
 				editFields = [],
@@ -43,33 +43,33 @@ define(["jquery"], function($){
 				//map of all the already added dependencies - stop duplicates
 				addedPaths = {},
 				//boolean
-				isRow = editElement.is("tr"),
+				isRow = editElement.is( "tr" ),
 				//find correct parent el where the data values are stored
-				parentEl = isRow ? editElement : editElement.closest("tr"),
+				parentEl = isRow ? editElement : editElement.closest( "tr" ),
 				//holder for iteration
 				colNumber,
 				field,
 				col;
 			
-			if(columns){
+			if ( columns ) {
 				
 				//iterate over column passed to this function
-				for(var i = 0, l = columns.length; i<l; i++){
-					colNumber = isRow ? i : editElement.attr(me.indexAttr);
-					col = columns[i];
-					if(col.editable !== false){
-						field = me.getFieldConfiguration(clazz, parentEl, editElement, col, colNumber, deps, addedPaths);
-						if(field){
+				for ( var i = 0, l = columns.length; i < l; i++ ) {
+					colNumber = isRow ? i : editElement.attr( me.indexAttr );
+					col = columns[ i ];
+					if ( col.editable !== false ) {
+						field = me.getFieldConfiguration( clazz, parentEl, editElement, col, colNumber, deps, addedPaths );
+						if ( field ) {
 							editFields.push( field );
 						}
 					}
 				}
 			}
-			return {deps: deps, items: editFields};
+			return { deps: deps, items: editFields };
 		},
 		
 		/**
-		 * @method getFieldConfiguration 
+		 * @method getFieldConfiguration
 		 * @param clazz {Object} table component class
 		 * @param $tr {jQuery Object TR}
 		 * @param $clickedItem {jQuery Object TR | TD etc}
@@ -79,47 +79,47 @@ define(["jquery"], function($){
 		 * @param addedPaths {Object} to populate which which dependencies have already been added to deps - **variable pointers**
 		 * @return {Object|null} field config {sName:"fields.input", value:"abc", ...}
 		 */
-		getFieldConfiguration: function(clazz, $tr, $clickedItem, col, colNumber, deps, addedPaths){
+		getFieldConfiguration: function( clazz, $tr, $clickedItem, col, colNumber, deps, addedPaths ) {
 			var me = this,
 				fieldConfig = col.editConf && col.editConf.field ? col.editConf.field : {},
 				path,
 				data = $tr.prop( clazz.propDataName ),
 				value = Firebrick.utils.getDeepProperty( col.mapping, data );
 			
-			if(data.children){
-				if(col.editConf && col.editConf.parentsEditable === false){
+			if ( data.children ) {
+				if ( col.editConf && col.editConf.parentsEditable === false ) {
 					//cancel edit field creation as this column should not be editable when a parent item
 					return;
-				}	
+				}
 			}
 
-			if(value === null || value === undefined){
+			if ( value === null || value === undefined ) {
 				//property not found by getDeepProperty() so we assume an edit should not be possible here
 				return;
-			}else if (col.renderer && !col.type){
+			} else if ( col.renderer && !col.type ) {
 				//don't support custom renderers if no type is given
 				return;
 			}
 
-			if(fieldConfig.sName){
+			if ( fieldConfig.sName ) {
 				//get the correct dependency path for the field type - i.e. "fields.input" => "Firebrick.ui/fields/Input"
-				path = Firebrick.classes.getSNameConfig(fieldConfig.sName).path;
-			}else{
+				path = Firebrick.classes.getSNameConfig( fieldConfig.sName ).path;
+			} else {
 				//default to input field if non given
 				fieldConfig.sName = col.type === "checkbox" ? "fields.checkbox" : "fields.input";
-				path = Firebrick.classes.getSNameConfig(fieldConfig.sName).path;
+				path = Firebrick.classes.getSNameConfig( fieldConfig.sName ).path;
 			}
 			
-			if(!addedPaths[path]){
-				addedPaths[path] = true;
-				deps.push(path);
+			if ( !addedPaths[ path ] ) {
+				addedPaths[ path ] = true;
+				deps.push( path );
 			}
 			
-			fieldConfig.label = fieldConfig.label || (col.text ? col.text : col);
-			fieldConfig.init = me._initFunction(colNumber);
-			fieldConfig.value = $.isFunction(value) ? value() : value;
+			fieldConfig.label = fieldConfig.label || ( col.text ? col.text : col );
+			fieldConfig.init = me._initFunction( colNumber );
+			fieldConfig.value = $.isFunction( value ) ? value() : value;
 			
-			if(typeof fieldConfig.value === "string"){
+			if ( typeof fieldConfig.value === "string" ) {
 				fieldConfig.value = "'" + fieldConfig.value + "'";
 			}
 			
@@ -132,9 +132,9 @@ define(["jquery"], function($){
 		 * @method removeCurrent
 		 * @private
 		 */
-		removeCurrent: function(editElement){
+		removeCurrent: function( editElement ) {
 			var me = this;
-			editElement.removeClass(me.editMarker);
+			editElement.removeClass( me.editMarker );
 			me.currentEdit = null;
 		},
 		
@@ -145,25 +145,25 @@ define(["jquery"], function($){
 		 * @param tableClass {Object} table component class
 		 * @param editElement {jQuery Object} TD
 		 */
-		cancelChanges: function(tableClass, editElement){
+		cancelChanges: function( tableClass, editElement ) {
 			var me = this;
 			
 			//reset html
-			me.resetCell(tableClass, editElement);
+			me.resetCell( tableClass, editElement );
 		},
 		
 		/**
 		 * @method resetCell
 		 * @param value {Any} optional - if set, once the cell is reset to its original state, the value will be set
 		 */
-		resetCell: function(tableClass, editElement, value){
+		resetCell: function( tableClass, editElement, value ) {
 			var me = this,
 				tdSpanClass = tableClass.tdSpanClass,
-				el = $("> [fb-view-bind]", editElement);	//find the inline edit field
+				el = $( "> [fb-view-bind]", editElement );	//find the inline edit field
 			
-			me.removeCurrent(editElement);
+			me.removeCurrent( editElement );
 			
-			if(el.length){
+			if ( el.length ) {
 				//remove the edit field
 				el.remove();
 			}
@@ -171,8 +171,8 @@ define(["jquery"], function($){
 			//reset html
 			editElement.children().removeClass( me.hideCellClass );
 			
-			if(value){
-				$("> span." + tdSpanClass, editElement).html(value);
+			if ( value ) {
+				$( "> span." + tdSpanClass, editElement ).html( value );
 			}
 		},
 		
@@ -183,11 +183,11 @@ define(["jquery"], function($){
 		 * @param value {Any}
 		 * @return value {Any} parsed
 		 */
-		parseValue: function(type, value){
-			if(type === "number"){
-				return parseInt(value);
-			}else if(type === "float"){
-				return parseFloat(value);
+		parseValue: function( type, value ) {
+			if ( type === "number" ) {
+				return parseInt( value );
+			} else if ( type === "float" ) {
+				return parseFloat( value );
 			}
 			return value;
 		},
@@ -199,39 +199,36 @@ define(["jquery"], function($){
 		 * @event beforeChanges(tableClass, editElement)	- event fired on tableClass
 		 * @event afterChanges(tableClass, editElement)	- event fired on tableClass
 		 */
-		makeChanges: function(tableClass, editElement){
+		makeChanges: function( tableClass, editElement ) {
 				var me = this,
 					columns = tableClass.columns,
-					isTreeTable = tableClass.treetable,
-					inputs = editElement.find("input"),
+					inputs = editElement.find( "input" ),
 					input,
 					value, //holder
 					model,
 					oldValue,
-					tdSpanClass = tableClass.tdSpanClass,	//needed for manual table alterations
 					editType = tableClass.editType,
-					isRow = editElement.is("tr"),
-					$tr = isRow ? editElement : editElement.closest("tr"),
-					rowNumber = isRow ? editElement.attr(me.indexAttr) : editElement.attr(me.rowAttr),
-					colNumber;	
+					isRow = editElement.is( "tr" ),
+					$tr = isRow ? editElement : editElement.closest( "tr" ),
+					colNumber;
+
+				tableClass.fireEvent( "beforeChanges", arguments );
 				
-				tableClass.fireEvent("beforeChanges", arguments);
-				
-				if(inputs.length){
-					for(var i = 0, l = inputs.length; i<l; i++){
-						input = $(inputs[i]);
+				if ( inputs.length ) {
+					for ( var i = 0, l = inputs.length; i < l; i++ ) {
+						input = $( inputs[ i ] );
 						//filter out (continue) non checked (selected) checkboxes or radio buttons
-						if(input.attr("type") === "radio" || input.attr("type") === "checkbox"){
-							if(!input.is(":checked")){
+						if ( input.attr( "type" ) === "radio" || input.attr( "type" ) === "checkbox" ) {
+							if ( !input.is( ":checked" ) ) {
 								continue;
-							}else{
-								colNumber = Firebrick.getById( input.attr("data-cmp-id") )._prop;
+							} else {
+								colNumber = Firebrick.getById( input.attr( "data-cmp-id" ) )._prop;
 							}
-						}else{
-							colNumber = Firebrick.getById( input.attr("id") )._prop;
+						} else {
+							colNumber = Firebrick.getById( input.attr( "id" ) )._prop;
 						}
 						
-						//example tableClass.getData()() => 
+						//example tableClass.getData()() =>
 						//						[{
 						//							name: "John",
 						//							age: 35,
@@ -247,27 +244,27 @@ define(["jquery"], function($){
 						//							}]
 						//						}]
 						
-						model = Firebrick.utils.getDeepProperty( columns[colNumber].mapping, $tr.prop( tableClass.propDataName ) );
+						model = Firebrick.utils.getDeepProperty( columns[ colNumber ].mapping, $tr.prop( tableClass.propDataName ) );
 						
 						oldValue = model();	//extract observable
 						
-						if(model){
+						if ( model ) {
 								value = input.val();
-								value = me.parseValue(columns[colNumber].type, value);
-								if(editType === "cell" && value === oldValue){
-									return me.cancelChanges(tableClass, editElement);
-								}else{
-									if(model.value){
-										model.value(value);
+								value = me.parseValue( columns[ colNumber ].type, value );
+								if ( editType === "cell" && value === oldValue ) {
+									return me.cancelChanges( tableClass, editElement );
+								} else {
+									if ( model.value ) {
+										model.value( value );
 										//cell edit
-										if(!isRow){
-											me.resetCell(tableClass, editElement);	
+										if ( !isRow ) {
+											me.resetCell( tableClass, editElement );
 										}
-									}else{
-										if(value !== oldValue){
-											model(value);	//set new value
-											if(!isRow){
-												me.resetCell(tableClass, editElement, value);
+									} else {
+										if ( value !== oldValue ) {
+											model( value );	//set new value
+											if ( !isRow ) {
+												me.resetCell( tableClass, editElement, value );
 											}
 										}
 									}
@@ -278,7 +275,7 @@ define(["jquery"], function($){
 					}
 				}
 				
-				tableClass.fireEvent("afterChanges", arguments);
+				tableClass.fireEvent( "afterChanges", arguments );
 		},
 		
 		/**
@@ -289,22 +286,22 @@ define(["jquery"], function($){
 		 * @param editFields.items {Array of Object} items configuration for the body of the modal
 		 * @param $tr {jQuery Object} tr that is to be edited
 		 */
-		buildModal: function(clazz, editFields, $tr){
+		buildModal: function( clazz, editFields, $tr ) {
 			var me = this,
 				customConfig = clazz.editModalConfig || {},
 				
 				defaultConfig = {
 					title: customConfig.modalTitle || "Edit",
 					target: $tr,
-					items:[{
+					items: [{
 						sName: "containers.form",
-						preSubmit: function(){
+						preSubmit: function() {
 							var me2 = this;
 							
 							//make changes to table
-							me.makeChanges(clazz, $tr);
+							me.makeChanges( clazz, $tr );
 							//hide the modal
-							$(me2._parent.getElement()).modal("hide");
+							$( me2._parent.getElement() ).modal( "hide" );
 							
 							//prevent default form submission
 							return false;
@@ -313,28 +310,28 @@ define(["jquery"], function($){
 					}]
 				};
 				
-			if(customConfig._showEditButtons !== false){
+			if ( customConfig._showEditButtons !== false ) {
 				defaultConfig.footerItems = [{
 					sName: "button.button",
 					closeModal: true,	//hide modal
 					text: customConfig.buttonUpdateText || "Update",
-					handler: function(){
-						me.makeChanges(clazz, $tr);
+					handler: function() {
+						me.makeChanges( clazz, $tr );
 					}
 				}];
 			}
 				
-			customConfig = Firebrick.utils.overwrite(defaultConfig, customConfig);
+			customConfig = Firebrick.utils.overwrite( defaultConfig, customConfig );
 			
 			//add standard dependencies
-			editFields.deps.push( Firebrick.classes.getSNameConfig("containers.modal").path );
-			editFields.deps.push( Firebrick.classes.getSNameConfig("containers.form").path ); 
-			editFields.deps.push( Firebrick.classes.getSNameConfig("button.button").path );
+			editFields.deps.push( Firebrick.classes.getSNameConfig( "containers.modal" ).path );
+			editFields.deps.push( Firebrick.classes.getSNameConfig( "containers.form" ).path );
+			editFields.deps.push( Firebrick.classes.getSNameConfig( "button.button" ).path );
 			
-			me.tableLoadMask(clazz.getElement());
-			require(editFields.deps, function(){
-				Firebrick.create("Firebrick.ui.containers.Modal", customConfig);
-				me.removeTableLoadMask(clazz.getElement());
+			me.tableLoadMask( clazz.getElement() );
+			require( editFields.deps, function() {
+				Firebrick.create( "Firebrick.ui.containers.Modal", customConfig );
+				me.removeTableLoadMask( clazz.getElement() );
 			});
 		},
 		
@@ -342,41 +339,41 @@ define(["jquery"], function($){
 		 * @method tableLoadMask
 		 * @param $table {jquery Object} table
 		 */
-		tableLoadMask: function($table){
+		tableLoadMask: function( $table ) {
 			var me = this,
-				tbody = $("tbody", $table),
-				div = $("<div class='fb-ui-load-mask'></div>");
-			tbody.addClass(me.rowLoadClass);
-			me.appendLoadIcon(div);
-			tbody.append(div);
+				tbody = $( "tbody", $table ),
+				div = $( "<div class='fb-ui-load-mask'></div>" );
+			tbody.addClass( me.rowLoadClass );
+			me.appendLoadIcon( div );
+			tbody.append( div );
 			
 		},
 		
 		/**
 		 * @method removeTableLoadMask
-		 * @param $table {jquery Object} table 
+		 * @param $table {jquery Object} table
 		 */
-		removeTableLoadMask: function($table){
+		removeTableLoadMask: function( $table ) {
 			var me = this,
-				tbody = $("tbody", $table);
-			tbody.removeClass(me.rowLoadClass);
-			$("> div.fb-ui-load-mask", tbody).remove();
+				tbody = $( "tbody", $table );
+			tbody.removeClass( me.rowLoadClass );
+			$( "> div.fb-ui-load-mask", tbody ).remove();
 		},
 		
 		/**
 		 * @method appendLoadIcon
 		 * @param $context {jquery Object} to append icon too
 		 */
-		appendLoadIcon: function($context){
-			$context.append("<span class='fb-ui-load-block glyphicon glyphicon-refresh glyphicon-refresh-animate'></span>");
+		appendLoadIcon: function( $context ) {
+			$context.append( "<span class='fb-ui-load-block glyphicon glyphicon-refresh glyphicon-refresh-animate'></span>" );
 		},
 		
 		/**
 		 * @method appendLoadIcon
 		 * @param $context {jquery Object} to remove icon from
 		 */
-		removeLoadIcon: function($context){
-			$("> .fb-ui-load-block", $context).remove();
+		removeLoadIcon: function( $context ) {
+			$( "> .fb-ui-load-block", $context ).remove();
 		},
 		
 		/**
@@ -387,13 +384,13 @@ define(["jquery"], function($){
 		 * @param editFields.items {Array of Object} items configuration for the body of the modal
 		 * @param $td {jQuery Object} td that is to be edited
 		 */
-		buildCellEditor: function(clazz, editFields, $td){
+		buildCellEditor: function( clazz, editFields, $td ) {
 			var me = this;
-			editFields.deps.push(Firebrick.classes.getSNameConfig("containers.box").path);
+			editFields.deps.push( Firebrick.classes.getSNameConfig( "containers.box" ).path );
 			
-			me.appendLoadIcon($td);
-			require(editFields.deps, function(){
-				var field = editFields.items[0];
+			me.appendLoadIcon( $td );
+			require( editFields.deps, function() {
+				var field = editFields.items[ 0 ];
 				
 				$td.children().addClass( me.hideCellClass );
 				
@@ -401,16 +398,16 @@ define(["jquery"], function($){
 				field.inputWidth = 12;
 				field.inputContainerBindings = me.cellEditInputContainerBindings();
 
-				field.init = me._cellEditInit(clazz, $td);
+				field.init = me._cellEditInit( clazz, $td );
 				//build edit field
-				Firebrick.create("containers.box", {
+				Firebrick.create( "containers.box", {
 					target: $td,
 					appendTarget: true,
 					enclosedBind: true,
-					items: [field]
-				});	
-				
-				me.removeLoadIcon($td);
+					items: [ field ]
+				});
+
+				me.removeLoadIcon( $td );
 			});
 		},
 		
@@ -420,12 +417,12 @@ define(["jquery"], function($){
 		 * @param $table {jQuery Object} table element
 		 * @param $tr {jQuery Object} tr that was double clicked
 		 */
-		initEditingTR: function(clazz, $table, $tr){
+		initEditingTR: function( clazz, $table, $tr ) {
 			var me = this,
 				//holder - this populates the fields that are shown in the edit mask ".items"
-				editFields = me.editFields($tr, clazz, clazz.columns);
-			if(editFields.items.length){
-				me.buildModal(clazz, editFields, $tr);
+				editFields = me.editFields( $tr, clazz, clazz.columns );
+			if ( editFields.items.length ) {
+				me.buildModal( clazz, editFields, $tr );
 			}
 		},
 		
@@ -435,21 +432,21 @@ define(["jquery"], function($){
 		 * @param $table {jQuery Object} table element
 		 * @param $tr {jQuery Object} td that was double clicked
 		 */
-		initEditingTD: function(clazz, $table, $td){
+		initEditingTD: function( clazz, $table, $td ) {
 			var me = this,
 				currentEdit = me.currentEdit,
-				index = $td.attr(me.indexAttr),
+				index = $td.attr( me.indexAttr ),
 				//holder - this populates the fields that are shown in the edit mask ".items"
-				editFields, 
+				editFields,
 				globalClick;
 			
-			if(me.currentEdit){
-				if(me.currentEdit.is($td)){
+			if ( me.currentEdit ) {
+				if ( me.currentEdit.is( $td ) ) {
 					//same cell that is already open
 					return;
-				}else{
+				} else {
 					//different cell, close the open one
-					me.makeChanges(clazz, currentEdit);
+					me.makeChanges( clazz, currentEdit );
 				}
 			}
 			
@@ -459,66 +456,65 @@ define(["jquery"], function($){
 			/*
 			 * listener for clicking outside the edit cell
 			 */
-			globalClick = function(event){
-				var $target = $(event.target),
+			globalClick = function( event ) {
+				var $target = $( event.target ),
 					current = me.currentEdit;
 				//different cell, close the open one
-				if(current){
+				if ( current ) {
 					//is the clicked target the edit element and not anything inside it
-					if(!current.is($target) && !current.has($target).length){
+					if ( !current.is( $target ) && !current.has( $target ).length ) {
 						//make changes (i.e. act like a "blur" event) and remove this click listener
-						me.makeChanges(clazz, current);
-						$(document).off("click", globalClick);					
+						me.makeChanges( clazz, current );
+						$( document ).off( "click", globalClick );
 					}
-				}else{
+				} else {
 					//makeChanges has been called before this already
 					//ie. the currentEdit item has been closed elsewhere, so just delete the click event
-					$(document).off("click", globalClick);
+					$( document ).off( "click", globalClick );
 				}
 				
 			};
-			$(document).on("click", globalClick);
+			$( document ).on( "click", globalClick );
 			/* --- **/
 			
 			//check if this cell isn't open for editing already
-			if(!$td.hasClass(me.editMarker)){
+			if ( !$td.hasClass( me.editMarker ) ) {
 				
 				//get the field to display for editing
-				editFields = me.editFields($td, clazz, [ clazz.columns[index] ]);
+				editFields = me.editFields( $td, clazz, [ clazz.columns[ index ] ] );
 				
-				if(editFields.items.length){
+				if ( editFields.items.length ) {
 					//add the css to mark as open for editing and show the field
-					$td.addClass(me.editMarker);
-					me.buildCellEditor(clazz, editFields, $td);
+					$td.addClass( me.editMarker );
+					me.buildCellEditor( clazz, editFields, $td );
 				}
 			}
 		},
 		
-		
 		/*
-		 * 
-		 * 
-		 * 
-		 * 
+		 *
+		 *
+		 *
+		 *
 		 * Component method overrides
-		 * 
-		 * 
-		 * 
-		 * 
-		 * 
+		 *
+		 *
+		 *
+		 *
+		 *
 		 */
 		/**
-		 * override InputContainerBindings function to add more properties 
+		 * override InputContainerBindings function to add more properties
 		 * @method cellEditInputContainerBindings
 		 * @return {Function}
 		 */
-		cellEditInputContainerBindings: function(){
-			return function(){
+		cellEditInputContainerBindings: function() {
+			return function() {
 				var me2 = this,
-					obj = me2.callParent(arguments);
+					obj = me2.callParent( arguments );
 				
-				obj.css["'col-md-10'"] = true;
-				obj.css["'col-lg-8'"] = true;
+				obj.css[ "'col-md-10'" ] = true;
+				obj.css[ "'col-lg-8'" ] = true;
 				
 				return obj;
 			};
@@ -530,7 +526,7 @@ define(["jquery"], function($){
 		 * @param clazz {Object} component class
 		 * @param colNum {Integer}
 		 */
-		_defaultRenderAction: function(clazz, colNum){
+		_defaultRenderAction: function( clazz, colNum ) {
 			clazz._prop = colNum;
 		},
 		
@@ -541,16 +537,16 @@ define(["jquery"], function($){
 		 * @param colNum {Integer}
 		 * @return {Function}
 		 */
-		_initFunction: function(colNum){
+		_initFunction: function( colNum ) {
 			var me = this;
-			return function(){
+			return function() {
 				var me2 = this;
 				
-				me2.on("rendered", function(){
-					me._defaultRenderAction(me2, colNum);
+				me2.on( "rendered", function() {
+					me._defaultRenderAction( me2, colNum );
 				});
 				
-				return me2.callParent(arguments);
+				return me2.callParent( arguments );
 			};
 		},
 		
@@ -560,99 +556,98 @@ define(["jquery"], function($){
 		 * @param clazz {Object} component clazz - edit field
 		 * @param $td {jQuery Object}
 		 */
-		_cellEditInit: function(clazz, $td){
+		_cellEditInit: function( clazz, $td ) {
 			var me = this;
-			return function(){
+			return function() {
 				var me2 = this,
 					sName = me2.sName;
 				
-				me2.on("rendered", function(){
+				me2.on( "rendered", function() {
 					var el = me2.getElement(),
 						children,
 						f;
 					
-					me._defaultRenderAction(me2, $td.attr(me.indexAttr));
+					me._defaultRenderAction( me2, $td.attr( me.indexAttr ) );
 					
-					el.on("keydown", function(event){
+					el.on( "keydown", function( event ) {
 						var k = event.which;
-						if(k === 13){
-							me.makeChanges(clazz, $td);
-						}else if(k === 27){
-							me.cancelChanges(clazz, $td);
+						if ( k === 13 ) {
+							me.makeChanges( clazz, $td );
+						} else if ( k === 27 ) {
+							me.cancelChanges( clazz, $td );
 						}
 					});
 					
-					if(sName !== "fields.input"){
-						children = el.is("input") ? el : el.find("input");
-						f = function(){
-							me.makeChanges(clazz, $td);
-							children.off("change", f);
+					if ( sName !== "fields.input" ) {
+						children = el.is( "input" ) ? el : el.find( "input" );
+						f = function() {
+							me.makeChanges( clazz, $td );
+							children.off( "change", f );
 						};
-						children.on("change", f);
-					}else{
+						children.on( "change", f );
+					} else {
 						el.focus();
 					}
 					
-					
 				});
 				
-				return me2.callParent(arguments);
+				return me2.callParent( arguments );
 			};
 		}
 		
 	});
 	
 	//jquery plugin to init editable table
-	$.fn.EditableTable = $.fn.EditableTable || function(){
-		var $table = $(this),
+	$.fn.EditableTable = $.fn.EditableTable || function() {
+		var $table = $( this ),
 			elements,
-			plugin = Firebrick.create("Firebrick.ui.table.plugins.EditableTable"),	//create Plugin Class instance
-			clazz = Firebrick.getById($table.attr("id")),
+			plugin = Firebrick.create( "Firebrick.ui.table.plugins.EditableTable" ),	//create Plugin Class instance
+			clazz = Firebrick.getById( $table.attr( "id" ) ),
 			editType = clazz.editType,
 			eventCallback,
 			ths, $th;
 		
-		$table.addClass("fb-ui-editabletable");	
-		
-		if(editType === "row"){
-			$table.addClass("fb-ui-row-editing");
+		$table.addClass( "fb-ui-editabletable" );
+
+		if ( editType === "row" ) {
+			$table.addClass( "fb-ui-row-editing" );
 			//for OPERA - http://stackoverflow.com/questions/7018324/how-do-i-stop-highlighting-of-a-div-element-when-double-clicking-on
-			$table.attr("unselectable", "on");
-			elements = $("tbody tr", $table);
-			eventCallback = function(){
-				var $this = $(this);
+			$table.attr( "unselectable", "on" );
+			elements = $( "tbody tr", $table );
+			eventCallback = function() {
+				var $this = $( this );
 				//stop the double click of taking event when a child element of TR is dblclicked
-				if($this.is("tr")){
-					plugin.initEditingTR(clazz, $table, $this);
+				if ( $this.is( "tr" ) ) {
+					plugin.initEditingTR( clazz, $table, $this );
 				}
 			};
 			
-		}else if (editType === "cell"){
+		} else if ( editType === "cell" ) {
 			/*
 			 * workaround to stop col width shifting from inline edit
 			 * datatable plugin stops this from happening
 			 */
-			if(!clazz.datatable){ //if not active
-				ths = $("> thead th", $table);
-				for(var i = 0, l = ths.length; i<l; i++){
-					$th = $(ths[i]);
-					$th.css("width", $th.width());
+			if ( !clazz.datatable ) { //if not active
+				ths = $( "> thead th", $table );
+				for ( var i = 0, l = ths.length; i < l; i++ ) {
+					$th = $( ths[ i ] );
+					$th.css( "width", $th.width() );
 				}
 			}
 			
 			//get the cells for the table
-			elements = $("tbody td", $table);
+			elements = $( "tbody td", $table );
 			//create the correct event function
-			eventCallback = function(){
-				var $this = $(this);
-				if($this.is("td")){
-					plugin.initEditingTD(clazz, $table, $this);	
+			eventCallback = function() {
+				var $this = $( this );
+				if ( $this.is( "td" ) ) {
+					plugin.initEditingTD( clazz, $table, $this );
 				}
 			};
 		}
 		
 		//register event with callback
-		elements.on("dblclick", eventCallback);
+		elements.on( "dblclick", eventCallback );
 	};
 	
 	return clazz;
