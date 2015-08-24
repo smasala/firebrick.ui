@@ -255,6 +255,8 @@ define(&#x27;firebrick-ui-all&#x27;,[&quot;jquery&quot;, &quot;firebrick&quot;, 
 		return;
 	}
 	
+	Firebrick._ns.push(&quot;Firebrick.ui&quot;);
+	
 	/**
 	 * Firebrick component library for Firebrick JS MVC
 	 * @module Firebrick.ui
@@ -843,155 +845,9 @@ define(&#x27;firebrick-ui-all&#x27;,[&quot;jquery&quot;, &quot;firebrick&quot;, 
 					}
 					return me._registry[name];
 				}
-			},
-			
-			/**
-			 * @property _sNames
-			 * @private
-			 * @type {Object}
-			 */
-			_sNames: {
-					&quot;button.dropdown.list&quot;:{
-						path:&quot;Firebrick.ui/button/dropdown/List&quot;
-					},
-					&quot;button.button&quot;:{
-						path:&quot;Firebrick.ui/button/Button&quot;
-					},
-					&quot;button.buttongroup&quot;:{
-						path:&quot;Firebrick.ui/button/ButtonGroup&quot;
-					},
-					&quot;button.icon&quot;:{
-						path:&quot;Firebrick.ui/button/Icon&quot;
-					},
-					&quot;button.togglebutton&quot;:{
-						path:&quot;Firebrick.ui/button/ToggleButton&quot;
-					},
-					&quot;containers.border.pane&quot;:{
-						path:&quot;Firebrick.ui/containers/border/Pane&quot;
-					},
-					&quot;containers.tab.pane&quot;:{
-						path:&quot;Firebrick.ui/containers/tab/Pane&quot;
-					},
-					&quot;containers.accordion&quot;:{
-						path:&quot;Firebrick.ui/containers/Accordion&quot;
-					},
-					&quot;containers.borderlayout&quot;:{
-						path:&quot;Firebrick.ui/containers/BorderLayout&quot;
-					},
-					&quot;containers.box&quot;:{
-						path:&quot;Firebrick.ui/containers/Box&quot;
-					},
-					&quot;containers.form&quot;:{
-						path:&quot;Firebrick.ui/containers/Form&quot;
-					},
-					&quot;containers.formpanel&quot;:{
-						path:&quot;Firebrick.ui/containers/FormPanel&quot;
-					},
-					&quot;containers.gridcolumn&quot;:{
-						path:&quot;Firebrick.ui/containers/GridColumn&quot;
-					},
-					&quot;containers.gridrow&quot;:{
-						path:&quot;Firebrick.ui/containers/GridRow&quot;
-					},
-					&quot;containers.modal&quot;:{
-						path:&quot;Firebrick.ui/containers/Modal&quot;
-					},
-					&quot;containers.fieldset&quot;: {
-						path:&quot;Firebrick.ui/containers/Fieldset&quot;
-					},
-					&quot;containers.panel&quot;:{
-						path:&quot;Firebrick.ui/containers/Panel&quot;
-					},
-					&quot;containers.tabpanel&quot;:{
-						path:&quot;Firebrick.ui/containers/TabPanel&quot;
-					},
-					&quot;display.alert&quot;:{
-						path:&quot;Firebrick.ui/display/Alert&quot;
-					},
-					&quot;display.divider&quot;:{
-						path:&quot;Firebrick.ui/display/Divider&quot;
-					},
-					&quot;display.header&quot;:{
-						path:&quot;Firebrick.ui/display/Header&quot;
-					},
-					&quot;display.image&quot;:{
-						path:&quot;Firebrick.ui/display/Image&quot;
-					},
-					&quot;display.list&quot;:{
-						path:&quot;Firebrick.ui/display/List&quot;
-					},
-					&quot;display.progress&quot;:{
-						path:&quot;Firebrick.ui/display/Progress&quot;
-					},
-					&quot;display.span&quot;:{
-						path:&quot;Firebrick.ui/display/Span&quot;
-					},
-					&quot;display.text&quot;:{
-						path:&quot;Firebrick.ui/display/Text&quot;
-					},
-					&quot;display.loader&quot;: {
-						path:&quot;Firebrick.ui/display/Loader&quot;
-					},
-					&quot;fields.checkbox&quot;:{
-						path:&quot;Firebrick.ui/fields/Checkbox&quot;
-					},
-					&quot;fields.datepicker&quot;:{
-						path:&quot;Firebrick.ui/fields/DatePicker&quot;
-					},
-					&quot;fields.display&quot;:{
-						path:&quot;Firebrick.ui/fields/Display&quot;
-					},
-					&quot;fields.combobox&quot;:{
-						path:&quot;Firebrick.ui/fields/ComboBox&quot;
-					},
-					&quot;fields.email&quot;:{
-						path:&quot;Firebrick.ui/fields/Email&quot;
-					},
-					&quot;fields.file&quot;:{
-						path:&quot;Firebrick.ui/fields/File&quot;
-					},
-					&quot;fields.input&quot;:{
-						path:&quot;Firebrick.ui/fields/Input&quot;
-					},
-					&quot;fields.password&quot;:{
-						path:&quot;Firebrick.ui/fields/Password&quot;
-					},
-					&quot;fields.radio&quot;:{
-						path:&quot;Firebrick.ui/fields/Radio&quot;
-					},
-					&quot;fields.selectbox&quot;:{
-						path:&quot;Firebrick.ui/fields/SelectBox&quot;
-					},
-					&quot;fields.textarea&quot;:{
-						path:&quot;Firebrick.ui/fields/TextArea&quot;
-					},
-					&quot;nav.breadcrumbs&quot;:{
-						path:&quot;Firebrick.ui/nav/Breadcrumbs&quot;	
-					},
-					&quot;nav.list&quot;:{
-						path:&quot;Firebrick.ui/nav/List&quot;
-					},
-					&quot;nav.navbar&quot;:{
-						path:&quot;Firebrick.ui/nav/Navbar&quot;
-					},
-					&quot;nav.pagination&quot;:{
-						path:&quot;Firebrick.ui/nav/Pagination&quot;
-					},
-					&quot;nav.toolbar&quot;:{
-						path:&quot;Firebrick.ui/nav/Toolbar&quot;	
-					},
-					&quot;table.table&quot;:{
-						path:&quot;Firebrick.ui/table/Table&quot;
-					},
-					&quot;table.treetable&quot;:{
-						path:&quot;Firebrick.ui/table/TreeTable&quot;
-					}
 			}
 			
 	};
-	
-	Firebrick.classes.addSNames(Firebrick.ui._sNames);
-	
 	
 	/**
 	 * Overwrites &quot;Firebrick.view.Base&quot; 
@@ -1134,6 +990,59 @@ define(&#x27;firebrick-ui-all&#x27;,[&quot;jquery&quot;, &quot;firebrick&quot;, 
 		};
 		
 	})(ko);
+	
+	//{{SNAME.HOLDER}}
+ Firebrick.classes.addLookups({&quot;button.button&quot;: &quot;Firebrick.ui.button.Button&quot;,
+&quot;button.buttongroup&quot;: &quot;Firebrick.ui.button.ButtonGroup&quot;,
+&quot;button.icon&quot;: &quot;Firebrick.ui.button.Icon&quot;,
+&quot;button.togglebutton&quot;: &quot;Firebrick.ui.button.ToggleButton&quot;,
+&quot;containers.accordion&quot;: &quot;Firebrick.ui.containers.Accordion&quot;,
+&quot;containers.border.pane&quot;: &quot;Firebrick.ui.containers.border.Pane&quot;,
+&quot;containers.borderlayout&quot;: &quot;Firebrick.ui.containers.BorderLayout&quot;,
+&quot;containers.box&quot;: &quot;Firebrick.ui.containers.Box&quot;,
+&quot;containers.fieldset&quot;: &quot;Firebrick.ui.containers.Fieldset&quot;,
+&quot;containers.form&quot;: &quot;Firebrick.ui.containers.Form&quot;,
+&quot;containers.formpanel&quot;: &quot;Firebrick.ui.containers.FormPanel&quot;,
+&quot;containers.gridcolumn&quot;: &quot;Firebrick.ui.containers.GridColumn&quot;,
+&quot;containers.gridrow&quot;: &quot;Firebrick.ui.containers.GridRow&quot;,
+&quot;containers.modal&quot;: &quot;Firebrick.ui.containers.Modal&quot;,
+&quot;containers.panel&quot;: &quot;Firebrick.ui.containers.Panel&quot;,
+&quot;containers.tab.pane&quot;: &quot;Firebrick.ui.containers.tab.Pane&quot;,
+&quot;containers.tabpanel&quot;: &quot;Firebrick.ui.containers.TabPanel&quot;,
+&quot;display.alert&quot;: &quot;Firebrick.ui.display.Alert&quot;,
+&quot;display.divider&quot;: &quot;Firebrick.ui.display.Divider&quot;,
+&quot;display.header&quot;: &quot;Firebrick.ui.display.Header&quot;,
+&quot;display.image&quot;: &quot;Firebrick.ui.display.Image&quot;,
+&quot;display.list&quot;: &quot;Firebrick.ui.display.List&quot;,
+&quot;display.loader&quot;: &quot;Firebrick.ui.display.Loader&quot;,
+&quot;display.progress&quot;: &quot;Firebrick.ui.display.Progress&quot;,
+&quot;display.span&quot;: &quot;Firebrick.ui.display.Span&quot;,
+&quot;display.text&quot;: &quot;Firebrick.ui.display.Text&quot;,
+&quot;fields.base&quot;: &quot;Firebrick.ui.fields.Base&quot;,
+&quot;fields.checkbox&quot;: &quot;Firebrick.ui.fields.Checkbox&quot;,
+&quot;fields.combobox&quot;: &quot;Firebrick.ui.fields.ComboBox&quot;,
+&quot;fields.datepicker&quot;: &quot;Firebrick.ui.fields.DatePicker&quot;,
+&quot;fields.display&quot;: &quot;Firebrick.ui.fields.Display&quot;,
+&quot;fields.email&quot;: &quot;Firebrick.ui.fields.Email&quot;,
+&quot;fields.file&quot;: &quot;Firebrick.ui.fields.File&quot;,
+&quot;fields.hidden&quot;: &quot;Firebrick.ui.fields.Hidden&quot;,
+&quot;fields.htmleditor&quot;: &quot;Firebrick.ui.fields.HtmlEditor&quot;,
+&quot;fields.input&quot;: &quot;Firebrick.ui.fields.Input&quot;,
+&quot;fields.password&quot;: &quot;Firebrick.ui.fields.Password&quot;,
+&quot;fields.selectbox&quot;: &quot;Firebrick.ui.fields.SelectBox&quot;,
+&quot;fields.radio&quot;: &quot;Firebrick.ui.fields.Radio&quot;,
+&quot;fields.textarea&quot;: &quot;Firebrick.ui.fields.TextArea&quot;,
+&quot;menu.contextmenu&quot;: &quot;Firebrick.ui.menu.ContextMenu&quot;,
+&quot;menu.item&quot;: &quot;Firebrick.ui.menu.Item&quot;,
+&quot;menu.menu&quot;: &quot;Firebrick.ui.menu.Menu&quot;,
+&quot;nav.breadcrumbs&quot;: &quot;Firebrick.ui.nav.Breadcrumbs&quot;,
+&quot;nav.list&quot;: &quot;Firebrick.ui.nav.List&quot;,
+&quot;nav.navbar&quot;: &quot;Firebrick.ui.nav.Navbar&quot;,
+&quot;nav.pagination&quot;: &quot;Firebrick.ui.nav.Pagination&quot;,
+&quot;nav.toolbar&quot;: &quot;Firebrick.ui.nav.Toolbar&quot;,
+&quot;table.table&quot;: &quot;Firebrick.ui.table.Table&quot;,
+&quot;table.treetable&quot;: &quot;Firebrick.ui.table.TreeTable&quot;});
+//{{/SNAME.HOLDER}}
 	
 	return Firebrick;	
 });
