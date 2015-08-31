@@ -16,7 +16,7 @@
 	    "mvvm"
 	],
   	"devDependencies": {
-  		""grunt": "~0.4.5",
+  		"grunt": "~0.4.5",
 	    "grunt-version": "latest",
 	    "grunt-shell": "latest",
 	    "grunt-contrib-watch": "latest",
