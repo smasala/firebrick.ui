@@ -1,11 +1,31 @@
 {
-  "version":"0.20.17",
-  "dependencies": {
-    "grunt": "~0.4.5",
-    "grunt-shell": "latest",
-    "grunt-contrib-watch": "latest",
-    "grunt-contrib-jshint": "^0.11.0",
-    "grunt-jscs": "^2.1.0",
-    "jshint-stylish": "^1.0.0"
-  }
+	"name": "Firebrick UI",
+  	"version":"0.20.17",
+  	"description": "JavasScript UI component (extendable) library for Firebrick JS, built with Knockout, Bootstrap and jQuery",
+  	"keywords": [
+	  	"firebrick",
+	  	"firebrick js",
+	  	"firebrick ui",
+	  	"ui",
+	  	"components",
+	  	"browser",
+	    "framework",
+	    "client",
+	    "front-end",
+	    "mvc",
+	    "mvvm"
+	],
+  	"devDependencies": {
+  		""grunt": "~0.4.5",
+	    "grunt-version": "latest",
+	    "grunt-shell": "latest",
+	    "grunt-contrib-watch": "latest",
+	    "jscs": "latest",
+	    "jshint": "latest"
+  	},
+  	"repository": {
+  		"type": "git",
+  		"url": "git://github.com/smasala/firebrick.git"
+	},
+  	"license": "MIT"
 }
