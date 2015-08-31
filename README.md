@@ -8,9 +8,21 @@ UI extendable component library built for:
     * Knockout JS 3
     * Require JS 2
 
-## Install with Bower
+## Installation
+
+### Bower
 ```
 bower install "firebrick.ui"
+```
+
+### NPM
+```
+npm install firebrick.ui
+```
+
+### Yeoman
+```
+npm install -g generator-firebrick-ui && yo firebrick-ui
 ```
 
 ## More Info
