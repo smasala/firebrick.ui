@@ -1,4 +1,4 @@
-#Firebrick UI version: 0.20.12 [![Build Status](https://travis-ci.org/smasala/firebrick.ui.svg?branch=master)](https://travis-ci.org/smasala/firebrick.ui)
+#Firebrick UI version: 0.20.17 [![Build Status](https://travis-ci.org/smasala/firebrick.ui.svg?branch=master)](https://travis-ci.org/smasala/firebrick.ui)
 
 UI extendable component library built for:
 

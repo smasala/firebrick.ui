@@ -11,7 +11,7 @@
  * @namespace components.common
  * @class Base
  */
-define( [ "doT", "firebrick", "jquery", "bootstrap.plugins/tooltip", "bootstrap.plugins/popover" ], function( tplEngine, fb, $ ) {
+define( [ "doT", "jquery", "bootstrap.plugins/tooltip", "bootstrap.plugins/popover" ], function( tplEngine, $ ) {
 
 	"use strict";
 	

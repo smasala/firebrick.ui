@@ -1,14 +1,15 @@
 /*!
 * Firebrick UI
 * @author Steven Masala [me@smasala.com]
-* @version 0.20.12
+* @version 0.20.17
 * @date
 *
 * FirebrickUI, component library for Firebrick JS
 **/
-define( 'firebrick-ui',[ "jquery", "firebrick", "knockout",  "devicejs", "knockout-mapping", "text", "bootstrap" ], function( $, Firebrick, ko, dev, kom ) {
+define( 'firebrick-ui',[ "jquery", "firebrick", "knockout",  "devicejs", "knockout-mapping", "text", "bootstrap" ], function( $, fb, ko, dev, kom ) {
 	"use strict";
-
+	var Firebrick = window.Firebrick;
+	
 	//ko mapping
 	ko.mapping = kom;
 	
@@ -34,7 +35,7 @@ define( 'firebrick-ui',[ "jquery", "firebrick", "knockout",  "devicejs", "knocko
 			 * @private
 			 * @type {String}
 			 */
-			version: "0.20.12",
+			version: "0.20.17",
 			
 			/**
 			 * populate a target with fields and data
@@ -734,7 +735,11 @@ define( 'firebrick-ui',[ "jquery", "firebrick", "knockout",  "devicejs", "knocko
 				  return { "controlsDescendantBindings": true };
 			  },
 			  "update": function( element, valueAccessor, allBindings, viewModel, bindingContext ) {
-				  element.innerHTML = valueAccessor();
+				  var val = valueAccessor();
+				  if ( val === null ) {
+					  val = ""; //IE fix
+				  }
+				  element.innerHTML = val;
 				  ko.applyBindingsToDescendants( bindingContext, element );
 			  }
 		};
@@ -753,7 +758,48 @@ define( 'firebrick-ui',[ "jquery", "firebrick", "knockout",  "devicejs", "knocko
 	})( ko );
 	
 	//{{SNAME.HOLDER}}
- Firebrick.classes.addLookups( {} );
+ Firebrick.classes.addLookups( { "button.icon": "Firebrick.ui.button.Icon",
+"button.togglebutton": "Firebrick.ui.button.ToggleButton",
+"containers.border.pane": "Firebrick.ui.containers.border.Pane",
+"containers.box": "Firebrick.ui.containers.Box",
+"containers.fieldset": "Firebrick.ui.containers.Fieldset",
+"containers.form": "Firebrick.ui.containers.Form",
+"containers.formpanel": "Firebrick.ui.containers.FormPanel",
+"containers.gridcolumn": "Firebrick.ui.containers.GridColumn",
+"containers.modal": "Firebrick.ui.containers.Modal",
+"containers.panel": "Firebrick.ui.containers.Panel",
+"containers.tab.pane": "Firebrick.ui.containers.tab.Pane",
+"display.alert": "Firebrick.ui.display.Alert",
+"display.divider": "Firebrick.ui.display.Divider",
+"display.header": "Firebrick.ui.display.Header",
+"display.image": "Firebrick.ui.display.Image",
+"display.list": "Firebrick.ui.display.List",
+"display.loader": "Firebrick.ui.display.Loader",
+"display.progress": "Firebrick.ui.display.Progress",
+"display.span": "Firebrick.ui.display.Span",
+"display.text": "Firebrick.ui.display.Text",
+"fields.base": "Firebrick.ui.fields.Base",
+"fields.checkbox": "Firebrick.ui.fields.Checkbox",
+"fields.combobox": "Firebrick.ui.fields.ComboBox",
+"fields.datepicker": "Firebrick.ui.fields.DatePicker",
+"fields.display": "Firebrick.ui.fields.Display",
+"fields.email": "Firebrick.ui.fields.Email",
+"fields.file": "Firebrick.ui.fields.File",
+"fields.hidden": "Firebrick.ui.fields.Hidden",
+"fields.htmleditor": "Firebrick.ui.fields.HtmlEditor",
+"fields.input": "Firebrick.ui.fields.Input",
+"fields.password": "Firebrick.ui.fields.Password",
+"fields.radio": "Firebrick.ui.fields.Radio",
+"fields.selectbox": "Firebrick.ui.fields.SelectBox",
+"fields.textarea": "Firebrick.ui.fields.TextArea",
+"menu.contextmenu": "Firebrick.ui.menu.ContextMenu",
+"nav.breadcrumbs": "Firebrick.ui.nav.Breadcrumbs",
+"nav.list": "Firebrick.ui.nav.List",
+"nav.navbar": "Firebrick.ui.nav.Navbar",
+"nav.pagination": "Firebrick.ui.nav.Pagination",
+"nav.toolbar": "Firebrick.ui.nav.Toolbar",
+"table.table": "Firebrick.ui.table.Table",
+"table.treetable": "Firebrick.ui.table.TreeTable" } );
 //{{/SNAME.HOLDER}}
 	
 	return Firebrick;
@@ -772,7 +818,7 @@ define( 'firebrick-ui',[ "jquery", "firebrick", "knockout",  "devicejs", "knocko
  * @namespace components.common
  * @class Base
  */
-define( 'Firebrick.ui/common/Base',[ "doT", "firebrick", "jquery", "bootstrap.plugins/tooltip", "bootstrap.plugins/popover" ], function( tplEngine, fb, $ ) {
+define( 'Firebrick.ui/common/Base',[ "doT", "jquery", "bootstrap.plugins/tooltip", "bootstrap.plugins/popover" ], function( tplEngine, $ ) {
 
 	"use strict";
 	
@@ -7449,7 +7495,7 @@ define( 'Firebrick.ui/containers/TabPanel',[ "text!./TabPanel.html", "./Base", "
 });
 
 
-define('text!Firebrick.ui/display/Alert.html',[],function () { return '<div data-bind="{{=it.dataBind()}}">\r\n\t{{?it.dismissible}}\r\n      <button data-bind="{{=it.dataBind(\'closeButtonBindings\')}}"><span aria-hidden="true">&times;</span><span data-bind="{{=it.dataBind(\'srCloseIconBindings\')}}"></span></button>\r\n    {{?}}\r\n    {{?it.title || it.html}}\r\n    \t<h4>{{=fb.text(it.title)}}</h4>\r\n    \t<p data-bind="{{=it.dataBind(\'paragraphBindings\')}}">\r\n    \t</p>\r\n    {{?? true }}\r\n    \t{{=it.getItems()}}\r\n    {{?}}\r\n\t\r\n</div>';});
+define('text!Firebrick.ui/display/Alert.html',[],function () { return '<div data-bind="{{=it.dataBind()}}">\r\n\t{{?it.dismissible}}\r\n      <button data-bind="{{=it.dataBind(\'closeButtonBindings\')}}"><span aria-hidden="true">&times;</span><span data-bind="{{=it.dataBind(\'srCloseIconBindings\')}}"></span></button>\r\n    {{?}}\r\n    {{?it.title || it.html}}\r\n    \t<h4>{{=Firebrick.text(it.title)}}</h4>\r\n    \t<p data-bind="{{=it.dataBind(\'paragraphBindings\')}}">\r\n    \t</p>\r\n    {{?? true }}\r\n    \t{{=it.getItems()}}\r\n    {{?}}\r\n\t\r\n</div>';});
 
 /*!
  * @author Steven Masala [me@smasala.com]

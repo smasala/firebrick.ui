@@ -32,10 +32,12 @@ define(function(_require, _exports, _module){
 			"knockout-mapping": ["knockout"],
 			"bootstrap": ["jquery"],
 			"datatables": ["jquery"],
-			"x-editable": ["bootstrap"],
 			"responsive-images": ["jquery"],
 			"responsive-tables-js": ["jquery"],
-			"popover": ["tooltip"]
+			"popover": [ "bootstrap.plugins/tooltip" ],
+			"bootstrap.plugins/popover": [ "bootstrap.plugins/tooltip" ],
+			"firebrick-ui": [ "firebrick" ],
+			"firebrick-ui-all": [ "firebrick-ui" ]
 		}
 	});	
 });

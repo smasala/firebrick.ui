@@ -1,3 +1,8 @@
+v0.20.17
+----------------------------
+* fix alert box component error: fb is not defined
+* improve configuration.js
+
 v0.20.15
 ----------------------------
 * css fixes for nested list

@@ -19,7 +19,7 @@
             
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 0.20.12</em>
+            <em>API Docs for: 0.20.17</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -237,14 +237,15 @@
 /*!
 * Firebrick UI
 * @author Steven Masala [me@smasala.com]
-* @version 0.20.12
+* @version 0.20.17
 * @date
 *
 * FirebrickUI, component library for Firebrick JS
 **/
-define( &#x27;firebrick-ui&#x27;,[ &quot;jquery&quot;, &quot;firebrick&quot;, &quot;knockout&quot;,  &quot;devicejs&quot;, &quot;knockout-mapping&quot;, &quot;text&quot;, &quot;bootstrap&quot; ], function( $, Firebrick, ko, dev, kom ) {
+define( &#x27;firebrick-ui&#x27;,[ &quot;jquery&quot;, &quot;firebrick&quot;, &quot;knockout&quot;,  &quot;devicejs&quot;, &quot;knockout-mapping&quot;, &quot;text&quot;, &quot;bootstrap&quot; ], function( $, fb, ko, dev, kom ) {
 	&quot;use strict&quot;;
-
+	var Firebrick = window.Firebrick;
+	
 	//ko mapping
 	ko.mapping = kom;
 	
@@ -270,7 +271,7 @@ define( &#x27;firebrick-ui&#x27;,[ &quot;jquery&quot;, &quot;firebrick&quot;, &q
 			 * @private
 			 * @type {String}
 			 */
-			version: &quot;0.20.12&quot;,
+			version: &quot;0.20.17&quot;,
 			
 			/**
 			 * populate a target with fields and data
@@ -970,7 +971,11 @@ define( &#x27;firebrick-ui&#x27;,[ &quot;jquery&quot;, &quot;firebrick&quot;, &q
 				  return { &quot;controlsDescendantBindings&quot;: true };
 			  },
 			  &quot;update&quot;: function( element, valueAccessor, allBindings, viewModel, bindingContext ) {
-				  element.innerHTML = valueAccessor();
+				  var val = valueAccessor();
+				  if ( val === null ) {
+					  val = &quot;&quot;; //IE fix
+				  }
+				  element.innerHTML = val;
 				  ko.applyBindingsToDescendants( bindingContext, element );
 			  }
 		};
@@ -989,7 +994,48 @@ define( &#x27;firebrick-ui&#x27;,[ &quot;jquery&quot;, &quot;firebrick&quot;, &q
 	})( ko );
 	
 	//{{SNAME.HOLDER}}
- Firebrick.classes.addLookups( {} );
+ Firebrick.classes.addLookups( { &quot;button.icon&quot;: &quot;Firebrick.ui.button.Icon&quot;,
+&quot;button.togglebutton&quot;: &quot;Firebrick.ui.button.ToggleButton&quot;,
+&quot;containers.border.pane&quot;: &quot;Firebrick.ui.containers.border.Pane&quot;,
+&quot;containers.box&quot;: &quot;Firebrick.ui.containers.Box&quot;,
+&quot;containers.fieldset&quot;: &quot;Firebrick.ui.containers.Fieldset&quot;,
+&quot;containers.form&quot;: &quot;Firebrick.ui.containers.Form&quot;,
+&quot;containers.formpanel&quot;: &quot;Firebrick.ui.containers.FormPanel&quot;,
+&quot;containers.gridcolumn&quot;: &quot;Firebrick.ui.containers.GridColumn&quot;,
+&quot;containers.modal&quot;: &quot;Firebrick.ui.containers.Modal&quot;,
+&quot;containers.panel&quot;: &quot;Firebrick.ui.containers.Panel&quot;,
+&quot;containers.tab.pane&quot;: &quot;Firebrick.ui.containers.tab.Pane&quot;,
+&quot;display.alert&quot;: &quot;Firebrick.ui.display.Alert&quot;,
+&quot;display.divider&quot;: &quot;Firebrick.ui.display.Divider&quot;,
+&quot;display.header&quot;: &quot;Firebrick.ui.display.Header&quot;,
+&quot;display.image&quot;: &quot;Firebrick.ui.display.Image&quot;,
+&quot;display.list&quot;: &quot;Firebrick.ui.display.List&quot;,
+&quot;display.loader&quot;: &quot;Firebrick.ui.display.Loader&quot;,
+&quot;display.progress&quot;: &quot;Firebrick.ui.display.Progress&quot;,
+&quot;display.span&quot;: &quot;Firebrick.ui.display.Span&quot;,
+&quot;display.text&quot;: &quot;Firebrick.ui.display.Text&quot;,
+&quot;fields.base&quot;: &quot;Firebrick.ui.fields.Base&quot;,
+&quot;fields.checkbox&quot;: &quot;Firebrick.ui.fields.Checkbox&quot;,
+&quot;fields.combobox&quot;: &quot;Firebrick.ui.fields.ComboBox&quot;,
+&quot;fields.datepicker&quot;: &quot;Firebrick.ui.fields.DatePicker&quot;,
+&quot;fields.display&quot;: &quot;Firebrick.ui.fields.Display&quot;,
+&quot;fields.email&quot;: &quot;Firebrick.ui.fields.Email&quot;,
+&quot;fields.file&quot;: &quot;Firebrick.ui.fields.File&quot;,
+&quot;fields.hidden&quot;: &quot;Firebrick.ui.fields.Hidden&quot;,
+&quot;fields.htmleditor&quot;: &quot;Firebrick.ui.fields.HtmlEditor&quot;,
+&quot;fields.input&quot;: &quot;Firebrick.ui.fields.Input&quot;,
+&quot;fields.password&quot;: &quot;Firebrick.ui.fields.Password&quot;,
+&quot;fields.radio&quot;: &quot;Firebrick.ui.fields.Radio&quot;,
+&quot;fields.selectbox&quot;: &quot;Firebrick.ui.fields.SelectBox&quot;,
+&quot;fields.textarea&quot;: &quot;Firebrick.ui.fields.TextArea&quot;,
+&quot;menu.contextmenu&quot;: &quot;Firebrick.ui.menu.ContextMenu&quot;,
+&quot;nav.breadcrumbs&quot;: &quot;Firebrick.ui.nav.Breadcrumbs&quot;,
+&quot;nav.list&quot;: &quot;Firebrick.ui.nav.List&quot;,
+&quot;nav.navbar&quot;: &quot;Firebrick.ui.nav.Navbar&quot;,
+&quot;nav.pagination&quot;: &quot;Firebrick.ui.nav.Pagination&quot;,
+&quot;nav.toolbar&quot;: &quot;Firebrick.ui.nav.Toolbar&quot;,
+&quot;table.table&quot;: &quot;Firebrick.ui.table.Table&quot;,
+&quot;table.treetable&quot;: &quot;Firebrick.ui.table.TreeTable&quot; } );
 //{{/SNAME.HOLDER}}
 	
 	return Firebrick;
@@ -1008,7 +1054,7 @@ define( &#x27;firebrick-ui&#x27;,[ &quot;jquery&quot;, &quot;firebrick&quot;, &q
  * @namespace components.common
  * @class Base
  */
-define( &#x27;Firebrick.ui/common/Base&#x27;,[ &quot;doT&quot;, &quot;firebrick&quot;, &quot;jquery&quot;, &quot;bootstrap.plugins/tooltip&quot;, &quot;bootstrap.plugins/popover&quot; ], function( tplEngine, fb, $ ) {
+define( &#x27;Firebrick.ui/common/Base&#x27;,[ &quot;doT&quot;, &quot;jquery&quot;, &quot;bootstrap.plugins/tooltip&quot;, &quot;bootstrap.plugins/popover&quot; ], function( tplEngine, $ ) {
 
 	&quot;use strict&quot;;
 	
@@ -7685,7 +7731,7 @@ define( &#x27;Firebrick.ui/containers/TabPanel&#x27;,[ &quot;text!./TabPanel.htm
 });
 
 
-define(&#x27;text!Firebrick.ui/display/Alert.html&#x27;,[],function () { return &#x27;&lt;div data-bind=&quot;{{=it.dataBind()}}&quot;&gt;\r\n\t{{?it.dismissible}}\r\n      &lt;button data-bind=&quot;{{=it.dataBind(\&#x27;closeButtonBindings\&#x27;)}}&quot;&gt;&lt;span aria-hidden=&quot;true&quot;&gt;&amp;times;&lt;/span&gt;&lt;span data-bind=&quot;{{=it.dataBind(\&#x27;srCloseIconBindings\&#x27;)}}&quot;&gt;&lt;/span&gt;&lt;/button&gt;\r\n    {{?}}\r\n    {{?it.title || it.html}}\r\n    \t&lt;h4&gt;{{=fb.text(it.title)}}&lt;/h4&gt;\r\n    \t&lt;p data-bind=&quot;{{=it.dataBind(\&#x27;paragraphBindings\&#x27;)}}&quot;&gt;\r\n    \t&lt;/p&gt;\r\n    {{?? true }}\r\n    \t{{=it.getItems()}}\r\n    {{?}}\r\n\t\r\n&lt;/div&gt;&#x27;;});
+define(&#x27;text!Firebrick.ui/display/Alert.html&#x27;,[],function () { return &#x27;&lt;div data-bind=&quot;{{=it.dataBind()}}&quot;&gt;\r\n\t{{?it.dismissible}}\r\n      &lt;button data-bind=&quot;{{=it.dataBind(\&#x27;closeButtonBindings\&#x27;)}}&quot;&gt;&lt;span aria-hidden=&quot;true&quot;&gt;&amp;times;&lt;/span&gt;&lt;span data-bind=&quot;{{=it.dataBind(\&#x27;srCloseIconBindings\&#x27;)}}&quot;&gt;&lt;/span&gt;&lt;/button&gt;\r\n    {{?}}\r\n    {{?it.title || it.html}}\r\n    \t&lt;h4&gt;{{=Firebrick.text(it.title)}}&lt;/h4&gt;\r\n    \t&lt;p data-bind=&quot;{{=it.dataBind(\&#x27;paragraphBindings\&#x27;)}}&quot;&gt;\r\n    \t&lt;/p&gt;\r\n    {{?? true }}\r\n    \t{{=it.getItems()}}\r\n    {{?}}\r\n\t\r\n&lt;/div&gt;&#x27;;});
 
 /*!
  * @author Steven Masala [me@smasala.com]

@@ -8,11 +8,15 @@ var app = {
 		  	var me = this,
 	  			results = [];
 			  fs.readdir(dir, function(err, list) {
-			    if (err) return done(err);
+			    if (err) {
+			    	return done(err);
+			    }
 			    var i = 0;
 			    (function next() {
 			      var file = list[i++];
-			      if (!file) return done(null, results);
+			      if (!file) {
+			    	  return done(null, results);
+			      }
 			      file = dir + '/' + file;
 			      fs.stat(file, function(err, stat) {
 			        if (stat && stat.isDirectory()) {
@@ -66,16 +70,15 @@ var app = {
 				if(typeof val === "function"){
 					props.push(JSON.stringify(key)+': ' + val.toString());	
 				}else{
-					props.push(JSON.stringify(key)+': ' + JSON.stringify(val))
+					props.push(JSON.stringify(key)+': ' + JSON.stringify(val));
 				}
 			}
 		}
-		return "{" + props.join(",\n") + "}";
+		return ("{ " + props.join(",\n") + " }").replace("{\"", "{ \"").replace("}\"", "} \"");
 	},
 	
 	getConfig: function(env, includePaths){
-		var me = this,
-			conf = {
+		var conf = {
 				baseUrl: "../src/",
 			    out: "../" + env + "/firebrick.ui.all.js",
 			    include: ["firebrick", "firebrick-ui"].concat( includePaths ),
@@ -145,17 +148,19 @@ var app = {
 						console.info(err);
 					}else{
 						content = data.toString();
-						className = content.match(/return *Firebrick.define *\( *["']+([a-z0-9\.\_\-]* *)["']+ *, *{/ig) || [];
+						className = content.match(/return *Firebrick.define *\( *["']+(([a-z0-9\.\_\-]* *))["']+ *, *{/ig) || [];
 						sName = content.match(/sName *\: *["']+([a-z0-9\.-_]*)["']+/ig) || [];
-						if(className.length > 1 && sName.length > 1){
-							map[sName[1]] = className[1];
+						if(className.length === 1 && sName.length === 1){
+							className = className[0].match(/["']+([a-z0-9\.-_]*)["']+/ig)[0].replace(/["']/ig, "");
+							sName = sName[0].match(/["']+([a-z0-9\.-_]*)["']+/ig)[0].replace(/["']/ig, "");
+							map[sName] = className;
 						}
 					}
 					
 					me.readFiles(arr, (i+1), l, callback, map);
 				});
 			}else{
-				me.readFiles(arr, (i+1), l, callback, map)
+				me.readFiles(arr, (i+1), l, callback, map);
 			}
 		}else{
 			callback(map);
