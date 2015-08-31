@@ -1,5 +1,5 @@
 {
-	"name": "Firebrick UI",
+	"name": "firebrick.ui",
   	"version":"0.20.17",
   	"description": "JavasScript UI component (extendable) library for Firebrick JS, built with Knockout, Bootstrap and jQuery",
   	"keywords": [
