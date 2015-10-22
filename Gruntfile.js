@@ -9,14 +9,19 @@ module.exports = function(grunt){
 	grunt.loadNpmTasks('grunt-jscs');
 	grunt.loadNpmTasks('grunt-contrib-jshint');
 	grunt.loadNpmTasks( "grunt-contrib-watch" );
+	grunt.loadNpmTasks( "grunt-sass" );
 	
 	
 	grunt.initConfig({
 		watch: {
-		    firebrick: {
-		        files: [ "./**/src/*.js"  ],
+		    codestyle: {
+		        files: [ "./src/**/*.js"  ],
 		        tasks: [ "jscs", "jshint" ]
 		    },
+		    css: {
+		        files: [ "./src/scss/**/*.scss" ],
+		        tasks: [ "sass" ]
+		    }
 	    },
 		version: {
 	        readme: {
@@ -35,23 +40,31 @@ module.exports = function(grunt){
 		        src: [ "src/*.js", "bower.json", "yuidoc.json" ]
 	        }
 	    },
+	    sass: {
+            options: {
+                sourceMap: true
+            },
+            src: {
+                files: {
+                    "./src/css/configuration.css": "./src/scss/configuration.scss",
+                    "./src/css/firebrick.ui.css": "./src/scss/firebrick.ui.scss"
+                }
+            }
+        },
 	    jscs: {
-	        src: "./src/**/*.js",
-	        options: {
-	            config: ".jscsrc"
-	        }
-	    },
-	    jshint: {
-	    	options: {
-	          jshintrc: '.jshintrc',
-	          reporter: require('jshint-stylish')
-	        },
-	        all: {
-	          src: [
-	            'Gruntfile.js',
-	            './src/{,*/}*.js'
-	            ]
-	        }
+            src: "./src/**/*.js",
+            options: {
+                config: ".jscsrc"
+            }
+        },
+        jshint: {
+            options: {
+                jshintrc: ".jshintrc",
+                reporter: require( "jshint-stylish" )
+            },
+            all: {
+                src: [ "Gruntfile.js", "./src{,*/}*.js" ]
+            }
         },
 		shell: {
 			optimiser: {
@@ -84,8 +97,11 @@ module.exports = function(grunt){
              'shell:optimiser',
              'jscs',
              'jshint',
+             'sass',
              'shell:build'
              ];
 	
+	grunt.registerTask("dev", ["jscs", "jshint", "sass"]);
+	grunt.registerTask("travis", ["jscs", "jshint"]);
 	grunt.registerTask('default', tasks);
 };

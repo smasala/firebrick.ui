@@ -1,0 +1,41 @@
+/** List **/
+.fb-ui-list-unstyled{
+	list-style: none;
+}
+
+ul.fb-ui-list-unstyled.nav ul {
+    padding-left: 20px;
+}
+
+.fb-ui-list-expandable-node{
+	cursor: pointer;
+	color: #337ab7;
+}
+
+.fb-ui-node-action.fb-ui-hidden + span.fb-ui-listitem-text,
+.fb-ui-node-action.fb-ui-hidden + a{
+	margin-left: 20px;
+}
+
+.fb-ui-node-action + span.fb-ui-listitem-text,
+.fb-ui-node-action + a {
+	margin-left: 6px;
+}
+
+.fb-ui-node-action, .fb-ui-node-action + a{
+	display: inline-block !important;
+}
+
+.fb-ui-listitem-collapsed > .fb-ui-list-expandable-node:before{
+	content: "\e080"; /* > */
+}
+
+.fb-ui-list-expandable-node:before{
+	content: "\e114"; /* v */
+}
+
+.fb-ui-listitem-parent.fb-ui-listitem-haschildren > ul{
+    padding-left: 22px;
+}
+
+/*-- /List --*/

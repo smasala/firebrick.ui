@@ -75,7 +75,7 @@ define( [ "text!./Progress.html", "../common/Base" ], function( tpl ) {
 					"'data-symbol'": me.parseBind( me.dataSymbol ),
 					"'data-value'": me.value
 				},
-				text: me.textBind( me.label ),
+				text: me.textBind( "label" ),
 				style: {
 					width: me.parseBind( me.value + "%" )
 				}

@@ -210,10 +210,10 @@ define( [ "doT", "jquery", "bootstrap.plugins/tooltip", "bootstrap.plugins/popov
 					}
 					bindObj.attr[ "'data-toggle'" ] = me.parseBind( me.tooltip ? "tooltip" : "popover" );
 					if ( me.tooltip || me.popoverTitle ) {
-						bindObj.attr.title = me.textBind( me.tooltip || me.popoverTitle );
+						bindObj.attr.title = me.textBind( me.tooltip ? "tooltip" : "popoverTitle" );
 					}
 					if ( me.popover ) {
-						bindObj.attr[ "'data-content'" ] = me.textBind( me.popover );
+						bindObj.attr[ "'data-content'" ] = me.textBind( "popover" );
 						bindObj.attr[ "'data-container'" ] = "'body'";
 						if ( me.popoverDismissible ) {
 							bindObj.attr[ "'data-trigger'" ] = "'focus'";
@@ -539,11 +539,13 @@ define( [ "doT", "jquery", "bootstrap.plugins/tooltip", "bootstrap.plugins/popov
 		 * 	textBind("mystring.abc.key")
 		 * 	// returns = Firebrick.text('mystring.abc.key')
 		 * @method textBind
-		 * @param key {String}
+		 * @param key {String} property key of the class to call
 		 * @return {String}
 		 */
 		textBind: function( key ) {
-			return "Firebrick.text('" + key + "')";
+		    var me = this,
+		        id = me.getId();
+			return "Firebrick.text( Firebrick.getById('" + id + "')[" + me.parseBind( key ) + "] )";
 		}
 	});
 });

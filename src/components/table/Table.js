@@ -658,7 +658,7 @@ define( [ "knockout", "knockout-mapping", "jquery", "doT", "text!./Table.html", 
 	    expandBindings: function() {
 		    var me = this;
 		    return {
-		        text: me.textBind( me.expandText ),
+		        text: me.textBind( "expandText" ),
 		        attr: {
 		            id: me.parseBind( "fb-expand-" + me.getId() ),
 		            href: "''"
@@ -672,7 +672,7 @@ define( [ "knockout", "knockout-mapping", "jquery", "doT", "text!./Table.html", 
 	    collapseBindings: function() {
 		    var me = this;
 		    return {
-		        text: me.textBind( me.collapseText ),
+		        text: me.textBind( "collapseText" ),
 		        attr: {
 		            id: me.parseBind( "fb-collapse-" + me.getId() ),
 		            href: "''"

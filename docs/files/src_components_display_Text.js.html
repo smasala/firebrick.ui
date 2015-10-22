@@ -19,7 +19,7 @@
             
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 0.20.17</em>
+            <em>API Docs for: 0.20.22</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -259,12 +259,11 @@ define( [ &quot;text!./Text.html&quot;, &quot;../common/Base&quot; ], function( 
 		 */
 		tpl: tpl,
 		/**
-		 * whether text is raw html or not
-		 * @property isHtml
-		 * @type {Boolean}
+		 * @property html
+		 * @type {String}
 		 * @default false
 		 */
-		isHtml: false,
+		html: false,
 		/**
 		 * @property text
 		 * @type {String}
@@ -325,9 +324,9 @@ define( [ &quot;text!./Text.html&quot;, &quot;../common/Base&quot; ], function( 
 			}
 			
 			if ( me.isHtml ) {
-				obj.html = me.text;
+				obj.html = &quot;Firebrick.getById(&#x27;&quot; + me.getId() + &quot;&#x27;).html&quot;;
 			} else if ( me.text ) {
-				obj.text = me.textBind( me.text );
+				obj.text = me.textBind( &quot;text&quot; );
 			}
 			
 			return obj;
@@ -350,10 +349,10 @@ define( [ &quot;text!./Text.html&quot;, &quot;../common/Base&quot; ], function( 
 		blockQuoteFooterBindings: function() {
 			var me = this,
 				obj = {};
-			if ( me.isHtml ) {
-				obj.html = me.blockQuoteFooter;
+			if ( me.html ) {
+				obj.html = &quot;Firebrick.getById(&#x27;&quot; + me.getId() + &quot;&#x27;)[&#x27;blockQuoteFooter&#x27;]&quot;;
 			} else {
-				obj.text = me.textBind( me.blockQuoteFooter );
+				obj.text = me.textBind( &quot;blockQuoteFooter&quot; );
 			}
 			return obj;
 		}

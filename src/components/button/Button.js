@@ -243,7 +243,7 @@ define( [ "text!./Button.html", "./Base", "../common/mixins/Badges", "../menu/Me
 			}
 			
 			if ( me.loadingText ) {
-				obj.attr[ "'data-loading-text'" ] = me.textBind( me.loadingText );
+				obj.attr[ "'data-loading-text'" ] = me.textBind( "loadingText" );
 			}
 			
 			if ( me.closeModal ) {
@@ -264,7 +264,7 @@ define( [ "text!./Button.html", "./Base", "../common/mixins/Badges", "../menu/Me
 			var me = this,
 				obj = {
 						css: {},
-						text: me.textBind( me.text )
+						text: me.textBind( "text" )
 				};
 			
 			if ( me.glyIcon ) {
@@ -362,7 +362,7 @@ define( [ "text!./Button.html", "./Base", "../common/mixins/Badges", "../menu/Me
 				obj = { css: {} };
 			
 			obj.css[ "'sr-only'" ] = true;
-			obj.text = me.textBind( me.srOnlyText );
+			obj.text = me.textBind( "srOnlyText" );
 			
 			return obj;
 		},

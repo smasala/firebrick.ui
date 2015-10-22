@@ -449,7 +449,7 @@ define( [ "text!./Panel.html", "text!./panel/Icon.html", "jquery", "doT", "./Bas
 					};
 			
 			if ( typeof me.title !== "boolean" ) {
-				obj.text = me.textBind( me.title );
+				obj.text = me.textBind( "title" );
 			}
 			
 			if ( me.headerItems ) {

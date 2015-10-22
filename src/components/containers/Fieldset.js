@@ -167,7 +167,7 @@ define( [ "text!./Fieldset.html", "jquery", "../common/mixins/Label" ], function
 				obj = {
 					css: {},
 					attr: {},
-					text: me.textBind( me.title )
+					text: me.textBind( "title" )
 				};
 			return obj;
 		},

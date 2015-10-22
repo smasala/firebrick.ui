@@ -1,0 +1,31 @@
+/** Base **/
+.tooltip {
+	position: fixed;
+}
+
+
+/** MISC **/
+
+.fb-ui-hidden-field, 
+.fb-ui-hidden{
+	display: none;	
+}
+
+.fb-ui-items-align-left{
+	text-align: left;
+}
+
+.fb-ui-items-align-center{
+	text-align: center;
+}
+
+.fb-ui-items-align-right{
+	text-align: right;
+}
+
+/** linked list cursor **/
+a:hover{
+	cursor:pointer;
+}
+
+

@@ -1,8 +1,8 @@
 
-configuration.css
+css/configuration.css
 ----------------
-configuration.css
+css/configuration.css
 
-firebrick.ui.css
+css/firebrick.ui.css
 ----------------
-firebrick.ui.css
+css/firebrick.ui.css

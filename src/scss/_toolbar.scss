@@ -1,0 +1,45 @@
+/** Panel toolbars **/
+.fb-ui-toolbar-container {
+	position:relative;
+}
+
+.fb-ui-toolbar {
+	position:absolute;
+	box-shadow:none;
+	z-index:5 !important;
+}
+
+.fb-ui-toolbar-container.fb-ui-toolbar-top {
+	padding-top:70px;
+}
+
+.fb-ui-toolbar-container.fb-ui-toolbar-bottom {
+	padding-bottom:70px;
+}
+
+.fb-ui-toolbar .fb-ui-navbar.form-horizontal .form-group{
+	margin-bottom:0px;
+}
+
+.fb-ui-toolbar .navbar-form{
+	padding-left: 0px;
+	padding-right: 0px;
+}
+
+.fb-ui-navbar-field{
+	margin-top:8px;
+}
+
+.navbar-form > *{
+	vertical-align:top;
+}
+
+/*-- /Panel toolbars --*/
+
+.fb-ui-toolbar .fb-ui-navbar > .row{
+	margin-top:7px;
+}
+
+.fb-ui-toolbar .form-group{
+	display: block;
+}

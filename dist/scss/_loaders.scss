@@ -1,0 +1,63 @@
+/** Loaders **/
+.glyphicon-refresh-animate {
+    animation: spin .7s infinite linear;
+    -webkit-animation: spin2 .7s infinite linear;
+}
+
+@-webkit-keyframes spin2 {
+    from { -webkit-transform: rotate(0deg);}
+    to { -webkit-transform: rotate(360deg);}
+}
+
+@keyframes spin {
+    from { transform: scale(1) rotate(0deg);}
+    to { transform: scale(1) rotate(360deg);}
+}
+
+/**
+* Loader
+**/
+
+.fb-ui-loader-container{
+	z-index: 5000;
+	left: 0;
+    position: absolute;
+    top: 0;
+}
+
+.fb-ui-loader-container, 
+.fb-ui-loader-mask {
+    height: 100%;
+    width: 100%;
+}
+
+.fb-ui-loader-spinner{
+	margin-right: 5px;
+}
+
+.fb-ui-loader-open{
+	position: relative;
+}
+
+.fb-ui-loader-mask {
+    background: #cccccc none repeat scroll 0 0;
+    opacity: 0.5;
+    z-index: 5001;
+}
+
+.fb-ui-loader-msg-container {
+	background-color: #fdfdfd;
+    background-image: none;
+    border: 1px solid #bfbfbf;
+    left: 0;
+    padding: 7px;
+    position: absolute;
+    top: 0;
+    z-index: 5002;
+    
+}
+
+/* for fields*/
+.fb-ui-combo-result.fb-ui-loader-open{
+	min-height: 65px;
+}

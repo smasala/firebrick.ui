@@ -19,7 +19,7 @@
             
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 0.20.17</em>
+            <em>API Docs for: 0.20.22</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -251,12 +251,34 @@ define( [ &quot;text!./Box.html&quot;, &quot;./Base&quot; ], function( tpl ) {
 		tpl: tpl,
 		sName: &quot;containers.box&quot;,
 		/**
-		 * set as string to fill the div/box with text content
+		 * set as string to fill the div/box with html content
 		 * @property html
 		 * @type {String|false}
 		 * @default false
 		 */
-		html: false
+		html: null,
+		/**
+		 * set as string to fill the div/box with text content
+		 * @property text
+		 * @type {String|false}
+		 * @default false
+		 */
+		text: null,
+		/**
+		 * @method bindings
+		 * @return {Object}
+		 */
+		bindings: function() {
+			var me = this,
+				id = me.getId(),
+				obj = me.callParent( arguments );
+			if ( me.text ) {
+				obj.text = &quot;Firebrick.text( Firebrick.getById(&#x27;&quot; + id + &quot;&#x27;).text )&quot;;
+			} else if ( me.html ) {
+				obj.html = &quot;Firebrick.getById(&#x27;&quot; + id + &quot;&#x27;).html&quot;;
+			}
+			return obj;
+		}
 	});
 });
 

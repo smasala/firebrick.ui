@@ -1,7 +1,7 @@
 /*!
 * Firebrick UI
 * @author Steven Masala [me@smasala.com]
-* @version 0.20.17
+* @version 0.20.22
 * @date
 *
 * FirebrickUI, component library for Firebrick JS
@@ -35,7 +35,7 @@ define( [ "jquery", "firebrick", "knockout",  "devicejs", "knockout-mapping", "t
 			 * @private
 			 * @type {String}
 			 */
-			version: "0.20.17",
+			version: "0.20.22",
 			
 			/**
 			 * populate a target with fields and data

@@ -19,7 +19,7 @@
             
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 0.20.17</em>
+            <em>API Docs for: 0.20.22</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -287,6 +287,13 @@ define( [ &quot;text!./Alert.html&quot;, &quot;../common/Base&quot;, &quot;../co
 		 */
 		html: &quot;&quot;,
 		/**
+		 * fill the panel body with text
+		 * @property text
+		 * @type {String}
+		 * @default &quot;&quot;
+		 */
+		text: &quot;&quot;,
+		/**
 		 * @method bindings
 		 * @return {Object}
 		 */
@@ -310,9 +317,14 @@ define( [ &quot;text!./Alert.html&quot;, &quot;../common/Base&quot;, &quot;../co
 		 */
 		paragraphBindings: function() {
 			var me = this,
+				id = me.getId(),
 				obj = {};
 			
-			obj.html = &quot;Firebrick.getById(&#x27;&quot; + me.getId() + &quot;&#x27;).html&quot;;
+			if ( me.text ) {
+				obj.text = &quot;Firebrick.text( Firebrick.getById(&#x27;&quot; + id + &quot;&#x27;).text )&quot;;
+			} else {
+				obj.html = &quot;Firebrick.getById(&#x27;&quot; + id + &quot;&#x27;).html&quot;;
+			}
 			
 			return obj;
 		},

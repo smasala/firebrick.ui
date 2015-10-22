@@ -164,7 +164,7 @@ define( [ "text!./TabPanel.html", "./Base", "bootstrap.plugins/tab", "./tab/Pane
 			var me = this,
 				obj = { css: {}, attr: {} };
 			
-			obj.text = me.textBind( "'+tab.title+'" );
+			obj.text = "Firebrick.text( tab.title )";
 			
 			return obj;
 		},

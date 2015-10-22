@@ -64,7 +64,7 @@ define( [ "text!./Header.html", "../common/Base", "../common/mixins/Label" ], fu
 			var me = this,
 				obj = {};
 			
-			obj.text = me.textBind( me.text );
+			obj.text = me.textBind( "text" );
 			
 			return obj;
 		},
@@ -76,7 +76,7 @@ define( [ "text!./Header.html", "../common/Base", "../common/mixins/Label" ], fu
 			var me = this;
 			if ( me.secondaryText ) {
 				return {
-					text: me.textBind( me.secondaryText )
+					text: me.textBind( "secondaryText" )
 				};
 			} else {
 				return {

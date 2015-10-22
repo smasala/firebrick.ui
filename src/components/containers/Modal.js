@@ -257,7 +257,7 @@ define( [ "text!./Modal.html", "./Base" ], function( tpl ) {
 		titleBindings: function() {
 			var me = this;
 			return {
-				text: me.textBind( me.title ),
+				text: me.textBind( "title" ),
 				css: {
 					"'modal-title'": me.titleClass
 				}

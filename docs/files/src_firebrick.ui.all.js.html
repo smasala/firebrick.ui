@@ -19,7 +19,7 @@
             
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 0.20.17</em>
+            <em>API Docs for: 0.20.22</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -237,7 +237,7 @@
 /*!
 * Firebrick UI
 * @author Steven Masala [me@smasala.com]
-* @version 0.20.17
+* @version 0.20.22
 * @date
 *
 * FirebrickUI, component library for Firebrick JS
@@ -271,7 +271,7 @@ define( &#x27;firebrick-ui&#x27;,[ &quot;jquery&quot;, &quot;firebrick&quot;, &q
 			 * @private
 			 * @type {String}
 			 */
-			version: &quot;0.20.17&quot;,
+			version: &quot;0.20.22&quot;,
 			
 			/**
 			 * populate a target with fields and data
@@ -1253,10 +1253,10 @@ define( &#x27;Firebrick.ui/common/Base&#x27;,[ &quot;doT&quot;, &quot;jquery&quo
 					}
 					bindObj.attr[ &quot;&#x27;data-toggle&#x27;&quot; ] = me.parseBind( me.tooltip ? &quot;tooltip&quot; : &quot;popover&quot; );
 					if ( me.tooltip || me.popoverTitle ) {
-						bindObj.attr.title = me.textBind( me.tooltip || me.popoverTitle );
+						bindObj.attr.title = me.textBind( me.tooltip ? &quot;tooltip&quot; : &quot;popoverTitle&quot; );
 					}
 					if ( me.popover ) {
-						bindObj.attr[ &quot;&#x27;data-content&#x27;&quot; ] = me.textBind( me.popover );
+						bindObj.attr[ &quot;&#x27;data-content&#x27;&quot; ] = me.textBind( &quot;popover&quot; );
 						bindObj.attr[ &quot;&#x27;data-container&#x27;&quot; ] = &quot;&#x27;body&#x27;&quot;;
 						if ( me.popoverDismissible ) {
 							bindObj.attr[ &quot;&#x27;data-trigger&#x27;&quot; ] = &quot;&#x27;focus&#x27;&quot;;
@@ -1582,11 +1582,13 @@ define( &#x27;Firebrick.ui/common/Base&#x27;,[ &quot;doT&quot;, &quot;jquery&quo
 		 * 	textBind(&quot;mystring.abc.key&quot;)
 		 * 	// returns = Firebrick.text(&#x27;mystring.abc.key&#x27;)
 		 * @method textBind
-		 * @param key {String}
+		 * @param key {String} property key of the class to call
 		 * @return {String}
 		 */
 		textBind: function( key ) {
-			return &quot;Firebrick.text(&#x27;&quot; + key + &quot;&#x27;)&quot;;
+		    var me = this,
+		        id = me.getId();
+			return &quot;Firebrick.text( Firebrick.getById(&#x27;&quot; + id + &quot;&#x27;)[&quot; + me.parseBind( key ) + &quot;] )&quot;;
 		}
 	});
 });
@@ -1728,7 +1730,7 @@ define( &#x27;Firebrick.ui/common/mixins/Badges&#x27;,[], function() {
 					css: {
 						badge: true
 					},
-					text: me.textBind( me.badge )
+					text: me.textBind( &quot;badge&quot; )
 				};
 			return obj;
 		}
@@ -1803,7 +1805,7 @@ define( &#x27;Firebrick.ui/menu/Item&#x27;,[ &quot;text!./Item.html&quot;, &quot
 				obj.href = me.href;
 			}
 			if ( me.text ) {
-				obj.text = me.textBind( me.text );
+				obj.text = me.textBind( &quot;text&quot; );
 			}
 			
 			obj.attr.role = &quot;&#x27;menuitem&#x27;&quot;;
@@ -2154,7 +2156,7 @@ define( &#x27;Firebrick.ui/button/Button&#x27;,[ &quot;text!./Button.html&quot;,
 			}
 			
 			if ( me.loadingText ) {
-				obj.attr[ &quot;&#x27;data-loading-text&#x27;&quot; ] = me.textBind( me.loadingText );
+				obj.attr[ &quot;&#x27;data-loading-text&#x27;&quot; ] = me.textBind( &quot;loadingText&quot; );
 			}
 			
 			if ( me.closeModal ) {
@@ -2175,7 +2177,7 @@ define( &#x27;Firebrick.ui/button/Button&#x27;,[ &quot;text!./Button.html&quot;,
 			var me = this,
 				obj = {
 						css: {},
-						text: me.textBind( me.text )
+						text: me.textBind( &quot;text&quot; )
 				};
 			
 			if ( me.glyIcon ) {
@@ -2273,7 +2275,7 @@ define( &#x27;Firebrick.ui/button/Button&#x27;,[ &quot;text!./Button.html&quot;,
 				obj = { css: {} };
 			
 			obj.css[ &quot;&#x27;sr-only&#x27;&quot; ] = true;
-			obj.text = me.textBind( me.srOnlyText );
+			obj.text = me.textBind( &quot;srOnlyText&quot; );
 			
 			return obj;
 		},
@@ -2369,7 +2371,7 @@ define( &#x27;Firebrick.ui/button/ButtonGroup&#x27;,[ &quot;text!./ButtonGroup.h
 			
 			obj.css[ me.parseBind( &quot;btn-group-&quot; + me.groupSize ) ] = true;
 			obj.attr.role = me.parseBind( me.role );
-			obj.attr[ &quot;&#x27;aria-label&#x27;&quot; ] = me.textBind( me.arialLabel );
+			obj.attr[ &quot;&#x27;aria-label&#x27;&quot; ] = me.textBind( &quot;arialLabel&quot; );
 			
 			return obj;
 		}
@@ -2749,7 +2751,7 @@ define( &#x27;Firebrick.ui/containers/GridRow&#x27;,[ &quot;text!./GridRow.html&
 });
 
 
-define(&#x27;text!Firebrick.ui/containers/Box.html&#x27;,[],function () { return &#x27;&lt;div id=&quot;{{=it.getId()}}&quot; data-bind=&quot;{{=it.dataBind()}}&quot;&gt;\r\n\t{{? it.html }}\r\n\t\t{{=it.html}}\r\n\t{{?? true}}\r\n\t\t{{=it.getItems()}}\r\n\t{{?}}\r\n&lt;/div&gt;&#x27;;});
+define(&#x27;text!Firebrick.ui/containers/Box.html&#x27;,[],function () { return &#x27;&lt;div id=&quot;{{=it.getId()}}&quot; data-bind=&quot;{{=it.dataBind()}}&quot;&gt;\r\n\t{{?it.items}}\r\n\t\t{{=it.getItems()}}\r\n\t{{?}}\r\n&lt;/div&gt;&#x27;;});
 
 /*!
  * @author Steven Masala [me@smasala.com]
@@ -2768,12 +2770,34 @@ define( &#x27;Firebrick.ui/containers/Box&#x27;,[ &quot;text!./Box.html&quot;, &
 		tpl: tpl,
 		sName: &quot;containers.box&quot;,
 		/**
-		 * set as string to fill the div/box with text content
+		 * set as string to fill the div/box with html content
 		 * @property html
 		 * @type {String|false}
 		 * @default false
 		 */
-		html: false
+		html: null,
+		/**
+		 * set as string to fill the div/box with text content
+		 * @property text
+		 * @type {String|false}
+		 * @default false
+		 */
+		text: null,
+		/**
+		 * @method bindings
+		 * @return {Object}
+		 */
+		bindings: function() {
+			var me = this,
+				id = me.getId(),
+				obj = me.callParent( arguments );
+			if ( me.text ) {
+				obj.text = &quot;Firebrick.text( Firebrick.getById(&#x27;&quot; + id + &quot;&#x27;).text )&quot;;
+			} else if ( me.html ) {
+				obj.html = &quot;Firebrick.getById(&#x27;&quot; + id + &quot;&#x27;).html&quot;;
+			}
+			return obj;
+		}
 	});
 });
 
@@ -3446,7 +3470,7 @@ define( &#x27;Firebrick.ui/fields/Input&#x27;,[ &quot;knockout&quot;, &quot;text
 		helpBlockBindings: function() {
 			var me = this;
 			return {
-				text: me.textBind( me.helpText )
+				text: me.textBind( &quot;helpText&quot; )
 			};
 		},
 		/**
@@ -3503,7 +3527,7 @@ define( &#x27;Firebrick.ui/fields/Input&#x27;,[ &quot;knockout&quot;, &quot;text
 				if ( me.formControlClass ) {
 					obj.css[ me.parseBind( me.formControlClass ) ] = true;
 				}
-				obj.attr.placeholder = me.textBind( me.placeholder );
+				obj.attr.placeholder = me.textBind( &quot;placeholder&quot; );
 			}
 			
 			if ( me.required ) {
@@ -3550,7 +3574,7 @@ define( &#x27;Firebrick.ui/fields/Input&#x27;,[ &quot;knockout&quot;, &quot;text
 				obj = { css: {} };
 			
 			if ( me.inputAddon &amp;&amp; typeof me.inputAddon === &quot;string&quot; ) {
-				obj.text = me.textBind( me.inputAddon );
+				obj.text = me.textBind( &quot;inputAddon&quot; );
 			}
 			
 			obj.css[ me.parseBind( me.glyphiconClass ) ] = true;
@@ -3594,7 +3618,7 @@ define( &#x27;Firebrick.ui/fields/Input&#x27;,[ &quot;knockout&quot;, &quot;text
 		labelBindings: function() {
 			var me = this,
 				obj = {
-					text: me.textBind( me.label ),
+					text: me.textBind( &quot;label&quot; ),
 					css: {
 						&quot;&#x27;control-label&#x27;&quot;: me.controlLabel
 					}
@@ -4086,7 +4110,7 @@ define( &#x27;Firebrick.ui/common/mixins/Label&#x27;,[ &quot;text!./tpl/Label.ht
 		labelBindings: function() {
 			var me = this,
 				obj = {
-						text: me.textBind( me.labelText ),
+						text: me.textBind( &quot;labelText&quot; ),
 						css: {
 							label: true
 						}
@@ -4801,7 +4825,7 @@ define( &#x27;Firebrick.ui/nav/Navbar&#x27;,[ &quot;text!./Navbar.html&quot;, &q
 		toggleTextBindings: function() {
 			var me = this;
 			return {
-				text: me.textBind( me.toggleText )
+				text: me.textBind( &quot;toggleText&quot; )
 			};
 		},
 		/**
@@ -5474,7 +5498,7 @@ define( &#x27;Firebrick.ui/containers/Panel&#x27;,[ &quot;text!./Panel.html&quot
 					};
 			
 			if ( typeof me.title !== &quot;boolean&quot; ) {
-				obj.text = me.textBind( me.title );
+				obj.text = me.textBind( &quot;title&quot; );
 			}
 			
 			if ( me.headerItems ) {
@@ -6694,7 +6718,7 @@ define( &#x27;Firebrick.ui/containers/Fieldset&#x27;,[ &quot;text!./Fieldset.htm
 				obj = {
 					css: {},
 					attr: {},
-					text: me.textBind( me.title )
+					text: me.textBind( &quot;title&quot; )
 				};
 			return obj;
 		},
@@ -7338,7 +7362,7 @@ define( &#x27;Firebrick.ui/containers/Modal&#x27;,[ &quot;text!./Modal.html&quot
 		titleBindings: function() {
 			var me = this;
 			return {
-				text: me.textBind( me.title ),
+				text: me.textBind( &quot;title&quot; ),
 				css: {
 					&quot;&#x27;modal-title&#x27;&quot;: me.titleClass
 				}
@@ -7641,7 +7665,7 @@ define( &#x27;Firebrick.ui/containers/TabPanel&#x27;,[ &quot;text!./TabPanel.htm
 			var me = this,
 				obj = { css: {}, attr: {} };
 			
-			obj.text = me.textBind( &quot;&#x27;+tab.title+&#x27;&quot; );
+			obj.text = &quot;Firebrick.text( tab.title )&quot;;
 			
 			return obj;
 		},
@@ -7731,7 +7755,7 @@ define( &#x27;Firebrick.ui/containers/TabPanel&#x27;,[ &quot;text!./TabPanel.htm
 });
 
 
-define(&#x27;text!Firebrick.ui/display/Alert.html&#x27;,[],function () { return &#x27;&lt;div data-bind=&quot;{{=it.dataBind()}}&quot;&gt;\r\n\t{{?it.dismissible}}\r\n      &lt;button data-bind=&quot;{{=it.dataBind(\&#x27;closeButtonBindings\&#x27;)}}&quot;&gt;&lt;span aria-hidden=&quot;true&quot;&gt;&amp;times;&lt;/span&gt;&lt;span data-bind=&quot;{{=it.dataBind(\&#x27;srCloseIconBindings\&#x27;)}}&quot;&gt;&lt;/span&gt;&lt;/button&gt;\r\n    {{?}}\r\n    {{?it.title || it.html}}\r\n    \t&lt;h4&gt;{{=Firebrick.text(it.title)}}&lt;/h4&gt;\r\n    \t&lt;p data-bind=&quot;{{=it.dataBind(\&#x27;paragraphBindings\&#x27;)}}&quot;&gt;\r\n    \t&lt;/p&gt;\r\n    {{?? true }}\r\n    \t{{=it.getItems()}}\r\n    {{?}}\r\n\t\r\n&lt;/div&gt;&#x27;;});
+define(&#x27;text!Firebrick.ui/display/Alert.html&#x27;,[],function () { return &#x27;&lt;div data-bind=&quot;{{=it.dataBind()}}&quot;&gt;\r\n\t{{?it.dismissible}}\r\n      &lt;button data-bind=&quot;{{=it.dataBind(\&#x27;closeButtonBindings\&#x27;)}}&quot;&gt;&lt;span aria-hidden=&quot;true&quot;&gt;&amp;times;&lt;/span&gt;&lt;span data-bind=&quot;{{=it.dataBind(\&#x27;srCloseIconBindings\&#x27;)}}&quot;&gt;&lt;/span&gt;&lt;/button&gt;\r\n    {{?}}\r\n    {{?!it.items}}\r\n    \t{{?it.title}}\r\n    \t&lt;h4&gt;{{=Firebrick.text(it.title)}}&lt;/h4&gt;\r\n    \t{{?}}\r\n    \t&lt;p data-bind=&quot;{{=it.dataBind(\&#x27;paragraphBindings\&#x27;)}}&quot;&gt;\r\n    \t&lt;/p&gt;\r\n    {{?? true }}\r\n    \t{{=it.getItems()}}\r\n    {{?}}\r\n\t\r\n&lt;/div&gt;&#x27;;});
 
 /*!
  * @author Steven Masala [me@smasala.com]
@@ -7786,6 +7810,13 @@ define( &#x27;Firebrick.ui/display/Alert&#x27;,[ &quot;text!./Alert.html&quot;, 
 		 */
 		html: &quot;&quot;,
 		/**
+		 * fill the panel body with text
+		 * @property text
+		 * @type {String}
+		 * @default &quot;&quot;
+		 */
+		text: &quot;&quot;,
+		/**
 		 * @method bindings
 		 * @return {Object}
 		 */
@@ -7809,9 +7840,14 @@ define( &#x27;Firebrick.ui/display/Alert&#x27;,[ &quot;text!./Alert.html&quot;, 
 		 */
 		paragraphBindings: function() {
 			var me = this,
+				id = me.getId(),
 				obj = {};
 			
-			obj.html = &quot;Firebrick.getById(&#x27;&quot; + me.getId() + &quot;&#x27;).html&quot;;
+			if ( me.text ) {
+				obj.text = &quot;Firebrick.text( Firebrick.getById(&#x27;&quot; + id + &quot;&#x27;).text )&quot;;
+			} else {
+				obj.html = &quot;Firebrick.getById(&#x27;&quot; + id + &quot;&#x27;).html&quot;;
+			}
 			
 			return obj;
 		},
@@ -7953,7 +7989,7 @@ define( &#x27;Firebrick.ui/display/Header&#x27;,[ &quot;text!./Header.html&quot;
 			var me = this,
 				obj = {};
 			
-			obj.text = me.textBind( me.text );
+			obj.text = me.textBind( &quot;text&quot; );
 			
 			return obj;
 		},
@@ -7965,7 +8001,7 @@ define( &#x27;Firebrick.ui/display/Header&#x27;,[ &quot;text!./Header.html&quot;
 			var me = this;
 			if ( me.secondaryText ) {
 				return {
-					text: me.textBind( me.secondaryText )
+					text: me.textBind( &quot;secondaryText&quot; )
 				};
 			} else {
 				return {
@@ -8267,7 +8303,7 @@ define( &#x27;Firebrick.ui/display/Loader&#x27;,[ &quot;text!./Loader.html&quot;
 				};
 			
 			if ( me.msgText ) {
-				obj.text = me.textBind( me.msgText );
+				obj.text = me.textBind( &quot;msgText&quot; );
 			}
 			
 			return obj;
@@ -8355,7 +8391,7 @@ define( &#x27;Firebrick.ui/display/Progress&#x27;,[ &quot;text!./Progress.html&q
 					&quot;&#x27;data-symbol&#x27;&quot;: me.parseBind( me.dataSymbol ),
 					&quot;&#x27;data-value&#x27;&quot;: me.value
 				},
-				text: me.textBind( me.label ),
+				text: me.textBind( &quot;label&quot; ),
 				style: {
 					width: me.parseBind( me.value + &quot;%&quot; )
 				}
@@ -8454,12 +8490,11 @@ define( &#x27;Firebrick.ui/display/Text&#x27;,[ &quot;text!./Text.html&quot;, &q
 		 */
 		tpl: tpl,
 		/**
-		 * whether text is raw html or not
-		 * @property isHtml
-		 * @type {Boolean}
+		 * @property html
+		 * @type {String}
 		 * @default false
 		 */
-		isHtml: false,
+		html: false,
 		/**
 		 * @property text
 		 * @type {String}
@@ -8520,9 +8555,9 @@ define( &#x27;Firebrick.ui/display/Text&#x27;,[ &quot;text!./Text.html&quot;, &q
 			}
 			
 			if ( me.isHtml ) {
-				obj.html = me.text;
+				obj.html = &quot;Firebrick.getById(&#x27;&quot; + me.getId() + &quot;&#x27;).html&quot;;
 			} else if ( me.text ) {
-				obj.text = me.textBind( me.text );
+				obj.text = me.textBind( &quot;text&quot; );
 			}
 			
 			return obj;
@@ -8545,10 +8580,10 @@ define( &#x27;Firebrick.ui/display/Text&#x27;,[ &quot;text!./Text.html&quot;, &q
 		blockQuoteFooterBindings: function() {
 			var me = this,
 				obj = {};
-			if ( me.isHtml ) {
-				obj.html = me.blockQuoteFooter;
+			if ( me.html ) {
+				obj.html = &quot;Firebrick.getById(&#x27;&quot; + me.getId() + &quot;&#x27;)[&#x27;blockQuoteFooter&#x27;]&quot;;
 			} else {
-				obj.text = me.textBind( me.blockQuoteFooter );
+				obj.text = me.textBind( &quot;blockQuoteFooter&quot; );
 			}
 			return obj;
 		}
@@ -12106,7 +12141,7 @@ define( &#x27;Firebrick.ui/table/Table&#x27;,[ &quot;knockout&quot;, &quot;knock
 	    expandBindings: function() {
 		    var me = this;
 		    return {
-		        text: me.textBind( me.expandText ),
+		        text: me.textBind( &quot;expandText&quot; ),
 		        attr: {
 		            id: me.parseBind( &quot;fb-expand-&quot; + me.getId() ),
 		            href: &quot;&#x27;&#x27;&quot;
@@ -12120,7 +12155,7 @@ define( &#x27;Firebrick.ui/table/Table&#x27;,[ &quot;knockout&quot;, &quot;knock
 	    collapseBindings: function() {
 		    var me = this;
 		    return {
-		        text: me.textBind( me.collapseText ),
+		        text: me.textBind( &quot;collapseText&quot; ),
 		        attr: {
 		            id: me.parseBind( &quot;fb-collapse-&quot; + me.getId() ),
 		            href: &quot;&#x27;&#x27;&quot;

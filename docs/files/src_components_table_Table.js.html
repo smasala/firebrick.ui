@@ -19,7 +19,7 @@
             
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 0.20.17</em>
+            <em>API Docs for: 0.20.22</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -894,7 +894,7 @@ define( [ &quot;knockout&quot;, &quot;knockout-mapping&quot;, &quot;jquery&quot;
 	    expandBindings: function() {
 		    var me = this;
 		    return {
-		        text: me.textBind( me.expandText ),
+		        text: me.textBind( &quot;expandText&quot; ),
 		        attr: {
 		            id: me.parseBind( &quot;fb-expand-&quot; + me.getId() ),
 		            href: &quot;&#x27;&#x27;&quot;
@@ -908,7 +908,7 @@ define( [ &quot;knockout&quot;, &quot;knockout-mapping&quot;, &quot;jquery&quot;
 	    collapseBindings: function() {
 		    var me = this;
 		    return {
-		        text: me.textBind( me.collapseText ),
+		        text: me.textBind( &quot;collapseText&quot; ),
 		        attr: {
 		            id: me.parseBind( &quot;fb-collapse-&quot; + me.getId() ),
 		            href: &quot;&#x27;&#x27;&quot;

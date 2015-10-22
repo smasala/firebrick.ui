@@ -1,0 +1,10 @@
+{
+	"version": 3,
+	"file": "configuration.css",
+	"sources": [
+		"../scss/configuration.scss"
+	],
+	"sourcesContent": [],
+	"mappings": "AAAA;;EAEE;AACF,OAAO,CAAC,yDAAI;AACZ,OAAO,CAAC,+DAAI;AACZ,OAAO,CAAC,mEAAI;AACZ,OAAO,CAAC,kEAAI;AACZ,OAAO,CAAC,uEAAI;AACZ,OAAO,CAAC,8DAAI;AAA4D,6BAA6B;AACrG,OAAO,CAAC,uDAAI;AACZ,OAAO,CAAC,8DAAI",
+	"names": []
+}

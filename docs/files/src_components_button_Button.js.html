@@ -19,7 +19,7 @@
             
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 0.20.17</em>
+            <em>API Docs for: 0.20.22</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -479,7 +479,7 @@ define( [ &quot;text!./Button.html&quot;, &quot;./Base&quot;, &quot;../common/mi
 			}
 			
 			if ( me.loadingText ) {
-				obj.attr[ &quot;&#x27;data-loading-text&#x27;&quot; ] = me.textBind( me.loadingText );
+				obj.attr[ &quot;&#x27;data-loading-text&#x27;&quot; ] = me.textBind( &quot;loadingText&quot; );
 			}
 			
 			if ( me.closeModal ) {
@@ -500,7 +500,7 @@ define( [ &quot;text!./Button.html&quot;, &quot;./Base&quot;, &quot;../common/mi
 			var me = this,
 				obj = {
 						css: {},
-						text: me.textBind( me.text )
+						text: me.textBind( &quot;text&quot; )
 				};
 			
 			if ( me.glyIcon ) {
@@ -598,7 +598,7 @@ define( [ &quot;text!./Button.html&quot;, &quot;./Base&quot;, &quot;../common/mi
 				obj = { css: {} };
 			
 			obj.css[ &quot;&#x27;sr-only&#x27;&quot; ] = true;
-			obj.text = me.textBind( me.srOnlyText );
+			obj.text = me.textBind( &quot;srOnlyText&quot; );
 			
 			return obj;
 		},

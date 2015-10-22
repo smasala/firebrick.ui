@@ -1,3 +1,11 @@
+v0.20.22
+----------------------------
+* add text property to alert component
+* add text property to div component
+* improve textBind common function to call the text directly from the class property rather than displaying the content in the KO data-bind objects
+* begin merge over to sass - css seperated into scss modules - run "grunt sass" to create css
+* remove property isHtml for Text component and replace with "html" for consistency
+
 v0.20.17
 ----------------------------
 * fix alert box component error: fb is not defined

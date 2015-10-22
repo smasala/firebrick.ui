@@ -52,7 +52,7 @@ define( [ "text!./tpl/Label.html" ], function( tpl ) {
 		labelBindings: function() {
 			var me = this,
 				obj = {
-						text: me.textBind( me.labelText ),
+						text: me.textBind( "labelText" ),
 						css: {
 							label: true
 						}

@@ -1,0 +1,278 @@
+/** Border Layout **/
+.row-eq-height, .fb-ui-borderlayout, .fb-ui-borderlayout .fb-ui-border-pane {  
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+}
+
+.fb-ui-borderlayout, .fb-ui-borderlayout .fb-ui-border-pane{
+	flex-direction: column;
+	-ms-flex-direction: column;
+	-webkit-flex-direction: column;
+}
+
+.fb-ui-borderlayout .fb-ui-center-row, .fb-ui-borderlayout .fb-ui-panel-body-container{
+	-webkit-box-flex: 1 1;
+  	-moz-box-flex: 1 1;
+ 	-webkit-flex: 1 1;
+  	-ms-flex: 1 1;
+  	flex: 1 1;
+}
+
+.fb-ui-borderlayout .fb-ui-center-row{
+	flex-direction: row;
+	-ms-flex-direction: row;
+	-webkit-flex-direction: row;
+}
+
+.fb-ui-borderlayout{
+	overflow:hidden;
+}
+
+.fb-ui-borderlayout .fb-ui-pane-position-center{
+	-webkit-box-flex: 1;
+  	-moz-box-flex:  1;
+ 	-webkit-flex:  1;
+  	-ms-flex:  1;
+  	flex:  1;
+}
+
+.fb-ui-borderlayout .fb-ui-center-row{
+	overflow:hidden;
+}
+
+.fb-ui-borderlayout .fb-ui-pane-position-top{
+	width:100%;
+	display:table !important;	/* stop overlapping (top) when making the bottom region bigger */
+}
+
+.fb-ui-borderlayout .fb-ui-border-pane{
+	overflow:auto;
+	background-color: transparent;
+}
+
+.fb-ui-borderlayout .fb-ui-panel-body-container {
+    overflow: auto;	
+}
+
+
+.fb-ui-border-pane.panel {
+	margin-bottom:0;
+	padding:0;
+	border:none;
+}
+
+.panel-rotated-heading {
+    width: 42px;
+    float: left;
+    height: 100%;
+    position: absolute !important;
+}
+
+.panel-rotated-title {
+    margin-top: 0;
+    margin-bottom: 0;
+    margin-left: 15px;
+    -webkit-transform: rotate(90deg);
+    -webkit-transform-origin: left top;
+    -moz-transform: rotate(90deg);
+    -moz-transform-origin: left top;
+    -ms-transform: rotate(90deg);
+    -ms-transform-origin: left top;
+    -o-transform: rotate(90deg);
+    -o-transform-origin: left top;
+    transform: rotate(90deg);
+    transform-origin: left top;
+    position: absolute;
+    white-space: nowrap;
+}
+
+.fb-ui-border-pane.fb-ui-pane-position-left.fb-ui-pane-collapsible.fb-ui-transition,
+.fb-ui-border-pane.fb-ui-pane-position-right.fb-ui-pane-collapsible.fb-ui-transition {
+    overflow:hidden;
+    white-space: nowrap;
+    -webkit-transition: width 0.6s ease-in-out, min-width 0.6s ease-in-out;
+    -moz-transition: width 0.6s ease-in-out, min-width 0.6s ease-in-out;
+    -o-transition: width 0.6s ease-in-out, min-width 0.6s ease-in-out;
+    transition: width 0.6s ease-in-out, min-width 0.6s ease-in-out;
+    width: 0px;
+    min-width:0px;
+}
+
+
+.fb-ui-border-pane.fb-ui-pane-position-top.fb-ui-pane-collapsible.fb-ui-transition, 
+.fb-ui-border-pane.fb-ui-pane-position-bottom.fb-ui-pane-collapsible.fb-ui-transition {
+    overflow:hidden;
+    white-space: nowrap;
+    -webkit-transition: height 0.6s ease-in-out, min-height 0.6s ease-in-out;
+    -moz-transition: height 0.6s ease-in-out, min-height 0.6s ease-in-out;
+    -o-transition: height 0.6s ease-in-out, min-height 0.6s ease-in-out;
+    transition: height 0.6s ease-in-out, min-height 0.6s ease-in-out;
+}
+
+.fb-ui-border-pane .panel-rotated-heading .fb-ui-title-link .panel-title{
+	margin-top:25px;
+}
+
+.fb-ui-border-pane{
+	position:relative;
+}
+
+.fb-ui-collapse-icon-present{
+	margin-right:15px;
+}
+
+.fb-ui-collapse-icon.fb-ui-header-items-present{
+	top:11px !important;
+}
+
+.panel-heading{
+	position:relative;
+}
+
+.panel-heading .fb-ui-title-link{
+	display:inline-block;
+}
+
+.panel-heading > .fb-ui-collapse-icon{
+	margin-left:10px;
+}
+
+.panel-heading .panel-title.fb-ui-has-label,
+.panel-heading .label{
+	display: inline-block;
+}
+
+.panel-heading .label{
+	font-size: 12px;
+	margin-left: 5px;
+}
+
+.panel-heading .fb-ui-collapse-icon{
+	right:14px;
+	top:8px;
+}
+
+.fb-ui-border-pane.fb-ui-pane-position-left .panel-heading .fb-ui-collapse-icon:before{
+	content: "\e079"; /* "<" */
+}
+
+.fb-ui-border-pane.fb-ui-pane-position-right .panel-heading .fb-ui-collapse-icon:before{
+	content: "\e080"; /* ">" */
+}
+
+.panel-primary > .panel-heading .fb-ui-collapse-icon:before,
+.panel-primary > .panel-heading a .panel-title {
+	color: #fff;
+}
+
+.panel-primary > .panel-heading a .panel-title:hover {
+	color: #d0f4f4;	
+}
+
+.panel-heading .fb-ui-panel-icon{
+	float: right;
+}
+
+.panel-heading .fb-ui-collapse-icon:before {
+    content: "\e114";	/* "v" */
+    font-family: 'Glyphicons Halflings';
+    color: grey;
+}
+
+.fb-ui-border-pane.fb-ui-pane-position-left.fb-ui-is-collapsed .panel-heading .fb-ui-collapse-icon:before{
+    content: "\e080"; /* ">" */
+}
+
+.fb-ui-border-pane.fb-ui-pane-position-right.fb-ui-is-collapsed .panel-heading .fb-ui-collapse-icon:before{
+    content: "\e079"; /* "<" */
+}
+
+.fb-ui-is-collapsed > .panel-heading .fb-ui-collapse-icon:before {
+    content: "\e080"; /* ">" */
+}
+
+.fb-ui-border-pane.fb-ui-is-collapsed{
+	overflow:hidden;
+}
+
+.fb-ui-splitbar{
+	width:5px;
+	min-width:5px;
+	background:#f4f4f4;
+	position:relative;
+}
+
+.fb-ui-splitbar.fb-ui-splitbar-left.fb-ui-collapsebar,
+.fb-ui-splitbar.fb-ui-splitbar-right.fb-ui-collapsebar {
+	width:15px;
+}
+
+.fb-ui-splitbar-horizontal{
+	cursor: row-resize;
+}
+
+.fb-ui-splitbar-vertical{
+	cursor: col-resize;
+}
+
+.fb-ui-splitbar.fb-ui-splitbar-bottom, 
+.fb-ui-splitbar.fb-ui-splitbar-top{
+	width:100%;
+	height:4px;
+	min-height:4px;
+}
+
+.fb-ui-splitbar.fb-ui-collapsebar .fb-ui-collapse-icon {
+	position:absolute;
+	cursor:pointer;
+}
+
+.fb-ui-splitbar.fb-ui-splitbar-left.fb-ui-collapsebar .fb-ui-collapse-icon,
+.fb-ui-splitbar.fb-ui-splitbar-right.fb-ui-collapsebar .fb-ui-collapse-icon {
+	top:50%;
+	left:0;	
+	width:100%;
+	text-align:center;
+}
+
+.fb-ui-splitbar.fb-ui-splitbar-bottom.fb-ui-collapsebar .fb-ui-collapse-icon,
+.fb-ui-splitbar.fb-ui-splitbar-top.fb-ui-collapsebar .fb-ui-collapse-icon {
+	left:50%;
+	top:0;	
+	height:100%;
+}
+
+.fb-ui-splitbar.fb-ui-splitbar-bottom.fb-ui-collapsebar,
+.fb-ui-splitbar.fb-ui-splitbar-top.fb-ui-collapsebar {
+	height:15px;
+	min-height:15px;
+}
+
+/*.fb-ui-splitbar.fb-ui-splitbar-left.fb-ui-collapsebar.fb-ui-is-collapsed .fb-ui-collapse-icon:before,
+.fb-ui-splitbar.fb-ui-splitbar-right.fb-ui-collapsebar.fb-ui-is-collapsed .fb-ui-collapse-icon:before {
+	content:"\e079"; /* < */
+/*}*/
+
+
+.fb-ui-splitbar.fb-ui-splitbar-bottom.fb-ui-collapsebar .fb-ui-collapse-icon:before,
+.fb-ui-splitbar.fb-ui-splitbar-top.fb-ui-collapsebar .fb-ui-collapse-icon:before {
+	vertical-align:middle;
+}
+
+.fb-ui-splitbar.fb-ui-splitbar-left.fb-ui-collapsebar.fb-ui-is-collapsed .fb-ui-collapse-icon:before{
+	content:"\e080"; /* > */
+}
+.fb-ui-splitbar.fb-ui-splitbar-right.fb-ui-collapsebar.fb-ui-is-collapsed .fb-ui-collapse-icon:before {
+	content:"\e079"; /* < */
+}
+.fb-ui-splitbar.fb-ui-splitbar-bottom.fb-ui-collapsebar.fb-ui-is-collapsed .fb-ui-collapse-icon:before {
+	content:"\e113"; /* ^ */
+}
+.fb-ui-splitbar.fb-ui-splitbar-top.fb-ui-collapsebar.fb-ui-is-collapsed .fb-ui-collapse-icon:before {
+	content:"\e114"; /* v */
+}
+
+/*-- /Border layout --*/

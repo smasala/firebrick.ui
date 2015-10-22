@@ -51,6 +51,13 @@ define( [ "text!./Alert.html", "../common/Base", "../common/mixins/Items" ], fun
 		 */
 		html: "",
 		/**
+		 * fill the panel body with text
+		 * @property text
+		 * @type {String}
+		 * @default ""
+		 */
+		text: "",
+		/**
 		 * @method bindings
 		 * @return {Object}
 		 */
@@ -74,9 +81,14 @@ define( [ "text!./Alert.html", "../common/Base", "../common/mixins/Items" ], fun
 		 */
 		paragraphBindings: function() {
 			var me = this,
+				id = me.getId(),
 				obj = {};
 			
-			obj.html = "Firebrick.getById('" + me.getId() + "').html";
+			if ( me.text ) {
+				obj.text = "Firebrick.text( Firebrick.getById('" + id + "').text )";
+			} else {
+				obj.html = "Firebrick.getById('" + id + "').html";
+			}
 			
 			return obj;
 		},

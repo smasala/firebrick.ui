@@ -60,7 +60,7 @@ define( [ "text!./Item.html", "../common/Base" ], function( tpl ) {
 				obj.href = me.href;
 			}
 			if ( me.text ) {
-				obj.text = me.textBind( me.text );
+				obj.text = me.textBind( "text" );
 			}
 			
 			obj.attr.role = "'menuitem'";

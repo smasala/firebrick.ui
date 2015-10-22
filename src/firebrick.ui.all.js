@@ -1,7 +1,7 @@
 /*!
 * Firebrick UI
 * @author Steven Masala [me@smasala.com]
-* @version 0.20.17
+* @version 0.20.22
 * @date
 *
 * FirebrickUI, component library for Firebrick JS
@@ -35,7 +35,7 @@ define( 'firebrick-ui',[ "jquery", "firebrick", "knockout",  "devicejs", "knocko
 			 * @private
 			 * @type {String}
 			 */
-			version: "0.20.17",
+			version: "0.20.22",
 			
 			/**
 			 * populate a target with fields and data
@@ -1017,10 +1017,10 @@ define( 'Firebrick.ui/common/Base',[ "doT", "jquery", "bootstrap.plugins/tooltip
 					}
 					bindObj.attr[ "'data-toggle'" ] = me.parseBind( me.tooltip ? "tooltip" : "popover" );
 					if ( me.tooltip || me.popoverTitle ) {
-						bindObj.attr.title = me.textBind( me.tooltip || me.popoverTitle );
+						bindObj.attr.title = me.textBind( me.tooltip ? "tooltip" : "popoverTitle" );
 					}
 					if ( me.popover ) {
-						bindObj.attr[ "'data-content'" ] = me.textBind( me.popover );
+						bindObj.attr[ "'data-content'" ] = me.textBind( "popover" );
 						bindObj.attr[ "'data-container'" ] = "'body'";
 						if ( me.popoverDismissible ) {
 							bindObj.attr[ "'data-trigger'" ] = "'focus'";
@@ -1346,11 +1346,13 @@ define( 'Firebrick.ui/common/Base',[ "doT", "jquery", "bootstrap.plugins/tooltip
 		 * 	textBind("mystring.abc.key")
 		 * 	// returns = Firebrick.text('mystring.abc.key')
 		 * @method textBind
-		 * @param key {String}
+		 * @param key {String} property key of the class to call
 		 * @return {String}
 		 */
 		textBind: function( key ) {
-			return "Firebrick.text('" + key + "')";
+		    var me = this,
+		        id = me.getId();
+			return "Firebrick.text( Firebrick.getById('" + id + "')[" + me.parseBind( key ) + "] )";
 		}
 	});
 });
@@ -1492,7 +1494,7 @@ define( 'Firebrick.ui/common/mixins/Badges',[], function() {
 					css: {
 						badge: true
 					},
-					text: me.textBind( me.badge )
+					text: me.textBind( "badge" )
 				};
 			return obj;
 		}
@@ -1567,7 +1569,7 @@ define( 'Firebrick.ui/menu/Item',[ "text!./Item.html", "../common/Base" ], funct
 				obj.href = me.href;
 			}
 			if ( me.text ) {
-				obj.text = me.textBind( me.text );
+				obj.text = me.textBind( "text" );
 			}
 			
 			obj.attr.role = "'menuitem'";
@@ -1918,7 +1920,7 @@ define( 'Firebrick.ui/button/Button',[ "text!./Button.html", "./Base", "../commo
 			}
 			
 			if ( me.loadingText ) {
-				obj.attr[ "'data-loading-text'" ] = me.textBind( me.loadingText );
+				obj.attr[ "'data-loading-text'" ] = me.textBind( "loadingText" );
 			}
 			
 			if ( me.closeModal ) {
@@ -1939,7 +1941,7 @@ define( 'Firebrick.ui/button/Button',[ "text!./Button.html", "./Base", "../commo
 			var me = this,
 				obj = {
 						css: {},
-						text: me.textBind( me.text )
+						text: me.textBind( "text" )
 				};
 			
 			if ( me.glyIcon ) {
@@ -2037,7 +2039,7 @@ define( 'Firebrick.ui/button/Button',[ "text!./Button.html", "./Base", "../commo
 				obj = { css: {} };
 			
 			obj.css[ "'sr-only'" ] = true;
-			obj.text = me.textBind( me.srOnlyText );
+			obj.text = me.textBind( "srOnlyText" );
 			
 			return obj;
 		},
@@ -2133,7 +2135,7 @@ define( 'Firebrick.ui/button/ButtonGroup',[ "text!./ButtonGroup.html", "./Base",
 			
 			obj.css[ me.parseBind( "btn-group-" + me.groupSize ) ] = true;
 			obj.attr.role = me.parseBind( me.role );
-			obj.attr[ "'aria-label'" ] = me.textBind( me.arialLabel );
+			obj.attr[ "'aria-label'" ] = me.textBind( "arialLabel" );
 			
 			return obj;
 		}
@@ -2513,7 +2515,7 @@ define( 'Firebrick.ui/containers/GridRow',[ "text!./GridRow.html", "./Base", "./
 });
 
 
-define('text!Firebrick.ui/containers/Box.html',[],function () { return '<div id="{{=it.getId()}}" data-bind="{{=it.dataBind()}}">\r\n\t{{? it.html }}\r\n\t\t{{=it.html}}\r\n\t{{?? true}}\r\n\t\t{{=it.getItems()}}\r\n\t{{?}}\r\n</div>';});
+define('text!Firebrick.ui/containers/Box.html',[],function () { return '<div id="{{=it.getId()}}" data-bind="{{=it.dataBind()}}">\r\n\t{{?it.items}}\r\n\t\t{{=it.getItems()}}\r\n\t{{?}}\r\n</div>';});
 
 /*!
  * @author Steven Masala [me@smasala.com]
@@ -2532,12 +2534,34 @@ define( 'Firebrick.ui/containers/Box',[ "text!./Box.html", "./Base" ], function(
 		tpl: tpl,
 		sName: "containers.box",
 		/**
-		 * set as string to fill the div/box with text content
+		 * set as string to fill the div/box with html content
 		 * @property html
 		 * @type {String|false}
 		 * @default false
 		 */
-		html: false
+		html: null,
+		/**
+		 * set as string to fill the div/box with text content
+		 * @property text
+		 * @type {String|false}
+		 * @default false
+		 */
+		text: null,
+		/**
+		 * @method bindings
+		 * @return {Object}
+		 */
+		bindings: function() {
+			var me = this,
+				id = me.getId(),
+				obj = me.callParent( arguments );
+			if ( me.text ) {
+				obj.text = "Firebrick.text( Firebrick.getById('" + id + "').text )";
+			} else if ( me.html ) {
+				obj.html = "Firebrick.getById('" + id + "').html";
+			}
+			return obj;
+		}
 	});
 });
 
@@ -3210,7 +3234,7 @@ define( 'Firebrick.ui/fields/Input',[ "knockout", "text!./Base.html", "text!./In
 		helpBlockBindings: function() {
 			var me = this;
 			return {
-				text: me.textBind( me.helpText )
+				text: me.textBind( "helpText" )
 			};
 		},
 		/**
@@ -3267,7 +3291,7 @@ define( 'Firebrick.ui/fields/Input',[ "knockout", "text!./Base.html", "text!./In
 				if ( me.formControlClass ) {
 					obj.css[ me.parseBind( me.formControlClass ) ] = true;
 				}
-				obj.attr.placeholder = me.textBind( me.placeholder );
+				obj.attr.placeholder = me.textBind( "placeholder" );
 			}
 			
 			if ( me.required ) {
@@ -3314,7 +3338,7 @@ define( 'Firebrick.ui/fields/Input',[ "knockout", "text!./Base.html", "text!./In
 				obj = { css: {} };
 			
 			if ( me.inputAddon && typeof me.inputAddon === "string" ) {
-				obj.text = me.textBind( me.inputAddon );
+				obj.text = me.textBind( "inputAddon" );
 			}
 			
 			obj.css[ me.parseBind( me.glyphiconClass ) ] = true;
@@ -3358,7 +3382,7 @@ define( 'Firebrick.ui/fields/Input',[ "knockout", "text!./Base.html", "text!./In
 		labelBindings: function() {
 			var me = this,
 				obj = {
-					text: me.textBind( me.label ),
+					text: me.textBind( "label" ),
 					css: {
 						"'control-label'": me.controlLabel
 					}
@@ -3850,7 +3874,7 @@ define( 'Firebrick.ui/common/mixins/Label',[ "text!./tpl/Label.html" ], function
 		labelBindings: function() {
 			var me = this,
 				obj = {
-						text: me.textBind( me.labelText ),
+						text: me.textBind( "labelText" ),
 						css: {
 							label: true
 						}
@@ -4565,7 +4589,7 @@ define( 'Firebrick.ui/nav/Navbar',[ "text!./Navbar.html", "./Base", "./List" ], 
 		toggleTextBindings: function() {
 			var me = this;
 			return {
-				text: me.textBind( me.toggleText )
+				text: me.textBind( "toggleText" )
 			};
 		},
 		/**
@@ -5238,7 +5262,7 @@ define( 'Firebrick.ui/containers/Panel',[ "text!./Panel.html", "text!./panel/Ico
 					};
 			
 			if ( typeof me.title !== "boolean" ) {
-				obj.text = me.textBind( me.title );
+				obj.text = me.textBind( "title" );
 			}
 			
 			if ( me.headerItems ) {
@@ -6458,7 +6482,7 @@ define( 'Firebrick.ui/containers/Fieldset',[ "text!./Fieldset.html", "jquery", "
 				obj = {
 					css: {},
 					attr: {},
-					text: me.textBind( me.title )
+					text: me.textBind( "title" )
 				};
 			return obj;
 		},
@@ -7102,7 +7126,7 @@ define( 'Firebrick.ui/containers/Modal',[ "text!./Modal.html", "./Base" ], funct
 		titleBindings: function() {
 			var me = this;
 			return {
-				text: me.textBind( me.title ),
+				text: me.textBind( "title" ),
 				css: {
 					"'modal-title'": me.titleClass
 				}
@@ -7405,7 +7429,7 @@ define( 'Firebrick.ui/containers/TabPanel',[ "text!./TabPanel.html", "./Base", "
 			var me = this,
 				obj = { css: {}, attr: {} };
 			
-			obj.text = me.textBind( "'+tab.title+'" );
+			obj.text = "Firebrick.text( tab.title )";
 			
 			return obj;
 		},
@@ -7495,7 +7519,7 @@ define( 'Firebrick.ui/containers/TabPanel',[ "text!./TabPanel.html", "./Base", "
 });
 
 
-define('text!Firebrick.ui/display/Alert.html',[],function () { return '<div data-bind="{{=it.dataBind()}}">\r\n\t{{?it.dismissible}}\r\n      <button data-bind="{{=it.dataBind(\'closeButtonBindings\')}}"><span aria-hidden="true">&times;</span><span data-bind="{{=it.dataBind(\'srCloseIconBindings\')}}"></span></button>\r\n    {{?}}\r\n    {{?it.title || it.html}}\r\n    \t<h4>{{=Firebrick.text(it.title)}}</h4>\r\n    \t<p data-bind="{{=it.dataBind(\'paragraphBindings\')}}">\r\n    \t</p>\r\n    {{?? true }}\r\n    \t{{=it.getItems()}}\r\n    {{?}}\r\n\t\r\n</div>';});
+define('text!Firebrick.ui/display/Alert.html',[],function () { return '<div data-bind="{{=it.dataBind()}}">\r\n\t{{?it.dismissible}}\r\n      <button data-bind="{{=it.dataBind(\'closeButtonBindings\')}}"><span aria-hidden="true">&times;</span><span data-bind="{{=it.dataBind(\'srCloseIconBindings\')}}"></span></button>\r\n    {{?}}\r\n    {{?!it.items}}\r\n    \t{{?it.title}}\r\n    \t<h4>{{=Firebrick.text(it.title)}}</h4>\r\n    \t{{?}}\r\n    \t<p data-bind="{{=it.dataBind(\'paragraphBindings\')}}">\r\n    \t</p>\r\n    {{?? true }}\r\n    \t{{=it.getItems()}}\r\n    {{?}}\r\n\t\r\n</div>';});
 
 /*!
  * @author Steven Masala [me@smasala.com]
@@ -7550,6 +7574,13 @@ define( 'Firebrick.ui/display/Alert',[ "text!./Alert.html", "../common/Base", ".
 		 */
 		html: "",
 		/**
+		 * fill the panel body with text
+		 * @property text
+		 * @type {String}
+		 * @default ""
+		 */
+		text: "",
+		/**
 		 * @method bindings
 		 * @return {Object}
 		 */
@@ -7573,9 +7604,14 @@ define( 'Firebrick.ui/display/Alert',[ "text!./Alert.html", "../common/Base", ".
 		 */
 		paragraphBindings: function() {
 			var me = this,
+				id = me.getId(),
 				obj = {};
 			
-			obj.html = "Firebrick.getById('" + me.getId() + "').html";
+			if ( me.text ) {
+				obj.text = "Firebrick.text( Firebrick.getById('" + id + "').text )";
+			} else {
+				obj.html = "Firebrick.getById('" + id + "').html";
+			}
 			
 			return obj;
 		},
@@ -7717,7 +7753,7 @@ define( 'Firebrick.ui/display/Header',[ "text!./Header.html", "../common/Base", 
 			var me = this,
 				obj = {};
 			
-			obj.text = me.textBind( me.text );
+			obj.text = me.textBind( "text" );
 			
 			return obj;
 		},
@@ -7729,7 +7765,7 @@ define( 'Firebrick.ui/display/Header',[ "text!./Header.html", "../common/Base", 
 			var me = this;
 			if ( me.secondaryText ) {
 				return {
-					text: me.textBind( me.secondaryText )
+					text: me.textBind( "secondaryText" )
 				};
 			} else {
 				return {
@@ -8031,7 +8067,7 @@ define( 'Firebrick.ui/display/Loader',[ "text!./Loader.html", "jquery", "../comm
 				};
 			
 			if ( me.msgText ) {
-				obj.text = me.textBind( me.msgText );
+				obj.text = me.textBind( "msgText" );
 			}
 			
 			return obj;
@@ -8119,7 +8155,7 @@ define( 'Firebrick.ui/display/Progress',[ "text!./Progress.html", "../common/Bas
 					"'data-symbol'": me.parseBind( me.dataSymbol ),
 					"'data-value'": me.value
 				},
-				text: me.textBind( me.label ),
+				text: me.textBind( "label" ),
 				style: {
 					width: me.parseBind( me.value + "%" )
 				}
@@ -8218,12 +8254,11 @@ define( 'Firebrick.ui/display/Text',[ "text!./Text.html", "../common/Base" ], fu
 		 */
 		tpl: tpl,
 		/**
-		 * whether text is raw html or not
-		 * @property isHtml
-		 * @type {Boolean}
+		 * @property html
+		 * @type {String}
 		 * @default false
 		 */
-		isHtml: false,
+		html: false,
 		/**
 		 * @property text
 		 * @type {String}
@@ -8284,9 +8319,9 @@ define( 'Firebrick.ui/display/Text',[ "text!./Text.html", "../common/Base" ], fu
 			}
 			
 			if ( me.isHtml ) {
-				obj.html = me.text;
+				obj.html = "Firebrick.getById('" + me.getId() + "').html";
 			} else if ( me.text ) {
-				obj.text = me.textBind( me.text );
+				obj.text = me.textBind( "text" );
 			}
 			
 			return obj;
@@ -8309,10 +8344,10 @@ define( 'Firebrick.ui/display/Text',[ "text!./Text.html", "../common/Base" ], fu
 		blockQuoteFooterBindings: function() {
 			var me = this,
 				obj = {};
-			if ( me.isHtml ) {
-				obj.html = me.blockQuoteFooter;
+			if ( me.html ) {
+				obj.html = "Firebrick.getById('" + me.getId() + "')['blockQuoteFooter']";
 			} else {
-				obj.text = me.textBind( me.blockQuoteFooter );
+				obj.text = me.textBind( "blockQuoteFooter" );
 			}
 			return obj;
 		}
@@ -11870,7 +11905,7 @@ define( 'Firebrick.ui/table/Table',[ "knockout", "knockout-mapping", "jquery", "
 	    expandBindings: function() {
 		    var me = this;
 		    return {
-		        text: me.textBind( me.expandText ),
+		        text: me.textBind( "expandText" ),
 		        attr: {
 		            id: me.parseBind( "fb-expand-" + me.getId() ),
 		            href: "''"
@@ -11884,7 +11919,7 @@ define( 'Firebrick.ui/table/Table',[ "knockout", "knockout-mapping", "jquery", "
 	    collapseBindings: function() {
 		    var me = this;
 		    return {
-		        text: me.textBind( me.collapseText ),
+		        text: me.textBind( "collapseText" ),
 		        attr: {
 		            id: me.parseBind( "fb-collapse-" + me.getId() ),
 		            href: "''"

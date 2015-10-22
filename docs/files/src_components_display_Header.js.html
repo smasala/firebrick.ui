@@ -19,7 +19,7 @@
             
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 0.20.17</em>
+            <em>API Docs for: 0.20.22</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -300,7 +300,7 @@ define( [ &quot;text!./Header.html&quot;, &quot;../common/Base&quot;, &quot;../c
 			var me = this,
 				obj = {};
 			
-			obj.text = me.textBind( me.text );
+			obj.text = me.textBind( &quot;text&quot; );
 			
 			return obj;
 		},
@@ -312,7 +312,7 @@ define( [ &quot;text!./Header.html&quot;, &quot;../common/Base&quot;, &quot;../c
 			var me = this;
 			if ( me.secondaryText ) {
 				return {
-					text: me.textBind( me.secondaryText )
+					text: me.textBind( &quot;secondaryText&quot; )
 				};
 			} else {
 				return {

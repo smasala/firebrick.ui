@@ -177,7 +177,7 @@ define( [ "text!./Loader.html", "jquery", "../common/Base", "../common/mixins/It
 				};
 			
 			if ( me.msgText ) {
-				obj.text = me.textBind( me.msgText );
+				obj.text = me.textBind( "msgText" );
 			}
 			
 			return obj;

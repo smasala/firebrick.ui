@@ -1,0 +1,35 @@
+/** Editable **/
+table.fb-ui-editabletable{
+	position: relative;
+	cursor: pointer;
+}
+
+table.fb-ui-editabletable .fb-ui-hide-me{
+	display:none !important;
+}
+
+table.fb-ui-editabletable.fb-ui-row-editing{
+	-webkit-user-select: none; /* Chrome/Safari */        
+	-moz-user-select: none; /* Firefox */
+	-ms-user-select: none; /* IE10+ */
+}
+
+table.fb-ui-editabletable td.fb-ui-cell-editing .form-group{
+	margin:0;
+}
+
+table.fb-ui-editabletable tbody.fb-ui-edit-loading{
+	position:relative;
+}
+
+table.fb-ui-editabletable div.fb-ui-load-mask{
+	background-color: rgba(91, 192, 222, 0.8);
+    color: #3d3d3d;
+    height: 100%;
+    left: 0;
+    top: 0;
+    padding-left: 50%;
+    padding-top: 10px;
+    position: absolute;
+    width: 100%;
+}

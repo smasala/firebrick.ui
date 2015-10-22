@@ -19,7 +19,7 @@
             
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 0.20.17</em>
+            <em>API Docs for: 0.20.22</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -303,7 +303,7 @@ define( [ &quot;text!./ButtonGroup.html&quot;, &quot;./Base&quot;, &quot;./Butto
 			
 			obj.css[ me.parseBind( &quot;btn-group-&quot; + me.groupSize ) ] = true;
 			obj.attr.role = me.parseBind( me.role );
-			obj.attr[ &quot;&#x27;aria-label&#x27;&quot; ] = me.textBind( me.arialLabel );
+			obj.attr[ &quot;&#x27;aria-label&#x27;&quot; ] = me.textBind( &quot;arialLabel&quot; );
 			
 			return obj;
 		}

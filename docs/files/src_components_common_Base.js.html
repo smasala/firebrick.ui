@@ -19,7 +19,7 @@
             
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 0.20.17</em>
+            <em>API Docs for: 0.20.22</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -446,10 +446,10 @@ define( [ &quot;doT&quot;, &quot;jquery&quot;, &quot;bootstrap.plugins/tooltip&q
 					}
 					bindObj.attr[ &quot;&#x27;data-toggle&#x27;&quot; ] = me.parseBind( me.tooltip ? &quot;tooltip&quot; : &quot;popover&quot; );
 					if ( me.tooltip || me.popoverTitle ) {
-						bindObj.attr.title = me.textBind( me.tooltip || me.popoverTitle );
+						bindObj.attr.title = me.textBind( me.tooltip ? &quot;tooltip&quot; : &quot;popoverTitle&quot; );
 					}
 					if ( me.popover ) {
-						bindObj.attr[ &quot;&#x27;data-content&#x27;&quot; ] = me.textBind( me.popover );
+						bindObj.attr[ &quot;&#x27;data-content&#x27;&quot; ] = me.textBind( &quot;popover&quot; );
 						bindObj.attr[ &quot;&#x27;data-container&#x27;&quot; ] = &quot;&#x27;body&#x27;&quot;;
 						if ( me.popoverDismissible ) {
 							bindObj.attr[ &quot;&#x27;data-trigger&#x27;&quot; ] = &quot;&#x27;focus&#x27;&quot;;
@@ -775,11 +775,13 @@ define( [ &quot;doT&quot;, &quot;jquery&quot;, &quot;bootstrap.plugins/tooltip&q
 		 * 	textBind(&quot;mystring.abc.key&quot;)
 		 * 	// returns = Firebrick.text(&#x27;mystring.abc.key&#x27;)
 		 * @method textBind
-		 * @param key {String}
+		 * @param key {String} property key of the class to call
 		 * @return {String}
 		 */
 		textBind: function( key ) {
-			return &quot;Firebrick.text(&#x27;&quot; + key + &quot;&#x27;)&quot;;
+		    var me = this,
+		        id = me.getId();
+			return &quot;Firebrick.text( Firebrick.getById(&#x27;&quot; + id + &quot;&#x27;)[&quot; + me.parseBind( key ) + &quot;] )&quot;;
 		}
 	});
 });

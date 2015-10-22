@@ -398,7 +398,7 @@ define( [ "knockout", "text!./Base.html", "text!./Input.html", "./Base", "../com
 		helpBlockBindings: function() {
 			var me = this;
 			return {
-				text: me.textBind( me.helpText )
+				text: me.textBind( "helpText" )
 			};
 		},
 		/**
@@ -455,7 +455,7 @@ define( [ "knockout", "text!./Base.html", "text!./Input.html", "./Base", "../com
 				if ( me.formControlClass ) {
 					obj.css[ me.parseBind( me.formControlClass ) ] = true;
 				}
-				obj.attr.placeholder = me.textBind( me.placeholder );
+				obj.attr.placeholder = me.textBind( "placeholder" );
 			}
 			
 			if ( me.required ) {
@@ -502,7 +502,7 @@ define( [ "knockout", "text!./Base.html", "text!./Input.html", "./Base", "../com
 				obj = { css: {} };
 			
 			if ( me.inputAddon && typeof me.inputAddon === "string" ) {
-				obj.text = me.textBind( me.inputAddon );
+				obj.text = me.textBind( "inputAddon" );
 			}
 			
 			obj.css[ me.parseBind( me.glyphiconClass ) ] = true;
@@ -546,7 +546,7 @@ define( [ "knockout", "text!./Base.html", "text!./Input.html", "./Base", "../com
 		labelBindings: function() {
 			var me = this,
 				obj = {
-					text: me.textBind( me.label ),
+					text: me.textBind( "label" ),
 					css: {
 						"'control-label'": me.controlLabel
 					}

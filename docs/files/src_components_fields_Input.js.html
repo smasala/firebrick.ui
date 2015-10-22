@@ -19,7 +19,7 @@
             
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 0.20.17</em>
+            <em>API Docs for: 0.20.22</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -634,7 +634,7 @@ define( [ &quot;knockout&quot;, &quot;text!./Base.html&quot;, &quot;text!./Input
 		helpBlockBindings: function() {
 			var me = this;
 			return {
-				text: me.textBind( me.helpText )
+				text: me.textBind( &quot;helpText&quot; )
 			};
 		},
 		/**
@@ -691,7 +691,7 @@ define( [ &quot;knockout&quot;, &quot;text!./Base.html&quot;, &quot;text!./Input
 				if ( me.formControlClass ) {
 					obj.css[ me.parseBind( me.formControlClass ) ] = true;
 				}
-				obj.attr.placeholder = me.textBind( me.placeholder );
+				obj.attr.placeholder = me.textBind( &quot;placeholder&quot; );
 			}
 			
 			if ( me.required ) {
@@ -738,7 +738,7 @@ define( [ &quot;knockout&quot;, &quot;text!./Base.html&quot;, &quot;text!./Input
 				obj = { css: {} };
 			
 			if ( me.inputAddon &amp;&amp; typeof me.inputAddon === &quot;string&quot; ) {
-				obj.text = me.textBind( me.inputAddon );
+				obj.text = me.textBind( &quot;inputAddon&quot; );
 			}
 			
 			obj.css[ me.parseBind( me.glyphiconClass ) ] = true;
@@ -782,7 +782,7 @@ define( [ &quot;knockout&quot;, &quot;text!./Base.html&quot;, &quot;text!./Input
 		labelBindings: function() {
 			var me = this,
 				obj = {
-					text: me.textBind( me.label ),
+					text: me.textBind( &quot;label&quot; ),
 					css: {
 						&quot;&#x27;control-label&#x27;&quot;: me.controlLabel
 					}

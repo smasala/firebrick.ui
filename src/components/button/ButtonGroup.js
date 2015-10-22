@@ -67,7 +67,7 @@ define( [ "text!./ButtonGroup.html", "./Base", "./Button" ], function( tpl ) {
 			
 			obj.css[ me.parseBind( "btn-group-" + me.groupSize ) ] = true;
 			obj.attr.role = me.parseBind( me.role );
-			obj.attr[ "'aria-label'" ] = me.textBind( me.arialLabel );
+			obj.attr[ "'aria-label'" ] = me.textBind( "arialLabel" );
 			
 			return obj;
 		}

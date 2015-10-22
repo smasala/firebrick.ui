@@ -2,8 +2,10 @@
 	{{?it.dismissible}}
       <button data-bind="{{=it.dataBind('closeButtonBindings')}}"><span aria-hidden="true">&times;</span><span data-bind="{{=it.dataBind('srCloseIconBindings')}}"></span></button>
     {{?}}
-    {{?it.title || it.html}}
+    {{?!it.items}}
+    	{{?it.title}}
     	<h4>{{=Firebrick.text(it.title)}}</h4>
+    	{{?}}
     	<p data-bind="{{=it.dataBind('paragraphBindings')}}">
     	</p>
     {{?? true }}

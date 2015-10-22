@@ -1,0 +1,10 @@
+/** Fieldset **/
+fieldset > legend > .glyphicon,
+fieldset > a > legend > .glyphicon {
+	font-size: 16px;
+	margin-right: 10px;
+}
+
+fieldset > .fb-ui-fieldset-body.collapsed {
+	display:none;
+}

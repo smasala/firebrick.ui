@@ -23,12 +23,11 @@ define( [ "text!./Text.html", "../common/Base" ], function( tpl ) {
 		 */
 		tpl: tpl,
 		/**
-		 * whether text is raw html or not
-		 * @property isHtml
-		 * @type {Boolean}
+		 * @property html
+		 * @type {String}
 		 * @default false
 		 */
-		isHtml: false,
+		html: false,
 		/**
 		 * @property text
 		 * @type {String}
@@ -89,9 +88,9 @@ define( [ "text!./Text.html", "../common/Base" ], function( tpl ) {
 			}
 			
 			if ( me.isHtml ) {
-				obj.html = me.text;
+				obj.html = "Firebrick.getById('" + me.getId() + "').html";
 			} else if ( me.text ) {
-				obj.text = me.textBind( me.text );
+				obj.text = me.textBind( "text" );
 			}
 			
 			return obj;
@@ -114,10 +113,10 @@ define( [ "text!./Text.html", "../common/Base" ], function( tpl ) {
 		blockQuoteFooterBindings: function() {
 			var me = this,
 				obj = {};
-			if ( me.isHtml ) {
-				obj.html = me.blockQuoteFooter;
+			if ( me.html ) {
+				obj.html = "Firebrick.getById('" + me.getId() + "')['blockQuoteFooter']";
 			} else {
-				obj.text = me.textBind( me.blockQuoteFooter );
+				obj.text = me.textBind( "blockQuoteFooter" );
 			}
 			return obj;
 		}

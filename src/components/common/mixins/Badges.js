@@ -29,7 +29,7 @@ define( [], function() {
 					css: {
 						badge: true
 					},
-					text: me.textBind( me.badge )
+					text: me.textBind( "badge" )
 				};
 			return obj;
 		}

@@ -227,7 +227,7 @@ define( [ "text!./Navbar.html", "./Base", "./List" ], function( tpl ) {
 		toggleTextBindings: function() {
 			var me = this;
 			return {
-				text: me.textBind( me.toggleText )
+				text: me.textBind( "toggleText" )
 			};
 		},
 		/**
