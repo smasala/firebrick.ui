@@ -12,4 +12,4 @@ before_script:
     - npm install -g grunt-cli
 script:
     # We want to gate on passing tests and a successful build
-    - grunt tavis
+    - grunt travis
