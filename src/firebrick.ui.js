@@ -327,7 +327,7 @@ define( [ "jquery", "firebrick", "knockout",  "devicejs", "knockout-mapping", "t
 						
 						var loop = function( obj, f ) {
 							var p = f ? "" : "{",
-								k,v;
+								k, v;
 							for ( k in obj ) {
 								if ( obj.hasOwnProperty( k ) ) {
 									v = obj[ k ];

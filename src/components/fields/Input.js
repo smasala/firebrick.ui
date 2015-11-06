@@ -410,7 +410,7 @@ define( [ "knockout", "text!./Base.html", "text!./Input.html", "./Base", "../com
 				binds = { css: {} },
 				rootClass = "'glyphicon-";
 			if ( me.containerBindings && me.containerBindings.css ) {
-				$.each( me.containerBindings.css, function( k,v ) {
+				$.each( me.containerBindings.css, function( k, v ) {
 					if ( v ) {
 						switch ( k ){
 							case "'has-success'":
