@@ -727,7 +727,7 @@ define( [ "text!./ComboBox.html",
 			return false;
 		},
 		/**
-		 * return items which is currently highlighted in the dopwdown
+		 * return items which is currently highlighted in the dropdown - these are not necessarily selected values, see getValue()
 		 * @method getSelection
 		 * @return {jQuery Object | null}
 		 */
@@ -1010,6 +1010,7 @@ define( [ "text!./ComboBox.html",
 			return !Firebrick.utils.compareArrays( newVal, oldVal );
 		},
 		/**
+		 * return get all values which have been selected
 		 * @method getValue
 		 * @return {Array}
 		 */
